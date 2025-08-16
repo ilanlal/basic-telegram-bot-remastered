@@ -1,5 +1,5 @@
-const JsonStudio_qUnit_Resources = {
+const BasicTelegramBot_qUnit_Resources = {
     hidepassed: true,
-    title: "Json Studio QUnit Tests",
+    title: "Basic Telegram Bot QUnit Tests",
 
 };

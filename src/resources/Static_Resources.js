@@ -1,19 +1,19 @@
 // Static_Resources.js
 // This file contains static resources used across the application.
 const Static_Resources = {
-  appName: "Json Studio",
-  menuTitle: "Json studio",
+  appName: "Basic Telegram Bot",
+  menuTitle: "Telegram bot",
   module: "core-server",
   // This is the static resources for the deployment.
   package: {
     // build number. 
     // This is used to identify the version of the static resources.
     // It should be updated with each deployment 😉.
-    build: "20250815.112900",
+    build: "20250816.000000",
     // version of the Google Apps Script deployment (usually vnext)
-    version: "v9.mp.rev",
+    version: "v38-remastered",
     // Google Marketplace URL for the add-on.
-    marketplaceUrl: "https://workspace.google.com/marketplace/app/json_studio/1234567890",
+    marketplaceUrl: "https://workspace.google.com/marketplace/app/basic_telegram_bot/1234567890",
     // Google Apps Script project URL for the add-on.
     projectUrl: "https://script.google.com/d/AKfycbx1234567890",
     // GitHub URLs for the 'main' (Production) repo.
@@ -23,7 +23,7 @@ const Static_Resources = {
   },
   qunit: {
     hidepassed: true, // Hide passed tests by default
-    title: "Json Studio QUnit Tests",
+    title: "Basic Telegram Bot QUnit Tests",
   },
   resources: {
     indentSpaces: "indentSpaces",

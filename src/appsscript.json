@@ -1,5 +1,5 @@
 {
-  "timeZone": "Asia/Jerusalem",
+  "timeZone": "America/New_York",
   "dependencies": {
     "libraries": [
       {
@@ -13,51 +13,34 @@
   "exceptionLogging": "STACKDRIVER",
   "runtimeVersion": "V8",
   "webapp": {
-    "executeAs": "USER_ACCESSING",
-    "access": "ANYONE"
+    "executeAs": "USER_DEPLOYING",
+    "access": "ANYONE_ANONYMOUS"
   },
   "oauthScopes": [
-    "https://www.googleapis.com/auth/script.locale",
-    "https://www.googleapis.com/auth/spreadsheets.currentonly"
+    "https://www.googleapis.com/auth/spreadsheets.currentonly",
+    "https://www.googleapis.com/auth/script.container.ui",
+    "https://www.googleapis.com/auth/script.external_request",
+    "https://www.googleapis.com/auth/userinfo.email"
   ],
   "addOns": {
     "common": {
-      "name": "Json Studio",
-      "logoUrl": "https://raw.githubusercontent.com/ilanlal/ss-json-editor/refs/heads/main/assets/logo24.png",
+      "name": "Basic Telegram Bot",
+      "logoUrl": "https://www.gstatic.com/images/branding/product/1x/translate_24dp.png",
       "layoutProperties": {
-        "primaryColor": "#88001b",
-        "secondaryColor": "#1010ff"
+        "primaryColor": "#2772ed"
       },
-      "openLinkUrlPrefixes": [
-        "https://raw.githubusercontent.com/ilanlal/",
-        "https://www.github.com/ilanlal/",
-        "https://github.com/ilanlal/",
-        "https://www.easyadm.com",
-        "https://easyadm.com"
-      ],
       "homepageTrigger": {
         "runFunction": "onDefaultHomePageOpen"
-      },
-      "useLocaleFromApp": true,
-      "universalActions": [
-        {
-          "label": "Account & Settings",
-          "runFunction": "onOpenAccountCard"
-        },
-        {
-          "label": "About",
-          "runFunction": "onShowAboutCard"
-        },
-        {
-          "label": "Help & Support",
-          "openLink": "https://github.com/ilanlal/ss-json-editor#readme"
-        },
-        {
-          "label": "Report an issue",
-          "openLink": "https://github.com/ilanlal/ss-json-editor/issues"
-        }
-      ]
+      }
     },
     "sheets": {}
-  }
+  },
+  "urlFetchWhitelist": [
+    "https://api.telegram.org/",
+    "https://raw.githubusercontent.com/ilanlal/",
+    "https://www.github.com/ilanlal/",
+    "https://github.com/ilanlal/",
+    "https://www.easyadm.com",
+    "https://easyadm.com"
+  ]
 }

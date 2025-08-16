@@ -8,12 +8,12 @@ class QUnitRunner {
         // Initialize QUnit for testing
         QUnit.urlParams(e.parameter);
         QUnit.config({
-            title: `${JsonStudio_qUnit_Resources.title}.`
+            title: `${BasicTelegramBot_qUnit_Resources.title}.`
                 + ` | version: ${Static_Resources.package.version}`
                 + ` | build: ${Static_Resources.package.build}`,
             // hide passed tests as default
             // https://qunitjs.com/api/config/
-            hidepassed: JsonStudio_qUnit_Resources.hidepassed
+            hidepassed: BasicTelegramBot_qUnit_Resources.hidepassed
         });
 
         //QUnit.config.hidepassed = true;
