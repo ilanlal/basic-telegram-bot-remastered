@@ -43,4 +43,16 @@ class ViewBuilder {
             .setPackageInfo(packageInfo)
             .newCardBuilder();
     }
+
+    static newBotHomeCard(
+        localization = AppManager.getLocalizationResources(),
+        userInfo = ModelBuilder.newUserInfo()
+            .setUserId('_user')
+            .setUserLicense(ServiceBuilder.newUserStore().getUserLicense())
+    ) {
+        return BotHomeCard.newBotHomeCard()
+            .setLocalization(localization)
+            .setUserInfo(userInfo)
+            .newCardBuilder();
+    }
 }

@@ -6,35 +6,6 @@ class HomeCard {
         this.FREE_ACTIVATION_DAYS = Static_Resources.parameters.freeActivationDays;
     }
 
-    static newHomeCard() {
-        return new HomeCard();
-    }
-
-    newCardBuilder() {
-        // Create a new card builder
-        const cardBuilder = CardService.newCardBuilder()
-            .setName(Static_Resources.resources.homeCardName)
-            // Set the card header
-            .setHeader(this.getHeader());
-        if (!this.isPremium()) {
-            // Add the premium required section if the user is not premium
-            cardBuilder.addSection(this.getPremiumRequiredSection());
-        }
-
-        // Add the format section
-        cardBuilder.addSection(this.getFormatSection())
-            // Add Minify section
-            .addSection(this.getMinifySection());
-        // Add Edit section
-        //.addSection(this.getEditSection());
-
-        if (!this.isPremium()) {
-            // Add the footer to the card
-            cardBuilder.setFixedFooter(this.getFixedFooter());
-        }
-
-        return cardBuilder;
-    }
 
     setUserInfo(userInfo) {
         this.userInfo = userInfo;
@@ -65,6 +36,36 @@ class HomeCard {
     setIndentationSpaces(spaces) {
         this.indentationLevel = spaces || UserStore.Constants.DEFAULT_INDENT_SPACES;
         return this;
+    }
+
+    static newHomeCard() {
+        return new HomeCard();
+    }
+
+    newCardBuilder() {
+        // Create a new card builder
+        const cardBuilder = CardService.newCardBuilder()
+            .setName(Static_Resources.resources.homeCardName)
+            // Set the card header
+            .setHeader(this.getHeader());
+        if (!this.isPremium()) {
+            // Add the premium required section if the user is not premium
+            cardBuilder.addSection(this.getPremiumRequiredSection());
+        }
+
+        // Add the format section
+        cardBuilder.addSection(this.getFormatSection())
+            // Add Minify section
+            .addSection(this.getMinifySection());
+        // Add Edit section
+        //.addSection(this.getEditSection());
+
+        if (!this.isPremium()) {
+            // Add the footer to the card
+            cardBuilder.setFixedFooter(this.getFixedFooter());
+        }
+
+        return cardBuilder;
     }
 
     getHeader() {
