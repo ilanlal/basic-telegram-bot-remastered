@@ -38,4 +38,12 @@ class ControllerBuilder {
     ) {
         return AboutController.newAboutController(localization, userStore, userInfo);
     }
+
+    static newBotController(
+        localization = AppManager.getLocalizationResources(),
+        userStore = ServiceBuilder.newUserStore(),
+        userInfo
+    ) {
+        return BotController.newBotController(localization, userStore, userInfo);
+    }
 }

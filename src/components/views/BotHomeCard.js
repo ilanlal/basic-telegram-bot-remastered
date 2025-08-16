@@ -5,6 +5,20 @@ class BotHomeCard {
         this.FREE_ACTIVATION_DAYS = Static_Resources.parameters.freeActivationDays;
     }
 
+    getUserInfo() {
+        return this.userInfo;
+    }
+
+    setUserInfo(userInfo) {
+        this.userInfo = userInfo;
+        return this;
+    }
+
+    setLocalization(localization) {
+        this.localization = localization;
+        return this;
+    }
+
     static newBotHomeCard() {
         return new BotHomeCard();
     }

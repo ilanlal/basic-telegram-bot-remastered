@@ -57,6 +57,7 @@ class QUnitRunner {
         new test_HomeView();
         new test_AccountView();
         new test_ReportView();
+        new test_BotCard();
     }
 
     test_controllers() {
@@ -65,6 +66,7 @@ class QUnitRunner {
         new test_AccountController();
         new test_ReportController();
         new test_JsonStudioController();
+        new test_BotController();
     }
 
 

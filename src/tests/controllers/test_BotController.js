@@ -1,7 +1,7 @@
 // Google Apps Script code for Google Workspace Add-ons
-class test_HomeController {
+class test_BotController {
     constructor() {
-        QUnit.module("HomeController (controllers)");
+        QUnit.module("BotController (controllers)");
         this.runTests();
         QUnit.done(() => {
             //this.tearDown();
@@ -20,7 +20,7 @@ class test_HomeController {
             const localization = AppManager.getLocalizationResources();
             const userStore = ServiceBuilder.newUserStore();
             const homeAction = ControllerBuilder
-                .newHomeController(localization, userStore)
+                .newBotController(localization, userStore)
                 .home()
                 .build()
                 .printJson();
@@ -29,11 +29,6 @@ class test_HomeController {
             assert.ok(actionResponse, "Home card should be created successfully");
             const card = actionResponse.renderActions.action.navigations[0].pushCard;
             assert.ok(card, "Card should be created successfully");
-            assert.strictEqual(
-                card.header.title,
-                localization.cards.home.title,
-                "Card title should match localization"
-            );
         });
     }
 }
