@@ -1,53 +1,55 @@
+// version: 1.0.0
+/// <reference path="../../services/UserStore.js" />
+/// <reference path="../../services/ServiceBuilder.js" />
+/// <reference path="../models/UserInfo.js" />
 class BotController {
-    constructor() {
-        this.localization = AppManager.getLocalizationResources();
-        this.userInfo = ModelBuilder.newUserInfo()
-            .setUserId('_user')
-            .setUserLicense(ServiceBuilder.newUserStore().getUserLicense());
+    constructor(LOCALIZE_STRINGS = null, userStore = null) {
+        this._services = {
+            /** @type {UserStore | null} */
+            _userStore: userStore,
+        };
+        this._models = {
+            /** @type {Global_Resources['hl'] | null} */
+            _LOCALIZE_STRINGS: LOCALIZE_STRINGS,
+            /** @type {UserInfo | null} */
+            _userInfo: this._services._userStore.getUserInfo(),
+            /** @type {number | null} */
+            _indentationLevel: this._services._userStore.getIndentSpaces(),
+        };
     }
-    setLocalization(localization) {
-        this.localization = localization;
+
+    static newBotController(LOCALIZE_STRINGS, userStore) {
+        return new BotController(LOCALIZE_STRINGS, userStore);
+    }
+
+    validate() {
+        if (!this._models._LOCALIZE_STRINGS) {
+            throw new Error("Localization strings are required");
+        }
+        if (!(this._models._userInfo instanceof UserInfo)) {
+            throw new Error("User info must be an instance of UserInfo");
+        }
+
+        if (typeof this._models._indentationLevel !== "number") {
+            throw new Error("Indentation level must be a number");
+        }
+
         return this;
     }
 
-    getLocalization() {
-        return this.localization;
-    }
-
-    setUserInfo(userInfo) {
-        this.userInfo = userInfo;
-        return this;
-    }
-
-    getUserInfo() {
-        return this.userInfo;
-    }
-
-    setUserStore(userStore) {
-        this.userStore = userStore;
-        return this;
-    }
-
-    getUserStore() {
-        return this.userStore;
-    }
-
-    static newBotController(localization, userStore, userInfo) {
-        return new BotController()
-            .setLocalization(localization)
-            .setUserStore(userStore)
-            .setUserInfo(userInfo);
-    }
-
-    home() {
+    /** @returns {CardService.ActionResponseBuilder} */
+    navigateToHome() {
         return CardService.newActionResponseBuilder()
             .setNavigation(
                 CardService.newNavigation()
                     .pushCard(
                         ViewBuilder.newBotHomeCard(
-                            this.getLocalization(),
-                            this.getUserInfo()
-                        ).build()
+                            this._models._LOCALIZE_STRINGS,
+                            this._models._indentationLevel,
+                            this._models._userInfo
+                        )
+                        .validate()
+                        .build()
                     )
             );
     }

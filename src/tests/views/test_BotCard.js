@@ -14,10 +14,14 @@ class test_BotCard {
     test_create() {
         QUnit.test("Test create BotCard", (assert) => {
             const localization = AppManager.getLocalizationResources();
+            const indentationLevel = ServiceBuilder.newUserStore().getIndentSpaces();
+            const userInfo = ServiceBuilder.newUserStore().getUserInfo();
 
-            const cardBuilder = ViewBuilder.newBotHomeCard(localization);
+            const cardBuilder = ViewBuilder.newBotHomeCard(localization, indentationLevel, userInfo);
+
             assert.ok(cardBuilder, "BotHomeCard should be created");
             const card = cardBuilder
+                .validate()
                 .build()
                 .printJson();
             assert.ok(card, "BotHomeCard should build successfully");

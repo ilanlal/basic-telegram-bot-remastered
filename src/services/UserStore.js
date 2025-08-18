@@ -1,3 +1,4 @@
+// version: 1.0.1
 // Google Apps Script code for Google Workspace Add-ons
 class UserStore {
   /**
@@ -51,6 +52,29 @@ class UserStore {
     return this;
   }
 
+  getUserInfo() {
+    const data = this.userDataStorage
+      .getProperty(UserStore.Constants.USER_INFO_KEY);
+
+    if (!data
+      || data === "undefined"
+      || data === "null"
+      || data === ""
+      || data === "[object Object]"
+    ) {
+      return UserInfo.fromJsonText(
+        UserInfo.toJsonText(
+          ModelBuilder.newUserInfo())); // Return a new UserInfo instance if no user info is set
+    }
+
+    return UserInfo.fromJsonText(data);
+  }
+
+  setUserInfo(userInfo) {
+    this.userDataStorage.setProperty(UserStore.Constants.USER_INFO_KEY, UserInfo.toJsonText(userInfo));
+    return this;
+  }
+
   /**
    * Gets the license information for the user.
    * This function retrieves the user's license information from the user properties.
@@ -65,7 +89,8 @@ class UserStore {
     if (!data
       || data === "undefined"
       || data === "null"
-      || data === "") {
+      || data === ""
+    || data === "[object Object]") {
       return undefined; // Return undefined if no license is set
     }
 
@@ -81,10 +106,10 @@ class UserStore {
       throw new Error("Invalid license object provided. Must be an instance of UserLicense or undefined.");
     }
 
-    if(license === undefined) {
+    if (license === undefined) {
       return this.clearUserLicense();
     }
-    
+
     const licenseJson = UserLicense.toJsonText(license);
 
     this.userDataStorage.setProperty(UserStore.Constants.USER_LICENSE_KEY, licenseJson);
@@ -115,6 +140,7 @@ class UserStore {
 }
 
 UserStore.Constants = {
+  USER_INFO_KEY: 'userInfo',
   INDENT_SPACES_KEY: 'indentSpaces',
   USER_LICENSE_KEY: 'userLicense',
   LOCALIZATION_KEY: 'localization',

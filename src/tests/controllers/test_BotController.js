@@ -21,7 +21,8 @@ class test_BotController {
             const userStore = ServiceBuilder.newUserStore();
             const homeAction = ControllerBuilder
                 .newBotController(localization, userStore)
-                .home()
+                .validate()
+                .navigateToHome()
                 .build()
                 .printJson();
 

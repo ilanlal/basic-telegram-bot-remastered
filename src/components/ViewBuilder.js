@@ -1,3 +1,4 @@
+// version: 1.0.1
 class ViewBuilder {
     static newHomeCard(
         localization = AppManager.getLocalizationResources(),
@@ -37,7 +38,10 @@ class ViewBuilder {
             .newCardBuilder();
     }
 
-    static newAboutCard(localization = AppManager.getLocalizationResources(), packageInfo = Static_Resources.package) {
+    static newAboutCard(
+        localization = AppManager.getLocalizationResources(),
+        packageInfo = Static_Resources.package
+    ) {
         return AboutCard.newAboutCard()
             .setLocalization(localization)
             .setPackageInfo(packageInfo)
@@ -45,14 +49,11 @@ class ViewBuilder {
     }
 
     static newBotHomeCard(
-        localization = AppManager.getLocalizationResources(),
-        userInfo = ModelBuilder.newUserInfo()
-            .setUserId('_user')
-            .setUserLicense(ServiceBuilder.newUserStore().getUserLicense())
+        LOCALIZE_STRINGS = AppManager.getLocalizationResources(),
+        indentationLevel = ServiceBuilder.newUserStore().getIndentSpaces(),
+        userInfo = ServiceBuilder.newUserStore().getUserLicense()
     ) {
-        return BotHomeCard.newBotHomeCard()
-            .setLocalization(localization)
-            .setUserInfo(userInfo)
-            .newCardBuilder();
+        return BotHomeCard
+            .createBotHomeCard(LOCALIZE_STRINGS, indentationLevel, userInfo);
     }
 }

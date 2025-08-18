@@ -1,3 +1,4 @@
+// version: 1.0.1
 class ServiceBuilder {
     static newJsonStudio() {
         return JsonStudio.newInstance();
@@ -21,5 +22,9 @@ class ServiceBuilder {
 
     static newRangeService(sheetName, a1Notation) {
         return RangeService.newRangeService(sheetName, a1Notation);
+    }
+
+    static newTelegramBotClientService(botToken) {
+        return new TelegramBotClient(botToken);
     }
 }

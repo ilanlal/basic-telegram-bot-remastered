@@ -1,3 +1,4 @@
+// version: 1.0.1
 // Google Apps Script code for Google Workspace Add-ons
 class UserInfo {    
     constructor() {
