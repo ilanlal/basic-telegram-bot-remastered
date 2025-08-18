@@ -1,3 +1,4 @@
+// version: 1.0.1
 // Google Apps Script code for Google Workspace Add-ons
 class test_UserStoreService {
     constructor() {
@@ -9,16 +10,17 @@ class test_UserStoreService {
             ServiceBuilder.newUserStore()
                 .setUserLicense(this.originalUserLicense)
                 .setLocalizationCode(this.originalLocalizationCode)
-                .setIndentSpaces(this.originalIndentSpaces);
+                .setIndentSpaces(this.originalIndentSpaces)
+                .setUserInfo(this.originalUserInfo);
         });
         this.runTests();
     }
 
-    setOriginalUserLicense(userLicense) {
+    storeOriginalUserLicense(userLicense) {
         this.originalUserLicense = userLicense;
     }
 
-    setOriginalLocalizationCode(localizationCode) {
+    storeOriginalLocalizationCode(localizationCode) {
         this.originalLocalizationCode = localizationCode;
     }
 
@@ -26,11 +28,16 @@ class test_UserStoreService {
         this.originalIndentSpaces = indentSpaces;
     }
 
+    storeOriginalUserInfo(userInfo) {
+        this.originalUserInfo = userInfo;
+    }
+
     runTests() {
         const tests = [
             this.test_localization.bind(this),
             this.test_indentSpaces.bind(this),
-            this.test_userLicenseCRUD.bind(this)
+            this.test_userLicenseCRUD.bind(this),
+            this.test_userInfo.bind(this)
         ];
         tests.forEach(test => {
             try {
@@ -39,6 +46,29 @@ class test_UserStoreService {
                 console.error(`Test failed: ${test.name} at UserStore (modules)`);
                 console.error(error);
             }
+        });
+    }
+
+    test_userInfo() {
+        QUnit.test("UserInfo CRUD Operations", (assert) => {
+            this.storeOriginalUserInfo(ServiceBuilder.newUserStore().getUserInfo());
+            const userStore = ServiceBuilder.newUserStore();
+            
+            // Create a new UserInfo instance
+            const newUserInfo = ModelBuilder.newUserInfo()
+                .setUserId("test_user")
+                .setUserLocaleCode("fr")
+                .setUserLicense(ModelBuilder.newUserLicense());
+
+            // Create & Get
+            const res = userStore.setUserInfo(newUserInfo);
+            assert.ok(res, "setUserInfo should return true");
+
+            const userInfo = userStore.getUserInfo();
+            assert.ok(userInfo, "getUserInfo should return a UserInfo instance");
+            assert.strictEqual(userInfo.getUserId(), "test_user", "User ID should match");
+            assert.strictEqual(userInfo.getUserLocaleCode(), "fr", "User locale code should match");
+
         });
     }
 
@@ -66,7 +96,7 @@ class test_UserStoreService {
 
     test_localization() {
         QUnit.test("localization", (assert) => {
-            this.setOriginalLocalizationCode(ServiceBuilder.newUserStore().getLocalizationCode());
+            this.storeOriginalLocalizationCode(ServiceBuilder.newUserStore().getLocalizationCode());
             assert.ok(this.originalLocalizationCode, "Original localizationCode should be defined");
 
             ServiceBuilder.newUserStore().setLocalizationCode("fr");
@@ -82,7 +112,7 @@ class test_UserStoreService {
 
     test_userLicenseCRUD() {
         QUnit.test("UserLicense CRUD Operations", (assert) => {
-            this.setOriginalUserLicense(ServiceBuilder.newUserStore().getUserLicense());
+            this.storeOriginalUserLicense(ServiceBuilder.newUserStore().getUserLicense());
             assert.ok(this.originalUserLicense || !this.originalUserLicense, "Original user license should be defined or undefined :-)");
 
             // Set up unique user license for testing

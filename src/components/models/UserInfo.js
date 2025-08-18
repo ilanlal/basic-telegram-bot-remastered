@@ -2,7 +2,6 @@
 // Google Apps Script code for Google Workspace Add-ons
 class UserInfo {    
     constructor() {
-        
     }
 
     setUserLicense(userLicense) {
@@ -11,7 +10,7 @@ class UserInfo {
     }
 
     getUserLicense() {
-        return this.userLicense;
+        return this.userLicense || ModelBuilder.newUserLicense();
     }
 
     setUserLocaleCode(localeCode) {
@@ -61,9 +60,10 @@ class UserInfo {
 
         return new UserInfo()
             .setUserId(data.userId)
+            .setUserCountry(data.userCountry)
+            .setUserTimezone(data.userTimezone)
             .setUserLicense(data.userLicense)
-            .setUserLocaleCode(data.userLocaleCode)
-            .setUserId(data.userId);
+            .setUserLocaleCode(data.userLocaleCode);
     }
 
     static toJsonText(userInfo) {
@@ -74,7 +74,10 @@ class UserInfo {
         return JSON.stringify({
             userId: userInfo.getUserId(),
             userLicense: userInfo.getUserLicense(),
-            localization: userInfo.getUserLocaleCode()
+            localization: userInfo.getUserLocaleCode(),
+            userCountry: userInfo.getUserCountry(),
+            userTimezone: userInfo.getUserTimezone(),
+            userLocaleCode: userInfo.getUserLocaleCode(),
         });
     }
 
