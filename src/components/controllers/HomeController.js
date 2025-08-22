@@ -1,15 +1,16 @@
+// version: 1.2.0
 // Apps Script code for Google Workspace Add-ons
 class HomeController {
     constructor() {
     }
 
     setIndentSpaces(spaces) {
-        this.indentSpaces = spaces || UserStore.Constants.DEFAULT_INDENT_SPACES;
+        this.indentSpaces = spaces || UserStore.DEFAULT_INDENT_SPACES;
         return this;
     }
 
     getIndentSpaces() {
-        return this.indentSpaces || UserStore.Constants.DEFAULT_INDENT_SPACES;
+        return this.indentSpaces || UserStore.DEFAULT_INDENT_SPACES;
     }
 
     setLocalization(localization) {
@@ -71,6 +72,6 @@ class HomeController {
             .setLocalization(localization)
             .setUserStore(userStore)
             .setUserInfo(userInfo)
-            .setIndentSpaces(userStore?.getIndentSpaces() || UserStore.Constants.DEFAULT_INDENT_SPACES);
+            .setIndentSpaces(userStore?.getIndentSpaces() || UserStore.DEFAULT_INDENT_SPACES);
     }
 }

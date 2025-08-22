@@ -1,11 +1,12 @@
 // version: 1.0.0
-class BotHomeCard {
-    constructor(LOCALIZE_STRING = null, indentationLevel = null, userInfo = null) {
-        this.CARD_NAME = 'botHomeCard';
+class BotSetupCard {
+    constructor(LOCALIZE_STRING = null, indentationLevel = null, userInfo = null, botToken = null) {
+        this.CARD_NAME = 'botSetupCard';
         this._models = {
             _LOCALIZE_STRINGS: LOCALIZE_STRING,
             _indentationLevel: indentationLevel,
-            _userInfo: userInfo
+            _userInfo: userInfo,
+            _botToken: botToken
         };
 
         this._card = {
@@ -33,8 +34,8 @@ class BotHomeCard {
         if (typeof this._models._indentationLevel !== "number") {
             throw new Error("Indentation level must be a number");
         }
-        if (!(this._models._userInfo instanceof AuthUser)) {
-            throw new Error("User info must be an instance of AuthUser");
+        if (!(this._models._userInfo instanceof UserInfo)) {
+            throw new Error("User info must be an instance of UserInfo");
         }
 
         return this;
@@ -44,8 +45,7 @@ class BotHomeCard {
         return this._card._build();
     }
 
-    static createBotHomeCard(LOCALIZE_STRINGS, indentationLevel, userInfo) {
-        return new BotHomeCard(LOCALIZE_STRINGS, indentationLevel, userInfo);
+    static createBotSetupCard(LOCALIZE_STRINGS, indentationLevel, userInfo) {
+        return new BotSetupCard(LOCALIZE_STRINGS, indentationLevel, userInfo);
     }
-
 }

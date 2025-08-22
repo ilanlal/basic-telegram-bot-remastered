@@ -1,4 +1,4 @@
-// version: 1.0.1
+// version: 1.2.0
 class ControllerBuilder {
     static newHomeController(
         localization = AppManager.getLocalizationResources(),
@@ -44,6 +44,7 @@ class ControllerBuilder {
         LOCALIZE_STRINGS = AppManager.getLocalizationResources(),
         userStore = ServiceBuilder.newUserStore()
     ) {
-        return BotController.newBotController(LOCALIZE_STRINGS, userStore);
+        return BotController.newBotController(
+            LOCALIZE_STRINGS, userStore);
     }
 }

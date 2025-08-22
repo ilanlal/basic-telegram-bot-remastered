@@ -1,8 +1,8 @@
-// version: 1.0.1
+// version: 1.2.0
 class ViewBuilder {
     static newHomeCard(
         localization = AppManager.getLocalizationResources(),
-        userInfo = ModelBuilder.newUserInfo()
+        userInfo = new AuthUserBuilder()
             .setUserId('_user')
             .setUserLicense(ServiceBuilder.newUserStore().getUserLicense()),
         indentationSpaces = ServiceBuilder.newUserStore().getIndentSpaces()
@@ -14,12 +14,12 @@ class ViewBuilder {
             .newCardBuilder();
     }
 
-
     static newAccountCard(
         localization = AppManager.getLocalizationResources(),
-        userInfo = ModelBuilder.newUserInfo()
+        userInfo = new AuthUserBuilder()
             .setUserId('_user')
             .setUserLicense(ServiceBuilder.newUserStore().getUserLicense())
+            .build()
     ) {
         return AccountCard.newAccountCard()
             .setLocalization(localization)
@@ -51,9 +51,18 @@ class ViewBuilder {
     static newBotHomeCard(
         LOCALIZE_STRINGS = AppManager.getLocalizationResources(),
         indentationLevel = ServiceBuilder.newUserStore().getIndentSpaces(),
-        userInfo = ServiceBuilder.newUserStore().getUserLicense()
+        userInfo = ServiceBuilder.newUserStore().getUserInfo()
     ) {
         return BotHomeCard
             .createBotHomeCard(LOCALIZE_STRINGS, indentationLevel, userInfo);
+    }
+
+    static newBotSetupCard(
+        LOCALIZE_STRINGS = AppManager.getLocalizationResources(),
+        indentationLevel = ServiceBuilder.newUserStore().getIndentSpaces(),
+        userInfo = ServiceBuilder.newUserStore().getUserInfo()
+    ) {
+        return BotSetupCard
+            .createBotSetupCard(LOCALIZE_STRINGS, indentationLevel, userInfo);
     }
 }

@@ -1,5 +1,7 @@
 # 🔥 Hot references
 
+> ```version 1.0.1```
+
 - [Manifest File](https://developers.google.com/apps-script/concepts/manifests)
 - [Spreadsheet Service (SpreadsheetApp)](https://developers.google.com/apps-script/reference/spreadsheet/spreadsheet)
   - [Get Spreadsheet Locale](https://developers.google.com/apps-script/reference/spreadsheet/spreadsheet?hl=en#getspreadsheetlocale)

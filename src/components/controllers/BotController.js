@@ -1,7 +1,4 @@
 // version: 1.0.0
-/// <reference path="../../services/UserStore.js" />
-/// <reference path="../../services/ServiceBuilder.js" />
-/// <reference path="../models/UserInfo.js" />
 class BotController {
     constructor(LOCALIZE_STRINGS = null, userStore = null) {
         this._services = {
@@ -11,7 +8,7 @@ class BotController {
         this._models = {
             /** @type {Global_Resources['hl'] | null} */
             _LOCALIZE_STRINGS: LOCALIZE_STRINGS,
-            /** @type {UserInfo | null} */
+            /** @type {AuthUser | null} */
             _userInfo: this._services._userStore.getUserInfo(),
             /** @type {number | null} */
             _indentationLevel: this._services._userStore.getIndentSpaces(),
@@ -26,8 +23,8 @@ class BotController {
         if (!this._models._LOCALIZE_STRINGS) {
             throw new Error("Localization strings are required");
         }
-        if (!(this._models._userInfo instanceof UserInfo)) {
-            throw new Error("User info must be an instance of UserInfo");
+        if (!(this._models._userInfo instanceof AuthUser)) {
+            throw new Error("User info must be an instance of AuthUser");
         }
 
         if (typeof this._models._indentationLevel !== "number") {
@@ -37,13 +34,28 @@ class BotController {
         return this;
     }
 
-    /** @returns {CardService.ActionResponseBuilder} */
     navigateToHome() {
         return CardService.newActionResponseBuilder()
             .setNavigation(
                 CardService.newNavigation()
                     .pushCard(
                         ViewBuilder.newBotHomeCard(
+                            this._models._LOCALIZE_STRINGS,
+                            this._models._indentationLevel,
+                            this._models._userInfo
+                        )
+                        .validate()
+                        .build()
+                    )
+            );
+    }
+
+    navigateToSetup() {
+        return CardService.newActionResponseBuilder()
+            .setNavigation(
+                CardService.newNavigation()
+                    .pushCard(
+                        ViewBuilder.newBotSetupCard(
                             this._models._LOCALIZE_STRINGS,
                             this._models._indentationLevel,
                             this._models._userInfo

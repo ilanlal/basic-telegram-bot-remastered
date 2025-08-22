@@ -1,4 +1,5 @@
 // Google Apps Script file for handling add-on triggers and events
+
 /**
  * Callback for the add-on homepage.
  * This function is called when the user opens the add-on.
@@ -10,13 +11,14 @@ function onDefaultHomePageOpen(e) {
     try {
         return ControllerBuilder.newHomeController()
             .setLocalization(AppManager.getLocalizationResources())
-            .setUserInfo(ModelBuilder.newUserInfo()
+            .setUserInfo(new AuthUserBuilder()
                 .setUserId('_user')
-                .setUserLocaleCode(e?.userLocale || UserStore.Constants.DEFAULT_USER_LOCALE_CODE)
+                .setUserLocaleCode(e?.userLocale || 'en')
                 .setUserCountry(e?.userCountry || 'US')
                 .setUserTimezone(e?.userTimezone || Session.getScriptTimeZone())
                 .setUserLicense(
-                    ServiceBuilder.newUserStore().getUserLicense()))
+                    ServiceBuilder.newUserStore().getUserLicense())
+                .build())
             .home()
             .build();
     } catch (error) {
@@ -33,13 +35,14 @@ function onOpenAccountCard(e) {
     console.log("onOpenAccountCard called with event:", e);
     try {
         return ControllerBuilder.newAccountController()
-            .setUserInfo(ModelBuilder.newUserInfo()
+            .setUserInfo(new AuthUserBuilder()
                 .setUserId('_user')
-                .setUserLocaleCode(e?.commonEventObject?.userLocale || UserStore.Constants.DEFAULT_USER_LOCALE_CODE)
+                .setUserLocaleCode(e?.commonEventObject?.userLocale || 'en')
                 .setUserCountry(e?.commonEventObject?.userCountry || 'US')
                 .setUserTimezone(e?.commonEventObject?.userTimezone || Session.getScriptTimeZone())
                 .setUserLicense(
-                    ServiceBuilder.newUserStore().getUserLicense()))
+                    ServiceBuilder.newUserStore().getUserLicense())
+                .build())
             .home()
             .build();
 

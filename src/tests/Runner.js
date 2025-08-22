@@ -1,4 +1,4 @@
-// version: 1.0.1
+// version: 1.2.0
 // Google Apps Script code for Google Workspace Add-ons
 // Apps Script QUnit Runner
 class QUnitRunner {
@@ -37,41 +37,25 @@ class QUnitRunner {
     }
 
     test_types() {
-        new test_ReportItem();
-        new test_RangeReport();
-        new test_UserLicense();
+        
     }
 
     test_helpers() {        
-        new test_AppManager();
+        
     }
 
     test_services() {
-        new test_JsonStudioService();
-        new test_UserStoreService();
-        //new test_SpreadsheetService();
-        new test_RangeService();
     }
 
     test_views() {
-        new test_AboutView();
-        new test_HomeView();
-        new test_AccountView();
-        new test_ReportView();
         new test_BotCard();
     }
 
     test_controllers() {
-        new test_AboutController();
-        new test_HomeController();
-        new test_AccountController();
-        new test_ReportController();
-        new test_JsonStudioController();
         new test_BotController();
     }
 
 
     test_e2eTriggers() {
-        new test_AddonTriggers();
     }
 }

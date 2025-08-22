@@ -2,7 +2,7 @@
 class HomeCard {
     constructor() {
         this.localization = AppManager.getLocalizationResources();
-        this.indentationLevel = UserStore.Constants.DEFAULT_INDENT_SPACES;
+        this.indentationLevel = UserStore.DEFAULT_INDENT_SPACES;
         this.FREE_ACTIVATION_DAYS = Static_Resources.parameters.freeActivationDays;
     }
 
@@ -30,11 +30,11 @@ class HomeCard {
     }
 
     getIndentationSpaces() {
-        return this.indentationLevel || UserStore.Constants.DEFAULT_INDENT_SPACES;
+        return this.indentationLevel || UserStore.DEFAULT_INDENT_SPACES;
     }
 
     setIndentationSpaces(spaces) {
-        this.indentationLevel = spaces || UserStore.Constants.DEFAULT_INDENT_SPACES;
+        this.indentationLevel = spaces || UserStore.DEFAULT_INDENT_SPACES;
         return this;
     }
 

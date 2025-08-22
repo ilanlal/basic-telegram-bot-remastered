@@ -1,65 +1,75 @@
-// version 1.0.1
+// version 2.0.0
 // Google Apps Script code for Google Workspace Add-ons
 class UserLicense {
-    /**
-     * Create a user license.
-     * @param {string} userId - ID of the user associated with the license
-     * @param {string} planId - ID of the plan associated with the license
-     * @param {Date} createdOn - Creation date in ISO format
-     * @param {Date} expirationDate - Expiration date in ISO format
-     * @param {number} [amount=0] - Amount associated with the license, default is 0 (e.g., for tokens or credits)
-     */
-    constructor(userId = '', planId = '', createdOn = null, expirationDate = null, amount = 0) {
-        this.userId = userId;
-        this.planId = planId;
-        this.createdOn = createdOn;
-        this.expirationDate = expirationDate;
-        this.amount = amount;
-    }
-
     setCreatedOn(createdOn) {
-        this.createdOn = createdOn;
+        this._createdOn = createdOn;
         return this;
     }
 
     getCreatedOn() {
-        return this.createdOn;
+        return this._createdOn;
     }
 
     setAmount(amount) {
-        this.amount = amount;
+        this._amount = amount;
         return this;
     }
 
     getAmount() {
-        return this.amount;
+        return this._amount;
     }
 
     setPlanId(planId) {
-        this.planId = planId;
+        this._planId = planId;
         return this;
     }
 
     getPlanId() {
-        return this.planId;
+        return this._planId;
     }
 
     setUserId(userId) {
-        this.userId = userId;
+        this._userId = userId;
         return this;
     }
 
     getUserId() {
-        return this.userId;
+        return this._userId;
     }
 
     setExpirationDate(expirationDate) {
-        this.expirationDate = expirationDate;
+        this._expirationDate = expirationDate;
         return this;
     }
 
     getExpirationDate() {
-        return this.expirationDate;
+        return this._expirationDate;
+    }
+
+    constructor() {
+        this._userId = '';
+        this._planId = '';
+        /** @type {Date | null} */
+        this._createdOn = null;
+        /** @type {Date | null} */
+        this._expirationDate = null;
+        this._amount = 0;
+    }
+
+    static newUserLicense() {
+        return new UserLicense();
+    }
+
+    static fromJsonString(json = '{}') {
+        // Parse the JSON string into a UserLicense object
+        const data = JSON.parse(json, (key, value) => {
+            if (key === 'createdOn' || key === 'expirationDate') {
+                return new Date(value); // Convert date strings back to Date objects
+            }
+            return value;
+        });
+
+        return new UserLicense().fromObject(data);
     }
 
     /**
@@ -69,42 +79,64 @@ class UserLicense {
     isActive() {
         // Check if the license is active based on the current date and expiration date
         const now = new Date();
-        return (now < new Date(this.expirationDate)) || this.amount > 0;
+        return (now < new Date(this._expirationDate)) || this._amount > 0;
     }
 
-    static fromJsonText(json = '{}') {
-        // Parse the JSON string into a UserLicense object
-        const data = JSON.parse(json, (key, value) => {
-            if (key === 'createdOn' || key === 'expirationDate') {
-                return new Date(value); // Convert date strings back to Date objects
-            }
-            return value;
-        });
-
-        return new UserLicense(
-            data.userId,
-            data.planId,
-            data.createdOn,
-            data.expirationDate,
-            data.amount
-        );
+    fromObject(json = {}) {
+        this._userId = json.userId;
+        this._planId = json.planId;
+        this._createdOn = json.createdOn;
+        this._expirationDate = json.expirationDate;
+        this._amount = json.amount;
+        return this;
     }
 
-    static toJsonText(license) {
-        if (!(license instanceof UserLicense)) {
-            throw new Error("Invalid UserLicense object.");
-        }
-
+    toJsonString() {
         return JSON.stringify({
-            userId: license.userId,
-            planId: license.planId,
-            createdOn: license.createdOn,
-            expirationDate: license.expirationDate,
-            amount: license.amount
+            userId: this._userId,
+            planId: this._planId,
+            createdOn: this._createdOn,
+            expirationDate: this._expirationDate,
+            amount: this._amount
         });
     }
+}
 
-    static newUserLicense() {
-        return new UserLicense().setCreatedOn(new Date().toISOString());
+class UserLicenseBuilder {
+    constructor() {
+        this._userLicense = new UserLicense();
     }
+
+    setCreatedOn(createdOn) {
+        this._userLicense.setCreatedOn(createdOn);
+        return this;
+    }
+
+    setAmount(amount) {
+        this._userLicense.setAmount(amount);
+        return this;
+    }
+
+    setPlanId(planId) {
+        this._userLicense.setPlanId(planId);
+        return this;
+    }
+
+    setUserId(userId) {
+        this._userLicense.setUserId(userId);
+        return this;
+    }
+
+    setExpirationDate(expirationDate) {
+        this._userLicense.setExpirationDate(expirationDate);
+        return this;
+    }
+
+    build() {
+        return this._userLicense;
+    }
+}
+
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = { UserLicense, UserLicenseBuilder };
 }

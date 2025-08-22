@@ -1,5 +1,6 @@
 class AccountController {
     constructor() {
+        this.DEFAULT_INDENT_SPACES = new UserStore()._DEBUG_MODE_KEY;
     }
 
     setLocalization(localization) {
@@ -60,11 +61,12 @@ class AccountController {
         const milliseconds = days * 24 * 60 * 60 * 1000; // Convert days to milliseconds
         const expirDate = new Date(createdOn.getTime() + milliseconds); // Calculate expiration date
         const amount = 0; // Assuming no cost for the trial
-        const newUserLicense = ModelBuilder.newUserLicense()
+        const newUserLicense = new UserLicenseBuilder()
             .setUserId(userId)
             .setPlanId(planId)
             .setExpirationDate(expirDate)
-            .setAmount(amount);
+            .setAmount(amount)
+            .build();
 
         this.userStore.setUserLicense(newUserLicense);
 
@@ -84,7 +86,7 @@ class AccountController {
 
     revokePremium(e) {
         this.userStore.clearUserLicense();
-        this.userStore.setIndentSpaces(UserStore.Constants.DEFAULT_INDENT_SPACES);
+        this.userStore.setIndentSpaces(UserStore.DEFAULT_INDENT_SPACES);
 
         // navigate to root
         return CardService

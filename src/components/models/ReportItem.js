@@ -1,69 +1,83 @@
-// Google Apps Script code for Google Workspace Add-ons
+// version: 2.0.0
 class ReportItem {
-  constructor() {
-    this.a1Notation = ''; // A1 notation of the cell
-    this.sheetName = ''; // Name of the sheet
-    this.message = ''; // Error message, if any
-    this.status = ReportItem.Status.VALID; // Status of the report item
-  }
-
   getSheetName() {
-    return this.sheetName;
+    return this._sheetName;
   }
 
   setSheetName(sheetName) {
-    this.sheetName = sheetName;
+    this._sheetName = sheetName;
     return this;
   }
 
-  getEmoji() {
-    return ReportItem.Icons[this.status] || ReportItem.Icons.VALID;
-  }
-
   getA1Notation() {
-    return this.a1Notation;
+    return this._a1Notation;
   }
 
   setA1Notation(a1Notation) {
-    this.a1Notation = a1Notation;
+    this._a1Notation = a1Notation;
     return this;
   }
 
   getMessage() {
-    return this.message;
+    return this._message;
   }
 
   setMessage(message) {
-    this.message = message;
+    this._message = message;
     return this;
   }
 
   getStatus() {
-    return this.status;
+    return this._status;
   }
 
   setStatus(status) {
-    if (!Object.values(ReportItem.Status).includes(status)) {
-      throw new Error(`Invalid status: ${status}`);
-    }
-    this.status = status;
-    this.icon = ReportItem.Icons[status] || ReportItem.Icons.VALID; // Update icon based on status
+    this._status = status;
     return this;
+  }
+
+  constructor() {
+    this._a1Notation = ''; // A1 notation of the cell
+    this._sheetName = ''; // Name of the sheet
+    this._message = ''; // Error message, if any
+    this._status = 'INVALID'; // Status of the report item
   }
 
   static newReportItem() {
     return new ReportItem();
   }
-};
+}
 
-// create enum for ReportItem status
-ReportItem.Status = {
-  VALID: 'VALID',
-  INVALID: 'INVALID'
-};
+class ReportItemBuilder {
+  constructor() {
+    this.reportItem = ReportItem.newReportItem();
+  }
 
-// create enum for ReportItem Icons
-ReportItem.Icons = {
-  VALID: '💫',
-  INVALID: '⚠️'
-};
+  setSheetName(sheetName) {
+    this.reportItem.setSheetName(sheetName);
+    return this;
+  }
+
+  setA1Notation(a1Notation) {
+    this.reportItem.setA1Notation(a1Notation);
+    return this;
+  }
+
+  setMessage(message) {
+    this.reportItem.setMessage(message);
+    return this;
+  }
+
+  setStatus(status) {
+    this.reportItem.setStatus(status);
+    return this;
+  }
+
+  build() {
+    return this.reportItem;
+  }
+}
+
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = { ReportItem, ReportItemBuilder };
+}
