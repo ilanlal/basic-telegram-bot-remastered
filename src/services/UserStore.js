@@ -77,16 +77,11 @@ class UserStore {
     const data = this._userDataProvider
       .getProperty(UserStore.USER_INFO_KEY);
 
-    if (!data
-      || data === "undefined"
-      || data === "null"
-      || data === ""
-      || data === "[object Object]"
-    ) {
-      return new AuthUserBuilder().build(); // Return a new empty user if no info is set
+    try {
+      return AuthUser.fromJsonString(data);
+    } catch (error) {
+      return new AuthUserBuilder().build();
     }
-
-    return AuthUser.fromJsonString(data);
   }
 
   setUserInfo(userInfo) {
