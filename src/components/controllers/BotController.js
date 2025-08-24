@@ -1,8 +1,8 @@
 // version: 1.0.0
-if(require) {
-    AuthUser = require('../../models/AuthUser.js').AuthUser;
-    TelegramUser = require('../../models/TelegramUser.js').TelegramUser;
-    TelegramBotInfo = require('../../models/TelegramBotInfo.js').TelegramBotInfo;
+if(typeof require !== 'undefined' && require) {
+    AuthUser = require('../models/AuthUser.js').AuthUser;
+    TelegramUser = require('../models/TelegramUser.js').TelegramUser;
+    TelegramBotInfo = require('../models/TelegramBotInfo.js').TelegramBotInfo;
     UserStore = require('../../services/UserStore.js').UserStore;
     TelegramBotClient = require('../../libs/TelegramBotClient.js').TelegramBotClient;
 }
@@ -102,9 +102,18 @@ class BotControllerFactory {
         return this;
     }
 
-    build(LOCALIZE_STRINGS) {
+    withLocalization(LOCALIZE_STRINGS) {
+        if (!LOCALIZE_STRINGS || typeof LOCALIZE_STRINGS !== 'object') {
+            throw new Error("LOCALIZE_STRINGS must be an object");
+        }
+
+        this._LOCALIZE_STRINGS = LOCALIZE_STRINGS;
+        return this;
+    }
+
+    build() {
         return new BotController(
-            LOCALIZE_STRINGS,
+            this._LOCALIZE_STRINGS,
             this._userStore,
             this._telegramBotClient
         );

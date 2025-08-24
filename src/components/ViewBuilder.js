@@ -47,22 +47,4 @@ class ViewBuilder {
             .setPackageInfo(packageInfo)
             .newCardBuilder();
     }
-
-    static newBotHomeCard(
-        LOCALIZE_STRINGS = AppManager.getLocalizationResources(),
-        indentationLevel = ServiceBuilder.newUserStore().getIndentSpaces(),
-        userInfo = ServiceBuilder.newUserStore().getUserInfo()
-    ) {
-        return BotHomeCard
-            .createBotHomeCard(LOCALIZE_STRINGS, indentationLevel, userInfo);
-    }
-
-    static newBotSetupCard(
-        LOCALIZE_STRINGS = AppManager.getLocalizationResources(),
-        indentationLevel = ServiceBuilder.newUserStore().getIndentSpaces(),
-        userInfo = ServiceBuilder.newUserStore().getUserInfo()
-    ) {
-        return BotSetupCard
-            .createBotSetupCard(LOCALIZE_STRINGS, indentationLevel, userInfo);
-    }
 }

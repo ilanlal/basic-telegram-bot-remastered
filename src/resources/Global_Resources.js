@@ -149,3 +149,9 @@ const Global_Resources = {
         }
     }
 }
+
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = {
+        Global_Resources
+    };
+}

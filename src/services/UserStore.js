@@ -1,9 +1,11 @@
 // version: 2.0.0
 // Google Apps Script code for Google Workspace Add-ons
-if(require){
+if (typeof require !== 'undefined' && require) {
+  AuthUserBuilder = require('../components/models/AuthUser.js').AuthUserBuilder;
   TelegramBotInfo = require('../components/models/TelegramBotInfo.js').TelegramBotInfo;
   TelegramBotInfoBuilder = require('../components/models/TelegramBotInfo.js').TelegramBotInfoBuilder;
 }
+
 class UserStore {
   static get TELEGRAM_BOT_INFO_KEY() {
     return "telegram_bot_info";
@@ -187,27 +189,27 @@ class UserStore {
 }
 
 class UserStoreFactory {
-    constructor() {
-        this.userProperties = null;
-    }
+  constructor() {
+    this.userProperties = null;
+  }
 
-    withUserProperties(userProperties) {
-        this.userProperties = userProperties;
-        return this;
-    }
+  withUserProperties(userProperties) {
+    this.userProperties = userProperties;
+    return this;
+  }
 
-    build() {
-        return new UserStore(this.userProperties);
-    }
+  build() {
+    return new UserStore(this.userProperties);
+  }
 
-    static newUserStoreFactory(userProperties) {
-        return new UserStoreFactory(userProperties);
-    }
+  static newUserStoreFactory(userProperties) {
+    return new UserStoreFactory(userProperties);
+  }
 }
 
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = {
-        UserStore,
-        UserStoreFactory
-    };
+  module.exports = {
+    UserStore,
+    UserStoreFactory
+  };
 }
