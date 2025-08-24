@@ -551,6 +551,28 @@ class TelegramBotClient {
   }
 }
 
+class TelegramBotClientFactory {
+    constructor() {
+        this.token = null;
+    }
+
+    withToken(token) {
+        this.token = token;
+        return this;
+    }
+
+    build() {
+        if (!this.token) {
+            throw new Error("Token is required to create TelegramBotClient");
+        }
+        return new TelegramBotClient(this.token);
+    }
+
+    static newTelegramBotClientFactory() {
+        return new TelegramBotClientFactory();
+    }
+}
+
 /**
  * Get an instance of the TelegramBotClient class.
  * @param {string} token The bot token from the Telegram Bot API.
@@ -560,4 +582,10 @@ function getTelegramBotClient(token) {
   return new TelegramBotClient(token);
 }
 
-
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = {
+        TelegramBotClient,
+        TelegramBotClientFactory,
+        getTelegramBotClient
+    };
+}

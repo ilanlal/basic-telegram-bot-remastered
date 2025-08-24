@@ -1,14 +1,11 @@
-// Google Apps Script code for Google Workspace Add-ons
-/**
- * @see https://developers.google.com/apps-script/guides/triggers#oninstalle
- **/
+/** 
+ * @see https://developers.google.com/apps-script/guides/triggers
+ */
+
 function onInstall(e) {
     onOpen(e);
 }
 
-/** 
- * @see https://developers.google.com/apps-script/guides/triggers
- */
 function onOpen(e) {
     
 }

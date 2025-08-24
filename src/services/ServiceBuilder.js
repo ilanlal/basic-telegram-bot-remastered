@@ -20,8 +20,4 @@ class ServiceBuilder {
     static newRangeService(sheetName, a1Notation) {
         return RangeService.newRangeService(sheetName, a1Notation);
     }
-
-    static newTelegramBotService(botToken) {
-        return TelegramBotService.newTelegramBotService(botToken);
-    }
 }

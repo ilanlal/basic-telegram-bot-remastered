@@ -1,5 +1,9 @@
 // version: 2.0.0
 // Google Apps Script code for Google Workspace Add-ons
+if(require){
+  TelegramBotInfo = require('../components/models/TelegramBotInfo.js').TelegramBotInfo;
+  TelegramBotInfoBuilder = require('../components/models/TelegramBotInfo.js').TelegramBotInfoBuilder;
+}
 class UserStore {
   static get TELEGRAM_BOT_INFO_KEY() {
     return "telegram_bot_info";
@@ -154,19 +158,21 @@ class UserStore {
       || data === "null"
       || data === ""
       || data === "[object Object]") {
-      return undefined; // Return undefined if no bot info is set
+      return new TelegramBotInfoBuilder().build();
     }
 
-    return TelegramUser.fromJsonString(data);
+    return TelegramBotInfo.fromJsonString(data);
   }
 
-  /** @param {TelegramUser} user */
-  setTelegramBotInfo(user) {
-    if (!(user instanceof TelegramUser)) {
-      throw new Error("Invalid TelegramUser object provided. Must be an instance of TelegramUser.");
+  /** @param {TelegramBotInfo} botInfo */
+  setTelegramBotInfo(botInfo) {
+    if (!(botInfo instanceof TelegramBotInfo)) {
+      throw new Error("Invalid TelegramBotInfo object provided. Must be an instance of TelegramBotInfo.");
     }
 
-    this._userDataProvider.setProperty(UserStore.TELEGRAM_BOT_INFO_KEY, user.toJsonString());
+    this._userDataProvider.setProperty(
+      UserStore.TELEGRAM_BOT_INFO_KEY,
+      botInfo.toJsonString());
     return this;
   }
 
@@ -178,4 +184,30 @@ class UserStore {
   static newInstance() {
     return new UserStore(PropertiesService.getUserProperties());
   }
+}
+
+class UserStoreFactory {
+    constructor() {
+        this.userProperties = null;
+    }
+
+    withUserProperties(userProperties) {
+        this.userProperties = userProperties;
+        return this;
+    }
+
+    build() {
+        return new UserStore(this.userProperties);
+    }
+
+    static newUserStoreFactory(userProperties) {
+        return new UserStoreFactory(userProperties);
+    }
+}
+
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = {
+        UserStore,
+        UserStoreFactory
+    };
 }
