@@ -1,4 +1,5 @@
 // version: 1.0.0
+// --- IGNORE (for Node.js support) --- //
 if (typeof require !== 'undefined' && require) {
     TelegramBotInfo = require('../models/TelegramBotInfo.js').TelegramBotInfo;
     AuthUser = require('../models/AuthUser.js').AuthUser;
@@ -11,20 +12,17 @@ class BotSetupCard {
         };
     }
 
-    constructor(LOCALIZE_STRING = null, _cardService = null, cardService = null, authUserInfo = null, telegramBotInfo = null) {
-        if (!_cardService) {
+    constructor(cardService = null) {
+        if (!cardService) {
             throw new Error("CardService is required");
         }
-        if (!LOCALIZE_STRING || typeof LOCALIZE_STRING !== 'object') {
-            throw new Error("LOCALIZE_STRING must be a valid object");
-        }
-        this.CARD_NAME = 'botSetupCard';
-        this._cardService = _cardService;
+        this._CARD_NAME = 'botSetupCard';
+        this._cardService = cardService;
         this._models = {
-            _LOCALIZE_STRINGS: LOCALIZE_STRING,
-            _authUserInfo: authUserInfo,
-            _botToken: BotSetupCard.INPUTS.BOT_TOKEN,
-            _telegramBotInfo: telegramBotInfo
+            _LOCALIZE_STRINGS: null,
+            _authUserInfo: null,
+            _botToken: '',
+            _telegramBotInfo: null
         };
 
         this._card = {
@@ -53,28 +51,46 @@ class BotSetupCard {
                     .setOnClickAction(this._cardService.newAction()
                         .setFunctionName('onCancelBotSetup')
                     )
-                ),
-            _build: () => this._cardService.newCardBuilder()
-                .setName(this.CARD_NAME)
-                .setHeader(this._card._header())
-                .addSection(this._card._body())
-                .setFixedFooter(this._card._footer())
-                .build()
+                )
         };
     }
 
+    withAuthUserInfo(authUserInfo) {
+        if (!(authUserInfo instanceof AuthUser)) {
+            throw new Error("authUserInfo must be an instance of AuthUser");
+        }
+        this._models._authUserInfo = authUserInfo;
+        return this;
+    }
+
+    withTelegramBotInfo(telegramBotInfo) {
+        if (!(telegramBotInfo instanceof TelegramBotInfo)) {
+            throw new Error("telegramBotInfo must be an instance of TelegramBotInfo");
+        }
+        this._models._telegramBotInfo = telegramBotInfo;
+        return this;
+    }
+    
+    withLocalization(LOCALIZE_STRINGS) {
+        if (!LOCALIZE_STRINGS || typeof LOCALIZE_STRINGS !== 'object') {
+            throw new Error("LOCALIZE_STRINGS must be a valid object");
+        }
+        this._models._LOCALIZE_STRINGS = LOCALIZE_STRINGS;
+        return this;
+    }
+
     build() {
-        return this._card._build();
+        return this._cardService.newCardBuilder()
+            .setName(this._CARD_NAME)
+            .setHeader(this._card._header())
+            .addSection(this._card._body())
+            .setFixedFooter(this._card._footer())
+            .build();
     }
 }
 
-class BotCardFactory {
+class BotSetupCardFactory {
     constructor() {
-        this._LOCALIZE_STRINGS = null;
-        /** @type {AuthUser} */
-        this._authUserInfo = null;
-        /** @type {TelegramBotInfo} */
-        this._telegramBotInfo = null;
         this._cardService = null;
     }
     withCardService(cardService) {
@@ -82,41 +98,19 @@ class BotCardFactory {
         return this;
     }
 
-    withAuthUserInfo(authUserInfo) {
-        if (!(authUserInfo instanceof AuthUser)) {
-            throw new Error("authUserInfo must be an instance of AuthUser");
-        }
-        this._authUserInfo = authUserInfo;
-        return this;
-    }
-    withTelegramBotInfo(telegramBotInfo) {
-        if (!(telegramBotInfo instanceof TelegramBotInfo)) {
-            throw new Error("telegramBotInfo must be an instance of TelegramBotInfo");
-        }
-        this._telegramBotInfo = telegramBotInfo;
-        return this;
-    }
-    withLocalization(LOCALIZE_STRINGS) {
-        if (!LOCALIZE_STRINGS || typeof LOCALIZE_STRINGS !== 'object') {
-            throw new Error("LOCALIZE_STRINGS must be a valid object");
-        }
-        this._LOCALIZE_STRINGS = LOCALIZE_STRINGS;
-        return this;
-    }
-
-
     build() {
-        return new BotSetupCard(this._LOCALIZE_STRINGS, this._cardService, this._authUserInfo);
+        return new BotSetupCard(this._cardService);
     }
 
-    static newBotCardFactory() {
-        return new BotCardFactory();
+    static newBotSetupCardFactory() {
+        return new BotSetupCardFactory();
     }
 }
 
+// --- IGNORE (for Node.js support) --- //
 if (typeof module !== "undefined" && module.exports) {
     module.exports = {
-        BotCardFactory,
+        BotSetupCardFactory,
         BotSetupCard
     };
 }

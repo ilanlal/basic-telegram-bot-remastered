@@ -73,6 +73,10 @@ class MockCardServiceFactory {
     static newFactory() {
         return new MockCardServiceFactory();
     }
+
+    static newCardService() {
+        return new MockCardService();
+    }
 }
 
 if (typeof module !== 'undefined' && module.exports) {

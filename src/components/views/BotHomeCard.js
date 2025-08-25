@@ -47,5 +47,4 @@ class BotHomeCard {
     static createBotHomeCard(LOCALIZE_STRINGS, indentationLevel, userInfo) {
         return new BotHomeCard(LOCALIZE_STRINGS, indentationLevel, userInfo);
     }
-
 }
