@@ -4,6 +4,7 @@ if (typeof require !== 'undefined' && require) {
   AuthUserBuilder = require('../components/models/AuthUser.js').AuthUserBuilder;
   TelegramBotInfo = require('../components/models/TelegramBotInfo.js').TelegramBotInfo;
   TelegramBotInfoBuilder = require('../components/models/TelegramBotInfo.js').TelegramBotInfoBuilder;
+  PropertiesService = require('gas-mock-globals/src/properties/PropertiesService.js');
 }
 
 class UserStore {
@@ -32,8 +33,8 @@ class UserStore {
     return 2;
   }
 
-  constructor(userDataProvider) {
-    this._userDataProvider = userDataProvider;
+  constructor() {
+    this._userDataProvider = PropertiesService.getUserProperties();
   }
 
   /**
@@ -190,20 +191,14 @@ class UserStore {
 
 class UserStoreFactory {
   constructor() {
-    this.userProperties = null;
-  }
-
-  withUserProperties(userProperties) {
-    this.userProperties = userProperties;
-    return this;
   }
 
   build() {
-    return new UserStore(this.userProperties);
+    return new UserStore();
   }
 
-  static newUserStoreFactory(userProperties) {
-    return new UserStoreFactory(userProperties);
+  static newUserStoreFactory() {
+    return new UserStoreFactory();
   }
 }
 

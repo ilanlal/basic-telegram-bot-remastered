@@ -1,4 +1,3 @@
-const { MockCardService, MockCardServiceFactory } = require('../../tests/mocks/MockCardService.js');
 const { AuthUser } = require('../models/AuthUser.js');
 const { TelegramBotInfo } = require('../models/TelegramBotInfo.js');
 const { BotSetupCard, BotSetupCardFactory } = require('./BotSetupCard.js');
@@ -8,10 +7,7 @@ describe("BotSetupCard Factory Tests", () => {
     let factory;
 
     beforeEach(() => {
-        factory = BotSetupCardFactory.newBotSetupCard()
-            .withCardService(
-                MockCardServiceFactory.newCardService()
-            );
+        factory = BotSetupCardFactory.newBotSetupCard();
     });
 
     test("should create a BotSetupCard instance", () => {

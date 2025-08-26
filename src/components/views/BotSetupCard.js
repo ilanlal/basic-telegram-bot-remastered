@@ -6,6 +6,7 @@
 if (typeof require !== 'undefined' && require) {
     TelegramBotInfo = require('../models/TelegramBotInfo.js').TelegramBotInfo;
     AuthUser = require('../models/AuthUser.js').AuthUser;
+    CardService = require('gas-mock-globals/src/card/CardService.js');
 }
 
 class BotSetupCard {
@@ -15,12 +16,9 @@ class BotSetupCard {
         };
     }
 
-    constructor(cardService = null) {
-        if (!cardService) {
-            throw new Error("CardService is required");
-        }
+    constructor() {
         this._CARD_NAME = 'botSetupCard';
-        this._cardService = cardService;
+        this._cardService = CardService;
         this._models = {
             _LOCALIZE_STRINGS: null,
             _authUserInfo: null,
@@ -94,15 +92,10 @@ class BotSetupCard {
 
 class BotSetupCardFactory {
     constructor() {
-        this._cardService = null;
-    }
-    withCardService(cardService) {
-        this._cardService = cardService;
-        return this;
     }
 
     build() {
-        return new BotSetupCard(this._cardService);
+        return new BotSetupCard();
     }
 
     static newBotSetupCard() {

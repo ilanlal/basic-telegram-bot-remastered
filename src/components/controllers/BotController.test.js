@@ -1,7 +1,7 @@
 const { AppManager } = require('../../helpers/AppManager');
 const { TelegramBotClientFactory } = require('../../libs/TelegramBotClient');
 const { UserStoreFactory } = require('../../services/UserStore');
-const { MockPropertiesService } = require('../../tests/mocks/MockPropertiesService');
+
 const {
     BotController,
     BotControllerFactory
@@ -18,8 +18,6 @@ describe('BotController Tests', () => {
             .withLocalization(AppManager.getLocalizationResources())
             .withUserStore(
                 UserStoreFactory.newUserStoreFactory()
-                    .withUserProperties(
-                        MockPropertiesService.getUserProperties())
                     .build())
             .withTelegramBotClient(
                 TelegramBotClientFactory.newTelegramBotClientFactory()

@@ -8,16 +8,11 @@ const {
     UserStore
 } = require('./UserStore.js');
 
-const {
-    MockPropertiesService
-} = require('../tests/mocks/MockPropertiesService.js');
-
 describe('UserStore Service Tests', () => {
     let userStore;
 
     beforeEach(() => {
         userStore = UserStoreFactory.newUserStoreFactory()
-            .withUserProperties(MockPropertiesService.getUserProperties())
             .build();
     });
 
