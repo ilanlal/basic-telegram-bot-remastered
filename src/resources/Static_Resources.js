@@ -55,3 +55,7 @@ const Static_Resources = {
     account: "👤",
   }
 };
+
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = { Static_Resources };
+}

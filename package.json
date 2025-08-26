@@ -12,7 +12,13 @@
     "type": "git",
     "url": "git+https://github.com/ilanlal/basic-telegram-bot-remastered.git"
   },
-  "keywords": ["telegram", "bot", "google apps script", "gas", "nodejs"],
+  "keywords": [
+    "telegram",
+    "bot",
+    "google apps script",
+    "gas",
+    "nodejs"
+  ],
   "author": "Ilan Laloum",
   "license": "MIT",
   "bugs": {
@@ -22,10 +28,8 @@
   "devDependencies": {
     "jest": "^29.7.0"
   },
-  "directories": {
-    "libs": "libs"
-  },
   "dependencies": {
+    "@types/google-apps-script": "^1.0.100",
     "ansi-escapes": "^4.3.2",
     "ansi-regex": "^6.2.0",
     "ansi-styles": "^4.3.0",
@@ -83,6 +87,7 @@
     "get-package-type": "^0.1.0",
     "get-stream": "^6.0.1",
     "glob": "^10.4.5",
+    "googleapis": "^157.0.0",
     "graceful-fs": "^4.2.11",
     "has-flag": "^4.0.0",
     "html-escaper": "^2.0.2",
@@ -210,5 +215,13 @@
     "yargs": "^17.7.2",
     "yargs-parser": "^21.1.1",
     "yocto-queue": "^0.1.0"
+  },
+  "jest": {
+    "modulePaths": [
+      "node_modules",
+      "."
+    ],
+    "coverageDirectory": "./coverage/",
+    "collectCoverage": true
   }
 }

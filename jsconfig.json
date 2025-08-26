@@ -3,6 +3,5 @@
     "module": "CommonJS",
     "target": "ES6",
     "checkJs": false
-  },
-  "include": ["src/**/*", "TelegramUser.test.js"]
+  }
 }

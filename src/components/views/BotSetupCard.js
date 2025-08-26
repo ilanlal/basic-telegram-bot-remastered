@@ -1,4 +1,7 @@
 // version: 1.0.0
+
+/* eslint-disable no-undef */
+
 // --- IGNORE (for Node.js support) --- //
 if (typeof require !== 'undefined' && require) {
     TelegramBotInfo = require('../models/TelegramBotInfo.js').TelegramBotInfo;
@@ -70,7 +73,7 @@ class BotSetupCard {
         this._models._telegramBotInfo = telegramBotInfo;
         return this;
     }
-    
+
     withLocalization(LOCALIZE_STRINGS) {
         if (!LOCALIZE_STRINGS || typeof LOCALIZE_STRINGS !== 'object') {
             throw new Error("LOCALIZE_STRINGS must be a valid object");
@@ -102,7 +105,7 @@ class BotSetupCardFactory {
         return new BotSetupCard(this._cardService);
     }
 
-    static newBotSetupCardFactory() {
+    static newBotSetupCard() {
         return new BotSetupCardFactory();
     }
 }

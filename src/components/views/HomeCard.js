@@ -1,11 +1,17 @@
 // Apps Script code for Google Workspace Add-ons
+if (typeof require !== 'undefined' && require) {
+    AppManager = require('../../helpers/AppManager.js').AppManager;
+    UserStore = require('../../services/UserStore.js').UserStore;
+    Static_Resources = require('../../resources/Static_Resources.js').Static_Resources;
+    CardService = require('googleapis').google.cardservice('v1');
+}
+
 class HomeCard {
     constructor() {
         this.localization = AppManager.getLocalizationResources();
         this.indentationLevel = UserStore.DEFAULT_INDENT_SPACES;
         this.FREE_ACTIVATION_DAYS = Static_Resources.parameters.freeActivationDays;
     }
-
 
     setUserInfo(userInfo) {
         this.userInfo = userInfo;
