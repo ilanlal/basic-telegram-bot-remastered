@@ -1,53 +1,33 @@
+/* eslint-disable no-undef */
+
 class AccountController {
-    constructor() {
+    get userStore() {
+        return this._service.userStore;
+    }
+    
+    getUserInfo() {
+        return this.userStore?.getUserInfo() || {};
+    }
+
+    constructor(userStore = null) {
+        this._service = {
+            userStore: null
+        }
+
         this.DEFAULT_INDENT_SPACES = new UserStore()._DEBUG_MODE_KEY;
     }
-
-    setLocalization(localization) {
-        this.localization = localization;
-        return this;
-    }
-
-    getLocalization() {
-        return this.localization;
-    }
-
-    setUserInfo(userInfo) {
-        this.userInfo = userInfo;
-        return this;
-    }
-
-    getUserInfo() {
-        return this.userInfo;
-    }
-
-    setUserStore(userStore) {
-        this.userStore = userStore;
-        return this;
-    }
-
-    getUserStore() {
-        return this.userStore;
-    }
-
-    getUserLicense() {
-        return this.getUserInfo()?.getUserLicense();
-    }
-
 
     /**
      * Creates a card for account management.
      * @returns {CardService.ActionResponse}
      */
-    home() {
+    navigateToHome() {
         return CardService.newActionResponseBuilder()
             .setNavigation(
                 CardService.newNavigation()
-                    .pushCard(
-                        ViewBuilder.newAccountCard(
-                            this.getLocalization(),
-                            this.getUserInfo()
-                        ).build()
+                    .pushCard(new AccountCard()
+                        .withUserInfo(this.getUserInfo())
+                        .build()
                     )
             );
     }
@@ -76,17 +56,14 @@ class AccountController {
                 CardService.newNavigation()
                     .popToRoot()
                     .updateCard(
-                        ViewBuilder.newHomeCard(
-                            this.getLocalization(),
-                            this.getUserInfo(),
-                            this.userStore.getIndentSpaces()
-                        ).build()
+                        new HomeCard()
+                            .withUserInfo(this.getUserInfo())
+                            .build()
                     ));
     }
 
     revokePremium(e) {
         this.userStore.clearUserLicense();
-        this.userStore.setIndentSpaces(UserStore.DEFAULT_INDENT_SPACES);
 
         // navigate to root
         return CardService
@@ -95,33 +72,11 @@ class AccountController {
                 CardService.newNavigation()
                     .popToRoot()
                     .updateCard(
-                        ViewBuilder.newHomeCard(
-                            this.getLocalization(),
-                            this.getUserInfo(),
-                            this.userStore.getIndentSpaces()
-                        ).build()
+                        new HomeCard()
+                            .withUserInfo(this.getUserInfo())
+                            .build()
                     ));
 
-    }
-
-    /**
-     * Handles the change of indent spaces.
-     * @param {Object} e - The event object containing the new indent spaces.
-     * @returns {CardService.ActionResponse}
-     */
-    indentSpacesChange(e) {
-        try {
-            const selectedSpaces = e?.commonEventObject
-                ?.formInputs?.[Static_Resources.resources.indentSpaces]
-                ?.stringInputs?.value[0] || "2";
-            this.userStore.setIndentSpaces(selectedSpaces); // Store the selected spaces in user properties
-            return this.handleOperationSuccess();
-        } catch (error) {
-            return CardService.newActionResponseBuilder()
-                .setNotification(CardService.newNotification()
-                    .setText(error.toString()))
-                .build();
-        }
     }
 
     /**
@@ -131,14 +86,32 @@ class AccountController {
         return CardService.newActionResponseBuilder()
             .setNotification(
                 CardService.newNotification()
-                    .setText(this.localization.messages.success))
+                    .setText("Operation completed successfully!"))
             .setStateChanged(false);
     }
+}
 
-    static newAccountController(localization, userStore, userInfo) {
-        return new AccountController()
-            .setLocalization(localization)
-            .setUserStore(userStore)
-            .setUserInfo(userInfo);
+class AccountControllerFactory {
+    constructor() {
+        this._userStore = null;
     }
+
+    withUserStore(userStore) {
+        this._userStore = userStore;
+        return this;
+    }
+
+    build() {
+        return new AccountController(
+            this._userStore
+        );
+    }
+
+    static create() {
+        return new AccountControllerFactory();
+    }
+}
+
+if (typeof module !== "undefined" && module.exports) {
+    module.exports = { AccountController, AccountControllerFactory };
 }

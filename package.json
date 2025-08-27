@@ -1,10 +1,12 @@
 {
   "name": "basic-telegram-bot-remastered",
   "version": "v38.next",
-  "description": "> version: ```v38.next```",
+  "description": "A simple Telegram bot template using Google Apps Script.",
   "main": "src/index.js",
+  "type": "commonjs",
   "scripts": {
     "test": "jest",
+    "test:watch": "jest --watch",
     "build": "echo \"No build step required for Google Apps Script projects.\""
   },
   "repository": {

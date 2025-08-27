@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+
 // version: 1.0.0
 class TelegramUser {
     getIsBot() {
@@ -186,81 +188,6 @@ class TelegramUser {
     }
 }
 
-class TelegramUserBuilder {
-    constructor() {
-        this.telegramUser = TelegramUser.newTelegramUser();
-    }
-
-    setIsBot(isBot) {
-        this.telegramUser.setIsBot(isBot);
-        return this;
-    }
-
-    setUserId(userId) {
-        this.telegramUser.setUserId(userId);
-        return this;
-    }
-
-    setFirstName(firstName) {
-        this.telegramUser.setFirstName(firstName);
-        return this;
-    }
-
-    setLastName(lastName) {
-        this.telegramUser.setLastName(lastName);
-        return this;
-    }
-
-    setUsername(username) {
-        this.telegramUser.setUsername(username);
-        return this;
-    }
-
-    setLanguageCode(languageCode) {
-        this.telegramUser.setLanguageCode(languageCode);
-        return this;
-    }
-
-    setIsPremium(isPremium) {
-        this.telegramUser.setIsPremium(isPremium);
-        return this;
-    }
-
-    setAddedToAttachmentMenu(addedToMenu) {
-        this.telegramUser.setAddedToAttachmentMenu(addedToMenu);
-        return this;
-    }
-
-    setCanJoinGroups(canJoin) {
-        this.telegramUser.setCanJoinGroups(canJoin);
-        return this;
-    }
-
-    setCanReadAllGroupMessages(canRead) {
-        this.telegramUser.setCanReadAllGroupMessages(canRead);
-        return this;
-    }
-
-    setSupportsInlineQueries(supports) {
-        this.telegramUser.setSupportsInlineQueries(supports);
-        return this;
-    }
-
-    setCanConnectToBusiness(canConnect) {
-        this.telegramUser.setCanConnectToBusiness(canConnect);
-        return this;
-    }
-
-    setHasMainWebApp(hasWebApp) {
-        this.telegramUser.setHasMainWebApp(hasWebApp);
-        return this;
-    }
-
-    build() {
-        return this.telegramUser;
-    }
-}
-
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { TelegramUser, TelegramUserBuilder };
+    module.exports = { TelegramUser };
 }

@@ -1,42 +1,22 @@
+/* eslint-disable no-undef */
 // version: 1.0.0
-if(typeof require !== 'undefined' && require) {
-    AuthUser = require('../models/AuthUser.js').AuthUser;
-    TelegramUser = require('../models/TelegramUser.js').TelegramUser;
-    TelegramBotInfo = require('../models/TelegramBotInfo.js').TelegramBotInfo;
-    UserStore = require('../../services/UserStore.js').UserStore;
-    TelegramBotClient = require('../../libs/TelegramBotClient.js').TelegramBotClient;
-}
 
 class BotController {
-    constructor(LOCALIZE_STRINGS = null, userStore = null, telegramBotClient = null) {
+    constructor(userStore = null, telegramBotClient = null) {
         this._services = {
             /** @type {UserStore | null} */
             _userStore: userStore,
             /** @type {TelegramBotClient | null} */
             _telegramBotClient: telegramBotClient
         };
-        this._models = {
-            /** @type {Global_Resources['hl'] | null} */
-            _LOCALIZE_STRINGS: LOCALIZE_STRINGS,
-            /** @type {AuthUser | null} */
-            _userInfo: this._services._userStore.getUserInfo()
-        };
-
     }
-
 
     navigateToHome() {
         return CardService.newActionResponseBuilder()
             .setNavigation(
                 CardService.newNavigation()
                     .pushCard(
-                        ViewBuilder.newBotHomeCard(
-                            this._models._LOCALIZE_STRINGS,
-                            this._models._indentationLevel,
-                            this._models._userInfo
-                        )
-                            .validate()
-                            .build()
+                        new HomeCard().build()
                     )
             );
     }
@@ -46,32 +26,26 @@ class BotController {
             .setNavigation(
                 CardService.newNavigation()
                     .pushCard(
-                        ViewBuilder.newBotSetupCard(
-                            this._models._LOCALIZE_STRINGS,
-                            this._models._userInfo
-                        )
-                            .validate()
-                            .build()
+                        new BotSetupCard().build()
                     )
             );
     }
 
     saveBotToken(e) {
-        console.log("saveBotToken called with event:", e);
+        //console.log("saveBotToken called with event:", e);
 
         const botToken = e?.commonEventObject
             ?.formInputs?.[BotSetupCard.INPUTS.BOT_TOKEN]
             ?.stringInputs.value[0] || BotSetupCard.INPUTS.BOT_TOKEN;
 
-        console.log("Bot token:", botToken);
+        //console.log("Bot token:", botToken);
         // Todo: getMe to approve validation
         this._services._userStore.setTelegramBotInfo(
-            new TelegramBotInfoBuilder()
+            new TelegramBotInfo()
                 .setBotToken(botToken)
                 .setCreatedOn(new Date())
                 .setLastSync(new Date())
                 .setUser(TelegramUser.newTelegramUser())
-                .build()
         );
 
         return this.navigateToHome();
@@ -102,24 +76,14 @@ class BotControllerFactory {
         return this;
     }
 
-    withLocalization(LOCALIZE_STRINGS) {
-        if (!LOCALIZE_STRINGS || typeof LOCALIZE_STRINGS !== 'object') {
-            throw new Error("LOCALIZE_STRINGS must be an object");
-        }
-
-        this._LOCALIZE_STRINGS = LOCALIZE_STRINGS;
-        return this;
-    }
-
     build() {
         return new BotController(
-            this._LOCALIZE_STRINGS,
             this._userStore,
             this._telegramBotClient
         );
     }
 
-    static newBotControllerFactory() {
+    static create() {
         return new BotControllerFactory();
     }
 }

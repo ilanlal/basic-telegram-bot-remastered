@@ -1,5 +1,5 @@
+/* eslint-disable no-undef */
 // version: 1.0.0
-// Google Apps Script code for Google Workspace Add-ons
 class ValidationReport {
     getItems() {
         return this._items;

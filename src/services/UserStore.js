@@ -1,12 +1,5 @@
+/* eslint-disable no-undef */
 // version: 2.0.0
-// Google Apps Script code for Google Workspace Add-ons
-if (typeof require !== 'undefined' && require) {
-  AuthUserBuilder = require('../components/models/AuthUser.js').AuthUserBuilder;
-  TelegramBotInfo = require('../components/models/TelegramBotInfo.js').TelegramBotInfo;
-  TelegramBotInfoBuilder = require('../components/models/TelegramBotInfo.js').TelegramBotInfoBuilder;
-  PropertiesService = require('gas-mock-globals/src/properties/PropertiesService.js');
-}
-
 class UserStore {
   static get TELEGRAM_BOT_INFO_KEY() {
     return "telegram_bot_info";
@@ -161,7 +154,7 @@ class UserStore {
       || data === "null"
       || data === ""
       || data === "[object Object]") {
-      return new TelegramBotInfoBuilder().build();
+      return new TelegramBotInfo(); // Return empty TelegramBotInfo if not set
     }
 
     return TelegramBotInfo.fromJsonString(data);

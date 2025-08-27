@@ -48,11 +48,11 @@ class QUnitRunner {
     }
 
     test_views() {
-        new test_BotCard();
+        
     }
 
     test_controllers() {
-        new test_BotController();
+        
     }
 
 

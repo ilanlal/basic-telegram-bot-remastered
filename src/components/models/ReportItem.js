@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 // version: 2.0.0
 class ReportItem {
   getSheetName() {
@@ -48,36 +49,6 @@ class ReportItem {
   }
 }
 
-class ReportItemBuilder {
-  constructor() {
-    this.reportItem = ReportItem.newReportItem();
-  }
-
-  setSheetName(sheetName) {
-    this.reportItem.setSheetName(sheetName);
-    return this;
-  }
-
-  setA1Notation(a1Notation) {
-    this.reportItem.setA1Notation(a1Notation);
-    return this;
-  }
-
-  setMessage(message) {
-    this.reportItem.setMessage(message);
-    return this;
-  }
-
-  setStatus(status) {
-    this.reportItem.setStatus(status);
-    return this;
-  }
-
-  build() {
-    return this.reportItem;
-  }
-}
-
 if (typeof module !== 'undefined' && module.exports) {
-  module.exports = { ReportItem, ReportItemBuilder };
+  module.exports = { ReportItem };
 }

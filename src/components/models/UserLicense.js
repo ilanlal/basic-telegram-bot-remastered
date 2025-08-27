@@ -1,5 +1,5 @@
+/* eslint-disable no-undef */
 // version 2.0.0
-// Google Apps Script code for Google Workspace Add-ons
 class UserLicense {
     setCreatedOn(createdOn) {
         this._createdOn = createdOn;
@@ -56,10 +56,6 @@ class UserLicense {
         this._amount = 0;
     }
 
-    static newUserLicense() {
-        return new UserLicense();
-    }
-
     static fromJsonString(json = '{}') {
         // Parse the JSON string into a UserLicense object
         const data = JSON.parse(json, (key, value) => {
@@ -102,41 +98,6 @@ class UserLicense {
     }
 }
 
-class UserLicenseBuilder {
-    constructor() {
-        this._userLicense = new UserLicense();
-    }
-
-    setCreatedOn(createdOn) {
-        this._userLicense.setCreatedOn(createdOn);
-        return this;
-    }
-
-    setAmount(amount) {
-        this._userLicense.setAmount(amount);
-        return this;
-    }
-
-    setPlanId(planId) {
-        this._userLicense.setPlanId(planId);
-        return this;
-    }
-
-    setUserId(userId) {
-        this._userLicense.setUserId(userId);
-        return this;
-    }
-
-    setExpirationDate(expirationDate) {
-        this._userLicense.setExpirationDate(expirationDate);
-        return this;
-    }
-
-    build() {
-        return this._userLicense;
-    }
-}
-
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { UserLicense, UserLicenseBuilder };
+    module.exports = { UserLicense };
 }

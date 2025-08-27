@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+
 // version: 2.0.0
 // Google Apps Script code for Google Workspace Add-ons
 class AuthUser {
@@ -51,13 +53,13 @@ class AuthUser {
         this.userCountry = null;
         this.userTimezone = null;
         this.userLicense = null;
-        this.userLocaleCode = "en"; // Default locale code
+        this.userLocaleCode = "en"; // Default locale code        
     }
 
     static newAuthUser() {
         return new AuthUser();
     }
-    
+
     static fromJsonString(json = '{}') {
         // Parse the JSON string into a UserInfo object
         const data = JSON.parse(json, (key, value) => {
@@ -90,41 +92,6 @@ class AuthUser {
     }
 }
 
-class AuthUserBuilder {
-    constructor() {
-        this.authUser = AuthUser.newAuthUser();
-    }
-
-    setUserId(userId) {
-        this.authUser.setUserId(userId);
-        return this;
-    }
-
-    setUserCountry(country) {
-        this.authUser.setUserCountry(country);
-        return this;
-    }
-
-    setUserTimezone(timezone) {
-        this.authUser.setUserTimezone(timezone);
-        return this;
-    }
-
-    setUserLicense(userLicense) {
-        this.authUser.setUserLicense(userLicense);
-        return this;
-    }
-
-    setUserLocaleCode(localeCode) {
-        this.authUser.setUserLocaleCode(localeCode);
-        return this;
-    }
-
-    build() {
-        return this.authUser;
-    }
-}
-
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = {AuthUser, AuthUserBuilder};
+    module.exports = { AuthUser };
 }

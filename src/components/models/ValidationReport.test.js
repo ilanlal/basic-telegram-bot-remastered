@@ -1,5 +1,5 @@
-const { ReportItem } = require('./ReportItem.js');
-const { ValidationReport, ValidationReportBuilder } = require('./ValidationReport.js');
+/* eslint-disable no-undef */
+require('./'); // index.js
 
 describe('ValidationReport Model Tests', () => {
     test('ValidationReport should be defined', () => {

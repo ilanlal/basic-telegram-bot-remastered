@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+
 // version: 1.0.0
 class TelegramBotInfo {
     /** @returns {string | null} */
@@ -43,8 +45,8 @@ class TelegramBotInfo {
     constructor() {
         /** @type {Date || null} */
         this._lastSync = null;
-        /** @type {string | null} */
-        this._botToken = null;
+        /** @type {string} */
+        this._botToken = '';
         /** @type {Date | null} */
         this._createdOn = null;
         /** @type {TelegramUser | null} */
@@ -76,7 +78,7 @@ class TelegramBotInfo {
             .setBotToken(json._botToken)
             .setCreatedOn(json._createdOn)
             .setLastSync(json._lastSync)
-            .setUser(JSON.parse(json._user));
+            .setUser((json._user && JSON.parse(json._user)) || null);
     }
 
     toJsonString() {
@@ -89,39 +91,8 @@ class TelegramBotInfo {
     }
 }
 
-class TelegramBotInfoBuilder {
-    constructor() {
-        this.telegramBotInfo = TelegramBotInfo.newTelegramBotInfo();
-    }
-
-    setBotToken(botToken) {
-        this.telegramBotInfo.setBotToken(botToken);
-        return this;
-    }
-
-    setCreatedOn(createdOn) {
-        this.telegramBotInfo.setCreatedOn(createdOn);
-        return this;
-    }
-
-    setLastSync(lastSync) {
-        this.telegramBotInfo.setLastSync(lastSync);
-        return this;
-    }
-
-    setUser(user) {
-        this.telegramBotInfo.setUser(user);
-        return this;
-    }
-
-    build() {
-        return this.telegramBotInfo;
-    }
-}
-
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = {
-        TelegramBotInfo,
-        TelegramBotInfoBuilder
+        TelegramBotInfo
     };
 }

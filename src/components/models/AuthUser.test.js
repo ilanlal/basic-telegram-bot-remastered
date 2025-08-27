@@ -1,7 +1,5 @@
-const {
-    AuthUser,
-    AuthUserBuilder
-} = require('./AuthUser.js');
+/* eslint-disable no-undef */
+require('./'); // index.js
 
 describe('AuthUser Model Tests', () => {
     test("AuthUser should be defined", () => {
@@ -50,22 +48,5 @@ describe('AuthUser Model Tests', () => {
         expect(deserializedAuthUser.getUserTimezone()).toBe("PST");
         expect(deserializedAuthUser.getUserLicense()).toBe("premium");
         expect(deserializedAuthUser.getUserLocaleCode()).toBe("en-US");
-    });
-
-    test("AuthUserBuilder should build AuthUser correctly", () => {
-        const authUser = new AuthUserBuilder()
-            .setUserId("123")
-            .setUserCountry("USA")
-            .setUserTimezone("PST")
-            .setUserLicense("premium")
-            .setUserLocaleCode("en-US")
-            .build();
-
-        expect(authUser).toBeDefined();
-        expect(authUser.getUserId()).toBe("123");
-        expect(authUser.getUserCountry()).toBe("USA");
-        expect(authUser.getUserTimezone()).toBe("PST");
-        expect(authUser.getUserLicense()).toBe("premium");
-        expect(authUser.getUserLocaleCode()).toBe("en-US");
     });
 });
