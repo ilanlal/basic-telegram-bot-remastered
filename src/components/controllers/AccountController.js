@@ -1,5 +1,7 @@
 /* eslint-disable no-undef */
 
+const HomeCard = require && require("../views/HomeCard");
+
 const AccountCard = require && require("../views/AccountCard");
 
 class AccountController {
@@ -15,8 +17,6 @@ class AccountController {
         this._service = {
             userStore: userStore
         }
-
-        this.DEFAULT_INDENT_SPACES = 2;
     }
 
     /**
@@ -57,8 +57,8 @@ class AccountController {
                 CardService.newNavigation()
                     //.popToRoot()
                     .updateCard(
-                        new AccountCard()
-                            .withUserInfo(this.getUserInfo())
+                        new HomeCard()
+                            .withAuthUserInfo(this.getUserInfo())
                             .build()
                     ));
     }
@@ -73,8 +73,8 @@ class AccountController {
                 CardService.newNavigation()
                     //.popToRoot()
                     .updateCard(
-                        new AccountCard()
-                            .withUserInfo(this.getUserInfo())
+                        new HomeCard()
+                            .withAuthUserInfo(this.getUserInfo())
                             .build()
                     ));
 
