@@ -1,3 +1,4 @@
+// version: 1.2.0
 class ServiceBuilder {
     static newJsonStudio() {
         return JsonStudio.newInstance();
@@ -12,11 +13,8 @@ class ServiceBuilder {
     }
 
     static newSpreadsheetService(sheetName = null) {
-        const sheet = sheetName
-            ? SpreadsheetApp.getActiveSpreadsheet().getSheetByName(sheetName)
-            : SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-
-        return SpreadsheetService.newSpreadsheetService(sheet);
+        return SpreadsheetService.newSpreadsheetService(
+            SpreadsheetApp.getActiveSpreadsheet(), sheetName);
     }
 
     static newRangeService(sheetName, a1Notation) {

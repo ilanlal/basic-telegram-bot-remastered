@@ -1,121 +1,59 @@
-// Google Apps Script code for Google Workspace Add-ons
+/* eslint-disable no-undef */
 class AccountCard {
+    static get CARD_NAME() {
+        return 'accountCard';
+    }
+
     constructor() {
-        this.FREE_ACTIVATION_DAYS = Static_Resources.parameters.freeActivationDays;
+        this._models = {
+            userInfo: new AuthUser(),
+            FREE_ACTIVATION_DAYS: 0
+        };
     }
 
-    static newAccountCard() {
-        return new AccountCard();
-    }
-
-    getUserInfo() {
-        return this.userInfo;
-    }
-
-    setUserInfo(userInfo) {
-        this.userInfo = userInfo;
+    withFreeActivationDays(days) {
+        this._models.FREE_ACTIVATION_DAYS = days;
         return this;
     }
 
-    getUserLicense() {
-        return this.getUserInfo()?.getUserLicense();
-    }
-
-    setLocalization(localization) {
-        this.localization = localization;
+    withUserInfo(userInfo) {
+        this._models.userInfo = userInfo;
         return this;
     }
 
     isPremium() {
-        return this?.getUserInfo()?.getUserLicense()?.isActive?.() || false;
-    }
-
-    /**
-     * @returns {CardService.CardBuilder} - The card builder for the account card.
-     */
-    newCardBuilder() {
-        // Create a new card builder
-        const cardBuilder = CardService.newCardBuilder()
-            // Set the card header with title and subtitle
-            .setHeader(this.newHeader())
-            .addSection(this.newUserInfoSection())
-            .addSection(this.newMembershipSection());
-
-        return cardBuilder;
-    }
-
-    newHeader() {
-        return CardService.newCardHeader()
-            .setTitle(this.localization.cards.account.title)
-            .setSubtitle(this.localization.cards.account.subtitle)
-            .setImageStyle(CardService.ImageStyle.SQUARE)
-            .setImageUrl('https://raw.githubusercontent.com/ilanlal/ss-json-editor/refs/heads/main/assets/logo120.png')
-            .setImageAltText(this.localization.cards.account.imageAltText);
-    }
-
-    newUserInfoSection() {
-        return CardService.newCardSection()
-            .setHeader(this.localization.messages.profileInfo)
-            .addWidget(CardService.newDivider())
-            .addWidget(CardService.newTextParagraph()
-                .setText(`User: ${this.getUserInfo()?.getUserId() || '(unknown user)'}`)
-            )
-            .addWidget(CardService.newTextParagraph()
-                .setText(`Locale: ${this.getUserInfo()?.getUserLocaleCode() || '(unknown locale)'}`)
-            )
-            //getUserCountry
-            .addWidget(CardService.newTextParagraph()
-                .setText(`Country: ${this.getUserInfo()?.getUserCountry() || '(unknown country)'}`)
-            )
-            //getUserTimezone
-            .addWidget(CardService.newTextParagraph()
-                .setText(`Timezone: ${this.getUserInfo()?.getUserTimezone()?.id || '(unknown timezone)'}`)
-            );
-    }
-
-    newMembershipSection() {
-        const section = CardService.newCardSection()
-            .setHeader(this.localization.messages.membershipInfo)
-            .addWidget(CardService.newDivider());
-
-        if (this.isPremium()) {
-            section
-                .addWidget(CardService.newTextParagraph()
-                    .setText(this.localization.messages.premiumActivated))
-                .addWidget(CardService.newTextParagraph()
-                    .setText(new Date(this.getUserLicense()?.getCreatedOn()).toLocaleString()))
-                .addWidget(CardService.newTextParagraph()
-                    .setText(this.getUserLicense()?.getPlanId() || ''))
-                .addWidget(CardService.newTextParagraph()
-                    .setText(new Date(this.getUserLicense()?.getExpirationDate())?.toLocaleString() || ''))
-                .addWidget(CardService.newTextButton()
-                    .setText(this.localization.actions.cancelPremium)
-                    .setOnClickAction(CardService.newAction()
-                        .setFunctionName("onRevokeLicense")));
-        } else {
-            section
-                .addWidget(CardService.newTextParagraph()
-                    .setText(
-                        this.localization.messages.claimPremium
-                            .replace('{0}', this.FREE_ACTIVATION_DAYS)
-                    )
-                )
-                .addWidget(CardService.newTextParagraph()
-                    .setText(this.localization.cards.account.activationInstructions)
-                )
-                .addWidget(CardService.newTextButton()
-                    .setText(this.localization.actions.activatePremium)
-                    //.setTextButtonStyle(CardService.TextButtonStyle.FILLED)
-                    .setOnClickAction(CardService.newAction()
-                        .setFunctionName("onActivatePremium")
-                        .setParameters({
-                            userId: 'view_user',
-                            planId: 'Premium membership',
-                            days: this.FREE_ACTIVATION_DAYS.toString()
-                        }))
-                );
+        if (!(this._models.userInfo && this._models.userInfo instanceof AuthUser)) {
+            return false;
         }
-
-        return section;
+        return this._models.userInfo?.getUserLicense()?.isActive?.() || false;
     }
+
+    build() {
+        const userInfo = this._models.userInfo;
+        const isPremium = this.isPremium();
+        const header = CardService.newCardHeader()
+            .setTitle("Account Information")
+            .setSubtitle(`${isPremium ? "Premium User" : "Free User"}`)
+            .setImageStyle(CardService.ImageStyle.SQUARE)
+            .setImageUrl('https://raw.githubusercontent.com/ilanlal/ss-json-editor/refs/heads/main/assets/logo120.png');
+        //.setImageAltText('Logo of Basic Telegram Bot');
+
+        const body = CardService.newCardSection()
+            .addWidget(CardService.newTextParagraph()
+                .setText(`Hello`))
+            .addWidget(CardService.newTextParagraph()
+                .setText(`You have ${this._models.FREE_ACTIVATION_DAYS} days of free activation.`))
+            .addWidget(CardService.newTextParagraph()
+                .setText(`Account Type: ${isPremium ? "Premium" : "Free"}`));
+
+        return CardService.newCardBuilder()
+            .setName(AccountCard.CARD_NAME)
+            .setHeader(header)
+            .addSection(body)
+            .build();
+    }
+}
+
+if (typeof module !== "undefined" && module.exports) {
+    module.exports = AccountCard;
 }

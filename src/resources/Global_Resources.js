@@ -56,6 +56,13 @@ const Global_Resources = {
             easyAdm: "Easy ADM",
         },
         cards: {
+            botSetup: {
+                title: "Bot Setup",
+                hint: "Enter your Telegram Bot Token",
+                subtitle: "Configure your bot settings",
+                description: "Use this section to set up and configure your bot.",
+                imageAltText: "Json Studio Bot Setup Card",
+            },
             account: {
                 title: "Account",
                 subtitle: "Manage your account settings",
@@ -86,15 +93,6 @@ const Global_Resources = {
                 indentSpaces: "Indentation Spaces",
                 indentSpacesContent: "Set your custom indentation spaces for prettifying JSON (default is 2)",
                 tools: "Tools",
-            },
-            editor: {
-                title: "JSON Editor",
-                subtitle: "Edit your data cell: {0}",
-                content: "Use this editor to parse and verify JSON data.",
-                imageAltText: "Json Studio Editor",
-                footer: "Use the buttons below to save or cancel your changes.",
-                saveButton: " 💾 Save",
-                cancelButton: " ❌ Cancel"
             },
             report: {
                 title: "Parse failed",
@@ -150,4 +148,10 @@ const Global_Resources = {
             focus: "👁️ {0}",
         }
     }
+}
+
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = {
+        Global_Resources
+    };
 }

@@ -1,11 +1,33 @@
-// Google Apps Script code for Google Workspace Add-ons
+/* eslint-disable no-undef */
+// version: 2.0.0
 class UserStore {
-  /**
-   * use UserStore.newUserPropertiesStore() to create an instance of UserStore using user properties (Apps Script PropertiesService)
-   * @param {*} userDataStore 
-   */
-  constructor(userDataStore) {
-    this.userDataStorage = userDataStore;
+  static get TELEGRAM_BOT_INFO_KEY() {
+    return "telegram_bot_info";
+  }
+  static get USER_INFO_KEY() {
+    return 'auth_user_info';
+  }
+  static get INDENT_SPACES_KEY() {
+    return 'indent_spaces';
+  }
+  static get USER_LICENSE_KEY() {
+    return 'user_license';
+  }
+  static get LOCALE_KEY() {
+    return 'locale';
+  }
+  static get DEBUG_MODE_KEY() {
+    return 'debug_mode';
+  }
+  static get DEFAULT_LOCALE_CODE() {
+    return 'en';
+  }
+  static get DEFAULT_INDENT_SPACES() {
+    return 2;
+  }
+
+  constructor() {
+    this._userDataProvider = PropertiesService.getUserProperties();
   }
 
   /**
@@ -15,16 +37,16 @@ class UserStore {
    * @return {string} The user's localization setting, defaulting to "en".
    */
   getLocalizationCode() {
-    return this.userDataStorage
-      .getProperty(UserStore.Constants.LOCALIZATION_KEY) || UserStore.Constants.DEFAULT_USER_LOCALE_CODE;
+    return this._userDataProvider
+      .getProperty(UserStore.LOCALE_KEY) || UserStore.DEFAULT_LOCALE_CODE;
   }
 
   /**
    * Sets the localization for the user.
    * @param {string} locale The locale to set, default is "en".
    */
-  setLocalizationCode(locale = UserStore.Constants.DEFAULT_USER_LOCALE_CODE) {
-    this.userDataStorage.setProperty(UserStore.Constants.LOCALIZATION_KEY, locale);
+  setLocalizationCode(locale = UserStore.DEFAULT_LOCALE_CODE) {
+    this._userDataProvider.setProperty(UserStore.LOCALE_KEY, locale);
     return this;
   }
 
@@ -33,10 +55,10 @@ class UserStore {
    * @return {number} The number of spaces for indentation, defaulting to DEFAULT_INDENT_SPACES.
    */
   getIndentSpaces() {
-    const spaces = this.userDataStorage.getProperty(UserStore.Constants.INDENT_SPACES_KEY);
+    const spaces = this._userDataProvider.getProperty(UserStore.INDENT_SPACES_KEY);
 
     if (!spaces) {
-      return UserStore.Constants.DEFAULT_INDENT_SPACES; // Return default if not set or invalid
+      return this.DEFAULT_INDENT_SPACES; // Return default if not set or invalid
     }
 
     return parseInt(spaces);
@@ -46,8 +68,25 @@ class UserStore {
    * Sets the number of spaces for indentation.
    * @param {number} value The number of spaces for indentation, default is DEFAULT_INDENT_SPACES=2 constant.
    */
-  setIndentSpaces(value = UserStore.Constants.DEFAULT_INDENT_SPACES) {
-    this.userDataStorage.setProperty(UserStore.Constants.INDENT_SPACES_KEY, value);
+  setIndentSpaces(value = UserStore.DEFAULT_INDENT_SPACES) {
+    this._userDataProvider.setProperty(UserStore.INDENT_SPACES_KEY, value);
+    return this;
+  }
+
+  getUserInfo() {
+    const data = this._userDataProvider
+      .getProperty(UserStore.USER_INFO_KEY);
+
+    try {
+      return AuthUser.fromJsonString(data);
+    } catch (error) {
+      return new AuthUser();
+    }
+  }
+
+  setUserInfo(userInfo) {
+    this._userDataProvider.setProperty(
+      UserStore.USER_INFO_KEY, userInfo?.toJsonString(userInfo));
     return this;
   }
 
@@ -59,17 +98,18 @@ class UserStore {
    * @see UserLicense
    */
   getUserLicense() {
-    const data = this.userDataStorage
-      .getProperty(UserStore.Constants.USER_LICENSE_KEY);
+    const data = this._userDataProvider
+      .getProperty(UserStore.USER_LICENSE_KEY);
 
     if (!data
       || data === "undefined"
       || data === "null"
-      || data === "") {
+      || data === ""
+      || data === "[object Object]") {
       return undefined; // Return undefined if no license is set
     }
 
-    return UserLicense.fromJsonText(data);
+    return UserLicense.fromJsonString(data);
   }
 
   /**
@@ -81,31 +121,59 @@ class UserStore {
       throw new Error("Invalid license object provided. Must be an instance of UserLicense or undefined.");
     }
 
-    if(license === undefined) {
+    if (license === undefined) {
       return this.clearUserLicense();
     }
-    
-    const licenseJson = UserLicense.toJsonText(license);
 
-    this.userDataStorage.setProperty(UserStore.Constants.USER_LICENSE_KEY, licenseJson);
+    const licenseJson = license.toJsonString();
+
+    this._userDataProvider.setProperty(UserStore.USER_LICENSE_KEY, licenseJson);
     return this;
   }
 
-  /**
-   * Clears the user's license information.
-   */
   clearUserLicense() {
-    this.userDataStorage.deleteProperty(UserStore.Constants.USER_LICENSE_KEY);
+    this._userDataProvider.deleteProperty(UserStore.USER_LICENSE_KEY);
     return this;
   }
 
   isInDebugMode() {
-    const debugMode = this.userDataStorage.getProperty(UserStore.Constants.DEBUG_MODE_KEY);
+    const debugMode = this._userDataProvider.getProperty(UserStore.DEBUG_MODE_KEY);
     return debugMode === 'true';
   }
 
   setDebugMode(value = false) {
-    this.userDataStorage.setProperty(UserStore.Constants.DEBUG_MODE_KEY, value);
+    this._userDataProvider.setProperty(UserStore.DEBUG_MODE_KEY, value);
+    return this;
+  }
+
+  getTelegramBotInfo() {
+    const data = this._userDataProvider.getProperty(UserStore.TELEGRAM_BOT_INFO_KEY);
+
+    if (!data
+      || data === "undefined"
+      || data === "null"
+      || data === ""
+      || data === "[object Object]") {
+      return new TelegramBotInfo(); // Return empty TelegramBotInfo if not set
+    }
+
+    return TelegramBotInfo.fromJsonString(data);
+  }
+
+  /** @param {TelegramBotInfo} botInfo */
+  setTelegramBotInfo(botInfo) {
+    if (!(botInfo instanceof TelegramBotInfo)) {
+      throw new Error("Invalid TelegramBotInfo object provided. Must be an instance of TelegramBotInfo.");
+    }
+
+    this._userDataProvider.setProperty(
+      UserStore.TELEGRAM_BOT_INFO_KEY,
+      botInfo.toJsonString());
+    return this;
+  }
+
+  clearTelegramBotInfo() {
+    this._userDataProvider.deleteProperty(UserStore.TELEGRAM_BOT_INFO_KEY);
     return this;
   }
 
@@ -114,11 +182,22 @@ class UserStore {
   }
 }
 
-UserStore.Constants = {
-  INDENT_SPACES_KEY: 'indentSpaces',
-  USER_LICENSE_KEY: 'userLicense',
-  LOCALIZATION_KEY: 'localization',
-  DEBUG_MODE_KEY: 'debugMode',
-  DEFAULT_USER_LOCALE_CODE: 'en',
-  DEFAULT_INDENT_SPACES: 2
-};
+class UserStoreFactory {
+  constructor() {
+  }
+
+  build() {
+    return new UserStore();
+  }
+
+  static newUserStoreFactory() {
+    return new UserStoreFactory();
+  }
+}
+
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = {
+    UserStore,
+    UserStoreFactory
+  };
+}

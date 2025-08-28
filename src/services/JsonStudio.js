@@ -9,7 +9,9 @@ class JsonStudio {
      * @returns RangeReport
      */
     prettifyRange(range, indentSpaces = 2) {
-        const report = ModelBuilder.newRangeReport().setRange(range);
+        const report = new ValidationReportBuilder()
+            .setRange(range)
+            .build();
         const values = range.getValues();
 
         // Check if the range is valid and does not exceed the maximum allowed size
@@ -35,11 +37,11 @@ class JsonStudio {
                         return newValue;
                     } catch (error) {
                         report.addItem(
-                            ModelBuilder.newReportItem()
+                            new ReportItemBuilder()
                                 .setSheetName(range.getSheet().getName())
                                 .setA1Notation(range.getCell(i + 1, j + 1).getA1Notation())
                                 .setMessage(`${error.message}`)
-                                .setStatus(ReportItem.Status.INVALID)
+                                .build()
                         );
 
                         return cell; // Return the original cell value
@@ -56,7 +58,9 @@ class JsonStudio {
      * @returns RangeReport
      */
     minifyRange(range) {
-        const report = ModelBuilder.newRangeReport().setRange(range);
+        const report = new ValidationReportBuilder()
+            .setA1Notation(range.getA1Notation())
+            .build();
         const values = range.getValues();
 
         // Map through the values and minify each cell
@@ -74,11 +78,11 @@ class JsonStudio {
                         return newValue;
                     } catch (error) {
                         report.addItem(
-                            ModelBuilder.newReportItem()
+                            new ReportItemBuilder()
                                 .setSheetName(range.getSheet().getName())
                                 .setA1Notation(range.getCell(i + 1, j + 1).getA1Notation())
                                 .setMessage(`${error.message}`)
-                                .setStatus(ReportItem.Status.INVALID)
+                                .build()
                         );
 
                         return cell; // Return the original cell value

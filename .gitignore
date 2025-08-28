@@ -1,2 +1,11 @@
+.idea/
+.vscode
+.DS_store
+*.iml
+*.log
+.*.swp
+package-lock.json
 .clasp.json
-.vscode/launch.json
+node_modules/
+coverage
+dist

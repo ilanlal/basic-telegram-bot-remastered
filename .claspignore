@@ -1,0 +1,5 @@
+# Ignore tests
+
+**/*test.js
+**/*test_.js
+**/index.js

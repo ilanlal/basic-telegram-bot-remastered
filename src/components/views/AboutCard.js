@@ -1,58 +1,41 @@
-// Google Apps Script code for Google Workspace Add-ons
+/* eslint-disable no-undef */
+
 class AboutCard {
+  static get CARD_NAME() {
+    return 'aboutCard';
+  }
+
   constructor() {
+    this._models = {
+      packageInfo: null,
+    };
+
+    this._view = {
+      header: () => CardService.newCardHeader()
+        .setTitle(this._models.packageInfo.name)
+        .setSubtitle(this._models.packageInfo.version)
+        .setImageStyle(CardService.ImageStyle.SQUARE)
+        .setImageUrl('https://raw.githubusercontent.com/ilanlal/ss-json-editor/refs/heads/main/assets/logo120.png'),
+      body: () => CardService.newCardSection()
+        .addWidget(CardService.newTextParagraph()
+          .setText(this._models.packageInfo.content)),
+    };
   }
 
-  setLocalization(localization) {
-    this.localization = localization;
+  withPackageInfo(packageInfo) {
+    this._models.packageInfo = packageInfo;
     return this;
   }
 
-  setPackageInfo(packageInfo) {
-    this.packageInfo = packageInfo;
-    return this;
+  build() {
+    return CardService.newCardBuilder()
+      .setName(AboutCard.CARD_NAME)
+      .setHeader(this._view.header())
+      .addSection(this._view.body())
+      .build();
   }
+}
 
-  static newAboutCard() {
-    return new AboutCard();
-  }
-
-  /**
-   * @returns {CardService.CardBuilder}
-   */
-  newCardBuilder() {
-    var builder = CardService.newCardBuilder();
-
-    // Set the card header
-    builder.setHeader(this.newHeader());
-
-    // Add a section with information about the add-on
-    builder.addSection(CardService.newCardSection()
-      .addWidget(CardService.newTextParagraph()
-        .setText(this.localization.cards.about.content)));
-
-    // Add a section for package information
-    if (this.packageInfo) {
-      builder.addSection(this.newPackageInfoSection());
-    }
-    return builder;
-  }
-
-  newPackageInfoSection() {
-    return CardService.newCardSection()
-      .setHeader(this.localization.messages.packageInfo)
-      .addWidget(CardService.newTextParagraph()
-        .setText(`Version: ${this.packageInfo.version}`))
-      .addWidget(CardService.newTextParagraph()
-        .setText(`Build: ${this.packageInfo.build}`));
-  }
-
-  newHeader() {
-    return CardService.newCardHeader()
-      .setTitle(this.localization.cards.about.title)
-      .setSubtitle(this.localization.cards.about.subtitle)
-      .setImageStyle(CardService.ImageStyle.SQUARE)
-      .setImageUrl('https://raw.githubusercontent.com/ilanlal/ss-json-editor/refs/heads/main/assets/logo120.png')
-      .setImageAltText(this.localization.appDescription);
-  }
+if (typeof module !== "undefined" && module.exports) {
+  module.exports = AboutCard;
 }

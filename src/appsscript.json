@@ -25,7 +25,7 @@
   "addOns": {
     "common": {
       "name": "Basic Telegram Bot",
-      "logoUrl": "https://www.gstatic.com/images/branding/product/1x/translate_24dp.png",
+      "logoUrl": "https://raw.githubusercontent.com/ilanlal/basic-telegram-bot-remastered/main/assets/logo24.png",
       "layoutProperties": {
         "primaryColor": "#2772ed"
       },
@@ -40,7 +40,7 @@
     "https://raw.githubusercontent.com/ilanlal/",
     "https://www.github.com/ilanlal/",
     "https://github.com/ilanlal/",
-    "https://www.easyadm.com",
-    "https://easyadm.com"
+    "https://www.easyadm.com/",
+    "https://easyadm.com/"
   ]
 }
