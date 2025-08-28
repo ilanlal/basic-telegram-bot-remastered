@@ -12,7 +12,7 @@ class AboutController {
     /**
     * @returns {CardService.ActionResponse}
     */
-    home() {
+    navigateHome() {
         return CardService.newActionResponseBuilder()
             .setNavigation(CardService
                 .newNavigation()

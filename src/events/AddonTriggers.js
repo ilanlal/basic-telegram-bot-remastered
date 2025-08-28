@@ -1,5 +1,10 @@
 // Google Apps Script file for handling add-on triggers and events
 
+const { AccountControllerFactory } = require && require("../components/controllers/AccountController");
+const { AboutControllerFactory } = require && require("../components/controllers/AboutController");
+const { BotControllerFactory } = require && require("../components/controllers/BotController");
+const { UserStoreFactory } = require && require("../services/UserStore");
+const { TelegramBotClientFactory } = require && require("../libs/TelegramBotClient");
 /**
  * Callback for the add-on homepage.
  * This function is called when the user opens the add-on.
@@ -9,37 +14,35 @@
 function onDefaultHomePageOpen(e) {
     console.log("onDefaultHomePageOpen called with event:", e);
     try {
-        return BotControllerFactory.newBotControllerFactory()
+        return BotControllerFactory.create()
             .withUserStore(
                 UserStoreFactory.newUserStoreFactory().build())
             .withTelegramBotClient(
-                TelegramBotClientFactory.newTelegramBotClientFactory().build())
-            .build(AppManager.getLocalizationResources())
+                TelegramBotClientFactory
+                    .newTelegramBotClientFactory()
+                    .withToken('_dummy_token_')
+                    .build())
+            .build()
             .navigateToHome()
             .build();
     } catch (error) {
-        SpreadsheetApp
-            .getActiveSpreadsheet()
-            .toast(
-                error.message || error.toString(),
-                "Error",
-                15);
+        return CardService.newActionResponseBuilder()
+            .setNotification(
+                CardService.newNotification()
+                    .setText(
+                        error.toString()))
+            .build();
     }
 }
 
 function onOpenAccountCard(e) {
     console.log("onOpenAccountCard called with event:", e);
     try {
-        return ControllerBuilder.newAccountController()
-            .setUserInfo(new AuthUserBuilder()
-                .setUserId('_user')
-                .setUserLocaleCode(e?.commonEventObject?.userLocale || 'en')
-                .setUserCountry(e?.commonEventObject?.userCountry || 'US')
-                .setUserTimezone(e?.commonEventObject?.userTimezone || Session.getScriptTimeZone())
-                .setUserLicense(
-                    ServiceBuilder.newUserStore().getUserLicense())
-                .build())
-            .home()
+        return AccountControllerFactory.create()
+            .withUserStore(
+                UserStoreFactory.newUserStoreFactory().build())
+            .build()
+            .navigateToHome()
             .build();
 
     } catch (error) {
@@ -55,8 +58,16 @@ function onOpenAccountCard(e) {
 function onShowAboutCard(e) {
     console.log("onShowAboutCard called with event:", e);
     try {
-        return ControllerBuilder.newAboutController()
-            .home()
+        return AboutControllerFactory.create()
+            .withPackageInfo({
+                name: "My Add-on",
+                version: "1.0.0",
+                author: "Your Name",
+                build: "1.0.0",
+                description: "This is my add-on"
+            })
+            .build()
+            .navigateHome()
             .build();
     } catch (error) {
         return CardService.newActionResponseBuilder()
@@ -69,7 +80,10 @@ function onShowAboutCard(e) {
 function onActivatePremium(e) {
     console.log("onActivatePremium called with event:", e);
     try {
-        return ControllerBuilder.newAccountController()
+        return AccountControllerFactory.create()
+            .withUserStore(
+                UserStoreFactory.newUserStoreFactory().build())
+            .build()
             .activatePremium(e)
             .build();
     } catch (error) {
@@ -85,7 +99,10 @@ function onActivatePremium(e) {
 function onRevokeLicense(e) {
     console.log("onRevokeLicense called with event:", e);
     try {
-        return ControllerBuilder.newAccountController()
+        return AccountControllerFactory.create()
+            .withUserStore(
+                UserStoreFactory.newUserStoreFactory().build())
+            .build()
             .revokePremium(e)
             .build();
     } catch (error) {
@@ -101,10 +118,14 @@ function onRevokeLicense(e) {
 function onNewBotToken(e) {
     console.log("onNewBotToken called with event:", e);
     try {
-        return ControllerBuilder
-            .newBotController(
-                AppManager.getLocalizationResources(),
-                ServiceBuilder.newUserStore())
+        return BotControllerFactory.create()
+            .withUserStore(
+                UserStoreFactory.newUserStoreFactory().build())
+            .withTelegramBotClient(
+                TelegramBotClientFactory.newTelegramBotClientFactory()
+                    .withToken('_dummy_token_')
+                    .build())
+            .build()
             .saveBotToken(e)
             .build();
     } catch (error) {
@@ -133,4 +154,16 @@ function onCancelBotSetup(e) {
                         error.toString()))
             .build();
     }
+}
+
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = {
+        onDefaultHomePageOpen,
+        onOpenAccountCard,
+        onShowAboutCard,
+        onActivatePremium,
+        onRevokeLicense,
+        onNewBotToken,
+        onCancelBotSetup
+    };
 }

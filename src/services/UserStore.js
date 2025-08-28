@@ -80,7 +80,7 @@ class UserStore {
     try {
       return AuthUser.fromJsonString(data);
     } catch (error) {
-      return new AuthUserBuilder().build();
+      return new AuthUser();
     }
   }
 
@@ -125,7 +125,7 @@ class UserStore {
       return this.clearUserLicense();
     }
 
-    const licenseJson = UserLicense.toJsonString(license);
+    const licenseJson = license.toJsonString();
 
     this._userDataProvider.setProperty(UserStore.USER_LICENSE_KEY, licenseJson);
     return this;
