@@ -1,10 +1,5 @@
 // Google Apps Script file for handling add-on triggers and events
 
-const { AccountControllerFactory } = require && require("../components/controllers/AccountController");
-const { AboutControllerFactory } = require && require("../components/controllers/AboutController");
-const { BotControllerFactory } = require && require("../components/controllers/BotController");
-const { UserStoreFactory } = require && require("../services/UserStore");
-const { TelegramBotClientFactory } = require && require("../libs/TelegramBotClient");
 /**
  * Callback for the add-on homepage.
  * This function is called when the user opens the add-on.

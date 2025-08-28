@@ -1,9 +1,4 @@
 /* eslint-disable no-undef */
-
-const HomeCard = require && require("../views/HomeCard");
-
-const AccountCard = require && require("../views/AccountCard");
-
 class AccountController {
     get userStore() {
         return this._service.userStore;
