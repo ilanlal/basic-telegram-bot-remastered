@@ -1,9 +1,10 @@
 /* eslint-disable no-undef */
-require('./'); // index.js
+const { TelegramBotInfo } = require('./TelegramBotInfo');
+const { TelegramUser } = require('./TelegramUser');
 
 describe('TelegramBotInfo Model Tests', () => {
     test('TelegramBotInfo should have a default constructor', () => {
-        const botInfo = TelegramBotInfo.newTelegramBotInfo()
+        const botInfo = TelegramBotInfo.create()
             .setBotToken('test_bot_token')
             .setCreatedOn(new Date())
             .setLastSync(new Date())
@@ -16,7 +17,7 @@ describe('TelegramBotInfo Model Tests', () => {
     });
 
     test('TelegramBotInfo should serialize and deserialize correctly', () => {
-        const botInfo = TelegramBotInfo.newTelegramBotInfo()
+        const botInfo = TelegramBotInfo.create()
             .setBotToken('test_bot_token')
             .setCreatedOn(new Date())
             .setLastSync(new Date())

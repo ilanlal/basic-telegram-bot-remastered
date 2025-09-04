@@ -3,3 +3,4 @@
 **/*test.js
 **/*test_.js
 **/index.js
+**/tests/mocks/**

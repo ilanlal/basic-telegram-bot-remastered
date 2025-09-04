@@ -42,18 +42,28 @@ class TelegramBotInfo {
         return this;
     }
 
+    getName() {
+        return this._name;
+    }
+
+    setName(name = '') {
+        this._name = name;
+        return this;
+    }
+    
     constructor() {
         /** @type {Date || null} */
         this._lastSync = null;
         /** @type {string} */
-        this._botToken = '';
+        this._botToken = '[YOUR_BOT_TOKEN]';
         /** @type {Date | null} */
         this._createdOn = null;
         /** @type {TelegramUser | null} */
         this._user = null;
+        this._name = '';
     }
 
-    static newTelegramBotInfo() {
+    static create() {
         return new TelegramBotInfo();
     }
 
@@ -75,6 +85,7 @@ class TelegramBotInfo {
         }
 
         return new TelegramBotInfo()
+            .setName(json._name)
             .setBotToken(json._botToken)
             .setCreatedOn(json._createdOn)
             .setLastSync(json._lastSync)
@@ -83,6 +94,7 @@ class TelegramBotInfo {
 
     toJsonString() {
         return JSON.stringify({
+            _name: this.getName(),
             _botToken: this.getBotToken(),
             _createdOn: this.getCreatedOn()?.toISOString(),
             _lastSync: this.getLastSync()?.toISOString(),

@@ -1,11 +1,11 @@
 /* eslint-disable no-undef */
-require('./'); // index.js
+const {TelegramUser} = require('./TelegramUser');
 
 describe('TelegramUser Model Tests', () => {
     test('TelegramUser model', () => {
         const user = TelegramUser.newTelegramUser()
             .setIsBot(true)
-            .setUserId(123)
+            .setId(123)
             .setFirstName('John')
             .setLastName('Doe')
             .setUsername('johndoe')
@@ -19,7 +19,7 @@ describe('TelegramUser Model Tests', () => {
             .setHasMainWebApp(true);
 
         expect(user.getIsBot()).toBe(true);
-        expect(user.getUserId()).toBe(123);
+        expect(user.getId()).toBe(123);
         expect(user.getFirstName()).toBe('John');
         expect(user.getLastName()).toBe('Doe');
         expect(user.getUsername()).toBe('johndoe');
@@ -36,7 +36,7 @@ describe('TelegramUser Model Tests', () => {
     test('TelegramUser should serialize and deserialize correctly', () => {
         const user = TelegramUser.newTelegramUser()
             .setIsBot(true)
-            .setUserId(123)
+            .setId(123)
             .setFirstName('John')
             .setLastName('Doe')
             .setUsername('johndoe')
@@ -53,7 +53,7 @@ describe('TelegramUser Model Tests', () => {
         const expectedUser = TelegramUser.fromJsonString(jsonString);
 
         expect(expectedUser.getIsBot()).toBe(true);
-        expect(expectedUser.getUserId()).toBe(123);
+        expect(expectedUser.getId()).toBe(123);
         expect(expectedUser.getFirstName()).toBe('John');
         expect(expectedUser.getLastName()).toBe('Doe');
         expect(expectedUser.getUsername()).toBe('johndoe');

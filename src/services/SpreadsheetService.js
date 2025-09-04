@@ -113,7 +113,7 @@ class SpreadsheetService {
             .getSheetByName(this.RESOURCES_SHEET_NAME)
             ?? SpreadsheetApp
                 .getActiveSpreadsheet()
-                .insertSheet(this.RESOURCES_SHEET_NAME, 0)
+                .insertSheet(this.RESOURCES_SHEET_NAME)
                 .appendRow(['KEY', 'en'])
                 .appendRow(['sampel1', 'Hello World..'])
                 .appendRow(['sampel2', 'Pleas select..']);
@@ -123,7 +123,7 @@ class SpreadsheetService {
         return SpreadsheetApp.getActiveSpreadsheet()
             .getSheetByName(this.USERS_SHEET_NAME) ?? SpreadsheetApp
                 .getActiveSpreadsheet()
-                .insertSheet(this.USERS_SHEET_NAME, 0)
+                .insertSheet(this.USERS_SHEET_NAME)
                 .appendRow(['Created on', 'chat_id', 'username', 'First Name', 'Last Name', 'language_code', 'Data']);
     }
 }

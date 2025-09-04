@@ -35,7 +35,7 @@ class AccountCard {
             .setTitle("Account Information")
             .setSubtitle(`${isPremium ? "Premium User" : "Free User"}`)
             .setImageStyle(CardService.ImageStyle.SQUARE)
-            .setImageUrl('https://raw.githubusercontent.com/ilanlal/ss-json-editor/refs/heads/main/assets/logo120.png');
+            .setImageUrl('https://raw.githubusercontent.com/ilanlal/basic-telegram-bot-remastered/refs/heads/vnext/assets/logo128.png');
         //.setImageAltText('Logo of Basic Telegram Bot');
 
         const body = CardService.newCardSection()

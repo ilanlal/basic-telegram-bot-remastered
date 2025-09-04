@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-require('./'); // index.js
+const {AuthUser} = require('./AuthUser');
 
 describe('AuthUser Model Tests', () => {
     test("AuthUser should be defined", () => {

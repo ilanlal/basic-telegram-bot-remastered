@@ -1,5 +1,5 @@
-require(".");
-require("../..");
+require("../../tests");
+const AboutCard = require("./AboutCard");
 
 describe("Test AboutCard", () => {
     let card;

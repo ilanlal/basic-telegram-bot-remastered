@@ -4,49 +4,141 @@
 class BotController {
     constructor(userStore = null, telegramBotClient = null) {
         this._services = {
-            /** @type {UserStore | null} */
-            _userStore: userStore,
-            /** @type {TelegramBotClient | null} */
-            _telegramBotClient: telegramBotClient
+            /** @type {UserStore} */
+            userStore: userStore,
+            /** @type {TelegramBotClient} */
+            telegramBotClient: telegramBotClient
         };
     }
 
-    navigateToHome() {
+    navigateToHome(state = { webhookSet: false, botTokenSet: false }) {
         return CardService.newActionResponseBuilder()
             .setNavigation(
                 CardService.newNavigation()
                     .pushCard(
-                        new HomeCard().build()
+                        new HomeCard()
+                            .setState(state)
+                            .build()
                     )
             );
     }
 
-    navigateToSetup() {
+    navigateToSettings() {
         return CardService.newActionResponseBuilder()
             .setNavigation(
                 CardService.newNavigation()
                     .pushCard(
-                        new BotSetupCard().build()
+                        new BotSettingsCard()
+                            .withTelegramBotInfo(
+                                this._services.userStore.getTelegramBotInfo()
+                            )
+                            .newCardBuilder()
+                            .build()
                     )
             );
     }
 
-    saveBotToken(e) {
-        //console.log("saveBotToken called with event:", e);
+    navigateToCreateBot() {
+        return CardService.newActionResponseBuilder()
+            .setNavigation(
+                CardService.newNavigation()
+                    .pushCard(
+                        new BotCreateCard()
+                            .newCardBuilder()
+                            .build()
+                    )
+            );
+    }
 
-        const botToken = e?.commonEventObject
-            ?.formInputs?.[BotSetupCard.INPUTS.BOT_TOKEN]
-            ?.stringInputs.value[0] || BotSetupCard.INPUTS.BOT_TOKEN;
+    navigateToAutomations() {
+        // Placeholder for future implementation
+        return CardService.newActionResponseBuilder()
+            .setNavigation(
+                CardService.newNavigation()
+                    .pushCard(
+                        new BotAutomationsCard()
+                            .withBotInfo(this._services.userStore
+                                .getTelegramBotInfo())
+                            .newCardBuilder()
+                            .build()
+                    )
+            );
+    }
 
-        //console.log("Bot token:", botToken);
-        // Todo: getMe to approve validation
-        this._services._userStore.setTelegramBotInfo(
-            new TelegramBotInfo()
-                .setBotToken(botToken)
-                .setCreatedOn(new Date())
-                .setLastSync(new Date())
-                .setUser(TelegramUser.newTelegramUser())
+    registerBotToken(token = '[YOUR_BOT_TOKEN]') {
+        if (!token || typeof token !== 'string' || token.trim() === '') {
+            throw new Error("Invalid bot token");
+        }
+
+        this._services.telegramBotClient = new TelegramBotClient(token);
+
+        const response = this._services.telegramBotClient.getMe();
+
+        if (response.getResponseCode() !== 200) {
+            throw new Error("Failed to validate bot token");
+        }
+        const contentText = response.getContentText();
+        const res = JSON.parse(contentText);
+        const user = new TelegramUser()
+            .setId(res.result.id)
+            .setIsBot(res.result.is_bot)
+            .setFirstName(res.result.first_name)
+            .setLastName(res.result.last_name)
+            .setUsername(res.result.username)
+            .setLanguageCode(res.result.language_code);
+
+        this._services.userStore
+            .setTelegramBotInfo(
+                new TelegramBotInfo()
+                    .setName(user.getUsername())
+                    .setBotToken(token)
+                    .setCreatedOn(new Date())
+                    .setLastSync(new Date())
+                    .setUser(user)
+            );
+
+        return this.navigateToHome(
+            { webhookSet: false, botTokenSet: true }
         );
+    }
+
+    saveBotSettings(e) {
+        //console.log("saveBotSettings called with event:", e);
+        const name = e?.commonEventObject
+            ?.formInputs?.['BOT_NAME']
+            ?.stringInputs.value[0] || '';
+
+        return global.CardService.newActionResponseBuilder()
+            .setNavigation(
+                CardService.newNavigation()
+                    .popToRoot()
+                    .updateCard(
+                        new HomeCard()
+                            .setState(
+                                { webhookSet: false, botTokenSet: true }
+                            )
+                            .build()
+                    ));
+    }
+
+    setWebhook(url) {
+        if (!url || typeof url !== 'string' || url.trim() === '') {
+            throw new Error("Invalid webhook URL");
+        }
+
+        const response = this._services.telegramBotClient.setWebhook(url);
+        if (response.getResponseCode() !== 200) {
+            throw new Error("Failed to set webhook");
+        }
+
+        return this.navigateToHome();
+    }
+
+    deleteWebhook() {
+        const response = this._services.telegramBotClient.deleteWebhook();
+        if (response.getResponseCode() !== 200) {
+            throw new Error("Failed to delete webhook");
+        }
 
         return this.navigateToHome();
     }
@@ -54,7 +146,7 @@ class BotController {
 
 class BotControllerFactory {
     constructor() {
-        this._userStore = null; 
+        this._userStore = null;
         this._telegramBotClient = null;
     }
 

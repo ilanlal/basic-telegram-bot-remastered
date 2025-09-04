@@ -50,10 +50,9 @@ class AccountController {
         return CardService.newActionResponseBuilder()
             .setNavigation(
                 CardService.newNavigation()
-                    //.popToRoot()
+                    .popToRoot()
                     .updateCard(
                         new HomeCard()
-                            .withAuthUserInfo(this.getUserInfo())
                             .build()
                     ));
     }
@@ -66,10 +65,9 @@ class AccountController {
             .newActionResponseBuilder()
             .setNavigation(
                 CardService.newNavigation()
-                    //.popToRoot()
+                    .popToRoot()
                     .updateCard(
                         new HomeCard()
-                            .withAuthUserInfo(this.getUserInfo())
                             .build()
                     ));
 
@@ -98,9 +96,7 @@ class AccountControllerFactory {
     }
 
     build() {
-        return new AccountController(
-            this._userStore
-        );
+        return new AccountController(this._userStore);
     }
 
     static create() {

@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-require('./'); // index.js
+const { UserLicense } = require('./UserLicense');
 
 describe('UserLicense Model Tests', () => {
     test('UserLicense should have a default constructor', () => {

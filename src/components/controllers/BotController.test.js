@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 require('../models'); // Ensure the model is loaded
 require('../views'); // Ensure the component is loaded
-require('../../'); // index.js
+require('../../tests'); // index.js
 require('../../libs'); // Ensure the lib is loaded
 require('../../services'); // Ensure the service is loaded
 const { BotController, BotControllerFactory } = require('./BotController');
@@ -34,6 +34,7 @@ describe('BotController Tests', () => {
         expect(controller).toBeInstanceOf(BotController);
     });
 
+    // navigateToHome
     test("navigateToHome should return a CardService.Card", () => {
         const actionResponse = BotControllerFactory.create()
             .withUserStore(
@@ -45,7 +46,7 @@ describe('BotController Tests', () => {
                     .build())
             .build()
             .navigateToHome()
-            //.build();
+        //.build();
 
         expect(actionResponse).toBeDefined();
         const res = actionResponse.build().getData();
@@ -55,30 +56,9 @@ describe('BotController Tests', () => {
         expect(card.header.title).toBeDefined();
     });
 
-    // navigateToSetup 
-    test("navigateToSetup should return a CardService.Card", () => {
-        const actionResponse = controller.navigateToSetup();
-        expect(actionResponse).toBeDefined();
-        const res = actionResponse.build().getData();
-        const card = res.cardNavigations[0].pushCard;
-        expect(card).toBeDefined();
-        expect(card.header.title).toBeDefined();
-    });
-
-    test("saveBotToken should return a CardService.ActionResponse", () => {
-        const mockEvent = {
-            commonEventObject: {
-                formInputs: {
-                    [BotSetupCard.INPUTS.BOT_TOKEN]: {
-                        stringInputs: {
-                            value: ["TEST_BOT_TOKEN"]
-                        }
-                    }
-                }
-            }
-        };
-
-        const actionResponse = controller.saveBotToken(mockEvent);
+    // navigateToCreateBot
+    test("navigateToCreateBot should return a CardService.Card", () => {
+        const actionResponse = controller.navigateToCreateBot();
         expect(actionResponse).toBeDefined();
         const res = actionResponse.build().getData();
         const card = res.cardNavigations[0].pushCard;
@@ -98,7 +78,6 @@ describe('BotController Tests', () => {
         }).toThrow("userStore must be an instance of UserStore");
     });
 
-    // withTelegramBotClient throws error if invalid
     test("BotControllerFactory should throw error if telegramBotClient is invalid", () => {
         expect(() => {
             BotControllerFactory.create()
@@ -108,5 +87,71 @@ describe('BotController Tests', () => {
                 .withTelegramBotClient({})
                 .build();
         }).toThrow("telegramBotClient must be an instance of TelegramBotClient");
+    });
+
+    // navigateToAutomations
+    test("navigateToAutomations should return a CardService.Card", () => {
+        const actionResponse = controller.navigateToAutomations();
+        expect(actionResponse).toBeDefined();
+        const res = actionResponse.build().getData();
+        const card = res.cardNavigations[0].pushCard;
+        expect(card).toBeDefined();
+        expect(card.header.title).toBeDefined();
+    });
+
+    // navigateToSettings
+    test("navigateToSettings should return a CardService.Card", () => {
+        const actionResponse = controller.navigateToSettings();
+        expect(actionResponse).toBeDefined();
+        const res = actionResponse.build().getData();
+        const card = res.cardNavigations[0].pushCard;
+        expect(card).toBeDefined();
+        expect(card.header.title).toBeDefined();
+    });
+
+    //registerBotToken
+    test("registerBotToken should return a CardService.ActionResponse", () => {
+        const token = '[DUMMY_BOT_TOKEN]';
+
+        const contentText = `{
+            "result": {
+                "id": 123456789,
+                "is_bot": true,
+                "first_name": "Test",
+                "last_name": "User",
+                "username": "testuser",
+                "language_code": "en"
+            }
+        }`;
+
+        UrlFetchAppStubConfiguration.when(`https://api.telegram.org/bot${token}/getMe`)
+            .return(new HttpResponse().setContentText(contentText));
+        const actionResponse = controller.registerBotToken(token);
+        expect(actionResponse).toBeDefined();
+        const res = actionResponse.build().getData();
+        const card = res.cardNavigations[0].pushCard;
+        expect(card).toBeDefined();
+        expect(card.header.title).toBeDefined();
+    });
+
+    // saveBotSettings
+    test("saveBotSettings should return a CardService.ActionResponse", () => {
+        const mockEvent = {
+            commonEventObject: {
+                formInputs: {
+                    ['BOT_NAME']: {
+                        stringInputs: {
+                            value: ["TEST_BOT_NAME"]
+                        }
+                    }
+                }
+            }
+        };
+
+        const actionResponse = controller.saveBotSettings(mockEvent);
+        expect(actionResponse).toBeDefined();
+        const res = actionResponse.build().getData();
+        expect(res.cardNavigations[0].popToRoot).toBeDefined();
+        expect(res.cardNavigations[1].updateCard).toBeDefined();
     });
 });

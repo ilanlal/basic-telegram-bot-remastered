@@ -1,5 +1,5 @@
-require("./");
-require("../../");
+require("../../tests");
+const HomeCard = require("./HomeCard");
 
 describe('HomeCard Tests', () => {
     test("should create a HomeCard instance", () => {
@@ -8,8 +8,9 @@ describe('HomeCard Tests', () => {
     });
 
     test("should build a CardService.Card", () => {
-        const card = new HomeCard();
-        const builtCard = card.build();
+        const builtCard = new HomeCard()
+        .setState({ webhookSet: true, botTokenSet: true })
+        .build();
         expect(builtCard).toBeDefined();
         const cardData = builtCard.getData();
         expect(cardData).toBeDefined();

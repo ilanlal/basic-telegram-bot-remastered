@@ -154,7 +154,8 @@ class UserStore {
       || data === "null"
       || data === ""
       || data === "[object Object]") {
-      return new TelegramBotInfo(); // Return empty TelegramBotInfo if not set
+      return new TelegramBotInfo()
+        .setBotToken('[YOUR_BOT_TOKEN]'); // Return empty TelegramBotInfo if not set
     }
 
     return TelegramBotInfo.fromJsonString(data);

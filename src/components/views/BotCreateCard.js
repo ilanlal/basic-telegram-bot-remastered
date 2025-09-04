@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 // version: 1.0.0
-class BotSetupCard {
+class BotCreateCard {
     static get INPUTS() {
         return {
             'BOT_TOKEN': 'BOT_TOKEN'
@@ -23,12 +23,12 @@ class BotSetupCard {
                 .setTitle("Welcome to Basic Telegram Bot!")
                 .setSubtitle("Customize your bot settings below:")
                 .setImageStyle(CardService.ImageStyle.SQUARE)
-                .setImageUrl('https://raw.githubusercontent.com/ilanlal/ss-json-editor/refs/heads/main/assets/logo120.png'),
-                //.setImageAltText('Logo of Basic Telegram Bot'),
+                .setImageUrl('https://raw.githubusercontent.com/ilanlal/basic-telegram-bot-remastered/refs/heads/vnext/assets/logo128.png')
+                .setImageAltText('Logo of Basic Telegram Bot'),
             _body: () => CardService.newCardSection()
                 // add card with text input for bot token
                 .addWidget(CardService.newTextInput()
-                    .setFieldName(BotSetupCard.INPUTS.BOT_TOKEN)
+                    .setFieldName(BotCreateCard.INPUTS.BOT_TOKEN)
                     .setTitle("Bot Token")
                     .setHint("Enter your bot token here")
                 ),
@@ -36,13 +36,13 @@ class BotSetupCard {
                 .setPrimaryButton(CardService.newTextButton()
                     .setText(" 💾 Save")
                     .setOnClickAction(CardService.newAction()
-                        .setFunctionName('onNewBotToken')
+                        .setFunctionName('EventHandlers.Bot.saveNewBotToken')
                     )
                 )
                 .setSecondaryButton(CardService.newTextButton()
                     .setText(" ❌ Cancel")
                     .setOnClickAction(CardService.newAction()
-                        .setFunctionName('onCancelBotSetup')
+                        .setFunctionName('EventHandlers.back')
                     )
                 )
         };
@@ -64,17 +64,16 @@ class BotSetupCard {
         return this;
     }
 
-    build() {
+    newCardBuilder() {
         return CardService.newCardBuilder()
-            .setName(BotSetupCard.CARD_NAME)
+            .setName(BotCreateCard.CARD_NAME)
             .setHeader(this._card._header())
             .addSection(this._card._body())
-            //.setFixedFooter(this._card._footer())
-            .build();
+            .setFixedFooter(this._card._footer())
     }
 }
 
 // --- IGNORE (for Node.js support) --- //
 if (typeof module !== "undefined" && module.exports) {
-    module.exports = BotSetupCard;
+    module.exports = BotCreateCard;
 }

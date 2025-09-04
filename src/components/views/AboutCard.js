@@ -15,10 +15,10 @@ class AboutCard {
         .setTitle(this._models.packageInfo.name)
         .setSubtitle(this._models.packageInfo.version)
         .setImageStyle(CardService.ImageStyle.SQUARE)
-        .setImageUrl('https://raw.githubusercontent.com/ilanlal/ss-json-editor/refs/heads/main/assets/logo120.png'),
+        .setImageUrl('https://raw.githubusercontent.com/ilanlal/basic-telegram-bot-remastered/refs/heads/vnext/assets/logo128.png'),
       body: () => CardService.newCardSection()
         .addWidget(CardService.newTextParagraph()
-          .setText(this._models.packageInfo.content)),
+          .setText(this._models.packageInfo.version)),
     };
   }
 

@@ -1,7 +1,8 @@
 {
   "compilerOptions": {
-    "module": "CommonJS",
+    "module": "commonjs",
     "target": "ES6",
-    "checkJs": false
+    "checkJs": false,
+    "allowJs": true,
   }
 }

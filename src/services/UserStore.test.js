@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 require('../components/models'); // Ensure the model is loaded
-require('../../'); // index.js
-require('./'); // index.js
+require('../tests'); // index.js
+const { UserStore, UserStoreFactory } = require('./UserStore');
 
 describe('UserStore Service Tests', () => {
     let userStore;
@@ -59,7 +59,7 @@ describe('UserStore Service Tests', () => {
         const clearedBotInfo = userStore.getTelegramBotInfo();
 
         expect(clearedBotInfo).toBeDefined();
-        expect(clearedBotInfo.getBotToken()).toBe('');
+        expect(clearedBotInfo.getBotToken()).toBe('[YOUR_BOT_TOKEN]');
         expect(clearedBotInfo.getCreatedOn()).toBeNull();
         expect(clearedBotInfo.getLastSync()).toBeNull();
         expect(clearedBotInfo.getUser()).toBeNull();

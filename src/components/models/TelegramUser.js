@@ -11,11 +11,11 @@ class TelegramUser {
         return this;
     }
 
-    getUserId() {
+    getId() {
         return this._id;
     }
 
-    setUserId(userId = 0) {
+    setId(userId = 0) {
         this._id = userId;
         return this;
     }
@@ -125,14 +125,14 @@ class TelegramUser {
     constructor() {
         this._is_bot = false; // Default value, can be set later if needed
         this._id = 0;
-        /** @type {string | null} */
-        this._first_name = null;
-        /** @type {string | null} */
-        this._last_name = null;
-        /** @type {string | null} */
-        this._username = null;
-        /** @type {string | null} */
-        this._language_code = null; // Default value, can be set later if needed
+        /** @type {string} */
+        this._first_name = '';
+        /** @type {string} */
+        this._last_name = '';
+        /** @type {string} */
+        this._username = '';
+        /** @type {string} */
+        this._language_code = '';
         this._is_premium = false; // Default value, can be set later if needed
         this._added_to_attachment_menu = false; // Default value, can be set later if needed
         this._can_join_groups = true; // Default value, can be set later if needed
@@ -152,7 +152,7 @@ class TelegramUser {
     }
 
     fromObject(json = {}) {
-        return this.setUserId(json._id)
+        return this.setId(json._id)
             .setIsBot(json._is_bot)
             .setFirstName(json._first_name)
             .setLastName(json._last_name)
@@ -171,7 +171,7 @@ class TelegramUser {
 
     toJsonString() {
         return JSON.stringify({
-            _id: this.getUserId(),
+            _id: this.getId(),
             _is_bot: this.getIsBot(),
             _first_name: this.getFirstName(),
             _last_name: this.getLastName(),

@@ -1,6 +1,8 @@
+const { co } = require("co");
+
 require("../models");
-require(".");
-require("../..");
+require("../../tests");
+const AccountCard = require("./AccountCard");
 
 
 describe("Test AccountCard", () => {

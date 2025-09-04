@@ -1,5 +1,5 @@
 /**
- * @version 2.0.0
+ * @version 2.0.1
  * @class TelegramBotClient
  * @classdesc This class is used to interact with the Telegram Bot API.
  * @example
@@ -23,7 +23,7 @@ class TelegramBotClient {
    * const botToken = [YOUR_BOT_TOKEN];
    * const botClient = new TelegramBotClient(botToken);
    */
-  constructor(botToken = '[YOUR_BOT_TOKEN') {
+  constructor(botToken = '[YOUR_BOT_TOKEN]') {
     this.telegramEnpBaseUrl = "https://api.telegram.org/bot" + botToken;
   }
 
@@ -467,8 +467,7 @@ class TelegramBotClient {
   setWebhook(webAppUrl) {
     if (webAppUrl) {
       const url = this.getApiBaseUrl() + "/setWebhook?url=" + webAppUrl;
-      const response = UrlFetchApp.fetch(url);
-      return response;
+      return UrlFetchApp.fetch(url);
     }
     else {
       throw new Error("webAppUrl paramter is null or empty!");
@@ -553,18 +552,15 @@ class TelegramBotClient {
 
 class TelegramBotClientFactory {
     constructor() {
-        this.token = null;
+        this.token = '[YOUR_BOT_TOKEN]';
     }
 
-    withToken(token) {
+    withToken(token='[YOUR_BOT_TOKEN]') {
         this.token = token;
         return this;
     }
 
     build() {
-        if (!this.token) {
-            throw new Error("Token is required to create TelegramBotClient");
-        }
         return new TelegramBotClient(this.token);
     }
 

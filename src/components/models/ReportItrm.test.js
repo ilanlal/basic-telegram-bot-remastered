@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 
-require('./'); // index.js
+const {ReportItem} = require('./ReportItem');
 
 describe('ReportItem Model Tests', () => {
     test("ReportItem should be defined", () => {
