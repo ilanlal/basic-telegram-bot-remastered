@@ -7,7 +7,7 @@ function onDefaultHomePageOpen(e) {
             .withUserStore(
                 UserStoreFactory.newUserStoreFactory().build())
             .withTelegramBotClient(
-                TelegramBotClientFactory.newTelegramBotClientFactory()
+                TelegramBotClientFactory
                     .withToken("[YOUR_BOT_TOKEN]")
                     .build()
             )

@@ -16,7 +16,7 @@ describe('BotController Tests', () => {
                     UserStoreFactory.newUserStoreFactory()
                         .build())
                 .withTelegramBotClient(
-                    TelegramBotClientFactory.newTelegramBotClientFactory()
+                    global.TelegramBotClientFactory
                         .withToken("YOUR_BOT_TOKEN")
                         .build())
                 .build();
@@ -41,7 +41,7 @@ describe('BotController Tests', () => {
                 UserStoreFactory.newUserStoreFactory()
                     .build())
             .withTelegramBotClient(
-                TelegramBotClientFactory.newTelegramBotClientFactory()
+                global.TelegramBotClientFactory
                     .withToken("YOUR_BOT_TOKEN")
                     .build())
             .build()
@@ -71,7 +71,7 @@ describe('BotController Tests', () => {
             BotControllerFactory.create()
                 .withUserStore({})
                 .withTelegramBotClient(
-                    TelegramBotClientFactory.newTelegramBotClientFactory()
+                    global.TelegramBotClientFactory
                         .withToken("YOUR_BOT_TOKEN")
                         .build())
                 .build();

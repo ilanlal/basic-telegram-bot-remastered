@@ -68,7 +68,6 @@ EventHandlers.Bot = {
                 ?.stringInputs.value[0] || '[YOUR_BOT_TOKEN]';
 
             const client = TelegramBotClientFactory
-                .newTelegramBotClientFactory()
                 .withToken(botToken)
                 .build();
 

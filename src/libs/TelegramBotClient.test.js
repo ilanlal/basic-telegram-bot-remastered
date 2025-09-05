@@ -1,15 +1,12 @@
 require('../tests');
-const {
-    TelegramBotClient,
-    TelegramBotClientFactory,
-    getTelegramBotClient
-} = require('./TelegramBotClient.js');
+require('.');
+
 
 describe('TelegramBotClient Tests', () => {
     let telegramBotClient;
 
     beforeEach(() => {
-        telegramBotClient = TelegramBotClientFactory.newTelegramBotClientFactory()
+        telegramBotClient = global.TelegramBotClientFactory
             .withToken('[YOUR_BOT_TOKEN]')
             .build();
     });
@@ -18,12 +15,8 @@ describe('TelegramBotClient Tests', () => {
         expect(TelegramBotClient).toBeDefined();
     });
 
-    test("TelegramBotClientFactory should be defined", () => {
-        expect(TelegramBotClientFactory).toBeDefined();
-    });
-
-    test("getTelegramBotClient should be defined", () => {
-        expect(getTelegramBotClient).toBeDefined();
+    test("global.TelegramBotClientFactory should be defined", () => {
+        expect(global.TelegramBotClientFactory).toBeDefined();
     });
 });
 
@@ -32,7 +25,7 @@ describe("TelegramBotClient getMe Tests", () => {
     let telegramBotClient;
 
     beforeEach(() => {
-        telegramBotClient = TelegramBotClientFactory.newTelegramBotClientFactory()
+        telegramBotClient = global.TelegramBotClientFactory
             .withToken('[YOUR_BOT_TOKEN]')
             .build();
     });
@@ -65,7 +58,7 @@ describe("TelegramBotClient Webhook Tests", () => {
     let telegramBotClient;
 
     beforeEach(() => {
-        telegramBotClient = TelegramBotClientFactory.newTelegramBotClientFactory()
+        telegramBotClient = global.TelegramBotClientFactory
             .withToken('[YOUR_BOT_TOKEN]')
             .build();
     });
@@ -136,7 +129,7 @@ describe("TelegramBotClient setMyName, setMyDescription, setMyShortDescription T
     let telegramBotClient;
 
     beforeEach(() => {
-        telegramBotClient = TelegramBotClientFactory.newTelegramBotClientFactory()
+        telegramBotClient = global.TelegramBotClientFactory
             .withToken('[YOUR_BOT_TOKEN]')
             .build();
     });
