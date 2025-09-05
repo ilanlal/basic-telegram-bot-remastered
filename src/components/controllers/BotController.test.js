@@ -18,7 +18,7 @@ describe('BotController Tests', () => {
                 .withTelegramBotClient(
                     global.TelegramBotClientFactory
                         .withToken("YOUR_BOT_TOKEN")
-                        .build())
+                        .create())
                 .build();
     });
 
@@ -43,7 +43,7 @@ describe('BotController Tests', () => {
             .withTelegramBotClient(
                 global.TelegramBotClientFactory
                     .withToken("YOUR_BOT_TOKEN")
-                    .build())
+                    .create())
             .build()
             .navigateToHome()
         //.build();
@@ -73,7 +73,7 @@ describe('BotController Tests', () => {
                 .withTelegramBotClient(
                     global.TelegramBotClientFactory
                         .withToken("YOUR_BOT_TOKEN")
-                        .build())
+                        .create())
                 .build();
         }).toThrow("userStore must be an instance of UserStore");
     });

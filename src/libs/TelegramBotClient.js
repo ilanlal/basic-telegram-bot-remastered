@@ -560,7 +560,7 @@ class TelegramBotClientFactory {
         return this;
     }
 
-    build() {
+    create() {
         return new TelegramBotClient(this.token);
     }
 

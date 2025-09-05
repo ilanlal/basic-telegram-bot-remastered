@@ -8,7 +8,7 @@ describe('TelegramBotClient Tests', () => {
     beforeEach(() => {
         telegramBotClient = global.TelegramBotClientFactory
             .withToken('[YOUR_BOT_TOKEN]')
-            .build();
+            .create();
     });
 
     test("TelegramBotClient should be defined", () => {
@@ -27,7 +27,7 @@ describe("TelegramBotClient getMe Tests", () => {
     beforeEach(() => {
         telegramBotClient = global.TelegramBotClientFactory
             .withToken('[YOUR_BOT_TOKEN]')
-            .build();
+            .create();
     });
 
 
@@ -60,7 +60,7 @@ describe("TelegramBotClient Webhook Tests", () => {
     beforeEach(() => {
         telegramBotClient = global.TelegramBotClientFactory
             .withToken('[YOUR_BOT_TOKEN]')
-            .build();
+            .create();
     });
 
     // test getWebhookInfo execution
@@ -131,7 +131,7 @@ describe("TelegramBotClient setMyName, setMyDescription, setMyShortDescription T
     beforeEach(() => {
         telegramBotClient = global.TelegramBotClientFactory
             .withToken('[YOUR_BOT_TOKEN]')
-            .build();
+            .create();
     });
 
     // test setMyName execution

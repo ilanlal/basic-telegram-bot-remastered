@@ -69,7 +69,7 @@ EventHandlers.Bot = {
 
             const client = TelegramBotClientFactory
                 .withToken(botToken)
-                .build();
+                .create();
 
             return BotControllerFactory.create()
                 .withUserStore(

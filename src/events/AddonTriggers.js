@@ -9,7 +9,7 @@ function onDefaultHomePageOpen(e) {
             .withTelegramBotClient(
                 TelegramBotClientFactory
                     .withToken("[YOUR_BOT_TOKEN]")
-                    .build()
+                    .create()
             )
             .build()
             .navigateToHome()
