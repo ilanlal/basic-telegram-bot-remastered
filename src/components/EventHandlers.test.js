@@ -1,8 +1,8 @@
 require('../../__mocks__');
+require('../libs');
 const { EventHandlers } = require('./EventHandlers');
 require('./controllers');
 require('../services');
-const { TelegramBotClient, TelegramBotClientFactory } = require('../libs');
 require('./views');
 require('./models');
 
