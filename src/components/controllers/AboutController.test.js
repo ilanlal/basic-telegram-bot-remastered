@@ -1,8 +1,8 @@
 /* eslint-disable no-undef */
 require('../models'); // Ensure the model is loaded
 require('../views'); // Ensure the view component is loaded
-require('../../tests'); // index.js
-require('../../libs'); // Ensure the lib is loaded
+require('../../../__mocks__'); // index.js
+require('../../libs/TelegramBotClient'); // Ensure the lib is loaded
 require('../../services'); // Ensure the service is loaded
 
 const { AboutController, AboutControllerFactory } = require('./AboutController');

@@ -1,4 +1,4 @@
-require("../../tests");
+require("../../../__mocks__");
 const BotCreateCard = require("./BotCreateCard");
 
 describe("BotSetupCard", () => {

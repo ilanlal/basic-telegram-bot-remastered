@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 require('../components/models'); // Ensure the model is loaded
-require('../tests'); // index.js
+require('../../__mocks__'); // index.js
 const { UserStore, UserStoreFactory } = require('./UserStore');
 
 describe('UserStore Service Tests', () => {

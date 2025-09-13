@@ -1,7 +1,7 @@
 const { co } = require("co");
 
 require("../models");
-require("../../tests");
+require("../../../__mocks__");
 const AccountCard = require("./AccountCard");
 
 

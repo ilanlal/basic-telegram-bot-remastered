@@ -1,8 +1,8 @@
 /* eslint-disable no-undef */
 require('../models'); // Ensure the model is loaded
 require('../views'); // Ensure the component is loaded
-require('../../tests'); // index.js
-require('../../libs'); // Ensure the lib is loaded
+require('../../../__mocks__'); // index.js
+const { TelegramBotClient, TelegramBotClientFactory } = require('../../libs'); // Ensure the lib is loaded
 require('../../services'); // Ensure the service is loaded
 const { BotController, BotControllerFactory } = require('./BotController');
 

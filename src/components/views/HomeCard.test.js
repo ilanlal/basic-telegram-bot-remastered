@@ -1,4 +1,4 @@
-require("../../tests");
+require("../../../__mocks__");
 const HomeCard = require("./HomeCard");
 
 describe('HomeCard Tests', () => {
