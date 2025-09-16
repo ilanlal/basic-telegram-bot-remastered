@@ -12,19 +12,18 @@ A simple Telegram bot client for Google Apps Script.
 
 ## Crash Course
 
-Here's an example of how to use the `TelegramBotClient` class in a Node.js environment:
+Copy the contents of the `src/lib/TelegramBotClient.js` file into new file named `TelegramBotClient.gs` in your Google Apps Script project.
+
+Then, you can use the following code to send a message using your Telegram bot:
 
 ```javascript
-const { TelegramBotClientFactory } = require('@ilanlal/telegram2gas');
 
 // Replace the placeholders with your chat_id and bot token
 const chat_id = '[YOUR_CHAT_ID]';
 const token = '[YOUR_BOT_TOKEN]';
 
 // Create a new instance of the TelegramBotClient class
-const client = new TelegramBotClientFactory()
-    .withToken(token)
-    .create();
+const client = new TelegramBotClient(token);
 
 // Send a message to the chat
 client.sendMessage({ chat_id, text: 'Hello, world!' })
@@ -38,20 +37,16 @@ client.sendMessage({ chat_id, text: 'Hello, world!' })
 
 ## Roadmap
 
-- Set up new telegram bot with the latest version of the Telegram Bot API.
+- Backoffice to manage multiple bots and users
 
 ## Overview
 
 This project is a remastered version of the original [Basic Telegram Bot](https://github.com/ilanlal/basic-telegram-bot).
 
-## Development
+## Contributing
 
-### Testing
+Contributions are welcome! Please open an issue or submit a pull request for any improvements or bug fixes.
 
-- #### just
+## License
 
-  To run local tests, use the following command:
-
-  ```bash
-  npm test
-  ```
+This project is licensed under the MIT license.

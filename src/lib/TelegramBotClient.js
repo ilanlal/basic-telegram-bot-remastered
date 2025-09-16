@@ -3,7 +3,6 @@
  * @file TelegramBotClient.gs
  * @author Ilan Laloum <ilanlal@gmail.com> (https://github.com/ilanlal)
  * @license MIT
- * @classdesc A simple Telegram bot client for Google Apps Script.
  * 
  * This class provides methods to interact with the Telegram Bot API, allowing you to send messages, photos, and other media to users via a Telegram bot.
  * 

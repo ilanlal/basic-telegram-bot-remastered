@@ -1,10 +1,10 @@
 require('../../__mocks__');
-require('../..');
+require('..');
 const { EventHandlers } = require('./EventHandlers');
-require('./controllers');
+require('../components/controllers');
 require('../services');
-require('./views');
-require('./models');
+require('../components/views');
+require('../components/models');
 
 describe('EventHandlers.Home Tests', () => {
     test('openCreateNewBotCard should return a CardService.ActionResponse', () => {

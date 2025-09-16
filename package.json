@@ -1,6 +1,6 @@
 {
   "name": "@ilanlal/telegram2gas",
-  "version": "1.0.0",
+  "version": "0.0.1-alpha.1",
   "description": "A simple Telegram bot client for Google Apps Script.",
   "main": "./src/index.js",
   "type": "commonjs",
@@ -9,7 +9,8 @@
     "build": "webpack --mode development",
     "start": "webpack-dev-server --mode development",
     "publish": "npm publish --access public --tag latest --registry https://npm.pkg.github.com",
-    "prepublishOnly": "npm version patch && npm run test && npm run build"
+    "prepublishOnly": "npm version patch && npm run test && npm run build",
+    "prepack": "npm run build"
   },
   "repository": {
     "type": "git",
