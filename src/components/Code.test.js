@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 require("../../__mocks__");
 require("../services");
-require("../libs/TelegramBotClient");
+require("../lib/TelegramBotClient");
 require("../components/models");
 require("../components/controllers");
 require("../components/views");

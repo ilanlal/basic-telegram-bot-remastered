@@ -1,7 +1,12 @@
 /**
- * @version 2.0.1
- * @class TelegramBotClient
- * @classdesc This class is used to interact with the Telegram Bot API.
+ * @version 2.1.0
+ * @file TelegramBotClient.gs
+ * @author Ilan Laloum <ilanlal@gmail.com> (https://github.com/ilanlal)
+ * @license MIT
+ * @classdesc A simple Telegram bot client for Google Apps Script.
+ * 
+ * This class provides methods to interact with the Telegram Bot API, allowing you to send messages, photos, and other media to users via a Telegram bot.
+ * 
  * @example
  * const botToken = '[YOUR_BOT_TOKEN]';
  * const chat_id = '[YOUR_CHAT_ID]';
@@ -551,22 +556,22 @@ class TelegramBotClient {
 }
 
 class TelegramBotClientFactory {
-    constructor() {
-        this.token = '[YOUR_BOT_TOKEN]';
-    }
+  constructor() {
+    this.token = '[YOUR_BOT_TOKEN]';
+  }
 
-    withToken(token='[YOUR_BOT_TOKEN]') {
-        this.token = token;
-        return this;
-    }
+  withToken(token = '[YOUR_BOT_TOKEN]') {
+    this.token = token;
+    return this;
+  }
 
-    create() {
-        return new TelegramBotClient(this.token);
-    }
+  create() {
+    return new TelegramBotClient(this.token);
+  }
 
-    static newTelegramBotClientFactory() {
-        return new TelegramBotClientFactory();
-    }
+  static newTelegramBotClientFactory() {
+    return new TelegramBotClientFactory();
+  }
 }
 
 /**
@@ -579,9 +584,9 @@ function getTelegramBotClient(token) {
 }
 
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = {
-        TelegramBotClient,
-        TelegramBotClientFactory,
-        getTelegramBotClient
-    };
+  module.exports = {
+    TelegramBotClient,
+    TelegramBotClientFactory,
+    getTelegramBotClient
+  };
 }

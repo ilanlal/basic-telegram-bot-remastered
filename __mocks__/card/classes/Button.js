@@ -1,4 +1,19 @@
-const set = require('lodash.set')
+// Obsolete
+// const set = require('lodash.set')
+
+// Simple implementation of lodash.set
+const set = (obj, path, value) => {
+  const keys = path.split('.')
+  let current = obj
+  keys.forEach((key, index) => {
+    if (index === keys.length - 1) {
+      current[key] = value
+    } else {
+      current[key] = current[key] || {}
+    }
+    current = current[key]
+  })
+}
 
 const AuthorizationAction = require('./AuthorizationAction')
 const OpenLink = require('./OpenLink')

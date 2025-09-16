@@ -1,5 +1,5 @@
 require('../../__mocks__');
-require('../libs');
+require('../..');
 const { EventHandlers } = require('./EventHandlers');
 require('./controllers');
 require('../services');

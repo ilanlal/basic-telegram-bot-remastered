@@ -1,5 +1,5 @@
 require('../../__mocks__');
-require('.');
+require('../..');
 
 
 describe('TelegramBotClient Tests', () => {

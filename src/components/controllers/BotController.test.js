@@ -2,7 +2,7 @@
 require('../models'); // Ensure the model is loaded
 require('../views'); // Ensure the component is loaded
 require('../../../__mocks__'); // index.js
-const { TelegramBotClient, TelegramBotClientFactory } = require('../../libs'); // Ensure the lib is loaded
+const { TelegramBotClient, TelegramBotClientFactory } = require('../../..'); // Ensure the lib is loaded
 require('../../services'); // Ensure the service is loaded
 const { BotController, BotControllerFactory } = require('./BotController');
 
