@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
-require("../../__mocks__");
+require("@ilanlal/gasmocks");
 require("../services");
-const { TelegramBotClient, TelegramBotClientFactory } = require("../..");
+const { TelegramBotClient, TelegramBotClientFactory } = require("../lib");
 require("../components/models");
 require("../components/controllers");
 require("../components/views");

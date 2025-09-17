@@ -1,5 +1,5 @@
-require('../../__mocks__');
-require('..');
+require("@ilanlal/gasmocks");
+require("../lib");
 const { EventHandlers } = require('./EventHandlers');
 require('../components/controllers');
 require('../services');

@@ -1,8 +1,8 @@
 /* eslint-disable no-undef */
 require('../models'); // Ensure the model is loaded
 require('../views'); // Ensure the component is loaded
-require('../../../__mocks__'); // index.js
-const { TelegramBotClient, TelegramBotClientFactory } = require('../../..'); // Ensure the lib is loaded
+require("@ilanlal/gasmocks");
+require('../../lib'); // Ensure the lib is loaded
 require('../../services'); // Ensure the service is loaded
 const { BotController, BotControllerFactory } = require('./BotController');
 
@@ -16,8 +16,8 @@ describe('BotController Tests', () => {
                     UserStoreFactory.newUserStoreFactory()
                         .build())
                 .withTelegramBotClient(
-                    global.TelegramBotClientFactory
-                        .withToken("YOUR_BOT_TOKEN")
+                    TelegramBotClientFactory
+                        .withToken('YOUR_BOT_TOKEN')
                         .create())
                 .build();
     });

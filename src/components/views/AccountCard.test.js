@@ -1,7 +1,7 @@
 const { co } = require("co");
 
 require("../models");
-require("../../../__mocks__");
+require("@ilanlal/gasmocks");
 const AccountCard = require("./AccountCard");
 
 

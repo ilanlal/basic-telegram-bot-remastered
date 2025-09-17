@@ -1,8 +1,8 @@
 {
   "name": "@ilanlal/telegram2gas",
-  "version": "0.0.1-alpha.1",
+  "version": "1.0.0",
   "description": "A simple Telegram bot client for Google Apps Script.",
-  "main": "./src/index.js",
+  "main": "index.js",
   "type": "commonjs",
   "scripts": {
     "test": "jest",
@@ -37,6 +37,7 @@
   "devDependencies": {
     "@babel/core": "^7.28.4",
     "@babel/preset-env": "^7.28.3",
+    "@ilanlal/gasmocks": "github:ilanlal/gasmocks",
     "babel-loader": "^10.0.0",
     "jest": "^29.7.0",
     "webpack": "^5.101.3",
@@ -46,14 +47,14 @@
   "jest": {
     "modulePaths": [
       "node_modules",
-      ".",
-      "__mocks__"
+      "."
     ],
     "coverageDirectory": "./coverage/",
     "collectCoverage": false
   },
   "files": [
-    "src/lib/README.md",
-    "dist/telegramClient.js"
+    "./dist/telegramClient.js",
+    "README.md",
+    "LICENSE"
   ]
 }

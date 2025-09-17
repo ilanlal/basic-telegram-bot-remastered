@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-require("../../__mocks__");
+require("@ilanlal/gasmocks");
 require("../services");
 require("../lib/TelegramBotClient");
 require("../components/models");

@@ -1,4 +1,4 @@
-require("../../../__mocks__");
+require("@ilanlal/gasmocks");
 const BotAutomationsCard = require("./BotAutomationsCard");
 
 describe("BotAutomationsCard", () => {

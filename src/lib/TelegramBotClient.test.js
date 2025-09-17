@@ -1,5 +1,5 @@
-require('../../__mocks__');
-require('../..');
+require("@ilanlal/gasmocks");
+require('.');
 
 
 describe('TelegramBotClient Tests', () => {
