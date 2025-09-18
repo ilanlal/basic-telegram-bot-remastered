@@ -96,13 +96,13 @@ class BotSettingsCard {
             .setPrimaryButton(CardService.newTextButton()
                 .setText("Save")
                 .setOnClickAction(CardService.newAction()
-                    .setFunctionName("EventHandlers.Bot.saveMyBotInfo")
+                    .setFunctionName("UiEventHandlers.Bot.saveMyBotInfo")
                 )
             )
             .setSecondaryButton(CardService.newTextButton()
                 .setText("Cancel")
                 .setOnClickAction(CardService.newAction()
-                    .setFunctionName("EventHandlers.Bot.back")
+                    .setFunctionName("UiEventHandlers.Bot.back")
                 )
             );
     }

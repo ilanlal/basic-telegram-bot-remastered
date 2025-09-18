@@ -75,20 +75,24 @@ HomeCard.Widgets = {
             .setButton(HomeCard.Buttons.REGISTER_NEW_BOT(state)),
     WEBHOOK_URL: (state = HomeCard.State) =>
         CardService.newDecoratedText()
+            .setWrapText(true)
             .setTopLabel("Webhook URL")
             .setText(`Webhook URL: ${state.webhookUrl || "🔴 Not Configured"}`),
     WEBHOOK_STATUS: (state = HomeCard.State) =>
         CardService.newDecoratedText()
+            .setWrapText(true)
             .setTopLabel(`${state.webhookSet ? "🟢 Set" : "🔴 Not Set"}`)
-            .setText("Manage your webhook settings")
+            .setText("Webhook Status")
             .setButton(state.webhookSet ? HomeCard.Buttons.UNSET_WEBHOOK(state) : HomeCard.Buttons.ACTIVATE_WEBHOOK(state)),
     BOT_SETTINGS: (state = HomeCard.State) =>
         CardService.newDecoratedText()
+            .setWrapText(true)
             .setTopLabel("Bot Settings")
             .setText("Configure your bot settings")
             .setBottomLabel("Configure your bot settings")
             .setButton(HomeCard.Buttons.EDIT_BOT_INFO(state)),
     AUTOMATED_REPLIES: (state = HomeCard.State) => CardService.newDecoratedText()
+        .setWrapText(true)
         .setTopLabel("Automated Replies")
         .setText("Manage your bot's automated replies")
         .setBottomLabel("Manage your bot's automated replies")
@@ -101,30 +105,31 @@ HomeCard.Buttons = {
         .setOnClickAction(CardService.newAction()
             .setFunctionName("onActivatePremiumClick")),
     REGISTER_NEW_BOT: (state = HomeCard.State) => CardService.newTextButton()
-        .setText("➕ Create New Bot")
+        .setText("➕ New")
         .setTextButtonStyle(state.botTokenSet ? CardService.TextButtonStyle.TEXT : CardService.TextButtonStyle.FILLED)
         .setOnClickAction(CardService.newAction()
-            .setFunctionName("EventHandlers.Home.openCreateNewBotCard")),
+            .setFunctionName("UiEventHandlers.Home.openCreateNewBotCard")),
     EDIT_BOT_INFO: (state = HomeCard.State) => CardService.newTextButton()
         .setText("🔖 Edit Bot Info")
         .setDisabled(!state.botTokenSet)
         .setOnClickAction(CardService.newAction()
-            .setFunctionName("EventHandlers.Home.openBotSettingsCard")),
+            .setFunctionName("UiEventHandlers.Home.openBotSettingsCard")),
     MANAGE_AUTOMATED_REPLIES: (state = HomeCard.State) => CardService.newTextButton()
         .setText("🤖 Automated Replies")
         .setDisabled(!state.botTokenSet)
         .setOnClickAction(CardService.newAction()
-            .setFunctionName("EventHandlers.Home.openBotRepliesCard")),
+            .setFunctionName("UiEventHandlers.Home.openBotRepliesCard")),
     ACTIVATE_WEBHOOK: (state = HomeCard.State) => CardService.newTextButton()
-        .setText("Set Webhook")
+        .setText("🟢 Activate Webhook")
+        .setTextButtonStyle(CardService.TextButtonStyle.FILLED)
         .setDisabled(!state.botTokenSet)
         .setOnClickAction(CardService.newAction()
-            .setFunctionName("EventHandlers.Bot.setWebhook")),
+            .setFunctionName("UiEventHandlers.Bot.setWebhook")),
     UNSET_WEBHOOK: (state = HomeCard.State) => CardService.newTextButton()
-        .setText("Delete Webhook")
+        .setText("🔴 Delete Webhook")
         .setDisabled(!state.botTokenSet)
         .setOnClickAction(CardService.newAction()
-            .setFunctionName("EventHandlers.Bot.deleteWebhook"))
+            .setFunctionName("UiEventHandlers.Bot.deleteWebhook"))
 };
 
 if (typeof module !== "undefined" && module.exports) {

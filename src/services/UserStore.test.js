@@ -24,12 +24,6 @@ describe('UserStore Service Tests', () => {
         expect(userStore).toBeInstanceOf(UserStore);
     });
 
-    test("UserStore should get default TelegramBotInfo when none is set", () => {
-        const botInfo = userStore.getTelegramBotInfo();
-        expect(botInfo).toBeDefined();
-        expect(botInfo).toBeInstanceOf(TelegramBotInfo);
-    });
-
     test("UserStore should set and get TelegramBotInfo correctly", () => {
         const botInfo = new TelegramBotInfo()
             .setBotToken('test_bot_token')
@@ -58,11 +52,7 @@ describe('UserStore Service Tests', () => {
         userStore.clearTelegramBotInfo();
         const clearedBotInfo = userStore.getTelegramBotInfo();
 
-        expect(clearedBotInfo).toBeDefined();
-        expect(clearedBotInfo.getBotToken()).toBe('[YOUR_BOT_TOKEN]');
-        expect(clearedBotInfo.getCreatedOn()).toBeNull();
-        expect(clearedBotInfo.getLastSync()).toBeNull();
-        expect(clearedBotInfo.getUser()).toBeNull();
+        expect(clearedBotInfo).toBeUndefined();
     });
 });
 

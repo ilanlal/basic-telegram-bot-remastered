@@ -6,7 +6,7 @@ require('../services');
 require('../components/views');
 require('../components/models');
 
-describe('EventHandlers.Home Tests', () => {
+describe('UiEventHandlers.Home Tests', () => {
     test('openCreateNewBotCard should return a CardService.ActionResponse', () => {
         const mockEvent = {
             commonEventObject: {
@@ -39,8 +39,8 @@ describe('EventHandlers.Home Tests', () => {
     });
 });
 
-// EventHandlers.Bot Tests
-describe('EventHandlers.Bot Tests', () => {
+// UiEventHandlers.Bot Tests
+describe('UiEventHandlers.Bot Tests', () => {
     // saveNewBotToken
     test('saveNewBotToken should return a CardService.ActionResponse', () => {
         const mockEvent = {

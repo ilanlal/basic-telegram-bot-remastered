@@ -12,13 +12,7 @@ describe('BotController Tests', () => {
     beforeEach(() => {
         controller =
             BotControllerFactory.create()
-                .withUserStore(
-                    UserStoreFactory.newUserStoreFactory()
-                        .build())
-                .withTelegramBotClient(
-                    TelegramBotClientFactory
-                        .withToken('YOUR_BOT_TOKEN')
-                        .create())
+                .withUserStore(new UserStore())
                 .build();
     });
 
@@ -37,13 +31,7 @@ describe('BotController Tests', () => {
     // navigateToHome
     test("navigateToHome should return a CardService.Card", () => {
         const actionResponse = BotControllerFactory.create()
-            .withUserStore(
-                UserStoreFactory.newUserStoreFactory()
-                    .build())
-            .withTelegramBotClient(
-                global.TelegramBotClientFactory
-                    .withToken("YOUR_BOT_TOKEN")
-                    .create())
+            .withUserStore(new UserStore())
             .build()
             .navigateToHome()
         //.build();
@@ -76,17 +64,6 @@ describe('BotController Tests', () => {
                         .create())
                 .build();
         }).toThrow("userStore must be an instance of UserStore");
-    });
-
-    test("BotControllerFactory should throw error if telegramBotClient is invalid", () => {
-        expect(() => {
-            BotControllerFactory.create()
-                .withUserStore(
-                    UserStoreFactory.newUserStoreFactory()
-                        .build())
-                .withTelegramBotClient({})
-                .build();
-        }).toThrow("telegramBotClient must be an instance of TelegramBotClient");
     });
 
     // navigateToAutomations
@@ -129,9 +106,8 @@ describe('BotController Tests', () => {
         const actionResponse = controller.registerBotToken(token);
         expect(actionResponse).toBeDefined();
         const res = actionResponse.build().getData();
-        const card = res.cardNavigations[0].pushCard;
-        expect(card).toBeDefined();
-        expect(card.header.title).toBeDefined();
+        expect(res.cardNavigations[0].popToRoot).toBeDefined();
+        expect(res.cardNavigations[1].updateCard).toBeDefined();
     });
 
     // saveBotSettings

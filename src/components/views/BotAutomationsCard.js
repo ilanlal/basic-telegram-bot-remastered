@@ -24,9 +24,6 @@ class BotAutomationsCard {
     }
 
     newCardBuilder() {
-        if (!this._data.botInfo) {
-            throw new Error("Bot info is not set");
-        }
         return CardService.newCardBuilder()
             .setName(BotAutomationsCard.CARD_NAME)
             .setHeader(this._header())

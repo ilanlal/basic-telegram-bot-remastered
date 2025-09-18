@@ -6,11 +6,6 @@ function onDefaultHomePageOpen(e) {
         return BotControllerFactory.create()
             .withUserStore(
                 UserStoreFactory.newUserStoreFactory().build())
-            .withTelegramBotClient(
-                TelegramBotClientFactory
-                    .withToken("[YOUR_BOT_TOKEN]")
-                    .create()
-            )
             .build()
             .navigateToHome()
             .build();

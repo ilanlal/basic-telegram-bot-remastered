@@ -1,17 +1,35 @@
-/* eslint-disable no-undef */
-// version: 1.0.0
-
 class BotController {
-    constructor(userStore = null, telegramBotClient = null) {
-        this._services = {
-            /** @type {UserStore} */
-            userStore: userStore,
-            /** @type {TelegramBotClient} */
-            telegramBotClient: telegramBotClient
+    constructor(userStore) {
+        if (!(userStore instanceof UserStore)) {
+            throw new Error("userStore must be an instance of UserStore");
+        }
+
+         /** @type {UserStore} */
+        this._userStore = userStore;
+        this._botTokenSet = () => !!this._userStore.getTelegramBotInfo();
+        this._webhookSet = () => {
+            const botInfo = this._userStore.getTelegramBotInfo();
+            const token = botInfo ? botInfo.getBotToken() : null;
+            if (!token) {
+                return false;
+            }
+            const telegramBotClient = new TelegramBotClient(token);
+            const response = telegramBotClient.getWebhookInfo();
+            if (response.getResponseCode() !== 200) {
+                return false;
+            }
+            const contentText = response.getContentText();
+            const res = JSON.parse(contentText);
+            return res.result.url !== '';
         };
     }
 
-    navigateToHome(state = { webhookSet: false, botTokenSet: false }) {
+    navigateToHome() {
+        const state = {
+            webhookSet: this._webhookSet(),
+            botTokenSet: this._botTokenSet()
+        };
+
         return CardService.newActionResponseBuilder()
             .setNavigation(
                 CardService.newNavigation()
@@ -30,7 +48,7 @@ class BotController {
                     .pushCard(
                         new BotSettingsCard()
                             .withTelegramBotInfo(
-                                this._services.userStore.getTelegramBotInfo()
+                                this._userStore.getTelegramBotInfo()
                             )
                             .newCardBuilder()
                             .build()
@@ -57,7 +75,7 @@ class BotController {
                 CardService.newNavigation()
                     .pushCard(
                         new BotAutomationsCard()
-                            .withBotInfo(this._services.userStore
+                            .withBotInfo(this._userStore
                                 .getTelegramBotInfo())
                             .newCardBuilder()
                             .build()
@@ -65,14 +83,14 @@ class BotController {
             );
     }
 
-    registerBotToken(token = '[YOUR_BOT_TOKEN]') {
+    registerBotToken(token) {
         if (!token || typeof token !== 'string' || token.trim() === '') {
             throw new Error("Invalid bot token");
         }
 
-        this._services.telegramBotClient = new TelegramBotClient(token);
+        this._telegramBotClient = new TelegramBotClient(token);
 
-        const response = this._services.telegramBotClient.getMe();
+        const response = this._telegramBotClient.getMe();
 
         if (response.getResponseCode() !== 200) {
             throw new Error("Failed to validate bot token");
@@ -87,7 +105,7 @@ class BotController {
             .setUsername(res.result.username)
             .setLanguageCode(res.result.language_code);
 
-        this._services.userStore
+        this._userStore
             .setTelegramBotInfo(
                 new TelegramBotInfo()
                     .setName(user.getUsername())
@@ -97,9 +115,17 @@ class BotController {
                     .setUser(user)
             );
 
-        return this.navigateToHome(
-            { webhookSet: false, botTokenSet: true }
-        );
+        return CardService.newActionResponseBuilder()
+            .setNavigation(
+                CardService.newNavigation()
+                    .popToRoot()
+                    .updateCard(
+                        new HomeCard()
+                            .setState(
+                                { webhookSet: false, botTokenSet: true }
+                            )
+                            .build()
+                    ));
     }
 
     saveBotSettings(e) {
@@ -126,16 +152,26 @@ class BotController {
             throw new Error("Invalid webhook URL");
         }
 
-        const response = this._services.telegramBotClient.setWebhook(url);
+        const response = this._telegramBotClient.setWebhook(url);
         if (response.getResponseCode() !== 200) {
             throw new Error("Failed to set webhook");
         }
 
-        return this.navigateToHome();
+        return CardService.newActionResponseBuilder()
+            .setNavigation(
+                CardService.newNavigation()
+                    .popToRoot()
+                    .updateCard(
+                        new HomeCard()
+                            .setState(
+                                { webhookSet: true, botTokenSet: true }
+                            )
+                            .build()
+                    ));
     }
 
     deleteWebhook() {
-        const response = this._services.telegramBotClient.deleteWebhook();
+        const response = this._telegramBotClient.deleteWebhook();
         if (response.getResponseCode() !== 200) {
             throw new Error("Failed to delete webhook");
         }
@@ -147,7 +183,6 @@ class BotController {
 class BotControllerFactory {
     constructor() {
         this._userStore = null;
-        this._telegramBotClient = null;
     }
 
     withUserStore(userStore) {
@@ -159,20 +194,8 @@ class BotControllerFactory {
         return this;
     }
 
-    withTelegramBotClient(telegramBotClient) {
-        if (!(telegramBotClient instanceof TelegramBotClient)) {
-            throw new Error("telegramBotClient must be an instance of TelegramBotClient");
-        }
-
-        this._telegramBotClient = telegramBotClient;
-        return this;
-    }
-
     build() {
-        return new BotController(
-            this._userStore,
-            this._telegramBotClient
-        );
+        return new BotController(this._userStore);
     }
 
     static create() {

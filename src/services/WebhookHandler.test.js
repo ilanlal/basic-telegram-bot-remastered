@@ -1,4 +1,5 @@
 const { WebhookHandler } = require('./WebhookHandler');
+require('.');
 
 describe('WebhookHandler', () => {
     it('should run doPost message handler', () => {

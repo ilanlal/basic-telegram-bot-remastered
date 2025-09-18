@@ -67,12 +67,12 @@ UiEventHandlers.Bot = {
                 ?.formInputs?.['BOT_TOKEN']
                 ?.stringInputs.value[0] || '[YOUR_BOT_TOKEN]';
 
-            const client = new TelegramBotClient(botToken);
+            //const client = new TelegramBotClient(botToken);
 
             return BotControllerFactory.create()
                 .withUserStore(
-                    UserStoreFactory.newUserStoreFactory().build())
-                .withTelegramBotClient(client)
+                    new UserStore())
+                //.withTelegramBotClient(client)
                 .build()
                 .registerBotToken(botToken)
                 .build();
@@ -99,11 +99,23 @@ UiEventHandlers.Bot = {
     },
     setWebhook: (e) => {
         try {
+            const deploymentId = ScriptApp.getDeploymentId();
+            if (!deploymentId) {
+                throw new Error("Deployment ID is not available. Please deploy the script as a web app.");
+            }
+            const webhookUrl = `https://script.google.com/macros/s/${deploymentId}/exec`;
+            const userStore = new UserStore();
+            const botToken = userStore.getTelegramBotInfo()?.getBotToken();
+            if (!botToken) {
+                throw new Error("Bot token is not set. Please set the bot token first.");
+            }
+            
+            //const client = new TelegramBotClient(botToken);
+
             return BotControllerFactory.create()
-                .withUserStore(
-                    UserStoreFactory.newUserStoreFactory().build())
+                .withUserStore(userStore)
                 .build()
-                .setWebhook(e)
+                .setWebhook(webhookUrl)
                 .build();
         } catch (error) {
             return UiEventHandlers.handleError(error);

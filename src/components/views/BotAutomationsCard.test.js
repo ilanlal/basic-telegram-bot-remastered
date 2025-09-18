@@ -10,8 +10,4 @@ describe("BotAutomationsCard", () => {
         const builtCard = builder.build();
         expect(builtCard).toBeDefined();
     });
-
-    it("should throw error if botInfo is not set", () => {
-        expect(() => new BotAutomationsCard().newCardBuilder()).toThrow("Bot info is not set");
-    });
 });
