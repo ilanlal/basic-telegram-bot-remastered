@@ -68,6 +68,12 @@ describe('UiEventHandlers.Bot Tests', () => {
         UrlFetchAppStubConfiguration.when(`https://api.telegram.org/bot[DUMMY_BOT_TOKEN]/getMe`)
             .return(new HttpResponse().setContentText(JSON.stringify(contentText)));
 
+
+            UrlFetchAppStubConfiguration.when(`https://api.telegram.org/bot[DUMMY_BOT_TOKEN]/setWebhook`)    
+                .return(new HttpResponse().setContentText(`{"ok":true,"result":{}}`));
+
+                UrlFetchAppStubConfiguration.when(`https://api.telegram.org/bot[DUMMY_BOT_TOKEN]/getWebhookInfo`)    
+                    .return(new HttpResponse().setContentText(`{"ok":true,"result":{}}`));
         const actionResponse = UiEventHandlers.Bot.saveNewBotToken(mockEvent);
         expect(actionResponse).toBeDefined();
     });

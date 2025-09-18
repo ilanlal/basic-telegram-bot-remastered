@@ -4,17 +4,28 @@ class BotController {
             throw new Error("userStore must be an instance of UserStore");
         }
 
-         /** @type {UserStore} */
+        /** @type {UserStore} */
         this._userStore = userStore;
         this._botTokenSet = () => !!this._userStore.getTelegramBotInfo();
-        this._webhookSet = () => {
+        this._deploymentId = () => this._userStore.getDeploymentId();
+        this._telegramBotClient = () => {
             const botInfo = this._userStore.getTelegramBotInfo();
             const token = botInfo ? botInfo.getBotToken() : null;
             if (!token) {
+                return null;
+            }
+            return new TelegramBotClient(token);
+        };
+        this._webhookUrl = () => {
+            return this._telegramBotClient()
+                ?.getWebhookInfo()
+                ?.getContentText();
+        };
+        this._webhookSet = () => {
+            if (!this._botTokenSet() || !this._telegramBotClient()) {
                 return false;
             }
-            const telegramBotClient = new TelegramBotClient(token);
-            const response = telegramBotClient.getWebhookInfo();
+            const response = this._telegramBotClient().getWebhookInfo();
             if (response.getResponseCode() !== 200) {
                 return false;
             }
@@ -27,7 +38,9 @@ class BotController {
     navigateToHome() {
         const state = {
             webhookSet: this._webhookSet(),
-            botTokenSet: this._botTokenSet()
+            webhookUrl: this._webhookUrl() || "[Not Set]",
+            botTokenSet: this._botTokenSet(),
+            deploymentId: this._deploymentId() || ""
         };
 
         return CardService.newActionResponseBuilder()
@@ -83,14 +96,24 @@ class BotController {
             );
     }
 
+    navigateToDeploymentSettings() {
+        return CardService.newActionResponseBuilder()
+            .setNavigation(
+                CardService.newNavigation()
+                    .pushCard(
+                        new DeploymentCreateCard()
+                            .build()
+                    )
+            );
+    }
+
     registerBotToken(token) {
         if (!token || typeof token !== 'string' || token.trim() === '') {
             throw new Error("Invalid bot token");
         }
 
-        this._telegramBotClient = new TelegramBotClient(token);
-
-        const response = this._telegramBotClient.getMe();
+        const botClient = new TelegramBotClient(token);
+        const response = botClient.getMe();
 
         if (response.getResponseCode() !== 200) {
             throw new Error("Failed to validate bot token");
@@ -122,7 +145,12 @@ class BotController {
                     .updateCard(
                         new HomeCard()
                             .setState(
-                                { webhookSet: false, botTokenSet: true }
+                                {
+                                    webhookSet: this._webhookSet(),
+                                    webhookUrl: this._webhookUrl() || "[Not Set]",
+                                    botTokenSet: true,
+                                    deploymentId: this._deploymentId()
+                                }
                             )
                             .build()
                     ));
@@ -134,25 +162,32 @@ class BotController {
             ?.formInputs?.['BOT_NAME']
             ?.stringInputs.value[0] || '';
 
-        return global.CardService.newActionResponseBuilder()
+        return CardService.newActionResponseBuilder()
             .setNavigation(
                 CardService.newNavigation()
                     .popToRoot()
                     .updateCard(
                         new HomeCard()
                             .setState(
-                                { webhookSet: false, botTokenSet: true }
+                                {
+                                    webhookSet: true,
+                                    webhookUrl: this._webhookUrl() || "[Not Set]",
+                                    botTokenSet: true,
+                                    deploymentId: this._deploymentId()
+                                }
                             )
                             .build()
                     ));
     }
 
-    setWebhook(url) {
-        if (!url || typeof url !== 'string' || url.trim() === '') {
-            throw new Error("Invalid webhook URL");
+    setWebhook() {
+        const deploymentId = this._deploymentId();
+        if (!deploymentId) {
+            throw new Error("Deployment ID is not available. Please deploy the script as a web app.");
         }
+        const webhookUrl = `https://script.google.com/macros/s/${deploymentId}/exec`;
 
-        const response = this._telegramBotClient.setWebhook(url);
+        const response = this._telegramBotClient().setWebhook(webhookUrl);
         if (response.getResponseCode() !== 200) {
             throw new Error("Failed to set webhook");
         }
@@ -164,19 +199,72 @@ class BotController {
                     .updateCard(
                         new HomeCard()
                             .setState(
-                                { webhookSet: true, botTokenSet: true }
+                                {
+                                    webhookSet: true,
+                                    webhookUrl: webhookUrl,
+                                    botTokenSet: true,
+                                    deploymentId: true
+                                }
                             )
                             .build()
                     ));
     }
 
     deleteWebhook() {
-        const response = this._telegramBotClient.deleteWebhook();
+        const deploymentId = this._deploymentId();
+        if (!deploymentId) {
+            throw new Error("Deployment ID is not available. Please deploy the script as a web app.");
+        }
+        const webhookUrl = `https://script.google.com/macros/s/${deploymentId}/exec`;
+
+        const response = this._telegramBotClient()
+            .deleteWebhook(webhookUrl);
+
         if (response.getResponseCode() !== 200) {
             throw new Error("Failed to delete webhook");
         }
 
-        return this.navigateToHome();
+        return CardService.newActionResponseBuilder()
+            .setNavigation(
+                CardService.newNavigation()
+                    .popToRoot()
+                    .updateCard(
+                        new HomeCard()
+                            .setState(
+                                {
+                                    webhookSet: false,
+                                    webhookUrl: "[Not Set]",
+                                    botTokenSet: true,
+                                    deploymentId: this._deploymentId()
+                                }
+                            )
+                            .build()
+                    ));
+    }
+
+    saveDeploymentSettings(e) {
+        const deploymentId = e?.commonEventObject
+            ?.formInputs?.['deploymentId']
+            ?.stringInputs.value[0] || '';
+
+        this._userStore.setDeploymentId(deploymentId);
+
+        return CardService.newActionResponseBuilder()
+            .setNavigation(
+                CardService.newNavigation()
+                    .popToRoot()
+                    .updateCard(
+                        new HomeCard()
+                            .setState(
+                                {
+                                    webhookSet: this._webhookSet(),
+                                    webhookUrl: this._webhookUrl() || "[Not Set]",
+                                    botTokenSet: this._botTokenSet(),
+                                    deploymentId: deploymentId
+                                }
+                            )
+                            .build()
+                    ));
     }
 }
 

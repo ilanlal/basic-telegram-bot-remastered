@@ -1,5 +1,5 @@
 // version: 1.2.0
-class SpreadsheetService {
+class SpreadsheetStore {
     static get EVENT_LOG_SHEET_NAME() {
         return "Event Logs";
     }
@@ -12,6 +12,10 @@ class SpreadsheetService {
         return "Resources";
     }
 
+    getActiveSpreadsheet() {
+        return this._activeSpreadsheet;
+    }
+    
     setActiveSheet(sheet) {
         this._activeSheet = sheet;
         return this;
@@ -29,14 +33,14 @@ class SpreadsheetService {
         this._activeSpreadsheet = activeSpreadsheet;
     }
 
-    static newSpreadsheetService(activeSpreadsheet, sheetName = null) {
+    static create(activeSpreadsheet, sheetName = null) {
         if (!activeSpreadsheet) {
             throw new Error("No active spreadsheet provided");
         }
         const sheet = activeSpreadsheet.getSheetByName(sheetName)
             || activeSpreadsheet.getActiveSheet();
 
-        return new SpreadsheetService(activeSpreadsheet)
+        return new SpreadsheetStore(activeSpreadsheet)
             .setActiveSheet(sheet);
     }
 
@@ -126,4 +130,8 @@ class SpreadsheetService {
                 .insertSheet(this.USERS_SHEET_NAME)
                 .appendRow(['Created on', 'chat_id', 'username', 'First Name', 'Last Name', 'language_code', 'Data']);
     }
+}
+
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = { SpreadsheetStore };
 }

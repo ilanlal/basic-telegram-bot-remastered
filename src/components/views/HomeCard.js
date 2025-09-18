@@ -12,7 +12,9 @@ class HomeCard {
             /* webhookUrl state properties */
             webhookUrl: "",
             /* botToken state properties */
-            botTokenSet: false
+            botTokenSet: false,
+            /* deploymentId state properties */
+            deploymentId: ""
         };
     }
 
@@ -32,8 +34,14 @@ class HomeCard {
         const cardBuilder = CardService.newCardBuilder()
             .setName(HomeCard.CARD_NAME)
             .setHeader(HomeCard.Layout.HEADER(this._state))
-            // Bot Setup Section
+            // Bot token Section
             .addSection(HomeCard.Layout.SETUP_SECTION(this._state))
+            // Deployment Section
+            .addSection(HomeCard.Layout.DEPLOYMENT_SECTION(this._state))
+            // Webhook Section
+            .addSection(HomeCard.Layout.WEBHOOK_SECTION(this._state))
+            // Edit Bot Section
+            .addSection(HomeCard.Layout.EDIT_BOT_SECTION(this._state))
             // Automated Replies Section
             .addSection(HomeCard.Layout.AUTOMATED_REPLIES_SECTION(this._state))
             .setFixedFooter(HomeCard.Layout.FIXED_FOOTER());
@@ -52,9 +60,16 @@ HomeCard.Layout = {
             .setImageUrl('https://raw.githubusercontent.com/ilanlal/basic-telegram-bot-remastered/refs/heads/vnext/assets/logo128.png'),
     SETUP_SECTION: (state = HomeCard.State) =>
         CardService.newCardSection()
-            .addWidget(HomeCard.Widgets.BOT_INFO(state))
-            .addWidget(HomeCard.Widgets.WEBHOOK_STATUS(state))
+            .addWidget(HomeCard.Widgets.BOT_TOKEN(state)),
+    WEBHOOK_SECTION: (state = HomeCard.State) =>
+        CardService.newCardSection()
+            .addWidget(HomeCard.Widgets.WEBHOOK_STATUS(state)),
+    EDIT_BOT_SECTION: (state = HomeCard.State) =>
+        CardService.newCardSection()
             .addWidget(HomeCard.Widgets.BOT_SETTINGS(state)),
+    DEPLOYMENT_SECTION: (state = HomeCard.State) =>
+        CardService.newCardSection()
+            .addWidget(HomeCard.Widgets.DEPLOYMENT_INFO(state)),
     AUTOMATED_REPLIES_SECTION: (state = HomeCard.State) =>
         CardService.newCardSection()
             .addWidget(HomeCard.Widgets.AUTOMATED_REPLIES(state)),
@@ -67,23 +82,19 @@ HomeCard.Layout = {
 };
 
 HomeCard.Widgets = {
-    BOT_INFO: (state = HomeCard.State) =>
+    BOT_TOKEN: (state = HomeCard.State) =>
         CardService.newDecoratedText()
-            .setTopLabel(`${state.botTokenSet ? "🟢 Set" : "🔴 Not Set"}`)
+            .setBottomLabel(`${state.botTokenSet ? "🟢 Set" : "🔴 Not Set"}`)
             .setText("Bot Information")
             //.setBottomLabel(`Bot status: ${state.botTokenSet || "Not Configured"}`)
             .setButton(HomeCard.Buttons.REGISTER_NEW_BOT(state)),
-    WEBHOOK_URL: (state = HomeCard.State) =>
-        CardService.newDecoratedText()
-            .setWrapText(true)
-            .setTopLabel("Webhook URL")
-            .setText(`Webhook URL: ${state.webhookUrl || "🔴 Not Configured"}`),
     WEBHOOK_STATUS: (state = HomeCard.State) =>
         CardService.newDecoratedText()
-            .setWrapText(true)
-            .setTopLabel(`${state.webhookSet ? "🟢 Set" : "🔴 Not Set"}`)
+            //.setWrapText(true)
+            .setBottomLabel(`${state.webhookSet ? "🟢 Set" : "🔴 Not Set"}`)
             .setText("Webhook Status")
-            .setButton(state.webhookSet ? HomeCard.Buttons.UNSET_WEBHOOK(state) : HomeCard.Buttons.ACTIVATE_WEBHOOK(state)),
+            .setButton(state.webhookSet ? HomeCard.Buttons.UNSET_WEBHOOK(state) : HomeCard.Buttons.ACTIVATE_WEBHOOK(state))
+            .setTopLabel(`${state.webhookUrl || "[Not Set]"}`),
     BOT_SETTINGS: (state = HomeCard.State) =>
         CardService.newDecoratedText()
             .setWrapText(true)
@@ -91,6 +102,13 @@ HomeCard.Widgets = {
             .setText("Configure your bot settings")
             .setBottomLabel("Configure your bot settings")
             .setButton(HomeCard.Buttons.EDIT_BOT_INFO(state)),
+    DEPLOYMENT_INFO: (state = HomeCard.State) =>
+        CardService.newDecoratedText()
+            .setWrapText(true)
+            .setTopLabel(`${state.deploymentId !== "" ? state.deploymentId : "No Deployment ID"}`)
+            .setText("Configure your deployment id")
+            .setBottomLabel(`${state.deploymentId !== "" ? "🟢 Set" : "🔴 Not Set"}`)
+            .setButton(HomeCard.Buttons.DEPLOYMENT_SETTINGS(state)),
     AUTOMATED_REPLIES: (state = HomeCard.State) => CardService.newDecoratedText()
         .setWrapText(true)
         .setTopLabel("Automated Replies")
@@ -129,7 +147,12 @@ HomeCard.Buttons = {
         .setText("🔴 Delete Webhook")
         .setDisabled(!state.botTokenSet)
         .setOnClickAction(CardService.newAction()
-            .setFunctionName("UiEventHandlers.Bot.deleteWebhook"))
+            .setFunctionName("UiEventHandlers.Bot.deleteWebhook")),
+    DEPLOYMENT_SETTINGS: (state = HomeCard.State) => CardService.newTextButton()
+        .setText("🚀 Deployment Settings")
+        .setDisabled(!state.botTokenSet)
+        .setOnClickAction(CardService.newAction()
+            .setFunctionName("UiEventHandlers.Home.openDeploymentSettingsCard"))
 };
 
 if (typeof module !== "undefined" && module.exports) {

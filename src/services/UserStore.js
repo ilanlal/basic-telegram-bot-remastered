@@ -1,6 +1,9 @@
 /* eslint-disable no-undef */
 // version: 2.0.0
 class UserStore {
+  static get DEPLOYMENT_ID_KEY() {
+    return 'deployment_id';
+  }
   static get TELEGRAM_BOT_INFO_KEY() {
     return "telegram_bot_info";
   }
@@ -177,8 +180,14 @@ class UserStore {
     return this;
   }
 
-  static newInstance() {
-    return new UserStore(PropertiesService.getUserProperties());
+  getDeploymentId() {
+    const deploymentId = this._userDataProvider.getProperty(UserStore.DEPLOYMENT_ID_KEY);
+    return deploymentId;
+  }
+
+  setDeploymentId(deploymentId) {
+    this._userDataProvider.setProperty(UserStore.DEPLOYMENT_ID_KEY, deploymentId);
+    return this;
   }
 }
 

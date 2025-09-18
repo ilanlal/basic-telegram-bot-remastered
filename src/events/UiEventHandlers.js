@@ -57,6 +57,37 @@ UiEventHandlers.Home = {
         } catch (error) {
             return UiEventHandlers.handleError(error);
         }
+    },
+    openDeploymentSettingsCard: (e) => {
+        try {
+            return BotControllerFactory.create()
+                .withUserStore(
+                    new UserStore())
+                .build()
+                .navigateToDeploymentSettings()
+                .build();
+        } catch (error) {
+            return UiEventHandlers.handleError(error);
+        }
+    },
+    saveDeploymentId: (e) => {
+        try {
+            const formInputs = e && e.commonEventObject && e.commonEventObject.formInputs;
+            if (!formInputs) {
+                throw new Error("Form inputs are missing");
+            }
+            return BotControllerFactory.create()
+                .withUserStore(
+                    new UserStore())
+                .build()
+                .saveDeploymentSettings(e)
+                .build();
+        } catch (error) {
+            return UiEventHandlers.handleError(error);
+        }
+    },
+    back: (e) => {
+        return UiEventHandlers.back(e);
     }
 };
 
@@ -99,23 +130,10 @@ UiEventHandlers.Bot = {
     },
     setWebhook: (e) => {
         try {
-            const deploymentId = ScriptApp.getDeploymentId();
-            if (!deploymentId) {
-                throw new Error("Deployment ID is not available. Please deploy the script as a web app.");
-            }
-            const webhookUrl = `https://script.google.com/macros/s/${deploymentId}/exec`;
-            const userStore = new UserStore();
-            const botToken = userStore.getTelegramBotInfo()?.getBotToken();
-            if (!botToken) {
-                throw new Error("Bot token is not set. Please set the bot token first.");
-            }
-            
-            //const client = new TelegramBotClient(botToken);
-
             return BotControllerFactory.create()
-                .withUserStore(userStore)
+                .withUserStore(new UserStore())
                 .build()
-                .setWebhook(webhookUrl)
+                .setWebhook()
                 .build();
         } catch (error) {
             return UiEventHandlers.handleError(error);
@@ -125,9 +143,9 @@ UiEventHandlers.Bot = {
         try {
             return BotControllerFactory.create()
                 .withUserStore(
-                    UserStoreFactory.newUserStoreFactory().build())
+                    new UserStore())
                 .build()
-                .deleteWebhook(e)
+                .deleteWebhook()
                 .build();
         } catch (error) {
             return UiEventHandlers.handleError(error);
