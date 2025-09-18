@@ -7,9 +7,17 @@ function onInstall(e) {
 }
 
 function onOpen(e) {
-    
+
 }
 
 function doGet(e) {
-    return ContentService.createTextOutput("Hello, world!");
+    return JSON.stringify({ status: 'ok' });
+}
+
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = {
+        onInstall,
+        onOpen,
+        doGet
+    };
 }

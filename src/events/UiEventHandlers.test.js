@@ -1,6 +1,6 @@
 require("@ilanlal/gasmocks");
 require("../lib");
-const { EventHandlers } = require('./EventHandlers');
+const { UiEventHandlers } = require('./UiEventHandlers');
 require('../components/controllers');
 require('../services');
 require('../components/views');
@@ -20,21 +20,21 @@ describe('EventHandlers.Home Tests', () => {
             }
         };
 
-        const actionResponse = EventHandlers.Home.openCreateNewBotCard(mockEvent);
+        const actionResponse = UiEventHandlers.Home.openCreateNewBotCard(mockEvent);
         expect(actionResponse).toBeDefined();
     });
 
     //openBotSettingsCard
     test('openBotSettingsCard should return a CardService.ActionResponse', () => {
         const mockEvent = {};
-        const actionResponse = EventHandlers.Home.openBotSettingsCard(mockEvent);
+        const actionResponse = UiEventHandlers.Home.openBotSettingsCard(mockEvent);
         expect(actionResponse).toBeDefined();
     });
 
     //openBotRepliesCard
     test('openBotRepliesCard should return a CardService.ActionResponse', () => {
         const mockEvent = {};
-        const actionResponse = EventHandlers.Home.openBotRepliesCard(mockEvent);
+        const actionResponse = UiEventHandlers.Home.openBotRepliesCard(mockEvent);
         expect(actionResponse).toBeDefined();
     });
 });
@@ -68,7 +68,7 @@ describe('EventHandlers.Bot Tests', () => {
         UrlFetchAppStubConfiguration.when(`https://api.telegram.org/bot[DUMMY_BOT_TOKEN]/getMe`)
             .return(new HttpResponse().setContentText(JSON.stringify(contentText)));
 
-        const actionResponse = EventHandlers.Bot.saveNewBotToken(mockEvent);
+        const actionResponse = UiEventHandlers.Bot.saveNewBotToken(mockEvent);
         expect(actionResponse).toBeDefined();
     });
 
@@ -99,7 +99,7 @@ describe('EventHandlers.Bot Tests', () => {
         UrlFetchAppStubConfiguration.when(`https://api.telegram.org/bot[DUMMY_BOT_INFO]/getMe`)
             .return(new HttpResponse().setContentText(JSON.stringify(contentText)));
 
-        const actionResponse = EventHandlers.Bot.saveMyBotInfo(mockEvent);
+        const actionResponse = UiEventHandlers.Bot.saveMyBotInfo(mockEvent);
         expect(actionResponse).toBeDefined();
     });
 

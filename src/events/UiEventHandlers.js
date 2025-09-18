@@ -1,4 +1,4 @@
-class EventHandlers {
+class UiEventHandlers {
     static back(e) {
         try {
             return CardService.newActionResponseBuilder()
@@ -7,7 +7,7 @@ class EventHandlers {
                         .popCard())
                 .build();
         } catch (error) {
-            return EventHandlers.handleError(error);
+            return UiEventHandlers.handleError(error);
         }
     }
     static handleError(error) {
@@ -21,7 +21,7 @@ class EventHandlers {
     }
 }
 
-EventHandlers.Home = {
+UiEventHandlers.Home = {
     openCreateNewBotCard: (e) => {
         try {
             return BotControllerFactory.create()
@@ -31,7 +31,7 @@ EventHandlers.Home = {
                 .navigateToCreateBot()
                 .build();
         } catch (error) {
-            return EventHandlers.handleError(error);
+            return UiEventHandlers.handleError(error);
         }
     },
     openBotSettingsCard: (e) => {
@@ -43,7 +43,7 @@ EventHandlers.Home = {
                 .navigateToSettings()
                 .build();
         } catch (error) {
-            return EventHandlers.handleError(error);
+            return UiEventHandlers.handleError(error);
         }
     },
     openBotRepliesCard: (e) => {
@@ -55,12 +55,12 @@ EventHandlers.Home = {
                 .navigateToAutomations()
                 .build();
         } catch (error) {
-            return EventHandlers.handleError(error);
+            return UiEventHandlers.handleError(error);
         }
     }
 };
 
-EventHandlers.Bot = {
+UiEventHandlers.Bot = {
     saveNewBotToken: (e) => {
         try {
             const botToken = e?.commonEventObject
@@ -77,7 +77,7 @@ EventHandlers.Bot = {
                 .registerBotToken(botToken)
                 .build();
         } catch (error) {
-            return EventHandlers.handleError(error);
+            return UiEventHandlers.handleError(error);
         }
     },
     saveMyBotInfo: (e) => {
@@ -94,7 +94,7 @@ EventHandlers.Bot = {
                 .saveBotSettings(e)
                 .build();
         } catch (error) {
-            return EventHandlers.handleError(error);
+            return UiEventHandlers.handleError(error);
         }
     },
     setWebhook: (e) => {
@@ -106,7 +106,7 @@ EventHandlers.Bot = {
                 .setWebhook(e)
                 .build();
         } catch (error) {
-            return EventHandlers.handleError(error);
+            return UiEventHandlers.handleError(error);
         }
     },
     deleteWebhook: (e) => {
@@ -118,17 +118,17 @@ EventHandlers.Bot = {
                 .deleteWebhook(e)
                 .build();
         } catch (error) {
-            return EventHandlers.handleError(error);
+            return UiEventHandlers.handleError(error);
         }
     },
     back: (e) => {
-        return EventHandlers.back(e);
+        return UiEventHandlers.back(e);
     }
 };
 
-EventHandlers.AutomationReplies = {
+UiEventHandlers.AutomationReplies = {
 };
 
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { EventHandlers };
+    module.exports = { UiEventHandlers };
 }

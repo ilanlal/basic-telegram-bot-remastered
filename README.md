@@ -35,6 +35,41 @@ client.sendMessage({ chat_id, text: 'Hello, world!' })
     });
 ```
 
+## Advanced Usage
+
+Setting webhook:
+
+```javascript
+// Replace the placeholders with your bot token you generated from BotFather
+const token = '[YOUR_BOT_TOKEN]';
+// Google Apps Script Web App URL after deployment
+const webDeploymentUrl = 'https://script.google.com/macros/s/[YOUR_DEPLOYMENT_ID]/exec';
+
+const client = new TelegramBotClient(token);
+
+client.setWebhook(webDeploymentUrl);
+```
+
+Handling incoming updates:
+
+```javascript
+// Handle incoming updates
+function doPost(e) {
+    const update = JSON.parse(e.postData.contents);
+    
+    if (update.message) {
+        const chat_id = update.message.chat.id;
+        const text = update.message.text;
+
+        // Echo the received message
+        const token = '[YOUR_BOT_TOKEN]';
+        const client = new TelegramBotClient(token);
+
+        client.sendMessage({ chat_id, text: `You said: ${text}` });
+    }
+}
+```
+
 ## Roadmap
 
 - Backoffice to manage multiple bots and users

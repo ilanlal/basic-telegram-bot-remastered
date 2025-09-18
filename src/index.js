@@ -1,4 +1,4 @@
-const { TelegramBotClient, TelegramBotClientFactory } = require('./lib/TelegramBotClient');
+const { TelegramBotClient, TelegramBotClientFactory } = require('./lib');
 
 global.TelegramBotClient = TelegramBotClient;
-global.TelegramBotClientFactory = TelegramBotClientFactory.newTelegramBotClientFactory();
+global.TelegramBotClientFactory = TelegramBotClientFactory;
