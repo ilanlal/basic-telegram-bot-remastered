@@ -1,3 +1,4 @@
+require('@ilanlal/gasmocks');
 require('../services');
 const { doPost } = require('./Code');
 

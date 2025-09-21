@@ -15,7 +15,7 @@ class SpreadsheetStore {
     getActiveSpreadsheet() {
         return this._activeSpreadsheet;
     }
-    
+
     setActiveSheet(sheet) {
         this._activeSheet = sheet;
         return this;
@@ -28,7 +28,7 @@ class SpreadsheetStore {
     getSheetByName(name) {
         return this._activeSpreadsheet?.getSheetByName(name);
     }
-    
+
     constructor(activeSpreadsheet = null) {
         this._activeSpreadsheet = activeSpreadsheet;
     }
@@ -81,13 +81,13 @@ class SpreadsheetStore {
     }
 
     addUser(chat_id, data) {
-        const sheet = this.getUsersSheet_();
+        const sheet = this._getUsersSheet();
         const datestring = new Date().toISOString();
 
         const user = [datestring, chat_id, data.username, data.first_name, data.last_name, data.language_code, data];
         sheet.appendRow(user);
 
-        return persone;
+        return user;
     }
 
     getUserById(id) {
@@ -123,12 +123,20 @@ class SpreadsheetStore {
                 .appendRow(['sampel2', 'Pleas select..']);
     }
 
-    getUsersSheet_() {
-        return SpreadsheetApp.getActiveSpreadsheet()
-            .getSheetByName(this.USERS_SHEET_NAME) ?? SpreadsheetApp
+    _getUsersSheet() {
+        let sheet = SpreadsheetApp.getActiveSpreadsheet()
+            .getSheetByName(this.USERS_SHEET_NAME);
+
+        if (!sheet) {
+            // Create the sheet if it doesn't exist
+            sheet = SpreadsheetApp
                 .getActiveSpreadsheet()
-                .insertSheet(this.USERS_SHEET_NAME)
-                .appendRow(['Created on', 'chat_id', 'username', 'First Name', 'Last Name', 'language_code', 'Data']);
+                .insertSheet(this.USERS_SHEET_NAME);
+
+            sheet.appendRow(['Created on', 'chat_id', 'username', 'First Name', 'Last Name', 'language_code', 'Data']);
+        }
+
+        return sheet;
     }
 }
 

@@ -1,3 +1,4 @@
+require('@ilanlal/gasmocks');
 const { WebhookHandler } = require('./WebhookHandler');
 require('.');
 
@@ -43,22 +44,22 @@ describe('WebhookHandler', () => {
     });
 
     it('should return not_handled for invalid event', () => {
-        const contents = {};
+        const content = {};
         const handler = new WebhookHandler();
-        const response = handler.handlePost(contents);
+        const response = handler.handlePost(content);
         expect(response).toBe(JSON.stringify({ status: 'not_handled' }));
     });
 
     it('should throw error for invalid message format', () => {
-        const contents = { message: {} };
+        const content = { message: {} };
         const handler = new WebhookHandler();
-        expect(() => handler.handlePost(contents)).toThrow('Invalid message format');
+        expect(() => handler.handlePost(content)).toThrow('Invalid message format');
     });
 
     it('should throw error for invalid callback_query format', () => {
-        const contents = { callback_query: {} };
+        const content = { callback_query: {} };
         const handler = new WebhookHandler();
-        expect(() => handler.handlePost(contents)).toThrow('Invalid callback_query format');
+        expect(() => handler.handlePost(content)).toThrow('Invalid callback_query format');
     });
 
 });

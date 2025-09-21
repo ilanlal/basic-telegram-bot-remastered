@@ -1,6 +1,7 @@
 class PostMessageHandler {
     constructor() {
-        this.contents = null;
+        this._spreadsheetStore = SpreadsheetStore.create(
+            SpreadsheetApp.getActiveSpreadsheet());
     }
 
     handlePostMessage(contents) {
@@ -35,8 +36,14 @@ class PostMessageHandler {
     }
 
     verifyPersone(message) {
-        // Implement verification logic here
-        return true;
+        return this._spreadsheetStore.addUser(
+            message.from.id,
+            {
+                username: message.from.username,
+                first_name: message.from.first_name,
+                last_name: message.from.last_name,
+                language_code: message.from.language_code
+            });
     }
 
     handleBotCommand(chat_id, message) {
@@ -64,6 +71,10 @@ class PostMessageHandler {
     handleDynamicReply(chat_id, commands, reply_to_message_id = null) {
         // Implement dynamic reply handling logic here
         return JSON.stringify({ status: 'dynamic_reply_handled' });
+    }
+
+    static create() {
+        return new PostMessageHandler();
     }
 }
 
