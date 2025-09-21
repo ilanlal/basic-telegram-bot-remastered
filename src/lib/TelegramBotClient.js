@@ -1,5 +1,5 @@
 /**
- * @version 2.1.0
+ * @version 1.0.0-remastered
  * @file TelegramBotClient.gs
  * @author Ilan Laloum <ilanlal@gmail.com> (https://github.com/ilanlal)
  * @license MIT
@@ -36,9 +36,6 @@ class TelegramBotClient {
    * Post sendMessgae to the API endpoint.
    * @see https://core.telegram.org/bots/api#sendmessage 
    * 
-   * @param {object} requestOptions The sendMessage paramters, see: https://core.telegram.org/bots/api#sendmessage
-   * @param {string} requestOptions.chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-   * @param {string} requestOptions.text Text of the message to be sent, 1-4096 characters after entities parsing
    * To see the full list of parameters, see: https://core.telegram.org/bots/api#sendmessage
    * @returns {object} The response from the API endpoint.
    * 
@@ -52,12 +49,24 @@ class TelegramBotClient {
    *  text: "Hi.. this is test"
    * });
    */
-  sendMessage(requestOptions) {
-    if (!requestOptions.chat_id) {
+  sendMessage(requestOptions = {
+    chat_id: null,
+    text: null,
+    business_connection_id: null,
+    parse_mode: null,
+    entities: null,
+    disable_web_page_preview: null,
+    disable_notification: null,
+    protect_content: null,
+    reply_to_message_id: null,
+    allow_sending_without_reply: null,
+    reply_markup: null
+  }) {
+    if (!requestOptions?.chat_id) {
       throw new Error("chat_id is required!");
     }
 
-    if (!requestOptions.text) {
+    if (!requestOptions?.text) {
       throw new Error("text is required!");
     }
 

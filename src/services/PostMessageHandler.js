@@ -36,7 +36,16 @@ class PostMessageHandler {
     }
 
     verifyPersone(message) {
-        return this._spreadsheetStore.addUser(
+        if (!message.from || !message.from.id) {
+            throw new Error('Invalid message format: missing from.id');
+        }
+
+        const user = SpreadsheetStore.Users.getUserById(message.from.id);
+        if (user) {
+            return user;
+        }
+
+        return SpreadsheetStore.Users.addUser(
             message.from.id,
             {
                 username: message.from.username,
@@ -60,17 +69,17 @@ class PostMessageHandler {
         }
 
         // Implement bot command handling logic here
-        return JSON.stringify({ status: 'bot_command_handled' });
+        return JSON.stringify({ status: 'bot_command_handled', chat_id, command: message.text });
     }
 
     handleReplyToMessage(chat_id, message) {
         // Implement reply to message handling logic here
-        return JSON.stringify({ status: 'reply_to_message_handled' });
+        return JSON.stringify({ status: 'reply_to_message_handled', chat_id, message });
     }
 
     handleDynamicReply(chat_id, commands, reply_to_message_id = null) {
         // Implement dynamic reply handling logic here
-        return JSON.stringify({ status: 'dynamic_reply_handled' });
+        return JSON.stringify({ status: 'dynamic_reply_handled', commands, reply_to_message_id });
     }
 
     static create() {

@@ -8,8 +8,8 @@ class SpreadsheetStore {
         return "Users";
     }
 
-    static get RESOURCES_SHEET_NAME() {
-        return "Resources";
+    static get REPLIES_SHEET_NAME() {
+        return "Replies";
     }
 
     getActiveSpreadsheet() {
@@ -80,27 +80,6 @@ class SpreadsheetStore {
         return 1;
     }
 
-    addUser(chat_id, data) {
-        const sheet = this._getUsersSheet();
-        const datestring = new Date().toISOString();
-
-        const user = [datestring, chat_id, data.username, data.first_name, data.last_name, data.language_code, data];
-        sheet.appendRow(user);
-
-        return user;
-    }
-
-    getUserById(id) {
-        const range = this.getSheetByName(this.USERS_SHEET_NAME).getDataRange();
-        const values = range.getValues();
-        for (var row = 0; row < values.length; row++) {
-            if (values[row][1] == id) { //chat_id
-                return values[row]; //user row
-            }
-        }
-        return null;
-    }
-
     getResourceByKey(key) {
         const range = this.getSheetByName(this.RESOURCES_SHEET_NAME).getDataRange();
         const values = range.getValues();
@@ -122,10 +101,50 @@ class SpreadsheetStore {
                 .appendRow(['sampel1', 'Hello World..'])
                 .appendRow(['sampel2', 'Pleas select..']);
     }
+}
 
-    _getUsersSheet() {
+SpreadsheetStore.Replies = {
+    getRepliesSheet: () => {
         let sheet = SpreadsheetApp.getActiveSpreadsheet()
-            .getSheetByName(this.USERS_SHEET_NAME);
+            .getSheetByName(SpreadsheetStore.REPLIES_SHEET_NAME);
+
+        if (!sheet) {
+            sheet = SpreadsheetApp
+                .getActiveSpreadsheet()
+                .insertSheet(SpreadsheetStore.REPLIES_SHEET_NAME);
+
+            sheet.appendRow(['KEY', 'en'])
+                .appendRow(['dummy_reply_keyboard', '{ "reply_markup": { "keyboard": [ ["Option 1", "Option 2"], ["Option 3"] ], "one_time_keyboard": true, "resize_keyboard": true } }'])
+                .appendRow(['dummy_inline_keyboard', '{ "reply_markup": { "inline_keyboard": [ [ { "text": "Button 1", "callback_data": "button1" }, { "text": "Button 2", "callback_data": "button2" } ] ] } }'])
+                .appendRow(['_notdefined', 'Sorry, I did not understand that command. Please use /start to begin.']);
+        }
+        return sheet;
+    }
+}
+
+SpreadsheetStore.Users = {
+    addUser: (chat_id, data) => {
+        const sheet = SpreadsheetStore.Users.getUsersSheet();
+        const datestring = new Date().toISOString();
+
+        const user = [datestring, chat_id, data.username, data.first_name, data.last_name, data.language_code, data];
+        sheet.appendRow(user);
+
+        return user;
+    },
+    getUserById: (id) => {
+        const range = SpreadsheetStore.Users.getUsersSheet().getDataRange();
+        const values = range.getValues();
+        for (var row = 0; row < values.length; row++) {
+            if (values[row][1] == id) { //chat_id
+                return values[row]; //user row
+            }
+        }
+        return null;
+    },
+    getUsersSheet: () => {
+        let sheet = SpreadsheetApp.getActiveSpreadsheet()
+            .getSheetByName(SpreadsheetStore.USERS_SHEET_NAME);
 
         if (!sheet) {
             // Create the sheet if it doesn't exist
