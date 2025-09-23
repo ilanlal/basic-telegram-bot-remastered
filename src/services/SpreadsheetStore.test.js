@@ -5,6 +5,7 @@ describe('SpreadsheetStore', () => {
     let store;
 
     beforeEach(() => {
+        SpreadsheetStubConfiguration.reset();
         store = SpreadsheetStore.create(SpreadsheetApp.getActiveSpreadsheet());
     });
 

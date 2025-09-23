@@ -2,7 +2,7 @@ require("@ilanlal/gasmocks");
 require('.');
 
 
-describe('TelegramBotClient Tests', () => {
+describe('TelegramBotClient base definition', () => {
     let telegramBotClient;
 
     beforeEach(() => {
@@ -18,19 +18,29 @@ describe('TelegramBotClient Tests', () => {
     test("global.TelegramBotClientFactory should be defined", () => {
         expect(global.TelegramBotClientFactory).toBeDefined();
     });
+});
 
-    // sendMessage
+describe("TelegramBotClient sendMessage Tests", () => {
+    let telegramBotClient;
+
+    beforeEach(() => {
+        telegramBotClient = global.TelegramBotClientFactory
+            .withToken('[YOUR_BOT_TOKEN]')
+            .create();
+    });
+
     test("sendMessage method should return status 200", () => {
         /* @see https://core.telegram.org/bots/api#sendmessage */
         const contentText = `{
             "ok": true,
             "result": {
-                "message_id": 12345,
+                "message_id": 42,
                 "from": {
                     "id": 123456789,
-                    "is_bot": true,
+                    "is_bot": false,
                     "first_name": "Test",
-                    "username": "testbot"
+                    "username": "testuser",
+                    "language_code": "en"
                 },
                 "chat": {
                     "id": 123456789,
@@ -38,33 +48,42 @@ describe('TelegramBotClient Tests', () => {
                     "username": "testuser",
                     "type": "private"
                 },
-                "date": 1616161616,
-                "text": "Hi.. this is test"
+                "date": 1625247600,
+                "text": "Hello, World!"
             }
         }`;
 
-        UrlFetchAppStubConfiguration.when(`https://api.telegram.org/bot[DUMMY_BOT_TOKEN]/sendMessage`)
+        UrlFetchAppStubConfiguration.when(`https://api.telegram.org/bot[YOUR_BOT_TOKEN]/sendMessage`)
             .return(new HttpResponse().setContentText(contentText));
 
         const response = telegramBotClient.sendMessage({
             chat_id: 123456789,
-            text: "Hi.. this is test"
+            text: "Hello, World!"
         });
 
         expect(response.getResponseCode()).toBe(200);
         expect(response.getContentText()).toBe(contentText);
     });
+
     test("sendMessage method should throw error if chat_id is missing", () => {
         expect(() => {
             telegramBotClient.sendMessage({
-                text: "Hi.. this is test"
+                text: "Hello, World!"
             });
         }).toThrow("chat_id is required!");
+    });
+
+    test("sendMessage method should throw error if text is missing", () => {
+        expect(() => {
+            telegramBotClient.sendMessage({
+                chat_id: 123456789
+            });
+        }).toThrow("text is required!");
     });
 });
 
 // getMe
-describe("TelegramBotClient getMe Tests", () => {
+describe("getMe Tests", () => {
     let telegramBotClient;
 
     beforeEach(() => {
@@ -97,7 +116,7 @@ describe("TelegramBotClient getMe Tests", () => {
 });
 
 
-describe("TelegramBotClient Webhook Tests", () => {
+describe("Webhook Tests", () => {
     let telegramBotClient;
 
     beforeEach(() => {

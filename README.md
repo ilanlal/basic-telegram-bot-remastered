@@ -1,4 +1,5 @@
 # ![Logo](https://raw.githubusercontent.com/ilanlal/basic-telegram-bot-remastered/main/assets/logo24.png) Basic Telegram Bot (REMASTERED)
+
 A simple Telegram bot client for Google Apps Script.
 
 [![GitHub release](https://img.shields.io/github/release/ilanlal/basic-telegram-bot-remastered.svg)](https://github.com/ilanlal/basic-telegram-bot-remastered/releases)

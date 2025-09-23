@@ -66,59 +66,112 @@ class SpreadsheetStore {
                 .insertSheet(this.EVENT_LOG_SHEET_NAME + ' ' + monthAsNumber, 0)
                 .appendRow(['Created On', 'DC', 'Action', 'chat_id', 'content', 'event']);
     }
+}
 
-    findLangColIndex(langCodeText) {
-        const range = this.getSheetByName(this.RESOURCES_SHEET_NAME).getDataRange();
-
-        const firstRow = range.getValues()[0];
-        for (var col = 1; col < firstRow.length; col++) {
-            if (firstRow[col] == langCodeText) {
-                return col;
-            }
+SpreadsheetStore.Events ={
+    log: ({ dc, action, chat_id, content, event }) => {
+        const sheet = SpreadsheetStore.prototype.getSheetByName(SpreadsheetStore.EVENT_LOG_SHEET_NAME)
+            || SpreadsheetStore.prototype.getEventLogSheet_();
+        const datestring = new Date().toISOString();
+        sheet.appendRow([datestring, dc, action, chat_id, content, event]);
+    },
+    initialize: (activeSpreadsheet) => {
+        let sheet = activeSpreadsheet.getSheetByName(SpreadsheetStore.EVENT_LOG_SHEET_NAME);
+        if (!sheet) {
+            sheet = activeSpreadsheet.insertSheet(SpreadsheetStore.EVENT_LOG_SHEET_NAME, 0);
+            sheet.appendRow(['Created On', 'DC', 'Action', 'chat_id', 'content', 'event']);
         }
-        // Default when not found
-        return 1;
-    }
-
-    getResourceByKey(key) {
-        const range = this.getSheetByName(this.RESOURCES_SHEET_NAME).getDataRange();
-        const values = range.getValues();
-        for (var row = 0; row < values.length; row++) {
-            if (values[row][0] == key) {
-                return values[row][this.LANG_COL_INDEX];
-            }
-        }
-        return null;
-    }
-
-    getResourcesSheet_() {
-        return SpreadsheetApp.getActiveSpreadsheet()
-            .getSheetByName(this.RESOURCES_SHEET_NAME)
-            ?? SpreadsheetApp
-                .getActiveSpreadsheet()
-                .insertSheet(this.RESOURCES_SHEET_NAME)
-                .appendRow(['KEY', 'en'])
-                .appendRow(['sampel1', 'Hello World..'])
-                .appendRow(['sampel2', 'Pleas select..']);
     }
 }
 
 SpreadsheetStore.Replies = {
-    getRepliesSheet: () => {
-        let sheet = SpreadsheetApp.getActiveSpreadsheet()
+    BASE_REPLIES: () => [
+        ['_notdefined', JSON.stringify({
+            action: 'sendMessage',
+            payload: {
+                text: "Sorry, I didn't understand that. Please try again."
+            }
+        })],
+        ['/start', JSON.stringify({
+            action: 'sendMessage',
+            payload: {
+                text: "Welcome! How can I assist you today?",
+                reply_markup: {
+                    inline_keyboard: [
+                        [{ text: "Help", callback_data: "/help" }],
+                        [{ text: "About", callback_data: "/about" }]
+                    ]
+                }
+            }
+        })],
+        ['/help', JSON.stringify({
+            action: 'sendMessage',
+            payload: {
+                text: "Here are some commands you can use:\n/start - Start the bot\n/help - Show this help message",
+                reply_markup: {
+                    inline_keyboard: [
+                        [{ text: "Home", callback_data: "/start" }]
+                    ]
+                }
+            }
+        })],
+        ['/about', JSON.stringify({
+            action: 'sendMessage',
+            payload: {
+                text: "This is a sample Telegram bot built with Google Apps Script.",
+                reply_markup: {
+                    inline_keyboard: [
+                        [{ text: "Home", callback_data: "/start" }]
+                    ]
+                }
+            }
+        })]
+    ],
+    initialize: (activeSpreadsheet, language_code) => {
+        let sheet = activeSpreadsheet
             .getSheetByName(SpreadsheetStore.REPLIES_SHEET_NAME);
 
         if (!sheet) {
-            sheet = SpreadsheetApp
-                .getActiveSpreadsheet()
+            sheet = activeSpreadsheet
                 .insertSheet(SpreadsheetStore.REPLIES_SHEET_NAME);
-
-            sheet.appendRow(['KEY', 'en'])
-                .appendRow(['dummy_reply_keyboard', '{ "reply_markup": { "keyboard": [ ["Option 1", "Option 2"], ["Option 3"] ], "one_time_keyboard": true, "resize_keyboard": true } }'])
-                .appendRow(['dummy_inline_keyboard', '{ "reply_markup": { "inline_keyboard": [ [ { "text": "Button 1", "callback_data": "button1" }, { "text": "Button 2", "callback_data": "button2" } ] ] } }'])
-                .appendRow(['_notdefined', 'Sorry, I did not understand that command. Please use /start to begin.']);
+            sheet.appendRow(['key', language_code]);
         }
-        return sheet;
+    },
+    findLanguageColumnIndex: (language_code) => {
+        const sheet = SpreadsheetApp.getActiveSpreadsheet()
+            .getSheetByName(SpreadsheetStore.REPLIES_SHEET_NAME);
+        const range = sheet.getDataRange();
+        const values = range.getValues();
+
+        for (let col = 0; col < values[0].length; col++) {
+            if (values[0][col] === language_code) {
+                return col;
+            }
+        }
+        return 1; // default to second column
+    },
+    addDemoData: () => {
+        const sheet = SpreadsheetApp.getActiveSpreadsheet()
+            .getSheetByName(SpreadsheetStore.REPLIES_SHEET_NAME);
+
+        if (!sheet) {
+            throw new Error("Replies sheet does not exist. Please initialize first.");
+        }
+        const baseReplies = SpreadsheetStore.Replies.BASE_REPLIES();
+        baseReplies.forEach(row => sheet.appendRow(row));
+    },
+    getReplyByKey: (key, language_code) => {
+        const sheet = SpreadsheetApp.getActiveSpreadsheet()
+            .getSheetByName(SpreadsheetStore.REPLIES_SHEET_NAME);
+        const range = sheet.getDataRange();
+        const values = range.getValues();
+
+        for (let row = 1; row < values.length; row++) {
+            if (values[row][0] === key) {
+                return JSON.parse(values[row][1])[language_code];
+            }
+        }
+        return null;
     }
 }
 

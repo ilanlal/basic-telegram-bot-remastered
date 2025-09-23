@@ -32,10 +32,7 @@ class TelegramBotClient {
   }
 
   /**
-   * v8.2
-   * Post sendMessgae to the API endpoint.
-   * @see https://core.telegram.org/bots/api#sendmessage 
-   * 
+   * Send a message to a chat.
    * To see the full list of parameters, see: https://core.telegram.org/bots/api#sendmessage
    * @returns {object} The response from the API endpoint.
    * 
@@ -582,19 +579,10 @@ class TelegramBotClientFactory {
   }
 }
 
-/**
- * Get an instance of the TelegramBotClient class.
- * @param {string} token The bot token from the Telegram Bot API.
- * @return {TelegramBotClient} An instance of the TelegramBotClient class.
- */
-function getTelegramBotClient(token) {
-  return new TelegramBotClient(token);
-}
 
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = {
     TelegramBotClient,
-    TelegramBotClientFactory,
-    getTelegramBotClient
+    TelegramBotClientFactory
   };
 }
