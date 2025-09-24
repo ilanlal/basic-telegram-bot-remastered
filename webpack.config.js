@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-  entry: './src/index.js',
+  entry: './src/lib/index.js',
   output: {
     filename: 'telegramClient.js',
     path: path.resolve(__dirname, 'dist')

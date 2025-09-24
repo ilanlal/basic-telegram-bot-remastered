@@ -1,20 +1,21 @@
-/* eslint-disable no-undef */
-require("@ilanlal/gasmocks");
-require("../services");
-require("../components/models");
-require("../components/controllers");
-require("../components/views");
+require('@ilanlal/gasmocks');
+require('../services');
+require('../helpers');
+require('../components/models');
+require('../components/controllers');
+require('../components/views');
+const { AddonHandler } = require('./AddonHandler');
 
-const {
-    onDefaultHomePageOpen,
-    onOpenAccountCard,
-    onShowAboutCard
-} = require("./AddonTriggers");
+describe('AddonHandler', () => {
+    it('should create an instance of AddonHandler', () => {
+        const handler = new AddonHandler();
+        expect(handler).toBeInstanceOf(AddonHandler);
+    });
 
-describe("AddonTriggers", () => {
-    it("should handle onDefaultHomePageOpen", () => {
+    it('should handle onHomePageOpen', () => {
+        const handler = new AddonHandler();
         const event = {}; // Mock event object
-        const actionResponse = onDefaultHomePageOpen(event);
+        const actionResponse = handler.handleOnHomePageOpen(event);
         expect(actionResponse).toBeDefined();
         const data = actionResponse.getData();
         expect(data).toBeDefined();
@@ -26,30 +27,26 @@ describe("AddonTriggers", () => {
         expect(data.cardNavigations[0].pushCard).toBeDefined();
     });
 
-    it("should handle onOpenAccountCard", () => {
-        const event = {
-            commonEventObject: {
-                userLocale: 'en',
-                userCountry: 'US',
-                userTimezone: 'America/New_York'
-            }
-        }; // Mock event object
-        const actionResponse = onOpenAccountCard(event);
-        expect(actionResponse).toBeDefined();
-        const data = actionResponse.getData();
-        expect(data).toBeDefined();
-        // not notification
-        expect(data.notification).toBeUndefined();
-        //{ cardNavigations: [ { pushCard: [Object] } ] }
-        expect(data.cardNavigations).toBeDefined();
-        expect(data.cardNavigations.length).toBeGreaterThan(0);
-        expect(data.cardNavigations[0].pushCard).toBeDefined();
-        card = data.cardNavigations[0].pushCard;
-    });
-
-    it("should handle onShowAboutCard", () => {
+    it('should handle onAccountCardOpen', () => {
+        const handler = new AddonHandler();
         const event = {}; // Mock event object
-        const actionResponse = onShowAboutCard(event);
+        const actionResponse = handler.handleOnAccountCardOpen(event);
+        expect(actionResponse).toBeDefined();
+        const data = actionResponse.getData();
+        expect(data).toBeDefined();
+
+        // not notification
+        expect(data.notification).toBeUndefined();
+        //{ cardNavigations: [ { pushCard: [Object] } ] }
+        expect(data.cardNavigations).toBeDefined();
+        expect(data.cardNavigations.length).toBeGreaterThan(0);
+        expect(data.cardNavigations[0].pushCard).toBeDefined();
+    });
+
+    it('should handle onAboutCardOpen', () => {
+        const handler = new AddonHandler();
+        const event = {}; // Mock event object
+        const actionResponse = handler.handleOnAboutCardOpen(event);
         expect(actionResponse).toBeDefined();
         const data = actionResponse.getData();
         expect(data).toBeDefined();
@@ -59,6 +56,6 @@ describe("AddonTriggers", () => {
         expect(data.cardNavigations).toBeDefined();
         expect(data.cardNavigations.length).toBeGreaterThan(0);
         expect(data.cardNavigations[0].pushCard).toBeDefined();
-        card = data.cardNavigations[0].pushCard;
     });
+
 });

@@ -1,11 +1,8 @@
-/* eslint-disable no-undef */
-
 function onDefaultHomePageOpen(e) {
     //console.log("onDefaultHomePageOpen called with event:", e);
     try {
         return BotControllerFactory.create()
-            .withUserStore(
-                UserStoreFactory.newUserStoreFactory().build())
+            .withUserStore(new UserStore())
             .build()
             .navigateToHome()
             .build();

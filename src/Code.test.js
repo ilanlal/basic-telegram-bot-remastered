@@ -2,7 +2,6 @@ require('@ilanlal/gasmocks');
 require('./services');
 require('./handlers');
 require('./helpers');
-require('.');
 const { doGet, doPost } = require('./Code');
 
 describe('doGet', () => {
