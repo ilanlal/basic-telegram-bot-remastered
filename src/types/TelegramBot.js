@@ -1,16 +1,24 @@
 
 class TelegramBot {
-    constructor() {
-        this._resources = [];
+    constructor(default_language_code = 'en') {
+        this._default_language_code = default_language_code;
+        this._infoList = [];
     }
 
-    setDefaultLanguageCode(language_code = 'en') {
+    getDefaultLanguageCode() {
+        return this._default_language_code;
+    }
+
+    setDefaultLanguageCode(language_code) {
+        if (!language_code || typeof language_code !== 'string' || language_code.length !== 2) {
+            throw new Error('Language code is required. It must be a 2-letter ISO 639-1 code.');
+        }
         this._default_language_code = language_code;
         return this;
     }
 
-    addResource(resource = {}) {
-        this._resources.push(new TelegramBot.Resource()
+    addInfo(resource = {}) {
+        this._infoList.push(new TelegramBot.Info()
             .setLanguageCode(resource.language_code)
             .setDescription(resource.description)
             .setShortDescription(resource.short_description)
@@ -19,15 +27,19 @@ class TelegramBot {
 
             if (Array.isArray(resource.commands)) {
                 resource.commands.forEach(command => {
-                    this._resources[this._resources.length - 1].addCommand( command );
+                    this._infoList[this._infoList.length - 1].addCommand( command );
                 });
             }
 
         return this;
     }
+
+    getInfoList() {
+        return this._infoList;
+    }
 };
 
-TelegramBot.Resource = class {
+TelegramBot.Info = class {
     constructor() {
         this.language_code = '';
         this.description = '';

@@ -44,6 +44,7 @@ class HomeCard {
             .addSection(HomeCard.Layout.EDIT_BOT_SECTION(this._state))
             // Automated Replies Section
             .addSection(HomeCard.Layout.AUTOMATED_REPLIES_SECTION(this._state))
+            // Footer
             .setFixedFooter(HomeCard.Layout.FIXED_FOOTER());
 
         return cardBuilder.build();
@@ -73,6 +74,9 @@ HomeCard.Layout = {
     AUTOMATED_REPLIES_SECTION: (state = HomeCard.State) =>
         CardService.newCardSection()
             .addWidget(HomeCard.Widgets.AUTOMATED_REPLIES(state)),
+    USER_SECTION: (state = HomeCard.State) =>
+        CardService.newCardSection()
+            .addWidget(HomeCard.Widgets.USERS_WIDGET(state)),
     FIXED_FOOTER: (state = HomeCard.State) =>
         CardService.newFixedFooter()
             .setPrimaryButton(CardService.newTextButton()
@@ -114,7 +118,17 @@ HomeCard.Widgets = {
         .setTopLabel("Automated Replies")
         .setText("Manage your bot's automated replies")
         .setBottomLabel("Manage your bot's automated replies")
-        .setButton(HomeCard.Buttons.MANAGE_AUTOMATED_REPLIES(state))
+        .setButton(HomeCard.Buttons.MANAGE_AUTOMATED_REPLIES(state)),
+    USERS_WIDGET: (state = HomeCard.State) =>
+        CardService.newDecoratedText()
+            .setWrapText(true)
+            .setTopLabel("Users")
+            .setText("Manage your bot's users")
+            .setBottomLabel("Manage your bot's users")
+            .setButton(CardService.newTextButton()
+                .setText("👥 Users")
+                .setOnClickAction(CardService.newAction()
+                    .setFunctionName("UiEventHandlers.Home.openUsersManagementCard")))
 };
 
 HomeCard.Buttons = {

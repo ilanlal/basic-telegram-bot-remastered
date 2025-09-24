@@ -48,10 +48,7 @@ UiEventHandlers.Home = {
     },
     openBotRepliesCard: (e) => {
         try {
-            return BotControllerFactory.create()
-                .withUserStore(
-                    UserStoreFactory.newUserStoreFactory().build())
-                .build()
+            return AutomationController.create(new UserStore())
                 .navigateToAutomations()
                 .build();
         } catch (error) {
@@ -65,6 +62,18 @@ UiEventHandlers.Home = {
                     new UserStore())
                 .build()
                 .navigateToDeploymentSettings()
+                .build();
+        } catch (error) {
+            return UiEventHandlers.handleError(error);
+        }
+    },
+    openUsersManagementCard: (e) => {
+        try {
+            return BotControllerFactory.create()
+                .withUserStore(
+                    new UserStore())
+                .build()
+                .navigateToUsersManagement()
                 .build();
         } catch (error) {
             return UiEventHandlers.handleError(error);
@@ -157,6 +166,11 @@ UiEventHandlers.Bot = {
 };
 
 UiEventHandlers.AutomationReplies = {
+    back: (e) => {
+        return UiEventHandlers.back(e);
+    },
+    appendSimpleDataReply: (e) => {
+    }
 };
 
 if (typeof module !== 'undefined' && module.exports) {

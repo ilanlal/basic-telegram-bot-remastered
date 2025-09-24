@@ -28,22 +28,6 @@ describe('BotController Tests', () => {
         expect(controller).toBeInstanceOf(BotController);
     });
 
-    // navigateToHome
-    test("navigateToHome should return a CardService.Card", () => {
-        const actionResponse = BotControllerFactory.create()
-            .withUserStore(new UserStore())
-            .build()
-            .navigateToHome()
-        //.build();
-
-        expect(actionResponse).toBeDefined();
-        const res = actionResponse.build().getData();
-        const card = res.cardNavigations[0].pushCard;
-        //console.log(card);
-        expect(card).toBeDefined();
-        expect(card.header.title).toBeDefined();
-    });
-
     // navigateToCreateBot
     test("navigateToCreateBot should return a CardService.Card", () => {
         const actionResponse = controller.navigateToCreateBot();
@@ -64,16 +48,6 @@ describe('BotController Tests', () => {
                         .create())
                 .build();
         }).toThrow("userStore must be an instance of UserStore");
-    });
-
-    // navigateToAutomations
-    test("navigateToAutomations should return a CardService.Card", () => {
-        const actionResponse = controller.navigateToAutomations();
-        expect(actionResponse).toBeDefined();
-        const res = actionResponse.build().getData();
-        const card = res.cardNavigations[0].pushCard;
-        expect(card).toBeDefined();
-        expect(card.header.title).toBeDefined();
     });
 
     // navigateToSettings

@@ -1,8 +1,8 @@
 class DeploymentCreateCard {
-    constructor() {
+    constructor(deploymentId = '', environment = 'production') {
         this._state = {
-            deploymentId: "",
-            environment: "production",
+            deploymentId,
+            environment,
             // Add other state properties as needed
         };
     }

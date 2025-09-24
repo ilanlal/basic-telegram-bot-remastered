@@ -9,10 +9,10 @@ describe('TelegramBot', () => {
 
     test('setDefaultLanguageCode should set the default language code', () => {
         bot.setDefaultLanguageCode('es');
-        expect(bot._default_language_code).toBe('es');
+        expect(bot.getDefaultLanguageCode()).toBe('es');
     });
 
-    test('addResource should add a resource', () => {
+    test('addInfo should add a resource', () => {
         const resource = {
             language_code: 'en',
             description: 'Test description',
@@ -22,9 +22,9 @@ describe('TelegramBot', () => {
             commands: []
         };
 
-        bot.addResource(resource);
-        expect(bot._resources.length).toBe(1);
-        expect(bot._resources[0]).toEqual(resource);
+        bot.addInfo(resource);
+        expect(bot.getInfoList().length).toBe(1);
+        expect(bot.getInfoList()[0]).toEqual(resource);
     });
 });
 
@@ -33,7 +33,7 @@ describe('TelegramBot.Resource', () => {
     let resource;
 
     beforeEach(() => {
-        resource = new TelegramBot.Resource()
+        resource = new TelegramBot.Info()
             .setLanguageCode('en')
             .setDescription('Test description')
             .setShortDescription('Test short description')

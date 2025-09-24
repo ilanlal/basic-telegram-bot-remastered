@@ -68,7 +68,7 @@ class SpreadsheetStore {
     }
 }
 
-SpreadsheetStore.Events ={
+SpreadsheetStore.Events = {
     log: ({ dc, action, chat_id, content, event }) => {
         const sheet = SpreadsheetStore.prototype.getSheetByName(SpreadsheetStore.EVENT_LOG_SHEET_NAME)
             || SpreadsheetStore.prototype.getEventLogSheet_();

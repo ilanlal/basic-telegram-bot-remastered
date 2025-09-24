@@ -35,25 +35,6 @@ class BotController {
         };
     }
 
-    navigateToHome() {
-        const state = {
-            webhookSet: this._webhookSet(),
-            webhookUrl: this._webhookUrl() || "[Not Set]",
-            botTokenSet: this._botTokenSet(),
-            deploymentId: this._deploymentId() || ""
-        };
-
-        return CardService.newActionResponseBuilder()
-            .setNavigation(
-                CardService.newNavigation()
-                    .pushCard(
-                        new HomeCard()
-                            .setState(state)
-                            .build()
-                    )
-            );
-    }
-
     navigateToSettings() {
         return CardService.newActionResponseBuilder()
             .setNavigation(
@@ -81,27 +62,26 @@ class BotController {
             );
     }
 
-    navigateToAutomations() {
-        // Placeholder for future implementation
-        return CardService.newActionResponseBuilder()
-            .setNavigation(
-                CardService.newNavigation()
-                    .pushCard(
-                        new BotAutomationsCard()
-                            .withBotInfo(this._userStore
-                                .getTelegramBotInfo())
-                            .newCardBuilder()
-                            .build()
-                    )
-            );
-    }
-
     navigateToDeploymentSettings() {
         return CardService.newActionResponseBuilder()
             .setNavigation(
                 CardService.newNavigation()
                     .pushCard(
-                        new DeploymentCreateCard()
+                        new DeploymentCreateCard(
+                            this._deploymentId() || '',
+                            'production'
+                        )
+                            .build()
+                    )
+            );
+    }
+
+    navigateToUsersManagement() {
+        return CardService.newActionResponseBuilder()
+            .setNavigation(
+                CardService.newNavigation()
+                    .pushCard(
+                        new UsersManagementCard()
                             .build()
                     )
             );

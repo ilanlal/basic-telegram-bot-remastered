@@ -4,18 +4,17 @@ require('../helpers');
 require('../components/models');
 require('../components/controllers');
 require('../components/views');
-const { AddonHandler } = require('./AddonHandler');
+const { EventHandler } = require('./EventHandler');
 
-describe('AddonHandler', () => {
-    it('should create an instance of AddonHandler', () => {
-        const handler = new AddonHandler();
-        expect(handler).toBeInstanceOf(AddonHandler);
+describe('EventHandler', () => {
+    it('should create an instance of EventHandler', () => {
+        const handler = EventHandler.create();
+        expect(handler).toBeInstanceOf(EventHandler);
     });
 
-    it('should handle onHomePageOpen', () => {
-        const handler = new AddonHandler();
+    it('should handle OpenOnHomeCard', () => {
         const event = {}; // Mock event object
-        const actionResponse = handler.handleOnHomePageOpen(event);
+        const actionResponse = EventHandler.Addon.onOpenHomeCard(event);
         expect(actionResponse).toBeDefined();
         const data = actionResponse.getData();
         expect(data).toBeDefined();
@@ -28,9 +27,8 @@ describe('AddonHandler', () => {
     });
 
     it('should handle onAccountCardOpen', () => {
-        const handler = new AddonHandler();
         const event = {}; // Mock event object
-        const actionResponse = handler.handleOnAccountCardOpen(event);
+        const actionResponse = EventHandler.Addon.onOpenAccountCard(event);
         expect(actionResponse).toBeDefined();
         const data = actionResponse.getData();
         expect(data).toBeDefined();
@@ -44,9 +42,8 @@ describe('AddonHandler', () => {
     });
 
     it('should handle onAboutCardOpen', () => {
-        const handler = new AddonHandler();
         const event = {}; // Mock event object
-        const actionResponse = handler.handleOnAboutCardOpen(event);
+        const actionResponse = EventHandler.Addon.onOpenAboutCard(event);
         expect(actionResponse).toBeDefined();
         const data = actionResponse.getData();
         expect(data).toBeDefined();
