@@ -72,12 +72,12 @@ describe('TelegramBot.Resource', () => {
         };
         resource.addCommand(command1);
         expect(resource.commands.length).toBe(1);
-        expect(resource.commands[0].command).toBe(command1);
+        expect(resource.commands[0]).toEqual(command1);
 
         // add another command
         resource.addCommand(command2);
         expect(resource.commands.length).toBe(2);
-        expect(resource.commands[1].command).toBe(command2);
+        expect(resource.commands[1]).toEqual(command2);
     });
 });
 

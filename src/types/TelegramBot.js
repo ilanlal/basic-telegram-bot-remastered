@@ -16,6 +16,13 @@ class TelegramBot {
             .setShortDescription(resource.short_description)
             .setName(resource.name)
             .setScope(resource.scope));
+
+            if (Array.isArray(resource.commands)) {
+                resource.commands.forEach(command => {
+                    this._resources[this._resources.length - 1].addCommand( command );
+                });
+            }
+
         return this;
     }
 };
@@ -58,7 +65,7 @@ TelegramBot.Resource = class {
     addCommand(command = {}) {
         this.commands.push(
             new TelegramBot.Command()
-                .setCommand(command)
+                .setCommand(command.command)
                 .setDescription(command.description));
         return this;
     }
