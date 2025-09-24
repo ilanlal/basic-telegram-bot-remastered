@@ -1,5 +1,7 @@
 require('@ilanlal/gasmocks');
-require('.');
+require('../services');
+require('../helpers');
+
 const { PostMessageHandler } = require('./PostMessageHandler');
 
 describe('PostMessageHandler', () => {

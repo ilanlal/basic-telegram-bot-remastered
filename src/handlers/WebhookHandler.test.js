@@ -1,6 +1,9 @@
 require('@ilanlal/gasmocks');
-const { WebhookHandler } = require('./WebhookHandler');
+require('../services');
+require('../handlers');
+require('../helpers');
 require('.');
+const { WebhookHandler } = require('./WebhookHandler');
 
 describe('WebhookHandler', () => {
     it('should run doPost message handler', () => {

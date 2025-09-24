@@ -1,14 +1,12 @@
 function doPost(e) {
-    const contents = JSON.parse(e.postData.contents);
-
     try {
+        const contents = JSON.parse(e.postData.contents);
+        // Handle the webhook event
         const webhookHandler = new WebhookHandler();
         return webhookHandler.handlePost(contents);
     } catch (error) {
         throw error;
     }
-
-    return JSON.stringify({ status: 'not_handled' });
 }
 
 if (typeof module !== 'undefined' && module.exports) {
