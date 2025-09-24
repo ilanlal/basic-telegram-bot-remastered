@@ -1,15 +1,10 @@
 class WebhookHandler {
-    constructor() {
-        this.contents = null;
-    }
-
-    handlePost(contents) {
-        this.contents = contents;
+    static handlePost(contents) {
         try {
-            if (this.contents.callback_query) {
+            if (contents.callback_query) {
                 const postCallbackQueryHandler = new PostCallbackQueryHandler();
                 return postCallbackQueryHandler.handlePostCallbackQuery(contents);
-            } else if (this.contents.message) {
+            } else if (contents.message) {
                 const postMessageHandler = new PostMessageHandler();
                 return postMessageHandler.handlePostMessage(contents);
             }
