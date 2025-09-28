@@ -24,11 +24,9 @@ class UiEventHandlers {
 UiEventHandlers.Home = {
     openCreateNewBotCard: (e) => {
         try {
-            return BotControllerFactory.create()
-                .withUserStore(
-                    UserStoreFactory.newUserStoreFactory().build())
-                .build()
-                .navigateToCreateBot()
+            return NavigationController
+                .create(new UserStore())
+                .navigateToNewBotTokenCard()
                 .build();
         } catch (error) {
             return UiEventHandlers.handleError(error);
@@ -36,11 +34,9 @@ UiEventHandlers.Home = {
     },
     openBotSettingsCard: (e) => {
         try {
-            return BotControllerFactory.create()
-                .withUserStore(
-                    UserStoreFactory.newUserStoreFactory().build())
-                .build()
-                .navigateToSettings()
+            return NavigationController
+                .create(new UserStore())
+                .navigateToSettingCard()
                 .build();
         } catch (error) {
             return UiEventHandlers.handleError(error);
@@ -48,8 +44,9 @@ UiEventHandlers.Home = {
     },
     openBotRepliesCard: (e) => {
         try {
-            return AutomationController.create(new UserStore())
-                .navigateToAutomations()
+            return NavigationController
+                .create(new UserStore())
+                .navigateToAutomationCard()
                 .build();
         } catch (error) {
             return UiEventHandlers.handleError(error);
@@ -57,11 +54,9 @@ UiEventHandlers.Home = {
     },
     openDeploymentSettingsCard: (e) => {
         try {
-            return BotControllerFactory.create()
-                .withUserStore(
-                    new UserStore())
-                .build()
-                .navigateToDeploymentSettings()
+            return NavigationController
+                .create(new UserStore())
+                .navigateToNewDeploymentIdCard()
                 .build();
         } catch (error) {
             return UiEventHandlers.handleError(error);
@@ -69,11 +64,9 @@ UiEventHandlers.Home = {
     },
     openUsersManagementCard: (e) => {
         try {
-            return BotControllerFactory.create()
-                .withUserStore(
-                    new UserStore())
-                .build()
-                .navigateToUsersManagement()
+            return NavigationController
+                .create(new UserStore())
+                .navigateToUsersManagementCard()
                 .build();
         } catch (error) {
             return UiEventHandlers.handleError(error);
@@ -85,10 +78,7 @@ UiEventHandlers.Home = {
             if (!formInputs) {
                 throw new Error("Form inputs are missing");
             }
-            return BotControllerFactory.create()
-                .withUserStore(
-                    new UserStore())
-                .build()
+            return BotController.create(this._userStore)
                 .saveDeploymentSettings(e)
                 .build();
         } catch (error) {
@@ -109,12 +99,11 @@ UiEventHandlers.Bot = {
 
             //const client = new TelegramBotClient(botToken);
 
-            return BotControllerFactory.create()
-                .withUserStore(
-                    new UserStore())
-                //.withTelegramBotClient(client)
-                .build()
-                .registerBotToken(botToken)
+            const response = BotController.create(this._userStore)
+                .registerBotToken(botToken);
+
+            return NavigationController.create(this._userStore)
+                .reload()
                 .build();
         } catch (error) {
             return UiEventHandlers.handleError(error);
@@ -127,33 +116,28 @@ UiEventHandlers.Bot = {
                 throw new Error("Form inputs are missing");
             }
 
-            return BotControllerFactory.create()
-                .withUserStore(
-                    UserStoreFactory.newUserStoreFactory().build())
-                .build()
-                .saveBotSettings(e)
-                .build();
+            return BotController.create(this._userStore)
+                .saveBotSettings(e);
         } catch (error) {
-            return UiEventHandlers.handleError(error);
+            throw error;
         }
     },
     setWebhook: (e) => {
         try {
-            return BotControllerFactory.create()
-                .withUserStore(new UserStore())
-                .build()
-                .setWebhook()
+            const response = BotController.create(this._userStore)
+                .setWebhook();
+            
+            return NavigationController.create(this._userStore)
+                .reload()
                 .build();
+                
         } catch (error) {
             return UiEventHandlers.handleError(error);
         }
     },
     deleteWebhook: (e) => {
         try {
-            return BotControllerFactory.create()
-                .withUserStore(
-                    new UserStore())
-                .build()
+            return BotController.create(this._userStore)
                 .deleteWebhook()
                 .build();
         } catch (error) {

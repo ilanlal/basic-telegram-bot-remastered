@@ -1,84 +1,42 @@
 /* eslint-disable no-undef */
 // version: 2.0.0
 class UserStore {
-  static get DEPLOYMENT_ID_KEY() {
-    return 'deployment_id';
-  }
-  static get TELEGRAM_BOT_INFO_KEY() {
-    return "telegram_bot_info";
-  }
-  static get USER_INFO_KEY() {
-    return 'auth_user_info';
-  }
-  static get INDENT_SPACES_KEY() {
-    return 'indent_spaces';
-  }
-  static get USER_LICENSE_KEY() {
-    return 'user_license';
-  }
-  static get LOCALE_KEY() {
-    return 'locale';
-  }
-  static get DEBUG_MODE_KEY() {
-    return 'debug_mode';
-  }
-  static get DEFAULT_LOCALE_CODE() {
-    return 'en';
-  }
-  static get DEFAULT_INDENT_SPACES() {
-    return 2;
-  }
-
   constructor() {
-    this._userDataProvider = PropertiesService.getUserProperties();
+    this._userProperties = PropertiesService
+      .getUserProperties();
   }
 
-  /**
-   * Gets the localization for the user.
-   * This function retrieves the user's localization setting from the user properties.
-   * If no localization is set, it defaults to "en" (English).
-   * @return {string} The user's localization setting, defaulting to "en".
-   */
   getLocalizationCode() {
-    return this._userDataProvider
-      .getProperty(UserStore.LOCALE_KEY) || UserStore.DEFAULT_LOCALE_CODE;
+    return this._userProperties
+      .getProperty(UserStore.Keys.LOCALE)
+      || UserStore.DEFAULTS.LOCALE;
   }
 
-  /**
-   * Sets the localization for the user.
-   * @param {string} locale The locale to set, default is "en".
-   */
-  setLocalizationCode(locale = UserStore.DEFAULT_LOCALE_CODE) {
-    this._userDataProvider.setProperty(UserStore.LOCALE_KEY, locale);
+  setLocalizationCode(locale = UserStore.DEFAULTS.LOCALE) {
+    this._userProperties
+      .setProperty(UserStore.Keys.LOCALE, locale);
     return this;
   }
 
-  /**
-   * Gets the number of spaces for indentation.
-   * @return {number} The number of spaces for indentation, defaulting to DEFAULT_INDENT_SPACES.
-   */
   getIndentSpaces() {
-    const spaces = this._userDataProvider.getProperty(UserStore.INDENT_SPACES_KEY);
+    const spaces = this._userProperties
+      .getProperty(UserStore.Keys.INDENT_SPACES);
 
     if (!spaces) {
-      return this.DEFAULT_INDENT_SPACES; // Return default if not set or invalid
+      return UserStore.DEFAULTS.INDENT_SPACES;
     }
 
     return parseInt(spaces);
   }
 
-  /**
-   * Sets the number of spaces for indentation.
-   * @param {number} value The number of spaces for indentation, default is DEFAULT_INDENT_SPACES=2 constant.
-   */
-  setIndentSpaces(value = UserStore.DEFAULT_INDENT_SPACES) {
-    this._userDataProvider.setProperty(UserStore.INDENT_SPACES_KEY, value);
+  setIndentSpaces(value = UserStore.DEFAULTS.INDENT_SPACES) {
+    this._userProperties.setProperty(UserStore.Keys.INDENT_SPACES, value);
     return this;
   }
 
   getUserInfo() {
-    const data = this._userDataProvider
-      .getProperty(UserStore.USER_INFO_KEY);
+    const data = this._userProperties
+      .getProperty(UserStore.Keys.USER_INFO);
 
     try {
       return AuthUser.fromJsonString(data);
@@ -88,21 +46,14 @@ class UserStore {
   }
 
   setUserInfo(userInfo) {
-    this._userDataProvider.setProperty(
-      UserStore.USER_INFO_KEY, userInfo?.toJsonString(userInfo));
+    this._userProperties.setProperty(
+      UserStore.Keys.USER_INFO, userInfo?.toJsonString(userInfo));
     return this;
   }
 
-  /**
-   * Gets the license information for the user.
-   * This function retrieves the user's license information from the user properties.
-   *
-   * @return {UserLicense | undefined} The user's license information, or undefined if not set.
-   * @see UserLicense
-   */
   getUserLicense() {
-    const data = this._userDataProvider
-      .getProperty(UserStore.USER_LICENSE_KEY);
+    const data = this._userProperties
+      .getProperty(UserStore.Keys.USER_LICENSE);
 
     if (!data
       || data === "undefined"
@@ -115,10 +66,6 @@ class UserStore {
     return UserLicense.fromJsonString(data);
   }
 
-  /**
-   * Sets the license information for the user.
-   * @param {UserLicense} license The license information to set.
-   */
   setUserLicense(license) {
     if (!(license instanceof UserLicense) && !(license === undefined)) {
       throw new Error("Invalid license object provided. Must be an instance of UserLicense or undefined.");
@@ -130,27 +77,32 @@ class UserStore {
 
     const licenseJson = license.toJsonString();
 
-    this._userDataProvider.setProperty(UserStore.USER_LICENSE_KEY, licenseJson);
+    this._userProperties
+      .setProperty(UserStore.Keys.USER_LICENSE, licenseJson);
     return this;
   }
 
   clearUserLicense() {
-    this._userDataProvider.deleteProperty(UserStore.USER_LICENSE_KEY);
+    this._userProperties
+      .deleteProperty(UserStore.Keys.USER_LICENSE);
     return this;
   }
 
   isInDebugMode() {
-    const debugMode = this._userDataProvider.getProperty(UserStore.DEBUG_MODE_KEY);
+    const debugMode = this._userProperties
+      .getProperty(UserStore.Keys.DEBUG_MODE);
     return debugMode === 'true';
   }
 
   setDebugMode(value = false) {
-    this._userDataProvider.setProperty(UserStore.DEBUG_MODE_KEY, value);
+    this._userProperties
+      .setProperty(UserStore.Keys.DEBUG_MODE, value);
     return this;
   }
 
   getTelegramBotInfo() {
-    const data = this._userDataProvider.getProperty(UserStore.TELEGRAM_BOT_INFO_KEY);
+    const data = this._userProperties
+      .getProperty(UserStore.Keys.TELEGRAM_BOT_INFO);
 
     if (!data
       || data === "undefined"
@@ -169,40 +121,69 @@ class UserStore {
       throw new Error("Invalid TelegramBotInfo object provided. Must be an instance of TelegramBotInfo.");
     }
 
-    this._userDataProvider.setProperty(
-      UserStore.TELEGRAM_BOT_INFO_KEY,
+    this._userProperties.setProperty(
+      UserStore.Keys.TELEGRAM_BOT_INFO,
       botInfo.toJsonString());
     return this;
   }
 
   clearTelegramBotInfo() {
-    this._userDataProvider.deleteProperty(UserStore.TELEGRAM_BOT_INFO_KEY);
+    this._userProperties
+      .deleteProperty(UserStore.Keys.TELEGRAM_BOT_INFO);
     return this;
   }
 
   getDeploymentId() {
-    const deploymentId = this._userDataProvider.getProperty(UserStore.DEPLOYMENT_ID_KEY);
+    const deploymentId = this._userProperties
+      .getProperty(UserStore.Keys.DEPLOYMENT_ID);
     return deploymentId;
   }
 
   setDeploymentId(deploymentId) {
-    this._userDataProvider.setProperty(UserStore.DEPLOYMENT_ID_KEY, deploymentId);
+    this._userProperties
+      .setProperty(UserStore.Keys.DEPLOYMENT_ID, deploymentId);
     return this;
   }
 }
 
 class UserStoreFactory {
   constructor() {
+    this._userStore = null;
   }
 
-  build() {
-    return new UserStore();
+  get current() {
+    if (!this._userStore) {
+      this._userStore = new UserStore();
+    }
+    return this._userStore;
   }
 
-  static newUserStoreFactory() {
+  get next() {
+    this._userStore = new UserStore();
+    return this._userStore;
+  }
+
+  static create() {
     return new UserStoreFactory();
   }
 }
+UserStore.DEFAULTS = {
+  LOCALE: 'en',
+  INDENT_SPACES: 2,
+  DEBUG_MODE: false
+};
+UserStore.Keys = {
+  BOT_TOKEN: 'bot_token',
+  DEPLOYMENT_ID: 'deployment_id',
+  TELEGRAM_BOT_INFO: 'telegram_bot_info',
+  USER_INFO: 'auth_user_info',
+  INDENT_SPACES: 'indent_spaces',
+  USER_LICENSE: 'user_license',
+  LOCALE: 'locale',
+  DEBUG_MODE: 'debug_mode'
+};
+
+UserStoreFactory.instance = UserStoreFactory.create();
 
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = {

@@ -1,20 +1,15 @@
-class DeploymentCreateCard {
-    constructor(deploymentId = '', environment = 'production') {
-        this._state = {
-            deploymentId,
-            environment,
-            // Add other state properties as needed
-        };
+class NewDeploymentIdCard {
+    constructor(model) {
+        this._model = model || { deploymentId: '' }; 
     }
 
-    setState(state) {
-        this._state = { ...this._state, ...state };
-        return this;
+    static create(model = {}) {
+        return new NewDeploymentIdCard(model);
     }
 
     build() {
         const cardBuilder = CardService.newCardBuilder()
-            .setName("deploymentCreateCard")
+            .setName("NewDeploymentIdCard")
             .setHeader(CardService.newCardHeader()
                 .setTitle("Setup Deployment")
                 .setSubtitle("Set up a deployment 'id' for your bot"))
@@ -22,7 +17,7 @@ class DeploymentCreateCard {
                 .addWidget(CardService.newTextInput()
                     .setFieldName("deploymentId")
                     .setTitle("Deployment ID")
-                    .setValue(this._state.deploymentId)))
+                    .setValue(this._model.deploymentId)))
             .setFixedFooter(CardService.newFixedFooter()
                 .setPrimaryButton(CardService.newTextButton()
                     .setText(" 💾 Save")
@@ -42,5 +37,5 @@ class DeploymentCreateCard {
 }// --- IGNORE (for Node.js support) --- //
 
 if (typeof module !== "undefined" && module.exports) {
-    module.exports = { DeploymentCreateCard };
+    module.exports = { NewDeploymentIdCard };
 }

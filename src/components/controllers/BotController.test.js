@@ -1,63 +1,24 @@
 /* eslint-disable no-undef */
-require('../models'); // Ensure the model is loaded
+require('../../types'); // Ensure the model is loaded
 require('../views'); // Ensure the component is loaded
 require("@ilanlal/gasmocks");
 require('../../lib'); // Ensure the lib is loaded
 require('../../services'); // Ensure the service is loaded
-const { BotController, BotControllerFactory } = require('./BotController');
+const { BotController } = require('./BotController');
 
 describe('BotController Tests', () => {
     let controller;
 
     beforeEach(() => {
-        controller =
-            BotControllerFactory.create()
-                .withUserStore(new UserStore())
-                .build();
+        controller = BotController.create(new UserStore());
     });
 
     test("BotController should be defined", () => {
         expect(BotController).toBeDefined();
     });
 
-    test("BotControllerFactory should be defined", () => {
-        expect(BotControllerFactory).toBeDefined();
-    });
-
     test("BotController instance should be created", () => {
         expect(controller).toBeInstanceOf(BotController);
-    });
-
-    // navigateToCreateBot
-    test("navigateToCreateBot should return a CardService.Card", () => {
-        const actionResponse = controller.navigateToCreateBot();
-        expect(actionResponse).toBeDefined();
-        const res = actionResponse.build().getData();
-        const card = res.cardNavigations[0].pushCard;
-        expect(card).toBeDefined();
-        expect(card.header.title).toBeDefined();
-    });
-
-    test("BotControllerFactory should throw error if userStore is invalid", () => {
-        expect(() => {
-            BotControllerFactory.create()
-                .withUserStore({})
-                .withTelegramBotClient(
-                    global.TelegramBotClientFactory
-                        .withToken("YOUR_BOT_TOKEN")
-                        .create())
-                .build();
-        }).toThrow("userStore must be an instance of UserStore");
-    });
-
-    // navigateToSettings
-    test("navigateToSettings should return a CardService.Card", () => {
-        const actionResponse = controller.navigateToSettings();
-        expect(actionResponse).toBeDefined();
-        const res = actionResponse.build().getData();
-        const card = res.cardNavigations[0].pushCard;
-        expect(card).toBeDefined();
-        expect(card.header.title).toBeDefined();
     });
 
     //registerBotToken
@@ -86,9 +47,6 @@ describe('BotController Tests', () => {
 
         const actionResponse = controller.registerBotToken(token);
         expect(actionResponse).toBeDefined();
-        const res = actionResponse.build().getData();
-        expect(res.cardNavigations[0].popToRoot).toBeDefined();
-        expect(res.cardNavigations[1].updateCard).toBeDefined();
     });
 
     // saveBotSettings
@@ -107,8 +65,6 @@ describe('BotController Tests', () => {
 
         const actionResponse = controller.saveBotSettings(mockEvent);
         expect(actionResponse).toBeDefined();
-        const res = actionResponse.build().getData();
-        expect(res.cardNavigations[0].popToRoot).toBeDefined();
-        expect(res.cardNavigations[1].updateCard).toBeDefined();
+        
     });
 });

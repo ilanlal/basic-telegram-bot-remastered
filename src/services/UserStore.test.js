@@ -1,23 +1,13 @@
-/* eslint-disable no-undef */
-require('../components/models'); // Ensure the model is loaded
 require("@ilanlal/gasmocks");
+require('../types'); // Ensure the model is loaded
 const { UserStore, UserStoreFactory } = require('./UserStore');
 
 describe('UserStore Service Tests', () => {
+    const factory = UserStoreFactory.create();
     let userStore;
 
     beforeEach(() => {
-        userStore = UserStoreFactory.newUserStoreFactory()
-            .build();
-    });
-
-    // Add your test cases here
-    test("UserStore should be defined", () => {
-        expect(UserStore).toBeDefined();
-    });
-
-    test("UserStoreFactory should be defined", () => {
-        expect(UserStoreFactory).toBeDefined();
+        userStore = factory.next;
     });
 
     test("UserStore instance should be created", () => {
@@ -25,7 +15,7 @@ describe('UserStore Service Tests', () => {
     });
 
     test("UserStore should set and get TelegramBotInfo correctly", () => {
-        const botInfo = new TelegramBotInfo()
+        const botInfo = new global.TelegramBotInfo()
             .setBotToken('test_bot_token')
             .setCreatedOn(new Date())
             .setLastSync(new Date())

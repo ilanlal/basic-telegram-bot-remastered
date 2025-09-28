@@ -1,6 +1,5 @@
 require('@ilanlal/gasmocks');
 require('../services');
-require('../helpers');
 
 const { PostMessageHandler } = require('./PostMessageHandler');
 
@@ -23,7 +22,7 @@ describe('PostMessageHandler', () => {
         };
         let response = handler.handlePostMessage(content);
         // check if user is added to Users sheet
-        let user = SpreadsheetStore.Users.getUserById(content.message.from.id);
+        let user = SpreadsheetService.Users.getUserById(content.message.from.id);
         expect(user).not.toBeNull();
         expect(user[2]).toBe(content.message.from.username);
         expect(user[3]).toBe(content.message.from.first_name);
@@ -33,7 +32,7 @@ describe('PostMessageHandler', () => {
 
         // call again to verify no duplicate user is added
         response = handler.handlePostMessage(content);
-        let usersSheet = SpreadsheetStore.Users.getUsersSheet();
+        let usersSheet = SpreadsheetService.Users.getUsersSheet();
         let data = usersSheet.getDataRange().getValues();
         let userCount = data.filter(row => row[1] === content.message.from.id).length;
         expect(userCount).toBe(1);

@@ -4,8 +4,11 @@ const AboutCard = require("./AboutCard");
 describe("Test AboutCard", () => {
     let card;
     beforeEach(() => {
-        card = new AboutCard()
-            .withPackageInfo({ name: "Test Package", version: "1.0.0", build: "100" });
+        card = AboutCard.create({ 
+            packageInfo: {
+                name: "Test Package", version: "1.0.0", build: "100"
+            }
+        });
     });
     test("should create an AboutCard instance", () => {
         expect(card).toBeInstanceOf(AboutCard);

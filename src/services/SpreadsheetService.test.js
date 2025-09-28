@@ -1,33 +1,38 @@
 require('@ilanlal/gasmocks');
-const { SpreadsheetStore } = require('./SpreadsheetStore');
+const { SpreadsheetService } = require('./SpreadsheetService');
 
-describe('SpreadsheetStore', () => {
+describe('SpreadsheetService', () => {
     let store;
 
     beforeEach(() => {
         SpreadsheetStubConfiguration.reset();
-        store = SpreadsheetStore.create(SpreadsheetApp.getActiveSpreadsheet());
+        store = SpreadsheetService.create(
+            SpreadsheetApp.getActiveSpreadsheet());
     });
 
     test('should initialize with active spreadsheet', () => {
-        expect(store.getActiveSpreadsheet()).toBe(Spreadsheet);
+        expect(store.getActiveSpreadsheet()).toBe(
+            SpreadsheetApp.getActiveSpreadsheet());
     });
 
     // getActiveSheet
     test('should return active sheet', () => {
         expect(store.getActiveSheet()).toBe(
-            SpreadsheetApp.getActiveSpreadsheet().getActiveSheet());
+            SpreadsheetApp.getActiveSpreadsheet()
+            .getActiveSheet());
     });
 
     // getSheetByName
     test('should return sheet by name', () => {
         const sheet = store.getSheetByName('Sheet2');
-        expect(sheet).toBe(SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Sheet2'));
+        expect(sheet).toBe(SpreadsheetApp
+            .getActiveSpreadsheet()
+            .getSheetByName('Sheet2'));
     });
 
     test('should throw error if no active spreadsheet provided', () => {
         expect(() => {
-            SpreadsheetStore.create(null, 'Test Sheet');
+            SpreadsheetService.create(null, 'Test Sheet');
         }).toThrow("No active spreadsheet provided");
     });
 

@@ -1,6 +1,6 @@
 class PostMessageHandler {
     constructor() {
-        this._spreadsheetStore = SpreadsheetStore.create(
+        this._spreadsheetService = SpreadsheetService.create(
             SpreadsheetApp.getActiveSpreadsheet());
     }
 
@@ -40,12 +40,12 @@ class PostMessageHandler {
             throw new Error('Invalid message format: missing from.id');
         }
 
-        const user = SpreadsheetStore.Users.getUserById(message.from.id);
+        const user = SpreadsheetService.Users.getUserById(message.from.id);
         if (user) {
             return user;
         }
 
-        return SpreadsheetStore.Users.addUser(
+        return SpreadsheetService.Users.addUser(
             message.from.id,
             {
                 username: message.from.username,

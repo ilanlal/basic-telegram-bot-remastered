@@ -1,14 +1,12 @@
-const { co } = require("co");
-
-require("../models");
 require("@ilanlal/gasmocks");
-const AccountCard = require("./AccountCard");
+require("../models");
 
+const AccountCard = require("./AccountCard");
 
 describe("Test AccountCard", () => {
     let card;
     beforeEach(() => {
-        card = new AccountCard();
+        card = AccountCard.create({ FREE_ACTIVATION_DAYS: 14, userInfo: null });
     });
 
     test("should create an AccountCard instance", () => {

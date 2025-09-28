@@ -4,32 +4,26 @@ class AccountCard {
         return 'accountCard';
     }
 
-    constructor() {
-        this._models = {
-            userInfo: new AuthUser(),
-            FREE_ACTIVATION_DAYS: 0
-        };
+    constructor(model) {
+        this._model = model || { FREE_ACTIVATION_DAYS: 7, userInfo: null };
     }
 
-    withFreeActivationDays(days) {
-        this._models.FREE_ACTIVATION_DAYS = days;
-        return this;
-    }
-
-    withUserInfo(userInfo) {
-        this._models.userInfo = userInfo;
-        return this;
+    static create(model = {
+        FREE_ACTIVATION_DAYS: 7,
+        userInfo: null
+    }) {
+        return new AccountCard(model);
     }
 
     isPremium() {
-        if (!(this._models.userInfo && this._models.userInfo instanceof AuthUser)) {
+        if (!(this._model.userInfo && this._model.userInfo instanceof AuthUser)) {
             return false;
         }
-        return this._models.userInfo?.getUserLicense()?.isActive?.() || false;
+        return this._model.userInfo?.getUserLicense()?.isActive?.() || false;
     }
 
     build() {
-        const userInfo = this._models.userInfo;
+        const userInfo = this._model.userInfo;
         const isPremium = this.isPremium();
         const header = CardService.newCardHeader()
             .setTitle("Account Information")
@@ -42,7 +36,7 @@ class AccountCard {
             .addWidget(CardService.newTextParagraph()
                 .setText(`Hello`))
             .addWidget(CardService.newTextParagraph()
-                .setText(`You have ${this._models.FREE_ACTIVATION_DAYS} days of free activation.`))
+                .setText(`You have ${this._model.FREE_ACTIVATION_DAYS} days of free activation.`))
             .addWidget(CardService.newTextParagraph()
                 .setText(`Account Type: ${isPremium ? "Premium" : "Free"}`));
 

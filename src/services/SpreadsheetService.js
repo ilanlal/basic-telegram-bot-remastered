@@ -1,5 +1,5 @@
 // version: 1.2.0
-class SpreadsheetStore {
+class SpreadsheetService {
     static get EVENT_LOG_SHEET_NAME() {
         return "Event Logs";
     }
@@ -40,7 +40,7 @@ class SpreadsheetStore {
         const sheet = activeSpreadsheet.getSheetByName(sheetName)
             || activeSpreadsheet.getActiveSheet();
 
-        return new SpreadsheetStore(activeSpreadsheet)
+        return new SpreadsheetService(activeSpreadsheet)
             .setActiveSheet(sheet);
     }
 
@@ -68,23 +68,23 @@ class SpreadsheetStore {
     }
 }
 
-SpreadsheetStore.Events = {
+SpreadsheetService.Events = {
     log: ({ dc, action, chat_id, content, event }) => {
-        const sheet = SpreadsheetStore.prototype.getSheetByName(SpreadsheetStore.EVENT_LOG_SHEET_NAME)
-            || SpreadsheetStore.prototype.getEventLogSheet_();
+        const sheet = SpreadsheetService.prototype.getSheetByName(SpreadsheetService.EVENT_LOG_SHEET_NAME)
+            || SpreadsheetService.prototype.getEventLogSheet_();
         const datestring = new Date().toISOString();
         sheet.appendRow([datestring, dc, action, chat_id, content, event]);
     },
     initialize: (activeSpreadsheet) => {
-        let sheet = activeSpreadsheet.getSheetByName(SpreadsheetStore.EVENT_LOG_SHEET_NAME);
+        let sheet = activeSpreadsheet.getSheetByName(SpreadsheetService.EVENT_LOG_SHEET_NAME);
         if (!sheet) {
-            sheet = activeSpreadsheet.insertSheet(SpreadsheetStore.EVENT_LOG_SHEET_NAME, 0);
+            sheet = activeSpreadsheet.insertSheet(SpreadsheetService.EVENT_LOG_SHEET_NAME, 0);
             sheet.appendRow(['Created On', 'DC', 'Action', 'chat_id', 'content', 'event']);
         }
     }
 }
 
-SpreadsheetStore.Replies = {
+SpreadsheetService.Replies = {
     BASE_REPLIES: () => [
         ['_notdefined', JSON.stringify({
             action: 'sendMessage',
@@ -129,17 +129,17 @@ SpreadsheetStore.Replies = {
     ],
     initialize: (activeSpreadsheet, language_code) => {
         let sheet = activeSpreadsheet
-            .getSheetByName(SpreadsheetStore.REPLIES_SHEET_NAME);
+            .getSheetByName(SpreadsheetService.REPLIES_SHEET_NAME);
 
         if (!sheet) {
             sheet = activeSpreadsheet
-                .insertSheet(SpreadsheetStore.REPLIES_SHEET_NAME);
+                .insertSheet(SpreadsheetService.REPLIES_SHEET_NAME);
             sheet.appendRow(['key', language_code]);
         }
     },
     findLanguageColumnIndex: (language_code) => {
         const sheet = SpreadsheetApp.getActiveSpreadsheet()
-            .getSheetByName(SpreadsheetStore.REPLIES_SHEET_NAME);
+            .getSheetByName(SpreadsheetService.REPLIES_SHEET_NAME);
         const range = sheet.getDataRange();
         const values = range.getValues();
 
@@ -152,17 +152,17 @@ SpreadsheetStore.Replies = {
     },
     addDemoData: () => {
         const sheet = SpreadsheetApp.getActiveSpreadsheet()
-            .getSheetByName(SpreadsheetStore.REPLIES_SHEET_NAME);
+            .getSheetByName(SpreadsheetService.REPLIES_SHEET_NAME);
 
         if (!sheet) {
             throw new Error("Replies sheet does not exist. Please initialize first.");
         }
-        const baseReplies = SpreadsheetStore.Replies.BASE_REPLIES();
+        const baseReplies = SpreadsheetService.Replies.BASE_REPLIES();
         baseReplies.forEach(row => sheet.appendRow(row));
     },
     getReplyByKey: (key, language_code) => {
         const sheet = SpreadsheetApp.getActiveSpreadsheet()
-            .getSheetByName(SpreadsheetStore.REPLIES_SHEET_NAME);
+            .getSheetByName(SpreadsheetService.REPLIES_SHEET_NAME);
         const range = sheet.getDataRange();
         const values = range.getValues();
 
@@ -175,9 +175,9 @@ SpreadsheetStore.Replies = {
     }
 }
 
-SpreadsheetStore.Users = {
+SpreadsheetService.Users = {
     addUser: (chat_id, data) => {
-        const sheet = SpreadsheetStore.Users.getUsersSheet();
+        const sheet = SpreadsheetService.Users.getUsersSheet();
         const datestring = new Date().toISOString();
 
         const user = [datestring, chat_id, data.username, data.first_name, data.last_name, data.language_code, data];
@@ -186,7 +186,7 @@ SpreadsheetStore.Users = {
         return user;
     },
     getUserById: (id) => {
-        const range = SpreadsheetStore.Users.getUsersSheet().getDataRange();
+        const range = SpreadsheetService.Users.getUsersSheet().getDataRange();
         const values = range.getValues();
         for (var row = 0; row < values.length; row++) {
             if (values[row][1] == id) { //chat_id
@@ -197,7 +197,7 @@ SpreadsheetStore.Users = {
     },
     getUsersSheet: () => {
         let sheet = SpreadsheetApp.getActiveSpreadsheet()
-            .getSheetByName(SpreadsheetStore.USERS_SHEET_NAME);
+            .getSheetByName(SpreadsheetService.USERS_SHEET_NAME);
 
         if (!sheet) {
             // Create the sheet if it doesn't exist
@@ -213,5 +213,5 @@ SpreadsheetStore.Users = {
 }
 
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { SpreadsheetStore };
+    module.exports = { SpreadsheetService };
 }

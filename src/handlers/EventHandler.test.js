@@ -1,18 +1,36 @@
 require('@ilanlal/gasmocks');
+require('../lib');
 require('../services');
-require('../helpers');
-require('../components/models');
+require('../types');
 require('../components/controllers');
 require('../components/views');
+require('../components/models');
 const { EventHandler } = require('./EventHandler');
 
 describe('EventHandler', () => {
     it('should create an instance of EventHandler', () => {
-        const handler = EventHandler.create();
+        const handler = new EventHandler();
         expect(handler).toBeInstanceOf(EventHandler);
     });
 
     it('should handle OpenOnHomeCard', () => {
+        /* @see https://core.telegram.org/bots/api#getwebhookinfo */
+        const contentText = `{
+            "result": {
+                "url": "https://example.com/webhook",
+                "has_custom_certificate": false,
+                "pending_update_count": 0,
+                "ip_address": "192.0.2.1",
+                "last_error_date": 0,
+                "last_error_message": "",
+                "max_connections": 40,
+                "allowed_updates": []
+            }
+        }`;
+
+        UrlFetchAppStubConfiguration.when(`https://api.telegram.org/bot[YOUR_BOT_TOKEN]/getWebhookInfo`)
+            .return(new HttpResponse().setContentText(contentText));
+            
         const event = {}; // Mock event object
         const actionResponse = EventHandler.Addon.onOpenHomeCard(event);
         expect(actionResponse).toBeDefined();

@@ -1,10 +1,11 @@
 require("@ilanlal/gasmocks");
+require('../types');
 require("../lib");
-const { UiEventHandlers } = require('./UiEventHandlers');
-require('../components/controllers');
 require('../services');
+require('../components/controllers');
 require('../components/views');
 require('../components/models');
+const { UiEventHandlers } = require('./UiEventHandlers');
 
 describe('UiEventHandlers.Home Tests', () => {
     test('openCreateNewBotCard should return a CardService.ActionResponse', () => {

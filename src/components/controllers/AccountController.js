@@ -1,32 +1,15 @@
 /* eslint-disable no-undef */
 class AccountController {
-    get userStore() {
-        return this._service.userStore;
-    }
-
     getUserInfo() {
-        return this._service.userStore?.getUserInfo() || {};
+        return this._userStore?.getUserInfo() || {};
     }
 
-    constructor(userStore = null) {
-        this._service = {
-            userStore: userStore
-        }
+    constructor(userStore) {
+        this._userStore = userStore;
     }
 
-    /**
-     * Creates a card for account management.
-     * @returns {CardService.ActionResponse}
-     */
-    navigateToHome() {
-        return CardService.newActionResponseBuilder()
-            .setNavigation(
-                CardService.newNavigation()
-                    .pushCard(new AccountCard()
-                        .withUserInfo(this.getUserInfo())
-                        .build()
-                    )
-            );
+    static create(userStore = new UserStore()) {
+        return new AccountController(userStore);
     }
 
     activatePremium(e) {
@@ -44,7 +27,7 @@ class AccountController {
             .setExpirationDate(expirDate)
             .setAmount(amount);
 
-        this._service.userStore.setUserLicense(newUserLicense);
+        this._userStore.setUserLicense(newUserLicense);
 
         // navigate to root
         return CardService.newActionResponseBuilder()
@@ -58,7 +41,7 @@ class AccountController {
     }
 
     revokePremium(e) {
-        this.userStore.clearUserLicense();
+        this._userStore.clearUserLicense();
 
         // navigate to root
         return CardService
@@ -85,25 +68,6 @@ class AccountController {
     }
 }
 
-class AccountControllerFactory {
-    constructor() {
-        this._userStore = null;
-    }
-
-    withUserStore(userStore) {
-        this._userStore = userStore;
-        return this;
-    }
-
-    build() {
-        return new AccountController(this._userStore);
-    }
-
-    static create() {
-        return new AccountControllerFactory();
-    }
-}
-
 if (typeof module !== "undefined" && module.exports) {
-    module.exports = { AccountController, AccountControllerFactory };
+    module.exports = { AccountController };
 }

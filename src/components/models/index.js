@@ -1,15 +1,8 @@
-const { AuthUser } = require('./AuthUser');
-const { TelegramBotInfo } = require('./TelegramBotInfo');
-const { TelegramUser } = require('./TelegramUser');
-const { UserLicense } = require('./UserLicense');
-const { ReportItem } = require('./ReportItem');
-const { ValidationReport, ValidationReportBuilder } = require('./ValidationReport');
+const { Model } = require('./Model');
+const { AutomationReply } = require('./AutomationReply');
+const { SetupFlow } = require('./SetupFlow');
 
-global.AuthUser = AuthUser;
-global.TelegramUser = TelegramUser;
-global.TelegramBotInfo = TelegramBotInfo;
-global.UserLicense = UserLicense;
-global.ReportItem = ReportItem;
-global.ValidationReport = ValidationReport;
-global.ValidationReportBuilder = ValidationReportBuilder;
+global.Model = Model;
+global.AutomationReply = AutomationReply;
+global.SetupFlow = SetupFlow;
 

@@ -6,17 +6,17 @@ class UsersManagementCard {
         users: [],
     };
 
-    constructor() {
+    constructor(model) {
+        this._model = model || {};
         this._state = {
             users: [],
         };
     }
 
-    setState(state) {
-        this._state = { ...this._state, ...state };
-        return this;
+    static create(model) {
+        return new UsersManagementCard(model);
     }
-
+    
     build() {
         const cardBuilder = CardService.newCardBuilder()
             .setName("usersManagementCard")

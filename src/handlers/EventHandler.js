@@ -1,95 +1,111 @@
-class EventHandler {
+class EventHandler {    
+    get userStore() {
+        if (!this._userStore) {
+            this._userStore = UserStoreFactory.create().current;
+        }
+        return this._userStore;
+    }
+
     constructor() {
-        this._userStore = new UserStore();
+        this._userStore = null;
+    }
+};
+
+EventHandler.Addon = {
+    onOpenHomeCard: (e) => {
+        return new EventHandler.AddonWrapper(EventHandler.prototype.userStore)
+                .handleOpenHomeCard(e);
+    },
+    onOpenAccountCard: (e) => {
+        return new EventHandler.AddonWrapper(EventHandler.prototype.userStore)
+            .handleOpenAccountCard(e);
+    },
+    onOpenAboutCard: (e) => {
+        return new EventHandler.AddonWrapper(EventHandler.prototype.userStore)
+            .handleOpenAboutCard(e);
+    },
+    onActivatePremiumClicked: (e) => {
+        return new EventHandler.AddonWrapper(EventHandler.prototype.userStore)
+            .handleActivatePremiumClicked(e);
+    },
+    onRevokeLicenseClicked: (e) => {
+        return new EventHandler.AddonWrapper(EventHandler.prototype.userStore)
+            .handleRevokeLicenseClicked(e);
+    }
+}
+EventHandler.AddonWrapper = class {
+    constructor(userStore) {
+        if (!(userStore instanceof UserStore)) {
+            throw new Error("userStore must be an instance of UserStore");
+        }
+        this._userStore = userStore;
     }
 
-    handleOnOpenHomeCard(e) {
-        return BotControllerFactory.create()
-            .withUserStore(this._userStore)
-            .build()
-            .navigateToHome()
-            .build();
-    }
-
-    handleOnOpenAccountCard(e) {
-        return AccountControllerFactory.create()
-            .withUserStore(this._userStore)
-            .build()
-            .navigateToHome()
-            .build();
-    }
-
-    handleOnOpenAboutCard(e) {
-        return AboutControllerFactory.create()
-            .withPackageInfo({
-                name: "My Add-on",
-                version: "1.0.0",
-                author: "Your Name",
-                build: "1.0.0",
-                description: "This is my add-on"
-            })
-            .build()
-            .navigateHome()
-            .build();
-    }
-
-    handleOnActivatePremium(e) {
+    handleOpenHomeCard(e) {
         try {
-            return AccountControllerFactory.create()
-                .withUserStore(
-                    this._userStore)
-                .build()
+            return NavigationController.create(this._userStore)
+                .navigateToHomeCard()
+                .build();
+        } catch (error) {
+            return this.handleError(error)
+                .build();
+        }
+    }
+
+    handleOpenAccountCard(e) {
+        try {
+            return NavigationController.create(this._userStore)
+                .navigateToAccountCard()
+                .build();
+        } catch (error) {
+            return this.handleError(error)
+                .build();
+        }
+    }
+
+    handleOpenAboutCard(e) {
+        try {
+            return NavigationController.create(this._userStore)
+                .navigateToAboutCard()
+                .build();
+        } catch (error) {
+            return this.handleError(error)
+                .build();
+        }
+    }
+
+    handleActivatePremiumClicked(e) {
+        try {
+            return AccountController.create(this._userStore)
                 .activatePremium(e)
                 .build();
         } catch (error) {
-            console.error("Error in onActivatePremium:", error);
-            return CardService.newActionResponseBuilder()
-                .setNotification(
-                    CardService.newNotification()
-                        .setText(
-                            error.toString()))
+            return this.handleError(error)
                 .build();
         }
     }
 
-    handleOnRevokeLicense(e) {
+    handleRevokeLicenseClicked(e) {
         try {
-            return AccountControllerFactory.create()
-                .withUserStore(
-                    this._userStore)
-                .build()
+            return AccountController.create(this._userStore)
                 .revokePremium(e)
                 .build();
         } catch (error) {
-            console.error("Error in onRevokeLicense:", error);
-            return CardService.newActionResponseBuilder()
-                .setNotification(
-                    CardService.newNotification()
-                        .setText(
-                            error.toString()))
+            return this.handleError(error)
                 .build();
         }
     }
 
-    withUserStore(userStore) {
-        this._userStore = userStore;
-        return this;
+    handleError(error) {
+        // Show an error message to the user
+        return CardService.newActionResponseBuilder()
+            .setNotification(
+                CardService.newNotification()
+                    .setText(
+                        error.toString()));
     }
-
-    static create() {
-        return new EventHandler();
-    }
-}
-
-EventHandler.Addon = {
-    onOpenHomeCard: (e) => RootController.create(new UserStore())
-        .navigateToHome()
-        .build(),
-    onOpenAccountCard: (e) => EventHandler.create().handleOnOpenAccountCard(e),
-    onOpenAboutCard: (e) => EventHandler.create().handleOnOpenAboutCard(e),
-    onActivatePremium: (e) => EventHandler.create().handleOnActivatePremium(e),
-    onRevokeLicense: (e) => EventHandler.create().handleOnRevokeLicense(e),
 };
+
 
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = {

@@ -4,31 +4,21 @@ class BotAutomationsCard {
         return 'botAutomationsCard';
     }
 
-    withBotInfo(botInfo) {
-        this._data.botInfo = botInfo;
-        return this;
+    constructor(model) {
+        this._model = model || {};
     }
 
-    addReply(reply) {
-        if (!reply || typeof reply !== 'object') {
-            throw new Error("Invalid reply");
-        }
-        this._data.replies.push(reply);
-        return this;
+    static create(model = {}) {
+        return new BotAutomationsCard(model);
     }
 
-    constructor() {
-        this._data = {
-            replies: []
-        };
-    }
-
-    newCardBuilder() {
+    build() {
         return CardService.newCardBuilder()
             .setName(BotAutomationsCard.CARD_NAME)
             .setHeader(this._header())
             .addSection(this._body())
-            .setFixedFooter(this._footer());
+            .setFixedFooter(this._footer())
+            .build();
     }
 
     _header() {

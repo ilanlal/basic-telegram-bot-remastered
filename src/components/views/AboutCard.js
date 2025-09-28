@@ -5,26 +5,29 @@ class AboutCard {
     return 'aboutCard';
   }
 
-  constructor() {
-    this._models = {
-      packageInfo: null,
-    };
+  constructor(model) {
+    this._model = model;
 
     this._view = {
       header: () => CardService.newCardHeader()
-        .setTitle(this._models.packageInfo.name)
-        .setSubtitle(this._models.packageInfo.version)
+        .setTitle(this._model.packageInfo.name || 'About')
+        .setSubtitle(this._model.packageInfo.version || '')
         .setImageStyle(CardService.ImageStyle.SQUARE)
         .setImageUrl('https://raw.githubusercontent.com/ilanlal/basic-telegram-bot-remastered/refs/heads/vnext/assets/logo128.png'),
       body: () => CardService.newCardSection()
         .addWidget(CardService.newTextParagraph()
-          .setText(this._models.packageInfo.version)),
+          .setText(this._model.packageInfo.version || '')),
     };
   }
 
-  withPackageInfo(packageInfo) {
-    this._models.packageInfo = packageInfo;
-    return this;
+  static create(model = {
+    packageInfo: {
+      name: 'About Card',
+      version: '1.0.0',
+      build: 'N/A'
+    }
+  }) {
+    return new AboutCard(model);
   }
 
   build() {
