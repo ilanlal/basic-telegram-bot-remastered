@@ -1,9 +1,11 @@
 class SetMyChatIdCard {
     constructor(model) {
-        this._model = model || { deploymentId: '' }; 
+        this._model = model; 
     }
 
-    static create(model = {}) {
+    static create(model = {
+        chatId: ''
+    }) {
         return new SetMyChatIdCard(model);
     }
 

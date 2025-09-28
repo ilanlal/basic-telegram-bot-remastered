@@ -105,6 +105,31 @@ class NavigationController {
         return this.navigateToAccountCard();
     }
 
+    navigateToSetMyChatIdCard() {
+        const model = {
+            chatId: this._userStore.getMyChatId() || ''
+        };
+        return CardService.newActionResponseBuilder()
+            .setNavigation(
+                CardService.newNavigation()
+                    .pushCard(
+                        SetMyChatIdCard.create(model)
+                            .build()
+                    )
+            );
+    }
+
+    navigateToBotSetupCard() {
+        const setupFlow = SetupFlow.create(this._userStore);
+        return CardService.newActionResponseBuilder()
+            .setNavigation(
+                CardService.newNavigation()
+                    .pushCard(
+                        BotSetupCard.create(setupFlow)
+                            .build()
+                    )
+            );
+    }
 
     reload() {
         return CardService.newActionResponseBuilder()

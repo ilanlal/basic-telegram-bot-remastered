@@ -157,13 +157,13 @@ class UserStore {
     return this;
   }
 
-  getChatId() {
+  getMyChatId() {
     const chatId = this._userProperties
       .getProperty(UserStore.Keys.CHAT_ID);
     return chatId;
   }
 
-  setChatId(chatId) {
+  setMyChatId(chatId) {
     this._userProperties
       .setProperty(UserStore.Keys.CHAT_ID, chatId);
     return this;

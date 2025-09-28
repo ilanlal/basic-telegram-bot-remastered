@@ -119,4 +119,29 @@ describe('NavigationController', () => {
         expect(data.cardNavigations.length).toBeGreaterThan(0);
         expect(data.cardNavigations[0].pushCard).toBeDefined();
     });
+
+    // Test for navigating to Set My Chat ID card
+    it('should navigate to Set My Chat ID card', () => {
+        const response = navigationController.navigateToSetMyChatIdCard();
+        expect(response).toBeDefined();
+        const builtResponse = response.build();
+        expect(builtResponse).toBeDefined();
+        const data = builtResponse.getData();
+        expect(data).toBeDefined();
+        expect(data.cardNavigations).toBeDefined();
+        expect(data.cardNavigations.length).toBeGreaterThan(0);
+        expect(data.cardNavigations[0].pushCard).toBeDefined();
+    });
+    // Test for navigating to Bot Setup card
+    it('should navigate to Bot Setup card', () => {
+        const response = navigationController.navigateToBotSetupCard();
+        expect(response).toBeDefined();
+        const builtResponse = response.build();
+        expect(builtResponse).toBeDefined();
+        const data = builtResponse.getData();
+        expect(data).toBeDefined();
+        expect(data.cardNavigations).toBeDefined();
+        expect(data.cardNavigations.length).toBeGreaterThan(0);
+        expect(data.cardNavigations[0].pushCard).toBeDefined();
+    });
 });

@@ -1,11 +1,20 @@
 class SetupFlow {
     get state() {
-        return this._state;
+        return {
+            botToken: this._userStore.getBotToken(),
+            botTokenSet: !!this._userStore.getBotToken(),
+            deploymentId: this._userStore.getDeploymentId(),
+            deploymentIdSet: !!this._userStore.getDeploymentId(),
+            webhookUrl: this.webhookUrl,
+            webhookSet: !!this.webhookUrl,
+            chatId: this._userStore.getMyChatId(),
+            chatIdSet: !!this._userStore.getMyChatId()
+        }
     }
 
     get telegramBotClient() {
         if (!this._telegramBotClient) {
-            const token = this.getStoredBotToken();
+            const token = this._userStore.getBotToken();
             if (!token) {
                 return null;
             }
@@ -14,32 +23,7 @@ class SetupFlow {
         return this._telegramBotClient;
     }
 
-    constructor(userStore) {
-        if (!(userStore instanceof UserStore)) {
-            throw new Error("userStore must be an instance of UserStore");
-        }
-        this._userStore = userStore;
-        this._telegramBotClient = null;
-        this._state = {
-            botToken: this.getStoredBotToken(),
-            botTokenSet: !!this.getStoredBotToken(),
-            deploymentId: this._userStore.getDeploymentId(),
-            deploymentIdSet: !!this._userStore.getDeploymentId(),
-            webhookUrl: this.getLiveWebhookUrl(),
-            webhookSet: !!this.getLiveWebhookUrl()
-        };
-    }
-
-    getStoredBotToken() {
-        const botInfo = this._userStore.getTelegramBotInfo();
-        return botInfo ? botInfo.getBotToken() : null;
-    }
-
-    getStoredDeploymentId() {
-        return this._userStore.getDeploymentId();
-    }
-
-    getLiveWebhookUrl() {
+    get webhookUrl() {
         if (!this.telegramBotClient) {
             return null;
         }
@@ -50,6 +34,26 @@ class SetupFlow {
             return null;
         }
         return JSON.parse(response.getContentText())?.result?.url || null;
+    }
+
+    constructor(userStore) {
+        if (!(userStore instanceof UserStore)) {
+            throw new Error("userStore must be an instance of UserStore");
+        }
+        this._userStore = userStore;
+        this._telegramBotClient = null;
+    }
+
+    setNewBotToken(token) {
+        if (!token || typeof token !== 'string' || token.trim() === '') {
+            throw new Error("Invalid bot token");
+        }
+
+        const response = new TelegramBotClient(token).getMe();
+        if (response.getResponseCode() !== 200) {
+            throw new Error("Failed to validate bot token");
+        }
+        return this._userStore.setBotToken(token);
     }
 
     setWebhook() {

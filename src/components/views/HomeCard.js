@@ -62,7 +62,8 @@ HomeCard.Layout = {
         CardService.newCardSection()
             .addWidget(HomeCard.Widgets.BOT_TOKEN(state))
             .addWidget(HomeCard.Widgets.DEPLOYMENT_INFO(state))
-            .addWidget(HomeCard.Widgets.WEBHOOK_STATUS(state)),
+            .addWidget(HomeCard.Widgets.WEBHOOK_STATUS(state))
+            .addWidget(HomeCard.Widgets.CHAT_ID(state)),
     WEBHOOK_SECTION: (state = null) =>
         CardService.newCardSection()
             .addWidget(HomeCard.Widgets.WEBHOOK_STATUS(state)),
@@ -101,6 +102,13 @@ HomeCard.Widgets = {
             .setText('Webhook Status')
             .setButton(state.webhookSet ? HomeCard.Buttons.UNSET_WEBHOOK(state) : HomeCard.Buttons.ACTIVATE_WEBHOOK(state))
             .setTopLabel(`${state.webhookUrl || '[Not Set]'}`),
+    CHAT_ID: (state = null) =>
+        CardService.newDecoratedText()
+            .setWrapText(true)
+            .setTopLabel('Chat ID')
+            .setText('Chat ID')
+            .setBottomLabel('Chat ID')
+            .setButton(HomeCard.Buttons.SET_MY_CHAT_ID(state)),
     BOT_SETTINGS: (state = null) =>
         CardService.newDecoratedText()
             .setWrapText(true)
@@ -134,6 +142,16 @@ HomeCard.Widgets = {
 };
 
 HomeCard.Buttons = {
+    SET_MY_CHAT_ID: (state = null) => CardService.newTextButton()
+        .setText('Chat ID')
+        .setDisabled(!state.botTokenSet)
+        .setTextButtonStyle(
+            state.chatIdSet ?
+                CardService.TextButtonStyle.TEXT :
+                CardService.TextButtonStyle.FILLED
+        )
+        .setOnClickAction(CardService.newAction()
+            .setFunctionName('UiEventHandlers.Home.openSetMyChatIdCard')),
     ACTIVATE_PREMIUM: (state = null) => CardService.newTextButton()
         .setText('Activate Premium')
         .setOnClickAction(CardService.newAction()
@@ -150,7 +168,6 @@ HomeCard.Buttons = {
             .setFunctionName('UiEventHandlers.Home.openBotSettingsCard')),
     MANAGE_AUTOMATED_REPLIES: (state = null) => CardService.newTextButton()
         .setText('🤖 Automated Replies')
-        .setDisabled(!state.botTokenSet)
         .setOnClickAction(CardService.newAction()
             .setFunctionName('UiEventHandlers.Home.openBotRepliesCard')),
     ACTIVATE_WEBHOOK: (state = null) => CardService.newTextButton()

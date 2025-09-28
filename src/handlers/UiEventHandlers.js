@@ -25,7 +25,7 @@ UiEventHandlers.Home = {
     openCreateNewBotCard: (e) => {
         try {
             return NavigationController
-                .create(new UserStore())
+                .create(UserStoreFactory.create().current)
                 .navigateToNewBotTokenCard()
                 .build();
         } catch (error) {
@@ -33,10 +33,20 @@ UiEventHandlers.Home = {
                 .build();
         }
     },
+    openBotSetupCard: (e) => {
+        try {
+            return NavigationController
+                .create(UserStoreFactory.create().current)
+                .navigateToBotSetupCard()
+                .build();
+        } catch (error) {
+            return UiEventHandlers.handleError(error);
+        }
+    },
     openBotSettingsCard: (e) => {
         try {
             return NavigationController
-                .create(new UserStore())
+                .create(UserStoreFactory.create().current)
                 .navigateToSettingCard()
                 .build();
         } catch (error) {
@@ -46,7 +56,7 @@ UiEventHandlers.Home = {
     openBotRepliesCard: (e) => {
         try {
             return NavigationController
-                .create(new UserStore())
+                .create(UserStoreFactory.create().current)
                 .navigateToAutomationCard()
                 .build();
         } catch (error) {
@@ -56,7 +66,7 @@ UiEventHandlers.Home = {
     openDeploymentSettingsCard: (e) => {
         try {
             return NavigationController
-                .create(new UserStore())
+                .create(UserStoreFactory.create().current)
                 .navigateToNewDeploymentIdCard()
                 .build();
         } catch (error) {
@@ -66,8 +76,18 @@ UiEventHandlers.Home = {
     openUsersManagementCard: (e) => {
         try {
             return NavigationController
-                .create(new UserStore())
+                .create(UserStoreFactory.create().current)
                 .navigateToUsersManagementCard()
+                .build();
+        } catch (error) {
+            return UiEventHandlers.handleError(error);
+        }
+    },
+    openSetMyChatIdCard: (e) => {
+        try {
+            return NavigationController
+                .create(UserStoreFactory.create().current)
+                .navigateToSetMyChatIdCard()
                 .build();
         } catch (error) {
             return UiEventHandlers.handleError(error);
@@ -79,6 +99,20 @@ UiEventHandlers.Home = {
 };
 
 UiEventHandlers.Bot = {
+    onSaveBotSetupSettingsClick: (e) => {
+        try {
+            const formInputs = e && e.commonEventObject && e.commonEventObject.formInputs;
+            if (!formInputs) {
+                throw new Error("Form inputs are missing");
+            }
+
+            const newBotToken = formInputs['BOT_TOKEN']?.stringInputs.value[0];
+            const newDeploymentId = formInputs['deploymentId']?.stringInputs.value[0];
+            const newChatId = formInputs['myChatId']?.stringInputs.value[0]; // Assuming 'myChatId' is the input field name
+        } catch (error) {
+            return UiEventHandlers.handleError(error);
+        }
+    },
     saveNewBotToken: (e) => {
         try {
             const botToken = e?.commonEventObject
@@ -166,7 +200,7 @@ UiEventHandlers.Bot = {
             return NavigationController.create(this._userStore)
                 .reload()
                 .build();
-                
+
         } catch (error) {
             return UiEventHandlers.handleError(error);
         }

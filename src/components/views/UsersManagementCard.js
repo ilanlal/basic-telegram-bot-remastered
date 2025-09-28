@@ -1,10 +1,7 @@
 class UsersManagementCard {
-    static CARD_NAME = "usersManagementCard";
-
-    // Add new state properties as needed
-    static State = {
-        users: [],
-    };
+    static get CARD_NAME () {
+        return "usersManagementCard";
+    }
 
     constructor(model) {
         this._model = model || {};
@@ -19,7 +16,7 @@ class UsersManagementCard {
     
     build() {
         const cardBuilder = CardService.newCardBuilder()
-            .setName("usersManagementCard")
+            .setName(UsersManagementCard.CARD_NAME)
             .setHeader(CardService.newCardHeader()
                 .setTitle("Users Management")
                 .setSubtitle("Manage your Telegram bot users"))

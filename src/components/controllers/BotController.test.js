@@ -22,7 +22,7 @@ describe('BotController Tests', () => {
     });
 
     //registerBotToken
-    test("registerBotToken should return a CardService.ActionResponse", () => {
+    test("registerBotToken should return a result", () => {
         const token = '[DUMMY_BOT_TOKEN]';
 
         const contentText = `{
@@ -45,12 +45,12 @@ describe('BotController Tests', () => {
         UrlFetchAppStubConfiguration.when(`https://api.telegram.org/bot${token}/getWebhookInfo`)
             .return(new HttpResponse().setContentText(`{"ok":true,"result":{}}`));
 
-        const actionResponse = controller.registerBotToken(token);
-        expect(actionResponse).toBeDefined();
+        const result = controller.registerBotToken(token);
+        expect(result).toBeDefined();
     });
 
     // saveBotSettings
-    test("saveBotSettings should return a CardService.ActionResponse", () => {
+    test("saveBotSettings should return a result", () => {
         const mockEvent = {
             commonEventObject: {
                 formInputs: {
@@ -63,8 +63,16 @@ describe('BotController Tests', () => {
             }
         };
 
-        const actionResponse = controller.saveBotSettings(mockEvent);
-        expect(actionResponse).toBeDefined();
+        const result = controller.saveBotSettings(mockEvent);
+        expect(result).toBeDefined();
 
+    });
+
+    // saveMyChatId
+    test("saveMyChatId should return a result", () => {
+        const chatId = 123456789;
+
+        const result = controller.saveMyChatId(chatId);
+        expect(result).toBeDefined();
     });
 });

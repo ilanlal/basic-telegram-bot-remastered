@@ -1,4 +1,5 @@
 require('@ilanlal/gasmocks');
+require('../../lib'); // Ensure the lib is loaded
 require('../../services');
 const { SetupFlow } = require('./SetupFlow');
 
@@ -7,11 +8,34 @@ describe('SetupFlow', () => {
 
     beforeEach(() => {
         model = SetupFlow.create(
-            new UserStore()
+            UserStoreFactory.create().next
         );
     });
 
     test('should create a SetupFlow instance', () => {
         expect(model).toBeInstanceOf(SetupFlow);
+    });
+
+    // setNewBotToken
+    test('should set a new bot token', () => {
+        const newToken = 'new_bot_token';
+        const contentText = `{
+            "result": {
+                "id": 123456789,
+                "is_bot": true,
+                "first_name": "Test",
+                "last_name": "User",
+                "username": "testuser",
+                "language_code": "en"
+            }
+        }`;
+        UrlFetchAppStubConfiguration.when(`https://api.telegram.org/bot${newToken}/getMe`)
+            .return(new HttpResponse()
+                .setContentText(contentText));
+        UrlFetchAppStubConfiguration.when(`https://api.telegram.org/bot${newToken}/getWebhookInfo`)
+            .return(new HttpResponse().setContentText(`{"ok":true,"result":{}}`));
+
+        model.setNewBotToken(newToken);
+        expect(model.state.botToken).toBe(newToken);
     });
 });
