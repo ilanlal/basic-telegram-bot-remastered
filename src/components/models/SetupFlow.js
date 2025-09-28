@@ -52,7 +52,39 @@ class SetupFlow {
         return JSON.parse(response.getContentText())?.result?.url || null;
     }
 
-    static create(userStore = new UserStore()) {
+    setWebhook() {
+        const deploymentId = this._userStore.getDeploymentId();
+        if (!deploymentId) {
+            throw new Error("Deployment ID is not available. Please deploy the script as a web app.");
+        }
+        const webhookUrl = `https://script.google.com/macros/s/${deploymentId}/exec`;
+
+        const response = this.telegramBotClient.setWebhook(webhookUrl);
+        if (response.getResponseCode() !== 200) {
+            throw new Error("Failed to set webhook");
+        }
+
+        return JSON.parse(response.getContentText());
+    }
+
+    deleteWebhook() {
+        const deploymentId = this._userStore.getDeploymentId();
+        if (!deploymentId) {
+            throw new Error("Deployment ID is not available. Please deploy the script as a web app.");
+        }
+        const webhookUrl = `https://script.google.com/macros/s/${deploymentId}/exec`;
+
+        const response = this.telegramBotClient
+            .deleteWebhook(webhookUrl);
+
+        if (response.getResponseCode() !== 200) {
+            throw new Error("Failed to delete webhook");
+        }
+
+        return JSON.parse(response.getContentText());
+    }
+
+    static create(userStore = UserStoreFactory.create().current) {
         return new SetupFlow(userStore);
     }
 }

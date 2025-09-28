@@ -144,6 +144,30 @@ class UserStore {
       .setProperty(UserStore.Keys.DEPLOYMENT_ID, deploymentId);
     return this;
   }
+
+  getBotToken() {
+    const botToken = this._userProperties
+      .getProperty(UserStore.Keys.BOT_TOKEN);
+    return botToken;
+  }
+
+  setBotToken(botToken) {
+    this._userProperties
+      .setProperty(UserStore.Keys.BOT_TOKEN, botToken);
+    return this;
+  }
+
+  getChatId() {
+    const chatId = this._userProperties
+      .getProperty(UserStore.Keys.CHAT_ID);
+    return chatId;
+  }
+
+  setChatId(chatId) {
+    this._userProperties
+      .setProperty(UserStore.Keys.CHAT_ID, chatId);
+    return this;
+  }
 }
 
 class UserStoreFactory {
@@ -180,7 +204,8 @@ UserStore.Keys = {
   INDENT_SPACES: 'indent_spaces',
   USER_LICENSE: 'user_license',
   LOCALE: 'locale',
-  DEBUG_MODE: 'debug_mode'
+  DEBUG_MODE: 'debug_mode',
+  CHAT_ID: 'chat_id'
 };
 
 UserStoreFactory.instance = UserStoreFactory.create();

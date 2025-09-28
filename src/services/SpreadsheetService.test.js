@@ -2,29 +2,30 @@ require('@ilanlal/gasmocks');
 const { SpreadsheetService } = require('./SpreadsheetService');
 
 describe('SpreadsheetService', () => {
-    let store;
+    const ssService = SpreadsheetService.create(
+        SpreadsheetApp.getActiveSpreadsheet());
 
     beforeEach(() => {
         SpreadsheetStubConfiguration.reset();
-        store = SpreadsheetService.create(
-            SpreadsheetApp.getActiveSpreadsheet());
     });
 
     test('should initialize with active spreadsheet', () => {
-        expect(store.getActiveSpreadsheet()).toBe(
+        expect(ssService.getActiveSpreadsheet()).toBe(
             SpreadsheetApp.getActiveSpreadsheet());
     });
 
     // getActiveSheet
     test('should return active sheet', () => {
-        expect(store.getActiveSheet()).toBe(
+        expect(ssService.getActiveSheet()).toBe(
             SpreadsheetApp.getActiveSpreadsheet()
-            .getActiveSheet());
+                .getActiveSheet());
     });
 
     // getSheetByName
     test('should return sheet by name', () => {
-        const sheet = store.getSheetByName('Sheet2');
+        ssService.getActiveSpreadsheet().insertSheet('Sheet2');
+        const sheet = ssService.getSheetByName('Sheet2');
+        expect(sheet).toBeDefined();
         expect(sheet).toBe(SpreadsheetApp
             .getActiveSpreadsheet()
             .getSheetByName('Sheet2'));
@@ -38,5 +39,43 @@ describe('SpreadsheetService', () => {
 
     afterEach(() => {
         jest.clearAllMocks();
+    });
+});
+
+describe('SpreadsheetService.Events', () => {
+    beforeEach(() => {
+        SpreadsheetStubConfiguration.reset();
+    });
+
+    test('should log event to event log sheet', () => {
+        const mockEvent = {
+            dc: 'TestDC',
+            action: 'TestAction',
+            chat_id: 'TestChatID',
+            content: 'TestContent',
+            event: 'TestEvent'
+        };
+
+        SpreadsheetService.Events.initialize({
+            activeSpreadsheet: SpreadsheetApp.getActiveSpreadsheet()
+        });
+        SpreadsheetService.Events.log(mockEvent);
+    });
+});
+
+describe('SpreadsheetService.Replies', () => {
+    beforeEach(() => {
+        SpreadsheetStubConfiguration.reset();
+        SpreadsheetService.Replies.initialize({
+            activeSpreadsheet: SpreadsheetApp.getActiveSpreadsheet(),
+            language_code: 'en'
+        });
+    });
+
+    test('should add demo data to replies sheet', () => {
+        SpreadsheetService.Replies.addDemoData();
+        const sheet = SpreadsheetApp.getActiveSpreadsheet()
+            .getSheetByName(SpreadsheetService.REPLIES_SHEET_NAME);
+        expect(sheet.getLastRow()).toBeGreaterThan(1); // Header + demo data
     });
 });

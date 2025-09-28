@@ -3,6 +3,10 @@ class PostMessageHandler {
         this._spreadsheetService = SpreadsheetService.create(
             SpreadsheetApp.getActiveSpreadsheet());
     }
+    
+    static create() {
+        return new PostMessageHandler();
+    }
 
     handlePostMessage(contents) {
         if (!contents.message || !contents.message.from) {
@@ -80,10 +84,6 @@ class PostMessageHandler {
     handleDynamicReply(chat_id, commands, reply_to_message_id = null) {
         // Implement dynamic reply handling logic here
         return JSON.stringify({ status: 'dynamic_reply_handled', commands, reply_to_message_id });
-    }
-
-    static create() {
-        return new PostMessageHandler();
     }
 }
 

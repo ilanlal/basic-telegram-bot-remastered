@@ -20,7 +20,7 @@ describe('WebhookHandler', () => {
             }
         };
 
-        const response = WebhookHandler.handlePost(event);
+        const response = WebhookHandler.handlePostUpdateRequest(event);
         expect(response).toBeDefined();
     });
 
@@ -39,24 +39,24 @@ describe('WebhookHandler', () => {
             }
         };
 
-        const response = WebhookHandler.handlePost(event);
+        const response = WebhookHandler.handlePostUpdateRequest(event);
         expect(response).toBeDefined();
     });
 
     it('should return not_handled for invalid event', () => {
         const content = {};
-        const response = WebhookHandler.handlePost(content);
+        const response = WebhookHandler.handlePostUpdateRequest(content);
         expect(response).toBe(JSON.stringify({ status: 'not_handled' }));
     });
 
     it('should throw error for invalid message format', () => {
         const content = { message: {} };
-        expect(() => WebhookHandler.handlePost(content)).toThrow('Invalid message format');
+        expect(() => WebhookHandler.handlePostUpdateRequest(content)).toThrow('Invalid message format');
     });
 
     it('should throw error for invalid callback_query format', () => {
         const content = { callback_query: {} };
-        expect(() => WebhookHandler.handlePost(content)).toThrow('Invalid callback_query format');
+        expect(() => WebhookHandler.handlePostUpdateRequest(content)).toThrow('Invalid callback_query format');
     });
 
 });

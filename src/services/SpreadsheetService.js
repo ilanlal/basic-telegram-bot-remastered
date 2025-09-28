@@ -70,17 +70,21 @@ class SpreadsheetService {
 
 SpreadsheetService.Events = {
     log: ({ dc, action, chat_id, content, event }) => {
-        const sheet = SpreadsheetService.prototype.getSheetByName(SpreadsheetService.EVENT_LOG_SHEET_NAME)
-            || SpreadsheetService.prototype.getEventLogSheet_();
+        const sheet = SpreadsheetApp.getActiveSpreadsheet()
+            .getSheetByName(SpreadsheetService.EVENT_LOG_SHEET_NAME);
+        if (!sheet) {
+            throw new Error("Event log sheet does not exist. Please initialize first.");
+        }
         const datestring = new Date().toISOString();
         sheet.appendRow([datestring, dc, action, chat_id, content, event]);
     },
-    initialize: (activeSpreadsheet) => {
+    initialize: ({ activeSpreadsheet }) => {
         let sheet = activeSpreadsheet.getSheetByName(SpreadsheetService.EVENT_LOG_SHEET_NAME);
         if (!sheet) {
-            sheet = activeSpreadsheet.insertSheet(SpreadsheetService.EVENT_LOG_SHEET_NAME, 0);
+            sheet = activeSpreadsheet.insertSheet(SpreadsheetService.EVENT_LOG_SHEET_NAME);
             sheet.appendRow(['Created On', 'DC', 'Action', 'chat_id', 'content', 'event']);
         }
+        return sheet;
     }
 }
 
@@ -127,7 +131,7 @@ SpreadsheetService.Replies = {
             }
         })]
     ],
-    initialize: (activeSpreadsheet, language_code) => {
+    initialize: ({ activeSpreadsheet, language_code }) => {
         let sheet = activeSpreadsheet
             .getSheetByName(SpreadsheetService.REPLIES_SHEET_NAME);
 
@@ -136,6 +140,15 @@ SpreadsheetService.Replies = {
                 .insertSheet(SpreadsheetService.REPLIES_SHEET_NAME);
             sheet.appendRow(['key', language_code]);
         }
+        else {
+            const index = SpreadsheetService.Replies
+                .findLanguageColumnIndex(language_code);
+            if (index === -1) {
+                const lastCol = sheet.getLastColumn();
+                sheet.getRange(1, lastCol + 1).setValue(language_code);
+            }
+        }
+        return sheet;
     },
     findLanguageColumnIndex: (language_code) => {
         const sheet = SpreadsheetApp.getActiveSpreadsheet()

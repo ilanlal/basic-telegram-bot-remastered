@@ -7,7 +7,8 @@ class UiEventHandlers {
                         .popCard())
                 .build();
         } catch (error) {
-            return UiEventHandlers.handleError(error);
+            return UiEventHandlers.handleError(error)
+                .build();
         }
     }
     static handleError(error) {
@@ -16,8 +17,7 @@ class UiEventHandlers {
         return CardService.newActionResponseBuilder()
             .setNotification(
                 CardService.newNotification()
-                    .setText('An error occurred: ' + error.message))
-            .build();
+                    .setText('An error occurred: ' + error.message));
     }
 }
 
@@ -29,7 +29,8 @@ UiEventHandlers.Home = {
                 .navigateToNewBotTokenCard()
                 .build();
         } catch (error) {
-            return UiEventHandlers.handleError(error);
+            return UiEventHandlers.handleError(error)
+                .build();
         }
     },
     openBotSettingsCard: (e) => {
@@ -72,19 +73,6 @@ UiEventHandlers.Home = {
             return UiEventHandlers.handleError(error);
         }
     },
-    saveDeploymentId: (e) => {
-        try {
-            const formInputs = e && e.commonEventObject && e.commonEventObject.formInputs;
-            if (!formInputs) {
-                throw new Error("Form inputs are missing");
-            }
-            return BotController.create(this._userStore)
-                .saveDeploymentSettings(e)
-                .build();
-        } catch (error) {
-            return UiEventHandlers.handleError(error);
-        }
-    },
     back: (e) => {
         return UiEventHandlers.back(e);
     }
@@ -122,24 +110,63 @@ UiEventHandlers.Bot = {
             throw error;
         }
     },
+    saveDeploymentId: (e) => {
+        try {
+            const formInputs = e && e.commonEventObject && e.commonEventObject.formInputs;
+            if (!formInputs) {
+                throw new Error("Form inputs are missing");
+            }
+            const deploymentId = formInputs?.['deploymentId']?.stringInputs.value[0];
+            const response = BotController.create(this._userStore)
+                .saveDeploymentId(edeploymentId);
+
+            return NavigationController.create(this._userStore)
+                .reload()
+                .build();
+
+        } catch (error) {
+            return UiEventHandlers.handleError(error);
+        }
+    },
+    saveMyChatId: (e) => {
+        try {
+            const formInputs = e && e.commonEventObject && e.commonEventObject.formInputs;
+            if (!formInputs) {
+                throw new Error("Form inputs are missing");
+            }
+            const chatId = parseInt(formInputs?.['myChatId']?.stringInputs.value[0]); // Assuming 'myChatId' is the input field name
+            const response = BotController.create(this._userStore)
+                .saveMyChatId(chatId);
+
+            return NavigationController.create(this._userStore)
+                .reload()
+                .build();
+        } catch (error) {
+            return UiEventHandlers.handleError(error);
+        }
+    },
     setWebhook: (e) => {
         try {
             const response = BotController.create(this._userStore)
                 .setWebhook();
-            
+
             return NavigationController.create(this._userStore)
                 .reload()
                 .build();
-                
+
         } catch (error) {
             return UiEventHandlers.handleError(error);
         }
     },
     deleteWebhook: (e) => {
         try {
-            return BotController.create(this._userStore)
-                .deleteWebhook()
+            const response = BotController.create(this._userStore)
+                .deleteWebhook();
+
+            return NavigationController.create(this._userStore)
+                .reload()
                 .build();
+                
         } catch (error) {
             return UiEventHandlers.handleError(error);
         }
@@ -153,7 +180,23 @@ UiEventHandlers.AutomationReplies = {
     back: (e) => {
         return UiEventHandlers.back(e);
     },
-    appendSimpleDataReply: (e) => {
+    onAddAutomationClick: (e) => {
+        try {
+            SpreadsheetService.Replies.initialize({
+                activeSpreadsheet: SpreadsheetApp.getActiveSpreadsheet(),
+                language_code: UserStoreFactory.create().current
+                    .getLocalizationCode()
+            });
+            SpreadsheetService.Replies.addDemoData();
+
+            return CardService.newActionResponseBuilder()
+                .setNotification(
+                    CardService.newNotification()
+                        .setText('Demo automations added to the spreadsheet!'))
+                .build();
+        } catch (error) {
+            return UiEventHandlers.handleError(error);
+        }
     }
 };
 

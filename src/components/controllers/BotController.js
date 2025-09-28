@@ -49,90 +49,25 @@ class BotController {
     }
 
     setWebhook() {
-        const deploymentId = this._deploymentId();
-        if (!deploymentId) {
-            throw new Error("Deployment ID is not available. Please deploy the script as a web app.");
-        }
-        const webhookUrl = `https://script.google.com/macros/s/${deploymentId}/exec`;
-
-        const response = this._telegramBotClient().setWebhook(webhookUrl);
-        if (response.getResponseCode() !== 200) {
-            throw new Error("Failed to set webhook");
-        }
-
-        return CardService.newActionResponseBuilder()
-            .setNavigation(
-                CardService.newNavigation()
-                    .popToRoot()
-                    .updateCard(
-                        new HomeCard()
-                            .setState(
-                                {
-                                    webhookSet: true,
-                                    webhookUrl: webhookUrl,
-                                    botTokenSet: true,
-                                    deploymentId: true
-                                }
-                            )
-                            .build()
-                    ));
+        return SetupFlow.create(this._userStore).setWebhook();
     }
 
     deleteWebhook() {
-        const deploymentId = this._deploymentId();
-        if (!deploymentId) {
-            throw new Error("Deployment ID is not available. Please deploy the script as a web app.");
-        }
-        const webhookUrl = `https://script.google.com/macros/s/${deploymentId}/exec`;
-
-        const response = this._telegramBotClient()
-            .deleteWebhook(webhookUrl);
-
-        if (response.getResponseCode() !== 200) {
-            throw new Error("Failed to delete webhook");
-        }
-
-        return CardService.newActionResponseBuilder()
-            .setNavigation(
-                CardService.newNavigation()
-                    .popToRoot()
-                    .updateCard(
-                        new HomeCard()
-                            .setState(
-                                {
-                                    webhookSet: false,
-                                    webhookUrl: "[Not Set]",
-                                    botTokenSet: true,
-                                    deploymentId: this._deploymentId()
-                                }
-                            )
-                            .build()
-                    ));
+        return SetupFlow.create(this._userStore).deleteWebhook();
     }
 
-    saveDeploymentSettings(e) {
-        const deploymentId = e?.commonEventObject
-            ?.formInputs?.['deploymentId']
-            ?.stringInputs.value[0] || '';
+    saveMyChatId(chat_id) {
+        if (!chat_id || typeof chat_id !== 'number') {
+            throw new Error("Invalid chat_id");
+        }
+        return this._userStore.setMyChatId(chat_id);
+    }
 
-        this._userStore.setDeploymentId(deploymentId);
-
-        return CardService.newActionResponseBuilder()
-            .setNavigation(
-                CardService.newNavigation()
-                    .popToRoot()
-                    .updateCard(
-                        new HomeCard()
-                            .setState(
-                                {
-                                    webhookSet: this._webhookSet(),
-                                    webhookUrl: this._webhookUrl() || "[Not Set]",
-                                    botTokenSet: this._botTokenSet(),
-                                    deploymentId: deploymentId
-                                }
-                            )
-                            .build()
-                    ));
+    saveDeploymentId(deploymentId) {
+        if (!deploymentId || typeof deploymentId !== 'string') {
+            throw new Error("Invalid deploymentId");
+        }
+        return this._userStore.setDeploymentId(deploymentId);
     }
 }
 

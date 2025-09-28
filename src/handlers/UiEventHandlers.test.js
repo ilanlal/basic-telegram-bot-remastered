@@ -70,11 +70,11 @@ describe('UiEventHandlers.Bot Tests', () => {
             .return(new HttpResponse().setContentText(JSON.stringify(contentText)));
 
 
-            UrlFetchAppStubConfiguration.when(`https://api.telegram.org/bot[DUMMY_BOT_TOKEN]/setWebhook`)    
-                .return(new HttpResponse().setContentText(`{"ok":true,"result":{}}`));
+        UrlFetchAppStubConfiguration.when(`https://api.telegram.org/bot[DUMMY_BOT_TOKEN]/setWebhook`)
+            .return(new HttpResponse().setContentText(`{"ok":true,"result":{}}`));
 
-                UrlFetchAppStubConfiguration.when(`https://api.telegram.org/bot[DUMMY_BOT_TOKEN]/getWebhookInfo`)    
-                    .return(new HttpResponse().setContentText(`{"ok":true,"result":{}}`));
+        UrlFetchAppStubConfiguration.when(`https://api.telegram.org/bot[DUMMY_BOT_TOKEN]/getWebhookInfo`)
+            .return(new HttpResponse().setContentText(`{"ok":true,"result":{}}`));
         const actionResponse = UiEventHandlers.Bot.saveNewBotToken(mockEvent);
         expect(actionResponse).toBeDefined();
     });
@@ -111,5 +111,47 @@ describe('UiEventHandlers.Bot Tests', () => {
     });
 
     // setWebhook
-    
+    test('setWebhook should return a CardService.ActionResponse', () => {
+        const mockEvent = {};
+        const token = '[DUMMY_BOT_TOKEN]';
+        const deploymentId = 'test-deployment-id';
+        UserStoreFactory.create().current.setBotToken(token);
+        UserStoreFactory.create().current.setDeploymentId(deploymentId);
+
+        const webAppUrl = `https://script.google.com/macros/s/${deploymentId}/exec`;
+        const callbackUrl = `https://api.telegram.org/bot${token}/setWebhook?url=${webAppUrl}`;
+
+        UrlFetchAppStubConfiguration.when(callbackUrl)
+            .return(new HttpResponse()
+                .setContentText(`{"ok":true,"result":{}}`));
+        const actionResponse = UiEventHandlers.Bot.setWebhook(mockEvent);
+        expect(actionResponse).toBeDefined();
+    });
+
+    // deleteWebhook
+    test('deleteWebhook should return a CardService.ActionResponse', () => {
+        const mockEvent = {};
+        const token = '[DUMMY_BOT_TOKEN]';
+        const deploymentId = 'test_deployment_id';
+        UserStoreFactory.create().current.setBotToken(token);
+        UserStoreFactory.create().current.setDeploymentId(deploymentId);
+
+        const webAppUrl = `https://script.google.com/macros/s/${deploymentId}/exec`;
+        UrlFetchAppStubConfiguration
+            .when(`https://api.telegram.org/bot${token}/deleteWebhook?url=${webAppUrl}`)
+            .return(new HttpResponse()
+                .setContentText(`{"ok":true,"result":{}}`));
+
+        const actionResponse = UiEventHandlers.Bot.deleteWebhook(mockEvent);
+        expect(actionResponse).toBeDefined();
+    });
+});
+
+describe('UiEventHandlers.AutomationReply Tests', () => {
+    // onAddAutomation
+    test('onAddAutomationClick should return a CardService.ActionResponse', () => {
+        const mockEvent = {};
+        const actionResponse = UiEventHandlers.AutomationReplies.onAddAutomationClick(mockEvent);
+        expect(actionResponse).toBeDefined();
+    });
 });

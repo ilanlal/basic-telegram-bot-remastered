@@ -1,10 +1,12 @@
+require('@ilanlal/gasmocks');
+require('../services');
 const { PostCallbackQueryHandler } = require('./PostCallbackQueryHandler');
 
 describe('PostCallbackQueryHandler', () => {
     let handler;
 
     beforeEach(() => {
-        handler = new PostCallbackQueryHandler();
+        handler = PostCallbackQueryHandler.create();
     });
 
     test("PostCallbackQueryHandler should be defined", () => {

@@ -39,11 +39,11 @@ describe('BotController Tests', () => {
         UrlFetchAppStubConfiguration.when(`https://api.telegram.org/bot${token}/getMe`)
             .return(new HttpResponse().setContentText(contentText));
 
-        UrlFetchAppStubConfiguration.when(`https://api.telegram.org/bot${token}/setWebhook`)    
+        UrlFetchAppStubConfiguration.when(`https://api.telegram.org/bot${token}/setWebhook`)
             .return(new HttpResponse().setContentText(`{"ok":true,"result":{}}`));
 
-            UrlFetchAppStubConfiguration.when(`https://api.telegram.org/bot${token}/getWebhookInfo`)    
-                .return(new HttpResponse().setContentText(`{"ok":true,"result":{}}`));
+        UrlFetchAppStubConfiguration.when(`https://api.telegram.org/bot${token}/getWebhookInfo`)
+            .return(new HttpResponse().setContentText(`{"ok":true,"result":{}}`));
 
         const actionResponse = controller.registerBotToken(token);
         expect(actionResponse).toBeDefined();
@@ -65,6 +65,6 @@ describe('BotController Tests', () => {
 
         const actionResponse = controller.saveBotSettings(mockEvent);
         expect(actionResponse).toBeDefined();
-        
+
     });
 });
