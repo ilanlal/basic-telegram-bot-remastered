@@ -1,4 +1,4 @@
-class SetupFlow {
+class BotSetupController {
     get state() {
         return {
             botToken: this._userStore.getBotToken(),
@@ -44,6 +44,10 @@ class SetupFlow {
         this._telegramBotClient = null;
     }
 
+    static create(userStore = UserStoreFactory.create().current) {
+        return new BotSetupController(userStore);
+    }
+
     setNewBotToken(token) {
         if (!token || typeof token !== 'string' || token.trim() === '') {
             throw new Error("Invalid bot token");
@@ -63,7 +67,7 @@ class SetupFlow {
         return this._userStore.setDeploymentId(id);
     }
 
-    setMyNewChatId(id) {
+    setNewChatId(id) {
         if (!id || typeof id !== 'number') {
             throw new Error("Invalid chat ID");
         }
@@ -101,13 +105,9 @@ class SetupFlow {
 
         return JSON.parse(response.getContentText());
     }
-
-    static create(userStore = UserStoreFactory.create().current) {
-        return new SetupFlow(userStore);
-    }
 }
 
 
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { SetupFlow };
+    module.exports = { BotSetupController };
 }

@@ -1,7 +1,6 @@
-/* eslint-disable no-undef */
+require("@ilanlal/gasmocks");
 require('../../types'); // Ensure the model is loaded
 require('../views'); // Ensure the component is loaded
-require("@ilanlal/gasmocks");
 require('../../lib'); // Ensure the lib is loaded
 require('../../services'); // Ensure the service is loaded
 const { BotController } = require('./BotController');
@@ -10,7 +9,9 @@ describe('BotController Tests', () => {
     let controller;
 
     beforeEach(() => {
-        controller = BotController.create(new UserStore());
+        controller = BotController.create(
+            UserStoreFactory.create().next
+        );
     });
 
     test("BotController should be defined", () => {
@@ -38,10 +39,6 @@ describe('BotController Tests', () => {
 
         UrlFetchAppStubConfiguration.when(`https://api.telegram.org/bot${token}/getMe`)
             .return(new HttpResponse().setContentText(contentText));
-
-        UrlFetchAppStubConfiguration.when(`https://api.telegram.org/bot${token}/setWebhook`)
-            .return(new HttpResponse().setContentText(`{"ok":true,"result":{}}`));
-
         UrlFetchAppStubConfiguration.when(`https://api.telegram.org/bot${token}/getWebhookInfo`)
             .return(new HttpResponse().setContentText(`{"ok":true,"result":{}}`));
 

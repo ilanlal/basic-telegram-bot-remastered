@@ -1,7 +1,9 @@
+const { BotSetupController } = require('./BotSetupController');
 const { NavigationController } = require('./NavigationController');
 const { BotController } = require('./BotController');
 const { AccountController, AccountControllerFactory } = require('./AccountController');
 
+global.BotSetupController = BotSetupController;
 global.AccountControllerFactory = AccountControllerFactory;
 global.AccountController = AccountController;
 global.BotController = BotController;

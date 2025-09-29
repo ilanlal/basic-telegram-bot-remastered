@@ -18,7 +18,7 @@ describe('SetupFlow', () => {
 
     // setNewBotToken
     test('should set a new bot token', () => {
-        const newToken = 'new_bot_token';
+        const newToken = '[DUMMY_BOT_TOKEN]';
         const contentText = `{
             "result": {
                 "id": 123456789,
@@ -38,4 +38,19 @@ describe('SetupFlow', () => {
         model.setNewBotToken(newToken);
         expect(model.state.botToken).toBe(newToken);
     });
+
+    // setNewChatId
+    test('should set a new chat id', () => {
+        const newChatId = 123456789;
+        model.setMyNewChatId(newChatId);
+        expect(model.state.chatId).toBe(newChatId);
+    });
+
+    // setNewDeploymentId
+    test('should set a new deployment id', () => {
+        const newDeploymentId = 'new_deployment_id';
+        model.setNewDeploymentId(newDeploymentId);
+        expect(model.state.deploymentId).toBe(newDeploymentId);
+    });
+
 });
