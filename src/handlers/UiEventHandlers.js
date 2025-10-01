@@ -12,7 +12,7 @@ class UiEventHandlers {
         }
     }
     static handleError(error) {
-        console.error('Error occurred:', error);
+        console.error('🚨🚨🚨🚨🚨Error occurred:', error);
         // Show an error message to the user
         return CardService.newActionResponseBuilder()
             .setNotification(
@@ -40,7 +40,8 @@ UiEventHandlers.Home = {
                 .navigateToBotSetupCard()
                 .build();
         } catch (error) {
-            return UiEventHandlers.handleError(error);
+            return UiEventHandlers.handleError(error)
+                .build();
         }
     },
     openBotSettingsCard: (e) => {
@@ -50,17 +51,19 @@ UiEventHandlers.Home = {
                 .navigateToSettingCard()
                 .build();
         } catch (error) {
-            return UiEventHandlers.handleError(error);
+            return UiEventHandlers.handleError(error)
+                .build();
         }
     },
-    openBotRepliesCard: (e) => {
+    openAutomationRepliesCard: (e) => {
         try {
             return NavigationController
                 .create(UserStoreFactory.create().current)
                 .navigateToAutomationCard()
                 .build();
         } catch (error) {
-            return UiEventHandlers.handleError(error);
+            return UiEventHandlers.handleError(error)
+                .build();
         }
     },
     openDeploymentSettingsCard: (e) => {
@@ -70,7 +73,8 @@ UiEventHandlers.Home = {
                 .navigateToNewDeploymentIdCard()
                 .build();
         } catch (error) {
-            return UiEventHandlers.handleError(error);
+            return UiEventHandlers.handleError(error)
+                .build();
         }
     },
     openUsersManagementCard: (e) => {
@@ -80,7 +84,8 @@ UiEventHandlers.Home = {
                 .navigateToUsersManagementCard()
                 .build();
         } catch (error) {
-            return UiEventHandlers.handleError(error);
+            return UiEventHandlers.handleError(error)
+                .build();
         }
     },
     openSetMyChatIdCard: (e) => {
@@ -90,7 +95,8 @@ UiEventHandlers.Home = {
                 .navigateToSetMyChatIdCard()
                 .build();
         } catch (error) {
-            return UiEventHandlers.handleError(error);
+            return UiEventHandlers.handleError(error)
+                .build();
         }
     },
     back: (e) => {
@@ -110,7 +116,8 @@ UiEventHandlers.Bot = {
             const newDeploymentId = formInputs['deploymentId']?.stringInputs.value[0];
             const newChatId = formInputs['myChatId']?.stringInputs.value[0]; // Assuming 'myChatId' is the input field name
         } catch (error) {
-            return UiEventHandlers.handleError(error);
+            return UiEventHandlers.handleError(error)
+                .build();
         }
     },
     saveNewBotToken: (e) => {
@@ -128,7 +135,8 @@ UiEventHandlers.Bot = {
                 .reload()
                 .build();
         } catch (error) {
-            return UiEventHandlers.handleError(error);
+            return UiEventHandlers.handleError(error)
+            .build();
         }
     },
     saveMyBotInfo: (e) => {
@@ -159,7 +167,8 @@ UiEventHandlers.Bot = {
                 .build();
 
         } catch (error) {
-            return UiEventHandlers.handleError(error);
+            return UiEventHandlers.handleError(error)
+            .build();
         }
     },
     saveMyChatId: (e) => {
@@ -176,7 +185,7 @@ UiEventHandlers.Bot = {
                 .reload()
                 .build();
         } catch (error) {
-            return UiEventHandlers.handleError(error);
+            return UiEventHandlers.handleError(error).build();
         }
     },
     setWebhook: (e) => {
@@ -187,9 +196,25 @@ UiEventHandlers.Bot = {
             return NavigationController.create(this._userStore)
                 .reload()
                 .build();
-
         } catch (error) {
-            return UiEventHandlers.handleError(error);
+            return UiEventHandlers.handleError(error).build();
+        }
+    },
+    saveMyChatId: (e) => {
+        try {
+            const formInputs = e && e.commonEventObject && e.commonEventObject.formInputs;
+            if (!formInputs) {
+                throw new Error("Form inputs are missing");
+            }
+            const chatId = parseInt(formInputs?.['chatId']?.stringInputs.value[0]); // Assuming 'chatId' is the input field name
+            const response = BotController.create(this._userStore)
+                .saveMyChatId(chatId);
+
+            return NavigationController.create(this._userStore)
+                .reload()
+                .build();
+        } catch (error) {
+            return UiEventHandlers.handleError(error).build();
         }
     },
     deleteWebhook: (e) => {
@@ -200,9 +225,8 @@ UiEventHandlers.Bot = {
             return NavigationController.create(this._userStore)
                 .reload()
                 .build();
-
         } catch (error) {
-            return UiEventHandlers.handleError(error);
+            return UiEventHandlers.handleError(error).build();
         }
     },
     back: (e) => {
@@ -216,11 +240,6 @@ UiEventHandlers.AutomationReplies = {
     },
     onAddAutomationClick: (e) => {
         try {
-            SpreadsheetService.Replies.initialize({
-                activeSpreadsheet: SpreadsheetApp.getActiveSpreadsheet(),
-                language_code: UserStoreFactory.create().current
-                    .getLocalizationCode()
-            });
             SpreadsheetService.Replies.addDemoData();
 
             return CardService.newActionResponseBuilder()
@@ -229,7 +248,7 @@ UiEventHandlers.AutomationReplies = {
                         .setText('Demo automations added to the spreadsheet!'))
                 .build();
         } catch (error) {
-            return UiEventHandlers.handleError(error);
+            return UiEventHandlers.handleError(error).build();
         }
     }
 };

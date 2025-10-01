@@ -23,6 +23,7 @@ class BotController {
         if (response.getResponseCode() !== 200) {
             throw new Error("Failed to validate bot token");
         }
+        this._userStore.setBotToken(token);
         const contentText = response.getContentText();
         const res = JSON.parse(contentText);
         const user = new TelegramUser()
@@ -57,7 +58,7 @@ class BotController {
     }
 
     saveMyChatId(chat_id) {
-        if (!chat_id || typeof chat_id !== 'number') {
+        if (!chat_id || isNaN(chat_id)) {
             throw new Error("Invalid chat_id");
         }
         return this._userStore.setMyChatId(chat_id);

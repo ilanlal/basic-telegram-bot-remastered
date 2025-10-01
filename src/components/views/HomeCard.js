@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 class HomeCard {
     static get CARD_NAME() {
         return 'homeCard';
@@ -60,19 +59,10 @@ HomeCard.Layout = {
             .setImageUrl('https://raw.githubusercontent.com/ilanlal/basic-telegram-bot-remastered/refs/heads/vnext/assets/logo128.png'),
     SETUP_SECTION: (state = null) =>
         CardService.newCardSection()
-            .addWidget(HomeCard.Widgets.BOT_TOKEN(state))
-            .addWidget(HomeCard.Widgets.DEPLOYMENT_INFO(state))
-            .addWidget(HomeCard.Widgets.WEBHOOK_STATUS(state))
-            .addWidget(HomeCard.Widgets.CHAT_ID(state)),
-    WEBHOOK_SECTION: (state = null) =>
-        CardService.newCardSection()
-            .addWidget(HomeCard.Widgets.WEBHOOK_STATUS(state)),
+            .addWidget(HomeCard.Widgets.SETUP(state)),
     EDIT_BOT_SECTION: (state = null) =>
         CardService.newCardSection()
             .addWidget(HomeCard.Widgets.BOT_SETTINGS(state)),
-    DEPLOYMENT_SECTION: (state = null) =>
-        CardService.newCardSection()
-            .addWidget(HomeCard.Widgets.DEPLOYMENT_INFO(state)),
     AUTOMATED_REPLIES_SECTION: (state = null) =>
         CardService.newCardSection()
             .addWidget(HomeCard.Widgets.AUTOMATED_REPLIES(state)),
@@ -88,27 +78,13 @@ HomeCard.Layout = {
 };
 
 HomeCard.Widgets = {
-    BOT_TOKEN: (state = null) =>
+    SETUP: (state = null) =>
         CardService.newDecoratedText()
             .setBottomLabel(`${state.botTokenSet ? '🟢 Set' : '🔴 Not Set'}`)
             .setText('Bot Token')
             .setTopLabel('Bot Information')
             //.setBottomLabel(`Bot status: ${state.botTokenSet || 'Not Configured'}`)
-            .setButton(HomeCard.Buttons.REGISTER_NEW_BOT(state)),
-    WEBHOOK_STATUS: (state = null) =>
-        CardService.newDecoratedText()
-            //.setWrapText(true)
-            .setBottomLabel(`${state.webhookSet ? '🟢 Set' : '🔴 Not Set'}`)
-            .setText('Webhook Status')
-            .setButton(state.webhookSet ? HomeCard.Buttons.UNSET_WEBHOOK(state) : HomeCard.Buttons.ACTIVATE_WEBHOOK(state))
-            .setTopLabel(`${state.webhookUrl || '[Not Set]'}`),
-    CHAT_ID: (state = null) =>
-        CardService.newDecoratedText()
-            .setWrapText(true)
-            .setTopLabel('Chat ID')
-            .setText('Chat ID')
-            .setBottomLabel('Chat ID')
-            .setButton(HomeCard.Buttons.SET_MY_CHAT_ID(state)),
+            .setButton(HomeCard.Buttons.BOT_SETUP(state)),
     BOT_SETTINGS: (state = null) =>
         CardService.newDecoratedText()
             .setWrapText(true)
@@ -116,13 +92,6 @@ HomeCard.Widgets = {
             .setText('Configure your bot settings')
             .setBottomLabel('Configure your bot settings')
             .setButton(HomeCard.Buttons.EDIT_BOT_INFO(state)),
-    DEPLOYMENT_INFO: (state = null) =>
-        CardService.newDecoratedText()
-            .setWrapText(true)
-            .setTopLabel(`${state.deploymentId !== '' ? state.deploymentId : 'No Deployment ID'}`)
-            .setText('Configure your deployment id')
-            .setBottomLabel(`${state.deploymentId !== '' ? '🟢 Set' : '🔴 Not Set'}`)
-            .setButton(HomeCard.Buttons.DEPLOYMENT_SETTINGS(state)),
     AUTOMATED_REPLIES: (state = null) => CardService.newDecoratedText()
         .setWrapText(true)
         .setTopLabel('Automated Replies')
@@ -135,32 +104,14 @@ HomeCard.Widgets = {
             .setTopLabel('Bot Users')
             .setText('Manage your bot\'s users')
             .setBottomLabel('Manage your bot\'s users')
-            .setButton(CardService.newTextButton()
-                .setText('👥 Users')
-                .setOnClickAction(CardService.newAction()
-                    .setFunctionName('UiEventHandlers.Home.openUsersManagementCard')))
+            .setButton(HomeCard.Buttons.MANAGE_USERS(state))
 };
 
 HomeCard.Buttons = {
-    SET_MY_CHAT_ID: (state = null) => CardService.newTextButton()
-        .setText('Chat ID')
-        .setDisabled(!state.botTokenSet)
-        .setTextButtonStyle(
-            state.chatIdSet ?
-                CardService.TextButtonStyle.TEXT :
-                CardService.TextButtonStyle.FILLED
-        )
+    BOT_SETUP: (state = null) => CardService.newTextButton()
+        .setText('⚙️ Setup Bot')
         .setOnClickAction(CardService.newAction()
-            .setFunctionName('UiEventHandlers.Home.openSetMyChatIdCard')),
-    ACTIVATE_PREMIUM: (state = null) => CardService.newTextButton()
-        .setText('Activate Premium')
-        .setOnClickAction(CardService.newAction()
-            .setFunctionName('onActivatePremiumClick')),
-    REGISTER_NEW_BOT: (state = null) => CardService.newTextButton()
-        .setText('➕ New')
-        .setTextButtonStyle(state.botTokenSet ? CardService.TextButtonStyle.TEXT : CardService.TextButtonStyle.FILLED)
-        .setOnClickAction(CardService.newAction()
-            .setFunctionName('UiEventHandlers.Home.openCreateNewBotCard')),
+            .setFunctionName('UiEventHandlers.Home.openBotSetupCard')),
     EDIT_BOT_INFO: (state = null) => CardService.newTextButton()
         .setText('🔖 Edit Bot Info')
         .setDisabled(!state.botTokenSet)
@@ -169,23 +120,12 @@ HomeCard.Buttons = {
     MANAGE_AUTOMATED_REPLIES: (state = null) => CardService.newTextButton()
         .setText('🤖 Automated Replies')
         .setOnClickAction(CardService.newAction()
-            .setFunctionName('UiEventHandlers.Home.openBotRepliesCard')),
-    ACTIVATE_WEBHOOK: (state = null) => CardService.newTextButton()
-        .setText('🟢 Activate Webhook')
-        .setTextButtonStyle(CardService.TextButtonStyle.FILLED)
+            .setFunctionName('UiEventHandlers.Home.openAutomationRepliesCard')),
+    MANAGE_USERS: (state = null) => CardService.newTextButton()
+        .setText('👥 Users')
         .setDisabled(!state.botTokenSet)
         .setOnClickAction(CardService.newAction()
-            .setFunctionName('UiEventHandlers.Bot.setWebhook')),
-    UNSET_WEBHOOK: (state = null) => CardService.newTextButton()
-        .setText('🔴 Delete Webhook')
-        .setDisabled(!state.botTokenSet)
-        .setOnClickAction(CardService.newAction()
-            .setFunctionName('UiEventHandlers.Bot.deleteWebhook')),
-    DEPLOYMENT_SETTINGS: (state = null) => CardService.newTextButton()
-        .setText('🚀 Deployment Settings')
-        .setDisabled(!state.botTokenSet)
-        .setOnClickAction(CardService.newAction()
-            .setFunctionName('UiEventHandlers.Home.openDeploymentSettingsCard'))
+            .setFunctionName('UiEventHandlers.Home.openUsersManagementCard'))
 };
 
 if (typeof module !== 'undefined' && module.exports) {

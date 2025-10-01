@@ -1,5 +1,8 @@
 require('@ilanlal/gasmocks');
+const { Resources } = require('../Resources');
 const { SpreadsheetService } = require('./SpreadsheetService');
+
+global.Resources = Resources;
 
 describe('SpreadsheetService', () => {
     const ssService = SpreadsheetService.create(
@@ -55,21 +58,16 @@ describe('SpreadsheetService.Events', () => {
             content: 'TestContent',
             event: 'TestEvent'
         };
-
-        SpreadsheetService.Events.initialize({
-            activeSpreadsheet: SpreadsheetApp.getActiveSpreadsheet()
-        });
-        SpreadsheetService.Events.log(mockEvent);
+        SpreadsheetService.Events.logEvent(mockEvent);
+        const sheet = SpreadsheetApp.getActiveSpreadsheet()
+            .getSheetByName(SpreadsheetService.EVENT_LOG_SHEET_NAME);
+        expect(sheet.getLastRow()).toBe(2);
     });
 });
 
 describe('SpreadsheetService.Replies', () => {
     beforeEach(() => {
         SpreadsheetStubConfiguration.reset();
-        SpreadsheetService.Replies.initialize({
-            activeSpreadsheet: SpreadsheetApp.getActiveSpreadsheet(),
-            language_code: 'en'
-        });
     });
 
     test('should add demo data to replies sheet', () => {

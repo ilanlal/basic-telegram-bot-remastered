@@ -6,9 +6,12 @@ require('../components/controllers');
 require('../components/views');
 require('../components/models');
 const { UiEventHandlers } = require('./UiEventHandlers');
+const { Resources } = require('../Resources');
+
+global.Resources = Resources;
 
 describe('UiEventHandlers.Home Tests', () => {
-    test('openCreateNewBotCard should return a CardService.ActionResponse', () => {
+    test('openAutomationRepliesCard should return a CardService.ActionResponse', () => {
         const mockEvent = {
             commonEventObject: {
                 formInputs: {
@@ -32,11 +35,21 @@ describe('UiEventHandlers.Home Tests', () => {
         expect(actionResponse).toBeDefined();
     });
 
-    //openBotRepliesCard
-    test('openBotRepliesCard should return a CardService.ActionResponse', () => {
+    //openAutomationRepliesCard
+    test('openAutomationRepliesCard should return a CardService.ActionResponse', () => {
         const mockEvent = {};
-        const actionResponse = UiEventHandlers.Home.openBotRepliesCard(mockEvent);
+        const actionResponse = UiEventHandlers.Home.openAutomationRepliesCard(mockEvent);
         expect(actionResponse).toBeDefined();
+    });
+
+    // openBotSetupCard
+    test('openBotSetupCard should return a CardService.ActionResponse', () => {
+        const mockEvent = {};
+        const actionResponse = UiEventHandlers.Home.openBotSetupCard(mockEvent);
+        expect(actionResponse).toBeDefined();
+        const data = actionResponse.getData();
+        expect(data).toBeDefined();
+        expect(data.cardNavigations).toBeDefined();
     });
 });
 

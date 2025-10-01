@@ -69,68 +69,25 @@ class SpreadsheetService {
 }
 
 SpreadsheetService.Events = {
-    log: ({ dc, action, chat_id, content, event }) => {
-        const sheet = SpreadsheetApp.getActiveSpreadsheet()
-            .getSheetByName(SpreadsheetService.EVENT_LOG_SHEET_NAME);
-        if (!sheet) {
-            throw new Error("Event log sheet does not exist. Please initialize first.");
-        }
-        const datestring = new Date().toISOString();
-        sheet.appendRow([datestring, dc, action, chat_id, content, event]);
-    },
     initialize: ({ activeSpreadsheet }) => {
-        let sheet = activeSpreadsheet.getSheetByName(SpreadsheetService.EVENT_LOG_SHEET_NAME);
+        let sheet = activeSpreadsheet
+            .getSheetByName(SpreadsheetService.EVENT_LOG_SHEET_NAME);
         if (!sheet) {
             sheet = activeSpreadsheet.insertSheet(SpreadsheetService.EVENT_LOG_SHEET_NAME);
             sheet.appendRow(['Created On', 'DC', 'Action', 'chat_id', 'content', 'event']);
         }
         return sheet;
+    },
+    logEvent: ({ dc, action, chat_id, content, event }) => {
+        const sheet = SpreadsheetService.Events.initialize({
+            activeSpreadsheet: SpreadsheetApp.getActiveSpreadsheet()
+        });
+        const datestring = new Date().toISOString();
+        sheet.appendRow([datestring, dc, action, chat_id, content, event]);
     }
 }
 
 SpreadsheetService.Replies = {
-    BASE_REPLIES: () => [
-        ['_notdefined', JSON.stringify({
-            action: 'sendMessage',
-            payload: {
-                text: "Sorry, I didn't understand that. Please try again."
-            }
-        })],
-        ['/start', JSON.stringify({
-            action: 'sendMessage',
-            payload: {
-                text: "Welcome! How can I assist you today?",
-                reply_markup: {
-                    inline_keyboard: [
-                        [{ text: "Help", callback_data: "/help" }],
-                        [{ text: "About", callback_data: "/about" }]
-                    ]
-                }
-            }
-        })],
-        ['/help', JSON.stringify({
-            action: 'sendMessage',
-            payload: {
-                text: "Here are some commands you can use:\n/start - Start the bot\n/help - Show this help message",
-                reply_markup: {
-                    inline_keyboard: [
-                        [{ text: "Home", callback_data: "/start" }]
-                    ]
-                }
-            }
-        })],
-        ['/about', JSON.stringify({
-            action: 'sendMessage',
-            payload: {
-                text: "This is a sample Telegram bot built with Google Apps Script.",
-                reply_markup: {
-                    inline_keyboard: [
-                        [{ text: "Home", callback_data: "/start" }]
-                    ]
-                }
-            }
-        })]
-    ],
     initialize: ({ activeSpreadsheet, language_code }) => {
         let sheet = activeSpreadsheet
             .getSheetByName(SpreadsheetService.REPLIES_SHEET_NAME);
@@ -151,8 +108,10 @@ SpreadsheetService.Replies = {
         return sheet;
     },
     findLanguageColumnIndex: (language_code) => {
-        const sheet = SpreadsheetApp.getActiveSpreadsheet()
-            .getSheetByName(SpreadsheetService.REPLIES_SHEET_NAME);
+        const sheet = SpreadsheetService.Replies.initialize({
+            activeSpreadsheet: SpreadsheetApp.getActiveSpreadsheet(),
+            language_code: language_code
+        });
         const range = sheet.getDataRange();
         const values = range.getValues();
 
@@ -164,18 +123,22 @@ SpreadsheetService.Replies = {
         return 1; // default to second column
     },
     addDemoData: () => {
-        const sheet = SpreadsheetApp.getActiveSpreadsheet()
-            .getSheetByName(SpreadsheetService.REPLIES_SHEET_NAME);
+        const sheet = SpreadsheetService.Replies.initialize({
+            activeSpreadsheet: SpreadsheetApp.getActiveSpreadsheet()
+        });
 
         if (!sheet) {
             throw new Error("Replies sheet does not exist. Please initialize first.");
         }
-        const baseReplies = SpreadsheetService.Replies.BASE_REPLIES();
-        baseReplies.forEach(row => sheet.appendRow(row));
+        
+        Resources.Samples.en.actions.forEach(row => sheet.appendRow(row));
     },
     getReplyByKey: (key, language_code) => {
-        const sheet = SpreadsheetApp.getActiveSpreadsheet()
-            .getSheetByName(SpreadsheetService.REPLIES_SHEET_NAME);
+        const sheet = SpreadsheetService.Replies.initialize({
+            activeSpreadsheet: SpreadsheetApp.getActiveSpreadsheet(),
+            language_code: language_code
+        });
+        
         const range = sheet.getDataRange();
         const values = range.getValues();
 

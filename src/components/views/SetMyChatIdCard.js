@@ -24,7 +24,7 @@ class SetMyChatIdCard {
                 .setPrimaryButton(CardService.newTextButton()
                     .setText(" 💾 Save")
                     .setOnClickAction(CardService.newAction()
-                        .setFunctionName('UiEventHandlers.Home.saveMyChatId')
+                        .setFunctionName('UiEventHandlers.Bot.saveMyChatId')
                     )
                 )
                 .setSecondaryButton(CardService.newTextButton()
