@@ -138,13 +138,17 @@ SpreadsheetService.Replies = {
             activeSpreadsheet: SpreadsheetApp.getActiveSpreadsheet(),
             language_code: language_code
         });
-        
+
         const range = sheet.getDataRange();
         const values = range.getValues();
+        const langColIndex = SpreadsheetService.Replies.findLanguageColumnIndex(language_code);
 
+        if (langColIndex === -1) {
+            throw new Error(`Language code "${language_code}" not found in Replies sheet.`);
+        }
         for (let row = 1; row < values.length; row++) {
             if (values[row][0] === key) {
-                return JSON.parse(values[row][1])[language_code];
+                return JSON.parse(values[row][langColIndex]);
             }
         }
         return null;
