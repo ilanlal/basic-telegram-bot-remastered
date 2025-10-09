@@ -240,8 +240,13 @@ UiEventHandlers.AutomationReplies = {
     },
     onAddAutomationClick: (e) => {
         try {
-            SpreadsheetService.Replies.addDemoData();
-
+            const userStore = UserStoreFactory.create();
+            const repliesSheetService = RepliesSheetService.create(
+                SpreadsheetApp.getActiveSpreadsheet(),
+                'en'
+            );
+            repliesSheetService.addDemoData();
+            repliesSheetService.setActiveSheet();
             return CardService.newActionResponseBuilder()
                 .setNotification(
                     CardService.newNotification()
