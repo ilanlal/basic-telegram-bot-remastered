@@ -27,7 +27,7 @@ Resources.Samples = {
             ]
         },
         actions: [
-            ['/start', {
+            ['/start', JSON.stringify( {
                 method: 'sendPhoto',
                 payload: {
                     caption: 'Hello ‼️' + '\n\n'
@@ -51,8 +51,8 @@ Resources.Samples = {
                         ]
                     }
                 }
-            }],
-            ['/help', {
+            })],
+            ['/help', JSON.stringify( {
                 method: 'editMessageMedia',
                 payload: {
                     caption: 'Hi there! How can I help you?',
@@ -64,8 +64,8 @@ Resources.Samples = {
                         ]
                     }
                 }
-            }],
-            ['/about', {
+            })],
+            ['/about', JSON.stringify( {
                 method: 'editMessageMedia',
                 payload: {
                     caption: 'Hi there! I am a simple bot that demonstrates the basic functionality of a Telegram bot.',
@@ -76,7 +76,7 @@ Resources.Samples = {
                         ]
                     }
                 }
-            }],
+            })],
         ],
     }
 }

@@ -240,7 +240,6 @@ UiEventHandlers.AutomationReplies = {
     },
     onAddAutomationClick: (e) => {
         try {
-            const userStore = UserStoreFactory.create();
             const repliesSheetService = RepliesSheetService.create(
                 SpreadsheetApp.getActiveSpreadsheet(),
                 'en'

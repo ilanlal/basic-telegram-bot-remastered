@@ -56,7 +56,8 @@ describe('RepliesSheetService', () => {
         service.addDemoData();
         const reply = service.getReplyByKey('/start', language_code);
         expect(reply).toBeDefined();
-        expect(reply.payload).toBeDefined();
+        expect(JSON.parse(reply).method).toBeDefined();
+        expect(JSON.parse(reply).payload).toBeDefined();
     });
 
     test('should return null for non-existing key', () => {

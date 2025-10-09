@@ -1,12 +1,16 @@
 class RepliesSheetService {
     static get REPLIES_SHEET_NAME() {
-        return "Replies";
+        return "🤖 Replies";
     }
 
     constructor(activeSpreadsheet = null, language_code = 'en') {
         this.language_code = language_code;
         this.activeSpreadsheet = activeSpreadsheet || SpreadsheetApp.getActiveSpreadsheet();
-        this.sheet = this.initialize();
+        this.sheet = this.activeSpreadsheet
+            .getSheetByName(RepliesSheetService.REPLIES_SHEET_NAME);
+        if (!this.sheet) {
+            this.initialize();
+        }
     }
 
     static create(activeSpreadsheet = null, language_code = 'en') {
