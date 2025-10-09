@@ -43,29 +43,6 @@ class SpreadsheetService {
         return new SpreadsheetService(activeSpreadsheet)
             .setActiveSheet(sheet);
     }
-
-    writeEvent({ dc, action, chat_id, content, event }) {
-        const sheet = this.getSheetByName(this.EVENT_LOG_SHEET_NAME);
-        const datestring = new Date().toISOString();
-        sheet.appendRow([datestring, dc, action, chat_id, content, event]);
-    }
-
-    writeError({ dc, action, chat_id, content, event }) {
-        const sheet = this.getSheetByName(this.EVENT_LOG_SHEET_NAME);
-        const datestring = new Date().toISOString();
-        sheet.appendRow([datestring, dc, action, chat_id, content, event]);
-    }
-
-    getEventLogSheet_() {
-        const monthAsNumber = new Date().getMonth() + 1;
-        return SpreadsheetApp
-            .getActiveSpreadsheet()
-            .getSheetByName(this.EVENT_LOG_SHEET_NAME + ' ' + monthAsNumber)
-            ?? SpreadsheetApp
-                .getActiveSpreadsheet()
-                .insertSheet(this.EVENT_LOG_SHEET_NAME + ' ' + monthAsNumber, 0)
-                .appendRow(['Created On', 'DC', 'Action', 'chat_id', 'content', 'event']);
-    }
 }
 
 SpreadsheetService.Events = {
@@ -88,7 +65,11 @@ SpreadsheetService.Events = {
 }
 
 SpreadsheetService.Replies = {
-    initialize: ({ activeSpreadsheet, language_code }) => {
+    initialize: (
+        activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet(),
+        language_code = UserStoreFactory.create()
+            .current.getLocalizationCode()) => {
+
         let sheet = activeSpreadsheet
             .getSheetByName(SpreadsheetService.REPLIES_SHEET_NAME);
 
@@ -108,10 +89,7 @@ SpreadsheetService.Replies = {
         return sheet;
     },
     findLanguageColumnIndex: (language_code) => {
-        const sheet = SpreadsheetService.Replies.initialize({
-            activeSpreadsheet: SpreadsheetApp.getActiveSpreadsheet(),
-            language_code: language_code
-        });
+        const sheet = SpreadsheetService.Replies.initialize();
         const range = sheet.getDataRange();
         const values = range.getValues();
 
@@ -123,21 +101,16 @@ SpreadsheetService.Replies = {
         return 1; // default to second column
     },
     addDemoData: () => {
-        const sheet = SpreadsheetService.Replies.initialize({
-            activeSpreadsheet: SpreadsheetApp.getActiveSpreadsheet()
-        });
+        const sheet = SpreadsheetService.Replies.initialize();
 
         if (!sheet) {
             throw new Error("Replies sheet does not exist. Please initialize first.");
         }
-        
+
         Resources.Samples.en.actions.forEach(row => sheet.appendRow(row));
     },
     getReplyByKey: (key, language_code) => {
-        const sheet = SpreadsheetService.Replies.initialize({
-            activeSpreadsheet: SpreadsheetApp.getActiveSpreadsheet(),
-            language_code: language_code
-        });
+        const sheet = SpreadsheetService.Replies.initialize();
 
         const range = sheet.getDataRange();
         const values = range.getValues();
@@ -152,6 +125,32 @@ SpreadsheetService.Replies = {
             }
         }
         return null;
+    },
+    listRepliesKeys: () => {
+        const sheet = SpreadsheetService.Replies.initialize();
+        const range = sheet.getDataRange();
+        const values = range.getValues();
+        const keys = [];
+        for (let row = 1; row < values.length; row++) {
+            const key = values[row][0];
+            if (key && key.trim() !== '') {
+                keys.push({ key, row });
+            }
+        }
+        return keys;
+    },
+    listLanguages: () => {
+        const sheet = SpreadsheetService.Replies.initialize();
+        const range = sheet.getDataRange();
+        const values = range.getValues();
+        const languages = [];
+        for (let col = 1; col < values[0].length; col++) {
+            const lang = values[0][col];
+            if (lang && lang.trim() !== '') {
+                languages.push({ lang, col });
+            }
+        }
+        return languages;
     }
 }
 

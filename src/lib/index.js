@@ -1,5 +1,5 @@
 const { TelegramBotClient, TelegramBotClientFactory } = require('./TelegramBotClient');
-const { Mocks } = require("./TelegramBotClientStubConfiguration.test");
+const { Mocks } = require("./tests/TelegramBotClientStubConfiguration.test");
 
 global.Mocks = Mocks;
 global.TelegramBotClient = TelegramBotClient;

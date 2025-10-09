@@ -1,5 +1,5 @@
 require("@ilanlal/gasmocks");
-require('.');
+require('..');
 
 
 describe('TelegramBotClient base definition', () => {

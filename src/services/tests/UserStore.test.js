@@ -1,6 +1,6 @@
 require("@ilanlal/gasmocks");
-require('../types'); // Ensure the model is loaded
-const { UserStore, UserStoreFactory } = require('./UserStore');
+require('../../types'); // Ensure the model is loaded
+const { UserStore, UserStoreFactory } = require('../UserStore');
 
 describe('UserStore Service Tests', () => {
     const factory = UserStoreFactory.create();
