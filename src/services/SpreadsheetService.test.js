@@ -74,6 +74,6 @@ describe('SpreadsheetService.Replies', () => {
         SpreadsheetService.Replies.addDemoData();
         const sheet = SpreadsheetApp.getActiveSpreadsheet()
             .getSheetByName(SpreadsheetService.REPLIES_SHEET_NAME);
-        expect(sheet.getLastRow()).toBeGreaterThan(1); // Header + demo data
+        expect(sheet.getLastRow()).toBeGreaterThan(3); // Header + demo data
     });
 });
