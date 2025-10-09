@@ -68,7 +68,8 @@ SpreadsheetService.Replies = {
     initialize: (
         activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet(),
         language_code = UserStoreFactory.create()
-            .current.getLocalizationCode()) => {
+            .current.getLocalizationCode() || 'preferred_language'
+    ) => {
 
         let sheet = activeSpreadsheet
             .getSheetByName(SpreadsheetService.REPLIES_SHEET_NAME);
@@ -77,14 +78,6 @@ SpreadsheetService.Replies = {
             sheet = activeSpreadsheet
                 .insertSheet(SpreadsheetService.REPLIES_SHEET_NAME);
             sheet.appendRow(['key', language_code]);
-        }
-        else {
-            const index = SpreadsheetService.Replies
-                .findLanguageColumnIndex(language_code);
-            if (index === -1) {
-                const lastCol = sheet.getLastColumn();
-                sheet.getRange(1, lastCol + 1).setValue(language_code);
-            }
         }
         return sheet;
     },
@@ -98,15 +91,10 @@ SpreadsheetService.Replies = {
                 return col;
             }
         }
-        return 1; // default to second column
+        return -1; // default to second column
     },
     addDemoData: () => {
         const sheet = SpreadsheetService.Replies.initialize();
-
-        if (!sheet) {
-            throw new Error("Replies sheet does not exist. Please initialize first.");
-        }
-
         Resources.Samples.en.actions.forEach(row => sheet.appendRow(row));
     },
     getReplyByKey: (key, language_code) => {
@@ -121,7 +109,7 @@ SpreadsheetService.Replies = {
         }
         for (let row = 1; row < values.length; row++) {
             if (values[row][0] === key) {
-                return JSON.parse(values[row][langColIndex]);
+                return values[row][langColIndex];
             }
         }
         return null;

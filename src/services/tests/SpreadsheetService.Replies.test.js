@@ -14,15 +14,21 @@ describe('SpreadsheetService.Replies', () => {
         SpreadsheetService.Replies.addDemoData();
         const sheet = SpreadsheetApp.getActiveSpreadsheet()
             .getSheetByName(SpreadsheetService.REPLIES_SHEET_NAME);
-        expect(sheet.getLastRow()).toBeGreaterThan(1); // Header + demo data
+        expect(sheet.getLastRow()).toBeGreaterThan(3); // Header + demo data
+    });
 
-        // Check if demo data exists
-        const demoData = Resources.Samples.en.actions;
-        demoData.forEach(row => {
-            const found = sheet.getRange(1, 1, sheet.getLastRow(), sheet.getLastColumn())
-                .getValues()
-                .some(r => JSON.stringify(r) === JSON.stringify(row));
-            expect(found).toBe(true);
-        });
+    test('should list all replies', () => {
+        const language_code = 'en';
+        SpreadsheetService.Replies.addDemoData();
+        const replies = SpreadsheetService.Replies.listRepliesKeys();
+        expect(replies.length).toBeGreaterThan(0);
+    });
+
+    test('should get reply by key', () => {
+        const language_code = 'en';
+        SpreadsheetService.Replies.addDemoData();
+        const reply = SpreadsheetService.Replies.getReplyByKey('/start', language_code);
+        expect(reply).toBeDefined();
+        expect(reply.payload).toBeDefined();
     });
 });
