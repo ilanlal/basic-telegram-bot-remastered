@@ -3,6 +3,18 @@ class BotSetupCard {
         return 'botSetupCard';
     }
 
+    static get LANGUAGE_INPUT_ID() {
+        return 'DEFAULT_LANGUAGE';
+    }
+
+    static get DEPLOYMENT_ID_INPUT_ID() {
+        return 'DEPLOYMENT_ID';
+    }
+
+    static get MY_CHAT_ID_INPUT_ID() {
+        return 'MY_CHAT_ID';
+    }
+
     constructor(model) {
         this._model = model;
     }
@@ -23,11 +35,18 @@ class BotSetupCard {
             .addSection(CardService.newCardSection()
                 .addWidget(BotSetupCard.Widgets.BOT_TOKEN(this._model.state))
                 .addWidget(BotSetupCard.Widgets.DEPLOYMENT_ID(this._model.state))
-                .addWidget(BotSetupCard.Widgets.WEBHOOK_STATUS(this._model.state))
-                .addWidget(BotSetupCard.Widgets.CHAT_ID(this._model.state)))
+                .addWidget(BotSetupCard.Widgets.CHAT_ID(this._model.state))
+                .addWidget(BotSetupCard.Widgets.WEBHOOK_STATUS(this._model.state)))
+
             .setFixedFooter(CardService.newFixedFooter()
                 .setPrimaryButton(CardService.newTextButton()
-                    .setText(' ❌ Close')
+                    .setText(' 💾 Save')
+                    .setOnClickAction(CardService.newAction()
+                        .setFunctionName('UiEventHandlers.Bot.onSaveBotSetupSettingsClick')
+                    )
+                )
+                .setSecondaryButton(CardService.newTextButton()
+                    .setText(' ❌ Cancel')
                     .setOnClickAction(CardService.newAction()
                         .setFunctionName('UiEventHandlers.back')
                     )
@@ -41,31 +60,35 @@ BotSetupCard.Widgets = {
     BOT_TOKEN: (state = null) =>
         CardService.newDecoratedText()
             .setBottomLabel(`${state.botTokenSet ? '🟢 Set' : '🔴 Not Set'}`)
-            .setText('Bot Token')
+            .setText(`${state.botToken || '[Not Set]'}`)
             .setTopLabel('Bot Information')
             //.setBottomLabel(`Bot status: ${state.botTokenSet || 'Not Configured'}`)
             .setButton(BotSetupCard.Buttons.REGISTER_NEW_BOT(state)),
     WEBHOOK_STATUS: (state = null) =>
         CardService.newDecoratedText()
-            //.setWrapText(true)
+            .setWrapText(true)
             .setBottomLabel(`${state.webhookSet ? '🟢 Set' : '🔴 Not Set'}`)
             .setText('Webhook Status')
             .setButton(state.webhookSet ? BotSetupCard.Buttons.UNSET_WEBHOOK(state) : BotSetupCard.Buttons.ACTIVATE_WEBHOOK(state))
             .setTopLabel(`${state.webhookUrl || '[Not Set]'}`),
     CHAT_ID: (state = null) =>
-        CardService.newDecoratedText()
-            .setWrapText(true)
-            .setTopLabel('Chat ID')
-            .setText('Chat ID')
-            .setBottomLabel('Chat ID')
-            .setButton(BotSetupCard.Buttons.SET_MY_CHAT_ID(state)),
+        CardService.newTextInput()
+            .setFieldName(BotSetupCard.MY_CHAT_ID_INPUT_ID)
+            .setTitle('Chat ID')
+            .setHint('Enter your chat ID here')
+            .setValue(state.chatId || ''),
     DEPLOYMENT_ID: (state = null) =>
-        CardService.newDecoratedText()
-            .setWrapText(true)
-            .setTopLabel(`${state.deploymentId !== '' ? state.deploymentId : 'No Deployment ID'}`)
-            .setText('Configure your deployment id')
-            .setBottomLabel(`${state.deploymentId !== '' ? '🟢 Set' : '🔴 Not Set'}`)
-            .setButton(BotSetupCard.Buttons.SET_DEPLOYMENT_ID(state))
+        CardService.newTextInput()
+            .setFieldName(BotSetupCard.DEPLOYMENT_ID_INPUT_ID)
+            .setTitle('Deployment ID')
+            .setHint('Enter your deployment ID here')
+            .setValue(state.deploymentId || ''),
+    DEFAULT_LANGUAGE: (state = null) =>
+        CardService.newTextInput()
+            .setFieldName(BotSetupCard.LANGUAGE_INPUT_ID)
+            .setTitle('Default Language')
+            .setHint('Enter your default language here (e.g., en, es, fr)')
+            .setValue(state.defaultLanguage || '')
 };
 
 BotSetupCard.Buttons = {

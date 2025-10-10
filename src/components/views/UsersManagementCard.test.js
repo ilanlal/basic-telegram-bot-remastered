@@ -1,14 +1,14 @@
 require('@ilanlal/gasmocks');
 require("../models");
 
-const { UsersManagementCard } = require('./UsersManagementCard');
+const UsersManagementCard = require('./UsersManagementCard');
 
 describe('UsersManagementCard', () => {
     it('should create an instance of UsersManagementCard', () => {
         const card = UsersManagementCard.create();
         expect(card).toBeInstanceOf(UsersManagementCard);
     });
-
+ 
     it('should build a card with expected sections and widgets', () => {
         const card = UsersManagementCard.create();
         const builtCard = card.build();

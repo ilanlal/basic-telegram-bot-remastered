@@ -4,12 +4,8 @@ const AboutCard = require('./AboutCard');
 const AccountCard = require('./AccountCard');
 const BotSetupCard = require('./BotSetupCard');
 const BotAutomationsCard = require('./BotAutomationsCard');
-const { UsersManagementCard } = require('./UsersManagementCard');
-const { NewDeploymentIdCard } = require('./NewDeploymentIdCard');
-const { SetMyChatIdCard } = require('./SetMyChatIdCard');
+const UsersManagementCard = require('./UsersManagementCard');
 
-global.SetMyChatIdCard = SetMyChatIdCard;
-global.NewDeploymentIdCard = NewDeploymentIdCard;
 global.UsersManagementCard = UsersManagementCard;
 global.HomeCard = HomeCard;
 global.NewBotTokenCard = NewBotTokenCard;
