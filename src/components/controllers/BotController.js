@@ -8,7 +8,7 @@ class BotController {
         this._userStore = userStore;
     }
 
-    static create(userStore = new UserStore()) {
+    static create(userStore = UserStoreFactory.create().current) {
         return new BotController(userStore);
     }
 
@@ -61,14 +61,24 @@ class BotController {
         if (!chat_id || isNaN(chat_id)) {
             throw new Error("Invalid chat_id");
         }
-        return this._userStore.setMyChatId(chat_id);
+        this._userStore.setMyChatId(chat_id);
+        return this;
     }
 
     saveDeploymentId(deploymentId) {
         if (!deploymentId || typeof deploymentId !== 'string') {
             throw new Error("Invalid deploymentId");
         }
-        return this._userStore.setDeploymentId(deploymentId);
+        this._userStore.setDeploymentId(deploymentId);
+        return this;
+    }
+
+    saveDefaultLanguage(languageCode) {
+        if (!languageCode || typeof languageCode !== 'string') {
+            throw new Error("Invalid language code");
+        }
+        this._userStore.setLocalizationCode(languageCode);
+        return this;
     }
 }
 

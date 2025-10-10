@@ -116,10 +116,10 @@ UiEventHandlers.Bot = {
             const newDeploymentId = formInputs['DEPLOYMENT_ID']?.stringInputs.value[0];
             const newChatId = formInputs['MY_CHAT_ID']?.stringInputs.value[0]; // Assuming 'myChatId' is the input field name
 
-            const response = BotController.create(UserStoreFactory.create().current)
+            BotController.create(UserStoreFactory.create().current)
                 .saveDeploymentId(newDeploymentId)
                 .saveMyChatId(newChatId)
-                .setNewDefaultLanguage(newLanguageCode);
+                .saveDefaultLanguage(newLanguageCode);
 
             return NavigationController.create(UserStoreFactory.create().current)
                 .reload()
