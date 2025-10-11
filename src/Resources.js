@@ -5,11 +5,13 @@ class Resources {
 Resources.Samples = {
     en: {
         bot: {
-            name: 'Basic Telegram Bot Machine',
-            short_description: 'BTB Machine - A simple bot that demonstrates the basic functionality of a Telegram bot.',
+            name: 'Bot Machine',
+            short_description: 'BotMac - Open Source Telegram Bot Framework.',
             description: 'This bot demonstrates the basic functionality of a Telegram bot. It provides the following commands:\n\n' +
                 '/start - Start the bot\n' +
+                '/home - Home (This command will show you main menu, home page)\n' +
                 '/howami - Who am I? (This command will tell you about yourself and your "chat_id")\n' +
+                '/whoru - Who are you? (This command will tell you about the bot)\n' +
                 '/help - Get help on using the bot, or report an issue\n' +
                 '/about - About the bot',
             commands: [
@@ -18,8 +20,20 @@ Resources.Samples = {
                     description: 'Start the bot'
                 },
                 {
+                    command: '/home',
+                    description: 'Home (This command will show you main menu, home page)'
+                },
+                {
+                    command: '/howami',
+                    description: 'Who am I? (This command will tell you about yourself and your "chat_id")'
+                },
+                {
+                    command: '/whoru',
+                    description: 'Who are you? (This command will tell you about the bot)'
+                },
+                {
                     command: '/help',
-                    description: 'Get help'
+                    description: 'Get help on using the bot, or report an issue'
                 },
                 {
                     command: '/about',
