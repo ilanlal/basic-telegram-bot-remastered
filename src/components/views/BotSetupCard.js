@@ -36,8 +36,8 @@ class BotSetupCard {
                 .addWidget(BotSetupCard.Widgets.BOT_TOKEN(this._model.state))
                 .addWidget(BotSetupCard.Widgets.DEPLOYMENT_ID(this._model.state))
                 .addWidget(BotSetupCard.Widgets.CHAT_ID(this._model.state))
+                .addWidget(BotSetupCard.Widgets.DEFAULT_LANGUAGE(this._model.state))
                 .addWidget(BotSetupCard.Widgets.WEBHOOK_STATUS(this._model.state)))
-
             .setFixedFooter(CardService.newFixedFooter()
                 .setPrimaryButton(CardService.newTextButton()
                     .setText(' 💾 Save')
