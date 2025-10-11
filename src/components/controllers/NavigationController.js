@@ -3,7 +3,7 @@ class NavigationController {
         this._userStore = userStore;
     }
 
-    static create(userStore = new UserStore()) {
+    static create(userStore = UserStoreFactory.create().current) {
         return new NavigationController(userStore);
     }
 
@@ -82,7 +82,7 @@ class NavigationController {
         return CardService.newActionResponseBuilder()
             .setNavigation(CardService
                 .newNavigation()
-                .pushCard(AboutCard.create({ packageInfo })                    
+                .pushCard(AboutCard.create({ packageInfo })
                     .build()));
     }
 

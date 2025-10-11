@@ -80,9 +80,9 @@ HomeCard.Layout = {
 HomeCard.Widgets = {
     SETUP: (state = null) =>
         CardService.newDecoratedText()
-            .setBottomLabel(`${state.botTokenSet ? '🟢 Set' : '🔴 Not Set'}`)
-            .setText('Bot Token')
-            .setTopLabel('Bot Information')
+            .setBottomLabel(`${state.botTokenSet ? '🟢' : '🔴'} ${state.webhookSet ? '🟢' : '🔴'} ${state.defaultLanguageSet ? '🟢' : '🔴'} ${state.chatIdSet ? '🟢' : '🔴'}`)
+            .setText('Bot setup')
+            .setTopLabel('Welcome to Basic Telegram Bot')
             //.setBottomLabel(`Bot status: ${state.botTokenSet || 'Not Configured'}`)
             .setButton(HomeCard.Buttons.BOT_SETUP(state)),
     BOT_SETTINGS: (state = null) =>

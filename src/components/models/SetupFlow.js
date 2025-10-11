@@ -8,7 +8,9 @@ class SetupFlow {
             webhookUrl: this.webhookUrl,
             webhookSet: !!this.webhookUrl,
             chatId: this._userStore.getMyChatId(),
-            chatIdSet: !!this._userStore.getMyChatId()
+            chatIdSet: !!this._userStore.getMyChatId(),
+            defaultLanguage: this._userStore.getLocalizationCode(),
+            defaultLanguageSet: !!this._userStore.getLocalizationCode(),
         }
     }
 
@@ -42,6 +44,13 @@ class SetupFlow {
         }
         this._userStore = userStore;
         this._telegramBotClient = null;
+    }
+
+    setNewDefaultLanguage(code) {
+        if (!code || typeof code !== 'string' || code.trim() === '') {
+            throw new Error("Invalid language code");
+        }
+        return this._userStore.setLocalizationCode(code);
     }
 
     setNewBotToken(token) {

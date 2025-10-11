@@ -16,6 +16,13 @@ describe('SetupFlow', () => {
         expect(model).toBeInstanceOf(SetupFlow);
     });
 
+    // setNewDefaultLanguage
+    test('should set a new default language', () => {
+        const newLanguageCode = 'es';
+        model.setNewDefaultLanguage(newLanguageCode);
+        expect(model.state.defaultLanguage).toBe(newLanguageCode);
+    });
+    
     // setNewBotToken
     test('should set a new bot token', () => {
         const newToken = '[DUMMY_BOT_TOKEN]';

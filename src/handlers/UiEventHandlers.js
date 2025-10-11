@@ -112,9 +112,18 @@ UiEventHandlers.Bot = {
                 throw new Error("Form inputs are missing");
             }
 
-            const newBotToken = formInputs['BOT_TOKEN']?.stringInputs.value[0];
-            const newDeploymentId = formInputs['deploymentId']?.stringInputs.value[0];
-            const newChatId = formInputs['myChatId']?.stringInputs.value[0]; // Assuming 'myChatId' is the input field name
+            const newLanguageCode = formInputs['DEFAULT_LANGUAGE']?.stringInputs.value[0];
+            const newDeploymentId = formInputs['DEPLOYMENT_ID']?.stringInputs.value[0];
+            const newChatId = formInputs['MY_CHAT_ID']?.stringInputs.value[0]; // Assuming 'myChatId' is the input field name
+
+            BotController.create(UserStoreFactory.create().current)
+                .saveDeploymentId(newDeploymentId)
+                .saveMyChatId(newChatId)
+                .saveDefaultLanguage(newLanguageCode);
+
+            return NavigationController.create(UserStoreFactory.create().current)
+                .reload()
+                .build();
         } catch (error) {
             return UiEventHandlers.handleError(error)
                 .build();
@@ -128,10 +137,10 @@ UiEventHandlers.Bot = {
 
             //const client = new TelegramBotClient(botToken);
 
-            const response = BotController.create(this._userStore)
+            const response = BotController.create(UserStoreFactory.create().current)
                 .registerBotToken(botToken);
 
-            return NavigationController.create(this._userStore)
+            return NavigationController.create(UserStoreFactory.create().current)
                 .reload()
                 .build();
         } catch (error) {
@@ -146,7 +155,7 @@ UiEventHandlers.Bot = {
                 throw new Error("Form inputs are missing");
             }
 
-            return BotController.create(this._userStore)
+            return BotController.create(UserStoreFactory.create().current)
                 .saveBotSettings(e);
         } catch (error) {
             throw error;
@@ -159,10 +168,10 @@ UiEventHandlers.Bot = {
                 throw new Error("Form inputs are missing");
             }
             const deploymentId = formInputs?.['deploymentId']?.stringInputs.value[0];
-            const response = BotController.create(this._userStore)
-                .saveDeploymentId(edeploymentId);
+            const response = BotController.create(UserStoreFactory.create().current)
+                .saveDeploymentId(deploymentId);
 
-            return NavigationController.create(this._userStore)
+            return NavigationController.create(UserStoreFactory.create().current)
                 .reload()
                 .build();
 
@@ -178,10 +187,10 @@ UiEventHandlers.Bot = {
                 throw new Error("Form inputs are missing");
             }
             const chatId = parseInt(formInputs?.['myChatId']?.stringInputs.value[0]); // Assuming 'myChatId' is the input field name
-            const response = BotController.create(this._userStore)
+            const response = BotController.create(UserStoreFactory.create().current)
                 .saveMyChatId(chatId);
 
-            return NavigationController.create(this._userStore)
+            return NavigationController.create(UserStoreFactory.create().current)
                 .reload()
                 .build();
         } catch (error) {
@@ -190,10 +199,10 @@ UiEventHandlers.Bot = {
     },
     setWebhook: (e) => {
         try {
-            const response = BotController.create(this._userStore)
+            const response = BotController.create(UserStoreFactory.create().current)
                 .setWebhook();
 
-            return NavigationController.create(this._userStore)
+            return NavigationController.create(UserStoreFactory.create().current)
                 .reload()
                 .build();
         } catch (error) {
@@ -207,10 +216,10 @@ UiEventHandlers.Bot = {
                 throw new Error("Form inputs are missing");
             }
             const chatId = parseInt(formInputs?.['chatId']?.stringInputs.value[0]); // Assuming 'chatId' is the input field name
-            const response = BotController.create(this._userStore)
+            const response = BotController.create(UserStoreFactory.create().current)
                 .saveMyChatId(chatId);
 
-            return NavigationController.create(this._userStore)
+            return NavigationController.create(UserStoreFactory.create().current)
                 .reload()
                 .build();
         } catch (error) {
@@ -219,10 +228,10 @@ UiEventHandlers.Bot = {
     },
     deleteWebhook: (e) => {
         try {
-            const response = BotController.create(this._userStore)
+            const response = BotController.create(UserStoreFactory.create().current)
                 .deleteWebhook();
 
-            return NavigationController.create(this._userStore)
+            return NavigationController.create(UserStoreFactory.create().current)
                 .reload()
                 .build();
         } catch (error) {

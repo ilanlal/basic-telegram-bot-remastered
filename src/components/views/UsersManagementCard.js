@@ -1,5 +1,5 @@
 class UsersManagementCard {
-    static get CARD_NAME () {
+    static get CARD_NAME() {
         return "usersManagementCard";
     }
 
@@ -13,7 +13,7 @@ class UsersManagementCard {
     static create(model) {
         return new UsersManagementCard(model);
     }
-    
+
     build() {
         const cardBuilder = CardService.newCardBuilder()
             .setName(UsersManagementCard.CARD_NAME)
@@ -36,5 +36,5 @@ class UsersManagementCard {
 }// --- IGNORE (for Node.js support) --- //
 
 if (typeof module !== "undefined" && module.exports) {
-    module.exports = { UsersManagementCard };
+    module.exports = UsersManagementCard;
 }

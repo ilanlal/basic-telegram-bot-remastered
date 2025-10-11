@@ -55,6 +55,35 @@ describe('UiEventHandlers.Home Tests', () => {
 
 // UiEventHandlers.Bot Tests
 describe('UiEventHandlers.Bot Tests', () => {
+
+    // onSaveBotSetupSettingsClick
+    test('onSaveBotSetupSettingsClick should return a CardService.ActionResponse', () => {
+        const mockEvent = {
+            commonEventObject: {
+                formInputs: {
+                    ['DEFAULT_LANGUAGE']: {
+                        stringInputs: {
+                            value: ["es"]
+                        }
+                    },
+                    ['DEPLOYMENT_ID']: {
+                        stringInputs: {
+                            value: ["test-deployment-id"]
+                        }
+                    },
+                    ['MY_CHAT_ID']: {
+                        stringInputs: {
+                            value: ["123456789"]
+                        }
+                    }
+                }
+            }
+        };
+        const actionResponse = UiEventHandlers.Bot.onSaveBotSetupSettingsClick(mockEvent);
+        expect(actionResponse).toBeDefined();
+    });
+
+
     // saveNewBotToken
     test('saveNewBotToken should return a CardService.ActionResponse', () => {
         const mockEvent = {

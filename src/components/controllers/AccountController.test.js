@@ -1,7 +1,7 @@
-/* eslint-disable no-undef */
+require("@ilanlal/gasmocks");
+
 require('../../types'); // Ensure the model is loaded
 require('../views'); // Ensure the view component is loaded
-require("@ilanlal/gasmocks");
 require('../../lib/TelegramBotClient'); // Ensure the lib is loaded
 require('../../services'); // Ensure the service is loaded
 
