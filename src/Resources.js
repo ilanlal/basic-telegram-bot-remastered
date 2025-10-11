@@ -3,7 +3,7 @@ class Resources {
 }
 
 Resources.Samples = {
-    en: {
+    default: {
         bot: {
             name: 'Bot Machine',
             short_description: 'BotMac - Open Source Telegram Bot Framework.',
@@ -42,7 +42,7 @@ Resources.Samples = {
             ]
         },
         actions: [
-            ['/start', JSON.stringify( {
+            ['/start', JSON.stringify({
                 method: 'sendPhoto',
                 payload: {
                     caption: 'Hello ‼️' + '\n\n'
@@ -67,7 +67,7 @@ Resources.Samples = {
                     }
                 }
             })],
-            ['/help', JSON.stringify( {
+            ['/help', JSON.stringify({
                 method: 'editMessageMedia',
                 payload: {
                     caption: 'Hi there! How can I help you?',
@@ -80,7 +80,7 @@ Resources.Samples = {
                     }
                 }
             })],
-            ['/about', JSON.stringify( {
+            ['/about', JSON.stringify({
                 method: 'editMessageMedia',
                 payload: {
                     caption: 'Hi there! I am a simple bot that demonstrates the basic functionality of a Telegram bot.',
@@ -93,10 +93,19 @@ Resources.Samples = {
                     }
                 }
             })],
-        ],
+        ]
     }
+};
+
+Resources.Languages = {
+    en: Resources.Samples.default,
+    es: Resources.Samples.default,
+    fr: Resources.Samples.default,
+    de: Resources.Samples.default,
+    it: Resources.Samples.default,
+    ja: Resources.Samples.default
 }
 
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { Resources }; 
+    module.exports = { Resources };
 }
