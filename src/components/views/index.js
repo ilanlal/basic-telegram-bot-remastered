@@ -5,6 +5,7 @@ const AccountCard = require('./AccountCard');
 const BotSetupCard = require('./BotSetupCard');
 const BotAutomationsCard = require('./BotAutomationsCard');
 const UsersManagementCard = require('./UsersManagementCard');
+const SettingsCard = require('./SettingsCard');
 
 global.UsersManagementCard = UsersManagementCard;
 global.HomeCard = HomeCard;
@@ -13,3 +14,4 @@ global.AboutCard = AboutCard;
 global.AccountCard = AccountCard;
 global.BotSetupCard = BotSetupCard;
 global.BotAutomationsCard = BotAutomationsCard;
+global.SettingsCard = SettingsCard;

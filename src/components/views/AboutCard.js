@@ -1,5 +1,3 @@
-/* eslint-disable no-undef */
-
 class AboutCard {
   static get CARD_NAME() {
     return 'aboutCard';
