@@ -95,7 +95,12 @@ Resources.Samples = {
                     reply_markup: {
                         inline_keyboard: [
                             [{ text: "YouTube™", web_app: { url: "https://www.youtube.com" } }],
-                            [{ text: "Who am I", callback_data: "code=whoami" }],
+                            [{ text: "Send Message", callback_data: "sendMessage" }],
+                            [{ text: "Send Photo", callback_data: "sendPhoto" }],
+                            [{ text: "Send Media Group", callback_data: "sendMediaGroup" }],
+                            [{ text: "How Am I?", callback_data: "/howami" }],
+                            [{ text: "Who Are You?", callback_data: "/whoru" }],
+                            // Two buttons in one row
                             [
                                 { text: 'Help', callback_data: "action=help" },
                                 { text: 'About', callback_data: "action=about" }
@@ -134,6 +139,83 @@ Resources.Samples = {
                 method: 'sendMessage',
                 payload: {
                     text: 'Oops! Command not found. Please use /help to see the list of available commands.',
+                    parse_mode: 'HTML',
+                    reply_markup: {
+                        inline_keyboard: [
+                            [{ text: "Home", callback_data: "/home" }]
+                        ]
+                    }
+                }
+            })],
+            ['sendMessage', JSON.stringify({
+                method: 'sendMessage',
+                payload: {
+                    text: 'Hello! This is a sample message. You can customize this message as needed. \n\n'
+                        + 'Feel free to explore and interact with the bot!'
+                        + '\n\n'
+                        + 'When "parse_mode" is set to HTML or Markdown, you can use the following formatting options:\n\n'
+                        + '<b>Bold</b>, <strong>Bold</strong>\n'
+                        + '<i>Italic</i>, <em>Italic</em>\n'
+                        + '<u>Underline</u>\n'
+                        + '<s>Strikethrough</s>\n'
+                        + '<code>Code</code>\n'
+                        + '<blockquote> Sample Blockquote: \n'
+                        + 'This is a simple bot that demonstrates the basic functionality of a Telegram bot.'
+                        + 'It provides the following commands:\n\n'
+                        + '</blockquote>'
+                        + '<blockquote expandable> Sample Expandable Block: \n'
+                        + 'This is a simple bot that demonstrates the basic functionality of a Telegram bot.'
+                        + 'It provides the following commands:\n\n'
+                        + '</blockquote>',
+                    parse_mode: 'HTML',
+                    reply_markup: {
+                        inline_keyboard: [
+                            [{ text: "Home", callback_data: "/home" }]
+                        ]
+                    }
+                }
+            })],
+            ['sendPhoto', JSON.stringify({
+                method: 'sendPhoto',
+                payload: {
+                    caption: 'This is a sample photo. You can customize this caption as needed. \n\n'
+                        + 'Feel free to explore and interact with the bot!'
+                        + '\n\n'
+                        + 'When "parse_mode" is set to HTML or Markdown, you can use the following formatting options:\n\n'
+                        + '<b>Bold</b>, <strong>Bold</strong>\n'
+                        + '<i>Italic</i>, <em>Italic</em>\n'
+                        + '<u>Underline</u>\n'
+                        + '<s>Strikethrough</s>\n'
+                        + '<code>Code</code>\n',
+                    photo: "https://www.gstatic.com/webp/gallery/1.jpg",
+                    parse_mode: 'HTML',
+                    reply_markup: {
+                        inline_keyboard: [
+                            [{ text: "Home", callback_data: "/home" }]
+                        ]
+                    }
+                }
+            })],
+            ['sendMediaGroup', JSON.stringify({
+                method: 'sendMediaGroup',
+                payload: {
+                    media: [
+                        {
+                            type: 'photo',
+                            media: 'https://www.gstatic.com/webp/gallery/1.jpg',
+                            caption: 'Photo 1 <b>Bold</b>, <strong>Bold</strong>\n<i>Italic</i>, <em>Italic</em>\n<u>Underline</u>\n<s>Strikethrough</s>\n<code>Code</code>'
+                        },
+                        {
+                            type: 'photo',
+                            media: 'https://www.gstatic.com/webp/gallery/2.jpg',
+                            caption: 'Photo 2 <b>Bold</b>, <strong>Bold</strong>\n<i>Italic</i>, <em>Italic</em>\n<u>Underline</u>\n<s>Strikethrough</s>\n<code>Code</code>'
+                        },
+                        {
+                            type: 'photo',
+                            media: 'https://www.gstatic.com/webp/gallery/3.jpg',
+                            caption: 'Photo 3 <b>Bold</b>, <strong>Bold</strong>\n<i>Italic</i>, <em>Italic</em>\n<u>Underline</u>\n<s>Strikethrough</s>\n<code>Code</code>'
+                        }
+                    ],
                     parse_mode: 'HTML',
                     reply_markup: {
                         inline_keyboard: [
