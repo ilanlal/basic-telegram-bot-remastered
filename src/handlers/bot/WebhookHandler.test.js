@@ -1,7 +1,7 @@
 require('@ilanlal/gasmocks');
-require('../services');
-require('../handlers');
-require('.');
+require('../../services');
+require('..');
+require('..');
 const { WebhookHandler } = require('./WebhookHandler');
 
 describe('WebhookHandler', () => {
