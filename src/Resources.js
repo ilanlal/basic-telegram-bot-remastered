@@ -5,11 +5,12 @@ class Resources {
 Resources.Samples = {
     en: {
         bot: {
-            name: 'Basic Telegram Bot',
-            short_description: 'A simple bot that demonstrates the basic functionality of a Telegram bot.',
+            name: 'Basic Telegram Bot Machine',
+            short_description: 'BTB Machine - A simple bot that demonstrates the basic functionality of a Telegram bot.',
             description: 'This bot demonstrates the basic functionality of a Telegram bot. It provides the following commands:\n\n' +
                 '/start - Start the bot\n' +
-                '/help - Get help\n' +
+                '/howami - Who am I? (This command will tell you about yourself and your "chat_id")\n' +
+                '/help - Get help on using the bot, or report an issue\n' +
                 '/about - About the bot',
             commands: [
                 {
@@ -72,6 +73,7 @@ Resources.Samples = {
                     media: "https://www.gstatic.com/webp/gallery/3.jpg",
                     reply_markup: {
                         inline_keyboard: [
+                            [{ text: "GitHub", web_app: { url: "https://github.com/ilanlal/basic-telegram-bot-remastered#readme" } }],
                             [{ text: "BACK", callback_data: "action=start" }]
                         ]
                     }
