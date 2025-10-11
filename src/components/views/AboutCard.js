@@ -10,15 +10,14 @@ class AboutCard {
 
     this._view = {
       header: () => CardService.newCardHeader()
-        .setTitle('About')
-        .setSubtitle(this._model.packageInfo.version || '')
+        .setTitle('🗨️ About')
+        .setSubtitle('A simple Telegram bot powered by Google Apps Script.')
         .setImageStyle(CardService.ImageStyle.SQUARE)
         .setImageUrl('https://raw.githubusercontent.com/ilanlal/basic-telegram-bot-remastered/refs/heads/vnext/assets/logo128.png'),
-      body: () => CardService.newCardSection()
+      topSection: () => CardService.newCardSection()
         .addWidget(CardService.newTextParagraph()
-          .setText(`Version: ${this._model.packageInfo.version || 'N/A'} (Build ${this._model.packageInfo.build || 'N/A'})`))
-        .addWidget(CardService.newTextParagraph()
-          .setText('A simple Telegram bot powered by Google Apps Script.'))
+          .setText(`Version: ${this._model.packageInfo.version || 'N/A'} (Build ${this._model.packageInfo.build || 'N/A'})`)),
+      bottomSection: () => CardService.newCardSection()
         .addWidget(CardService.newTextParagraph()
           .setText(`Author: ${this._model.packageInfo.author || 'N/A'}`))
         .addWidget(CardService.newTextParagraph()
@@ -39,7 +38,8 @@ class AboutCard {
     return CardService.newCardBuilder()
       .setName(AboutCard.CARD_NAME)
       .setHeader(this._view.header())
-      .addSection(this._view.body())
+      .addSection(this._view.topSection())
+      .addSection(this._view.bottomSection())
       .build();
   }
 }

@@ -21,8 +21,8 @@ describe("Test AboutCard", () => {
         expect(cardData).toBeDefined();
         expect(cardData.name).toBe(AboutCard.CARD_NAME);
         expect(cardData.header).toBeDefined();
-        expect(cardData.header.title).toBe("About");
-        expect(cardData.header.subTitle).toBe("1.0.0");
+        expect(cardData.header.title).toBe("🗨️ About");
+        expect(cardData.header.subTitle).toBe("A simple Telegram bot powered by Google Apps Script.");
         
     });
 });
