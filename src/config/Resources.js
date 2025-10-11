@@ -4,6 +4,11 @@ class Resources {
     static get author() { return '<Ilan Lal>(https://github.com/ilanlal)'; }
     static get license() { return 'MIT'; }
     static get repository() { return 'https://github.com/ilanlal/basic-telegram-bot-remastered'; }
+    static getVersion() { return Resources.version; }
+    static getBuild() { return Resources.build; }
+    static getAuthor() { return Resources.author; }
+    static getLicense() { return Resources.license; }
+    static getRepository() { return Resources.repository; }
 }
 
 Resources.Samples = {

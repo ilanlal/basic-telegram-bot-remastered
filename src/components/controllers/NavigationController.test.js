@@ -3,6 +3,7 @@ require('../../services');
 require('../models');
 require('../views');
 require('../../types');
+require('../../config');
 const { NavigationController } = require('./NavigationController');
 
 describe('NavigationController', () => {

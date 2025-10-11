@@ -2,6 +2,7 @@ require('@ilanlal/gasmocks');
 require('../lib');
 require('../services');
 require('../types');
+require('../config');
 require('../components/controllers');
 require('../components/views');
 require('../components/models');
