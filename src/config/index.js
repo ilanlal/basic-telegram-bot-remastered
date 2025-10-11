@@ -1,3 +1,3 @@
-const { Resources } = require('./Resources');
+const { Config } = require('./Config');
 
-global.Resources = Resources;
+global.Config = Config;

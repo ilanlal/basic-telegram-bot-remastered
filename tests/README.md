@@ -4,7 +4,7 @@ This directory contains test files for the Basic Telegram Bot Remastered project
 
 ## Strategy
 
-The tests are organized into separate files based on the service or component being tested. Each test file includes necessary imports and setups, such as mocking the `Resources` configuration.
+The tests are organized into separate files based on the service or component being tested. Each test file includes necessary imports and setups, such as mocking the `Config` configuration.
 
 Each test file follows a similar structure, starting with necessary imports, setting up global configurations, and defining test cases using `describe` and `test` blocks.
 

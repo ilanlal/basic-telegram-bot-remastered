@@ -1,17 +1,17 @@
-class Resources {
+class Config {
     static get version() { return '1.0.1'; }
     static get build() { return '20251011.183400'; }
     static get author() { return '<Ilan Lal>(https://github.com/ilanlal)'; }
     static get license() { return 'MIT'; }
     static get repository() { return 'https://github.com/ilanlal/basic-telegram-bot-remastered'; }
-    static getVersion() { return Resources.version; }
-    static getBuild() { return Resources.build; }
-    static getAuthor() { return Resources.author; }
-    static getLicense() { return Resources.license; }
-    static getRepository() { return Resources.repository; }
+    static getVersion() { return Config.version; }
+    static getBuild() { return Config.build; }
+    static getAuthor() { return Config.author; }
+    static getLicense() { return Config.license; }
+    static getRepository() { return Config.repository; }
 }
 
-Resources.Samples = {
+Config.Samples = {
     default: {
         bot: {
             name: 'Bot Machine',
@@ -228,11 +228,11 @@ Resources.Samples = {
     }
 };
 
-Resources.Languages = {
-    en: Resources.Samples.default
+Config.Languages = {
+    en: Config.Samples.default
     // Add other languages here as needed
 }
 
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { Resources };
+    module.exports = { Config };
 }

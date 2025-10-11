@@ -47,7 +47,7 @@ class RepliesSheetService {
     }
 
     addDemoData() {
-        Resources.Samples.default.actions.forEach(row => this.sheet.appendRow(row));
+        Config.Samples.default.actions.forEach(row => this.sheet.appendRow(row));
     }
 
     listRepliesKeys() {

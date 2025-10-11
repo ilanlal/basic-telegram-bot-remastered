@@ -75,11 +75,11 @@ class NavigationController {
     navigateToAboutCard() {
         // package.json is not accessible in GAS environment
         const packageInfo = {
-            version: Resources.getVersion(),
-            build: Resources.getBuild(),
-            author: Resources.getAuthor(),
-            license: Resources.getLicense(),
-            repository: Resources.getRepository()
+            version: Config.getVersion(),
+            build: Config.getBuild(),
+            author: Config.getAuthor(),
+            license: Config.getLicense(),
+            repository: Config.getRepository()
         };
 
         return CardService.newActionResponseBuilder()
