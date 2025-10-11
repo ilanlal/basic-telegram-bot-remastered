@@ -16,7 +16,13 @@ class AboutCard {
         .setImageUrl('https://raw.githubusercontent.com/ilanlal/basic-telegram-bot-remastered/refs/heads/vnext/assets/logo128.png'),
       body: () => CardService.newCardSection()
         .addWidget(CardService.newTextParagraph()
-          .setText(this._model.packageInfo.build || '')),
+          .setText(`Version: ${this._model.packageInfo.version || 'N/A'} (Build ${this._model.packageInfo.build || 'N/A'})`))
+        .addWidget(CardService.newTextParagraph()
+          .setText('A simple Telegram bot powered by Google Apps Script.'))
+        .addWidget(CardService.newTextParagraph()
+          .setText(`Author: ${this._model.packageInfo.author || 'N/A'}`))
+        .addWidget(CardService.newTextParagraph()
+          .setText(`Repository: <a href="${this._model.packageInfo.repository || '#'}" target="_blank">${this._model.packageInfo.repository || 'N/A'}</a>`)),
     };
   }
 
