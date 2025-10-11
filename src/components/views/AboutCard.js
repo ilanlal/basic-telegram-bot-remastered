@@ -10,20 +10,19 @@ class AboutCard {
 
     this._view = {
       header: () => CardService.newCardHeader()
-        .setTitle(this._model.packageInfo.name || 'About')
+        .setTitle('About')
         .setSubtitle(this._model.packageInfo.version || '')
         .setImageStyle(CardService.ImageStyle.SQUARE)
         .setImageUrl('https://raw.githubusercontent.com/ilanlal/basic-telegram-bot-remastered/refs/heads/vnext/assets/logo128.png'),
       body: () => CardService.newCardSection()
         .addWidget(CardService.newTextParagraph()
-          .setText(this._model.packageInfo.version || '')),
+          .setText(this._model.packageInfo.build || '')),
     };
   }
 
   static create(model = {
     packageInfo: {
-      name: 'About Card',
-      version: '1.0.0',
+      version: 'N/A',
       build: 'N/A'
     }
   }) {

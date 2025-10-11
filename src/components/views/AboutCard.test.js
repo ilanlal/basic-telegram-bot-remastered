@@ -6,7 +6,7 @@ describe("Test AboutCard", () => {
     beforeEach(() => {
         card = AboutCard.create({ 
             packageInfo: {
-                name: "Test Package", version: "1.0.0", build: "100"
+                version: "1.0.0", build: "100"
             }
         });
     });
@@ -20,5 +20,9 @@ describe("Test AboutCard", () => {
         const cardData = builtCard.getData();
         expect(cardData).toBeDefined();
         expect(cardData.name).toBe(AboutCard.CARD_NAME);
+        expect(cardData.header).toBeDefined();
+        expect(cardData.header.title).toBe("About");
+        expect(cardData.header.subTitle).toBe("1.0.0");
+        
     });
 });
