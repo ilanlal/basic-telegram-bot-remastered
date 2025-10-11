@@ -130,6 +130,18 @@ Resources.Samples = {
                     }
                 }
             })],
+            ['_not_found_', JSON.stringify({
+                method: 'sendMessage',
+                payload: {
+                    text: 'Oops! Command not found. Please use /help to see the list of available commands.',
+                    parse_mode: 'HTML',
+                    reply_markup: {
+                        inline_keyboard: [
+                            [{ text: "Home", callback_data: "/home" }]
+                        ]
+                    }
+                }
+            })]
         ]
     }
 };
