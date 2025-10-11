@@ -98,12 +98,8 @@ Resources.Samples = {
 };
 
 Resources.Languages = {
-    en: Resources.Samples.default,
-    es: Resources.Samples.default,
-    fr: Resources.Samples.default,
-    de: Resources.Samples.default,
-    it: Resources.Samples.default,
-    ja: Resources.Samples.default
+    en: Resources.Samples.default
+    // Add other languages here as needed
 }
 
 if (typeof module !== 'undefined' && module.exports) {
