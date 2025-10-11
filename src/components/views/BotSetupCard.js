@@ -31,6 +31,8 @@ class BotSetupCard {
             .setName(BotSetupCard.CARD_NAME)
             .setHeader(CardService.newCardHeader()
                 .setTitle('Bot Settings')
+                .setImageStyle(CardService.ImageStyle.SQUARE)
+                .setImageUrl('https://raw.githubusercontent.com/ilanlal/basic-telegram-bot-remastered/refs/heads/vnext/assets/logo128.png')
                 .setSubtitle('Configure your bot settings'))
             .addSection(CardService.newCardSection()
                 .addWidget(BotSetupCard.Widgets.BOT_TOKEN(this._model.state))

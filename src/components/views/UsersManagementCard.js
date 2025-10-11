@@ -19,6 +19,8 @@ class UsersManagementCard {
             .setName(UsersManagementCard.CARD_NAME)
             .setHeader(CardService.newCardHeader()
                 .setTitle("Users Management")
+                .setImageStyle(CardService.ImageStyle.SQUARE)
+                .setImageUrl("https://raw.githubusercontent.com/ilanlal/basic-telegram-bot-remastered/refs/heads/vnext/assets/logo128.png")
                 .setSubtitle("Manage your Telegram bot users"))
             .addSection(CardService.newCardSection()
                 .addWidget(CardService.newTextParagraph()

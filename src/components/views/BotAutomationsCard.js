@@ -49,7 +49,7 @@ BotAutomationsCard.Headers = {
             .setTitle('Bot Automations')
             .setSubtitle('Manage your bot\'s automations')
             .setImageStyle(CardService.ImageStyle.SQUARE)
-            .setImageUrl('https://www.gstatic.com/images/branding/product/1x/drive_2020q4_48dp.png'),
+            .setImageUrl('https://raw.githubusercontent.com/ilanlal/basic-telegram-bot-remastered/refs/heads/vnext/assets/logo128.png'),
 };
 
 BotAutomationsCard.Footers = {
