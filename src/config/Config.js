@@ -1,7 +1,7 @@
 class Config {
     static get version() { return '1.0.1'; }
-    static get build() { return '20251011.183400'; }
-    static get author() { return '<Ilan Lal>(https://github.com/ilanlal)'; }
+    static get build() { return '20251011.231300'; }
+    static get author() { return 'Ilan Laloum <ilanlal@gmail.com>'; }
     static get license() { return 'MIT'; }
     static get repository() { return 'https://github.com/ilanlal/basic-telegram-bot-remastered'; }
     static getVersion() { return Config.version; }
