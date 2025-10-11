@@ -1,5 +1,9 @@
 class Resources {
     static get version() { return '1.0.1'; }
+    static get build() { return '20251011.165800'; }
+    static get author() { return 'Ilan Laloum'; }
+    static get license() { return 'MIT'; }
+    static get repository() { return 'https://github.com/ilanlal/basic-telegram-bot-remastered'; }
 }
 
 Resources.Samples = {
@@ -43,15 +47,43 @@ Resources.Samples = {
         },
         actions: [
             ['/start', JSON.stringify({
-                method: 'sendPhoto',
+                method: 'sendMessage',
                 payload: {
-                    caption: 'Hello ‼️' + '\n\n'
-                        + '<blockquote expandable>Expandable Block \n'
+                    text: 'Hello ‼️' + '\n\n'
+                        + '<blockquote>\n'
                         + 'This is a simple bot that demonstrates the basic functionality of a Telegram bot.'
                         + 'It provides the following commands:\n\n'
-                        + '/start - Start the bot\n'
+                        + '/home - Home (This command will show you main menu, home page)\n'
+                        + '/howami - Who am I? (This command will tell you about yourself and your "chat_id")\n'
+                        + '/whoru - Who are you? (This command will tell you about the bot)\n'
                         + '/help - Get help\n'
-                        + '/about - About the bot'
+                        + '/about - About the bot\n'
+                        + '</blockquote>' + '\n\n'
+                        + 'You can interact with me using the buttons below or by typing commands.'
+                        + '\n'
+                        + 'Feel free to explore and interact with the bot!'
+                        + '\n'
+                        + 'For any issues or suggestions, please visit our GitHub repository.\n'
+                        + '\n'
+                        + 'Happy chatting! 😊'
+                        + '\n',
+                    parse_mode: 'HTML',
+                    reply_markup: {
+                        inline_keyboard: [
+                            [
+                                { text: "Home", callback_data: "/home" }
+                            ]
+                        ]
+                    }
+                }
+            })],
+            ['/home', JSON.stringify({
+                method: 'sendPhoto',
+                payload: {
+                    caption: 'Welcome to Bot Machine! \n\n'
+                        + '<blockquote expandable>Sample Expandable Block: \n'
+                        + 'This is a simple bot that demonstrates the basic functionality of a Telegram bot.'
+                        + 'It provides the following commands:\n\n'
                         + '</blockquote>',
                     photo: "https://www.gstatic.com/webp/gallery/1.jpg",
                     parse_mode: 'HTML',
