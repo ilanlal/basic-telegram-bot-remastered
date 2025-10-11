@@ -1,9 +1,7 @@
 require('@ilanlal/gasmocks');
 require('..');
-const { Resources } = require('../../Resources');
+require('../../config');
 const { SpreadsheetService } = require('../SpreadsheetService');
-
-global.Resources = Resources;
 
 describe('SpreadsheetService.Events', () => {
     beforeEach(() => {

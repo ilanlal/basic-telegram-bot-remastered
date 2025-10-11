@@ -1,11 +1,10 @@
 require('@ilanlal/gasmocks');
 require('.');
 const { RepliesSheetService } = require('./RepliesSheetService');
-const { Resources } = require('../Resources');
+require('../config');
 
 const language_code = 'en';
 const activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet();
-global.Resources = Resources;
 
 describe('RepliesSheetService', () => {
     beforeEach(() => {

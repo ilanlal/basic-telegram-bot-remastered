@@ -6,9 +6,7 @@ require('../components/controllers');
 require('../components/views');
 require('../components/models');
 const { UiEventHandlers } = require('./UiEventHandlers');
-const { Resources } = require('../Resources');
-
-global.Resources = Resources;
+require('../config');
 
 describe('UiEventHandlers.Home Tests', () => {
     test('openAutomationRepliesCard should return a CardService.ActionResponse', () => {
