@@ -22,7 +22,7 @@ class SettingsCard {
                 .setPrimaryButton(CardService.newTextButton()
                     .setText('💾 Save')
                     .setOnClickAction(CardService.newAction()
-                        .setFunctionName('onSaveSettings')))
+                        .setFunctionName('EventHandler.Addon.onSaveSettingsClicked')))
                 .setSecondaryButton(CardService.newTextButton()
                     .setText('❌ Cancel')
                     .setOnClickAction(CardService.newAction()

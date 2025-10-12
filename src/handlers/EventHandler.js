@@ -35,6 +35,10 @@ EventHandler.Addon = {
     onOpenSettingsCard: (e) => {
         return new EventHandler.AddonWrapper(EventHandler.prototype.userStore)
             .handleOpenSettingsCard(e);
+    },
+    onSaveSettingsClicked: (e) => {
+        return new EventHandler.AddonWrapper(EventHandler.prototype.userStore)
+            .handleSaveSettings(e);
     }
 }
 EventHandler.AddonWrapper = class {
@@ -104,6 +108,17 @@ EventHandler.AddonWrapper = class {
         try {
             return NavigationController.create(this._userStore)
                 .navigateToSettingsCard()
+                .build();
+        } catch (error) {
+            return this.handleError(error)
+                .build();
+        }
+    }
+
+    handleSaveSettings(e) {
+        try {
+            return SettingsController.create(this._userStore)
+                .saveSettings(e)
                 .build();
         } catch (error) {
             return this.handleError(error)
