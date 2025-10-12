@@ -32,8 +32,12 @@
       "useLocaleFromApp": true,
       "universalActions": [
         {
-          "label": "Account & Settings",
+          "label": "Account",
           "runFunction": "EventHandler.Addon.onOpenAccountCard"
+        },
+        {
+          "label": "⚙️ Settings",
+          "runFunction": "EventHandler.Addon.onOpenSettingsCard"
         },
         {
           "label": "About",

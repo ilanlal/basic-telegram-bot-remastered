@@ -1,6 +1,6 @@
 class Config {
     static get version() { return '1.0.1'; }
-    static get build() { return '20251011.231300'; }
+    static get build() { return '20251021.111900'; }
     static get author() { return 'Ilan Laloum <ilanlal@gmail.com>'; }
     static get license() { return 'MIT'; }
     static get repository() { return 'https://github.com/ilanlal/basic-telegram-bot-remastered'; }

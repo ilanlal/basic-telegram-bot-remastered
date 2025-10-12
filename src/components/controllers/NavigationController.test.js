@@ -120,4 +120,17 @@ describe('NavigationController', () => {
         expect(data.cardNavigations.length).toBeGreaterThan(0);
         expect(data.cardNavigations[0].pushCard).toBeDefined();
     });
+
+    // Test for navigating to Settings card
+    it('should navigate to Settings card', () => {
+        const response = navigationController.navigateToSettingsCard();
+        expect(response).toBeDefined();
+        const builtResponse = response.build();
+        expect(builtResponse).toBeDefined();
+        const data = builtResponse.getData();
+        expect(data).toBeDefined();
+        expect(data.cardNavigations).toBeDefined();
+        expect(data.cardNavigations.length).toBeGreaterThan(0);
+        expect(data.cardNavigations[0].pushCard).toBeDefined();
+    });
 });

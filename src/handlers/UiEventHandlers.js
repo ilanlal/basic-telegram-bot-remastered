@@ -48,7 +48,7 @@ UiEventHandlers.Home = {
         try {
             return NavigationController
                 .create(UserStoreFactory.create().current)
-                .navigateToSettingCard()
+                .navigateToSettingsCard()
                 .build();
         } catch (error) {
             return UiEventHandlers.handleError(error)

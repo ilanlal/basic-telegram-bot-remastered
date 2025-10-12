@@ -21,29 +21,14 @@ class NavigationController {
     }
 
     navigateToNewBotTokenCard() {
-        const model = {
-            BOT_TOKEN: ''
-        };
+        const setupFlow = SetupFlow.create(this._userStore);
+
         return CardService.newActionResponseBuilder()
             .setNavigation(
                 CardService.newNavigation()
                     .pushCard(
-                        NewBotTokenCard.create(model)
+                        NewBotTokenCard.create(setupFlow)
                             .build()
-                    )
-            );
-    }
-
-    navigateToNewDeploymentIdCard() {
-        const model = {
-            deploymentId: this._userStore.getDeploymentId() || '',
-            environment: 'production'
-        };
-        return CardService.newActionResponseBuilder()
-            .setNavigation(
-                CardService.newNavigation()
-                    .pushCard(NewDeploymentIdCard.create(model)
-                        .build()
                     )
             );
     }
@@ -104,28 +89,14 @@ class NavigationController {
             );
     }
 
-    navigateToSettingCard() {
-        const settingsModel = Settings.create();
-        // settingsModel.load();
+    navigateToSettingsCard() {
+        // load settings from user properties
+        const settingsModel = Settings.create().load();
         return CardService.newActionResponseBuilder()
             .setNavigation(CardService
                 .newNavigation()
                 .pushCard(SettingsCard.create(settingsModel)
                     .build()));
-    }
-
-    navigateToSetMyChatIdCard() {
-        const model = {
-            chatId: this._userStore.getMyChatId() || ''
-        };
-        return CardService.newActionResponseBuilder()
-            .setNavigation(
-                CardService.newNavigation()
-                    .pushCard(
-                        SetMyChatIdCard.create(model)
-                            .build()
-                    )
-            );
     }
 
     navigateToBotSetupCard() {

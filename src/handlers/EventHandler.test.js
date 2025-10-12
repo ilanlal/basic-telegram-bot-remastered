@@ -1,11 +1,5 @@
-require('@ilanlal/gasmocks');
-require('../lib');
-require('../services');
-require('../types');
-require('../config');
-require('../components/controllers');
-require('../components/views');
-require('../components/models');
+require('../../tests');
+
 const { EventHandler } = require('./EventHandler');
 
 describe('EventHandler', () => {
@@ -74,4 +68,17 @@ describe('EventHandler', () => {
         expect(data.cardNavigations[0].pushCard).toBeDefined();
     });
 
+    it('should handle onOpenSettingsCard', () => {
+        const event = {}; // Mock event object
+        const actionResponse = EventHandler.Addon.onOpenSettingsCard(event);
+        expect(actionResponse).toBeDefined();
+        const data = actionResponse.getData();
+        expect(data).toBeDefined();
+        // not notification
+        expect(data.notification).toBeUndefined();
+        //{ cardNavigations: [ { pushCard: [Object] } ] }
+        expect(data.cardNavigations).toBeDefined();
+        expect(data.cardNavigations.length).toBeGreaterThan(0);
+        expect(data.cardNavigations[0].pushCard).toBeDefined();
+    });
 });
