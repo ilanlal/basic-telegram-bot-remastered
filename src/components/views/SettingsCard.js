@@ -11,14 +11,22 @@ class SettingsCard {
                 .setTitle('⚙️ Settings')
                 .setSubtitle('Configure your bot settings here.'),
             sections: () => {
-                const sections = [];
-                Object.keys(this._model.params).forEach(key => {
-                    sections.push(CardService.newCardSection()
-                        .addWidget(CardService.newTextParagraph()
-                            .setText(`${key}: ${this._model.params[key]}`)));
+                const section = CardService.newCardSection();
+                this._model.attributes.forEach(attr => {
+                    section.addWidget(CardService.newTextParagraph()
+                        .setText(`${attr.name}: ${attr.value}`));
                 });
-                return sections;
-            }
+                return [section];
+            },
+            fixedFooter: () => CardService.newFixedFooter()
+                .setPrimaryButton(CardService.newTextButton()
+                    .setText('💾 Save')
+                    .setOnClickAction(CardService.newAction()
+                        .setFunctionName('onSaveSettings')))
+                .setSecondaryButton(CardService.newTextButton()
+                    .setText('❌ Cancel')
+                    .setOnClickAction(CardService.newAction()
+                        .setFunctionName('onCancelSettings')))
         };
     }
 
@@ -35,6 +43,8 @@ class SettingsCard {
             cardBuilder.addSection(section);
         });
 
+        cardBuilder.setFixedFooter(this._view.fixedFooter());
+        
         return cardBuilder.build();
     }
 }

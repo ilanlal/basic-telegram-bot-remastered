@@ -1,41 +1,50 @@
+const { Attribute } = require("./Attribute");
+
 class Settings {
     constructor() {
-        this._params = { ...Settings.Params };
-        this.load();
+        this._entitySchema = Settings.Entity;
+        this._data = [...this._entitySchema.attributes.map(attr => attr.toObject())];
     }
 
-    get params() {
-        return this._params;
+    get entitySchema() {
+        return this._entitySchema;
+    }
+
+    get attributes() {
+        return this._entitySchema.attributes;
+    }
+
+    get data() {
+        return this._data;
     }
 
     load() {
         const userProperties = PropertiesService.getUserProperties();
-        const logEvents = userProperties.getProperty(Settings.Keys.logEvents);
-        if (logEvents !== null) {
-            this._params.logEvents = (logEvents === 'true');
-        }
-        const autoReplyEnabled = userProperties.getProperty(Settings.Keys.autoReplyEnabled);
-        if (autoReplyEnabled !== null) {
-            this._params.autoReplyEnabled = (autoReplyEnabled === 'true');
-        }
-        const autoReplyMessage = userProperties.getProperty(Settings.Keys.autoReplyMessage);
-        if (autoReplyMessage !== null) {
-            this._params.autoReplyMessage = autoReplyMessage;
-        }
-        const adminChatId = userProperties.getProperty(Settings.Keys.adminChatId);
-        if (adminChatId !== null) {
-            this._params.adminChatId = parseInt(adminChatId, 10);
-        }
+        this._entitySchema.attributes.forEach(attr => {
+            const storedValue = userProperties.getProperty(attr.id);
+            if (storedValue !== null) {
+                // Convert to appropriate type
+                switch (attr.type) {
+                    case 'boolean':
+                        attr.value = (storedValue === 'true');
+                        break;
+                    case 'number':
+                        attr.value = Number(storedValue);
+                        break;
+                    case 'string':
+                    default:
+                        attr.value = storedValue;
+                }
+            }
+            this._data = [...this._data.filter(a => a.id !== attr.id), attr.toObject()];
+        });
         return this;
     }
 
-    save(params = Settings.Params) {
+    save(attributesList = []) {
         const userProperties = PropertiesService.getUserProperties();
-        Object.keys(params).forEach(key => {
-            if (key in Settings.Keys) {
-                userProperties.setProperty(Settings.Keys[key], params[key].toString());
-                this._params[key] = params[key];
-            }
+        attributesList.forEach(attr => {
+            userProperties.setProperty(attr.id, String(attr.value));
         });
         return this;
     }
@@ -45,22 +54,20 @@ class Settings {
     }
 }
 
-Settings.Params = {
-    logEvents: false,
-    autoReplyEnabled: false,
-    autoReplyMessage: "Hello! I'm currently unavailable. I'll get back to you as soon as I can.",
-    adminChatId: 0
+Settings.Entity = {
+    id: 'Settings',
+    name: 'Settings',
+    description: 'Bot configuration settings',
+    attributes: [
+        { id: 'logEvents', name: 'Log Events', description: 'Enable logging of events', value: false, type: 'boolean' },
+        { id: 'autoReplyEnabled', name: 'Auto Reply Enabled', description: 'Enable automatic replies', value: false, type: 'boolean' },
+        { id: 'autoReplyMessage', name: 'Auto Reply Message', description: 'Message to send when auto-reply is enabled', value: 'I am currently unavailable.', type: 'string' },
+        { id: 'adminChatId', name: 'Admin Chat ID', description: 'Chat ID of the admin user', value: 0, type: 'number' }
+    ].map(attr => Attribute.create(attr)) // Convert to Attribute instances
 };
 
-Settings.Keys = {
-    logEvents: 'logEvents',
-    autoReplyEnabled: 'autoReplyEnabled',
-    autoReplyMessage: 'autoReplyMessage',
-    adminChatId: 'adminChatId'
-}
-
 if (typeof module !== 'undefined' && module.exports) {
-  module.exports = {
-    Settings
-  };
+    module.exports = {
+        Settings
+    };
 }

@@ -105,7 +105,13 @@ class NavigationController {
     }
 
     navigateToSettingCard() {
-        return this.navigateToAccountCard();
+        const settingsModel = Settings.create();
+        // settingsModel.load();
+        return CardService.newActionResponseBuilder()
+            .setNavigation(CardService
+                .newNavigation()
+                .pushCard(SettingsCard.create(settingsModel)
+                    .build()));
     }
 
     navigateToSetMyChatIdCard() {
