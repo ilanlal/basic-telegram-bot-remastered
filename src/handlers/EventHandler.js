@@ -39,6 +39,10 @@ EventHandler.Addon = {
     onSaveSettingsClicked: (e) => {
         return new EventHandler.AddonWrapper(EventHandler.prototype.userStore)
             .handleSaveSettings(e);
+    },
+    onToggleBooleanSetting: (e) => {
+        return new EventHandler.AddonWrapper(EventHandler.prototype.userStore)
+            .handleToggleBooleanSetting(e);
     }
 }
 EventHandler.AddonWrapper = class {
@@ -119,6 +123,20 @@ EventHandler.AddonWrapper = class {
         try {
             return SettingsController.create(this._userStore)
                 .saveSettings(e)
+                .build();
+        } catch (error) {
+            return this.handleError(error)
+                .build();
+        }
+    }
+
+    handleToggleBooleanSetting(e) {
+        try {
+            const settingId = e.parameters.settingId;
+            const currentValue = e.parameters.currentValue;
+
+            return SettingsController.create()
+                .toggleBooleanSetting(settingId, currentValue)
                 .build();
         } catch (error) {
             return this.handleError(error)

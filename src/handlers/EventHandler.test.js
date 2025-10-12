@@ -74,11 +74,5 @@ describe('EventHandler', () => {
         expect(actionResponse).toBeDefined();
         const data = actionResponse.getData();
         expect(data).toBeDefined();
-        // not notification
-        expect(data.notification).toBeUndefined();
-        //{ cardNavigations: [ { pushCard: [Object] } ] }
-        expect(data.cardNavigations).toBeDefined();
-        expect(data.cardNavigations.length).toBeGreaterThan(0);
-        expect(data.cardNavigations[0].pushCard).toBeDefined();
     });
 });

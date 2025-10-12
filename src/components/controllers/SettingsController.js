@@ -27,6 +27,31 @@ class SettingsController {
         messageAttr.value = message;
         return settings.save([replyAttr, messageAttr]);
     }
+
+    toggleBooleanSetting(settingId, currentValue) {
+        const settings = Settings.create().load();
+        const targetAttr = settings.attributes.find(attr => attr.id === settingId);
+        if (targetAttr) {
+            targetAttr.value = (currentValue === 'true');
+            return settings.save([targetAttr]).load();
+        }
+        throw new Error(`Setting with ID ${settingId} not found`);
+    }
+    saveSettings(e) {
+        const formInputs = e.formInput;
+        const settings = Settings.create().load();
+        const updatedAttrs = [];
+
+        for (const [key, value] of Object.entries(formInputs)) {
+            const attr = settings.attributes.find(attr => attr.id === key);
+            if (attr) {
+                attr.value = value;
+                updatedAttrs.push(attr);
+            }
+        }
+
+        return settings.save(updatedAttrs);
+    }
 }
 
 if (typeof module !== "undefined" && module.exports) {

@@ -8,29 +8,50 @@ class SettingsCard {
 
         this._view = {
             header: () => CardService.newCardHeader()
-                .setTitle('⚙️ Settings')
-                .setSubtitle('Configure your bot settings here.'),
-            sections: () => {
+                .setTitle('⚙️ Developer Settings')
+                .setSubtitle('Enable or disable features'),
+            section: (attr) => {
                 const section = CardService.newCardSection();
-                this._model.attributes.forEach(attr => {
-                    section.addWidget(CardService.newTextParagraph()
-                        .setText(`${attr.name}: ${attr.value}`));
-                });
-                return [section];
+                if (attr.type === 'boolean') {
+                    section.addWidget(
+                        this._view._booleanDecoratedText(attr));
+                } else {
+                    section.addWidget(
+                        this._view._textInput(attr));
+                }
+                return section;
+            },
+            _booleanDecoratedText: (attr) => {
+                return CardService.newDecoratedText()
+                    .setTopLabel(`${attr.name}`)
+                    .setText(`${attr.description}`)
+                    .setBottomLabel(attr.value ? '✅ Enabled' : '❌ Disabled')
+                    .setWrapText(true)
+                    .setButton(CardService.newTextButton()
+                        .setText(attr.value ? '🚫 Disable' : '✅ Enable')
+                        .setOnClickAction(CardService.newAction()
+                            .setFunctionName('EventHandler.Addon.onToggleBooleanSetting')
+                            .setParameters({
+                                settingId: attr.id,
+                                currentValue: String(attr.value)
+                            })))
+            },
+            _textInput: (attr) => {
+                return CardService.newTextInput()
+                    .setFieldName(attr.id)
+                    .setTitle(attr.name)
+                    .setValue(String(attr.value))
+                    .setHint(attr.description);
             },
             fixedFooter: () => CardService.newFixedFooter()
                 .setPrimaryButton(CardService.newTextButton()
                     .setText('💾 Save')
                     .setOnClickAction(CardService.newAction()
                         .setFunctionName('EventHandler.Addon.onSaveSettingsClicked')))
-                .setSecondaryButton(CardService.newTextButton()
-                    .setText('❌ Cancel')
-                    .setOnClickAction(CardService.newAction()
-                        .setFunctionName('onCancelSettings')))
         };
     }
 
-    static create(model = Settings.create()) {
+    static create(model = Settings.create().load()) {
         return new SettingsCard(model);
     }
 
@@ -39,12 +60,13 @@ class SettingsCard {
             .setName(SettingsCard.CARD_NAME)
             .setHeader(this._view.header());
 
-        this._view.sections().forEach(section => {
-            cardBuilder.addSection(section);
+        this._model.attributes.forEach(attr => {
+            cardBuilder.addSection(
+                this._view.section(attr));
         });
 
         cardBuilder.setFixedFooter(this._view.fixedFooter());
-        
+
         return cardBuilder.build();
     }
 }
