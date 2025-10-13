@@ -10,10 +10,10 @@ describe('Settings', () => {
 
     it('should save and load settings correctly', () => {
         const customAttributes = [
-            Attribute.create({ id: 'logEvents', value: true, type: 'boolean' }),
-            Attribute.create({ id: 'autoReplyEnabled', value: true, type: 'boolean' }),
-            Attribute.create({ id: 'autoReplyMessage', value: "I'm here!", type: 'string' }),
-            Attribute.create({ id: 'adminChatId', value: 1110000000, type: 'number' })
+            { id: 'logEvents', value: true, type: 'boolean' },
+            { id: 'autoReplyEnabled', value: true, type: 'boolean' },
+            { id: 'autoReplyMessage', value: "I'm here!", type: 'string' },
+            { id: 'adminChatId', value: 1110000000, type: 'number' }
         ];
         const settings = Settings.create();
         settings.save(customAttributes);

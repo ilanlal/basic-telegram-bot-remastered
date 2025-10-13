@@ -1,5 +1,24 @@
 class Attribute {
-    
+    get id() {
+        return this._id;
+    }
+
+    get name() {
+        return this._name;
+    }
+
+    get description() {
+        return this._description;
+    }
+
+    get type() {
+        return this._type;
+    }
+
+    get value() {
+        return this._value;
+    }
+
     constructor(id, name, description, type, defaultValue = undefined) {
         this._id = id;
         this._name = name;
@@ -17,24 +36,29 @@ class Attribute {
         return this._value;
     }
 
-    static create({ id, ...rest } = {}) {
+    static create({ id, name, description, type, value, ...rest } = {}) {
         if (!id) {
             throw new Error('Attribute id is required');
         }
-        const attribute = new Attribute();
-        attribute.id = id;
-        Object.assign(attribute, rest);
+        const attribute = new Attribute(
+            id,
+            name,
+            description,
+            type,
+            value
+        );
         return attribute;
     }
 
     toObject() {
         return {
-            id: this.id,
-            name: this.name,
-            description: this.description,
-            value: this.value,
-            type: this.type
+            id: this._id,
+            name: this._name,
+            description: this._description,
+            value: this._value,
+            type: this._type
         };
+    
     }
 }
 

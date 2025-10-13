@@ -38,7 +38,7 @@ class Entity {
             return entity;
         }
         obj.attributes.forEach(attr => {
-            entity.addAttribute(Attribute.createFromObject(attr));
+            entity.addAttribute(Attribute.create(attr));
         });
         return entity;
     }
