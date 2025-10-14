@@ -16,7 +16,9 @@ class ViewModel {
             object.imageUrl = 'https://raw.githubusercontent.com/ilanlal/basic-telegram-bot-remastered/refs/heads/vnext/assets/logo128.png';
         }
 
-        return new ViewModel(Entity.createFromObject(object));
+        return new ViewModel(
+            Entity.createFromObject(object)
+        );
     }
 
     constructor(entity = null) {
@@ -29,65 +31,34 @@ class ViewModel {
     }
 
     newCardBuilder() {
+        return ViewModel.Card.newCardBuilder(this.entity);
+    }
+}
+
+ViewModel.Card = {
+    newCardBuilder: (entity) => {
         const cardBuilder = CardService.newCardBuilder();
         cardBuilder
-            .setName(`${this.entity.name}Card`)
-            .setHeader(
-                CardService.newCardHeader()
-                    .setTitle(this.entity.name)
-                    .setSubtitle(this.entity.description || "..")
-                    .setImageStyle(CardService.ImageStyle.SQUARE)
-                    .setImageUrl(this.entity.imageUrl || 'https://raw.githubusercontent.com/ilanlal/basic-telegram-bot-remastered/refs/heads/vnext/assets/logo128.png'));
+            .setName(`${entity.name}Card`)
+            .setHeader(ViewModel.Card.newCardHeader(entity));
 
-        this.entity.attributes.forEach((attr) => {
+        entity.attributes.forEach((attr) => {
             cardBuilder.addSection(
-                this.newCardSection(attr));
+                ViewModel.Card.newCardSection(attr));
         });
 
-        cardBuilder.setFixedFooter(this.newFixedFooter());
+        cardBuilder.setFixedFooter(ViewModel.Card.newFixedFooter(entity));
 
         return cardBuilder;
-    }
-
-    newCardSection(attr) {
-        const section = CardService.newCardSection();
-        if (attr.type === "boolean") {
-            section.addWidget(this.newDecoratedText(attr));
-        } else {
-            section.addWidget(this.newTextInput(attr));
-        }
-        return section;
-    }
-
-    newDecoratedText(attr) {
-        return CardService.newDecoratedText()
-            .setTopLabel(`${attr.name}`)
-            .setText(`${attr.description}`)
-            .setBottomLabel(attr.value ? "🟢 - On" : "🔘 - Off")
-            .setWrapText(true)
-            .setButton(
-                CardService.newTextButton()
-                    .setText(attr.value ? "🚫 Disable" : "✅ Enable")
-                    .setOnClickAction(
-                        CardService.newAction()
-                            .setFunctionName("EventHandler.Addon.onToggleBooleanSetting")
-                            .setParameters({
-                                settingId: attr.id,
-                                currentValue: String(attr.value),
-                            })
-                    )
-            );
-    }
-
-    newTextInput(attr) {
-        return CardService.newTextInput()
-            .setFieldName(attr.id)
-            .setTitle(attr.name)
-            .setValue(String(attr.value))
-            .setHint(attr.description);
-    }
-
-    newFixedFooter() {
+    },
+    newCardHeader: (entity) => {
+        return CardService.newCardHeader()
+            .setTitle(entity.name)
+            .setSubtitle(entity.description || "..")
+            .setImageStyle(CardService.ImageStyle.SQUARE)
+            .setImageUrl(entity.imageUrl || 'https://raw.githubusercontent.com/ilanlal/basic-telegram-bot-remastered/refs/heads/vnext/assets/logo128.png');
+    },
+    newFixedFooter: (entity) => {
         return CardService.newFixedFooter().setPrimaryButton(
             CardService.newTextButton()
                 .setText("💾 Save")
@@ -95,17 +66,47 @@ class ViewModel {
                     CardService.newAction()
                         .setFunctionName("EventHandler.Addon.onSave")
                         .setParameters({
-                            data: JSON.stringify(this.entity.attributes),
-                            entityName: this.entity.name,
-                            entityId: this.entity.id,
+                            data: JSON.stringify(entity.attributes || []),
+                            entityName: entity.name,
+                            entityId: entity.id,
                         })))
-    }
-}
-
-ViewModel.Card = {
-    build(entity) {
-        const viewModel = new ViewModel(entity);
-        return viewModel.newCardBuilder().build();
+    },
+    newCardSection: (attr) => {
+        const section = CardService.newCardSection();
+        if (attr.type === "boolean") {
+            section.addWidget(ViewModel.Card.Widget.newDecoratedText(attr));
+        } else {
+            section.addWidget(ViewModel.Card.Widget.newTextInput(attr));
+        }
+        return section;
+    },
+    Widget: {
+        newDecoratedText: (attr) => {
+            return CardService.newDecoratedText()
+                .setTopLabel(`${attr.name}`)
+                .setText(`${attr.description}`)
+                .setBottomLabel(attr.value ? "🟢 - On" : "🔘 - Off")
+                .setWrapText(true)
+                .setButton(
+                    CardService.newTextButton()
+                        .setText(attr.value ? "🚫 Disable" : "✅ Enable")
+                        .setOnClickAction(
+                            CardService.newAction()
+                                .setFunctionName("EventHandler.Addon.onToggleBooleanSetting")
+                                .setParameters({
+                                    settingId: attr.id,
+                                    currentValue: String(attr.value),
+                                })
+                        )
+                );
+        },
+        newTextInput: (attr) => {
+            return CardService.newTextInput()
+                .setFieldName(attr.id)
+                .setTitle(attr.name)
+                .setValue(String(attr.value))
+                .setHint(attr.description);
+        }
     }
 };
 
