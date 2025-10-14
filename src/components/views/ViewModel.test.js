@@ -2,7 +2,7 @@ require('../../../tests');
 const ViewModel = require('./ViewModel');
 
 describe('ViewModel', () => {
-    it('should create a card with the correct name', () => {
+    it('should create a card with the correct name and data', () => {
         const testCardData = {
             id: 'testCard',
             name: 'Test Card',
