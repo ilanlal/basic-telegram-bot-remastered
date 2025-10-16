@@ -1,14 +1,58 @@
 class Entity {
-    get id() {
-        return this._id;
+    static get INVALID_ENTITY_ERROR() {
+        return 'Invalid entity: missing entityName';
     }
 
-    get name() {
-        return this._name;
+    static get DEFAULT_IMAGE_URL() {
+        return 'https://raw.githubusercontent.com/ilanlal/basic-telegram-bot-remastered/refs/heads/vnext/assets/logo128.png';
     }
 
-    get attributes() {
-        return this._attributes;
+    static get DEFAULT_DISPLAY_TYPE() {
+        return 'add'; // or 'list' or 'edit'
+    }
+
+    constructor(entityName) {
+        this._entityName = entityName;
+        this._displayName = entityName;
+        this._description = '';
+        this._imageUrl = Entity.DEFAULT_IMAGE_URL;
+        this._displayType = Entity.DEFAULT_DISPLAY_TYPE; // or 'list' or 'edit'
+        this._sections = [];
+    }
+
+    static create(entityName) {
+        if (!entityName || typeof entityName !== 'string' || entityName.trim() === '') {
+            throw new Error(Entity.INVALID_ENTITY_ERROR);
+        }
+        return new Entity(entityName);
+    }
+
+    static createFromObject(obj = {}) {
+        const entity = Entity.create(obj.entityName);
+        entity.setDisplayName(obj.displayName || obj.entityName);
+        entity.setDescription(obj.description || '');
+        entity.setImageUrl(obj.imageUrl || Entity.DEFAULT_IMAGE_URL);
+        entity.setDisplayType(obj.displayType || Entity.DEFAULT_DISPLAY_TYPE);
+        if (obj.sections && Array.isArray(obj.sections)) {
+            obj.sections.forEach(section => {
+                entity.addSection(section);
+            });
+        }
+
+        return entity;
+    }
+
+    /// Getters
+    get displayType() {
+        return this._displayType;
+    }
+
+    get entityName() {
+        return this._entityName;
+    }
+
+    get displayName() {
+        return this._displayName;
     }
 
     get description() {
@@ -19,38 +63,46 @@ class Entity {
         return this._imageUrl;
     }
 
-    constructor(id, name, description = '', imageUrl = 'https://raw.githubusercontent.com/ilanlal/basic-telegram-bot-remastered/refs/heads/vnext/assets/logo128.png') {
-        this._id = id;
-        this._name = name;
-        this._description = description;
-        this._imageUrl = imageUrl;
-        this._attributes = [];
+    get sections() {
+        return this._sections;
     }
 
-    addAttribute(attr) {
-        this._attributes.push(attr);
+    /// Setters
+    addSection(section) {
+        let newSection = section;
+        if (!newSection) {
+            throw new Error('Invalid section: cannot be null or undefined');
+        }
+        if (!(newSection instanceof Section)) {
+            newSection = Section.createFromObject(newSection);
+        }
+        this._sections.push(newSection);
         return this;
     }
 
-    static create(id, name, description = '', imageUrl = 'https://raw.githubusercontent.com/ilanlal/basic-telegram-bot-remastered/refs/heads/vnext/assets/logo128.png') {
-        if (!name) {
-            throw new Error('Invalid entity: missing name');
-        }
-        return new Entity(id, name, description, imageUrl);
+    setEntityName(entityName) {
+        this._entityName = entityName;
+        return this;
     }
 
-    static createFromObject(obj) {
-        if (!obj.name) {
-            throw new Error('Invalid object: missing name');
-        }
-        const entity = Entity.create(obj.id, obj.name, obj.description, obj.imageUrl);
-        if (!Array.isArray(obj.attributes)) {
-            return entity;
-        }
-        obj.attributes.forEach(attr => {
-            entity.addAttribute(Attribute.create(attr));
-        });
-        return entity;
+    setDisplayName(displayName) {
+        this._displayName = displayName;
+        return this;
+    }
+
+    setDescription(description) {
+        this._description = description;
+        return this;
+    }
+
+    setImageUrl(imageUrl) {
+        this._imageUrl = imageUrl;
+        return this;
+    }
+
+    setDisplayType(displayType) {
+        this._displayType = displayType;
+        return this;
     }
 }
 
