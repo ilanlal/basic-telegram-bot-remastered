@@ -74,4 +74,9 @@ describe('Entity', () => {
         expect(entity.sections[0].widgets[1].type).toBe('number');
     });
 
+    // should have default image URL if not provided
+    it('should have default image URL if not provided', () => {
+        const entity = Entity.create('Product');
+        expect(entity.imageUrl).toBe(Entity.DEFAULT_IMAGE_URL);
+    });
 });

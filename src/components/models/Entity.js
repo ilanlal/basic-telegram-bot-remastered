@@ -11,15 +11,6 @@ class Entity {
         return 'default'; // or 'list' or 'edit' or 'view' or 'add'
     }
 
-    constructor(entityName) {
-        this._entityName = entityName;
-        this._displayName = entityName;
-        this._description = '';
-        this._imageUrl = Entity.DEFAULT_IMAGE_URL;
-        this._displayType = Entity.DEFAULT_DISPLAY_TYPE; // or 'list' or 'edit'
-        this._sections = [];
-    }
-
     static create(entityName) {
         if (!entityName || typeof entityName !== 'string' || entityName.trim() === '') {
             throw new Error(Entity.INVALID_ENTITY_ERROR);
@@ -33,6 +24,9 @@ class Entity {
         entity.setDescription(obj.description || '');
         entity.setImageUrl(obj.imageUrl || Entity.DEFAULT_IMAGE_URL);
         entity.setDisplayType(obj.displayType || Entity.DEFAULT_DISPLAY_TYPE);
+        entity.setShowNewButton(obj.showNewButton !== false);
+        entity.setShowUpdateButton(obj.showUpdateButton !== false);
+        entity.setShowFocusButton(obj.showFocusButton !== false);
         if (obj.sections && Array.isArray(obj.sections)) {
             obj.sections.forEach(section => {
                 entity.addSection(
@@ -44,32 +38,19 @@ class Entity {
         return entity;
     }
 
-    /// Getters
-    get displayType() {
-        return this._displayType;
+    constructor(entityName) {
+        this._entityName = entityName;
+        this._displayName = entityName;
+        this._description = '';
+        this._showNewButton = true;
+        this._showUpdateButton = true;
+        this._showFocusButton = true;
+        this._imageUrl = Entity.DEFAULT_IMAGE_URL;
+        this._displayType = Entity.DEFAULT_DISPLAY_TYPE; // or 'list' or 'edit'
+        this._sections = [];
     }
 
-    get entityName() {
-        return this._entityName;
-    }
-
-    get displayName() {
-        return this._displayName;
-    }
-
-    get description() {
-        return this._description;
-    }
-
-    get imageUrl() {
-        return this._imageUrl;
-    }
-
-    get sections() {
-        return this._sections;
-    }
-
-    /// Setters
+     /// Setters
     addSection(section) {
         let newSection = section;
         if (!newSection) {
@@ -105,6 +86,56 @@ class Entity {
     setDisplayType(displayType) {
         this._displayType = displayType;
         return this;
+    }
+
+    setShowNewButton(show) {
+        this._showNewButton = show;
+        return this;
+    }
+
+    setShowUpdateButton(show) {
+        this._showUpdateButton = show;
+        return this;
+    }
+
+    setShowFocusButton(show) {
+        this._showFocusButton = show;
+        return this;
+    }
+
+    /// Getters
+    get showNewButton() {
+        return this._showNewButton;
+    }
+    get showUpdateButton() {
+        return this._showUpdateButton;
+    }
+    get showFocusButton() {
+        return this._showFocusButton;
+    }
+
+    get displayType() {
+        return this._displayType;
+    }
+
+    get entityName() {
+        return this._entityName;
+    }
+
+    get displayName() {
+        return this._displayName;
+    }
+
+    get description() {
+        return this._description;
+    }
+
+    get imageUrl() {
+        return this._imageUrl;
+    }
+
+    get sections() {
+        return this._sections;
     }
 }
 

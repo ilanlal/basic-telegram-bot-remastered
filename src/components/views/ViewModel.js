@@ -21,13 +21,66 @@ class ViewModel {
             .setHeader(this._card.newCardHeader(this.entity))
             .setFixedFooter(this._card.newFixedFooter(this.entity));
 
-        if (this.entity.displayType === 'default' || this.entity.displayType === 'view') {
+        // Add sections only for 'edit' and 'add' display types
+        if (this.entity.displayType === 'add' || this.entity.displayType === 'edit') {
             this.entity.sections.forEach(section => {
                 cardBuilder.addSection(
                     this._card.newCardSection(section));
             });
         }
+        else {
+            // For 'default' and other display types, show a summary section
+            this.setDefaultCardBuilder(cardBuilder);
+        }
 
+
+        return cardBuilder;
+    }
+
+    setDefaultCardBuilder(cardBuilder) {
+        const section = {
+            header: 'Entity Information',
+            collapsible: true,
+            numUncollapsibleWidgets: 3,
+            widgets: [
+                { id: 'entityName', name: 'Entity Name', render: 'TextParagraph', type: 'string', value: this.entity.entityName },
+                { id: 'displayName', name: 'Display Name', render: 'TextParagraph', type: 'string', value: this.entity.displayName },
+                { id: 'description', name: 'Description', render: 'TextParagraph', type: 'string', value: this.entity.description },
+                { id: 'imageUrl', name: 'Image URL', render: 'TextParagraph', type: 'string', value: this.entity.imageUrl },
+                { id: 'displayType', name: 'Display Type', render: 'TextParagraph', type: 'string', value: this.entity.displayType },
+                { id: 'numSections', name: 'Number of Sections', render: 'TextParagraph', type: 'number', value: this.entity.sections.length },
+                { id: 'numWidgets', name: 'Number of Widgets', render: 'TextParagraph', type: 'number', value: this.entity.sections.reduce((sum, sec) => sum + sec.widgets.length, 0) }
+                // Add more widgets as needed
+            ]
+        };
+
+        // Add a summary section with key entity details
+        cardBuilder.addSection(
+            this._card.newCardSection(section));
+
+            if (this.entity.showNewButton) {
+            cardBuilder.addSection(
+                this._card.newCardSection({
+                    widgets: [{ id: 'addRow', name: 'Add New Row', render: 'DecoratedText', type: 'action' }]
+                })
+            );
+        }
+
+        if (this.entity.showUpdateButton) {
+            cardBuilder.addSection(
+                this._card.newCardSection({
+                    widgets: [{ id: 'updateRow', name: 'Update Row', render: 'DecoratedText', type: 'action' }]
+                })
+            );
+        }
+
+        if (this.entity.showFocusButton) {
+            cardBuilder.addSection(
+                this._card.newCardSection({
+                    widgets: [{ id: 'focusRow', name: 'Focus Row', render: 'DecoratedText', type: 'action' }]
+                })
+            );
+        }
         return cardBuilder;
     }
 
@@ -192,8 +245,8 @@ ViewModel.CardWrapper = class {
     }
     newTextParagraph(data) {
         return CardService.newTextParagraph()
-            .setText(data.test || data.value || data.description || data.name || '...')
-            .setMaxLines(data.maxLines || 3);
+            .setText(data.text || data.value || data.description || data.name || '...');
+        //.setMaxLines(data.maxLines || 3);
     }
 };
 
