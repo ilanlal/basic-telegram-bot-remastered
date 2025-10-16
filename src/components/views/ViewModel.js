@@ -12,44 +12,86 @@ class ViewModel {
         this.entity = entity;
         this.spreadsheetService = null;
         // Use the global CardService in Apps Script environment
-        this._card = ViewModel.CardWrapper.create(CardService);
+        this._card = ViewModel.CardServiceWrapper.create(CardService);
     }
 
     newCardBuilder() {
-        const cardBuilder = this._card.newCardBuilder()
-            .setName(`${this.entity.entityName}_Card`)
+        if (this.entity.displayType === 'default') {
+            return this.buildHomeCardBuilder();
+        } else {
+            return this.buildEntityCardBuilder();
+        }
+    }
+
+    buildEntityCardBuilder() {
+        const cardBuilder = this._card.newCardBuilder();
+
+        // Basic card setup
+        cardBuilder.setName(`${this.entity.entityName}_Card`)
             .setHeader(this._card.newCardHeader(this.entity))
             .setFixedFooter(this._card.newFixedFooter(this.entity));
 
-        // Add sections only for 'edit' and 'add' display types
-        if (this.entity.displayType === 'add' || this.entity.displayType === 'edit') {
-            this.entity.sections.forEach(section => {
-                cardBuilder.addSection(
-                    this._card.newCardSection(section));
-            });
-        }
-        else {
-            // For 'default' and other display types, show a summary section
-            this.setDefaultCardBuilder(cardBuilder);
-        }
-
+        this.entity.sections.forEach(section => {
+            cardBuilder.addSection(this._card.newCardSection(section));
+        });
 
         return cardBuilder;
     }
 
-    setDefaultCardBuilder(cardBuilder) {
+    buildHomeCardBuilder() {
+        const cardBuilder = this._card.newCardBuilder()
+            .setName(`${this.entity.entityName}_Card`)
+            .setHeader(this._card.newCardHeader(this.entity));
+        //.setFixedFooter(this._card.newFixedFooter(this.entity));
+
+        // Define a section with key entity details
         const section = {
             header: 'Entity Information',
             collapsible: true,
             numUncollapsibleWidgets: 3,
-            widgets: [
-                { id: 'entityName', name: 'Entity Name', render: 'TextParagraph', type: 'string', value: this.entity.entityName },
-                { id: 'displayName', name: 'Display Name', render: 'TextParagraph', type: 'string', value: this.entity.displayName },
-                { id: 'description', name: 'Description', render: 'TextParagraph', type: 'string', value: this.entity.description },
-                { id: 'imageUrl', name: 'Image URL', render: 'TextParagraph', type: 'string', value: this.entity.imageUrl },
-                { id: 'displayType', name: 'Display Type', render: 'TextParagraph', type: 'string', value: this.entity.displayType },
-                { id: 'numSections', name: 'Number of Sections', render: 'TextParagraph', type: 'number', value: this.entity.sections.length },
-                { id: 'numWidgets', name: 'Number of Widgets', render: 'TextParagraph', type: 'number', value: this.entity.sections.reduce((sum, sec) => sum + sec.widgets.length, 0) }
+            widgets: [{
+                id: 'entityName',
+                view: {
+                    type: 'TextParagraph',
+                    text: this.entity.entityName
+                },
+                type: 'string',
+                value: this.entity.entityName
+            }, {
+                id: 'displayName',
+                type: 'string',
+                view: {
+                    type: 'TextParagraph',
+                    text: this.entity.displayName
+                }
+            },
+            {
+                id: 'addRow',
+                type: 'action',
+                view: {
+                    type: 'DecoratedText',
+                    topLabel: 'Add New Row',
+                    text: 'Click the "➕" button to add a new row to the entity',
+                    bottomLabel: 'Total rows: ' + (0),
+                    wrapText: true,
+                    button: {
+                        text: '➕',
+                        handler: 'addRowHandler',
+                        parameters: {
+                            entityId: this.entity.entityId || ''
+                        }
+                    }
+                },
+                value: 'Add New Row'
+            },
+            { id: 'description', type: 'string', view: { type: 'TextParagraph', text: this.entity.description || 'No description provided.' } },
+            { id: 'imageUrl', type: 'string', view: { type: 'TextParagraph', text: this.entity.imageUrl || 'No image URL provided.' } },
+            { id: 'displayType', type: 'string', view: { type: 'TextParagraph', text: this.entity.displayType || 'No display type provided.' } },
+            { id: 'numSections', type: 'number', view: { type: 'TextParagraph', text: `Number of sections: ${this.entity.sections.length}` }, value: this.entity.sections.length },
+            //{ id: 'numAttributes', type: 'number', view: { type: 'TextParagraph', text: `Number of attributes: ${this.entity.attributes.length}` }, value: this.entity.attributes.length },
+            //{ id: 'numRows', type: 'number', view: { type: 'TextParagraph', text: `Number of rows: ${this.entity.rows.length}` }, value: this.entity.rows.length },
+            //{ id: 'numColumns', type: 'number', view: { type: 'TextParagraph', text: `Number of columns: ${this.entity.columns.length}` }, value: this.entity.columns.length },
+            //{ id: 'lastUpdated', type: 'string', view: { type: 'TextParagraph', text: `Last updated: ${this.entity.lastUpdated || 'N/A'}` }, value: this.entity.lastUpdated || '' },
                 // Add more widgets as needed
             ]
         };
@@ -57,30 +99,6 @@ class ViewModel {
         // Add a summary section with key entity details
         cardBuilder.addSection(
             this._card.newCardSection(section));
-
-            if (this.entity.showNewButton) {
-            cardBuilder.addSection(
-                this._card.newCardSection({
-                    widgets: [{ id: 'addRow', name: 'Add New Row', render: 'DecoratedText', type: 'action' }]
-                })
-            );
-        }
-
-        if (this.entity.showUpdateButton) {
-            cardBuilder.addSection(
-                this._card.newCardSection({
-                    widgets: [{ id: 'updateRow', name: 'Update Row', render: 'DecoratedText', type: 'action' }]
-                })
-            );
-        }
-
-        if (this.entity.showFocusButton) {
-            cardBuilder.addSection(
-                this._card.newCardSection({
-                    widgets: [{ id: 'focusRow', name: 'Focus Row', render: 'DecoratedText', type: 'action' }]
-                })
-            );
-        }
         return cardBuilder;
     }
 
@@ -94,35 +112,30 @@ class ViewModel {
     }
 }
 
-ViewModel.Spreadsheet = {
-    toEntity: (sheet) => {
-        const data = sheet.getDataRange().getValues();
-        const headers = data.shift();
-        const entity = Entity.create(sheet.getSheetId(), sheet.getName());
+ViewModel.Spreadsheet = class {
+    static create(activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet()) {
+        return new ViewModel.Spreadsheet(activeSpreadsheet);
+    }
 
-        headers.forEach((header, index) => {
-            const attr = Attribute.create({
-                id: `field_${index}`,
-                name: header,
-                type: 'string',
-                value: data[0][index]
-            });
-            entity.addAttribute(attr);
-        });
+    constructor(activeSpreadsheet) {
+        this._activeSpreadsheet = activeSpreadsheet;
+    }
 
-        return entity;
+    get activeSpreadsheet() {
+        return this._activeSpreadsheet;
     }
 };
 
-ViewModel.CardWrapper = class {
+ViewModel.CardServiceWrapper = class {
     static create(cardService = CardService) {
-        return new ViewModel.CardWrapper(cardService);
+        return new ViewModel.CardServiceWrapper(cardService);
     }
 
     constructor(cardService) {
         // Use the global CardService in Apps Script environment
         this._cardService = cardService;
     }
+
     newCardBuilder() {
         return this._cardService.newCardBuilder();
     }
@@ -143,7 +156,7 @@ ViewModel.CardWrapper = class {
         if (section.widgets && Array.isArray(section.widgets)) {
             section.widgets.forEach(widget => {
                 let cardWidget = null;
-                switch (widget.render) {
+                switch (widget.view.type) {
                     case 'DecoratedText':
                         cardWidget = this.newDecoratedText(widget);
                         break;
@@ -168,23 +181,44 @@ ViewModel.CardWrapper = class {
         return cardSection;
     }
     newDecoratedText(widget) {
-        return CardService.newDecoratedText()
-            .setTopLabel(`${widget.name || '[No Name]'}`)
-            .setText(`${widget.description || ''}`)
-            .setBottomLabel(widget.value ? "🟢 - On" : "🔘 - Off")
-            .setWrapText(true)
-            .setButton(
-                CardService.newTextButton()
-                    .setText(widget.value ? "🚫 Disable" : "✅ Enable")
-                    .setOnClickAction(
-                        CardService.newAction()
-                            .setFunctionName("EventHandler.Addon.onToggleBooleanSetting")
-                            .setParameters({
-                                settingId: widget.id,
-                                currentValue: String(widget.value),
-                            })
-                    )
-            );
+        const decoratedText = CardService.newDecoratedText()
+            .setTopLabel(`${widget.name || '[No Name]'}`);
+
+        switch (widget.type) {
+            case 'string':
+                decoratedText.setText(`${widget.description || ''}`)
+                    .setBottomLabel(widget.value || '')
+                    .setWrapText(true);
+                break;
+            case 'number':
+                decoratedText.setText(`${widget.description || ''}`)
+                    .setBottomLabel(widget.value || '')
+                    .setWrapText(true);
+                break;
+            case 'boolean':
+                decoratedText.setText(`${widget.description || ''}`)
+                    .setBottomLabel(widget.value ? "🟢 - On" : "🔘 - Off")
+                    .setWrapText(true)
+                    .setButton(
+                        this.newTextButton({
+                            text: widget.value ? "Turn Off" : "Turn On",
+                            handler: widget.handler,
+                            parameters: {
+                                fieldId: widget.id,
+                                entityId: widget.entityId || ''
+                            }
+                        })
+                    );
+                break;
+            case 'action':
+                decoratedText.setText(`${widget.description || ''}`);
+                break;
+            default:
+                console.warn(`Unknown widget type: ${widget.type}, defaulting to TextInput`);
+                decoratedText.setText(`${widget.description || ''}`);
+        }
+
+        return decoratedText;
     }
     newFixedFooter(entity) {
         const fixedFooter = this._cardService.newFixedFooter();
@@ -226,27 +260,28 @@ ViewModel.CardWrapper = class {
 
         return fixedFooter;
     }
-    newTextInput(data) {
+    newTextInput(widget) {
         return CardService.newTextInput()
-            .setFieldName(data.id)
-            .setTitle(data.title || data.name || '[No Name]')
-            .setValue(data.value !== undefined && data.value !== null ? String(data.value) : '')
-            .setHint(data.hint || data.description || '')
-            .setMultiline(data.type === 'string' && (data.value || '').length > 50)
-            .setOnChangeAction(
-                CardService.newAction()
-                    .setFunctionName("EventHandler.Addon.onTextInputChange")
-                    .setParameters({
-                        fieldId: data.id,
-                        entityName: data.entityName || '',
-                        entityId: data.entityId || ''
-                    })
-            );
+            .setFieldName(widget.id)
+            .setTitle(widget.title || widget.name || '[No Name]')
+            .setValue(widget.value !== undefined && widget.value !== null ? String(widget.value) : '')
+            .setHint(widget.hint || widget.description || '')
+            .setMultiline(widget.type === 'string' && (widget.value || '').length > 50);
     }
-    newTextParagraph(data) {
+    newTextParagraph(widget) {
         return CardService.newTextParagraph()
-            .setText(data.text || data.value || data.description || data.name || '...');
+            .setText(widget.text || widget.value || widget.description || widget.name || '...');
         //.setMaxLines(data.maxLines || 3);
+    }
+
+    newTextButton({ text, handler, parameters = {} }) {
+        return this._cardService.newTextButton()
+            .setText(text || 'Button')
+            .setOnClickAction(
+                this._cardService.newAction()
+                    .setFunctionName(handler || 'EventHandler.Addon.onButtonClick')
+                    .setParameters(parameters)
+            );
     }
 };
 

@@ -1,60 +1,45 @@
 class Widget {
-    get id() {
-        return this._id;
+    static get INVALID_ID_ERROR() {
+        return 'Widget id is required';
     }
 
-    get name() {
-        return this._name;
+    static create({ id, view, value, type } = {}) {
+        if (!id) {
+            throw new Error(Widget.INVALID_ID_ERROR);
+        }
+
+        const widget = new Widget(id);
+
+        if (view) {
+            widget.setView(view);
+        }
+
+        if (value) {
+            widget.setValue(value);
+        }
+
+        if (type) {
+            widget.setType(type);
+        }
+
+        return widget;
     }
 
-    get render() {
-        return this._render;
-    }
-
-    get description() {
-        return this._description;
-    }
-
-    get type() {
-        return this._type;
-    }
-
-    get value() {
-        return this._value;
-    }
-
-    get disabled() {
-        return this._disabled;
-    }
-
-    constructor(id, name, render, description, type, defaultValue = undefined) {
+    constructor(id) {
         this._id = id;
-        this._name = name;
-        this._render = render;
-        this._description = description;
-        this._value = defaultValue;
+        this._view = null;
+        this._value = null;
+        this._type = null;
+    }
+
+    /// Setters
+    setType(type) {
         this._type = type;
-        this._disabled = false;
-    }
-
-    setId(id) {
-        this._id = id;
         return this;
     }
 
-    setName(name) {
-        this._name = name;
-        return this;
-    }
-
-    setDescription(description) {
-        this._description = description;
-        return this;
-    }
-
-
-    setDisabled(disabled) {
-        this._disabled = disabled;
+    setView(view) {
+        this._view = view;
         return this;
     }
 
@@ -63,36 +48,21 @@ class Widget {
         return this;
     }
 
-    setRender(render) {
-        this._render = render;
-        return this;
+    /// Getters
+    get type() {
+        return this._type;
     }
 
-    static create({ id, name, render, description, type, value, ...rest } = {}) {
-        if (!id) {
-            throw new Error('Widget id is required');
-        }
-        const widget = new Widget(
-            id,
-            name,
-            render,
-            description,
-            type,
-            value
-        );
-        return widget;
+    get id() {
+        return this._id;
     }
 
-    toObject() {
-        return {
-            id: this._id,
-            name: this._name,
-            render: this._render,
-            description: this._description,
-            value: this._value,
-            type: this._type
-        };
-    
+    get view() {
+        return this._view;
+    }
+
+    get value() {
+        return this._value;
     }
 }
 

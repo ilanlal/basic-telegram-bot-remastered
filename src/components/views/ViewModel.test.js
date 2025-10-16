@@ -14,9 +14,9 @@ describe('ViewModel', () => {
                 collapsible: false,
                 numUncollapsibleWidgets: 0,
                 widgets: [
-                    { id: 'field1', name: 'Field 1', render:'TextInput', type: 'string', value: 'Value 1' },
-                    { id: 'field2', name: 'Field 2', render:'TextInput', type: 'number', value: 42 },
-                    { id: 'field3', name: 'Field 3', render:'DecoratedText', type: 'boolean', value: true }
+                    { id: 'field1', view: { type: 'TextInput', title: 'Field 1', value: 'Value 1' }, type: 'string', value: 'Value 1' },
+                    { id: 'field2', view: { type: 'TextInput', title: 'Field 2', value: 42 }, type: 'number', value: 42 },
+                    { id: 'field3', view: { type: 'DecoratedText', title: 'Field 3', value: true }, type: 'boolean', value: true }
                 ]
             }]
         };
@@ -60,7 +60,7 @@ describe('ViewModel', () => {
         expect(data.name).toBe(testCardData.entityName + '_Card');
         expect(data.header.title).toBe(`${testCardData.displayType}: ${testCardData.entityName}`);
         expect(data.header.subTitle).toBe(testCardData.description);
-        expect(data.sections.length).toBe(4);
+        expect(data.sections.length).toBe(1);
         expect(data.sections[0].header).toBe('Entity Information');
         expect(data.sections[0].widgets.length).toBe(7);
         expect(data.sections[0].widgets[0].text).toBeDefined();
