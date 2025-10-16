@@ -3,7 +3,7 @@ const ViewModel = require('./ViewModel');
 
 describe('ViewModel', () => {
     it('should create a "add"card with the correct name and data', () => {
-        const testCardData = {
+        const testDataModel = {
             entityName: 'testCard',
             displayName: 'Test Card',
             description: 'This is a test card',
@@ -20,17 +20,17 @@ describe('ViewModel', () => {
                 ]
             }]
         };
-        const viewModel = ViewModel.createFromObject(testCardData);
+        const viewModel = ViewModel.create(testDataModel);
         expect(viewModel).toBeDefined();
         const card = viewModel.newCardBuilder();
         expect(card).toBeDefined();
         const builtCard = card.build();
         const data = builtCard.getData();
         expect(data).toBeDefined();
-        expect(data.name).toBe(testCardData.entityName + '_Card');
+        expect(data.name).toBe(testDataModel.entityName + '_Card');
         //expect(data.getName()).toBe(testCardData.entityName + '_Card');
-        expect(data.header.title).toBe(`${testCardData.displayType}: ${testCardData.entityName}`);
-        expect(data.header.subTitle).toBe(testCardData.description);
+        expect(data.header.title).toBe(`${testDataModel.displayType}: ${testDataModel.entityName}`);
+        expect(data.header.subTitle).toBe(testDataModel.description);
         expect(data.sections.length).toBe(1);
         expect(data.sections[0].header).toBe('Section 1');
         expect(data.sections[0].widgets.length).toBe(3);
@@ -50,7 +50,7 @@ describe('ViewModel', () => {
             imageUrl: 'https://example.com/image.png',
             sections: [] // No sections for view type
         };
-        const viewModel = ViewModel.createFromObject(testCardData);
+        const viewModel = ViewModel.create(testCardData);
         expect(viewModel).toBeDefined();
         const card = viewModel.newCardBuilder();
         expect(card).toBeDefined();

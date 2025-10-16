@@ -1,47 +1,45 @@
 class ViewModel {
-    static createFromObject(object = {}) {
+    static create(dataModel = {}) {
         return new ViewModel(
-            Entity.createFromObject(object)
-        );
+            Entity.createFromObject(dataModel));
     }
 
-    constructor(entity = null) {
-        if (!entity) {
-            throw new Error('Entity is required to build the card');
-        }
-        this.entity = entity;
+    constructor(entityDataModel) {
+        this._entityDataModel = entityDataModel;
         this.spreadsheetService = null;
         // Use the global CardService in Apps Script environment
         this._card = ViewModel.CardServiceWrapper.create(CardService);
     }
 
     newCardBuilder() {
-        if (this.entity.displayType === 'default') {
-            return this.buildHomeCardBuilder();
-        } else {
-            return this.buildEntityCardBuilder();
+        if (this._entityDataModel.displayType === 'edit' || this._entityDataModel.displayType === 'add') {
+            return this.buildEntityCardBuilder(this._entityDataModel);
         }
+
+        return this.buildHomeCardBuilder(this._entityDataModel);
     }
 
-    buildEntityCardBuilder() {
+    buildEntityCardBuilder(entityDataModel) {
         const cardBuilder = this._card.newCardBuilder();
 
         // Basic card setup
-        cardBuilder.setName(`${this.entity.entityName}_Card`)
-            .setHeader(this._card.newCardHeader(this.entity))
-            .setFixedFooter(this._card.newFixedFooter(this.entity));
+        cardBuilder.setName(`${entityDataModel.entityName}_Card`)
+            .setHeader(this._card.newCardHeader(entityDataModel))
+            .setFixedFooter(
+                this._card.newFixedFooter(entityDataModel));
 
-        this.entity.sections.forEach(section => {
-            cardBuilder.addSection(this._card.newCardSection(section));
+        entityDataModel.sections.forEach(section => {
+            cardBuilder.addSection(
+                this._card.newCardSection(section));
         });
 
         return cardBuilder;
     }
 
-    buildHomeCardBuilder() {
+    buildHomeCardBuilder(dataModel) {
         const cardBuilder = this._card.newCardBuilder()
-            .setName(`${this.entity.entityName}_Card`)
-            .setHeader(this._card.newCardHeader(this.entity));
+            .setName(`${dataModel.entityName}_Card`)
+            .setHeader(this._card.newCardHeader(dataModel));
         //.setFixedFooter(this._card.newFixedFooter(this.entity));
 
         // Define a section with key entity details
@@ -53,16 +51,16 @@ class ViewModel {
                 id: 'entityName',
                 view: {
                     type: 'TextParagraph',
-                    text: this.entity.entityName
+                    text: dataModel.entityName
                 },
                 type: 'string',
-                value: this.entity.entityName
+                value: dataModel.entityName
             }, {
                 id: 'displayName',
                 type: 'string',
                 view: {
                     type: 'TextParagraph',
-                    text: this.entity.displayName
+                    text: dataModel.displayName
                 }
             },
             {
@@ -78,20 +76,20 @@ class ViewModel {
                         text: '➕',
                         handler: 'addRowHandler',
                         parameters: {
-                            entityId: this.entity.entityId || ''
+                            entityId: dataModel.entityId || ''
                         }
                     }
                 },
                 value: 'Add New Row'
             },
-            { id: 'description', type: 'string', view: { type: 'TextParagraph', text: this.entity.description || 'No description provided.' } },
-            { id: 'imageUrl', type: 'string', view: { type: 'TextParagraph', text: this.entity.imageUrl || 'No image URL provided.' } },
-            { id: 'displayType', type: 'string', view: { type: 'TextParagraph', text: this.entity.displayType || 'No display type provided.' } },
-            { id: 'numSections', type: 'number', view: { type: 'TextParagraph', text: `Number of sections: ${this.entity.sections.length}` }, value: this.entity.sections.length },
-            //{ id: 'numAttributes', type: 'number', view: { type: 'TextParagraph', text: `Number of attributes: ${this.entity.attributes.length}` }, value: this.entity.attributes.length },
-            //{ id: 'numRows', type: 'number', view: { type: 'TextParagraph', text: `Number of rows: ${this.entity.rows.length}` }, value: this.entity.rows.length },
-            //{ id: 'numColumns', type: 'number', view: { type: 'TextParagraph', text: `Number of columns: ${this.entity.columns.length}` }, value: this.entity.columns.length },
-            //{ id: 'lastUpdated', type: 'string', view: { type: 'TextParagraph', text: `Last updated: ${this.entity.lastUpdated || 'N/A'}` }, value: this.entity.lastUpdated || '' },
+            { id: 'description', type: 'string', view: { type: 'TextParagraph', text: dataModel.description || 'No description provided.' } },
+            { id: 'imageUrl', type: 'string', view: { type: 'TextParagraph', text: dataModel.imageUrl || 'No image URL provided.' } },
+            { id: 'displayType', type: 'string', view: { type: 'TextParagraph', text: dataModel.displayType || 'No display type provided.' } },
+            { id: 'numSections', type: 'number', view: { type: 'TextParagraph', text: `Number of sections: ${dataModel.sections.length}` }, value: dataModel.sections.length },
+                //{ id: 'numAttributes', type: 'number', view: { type: 'TextParagraph', text: `Number of attributes: ${dataModel.attributes.length}` }, value: dataModel.attributes.length },
+                //{ id: 'numRows', type: 'number', view: { type: 'TextParagraph', text: `Number of rows: ${dataModel.rows.length}` }, value: dataModel.rows.length },
+                //{ id: 'numColumns', type: 'number', view: { type: 'TextParagraph', text: `Number of columns: ${dataModel.columns.length}` }, value: dataModel.columns.length },
+                //{ id: 'lastUpdated', type: 'string', view: { type: 'TextParagraph', text: `Last updated: ${dataModel.lastUpdated || 'N/A'}` }, value: dataModel.lastUpdated || '' },
                 // Add more widgets as needed
             ]
         };
@@ -103,11 +101,11 @@ class ViewModel {
     }
 
     initializeSheet(activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet()) {
-        const sheet = activeSpreadsheet.getSheetByName(this.entity.name) ||
-            activeSpreadsheet.insertSheet(this.entity.name);
+        const sheet = activeSpreadsheet.getSheetByName(this._entityDataModel.name) ||
+            activeSpreadsheet.insertSheet(this._entityDataModel.name);
 
-        sheet.appendRow(this.entity.attributes.map(attr => attr.name));
-        sheet.appendRow(this.entity.attributes.map(attr => attr.value));
+        sheet.appendRow(this._entityDataModel.attributes.map(attr => attr.name));
+        sheet.appendRow(this._entityDataModel.attributes.map(attr => attr.value));
         return sheet;
     }
 }
@@ -181,41 +179,20 @@ ViewModel.CardServiceWrapper = class {
         return cardSection;
     }
     newDecoratedText(widget) {
-        const decoratedText = CardService.newDecoratedText()
-            .setTopLabel(`${widget.name || '[No Name]'}`);
+        const view = widget.view || {};
+        const decoratedText = this._cardService.newDecoratedText()
+            .setTopLabel(`${view.topLabel || ''}`)
+            .setWrapText(view.wrapText || false)
+            .setText(`${view.text || ''}`)
+            .setBottomLabel(`${view.bottomLabel || ''}`);
 
-        switch (widget.type) {
-            case 'string':
-                decoratedText.setText(`${widget.description || ''}`)
-                    .setBottomLabel(widget.value || '')
-                    .setWrapText(true);
-                break;
-            case 'number':
-                decoratedText.setText(`${widget.description || ''}`)
-                    .setBottomLabel(widget.value || '')
-                    .setWrapText(true);
-                break;
-            case 'boolean':
-                decoratedText.setText(`${widget.description || ''}`)
-                    .setBottomLabel(widget.value ? "🟢 - On" : "🔘 - Off")
-                    .setWrapText(true)
-                    .setButton(
-                        this.newTextButton({
-                            text: widget.value ? "Turn Off" : "Turn On",
-                            handler: widget.handler,
-                            parameters: {
-                                fieldId: widget.id,
-                                entityId: widget.entityId || ''
-                            }
-                        })
-                    );
-                break;
-            case 'action':
-                decoratedText.setText(`${widget.description || ''}`);
-                break;
-            default:
-                console.warn(`Unknown widget type: ${widget.type}, defaulting to TextInput`);
-                decoratedText.setText(`${widget.description || ''}`);
+        if (view.button) {
+            decoratedText.setButton(
+                this.newTextButton({
+                    text: view.button.text,
+                    handler: view.button.handler,
+                    parameters: view.button.parameters
+                }));
         }
 
         return decoratedText;
