@@ -8,7 +8,7 @@ class Entity {
     }
 
     static get DEFAULT_DISPLAY_TYPE() {
-        return 'add'; // or 'list' or 'edit'
+        return 'default'; // or 'list' or 'edit' or 'view' or 'add'
     }
 
     constructor(entityName) {
@@ -35,7 +35,9 @@ class Entity {
         entity.setDisplayType(obj.displayType || Entity.DEFAULT_DISPLAY_TYPE);
         if (obj.sections && Array.isArray(obj.sections)) {
             obj.sections.forEach(section => {
-                entity.addSection(section);
+                entity.addSection(
+                    Section.createFromObject(section)
+                );
             });
         }
 

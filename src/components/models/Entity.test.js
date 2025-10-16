@@ -1,4 +1,4 @@
-require('.../../tests');
+require('../../../tests');
 const { Entity } = require('./Entity');
 const { Widget } = require('./Widget');
 

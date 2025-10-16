@@ -7,6 +7,10 @@ class Widget {
         return this._name;
     }
 
+    get render() {
+        return this._render;
+    }
+
     get description() {
         return this._description;
     }
@@ -23,14 +27,31 @@ class Widget {
         return this._disabled;
     }
 
-    constructor(id, name, description, type, defaultValue = undefined) {
+    constructor(id, name, render, description, type, defaultValue = undefined) {
         this._id = id;
         this._name = name;
+        this._render = render;
         this._description = description;
         this._value = defaultValue;
         this._type = type;
         this._disabled = false;
     }
+
+    setId(id) {
+        this._id = id;
+        return this;
+    }
+
+    setName(name) {
+        this._name = name;
+        return this;
+    }
+
+    setDescription(description) {
+        this._description = description;
+        return this;
+    }
+
 
     setDisabled(disabled) {
         this._disabled = disabled;
@@ -42,17 +63,19 @@ class Widget {
         return this;
     }
 
-    getValue() {
-        return this._value;
+    setRender(render) {
+        this._render = render;
+        return this;
     }
 
-    static create({ id, name, description, type, value, ...rest } = {}) {
+    static create({ id, name, render, description, type, value, ...rest } = {}) {
         if (!id) {
             throw new Error('Widget id is required');
         }
         const widget = new Widget(
             id,
             name,
+            render,
             description,
             type,
             value
@@ -64,6 +87,7 @@ class Widget {
         return {
             id: this._id,
             name: this._name,
+            render: this._render,
             description: this._description,
             value: this._value,
             type: this._type

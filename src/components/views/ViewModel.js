@@ -12,16 +12,16 @@ class ViewModel {
         this.entity = entity;
         this.spreadsheetService = null;
         // Use the global CardService in Apps Script environment
-        this._card = ViewModel.CardServiceWrapper.create(CardService);
+        this._card = ViewModel.CardWrapper.create(CardService);
     }
 
     newCardBuilder() {
-        const cardBuilder = CardService.newCardBuilder()
+        const cardBuilder = this._card.newCardBuilder()
             .setName(`${this.entity.entityName}_Card`)
             .setHeader(this._card.newCardHeader(this.entity))
             .setFixedFooter(this._card.newFixedFooter(this.entity));
 
-        if (this.entity.displayType === 'edit') {
+        if (this.entity.displayType === 'default' || this.entity.displayType === 'view') {
             this.entity.sections.forEach(section => {
                 cardBuilder.addSection(
                     this._card.newCardSection(section));
@@ -61,14 +61,17 @@ ViewModel.Spreadsheet = {
     }
 };
 
-ViewModel.CardServiceWrapper = class {
-    static create(cardService = null) {
-        return new ViewModel.CardServiceWrapper(cardService);
+ViewModel.CardWrapper = class {
+    static create(cardService = CardService) {
+        return new ViewModel.CardWrapper(cardService);
     }
 
-    constructor(cardService = null) {
+    constructor(cardService) {
         // Use the global CardService in Apps Script environment
-        this._cardService = cardService || CardService; // Real CardService :-)
+        this._cardService = cardService;
+    }
+    newCardBuilder() {
+        return this._cardService.newCardBuilder();
     }
     newCardHeader(entity) {
         return this._cardService.newCardHeader()
@@ -76,37 +79,6 @@ ViewModel.CardServiceWrapper = class {
             .setSubtitle(entity.description || "..")
             .setImageStyle(CardService.ImageStyle.SQUARE)
             .setImageUrl(entity.imageUrl || 'https://raw.githubusercontent.com/ilanlal/basic-telegram-bot-remastered/refs/heads/vnext/assets/logo128.png');
-    }
-    newFixedFooter(entity) {
-        const fixedFooter = this._cardService.newFixedFooter();
-        if (entity.displayType === 'edit') {
-            fixedFooter.setPrimaryButton(
-                this._cardService.newTextButton()
-                    .setText("💾 Save")
-                    .setOnClickAction(
-                        this._cardService.newAction()
-                            .setFunctionName("EventHandler.Addon.onSave")
-                            .setParameters({
-                                data: JSON.stringify(entity.attributes || []),
-                                entityName: entity.name,
-                                entityId: entity.id,
-                            })));
-        } else {
-            fixedFooter.setPrimaryButton(
-                this._cardService.newTextButton()
-                    .setText("📝 Initialize Sheet")
-                    .setOnClickAction(
-                        this._cardService.newAction()
-                            .setFunctionName("EventHandler.Addon.onInitializeSheet")
-                            .setParameters({
-                                entityName: entity.name,
-                                entityId: entity.id
-                            })
-                    ));
-
-        }
-
-        return fixedFooter;
     }
     newCardSection(section) {
         const cardSection = this._cardService.newCardSection();
@@ -117,41 +89,111 @@ ViewModel.CardServiceWrapper = class {
 
         if (section.widgets && Array.isArray(section.widgets)) {
             section.widgets.forEach(widget => {
-                if (widget.type === "boolean") {
-                    cardSection.addWidget(this.newDecoratedText(widget));
-                } else {
-                    cardSection.addWidget(this.newTextInput(widget));
+                let cardWidget = null;
+                switch (widget.render) {
+                    case 'DecoratedText':
+                        cardWidget = this.newDecoratedText(widget);
+                        break;
+                    case 'TextInput':
+                        cardWidget = this.newTextInput(widget);
+                        break;
+                    case 'SelectionInput':
+                        // To be implemented
+                        console.warn('SelectionInput not implemented yet');
+                        break;
+                    case 'TextParagraph':
+                        cardWidget = this.newTextParagraph(widget);
+                        break;
+                    default:
+                        console.warn(`Unknown widget render type: ${widget.render}, defaulting to TextInput`);
+                        cardWidget = this.newTextInput(widget);
                 }
+                cardSection.addWidget(cardWidget);
             });
         }
 
         return cardSection;
     }
-    newDecoratedText(data) {
+    newDecoratedText(widget) {
         return CardService.newDecoratedText()
-            .setTopLabel(`${data.name}`)
-            .setText(`${data.description}`)
-            .setBottomLabel(data.value ? "🟢 - On" : "🔘 - Off")
+            .setTopLabel(`${widget.name || '[No Name]'}`)
+            .setText(`${widget.description || ''}`)
+            .setBottomLabel(widget.value ? "🟢 - On" : "🔘 - Off")
             .setWrapText(true)
             .setButton(
                 CardService.newTextButton()
-                    .setText(data.value ? "🚫 Disable" : "✅ Enable")
+                    .setText(widget.value ? "🚫 Disable" : "✅ Enable")
                     .setOnClickAction(
                         CardService.newAction()
                             .setFunctionName("EventHandler.Addon.onToggleBooleanSetting")
                             .setParameters({
-                                settingId: data.id,
-                                currentValue: String(data.value),
+                                settingId: widget.id,
+                                currentValue: String(widget.value),
                             })
                     )
             );
     }
+    newFixedFooter(entity) {
+        const fixedFooter = this._cardService.newFixedFooter();
+        if (entity.displayType === 'edit' || entity.displayType === 'add') {
+            fixedFooter.setPrimaryButton(
+                this._cardService.newTextButton()
+                    .setText("💾 Save")
+                    .setOnClickAction(
+                        this._cardService.newAction()
+                            .setFunctionName("EventHandler.Addon.onSave")
+                            .setParameters({
+                                action: entity.displayType,
+                                data: JSON.stringify(entity.sections.map(
+                                    section => ({
+                                        header: section.header,
+                                        widgets: section.widgets.map(widget => ({
+                                            id: widget.id,
+                                            name: widget.name,
+                                            type: widget.type,
+                                            value: widget.value
+                                        }))
+                                    }))),
+                                entityName: entity.entityName
+                            })));
+        } else {
+            fixedFooter.setPrimaryButton(
+                this._cardService.newTextButton()
+                    .setText(`🚧 ${entity.entityName}`)
+                    .setOnClickAction(
+                        this._cardService.newAction()
+                            .setFunctionName("EventHandler.Addon.onInitializeSheet")
+                            .setParameters({
+                                entityName: entity.entityName,
+                                displayName: entity.displayName
+                            })
+                    ));
+
+        }
+
+        return fixedFooter;
+    }
     newTextInput(data) {
         return CardService.newTextInput()
             .setFieldName(data.id)
-            .setTitle(data.name)
-            .setValue(String(data.value))
-            .setHint(data.description);
+            .setTitle(data.title || data.name || '[No Name]')
+            .setValue(data.value !== undefined && data.value !== null ? String(data.value) : '')
+            .setHint(data.hint || data.description || '')
+            .setMultiline(data.type === 'string' && (data.value || '').length > 50)
+            .setOnChangeAction(
+                CardService.newAction()
+                    .setFunctionName("EventHandler.Addon.onTextInputChange")
+                    .setParameters({
+                        fieldId: data.id,
+                        entityName: data.entityName || '',
+                        entityId: data.entityId || ''
+                    })
+            );
+    }
+    newTextParagraph(data) {
+        return CardService.newTextParagraph()
+            .setText(data.test || data.value || data.description || data.name || '...')
+            .setMaxLines(data.maxLines || 3);
     }
 };
 

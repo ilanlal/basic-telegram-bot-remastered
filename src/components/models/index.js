@@ -4,7 +4,10 @@ const { Widget } = require('./Widget');
 const { AutomationReply } = require('./AutomationReply');
 const { SetupFlow } = require('./SetupFlow');
 const { Settings } = require('./Settings');
+const { Attribute } = require('./Attribute');
 
+// Expose globally for tests and other scripts
+global.Attribute = Attribute;
 global.AutomationReply = AutomationReply;
 global.SetupFlow = SetupFlow;
 global.Settings = Settings;

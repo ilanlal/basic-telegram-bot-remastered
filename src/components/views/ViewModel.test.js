@@ -7,17 +7,16 @@ describe('ViewModel', () => {
             entityName: 'testCard',
             displayName: 'Test Card',
             description: 'This is a test card',
-            displayType: 'edit',
+            displayType: 'default',
             imageUrl: 'https://example.com/image.png',
             sections: [{
                 header: 'Section 1',
-                collapseControl: 'COLLAPSE_CONTROL_NONE',
                 collapsible: false,
                 numUncollapsibleWidgets: 0,
                 widgets: [
-                    { id: 'field1', name: 'Field 1', type: 'string', value: 'Value 1' },
-                    { id: 'field2', name: 'Field 2', type: 'number', value: 42 },
-                    { id: 'field3', name: 'Field 3', type: 'boolean', value: true }
+                    { id: 'field1', name: 'Field 1', render:'TextInput', type: 'string', value: 'Value 1' },
+                    { id: 'field2', name: 'Field 2', render:'TextInput', type: 'number', value: 42 },
+                    { id: 'field3', name: 'Field 3', render:'DecoratedText', type: 'boolean', value: true }
                 ]
             }]
         };
@@ -33,6 +32,12 @@ describe('ViewModel', () => {
         expect(data.header.title).toBe(`${testCardData.displayType}: ${testCardData.entityName}`);
         expect(data.header.subTitle).toBe(testCardData.description);
         expect(data.sections.length).toBe(1);
+        expect(data.sections[0].header).toBe('Section 1');
         expect(data.sections[0].widgets.length).toBe(3);
+        expect(data.sections[0].widgets[0].text).toBeDefined();
+        expect(data.sections[0].widgets[0].value).toBeDefined();
+        expect(data.sections[0].widgets[1].text).toBeDefined();
+        expect(data.sections[0].widgets[1].value).toBeDefined();
+        expect(data.sections[0].widgets[2].topLabel).toBeDefined();
     });
 });
