@@ -45,7 +45,6 @@ describe('UserLicense Model Tests', () => {
         expect(deserializedLicense.getAmount()).toBe(100);
     });
 
-
     test('UserLicense isActive method works correctly', () => {
         const license = new UserLicense()
             .setUserId('user123')

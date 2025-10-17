@@ -15,11 +15,17 @@ describe('Widget', () => {
             type: 'string'
         };
 
-        const createdWidget = Widget.create(widget);
-        expect(createdWidget.id).toBe(widget.id);
-        expect(createdWidget.view).toEqual(widget.view);
-        expect(createdWidget.value).toBe(widget.value);
-        expect(createdWidget.type).toBe(widget.type);
+        const widget1 = Widget.create(widget);
+        expect(widget1.id).toBe(widget.id);
+        expect(widget1.view).toEqual(widget.view);
+        expect(widget1.value).toBe(widget.value);
+        expect(widget1.type).toBe(widget.type);
+        expect(widget1.tabIndex).toEqual(0);
+        // Ensure tabIndex is unique and auto-incremented
+        widget.id = 'modifiedId';
+        const widget2 = Widget.create(widget);
+        expect(widget2.id).toBe(widget.id);
+        expect(widget2.tabIndex).toEqual(1);
     });
 
     test('should throw error if id is missing', () => {

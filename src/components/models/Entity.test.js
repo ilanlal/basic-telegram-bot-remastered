@@ -20,12 +20,11 @@ describe('Entity', () => {
 
     it('should add widgets to the entity', () => {
         const entity = Entity.create('User', 'user');
-        const widget1 = Widget.create({ id: 'username', view : { type: 'TextInput', title: 'Username', value: 'testuser' }, type: 'string', value: 'testuser' });
-        const widget2 = Widget.create({ id: 'age', view : { type: 'TextInput', title: 'Age', value: 30 }, type: 'number', value: 30 });
+        const widget1 = Widget.create({ id: 'username', view : { type: 'TextInput', hint: 'Enter your username', title: 'Username', value: 'testuser' }, type: 'string', value: 'testuser' });
+        const widget2 = Widget.create({ id: 'age', view : { type: 'TextInput', hint: 'Enter your age', title: 'Age', value: 30 }, type: 'number', value: 30 });
 
         entity.addSection({
             header: 'User Info',
-            collapseControl: 'COLLAPSE_CONTROL_NONE',
             collapsible: false,
             numUncollapsibleWidgets: 0,
             widgets: [widget1, widget2]

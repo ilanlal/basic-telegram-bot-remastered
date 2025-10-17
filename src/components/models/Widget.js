@@ -3,12 +3,15 @@ class Widget {
         return 'Widget id is required';
     }
 
+    static tabIndex = 0;
+
     static create({ id, view, value, type } = {}) {
         if (!id) {
             throw new Error(Widget.INVALID_ID_ERROR);
         }
 
-        const widget = new Widget(id);
+        const widget = new Widget(id)
+            .setTabIndex(Widget.tabIndex++);
 
         if (view) {
             widget.setView(view);
@@ -30,6 +33,7 @@ class Widget {
         this._view = null;
         this._value = null;
         this._type = null;
+        this._tabIndex = 0;
     }
 
     /// Setters
@@ -48,6 +52,11 @@ class Widget {
         return this;
     }
 
+    setTabIndex(tabIndex) {
+        this._tabIndex = tabIndex;
+        return this;
+    }
+
     /// Getters
     get type() {
         return this._type;
@@ -63,6 +72,10 @@ class Widget {
 
     get value() {
         return this._value;
+    }
+
+    get tabIndex() {
+        return this._tabIndex;
     }
 }
 

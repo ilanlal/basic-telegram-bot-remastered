@@ -14,13 +14,17 @@ describe('ViewModel', () => {
                 collapsible: false,
                 numUncollapsibleWidgets: 0,
                 widgets: [
-                    { id: 'field1', view: { type: 'TextInput', title: 'Field 1', value: 'Value 1' }, type: 'string', value: 'Value 1' },
-                    { id: 'field2', view: { type: 'TextInput', title: 'Field 2', value: 42 }, type: 'number', value: 42 },
-                    { id: 'field3', view: { type: 'DecoratedText', title: 'Field 3', value: true }, type: 'boolean', value: true }
+                    { id: 'field1', view: { type: 'TextInput', hint: 'Enter text for Field 1', title: 'Field 1' }, type: 'string', value: 'Value 1' },
+                    { id: 'field2', view: { type: 'TextInput', hint: 'Enter text for Field 2', title: 'Field 2' }, type: 'number', value: 42 },
+                    { id: 'field3', view: { type: 'DecoratedText', hint: 'Enter text for Field 3', title: 'Field 3' }, type: 'boolean', value: true }
                 ]
             }]
         };
-        const viewModel = ViewModel.create(testDataModel);
+        const viewModel = ViewModel.create({
+            dataModel: testDataModel,
+            cardService: CardService,
+            activeSpreadsheet: SpreadsheetApp.getActiveSpreadsheet()
+        });
         expect(viewModel).toBeDefined();
         const card = viewModel.newCardBuilder();
         expect(card).toBeDefined();
@@ -50,7 +54,11 @@ describe('ViewModel', () => {
             imageUrl: 'https://example.com/image.png',
             sections: [] // No sections for view type
         };
-        const viewModel = ViewModel.create(testCardData);
+        const viewModel = ViewModel.create({
+            dataModel: testCardData,
+            cardService: CardService,
+            activeSpreadsheet: SpreadsheetApp.getActiveSpreadsheet()
+        });
         expect(viewModel).toBeDefined();
         const card = viewModel.newCardBuilder();
         expect(card).toBeDefined();
@@ -64,5 +72,24 @@ describe('ViewModel', () => {
         expect(data.sections[0].header).toBe('Entity Information');
         expect(data.sections[0].widgets.length).toBe(7);
         expect(data.sections[0].widgets[0].text).toBeDefined();
+    });
+
+    // getActiveSheet
+    it('should get the active sheet', () => {
+        const testCardData = {
+            entityName: 'testCard',
+            displayName: 'Test Card',
+            description: 'This is a test card',
+            displayType: 'default',
+            imageUrl: 'https://example.com/image.png',
+            sections: [] // No sections for view type
+        };
+        const viewModel = ViewModel.create({
+            dataModel: testCardData,
+            cardService: CardService,
+            activeSpreadsheet: SpreadsheetApp.getActiveSpreadsheet()
+        });
+        const activeSheet = viewModel.getActiveSheet();
+        expect(activeSheet).toBeDefined();
     });
 });

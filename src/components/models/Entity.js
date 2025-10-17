@@ -107,9 +107,11 @@ class Entity {
     get showNewButton() {
         return this._showNewButton;
     }
+
     get showUpdateButton() {
         return this._showUpdateButton;
     }
+
     get showFocusButton() {
         return this._showFocusButton;
     }
@@ -136,6 +138,10 @@ class Entity {
 
     get sections() {
         return this._sections;
+    }
+
+    get columns() {
+        return this._sections.flatMap(section => section.widgets);
     }
 }
 

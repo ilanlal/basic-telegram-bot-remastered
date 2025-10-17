@@ -1,14 +1,28 @@
 class ViewModel {
-    static create(dataModel = {}) {
-        return new ViewModel(
-            Entity.createFromObject(dataModel));
+    static INVALID_MODEL_ERROR = "Invalid data model provided to ViewModel.create, missing entityName";
+
+    static create({ dataModel = {}, cardService = CardService, activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet() } = {}) {
+        if (!dataModel || !dataModel.entityName) {
+            throw new Error(ViewModel.INVALID_MODEL_ERROR);
+        }
+        const entityDataModel = Entity.createFromObject(dataModel);
+        return new ViewModel({
+            entityDataModel,
+            sheetWrapper: ViewModel.SheetWrapper.create(activeSpreadsheet, dataModel.entityName),
+            cardWrapper: ViewModel.CardServiceWrapper.create(cardService)
+        });
     }
 
-    constructor(entityDataModel) {
+    constructor({ entityDataModel = null, sheetWrapper = null, cardWrapper = null } = {}) {
         this._entityDataModel = entityDataModel;
-        this.spreadsheetService = null;
+
+        // Initialize SpreadsheetService
+        this._sheetWrapper = sheetWrapper || ViewModel.SheetWrapper
+            .create(SpreadsheetApp.getActiveSpreadsheet(), entityDataModel.entityName);
+
         // Use the global CardService in Apps Script environment
-        this._card = ViewModel.CardServiceWrapper.create(CardService);
+        this._cardWrapper = cardWrapper || ViewModel.CardServiceWrapper
+            .create(CardService);
     }
 
     newCardBuilder() {
@@ -20,26 +34,26 @@ class ViewModel {
     }
 
     buildEntityCardBuilder(entityDataModel) {
-        const cardBuilder = this._card.newCardBuilder();
+        const cardBuilder = this._cardWrapper.newCardBuilder();
 
         // Basic card setup
         cardBuilder.setName(`${entityDataModel.entityName}_Card`)
-            .setHeader(this._card.newCardHeader(entityDataModel))
+            .setHeader(this._cardWrapper.newCardHeader(entityDataModel))
             .setFixedFooter(
-                this._card.newFixedFooter(entityDataModel));
+                this._cardWrapper.newFixedFooter(entityDataModel));
 
         entityDataModel.sections.forEach(section => {
             cardBuilder.addSection(
-                this._card.newCardSection(section));
+                this._cardWrapper.newCardSection(section));
         });
 
         return cardBuilder;
     }
 
     buildHomeCardBuilder(dataModel) {
-        const cardBuilder = this._card.newCardBuilder()
+        const cardBuilder = this._cardWrapper.newCardBuilder()
             .setName(`${dataModel.entityName}_Card`)
-            .setHeader(this._card.newCardHeader(dataModel));
+            .setHeader(this._cardWrapper.newCardHeader(dataModel));
         //.setFixedFooter(this._card.newFixedFooter(this.entity));
 
         // Define a section with key entity details
@@ -82,36 +96,45 @@ class ViewModel {
                 },
                 value: 'Add New Row'
             },
-            { id: 'description', type: 'string', view: { type: 'TextParagraph', text: dataModel.description || 'No description provided.' } },
-            { id: 'imageUrl', type: 'string', view: { type: 'TextParagraph', text: dataModel.imageUrl || 'No image URL provided.' } },
+            {
+                id: 'description', type: 'string',
+                view: { type: 'TextParagraph', text: dataModel.description || 'No description provided.' }
+            },
+            {
+                id: 'imageUrl', type: 'string',
+                view: { type: 'TextParagraph', text: dataModel.imageUrl || 'No image URL provided.' }
+            },
             { id: 'displayType', type: 'string', view: { type: 'TextParagraph', text: dataModel.displayType || 'No display type provided.' } },
             { id: 'numSections', type: 'number', view: { type: 'TextParagraph', text: `Number of sections: ${dataModel.sections.length}` }, value: dataModel.sections.length },
-                //{ id: 'numAttributes', type: 'number', view: { type: 'TextParagraph', text: `Number of attributes: ${dataModel.attributes.length}` }, value: dataModel.attributes.length },
-                //{ id: 'numRows', type: 'number', view: { type: 'TextParagraph', text: `Number of rows: ${dataModel.rows.length}` }, value: dataModel.rows.length },
-                //{ id: 'numColumns', type: 'number', view: { type: 'TextParagraph', text: `Number of columns: ${dataModel.columns.length}` }, value: dataModel.columns.length },
-                //{ id: 'lastUpdated', type: 'string', view: { type: 'TextParagraph', text: `Last updated: ${dataModel.lastUpdated || 'N/A'}` }, value: dataModel.lastUpdated || '' },
                 // Add more widgets as needed
             ]
         };
 
         // Add a summary section with key entity details
         cardBuilder.addSection(
-            this._card.newCardSection(section));
+            this._cardWrapper.newCardSection(section));
         return cardBuilder;
     }
 
-    initializeSheet(activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet()) {
-        const sheet = activeSpreadsheet.getSheetByName(this._entityDataModel.name) ||
-            activeSpreadsheet.insertSheet(this._entityDataModel.name);
-
-        sheet.appendRow(this._entityDataModel.attributes.map(attr => attr.name));
-        sheet.appendRow(this._entityDataModel.attributes.map(attr => attr.value));
-        return sheet;
+    getActiveSheet() {
+        return this._sheetWrapper.getSheet();
     }
-}
+
+    get sheetWrapper() {
+        return this._sheetWrapper;
+    }
+
+    get cardWrapper() {
+        return this._cardWrapper;
+    }
+
+    get entityDataModel() {
+        return this._entityDataModel;
+    }
+};
 
 ViewModel.Spreadsheet = class {
-    static create(activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet()) {
+    static create(activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet(), sheetName = null) {
         return new ViewModel.Spreadsheet(activeSpreadsheet);
     }
 
@@ -119,8 +142,79 @@ ViewModel.Spreadsheet = class {
         this._activeSpreadsheet = activeSpreadsheet;
     }
 
+    getSheetByName(name) {
+        return this._activeSpreadsheet.getSheetByName(name);
+    }
+
+    setActiveSheet(sheet) {
+        this._activeSheet = sheet;
+        return this;
+    }
+
+    getActiveSheet() {
+        return this._activeSheet;
+    }
+
+    insertSheet(name) {
+        return this._activeSpreadsheet.insertSheet(name);
+    }
+
     get activeSpreadsheet() {
         return this._activeSpreadsheet;
+    }
+};
+
+ViewModel.SheetWrapper = class {
+    static create(activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet(), sheetName = null, columns = []) {
+        return new ViewModel.SheetWrapper(activeSpreadsheet, sheetName, columns);
+    }
+    constructor(activeSpreadsheet, sheetName, columns = []) {
+        this._activeSpreadsheet = activeSpreadsheet;
+        this._sheetName = sheetName;
+        this._columns = columns;
+    }
+
+    initializeSheet() {
+        let sheet = this._activeSpreadsheet.getSheetByName(this._sheetName);
+        if (!sheet) {
+            sheet = this._activeSpreadsheet.insertSheet(this._sheetName);
+
+            if (this._columns.length > 0) {
+                sheet.appendRow(this._columns);
+            }
+        }
+        return sheet;
+    }
+
+    setActiveSheet() {
+        return this._activeSpreadsheet.setActiveSheet(this._sheet);
+    }
+
+    getSheet() {
+        if (!this._sheet) {
+            this._sheet = this.initializeSheet();
+        }
+        return this._sheet;
+    }
+
+    appendRow(rowData = []) {
+        return this._sheet.appendRow(rowData);
+    }
+
+    get columns() {
+        return this._columns;
+    }
+
+    get sheet() {
+        return this._sheet;
+    }
+
+    get activeSpreadsheet() {
+        return this._activeSpreadsheet;
+    }
+
+    get sheetName() {
+        return this._sheetName;
     }
 };
 
