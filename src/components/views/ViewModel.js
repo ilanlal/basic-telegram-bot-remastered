@@ -13,16 +13,14 @@ class ViewModel {
         });
     }
 
-    constructor({ entityDataModel = null, sheetWrapper = null, cardWrapper = null } = {}) {
+    constructor({ entityDataModel, sheetWrapper, cardWrapper } = {}) {
         this._entityDataModel = entityDataModel;
 
         // Initialize SpreadsheetService
-        this._sheetWrapper = sheetWrapper || ViewModel.SheetWrapper
-            .create(SpreadsheetApp.getActiveSpreadsheet(), entityDataModel.entityName);
+        this._sheetWrapper = sheetWrapper;
 
         // Use the global CardService in Apps Script environment
-        this._cardWrapper = cardWrapper || ViewModel.CardServiceWrapper
-            .create(CardService);
+        this._cardWrapper = cardWrapper;
     }
 
     newCardBuilder() {
@@ -50,10 +48,10 @@ class ViewModel {
         return cardBuilder;
     }
 
-    buildHomeCardBuilder(dataModel) {
+    buildHomeCardBuilder(entityDataModel) {
         const cardBuilder = this._cardWrapper.newCardBuilder()
-            .setName(`${dataModel.entityName}_Card`)
-            .setHeader(this._cardWrapper.newCardHeader(dataModel));
+            .setName(`${entityDataModel.entityName}_Card`)
+            .setHeader(this._cardWrapper.newCardHeader(entityDataModel));
         //.setFixedFooter(this._card.newFixedFooter(this.entity));
 
         // Define a section with key entity details
@@ -65,16 +63,16 @@ class ViewModel {
                 id: 'entityName',
                 view: {
                     type: 'TextParagraph',
-                    text: dataModel.entityName
+                    text: entityDataModel.entityName
                 },
                 type: 'string',
-                value: dataModel.entityName
+                value: entityDataModel.entityName
             }, {
                 id: 'displayName',
                 type: 'string',
                 view: {
                     type: 'TextParagraph',
-                    text: dataModel.displayName
+                    text: entityDataModel.displayName
                 }
             },
             {
@@ -90,7 +88,7 @@ class ViewModel {
                         text: '➕',
                         handler: 'addRowHandler',
                         parameters: {
-                            entityId: dataModel.entityId || ''
+                            entityId: entityDataModel.entityId || ''
                         }
                     }
                 },
@@ -98,14 +96,14 @@ class ViewModel {
             },
             {
                 id: 'description', type: 'string',
-                view: { type: 'TextParagraph', text: dataModel.description || 'No description provided.' }
+                view: { type: 'TextParagraph', text: entityDataModel.description || 'No description provided.' }
             },
             {
                 id: 'imageUrl', type: 'string',
-                view: { type: 'TextParagraph', text: dataModel.imageUrl || 'No image URL provided.' }
+                view: { type: 'TextParagraph', text: entityDataModel.imageUrl || 'No image URL provided.' }
             },
-            { id: 'displayType', type: 'string', view: { type: 'TextParagraph', text: dataModel.displayType || 'No display type provided.' } },
-            { id: 'numSections', type: 'number', view: { type: 'TextParagraph', text: `Number of sections: ${dataModel.sections.length}` }, value: dataModel.sections.length },
+            { id: 'displayType', type: 'string', view: { type: 'TextParagraph', text: entityDataModel.displayType || 'No display type provided.' } },
+            { id: 'numSections', type: 'number', view: { type: 'TextParagraph', text: `Number of sections: ${entityDataModel.sections.length}` }, value: entityDataModel.sections.length },
                 // Add more widgets as needed
             ]
         };
@@ -130,37 +128,6 @@ class ViewModel {
 
     get entityDataModel() {
         return this._entityDataModel;
-    }
-};
-
-ViewModel.Spreadsheet = class {
-    static create(activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet(), sheetName = null) {
-        return new ViewModel.Spreadsheet(activeSpreadsheet);
-    }
-
-    constructor(activeSpreadsheet) {
-        this._activeSpreadsheet = activeSpreadsheet;
-    }
-
-    getSheetByName(name) {
-        return this._activeSpreadsheet.getSheetByName(name);
-    }
-
-    setActiveSheet(sheet) {
-        this._activeSheet = sheet;
-        return this;
-    }
-
-    getActiveSheet() {
-        return this._activeSheet;
-    }
-
-    insertSheet(name) {
-        return this._activeSpreadsheet.insertSheet(name);
-    }
-
-    get activeSpreadsheet() {
-        return this._activeSpreadsheet;
     }
 };
 
