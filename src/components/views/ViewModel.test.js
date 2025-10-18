@@ -20,13 +20,13 @@ describe('ViewModel', () => {
                 ]
             }]
         };
-        const viewModel = ViewModel.create({
+        const viewModel = ViewModel.fromModel({
             dataModel: testDataModel,
             cardService: CardService,
             activeSpreadsheet: SpreadsheetApp.getActiveSpreadsheet()
         });
         expect(viewModel).toBeDefined();
-        const card = viewModel.newCardBuilder();
+        const card = viewModel.getCardBuilder();
         expect(card).toBeDefined();
         const builtCard = card.build();
         const data = builtCard.getData();
@@ -54,13 +54,13 @@ describe('ViewModel', () => {
             imageUrl: 'https://example.com/image.png',
             sections: [] // No sections for view type
         };
-        const viewModel = ViewModel.create({
+        const viewModel = ViewModel.fromModel({
             dataModel: testCardData,
             cardService: CardService,
             activeSpreadsheet: SpreadsheetApp.getActiveSpreadsheet()
         });
         expect(viewModel).toBeDefined();
-        const card = viewModel.newCardBuilder();
+        const card = viewModel.getCardBuilder();
         expect(card).toBeDefined();
         const builtCard = card.build();
         const data = builtCard.getData();
@@ -84,7 +84,7 @@ describe('ViewModel', () => {
             imageUrl: 'https://example.com/image.png',
             sections: [] // No sections for view type
         };
-        const viewModel = ViewModel.create({
+        const viewModel = ViewModel.fromModel({
             dataModel: testCardData,
             cardService: CardService,
             activeSpreadsheet: SpreadsheetApp.getActiveSpreadsheet()

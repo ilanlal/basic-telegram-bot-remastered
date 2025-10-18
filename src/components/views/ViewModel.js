@@ -1,7 +1,7 @@
 class ViewModel {
     static INVALID_MODEL_ERROR = "Invalid data model provided to ViewModel.create, missing entityName";
 
-    static create({ dataModel = {}, cardService = CardService, activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet() } = {}) {
+    static fromModel({ dataModel = {}, cardService = CardService, activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet() } = {}) {
         if (!dataModel || !dataModel.entityName) {
             throw new Error(ViewModel.INVALID_MODEL_ERROR);
         }
@@ -23,12 +23,16 @@ class ViewModel {
         this._cardWrapper = cardWrapper;
     }
 
-    newCardBuilder() {
+    getCardBuilder() {
         if (this._entityDataModel.displayType === 'edit' || this._entityDataModel.displayType === 'add') {
             return this.buildEntityCardBuilder(this._entityDataModel);
         }
 
         return this.buildHomeCardBuilder(this._entityDataModel);
+    }
+
+    getActiveSheet() {
+        return this._sheetWrapper.getSheet();
     }
 
     buildEntityCardBuilder(entityDataModel) {
@@ -112,10 +116,6 @@ class ViewModel {
         cardBuilder.addSection(
             this._cardWrapper.newCardSection(section));
         return cardBuilder;
-    }
-
-    getActiveSheet() {
-        return this._sheetWrapper.getSheet();
     }
 
     get sheetWrapper() {
