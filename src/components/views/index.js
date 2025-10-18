@@ -6,7 +6,7 @@ const BotSetupCard = require('./BotSetupCard');
 const BotAutomationsCard = require('./BotAutomationsCard');
 const UsersManagementCard = require('./UsersManagementCard');
 const SettingsCard = require('./SettingsCard');
-const ViewModel = require('./ViewModel');
+const EntityViewModel = require('./EntityViewModel');
 
 global.UsersManagementCard = UsersManagementCard;
 global.HomeCard = HomeCard;
@@ -16,4 +16,4 @@ global.AccountCard = AccountCard;
 global.BotSetupCard = BotSetupCard;
 global.BotAutomationsCard = BotAutomationsCard;
 global.SettingsCard = SettingsCard;
-global.ViewModel = ViewModel;
+global.EntityViewModel = EntityViewModel;

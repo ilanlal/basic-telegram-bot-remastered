@@ -1,15 +1,15 @@
-class ViewModel {
+class EntityViewModel {
     static INVALID_MODEL_ERROR = "Invalid data model provided to ViewModel.create, missing entityName";
 
     static fromModel({ dataModel = {}, cardService = CardService, activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet() } = {}) {
         if (!dataModel || !dataModel.entityName) {
-            throw new Error(ViewModel.INVALID_MODEL_ERROR);
+            throw new Error(EntityViewModel.INVALID_MODEL_ERROR);
         }
         const entityDataModel = Entity.createFromObject(dataModel);
-        return new ViewModel({
+        return new EntityViewModel({
             entityDataModel,
-            sheetWrapper: ViewModel.SheetWrapper.create(activeSpreadsheet, dataModel.entityName),
-            cardWrapper: ViewModel.CardServiceWrapper.create(cardService)
+            sheetWrapper: EntityViewModel.SheetWrapper.create(activeSpreadsheet, dataModel.entityName),
+            cardWrapper: EntityViewModel.CardServiceWrapper.create(cardService)
         });
     }
 
@@ -131,9 +131,9 @@ class ViewModel {
     }
 };
 
-ViewModel.SheetWrapper = class {
+EntityViewModel.SheetWrapper = class {
     static create(activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet(), sheetName = null, columns = []) {
-        return new ViewModel.SheetWrapper(activeSpreadsheet, sheetName, columns);
+        return new EntityViewModel.SheetWrapper(activeSpreadsheet, sheetName, columns);
     }
     constructor(activeSpreadsheet, sheetName, columns = []) {
         this._activeSpreadsheet = activeSpreadsheet;
@@ -185,9 +185,9 @@ ViewModel.SheetWrapper = class {
     }
 };
 
-ViewModel.CardServiceWrapper = class {
+EntityViewModel.CardServiceWrapper = class {
     static create(cardService = CardService) {
-        return new ViewModel.CardServiceWrapper(cardService);
+        return new EntityViewModel.CardServiceWrapper(cardService);
     }
 
     constructor(cardService) {
@@ -324,5 +324,5 @@ ViewModel.CardServiceWrapper = class {
 };
 
 if (typeof module !== "undefined" && module.exports) {
-    module.exports = ViewModel;
+    module.exports = EntityViewModel;
 }

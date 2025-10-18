@@ -1,7 +1,7 @@
 require('../../../tests');
-const ViewModel = require('./ViewModel');
+const EntityViewModel = require('./EntityViewModel');
 
-describe('ViewModel', () => {
+describe('EntityViewModel', () => {
     it('should create a "add"card with the correct name and data', () => {
         const testDataModel = {
             entityName: 'testCard',
@@ -20,7 +20,7 @@ describe('ViewModel', () => {
                 ]
             }]
         };
-        const viewModel = ViewModel.fromModel({
+        const viewModel = EntityViewModel.fromModel({
             dataModel: testDataModel,
             cardService: CardService,
             activeSpreadsheet: SpreadsheetApp.getActiveSpreadsheet()
@@ -54,7 +54,7 @@ describe('ViewModel', () => {
             imageUrl: 'https://example.com/image.png',
             sections: [] // No sections for view type
         };
-        const viewModel = ViewModel.fromModel({
+        const viewModel = EntityViewModel.fromModel({
             dataModel: testCardData,
             cardService: CardService,
             activeSpreadsheet: SpreadsheetApp.getActiveSpreadsheet()
@@ -84,7 +84,7 @@ describe('ViewModel', () => {
             imageUrl: 'https://example.com/image.png',
             sections: [] // No sections for view type
         };
-        const viewModel = ViewModel.fromModel({
+        const viewModel = EntityViewModel.fromModel({
             dataModel: testCardData,
             cardService: CardService,
             activeSpreadsheet: SpreadsheetApp.getActiveSpreadsheet()
