@@ -9,7 +9,7 @@ describe('EntityViewModel', () => {
         });
         expect(viewModel).toBeDefined();
     });
-    
+
     // getCardBuilder
     it('should create a card with the correct name and data', () => {
         const cardMeta = {
@@ -26,9 +26,9 @@ describe('EntityViewModel', () => {
                 collapsible: false,
                 numUncollapsibleWidgets: 0,
                 widgets: [
-                    { id: 'field1', TextInput: { hint: 'Enter text for Field 1', title: 'Field 1' }, type: 'string', value: 'Value 1' },
-                    { id: 'field2', TextInput: { hint: 'Enter text for Field 2', title: 'Field 2' }, type: 'number', value: 42 },
-                    { id: 'field3', DecoratedText: { hint: 'Enter text for Field 3', title: 'Field 3' }, type: 'boolean', value: true }
+                    { TextInput: {id: 'field1', hint: 'Enter text for Field 1', title: 'Field 1' }, type: 'string', value: 'Value 1' },
+                    { TextInput: { id: 'field2', hint: 'Enter text for Field 2', title: 'Field 2' }, type: 'number', value: 42 },
+                    { DecoratedText: { id: 'field3', hint: 'Enter text for Field 3', title: 'Field 3' }, type: 'boolean', value: true }
                 ]
             }],
             fixedFooter: {
