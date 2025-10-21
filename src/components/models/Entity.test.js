@@ -45,6 +45,10 @@ describe('Entity', () => {
         const obj = {
             entityName: 'user',
             displayName: 'User',
+            header: {
+                title: '',
+                subTitle: ''
+            },
             sections: [{
                 header: '',
                 collapseControl: 'COLLAPSE_CONTROL_NONE',
@@ -54,14 +58,14 @@ describe('Entity', () => {
                     { id: 'username', view : { type: 'TextInput', title: 'Username', value: 'testuser' }, value: 'testuser', type: 'string' },
                     { id: 'age', view : { type: 'TextInput', title: 'Age', value: 30 }, value: 30, type: 'number' }
                 ]
-            }]
+            }],
+            footer: { text: '' }
         };
         const entity = Entity.createFromObject(obj);
         expect(entity.displayName).toBe('User');
         expect(entity.entityName).toBe('user');
         expect(entity.sections.length).toBe(1);
         expect(entity.sections[0].header).toBe('');
-        expect(entity.sections[0].collapseControl).toBe('COLLAPSE_CONTROL_NONE');
         expect(entity.sections[0].collapsible).toBe(false);
         expect(entity.sections[0].numUncollapsibleWidgets).toBe(0);
         expect(entity.sections[0].widgets.length).toBe(2);

@@ -2,94 +2,78 @@ require('../../../tests');
 const EntityViewModel = require('./EntityViewModel');
 
 describe('EntityViewModel', () => {
-    it('should create a "add"card with the correct name and data', () => {
-        const testDataModel = {
-            entityName: 'testCard',
-            displayName: 'Test Card',
-            description: 'This is a test card',
-            displayType: 'add',
-            imageUrl: 'https://example.com/image.png',
+    it('should create an instance using the static create method', () => {
+        const viewModel = EntityViewModel.create({
+            cardService: CardService,
+            activeSpreadsheet: SpreadsheetApp.getActiveSpreadsheet()
+        });
+        expect(viewModel).toBeDefined();
+    });
+    
+    // getCardBuilder
+    it('should create a card with the correct name and data', () => {
+        const cardMeta = {
+            name: 'addBotCard',
+            header: {
+                title: 'Add Bot',
+                subTitle: 'Add a new bot to the system',
+                imageUrl: 'https://example.com/add_bot_image.png',
+                imageStyle: CardService.ImageStyle.SQUARE,
+                imageAltText: 'Add Bot Image'
+            },
             sections: [{
                 header: 'Section 1',
                 collapsible: false,
                 numUncollapsibleWidgets: 0,
                 widgets: [
-                    { id: 'field1', view: { type: 'TextInput', hint: 'Enter text for Field 1', title: 'Field 1' }, type: 'string', value: 'Value 1' },
-                    { id: 'field2', view: { type: 'TextInput', hint: 'Enter text for Field 2', title: 'Field 2' }, type: 'number', value: 42 },
-                    { id: 'field3', view: { type: 'DecoratedText', hint: 'Enter text for Field 3', title: 'Field 3' }, type: 'boolean', value: true }
+                    { id: 'field1', TextInput: { hint: 'Enter text for Field 1', title: 'Field 1' }, type: 'string', value: 'Value 1' },
+                    { id: 'field2', TextInput: { hint: 'Enter text for Field 2', title: 'Field 2' }, type: 'number', value: 42 },
+                    { id: 'field3', DecoratedText: { hint: 'Enter text for Field 3', title: 'Field 3' }, type: 'boolean', value: true }
                 ]
-            }]
+            }],
+            fixedFooter: {
+                primaryButton: {
+                    textButton: {
+                        text: 'Submit',
+                        functionName: 'EventHandler.Addon.onSubmit',
+                        parameters: {
+                            action: 'submitAddBot'
+                        }
+                    }
+                }
+            }
         };
-        const viewModel = EntityViewModel.fromModel({
-            dataModel: testDataModel,
+        const viewModel = EntityViewModel.create({
             cardService: CardService,
             activeSpreadsheet: SpreadsheetApp.getActiveSpreadsheet()
         });
         expect(viewModel).toBeDefined();
-        const card = viewModel.getCardBuilder();
+        const card = viewModel.getCardBuilder(cardMeta);
         expect(card).toBeDefined();
         const builtCard = card.build();
         const data = builtCard.getData();
         expect(data).toBeDefined();
-        expect(data.name).toBe(testDataModel.entityName + '_Card');
-        //expect(data.getName()).toBe(testCardData.entityName + '_Card');
-        expect(data.header.title).toBe(`${testDataModel.displayType}: ${testDataModel.entityName}`);
-        expect(data.header.subTitle).toBe(testDataModel.description);
-        expect(data.sections.length).toBe(1);
-        expect(data.sections[0].header).toBe('Section 1');
-        expect(data.sections[0].widgets.length).toBe(3);
-        expect(data.sections[0].widgets[0].text).toBeDefined();
-        expect(data.sections[0].widgets[0].value).toBeDefined();
-        expect(data.sections[0].widgets[1].text).toBeDefined();
-        expect(data.sections[0].widgets[1].value).toBeDefined();
-        expect(data.sections[0].widgets[2].topLabel).toBeDefined();
-    });
-
-    it('should create a "default" card with the correct name and data', () => {
-        const testCardData = {
-            entityName: 'testCard',
-            displayName: 'Test Card',
-            description: 'This is a test card',
-            displayType: 'default',
-            imageUrl: 'https://example.com/image.png',
-            sections: [] // No sections for view type
-        };
-        const viewModel = EntityViewModel.fromModel({
-            dataModel: testCardData,
-            cardService: CardService,
-            activeSpreadsheet: SpreadsheetApp.getActiveSpreadsheet()
-        });
-        expect(viewModel).toBeDefined();
-        const card = viewModel.getCardBuilder();
-        expect(card).toBeDefined();
-        const builtCard = card.build();
-        const data = builtCard.getData();
-        expect(data).toBeDefined();
-        expect(data.name).toBe(testCardData.entityName + '_Card');
-        expect(data.header.title).toBe(`${testCardData.displayType}: ${testCardData.entityName}`);
-        expect(data.header.subTitle).toBe(testCardData.description);
-        expect(data.sections.length).toBe(1);
-        expect(data.sections[0].header).toBe('Entity Information');
-        expect(data.sections[0].widgets.length).toBe(7);
-        expect(data.sections[0].widgets[0].text).toBeDefined();
+        expect(data.name).toBe(cardMeta.name);
+        expect(data.header).toBeDefined();
+        expect(data.header.title).toBe(cardMeta.header.title);
+        expect(data.header.subTitle).toBe(cardMeta.header.subTitle);
+        expect(data.header.imageUrl).toBe(cardMeta.header.imageUrl);
+        expect(data.header.imageStyle).toBe(cardMeta.header.imageStyle);
+        expect(data.header.imageAltText).toBe(cardMeta.header.imageAltText);
+        console.log(JSON.stringify(data, null, 2));
     });
 
     // getActiveSheet
     it('should get the active sheet', () => {
-        const testCardData = {
-            entityName: 'testCard',
-            displayName: 'Test Card',
-            description: 'This is a test card',
-            displayType: 'default',
-            imageUrl: 'https://example.com/image.png',
-            sections: [] // No sections for view type
+        const sheetMeta = {
+            name: 'TestSheet',
+            columns: ['Column1', 'Column2', 'Column3']
         };
-        const viewModel = EntityViewModel.fromModel({
-            dataModel: testCardData,
+        const viewModel = EntityViewModel.create({
             cardService: CardService,
             activeSpreadsheet: SpreadsheetApp.getActiveSpreadsheet()
         });
-        const activeSheet = viewModel.getActiveSheet();
+        const activeSheet = viewModel.getActiveSheet(sheetMeta);
         expect(activeSheet).toBeDefined();
     });
 });
