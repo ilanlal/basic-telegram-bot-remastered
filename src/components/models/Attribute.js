@@ -1,52 +1,53 @@
 class Attribute {
-    constructor() {
-    }
-
-    static create({ id, ...rest } = {}) {
-        if (!id) {
-            throw new Error('Attribute id is required');
-        }
-        const attribute = new Attribute();
-        attribute.id = id;
-        Object.assign(attribute, rest);
-        return attribute;
-    }
-
     get id() {
         return this._id;
-    }
-
-    set id(val) {
-        this._id = val;
     }
 
     get name() {
         return this._name;
     }
-    set name(val) {
-        this._name = val;
-    }
 
     get description() {
         return this._description;
     }
-    set description(val) {
-        this._description = val;
+
+    get type() {
+        return this._type;
     }
 
     get value() {
         return this._value;
     }
 
-    set value(val) {
-        this._value = val;
+    constructor(id, name, description, type, defaultValue = undefined) {
+        this._id = id;
+        this._name = name;
+        this._description = description;
+        this._value = defaultValue;
+        this._type = type;
     }
 
-    get type() {
-        return this._type;
+    setValue(value) {
+        this._value = value;
+        return this;
     }
-    set type(val) {
-        this._type = val;
+
+    getValue() {
+        return this._value;
+    }
+
+    static create({ id, name, description, type, value, ...rest } = {}) {
+        if (!id) {
+            throw new Error('Attribute id is required');
+        }
+        const attribute = new Attribute(
+            id,
+            name,
+            description,
+            type,
+            value
+        );
+        return attribute;
     }
 
     toObject() {
@@ -57,6 +58,7 @@ class Attribute {
             value: this._value,
             type: this._type
         };
+    
     }
 }
 

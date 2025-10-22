@@ -1,6 +1,14 @@
 require("@ilanlal/gasmocks");
 require('..');
 
+const { TelegramBotClient } = require('../TelegramBotClient');
+
+describe('TelegramBotClient newClient method', () => {
+    test('should create an instance using the newClient method', () => {
+        const botClient = TelegramBotClient.newClient('sample-token-123');
+        expect(botClient).toBeInstanceOf(TelegramBotClient);
+    });
+});
 
 describe('TelegramBotClient base definition', () => {
     let telegramBotClient;

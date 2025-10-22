@@ -560,7 +560,12 @@ class TelegramBotClient {
   }
 }
 
+TelegramBotClient.newClient = function (token = '[YOUR_BOT_TOKEN]') {
+  return new TelegramBotClient(token);
+};
+
 class TelegramBotClientFactory {
+
   constructor() {
     this.token = '[YOUR_BOT_TOKEN]';
   }

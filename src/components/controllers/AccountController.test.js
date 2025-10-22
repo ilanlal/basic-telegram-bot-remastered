@@ -1,9 +1,4 @@
-require("@ilanlal/gasmocks");
-
-require('../../types'); // Ensure the model is loaded
-require('../views'); // Ensure the view component is loaded
-require('../../lib/TelegramBotClient'); // Ensure the lib is loaded
-require('../../services'); // Ensure the service is loaded
+require('../../../tests');
 
 const { AccountController } = require('./AccountController');
 
