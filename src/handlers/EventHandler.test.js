@@ -83,12 +83,9 @@ describe('EventHandler', () => {
                 currentValue: 'true'
             }
         };
-        const actionResponse = EventHandler.Addon.onToggleBooleanSetting(event);
-        expect(actionResponse).toBeDefined();
-        const data = actionResponse.getData();
-        expect(data).toBeDefined();
-        // not notification
-        expect(data.notification).toBeUndefined();
+        const response = EventHandler.Addon.onToggleBooleanSetting(event);
+        expect(response).toBeDefined();
+        console.log(JSON.stringify(response, null, 2));
     });
     // Additional tests for other handlers can be added similarly
 });

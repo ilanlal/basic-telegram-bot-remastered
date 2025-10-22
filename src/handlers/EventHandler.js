@@ -135,8 +135,9 @@ EventHandler.AddonWrapper = class {
             const settingId = e.parameters.settingId;
             const currentValue = e.parameters.currentValue;
 
-            return SettingsController.create()
+            const response = SettingsController.create(this._userStore)
                 .toggleBooleanSetting(settingId, currentValue);
+            return response;
         } catch (error) {
             return this.handleError(error)
                 .build();
