@@ -26,19 +26,17 @@ describe('EntityViewModel', () => {
                 collapsible: false,
                 numUncollapsibleWidgets: 0,
                 widgets: [
-                    { TextInput: {id: 'field1', hint: 'Enter text for Field 1', title: 'Field 1' }, type: 'string', value: 'Value 1' },
+                    { TextInput: { id: 'field1', hint: 'Enter text for Field 1', title: 'Field 1' }, type: 'string', value: 'Value 1' },
                     { TextInput: { id: 'field2', hint: 'Enter text for Field 2', title: 'Field 2' }, type: 'number', value: 42 },
                     { DecoratedText: { id: 'field3', hint: 'Enter text for Field 3', title: 'Field 3' }, type: 'boolean', value: true }
                 ]
             }],
             fixedFooter: {
                 primaryButton: {
-                    textButton: {
-                        text: 'Submit',
-                        functionName: 'EventHandler.Addon.onSubmit',
-                        parameters: {
-                            action: 'submitAddBot'
-                        }
+                    text: 'Submit',
+                    functionName: 'EventHandler.Addon.onSubmit',
+                    parameters: {
+                        action: 'submitAddBot'
                     }
                 }
             }

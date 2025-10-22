@@ -162,7 +162,7 @@ EntityViewModel.CardServiceWrapper = class {
         const fixedFooter = this._cardService.newFixedFooter();
 
         const primaryButton = this.newTextButton({
-            text: fixedFooterMeta.primaryButton.textButton?.text || 'Primary Action',
+            text: fixedFooterMeta.primaryButton.text || 'Primary Action',
             functionName: fixedFooterMeta.primaryButton.functionName || 'EventHandler.Addon.onPrimaryAction',
             parameters: fixedFooterMeta.primaryButton.parameters || {}
         });
@@ -172,7 +172,7 @@ EntityViewModel.CardServiceWrapper = class {
             fixedFooter.setSecondaryButton(
                 this.newTextButton({
                     text: fixedFooterMeta.secondaryButton.text || 'Secondary Action',
-                    functionName: fixedFooterMeta.secondaryButton.handler || 'EventHandler.Addon.onSecondaryAction',
+                    functionName: fixedFooterMeta.secondaryButton.functionName || 'EventHandler.Addon.onSecondaryAction',
                     parameters: fixedFooterMeta.secondaryButton.parameters || {}
                 })
             );
