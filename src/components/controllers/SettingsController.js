@@ -37,6 +37,7 @@ class SettingsController {
         }
         throw new Error(`Setting with ID ${settingId} not found`);
     }
+    
     saveSettings(e) {
         const formInputs = e.formInput;
         const settings = Settings.create().load();

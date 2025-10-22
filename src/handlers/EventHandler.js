@@ -136,8 +136,7 @@ EventHandler.AddonWrapper = class {
             const currentValue = e.parameters.currentValue;
 
             return SettingsController.create()
-                .toggleBooleanSetting(settingId, currentValue)
-                .build();
+                .toggleBooleanSetting(settingId, currentValue);
         } catch (error) {
             return this.handleError(error)
                 .build();
