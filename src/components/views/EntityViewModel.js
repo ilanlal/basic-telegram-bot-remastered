@@ -106,7 +106,8 @@ EntityViewModel.CardServiceWrapper = class {
     // Error Messages
     static FIXED_FOOTER_BUTTON_NOT_DEFINED_ERROR = "Fixed footer must have a primaryButton defined.";
     static TEXT_INPUT_MISSING_ID_ERROR = "TextInput widget must have an 'id' property.";
-    
+    static DECORATED_TEXT_MISSING_CONTENT_ERROR = "DecoratedText widget must have at least one of 'text', 'decoratedText', 'topLabel', or 'bottomLabel' properties defined.";
+
     static create(cardService = CardService) {
         return new EntityViewModel.CardServiceWrapper(cardService);
     }
@@ -223,10 +224,17 @@ EntityViewModel.CardServiceWrapper = class {
     }
 
     newDecoratedText(decoratedTextMeta = {}) {
+        // setText(text) and one of the keys: setTopLabel(text), or setBottomLabel(text) are required
+        if (!decoratedTextMeta.text) {
+            throw new Error(EntityViewModel.CardServiceWrapper.DECORATED_TEXT_MISSING_CONTENT_ERROR);
+        }
+        if (!decoratedTextMeta.topLabel && !decoratedTextMeta.bottomLabel) {
+            throw new Error(EntityViewModel.CardServiceWrapper.DECORATED_TEXT_MISSING_CONTENT_ERROR);
+        }
         const decoratedText = this._cardService.newDecoratedText()
             .setTopLabel(`${decoratedTextMeta.topLabel || ''}`)
             .setWrapText(decoratedTextMeta.wrapText || false)
-            .setText(`${decoratedTextMeta.text || ''}`)
+            .setText(`${decoratedTextMeta.text}`)
             .setBottomLabel(`${decoratedTextMeta.bottomLabel || ''}`);
 
         if (decoratedTextMeta.textButton) {
@@ -253,7 +261,7 @@ EntityViewModel.CardServiceWrapper = class {
     newTextParagraph(textParagraphMeta = {}) {
         return CardService.newTextParagraph()
             .setText(textParagraphMeta.text || EntityViewModel.CardServiceWrapper.DEFAULT_PARAGRAPH_CONTENT);
-            //.setMaxLines(textParagraphMeta.maxLines || EntityViewModel.CardServiceWrapper.DEFAULT_PARAGRAPH_LINE_LIMIT);
+        //.setMaxLines(textParagraphMeta.maxLines || EntityViewModel.CardServiceWrapper.DEFAULT_PARAGRAPH_LINE_LIMIT);
     }
 
     newTextButton(textButtonMeta = {}) {
