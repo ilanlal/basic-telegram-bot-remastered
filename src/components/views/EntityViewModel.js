@@ -101,11 +101,10 @@ EntityViewModel.CardServiceWrapper = class {
 
     // Default Text Paragraph Values
     static DEFAULT_PARAGRAPH_LINE_LIMIT = 3;
-    static DEFAULT_PARAGRAPH_CONTENT = 'Paragraph text here';
 
     // Error Messages
     static FIXED_FOOTER_BUTTON_NOT_DEFINED_ERROR = "Fixed footer must have a primaryButton defined.";
-    static TEXT_INPUT_MISSING_ID_ERROR = "TextInput widget must have an 'id' property.";
+    static TEXT_INPUT_MISSING_FIELD_NAME_ERROR = "TextInput widget must have a 'fieldName' property.";
     static DECORATED_TEXT_MISSING_CONTENT_ERROR = "DecoratedText widget must have at least one of 'text', 'decoratedText', 'topLabel', or 'bottomLabel' properties defined.";
 
     static create(cardService = CardService) {
@@ -246,12 +245,12 @@ EntityViewModel.CardServiceWrapper = class {
     }
 
     newTextInput(inputTextMeta = {}) {
-        if (!inputTextMeta.id || String(inputTextMeta.id).trim() === '') {
-            throw new Error(EntityViewModel.CardServiceWrapper.TEXT_INPUT_MISSING_ID_ERROR);
+        if (!inputTextMeta.fieldName || String(inputTextMeta.fieldName).trim() === '') {
+            throw new Error(EntityViewModel.CardServiceWrapper.TEXT_INPUT_MISSING_FIELD_NAME_ERROR);
         }
 
         return CardService.newTextInput()
-            .setFieldName(inputTextMeta.id)
+            .setFieldName(inputTextMeta.fieldName)
             .setTitle(inputTextMeta.title || '')
             .setValue(inputTextMeta.value !== undefined && inputTextMeta.value !== null ? String(inputTextMeta.value) : '')
             .setHint(inputTextMeta.hint || inputTextMeta.description || '')
@@ -259,9 +258,12 @@ EntityViewModel.CardServiceWrapper = class {
     }
 
     newTextParagraph(textParagraphMeta = {}) {
-        return CardService.newTextParagraph()
-            .setText(textParagraphMeta.text || EntityViewModel.CardServiceWrapper.DEFAULT_PARAGRAPH_CONTENT);
-        //.setMaxLines(textParagraphMeta.maxLines || EntityViewModel.CardServiceWrapper.DEFAULT_PARAGRAPH_LINE_LIMIT);
+        const _ = CardService.newTextParagraph()
+            .setText(textParagraphMeta.text || '');
+        if (_.setMaxLines) {
+            _.setMaxLines(textParagraphMeta.maxLines || EntityViewModel.CardServiceWrapper.DEFAULT_PARAGRAPH_LINE_LIMIT);
+        }
+        return _;
     }
 
     newTextButton(textButtonMeta = {}) {

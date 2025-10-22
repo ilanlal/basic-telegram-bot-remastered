@@ -50,7 +50,7 @@ describe('EntityViewModel.cardWrapper', () => {
         describe('TextInput', () => {
             it('should create a newTextInput widget with correct placeholder', () => {
                 const textInputMeta = {
-                    id: 'testInput',
+                    fieldName: 'testInput',
                     title: 'Test Input',
                     hint: 'Enter test value',
                     value: 'Test Value',
@@ -63,16 +63,16 @@ describe('EntityViewModel.cardWrapper', () => {
                 //console.log(JSON.stringify(data, null, 2));
             });
 
-            it('should throw an error if TextInput id is missing', () => {
+            it('should throw an error if TextInput fieldName is missing', () => {
                 const textInputMeta = {
-                    // id is missing
+                    // fieldName is missing
                     title: 'Test Input',
                     hint: 'Enter test value',
                     value: 'Test Value',
                     type: 'string'
                 };
                 expect(() => viewModel.cardWrapper.newTextInput(textInputMeta))
-                    .toThrowError(EntityViewModel.CardServiceWrapper.TEXT_INPUT_MISSING_ID_ERROR);
+                    .toThrowError(EntityViewModel.CardServiceWrapper.TEXT_INPUT_MISSING_FIELD_NAME_ERROR);
             });
         });
 
