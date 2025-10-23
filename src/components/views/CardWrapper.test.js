@@ -9,6 +9,27 @@ describe('EntityViewModel.cardWrapper', () => {
         expect(viewModel.cardWrapper).toBeDefined();
     });
 
+    describe('sections', () => {
+        it('should create a new section with the correct header and widgets', () => {
+            const viewModel = EntityViewModel.create({
+                cardService: CardService,
+                activeSpreadsheet: SpreadsheetApp.getActiveSpreadsheet()
+            });
+            const sectionMeta = {
+                header: 'Section 1',
+                collapsible: false,
+                numUncollapsibleWidgets: 0
+            };
+            const section = viewModel.cardWrapper.newCardSection(sectionMeta);
+            expect(section).toBeDefined();
+            const data = section.getData();
+            expect(data).toBeDefined();
+            expect(data.header).toBe(sectionMeta.header);
+            expect(data.collapsible).toBe(sectionMeta.collapsible);
+            expect(data.uncollapsiblewidgetsNum).toBe(sectionMeta.numUncollapsibleWidgets);
+        });
+    });
+
     describe('widgets', () => {
         const viewModel = EntityViewModel.create({
             cardService: CardService,
