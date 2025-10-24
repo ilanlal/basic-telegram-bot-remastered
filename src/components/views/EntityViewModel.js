@@ -267,13 +267,20 @@ EntityViewModel.CardServiceWrapper = class {
     }
 
     newTextButton(textButtonMeta = {}) {
-        return this._cardService.newTextButton()
+        const _ = this._cardService.newTextButton()
             .setText(textButtonMeta.text || EntityViewModel.CardServiceWrapper.DEFAULT_BUTTON_LABEL)
-            .setOnClickAction(
-                this._cardService.newAction()
-                    .setFunctionName(textButtonMeta.functionName || EntityViewModel.CardServiceWrapper.DEFAULT_EVENT_CLICK_FUNCTION_NAME)
-                    .setParameters(textButtonMeta.parameters || {})
+            .setDisabled(!!textButtonMeta.disabled);
+
+        if (textButtonMeta.openLink) {
+            _.setOpenLink(this._cardService.newOpenLink().setUrl(textButtonMeta.openLink.url || ''));
+        }
+        else if (textButtonMeta.functionName) {
+            _.setOnClickAction(textButtonMeta.functionName ? this._cardService.newAction()
+                .setFunctionName(textButtonMeta.functionName || EntityViewModel.CardServiceWrapper.DEFAULT_EVENT_CLICK_FUNCTION_NAME)
+                .setParameters(textButtonMeta.parameters || {}) : null
             );
+        }
+        return _;
     }
 };
 
