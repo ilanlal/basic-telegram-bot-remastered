@@ -69,6 +69,16 @@ EMD.Home = {
     }
 };
 
+EMD.Environment = {
+    entityName: 'Environment',
+    displayName: 'Environment',
+    pluralDisplayName: 'Environments',
+    sheetMeta: {
+        name: 'Environments',
+        columns: ['Parameter', 'Value', 'Description', 'CreatedAt', 'UpdatedAt']
+    }
+};
+
 EMD.Bot = {
     entityName: 'Bot',
     displayName: 'Bot',
