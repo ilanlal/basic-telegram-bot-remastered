@@ -73,6 +73,7 @@ EMD.Environment = {
         name: 'Environments',
         columns: ['Parameter', 'Value', 'Description'],
         sample_data: [
+            ['[BOT_API_TOKEN]', '[YOUR_BOT_API_TOKEN]', 'API token for accessing the Telegram Bot API'],
             ['ADMIN_CHAT_ID', '[YOUR_ADMIN_CHAT_ID]', 'Telegram chat ID of the bot administrator'],
             ['DEPLOYMENT_ID', '[YOUR_DEPLOYMENT_ID]', 'Deployment ID, after deploying the Google Apps Script project'],
             ['DEFAULT_LANGUAGE', 'en', 'Default language for global defaults'],
@@ -88,7 +89,7 @@ EMD.Bot = {
     pluralDisplayName: 'Bots',
     sheetMeta: {
         name: 'Bots',
-        columns: ['Bot ID', 'default', 'es', 'fr', 'ar', 'de', 'it', 'pt', 'ru', 'zh', 'ja', 'ko', 'he'],
+        columns: ['Parameter', 'default', 'es', 'fr', 'ar', 'de', 'it', 'pt', 'ru', 'zh', 'ja', 'ko', 'he'],
         sample_data: [
             ['name', 'Sample Bot', 'Bot de Ejemplo', 'Bot d\'exemple', 'بوت تجريبي', 'Beispiel-Bot', 'Bot di esempio', 'Bot de Exemplo', 'Пример бота', '示例机器人', 'サンプルボット', '샘플 봇', 'בוט לדוגמה'],
             ['short_description', 'This is a sample bot.', 'Este es un bot de ejemplo.', 'Ceci est un bot d\'exemple.', 'هذا بوت تجريبي.', 'Dies ist ein Beispiel-Bot.', 'Questo è un bot di esempio.', 'Este é um bot de exemplo.', 'Это пример бота.', '这是一个示例机器人。', 'これはサンプルボットです。', '이것은 샘플 봇입니다.', 'זהו בוט לדוגמה.'],
@@ -118,10 +119,10 @@ EMD.Bot = {
         ]
     },
     cardMeta: {
-        name: 'botIndexCard',
+        name: 'bot_dashboard_Card',
         header: {
-            title: 'Bots',
-            subTitle: 'List of all bots',
+            title: '🤖 - [YOUR_BOT_API_TOKEN]',
+            subTitle: 'Control panel for your bot.',
             imageUrl: EMD.DEFAULT_IMAGE_URL,
             imageStyle: CardService.ImageStyle.SQUARE,
             imageAltText: 'Bot Image'
@@ -191,57 +192,6 @@ EMD.Bot = {
     }
 };
 
-EMD.BotsIndex = {
-    entityName: 'BotsIndex',
-    displayName: 'Bots Index',
-    pluralDisplayName: 'Bots Indexes',
-    sheetMeta: {
-        name: 'Bots Index',
-        columns: ['Bot ID', 'default', 'es', 'fr', 'ar', 'de', 'it', 'pt', 'ru', 'zh', 'ja', 'ko', 'he'],
-        sample_data: [
-            ['[FK.BOT.ID]',
-                // default (en)
-                JSON.stringify({
-                    name: 'Bot Machine',
-                    short_description: 'BotMac - Open Source Telegram Bot Framework.',
-                    description: 'This bot demonstrates the basic functionality of a Telegram bot. It provides the following commands:\n\n' +
-                        '/start - Start the bot\n' +
-                        '/home - Home (This command will show you main menu, home page)\n' +
-                        '/howami - Who am I? (This command will tell you about yourself and your "chat_id")\n' +
-                        '/whoru - Who are you? (This command will tell you about the bot)\n' +
-                        '/help - Get help on using the bot, or report an issue\n' +
-                        '/about - About the bot',
-                    commands: [
-                        {
-                            command: '/start',
-                            description: 'Start the bot'
-                        },
-                        {
-                            command: '/home',
-                            description: 'Home (This command will show you main menu, home page)'
-                        },
-                        {
-                            command: '/howami',
-                            description: 'Who am I? (This command will tell you about yourself and your "chat_id")'
-                        },
-                        {
-                            command: '/whoru',
-                            description: 'Who are you? (This command will tell you about the bot)'
-                        },
-                        {
-                            command: '/help',
-                            description: 'Get help on using the bot, or report an issue'
-                        },
-                        {
-                            command: '/about',
-                            description: 'About the bot'
-                        }
-                    ]
-                })
-            ]
-        ]
-    }
-};
 
 EMD.Automation = {
     entityName: 'Automation',

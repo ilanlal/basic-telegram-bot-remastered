@@ -1,3 +1,4 @@
+// Deprecated: Use package.json for versioning and metadata
 class Config {
     static get version() { return '1.0.1'; }
     static get build() { return '20251021.111900'; }
