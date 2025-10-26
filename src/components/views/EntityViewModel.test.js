@@ -19,15 +19,15 @@ describe('EntityViewModel', () => {
         expect(viewModel).toBeDefined();
     });
 
-    describe('EntityViewModel', () => {
+    describe('Entity Metadata configuration', () => {
         const viewModel = EntityViewModel.create({
             cardService: CardService,
             activeSpreadsheet: SpreadsheetApp.getActiveSpreadsheet()
         });
 
         tests.forEach((emd) => {
-            describe(`Testing entity: ${emd.entityName}`, () => {                
-                it('should create a card from the "Bot" cardMeta', () => {
+            describe(`Testing entity: ${emd.entityName}`, () => {
+                it(`should create a card from the "${emd.entityName}" cardMeta`, () => {
                     if(!emd.cardMeta) return;
                     const cardMeta = emd.cardMeta;
                     const card = viewModel.getCardBuilder(cardMeta);
@@ -46,7 +46,7 @@ describe('EntityViewModel', () => {
                     expect(data.sections.length).toBe(cardMeta.sections.length);
                 });
 
-                it('should get the active sheet', () => {
+                it(`should get the active sheet from the "${emd.entityName}" sheetMeta`, () => {
                     const sheetMeta = emd.sheetMeta;
                     if(!sheetMeta) return;
                     const activeSheet = viewModel.getActiveSheet(sheetMeta);
