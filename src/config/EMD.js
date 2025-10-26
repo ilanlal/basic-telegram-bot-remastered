@@ -90,7 +90,10 @@ EMD.Bot = {
     pluralDisplayName: 'Bots',
     sheetMeta: {
         name: 'Bots',
-        columns: ['Token', 'Resource', 'CreatedAt', 'UpdatedAt']
+        columns: ['Token', 'Deployment ID', 'Admin Chat ID', 'Debug Mode', 'API Resource Object'],
+        sample_data: [
+            ['123456:ABC-DEF1234ghIkl-zyx57W2v1u123ew11', 'deploy_001', '987654321', 'true', '{"id": "123456", "name": "Sample Bot"}']
+        ]
     },
     cardMeta: {
         name: 'botIndexCard',
@@ -165,7 +168,7 @@ EMD.Automation = {
     sheetMeta: {
         name: 'Automations',
         columns: ['ID', '{language}'],
-        sample_actions: [
+        sample_data: [
             ['/start', JSON.stringify({
                 method: 'sendMessage',
                 payload: {
@@ -219,7 +222,8 @@ EMD.Automation = {
                             [
                                 { text: 'Help', callback_data: "action=help" },
                                 { text: 'About', callback_data: "action=about" }
-                            ]
+                            ],
+                            [{ text: "Keypad Samples", callback_data: "keypadSamples" }]
                         ]
                     }
                 }
@@ -336,6 +340,37 @@ EMD.Automation = {
                         inline_keyboard: [
                             [{ text: "Home", callback_data: "/home" }]
                         ]
+                    }
+                }
+            })],
+            ['keypadSamples', JSON.stringify({
+                method: 'sendMessage',
+                payload: {
+                    chat_id: 'user_chat_id',
+                    text: 'Here are some sample keypads you can use:',
+                    reply_markup: {
+                        keyboard: [
+                            [
+                                { text: "1x1", callback_data: "sample_keypad_3" }
+                            ],
+                            [
+                                { text: "1x2", callback_data: "sample_keypad_1" },
+                                { text: "1x2", callback_data: "sample_keypad_2" }
+                            ],
+                            [
+                                { text: "1x3", callback_data: "sample_keypad_4" },
+                                { text: "1x3", callback_data: "sample_keypad_5" },
+                                { text: "1x3", callback_data: "sample_keypad_6" }
+                            ],
+                            [
+                                { text: "1x4", callback_data: "sample_keypad_7" },
+                                { text: "1x4", callback_data: "sample_keypad_8" },
+                                { text: "1x4", callback_data: "sample_keypad_9" },
+                                { text: "1x4", callback_data: "sample_keypad_10" }
+                            ]
+                        ],
+                        resize_keyboard: true,
+                        one_time_keyboard: true
                     }
                 }
             })]
