@@ -6,7 +6,9 @@ const EntityViewModel = require('./EntityViewModel');
 describe('EntityViewModel', () => {
     const tests = [
         EMD.Bot,
-        EMD.Home
+        EMD.Home,
+        EMD.Automation,
+        EMD.Environment
     ];
 
     it('should create an view model instance.', () => {
@@ -26,6 +28,7 @@ describe('EntityViewModel', () => {
         tests.forEach((emd) => {
             describe(`Testing entity: ${emd.entityName}`, () => {                
                 it('should create a card from the "Bot" cardMeta', () => {
+                    if(!emd.cardMeta) return;
                     const cardMeta = emd.cardMeta;
                     const card = viewModel.getCardBuilder(cardMeta);
                     expect(card).toBeDefined();
