@@ -169,7 +169,19 @@ EMD.Automation = {
         name: 'Automations',
         columns: ['ID', '{language}'],
         sample_data: [
-            ['/start', JSON.stringify({
+            ['_not_found_', JSON.stringify([{
+                method: 'sendMessage',
+                payload: {
+                    text: 'Oops! Command not found. Please use /help to see the list of available commands.',
+                    parse_mode: 'HTML',
+                    reply_markup: {
+                        inline_keyboard: [
+                            [{ text: "Home", callback_data: "/home" }]
+                        ]
+                    }
+                }
+            }])],
+            ['/start', JSON.stringify([{
                 method: 'sendMessage',
                 payload: {
                     text: 'Hello ‼️' + '\n\n'
@@ -199,8 +211,8 @@ EMD.Automation = {
                         ]
                     }
                 }
-            })],
-            ['/home', JSON.stringify({
+            }])],
+            ['/home', JSON.stringify([{
                 method: 'sendPhoto',
                 payload: {
                     caption: 'Welcome to Bot Machine! \n\n'
@@ -227,8 +239,8 @@ EMD.Automation = {
                         ]
                     }
                 }
-            })],
-            ['/help', JSON.stringify({
+            }])],
+            ['/help', JSON.stringify([{
                 method: 'editMessageMedia',
                 payload: {
                     caption: 'Hi there! How can I help you?',
@@ -240,8 +252,8 @@ EMD.Automation = {
                         ]
                     }
                 }
-            })],
-            ['/about', JSON.stringify({
+            }])],
+            ['/about', JSON.stringify([{
                 method: 'editMessageMedia',
                 payload: {
                     caption: 'Hi there! I am a simple bot that demonstrates the basic functionality of a Telegram bot.',
@@ -253,20 +265,102 @@ EMD.Automation = {
                         ]
                     }
                 }
-            })],
-            ['_not_found_', JSON.stringify({
-                method: 'sendMessage',
+            }])],
+            ['store', JSON.stringify([{
+                method: 'sendPhoto',
                 payload: {
-                    text: 'Oops! Command not found. Please use /help to see the list of available commands.',
+                    caption: 'Welcome to the Store! Here you can find various products and services.',
+                    photo: "https://www.gstatic.com/webp/gallery/1.jpg",
                     parse_mode: 'HTML',
                     reply_markup: {
                         inline_keyboard: [
-                            [{ text: "Home", callback_data: "/home" }]
+                            [{ text: "Browse Products", callback_data: "browseProducts" }],
+                            [{ text: "View Cart", callback_data: "viewCart" }],
+                            [{ text: "Checkout", callback_data: "checkout" }],
+                            [{ text: "BACK", callback_data: "action=start" }]
                         ]
                     }
                 }
-            })],
-            ['sendMessage', JSON.stringify({
+            }])],
+            ['browseProducts', JSON.stringify([{
+                method: 'sendPhoto',
+                payload: {
+                    caption: 'Product A: An amazing product that you will love! \n\n'
+                        + '<b>Price:</b> $19.99\n'
+                        + '<i>Description:</i> This product is made from high-quality materials and offers great value for money.\n\n'
+                        + 'Click "Add to Cart" to purchase this product.',
+                    photo: "https://www.gstatic.com/webp/gallery/1.jpg",
+                    parse_mode: 'HTML',
+                    reply_markup: {
+                        inline_keyboard: [
+                            [{ text: "➕ Add to Cart", callback_data: "addToCart_productA" }],
+                            [{ text: "👀 Watch price", callback_data: "watchPrice_productA" }]
+                        ]
+                    }
+                }
+            }, {
+                method: 'sendPhoto',
+                payload: {
+                    caption: 'Product B: Another fantastic product that meets your needs! \n\n',
+                    photo: "https://www.gstatic.com/webp/gallery/2.jpg",
+                    parse_mode: 'HTML',
+                    reply_markup: {
+                        inline_keyboard: [
+                            [{ text: "➕ Add to Cart", callback_data: "addToCart_productB" }],
+                            [{ text: "👀 Watch price", callback_data: "watchPrice_productB" }]
+                        ]
+                    }
+                }
+            }, {
+                method: 'sendPhoto',
+                payload: {
+                    caption: 'Product C: A must-have item for everyone! \n\n',
+                    photo: "https://www.gstatic.com/webp/gallery/3.jpg",
+                    parse_mode: 'HTML',
+                    reply_markup: {
+                        inline_keyboard: [
+                            [{ text: "➕ Add to Cart", callback_data: "addToCart_productC" }],
+                            [{ text: "👀 Watch price", callback_data: "watchPrice_productC" }]
+                        ]
+                    }
+                }
+            }, {
+                method: 'sendPhoto',
+                payload: {
+                    caption: 'Product C: A must-have item for everyone! \n\n',
+                    photo: "https://www.gstatic.com/webp/gallery/3.jpg",
+                    parse_mode: 'HTML',
+                    reply_markup: {
+                        inline_keyboard: [
+                            [{ text: "➕ Add to Cart", callback_data: "addToCart_productC" }],
+                            [{ text: "👀 Watch price", callback_data: "watchPrice_productC" }]
+                        ]
+                    }
+                }
+            }
+            ])],
+            ['apiFeatures', JSON.stringify([{
+                method: 'sendMessage',
+                payload: {
+                    text: 'Here are some API features you can use:\n\n'
+                        + '1. Send Messages\n'
+                        + '2. Send Photos\n'
+                        + '3. Send Media Groups\n'
+                        + '4. Inline Keyboards\n\n'
+                        + 'Feel free to explore and interact with the bot!',
+                    parse_mode: 'HTML',
+                    reply_markup: {
+                        inline_keyboard: [
+                            [{ text: "Message", callback_data: "sendMessage" }],
+                            [{ text: "Photo", callback_data: "sendPhoto" }],
+                            [{ text: "Media Group", callback_data: "sendMediaGroup" }],
+                            [{ text: "Inline Keyboard", callback_data: "inlineKeyboard" }],
+                            [{ text: "BACK", callback_data: "action=start" }]
+                        ]
+                    }
+                }
+            }])],
+            ['sendMessage', JSON.stringify([{
                 method: 'sendMessage',
                 payload: {
                     text: 'Hello! This is a sample message. You can customize this message as needed. \n\n'
@@ -293,8 +387,8 @@ EMD.Automation = {
                         ]
                     }
                 }
-            })],
-            ['sendPhoto', JSON.stringify({
+            }])],
+            ['sendPhoto', JSON.stringify([{
                 method: 'sendPhoto',
                 payload: {
                     caption: 'This is a sample photo. You can customize this caption as needed. \n\n'
@@ -314,8 +408,8 @@ EMD.Automation = {
                         ]
                     }
                 }
-            })],
-            ['sendMediaGroup', JSON.stringify({
+            }])],
+            ['sendMediaGroup', JSON.stringify([{
                 method: 'sendMediaGroup',
                 payload: {
                     media: [
@@ -342,16 +436,16 @@ EMD.Automation = {
                         ]
                     }
                 }
-            })],
-            ['keypadSamples', JSON.stringify({
+            }])],
+            ['inlineKeyboard', JSON.stringify([{
                 method: 'sendMessage',
                 payload: {
                     chat_id: 'user_chat_id',
-                    text: 'Here are some sample keypads you can use:',
+                    text: 'Here are some sample inline keyboards you can use:',
                     reply_markup: {
-                        keyboard: [
+                        inline_keyboard: [
                             [
-                                { text: "1x1", callback_data: "sample_keypad_3" }
+                                { text: "1x1 YouTube™", web_app: { url: "https://www.youtube.com" } }
                             ],
                             [
                                 { text: "1x2", callback_data: "sample_keypad_1" },
@@ -373,7 +467,7 @@ EMD.Automation = {
                         one_time_keyboard: true
                     }
                 }
-            })]
+            }])]
         ]
     }
 };
