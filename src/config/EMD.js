@@ -75,11 +75,12 @@ EMD.Environment = {
     pluralDisplayName: 'Environments',
     sheetMeta: {
         name: 'Environments',
-        columns: ['Parameter', 'Value', 'Description', 'CreatedAt', 'UpdatedAt'],
+        columns: ['Parameter', 'Value', 'Description'],
         sample_data: [
-            ['TELEGRAM_BOT_API_URL', 'https://api.telegram.org', 'Base URL for Telegram Bot API'],
-            ['DEFAULT_LANGUAGE', 'en', 'Default language for the bot responses'],
-            ['LOG_LEVEL', 'INFO', 'Logging level for the application']
+            ['ADMIN_CHAT_ID', '[YOUR_ADMIN_CHAT_ID]', 'Telegram chat ID of the bot administrator'],
+            ['DEPLOYMENT_ID', '[YOUR_DEPLOYMENT_ID]', 'Deployment ID, after deploying the Google Apps Script project'],
+            ['DEFAULT_LANGUAGE', 'en', 'Default language for global defaults'],
+            ['DEBUG_MODE', 'false', 'Enable or disable debug mode']
         ]
     }
 };
@@ -90,9 +91,9 @@ EMD.Bot = {
     pluralDisplayName: 'Bots',
     sheetMeta: {
         name: 'Bots',
-        columns: ['Token', 'Deployment ID', 'Admin Chat ID', 'Debug Mode', 'API Resource Object'],
+        columns: ['Token', 'API/getMe', 'Deployment ID', 'API/getWebhookInfo', 'Admin Chat ID', 'Debug Mode'],
         sample_data: [
-            ['123456:ABC-DEF1234ghIkl-zyx57W2v1u123ew11', 'deploy_001', '987654321', 'true', '{"id": "123456", "name": "Sample Bot"}']
+            ['[YOUR_BOT_TOKEN]', 'Use the getMe action, to fill this information', '[YOUR_DEPLOYMENT_ID]', 'Use the getWebhookInfo action, to fill this information', '[YOUR_ADMIN_CHAT_ID]', 'false']
         ]
     },
     cardMeta: {
@@ -121,42 +122,57 @@ EMD.Bot = {
                 }
             }
         }
-    },
-    sampleBotInfo: {
-        name: 'Bot Machine',
-        short_description: 'BotMac - Open Source Telegram Bot Framework.',
-        description: 'This bot demonstrates the basic functionality of a Telegram bot. It provides the following commands:\n\n' +
-            '/start - Start the bot\n' +
-            '/home - Home (This command will show you main menu, home page)\n' +
-            '/howami - Who am I? (This command will tell you about yourself and your "chat_id")\n' +
-            '/whoru - Who are you? (This command will tell you about the bot)\n' +
-            '/help - Get help on using the bot, or report an issue\n' +
-            '/about - About the bot',
-        commands: [
-            {
-                command: '/start',
-                description: 'Start the bot'
-            },
-            {
-                command: '/home',
-                description: 'Home (This command will show you main menu, home page)'
-            },
-            {
-                command: '/howami',
-                description: 'Who am I? (This command will tell you about yourself and your "chat_id")'
-            },
-            {
-                command: '/whoru',
-                description: 'Who are you? (This command will tell you about the bot)'
-            },
-            {
-                command: '/help',
-                description: 'Get help on using the bot, or report an issue'
-            },
-            {
-                command: '/about',
-                description: 'About the bot'
-            }
+    }
+};
+
+EMD.BotsIndex = {
+    entityName: 'BotsIndex',
+    displayName: 'Bots Index',
+    pluralDisplayName: 'Bots Indexes',
+    sheetMeta: {
+        name: 'Bots Index',
+        columns: ['ID', 'default', 'es', 'fr', 'ar', 'de', 'it', 'pt', 'ru', 'zh', 'ja', 'ko', 'he'],
+        sample_data: [
+            ['[YOUR_BOT_TOKEN]/getMe',
+                // default (en)
+                JSON.stringify({
+                    name: 'Bot Machine',
+                    short_description: 'BotMac - Open Source Telegram Bot Framework.',
+                    description: 'This bot demonstrates the basic functionality of a Telegram bot. It provides the following commands:\n\n' +
+                        '/start - Start the bot\n' +
+                        '/home - Home (This command will show you main menu, home page)\n' +
+                        '/howami - Who am I? (This command will tell you about yourself and your "chat_id")\n' +
+                        '/whoru - Who are you? (This command will tell you about the bot)\n' +
+                        '/help - Get help on using the bot, or report an issue\n' +
+                        '/about - About the bot',
+                    commands: [
+                        {
+                            command: '/start',
+                            description: 'Start the bot'
+                        },
+                        {
+                            command: '/home',
+                            description: 'Home (This command will show you main menu, home page)'
+                        },
+                        {
+                            command: '/howami',
+                            description: 'Who am I? (This command will tell you about yourself and your "chat_id")'
+                        },
+                        {
+                            command: '/whoru',
+                            description: 'Who are you? (This command will tell you about the bot)'
+                        },
+                        {
+                            command: '/help',
+                            description: 'Get help on using the bot, or report an issue'
+                        },
+                        {
+                            command: '/about',
+                            description: 'About the bot'
+                        }
+                    ]
+                })
+            ]
         ]
     }
 };
@@ -167,21 +183,167 @@ EMD.Automation = {
     pluralDisplayName: 'Automations',
     sheetMeta: {
         name: 'Automations',
-        columns: ['ID', '{language}'],
+        columns: ['ID', 'default', 'es', 'fr', 'ar', 'de', 'it', 'pt', 'ru', 'zh', 'ja', 'ko', 'he'],
         sample_data: [
-            ['_not_found_', JSON.stringify([{
-                method: 'sendMessage',
-                payload: {
-                    text: 'Oops! Command not found. Please use /help to see the list of available commands.',
-                    parse_mode: 'HTML',
-                    reply_markup: {
-                        inline_keyboard: [
-                            [{ text: "Home", callback_data: "/home" }]
-                        ]
+            ['_not_found_',
+                // default (en)
+                JSON.stringify([{
+                    method: 'sendMessage',
+                    payload: {
+                        text: 'Oops! Command not found. Please use /help to see the list of available commands.',
+                        parse_mode: 'HTML',
+                        reply_markup: {
+                            inline_keyboard: [
+                                [{ text: "Home", callback_data: "/home" }]
+                            ]
+                        }
                     }
-                }
-            }])],
-            ['/start', JSON.stringify([{
+                }]),
+                // es
+                JSON.stringify([{
+                    method: 'sendMessage',
+                    payload: {
+                        text: '¡Vaya! Comando no encontrado. Por favor, usa /help para ver la lista de comandos disponibles.',
+                        parse_mode: 'HTML',
+                        reply_markup: {
+                            inline_keyboard: [
+                                [{ text: "Inicio", callback_data: "/home" }]
+                            ]
+                        }
+                    }
+                }]),
+                // fr
+                JSON.stringify([{
+                    method: 'sendMessage',
+                    payload: {
+                        text: '¡Vaya! Comando no encontrado. Por favor, usa /help para ver la lista de comandos disponibles.',
+                        parse_mode: 'HTML',
+                        reply_markup: {
+                            inline_keyboard: [
+                                [{ text: "L'accueil", callback_data: "/home" }]
+                            ]
+                        }
+                    }
+                }]),
+                // ar
+                JSON.stringify([{
+                    method: 'sendMessage',
+                    payload: {
+                        text: 'عذرًا! الأمر غير موجود. يرجى استخدام /help لرؤية قائمة الأوامر المتاحة.',
+                        parse_mode: 'HTML',
+                        reply_markup: {
+                            inline_keyboard: [
+                                [{ text: "الصفحة الرئيسية", callback_data: "/home" }]
+                            ]
+                        }
+                    }
+                }]),
+                // de
+                JSON.stringify([{
+                    method: 'sendMessage',
+                    payload: {
+                        text: 'Hoppla! Befehl nicht gefunden. Bitte benutze /help, um die Liste der verfügbaren Befehle zu sehen.',
+                        parse_mode: 'HTML',
+                        reply_markup: {
+                            inline_keyboard: [
+                                [{ text: "Home", callback_data: "/home" }]
+                            ]
+                        }
+                    }
+                }]),
+                // it
+                JSON.stringify([{
+                    method: 'sendMessage',
+                    payload: {
+                        text: 'Oops! Comando non trovato. Per favore usa /help per vedere la lista dei comandi disponibili.',
+                        parse_mode: 'HTML',
+                        reply_markup: {
+                            inline_keyboard: [
+                                [{ text: "Inizio", callback_data: "/home" }]
+                            ]
+                        }
+                    }
+                }]),
+                // pt
+                JSON.stringify([{
+                    method: 'sendMessage',
+                    payload: {
+                        text: 'Ops! Comando não encontrado. Por favor, use /help para ver a lista de comandos disponíveis.',
+                        parse_mode: 'HTML',
+                        reply_markup: {
+                            inline_keyboard: [
+                                [{ text: "Início", callback_data: "/home" }]
+                            ]
+                        }
+                    }
+                }]),
+                // ru
+                JSON.stringify([{
+                    method: 'sendMessage',
+                    payload: {
+                        text: 'Упс! Команда не найдена. Пожалуйста, используйте /help, чтобы увидеть список доступных команд.',
+                        parse_mode: 'HTML',
+                        reply_markup: {
+                            inline_keyboard: [
+                                [{ text: "Главная", callback_data: "/home" }]
+                            ]
+                        }
+                    }
+                }]),
+                // zh
+                JSON.stringify([{
+                    method: 'sendMessage',
+                    payload: {
+                        text: '哎呀！未找到命令。请使用 /help 查看可用命令列表。',
+                        parse_mode: 'HTML',
+                        reply_markup: {
+                            inline_keyboard: [
+                                [{ text: "主页", callback_data: "/home" }]
+                            ]
+                        }
+                    }
+                }]),
+                // ja
+                JSON.stringify([{
+                    method: 'sendMessage',
+                    payload: {
+                        text: 'おっと！コマンドが見つかりません。利用可能なコマンドのリストを見るには /help を使用してください。',
+                        parse_mode: 'HTML',
+                        reply_markup: {
+                            inline_keyboard: [
+                                [{ text: "ホーム", callback_data: "/home" }]
+                            ]
+                        }
+                    }
+                }]),
+                // ko
+                JSON.stringify([{
+                    method: 'sendMessage',
+                    payload: {
+                        text: '이런! 명령을 찾을 수 없습니다. 사용 가능한 명령 목록을 보려면 /help를 사용하세요.',
+                        parse_mode: 'HTML',
+                        reply_markup: {
+                            inline_keyboard: [
+                                [{ text: "홈", callback_data: "/home" }]
+                            ]
+                        }
+                    }
+                }]),
+                // he
+                JSON.stringify([{
+                    method: 'sendMessage',
+                    payload: {
+                        text: 'אופס! הפקודה לא נמצאה. אנא השתמש ב-/help כדי לראות את רשימת הפקודות הזמינות.',
+                        parse_mode: 'HTML',
+                        reply_markup: {
+                            inline_keyboard: [
+                                [{ text: "בית", callback_data: "/home" }]
+                            ]
+                        }
+                    }
+                }])
+            ],
+            ["/start", JSON.stringify([{
                 method: 'sendMessage',
                 payload: {
                     text: 'Hello ‼️' + '\n\n'
