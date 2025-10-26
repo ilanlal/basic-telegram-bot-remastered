@@ -126,19 +126,64 @@ EMD.Bot = {
             imageStyle: CardService.ImageStyle.SQUARE,
             imageAltText: 'Bot Image'
         },
-        sections: [{
-            header: 'Section 1',
-            collapsible: false,
-            numUncollapsibleWidgets: 0,
-            widgets: []
-        }],
+        sections:
+            [
+                {
+                    header: 'Verify Bot Identity',
+                    collapsible: false,
+                    numUncollapsibleWidgets: 0,
+                    widgets: [
+                        {
+                            DecoratedText: {
+                                text: '{🔘}',
+                                topLabel: 'call api/getMe',
+                                bottomLabel: 'Retrieve bot information',
+                                wrapText: true,
+                                textButton: {
+                                    text: 'Call API',
+                                    onClick: {
+                                        action: 'EventHandler.Addon.callApi',
+                                        parameters: {
+                                            api: 'getMe'
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    header: 'Webhook Management',
+                    collapsible: false,
+                    numUncollapsibleWidgets: 0,
+                    widgets: [
+                        {
+                            DecoratedText: {
+                                text: '{🔔}',
+                                topLabel: 'call api/setWebhook',
+                                bottomLabel: 'Set webhook for the bot',
+                                wrapText: true,
+                                textButton: {
+                                    text: 'Call API',
+                                    onClick: {
+                                        action: 'EventHandler.Addon.callApi',
+                                        parameters: {
+                                            api: 'setWebhook'
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    ]
+                }
+            ],
         fixedFooter: {
             primaryButton: {
                 textButton: {
-                    text: 'Add Bot',
-                    functionName: 'EventHandler.Addon.onAddBot',
+                    text: '💫 Bind row data',
+                    functionName: 'EventHandler.Addon.onBindData',
                     parameters: {
-                        action: 'addBot'
+                        action: 'bindData'
                     }
                 }
             }
@@ -370,28 +415,16 @@ EMD.Automation = {
                         method: 'sendMessage',
                         payload: {
                             text: 'Hello ‼️' + '\n\n'
-                                + '<blockquote>\n'
-                                + 'This is a simple bot that demonstrates the basic functionality of a Telegram bot.'
-                                + 'It provides the following commands:\n\n'
-                                + '/home - Home (This command will show you main menu, home page)\n'
-                                + '/howami - Who am I? (This command will tell you about yourself and your "chat_id")\n'
-                                + '/whoru - Who are you? (This command will tell you about the bot)\n'
-                                + '/help - Get help\n'
-                                + '/about - About the bot\n'
-                                + '</blockquote>' + '\n\n'
-                                + 'You can interact with me using the buttons below or by typing commands.'
-                                + '\n'
-                                + 'Feel free to explore and interact with the bot!'
-                                + '\n'
-                                + 'For any issues or suggestions, please visit our GitHub repository.\n'
-                                + '\n'
-                                + 'Happy chatting! 😊'
+                                + '<b>Welcome to <b>Bot Machine</b>! 🤖' + '\n\n'
+                                + 'By selecting "Accept All", you agree to our:\n\n'
+                                + '<a href="https://example.com/terms">Terms of Service</a> and <a href="https://example.com/privacy">Privacy Policy</a>.' + '\n'
+
                                 + '\n',
                             parse_mode: 'HTML',
                             reply_markup: {
                                 inline_keyboard: [
                                     [
-                                        { text: "Home", callback_data: "/home" }
+                                        { text: "Accept All", callback_data: "/home" }
                                     ]
                                 ]
                             }
