@@ -8,7 +8,7 @@ describe('EntityViewModel', () => {
         EMD.Bot,
         EMD.Home,
         EMD.Automation,
-        EMD.Environment
+        EMD.BotSetup
     ];
 
     it('should create an view model instance.', () => {

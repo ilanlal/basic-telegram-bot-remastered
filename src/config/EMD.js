@@ -1,8 +1,9 @@
 // Entity Metadata Configuration Class
 class EMD {
-    constructor() {
+    constructor(model = {}) {
+        this.model = model;
     }
-}
+};
 
 EMD.DEFAULT_IMAGE_URL = 'https://raw.githubusercontent.com/ilanlal/basic-telegram-bot-remastered/refs/heads/vnext/assets/logo128.png';
 
@@ -19,118 +20,171 @@ EMD.Home = {
             imageStyle: CardService.ImageStyle.SQUARE,
             imageAltText: 'Home Image'
         },
-        sections: [{
-            header: 'Section 1',
-            collapsible: false,
-            numUncollapsibleWidgets: 0,
-            widgets: [{
-                DecoratedText: {
-                    text: 'Environment management',
-                    topLabel: 'Environment',
-                    bottomLabel: '{state}',
-                    wrapText: true,
-                    textButton: {
-                        text: '⚙️',
-                        functionName: 'EventHandler.Addon.environment',
-                        parameters: { action: 'manageEnvironments' }
-                    }
-                }
-            }, {
-                DecoratedText: {
-                    text: 'Bots management',
-                    topLabel: 'Bots {total}',
-                    bottomLabel: 'Manage your bots here',
-                    wrapText: true,
-                    textButton: {
-                        disabled: false,
-                        text: '🤖',
-                        functionName: 'EventHandler.Addon.bots',
-                        parameters: { action: 'manageBots' }
-                    }
-                }
-            }, {
-                DecoratedText: {
-                    text: 'Automations management',
-                    topLabel: 'Automations {total}',
-                    bottomLabel: 'Manage your automations here',
-                    wrapText: true,
-                    textButton: {
-                        text: '⚡',
-                        functionName: 'EventHandler.Addon.automation',
-                        parameters: { action: 'manageAutomations' }
-                    }
-                }
-            }]
-        }]
-    }
-};
-
-EMD.Environment = {
-    entityName: 'Environment',
-    displayName: 'Environment',
-    pluralDisplayName: 'Environments',
-    cardMeta: {
-        name: 'environmentCard',
-        header: {
-            title: 'Environment',
-            subTitle: 'Manage your environments variables here',
-            imageUrl: EMD.DEFAULT_IMAGE_URL,
-            imageStyle: CardService.ImageStyle.SQUARE,
-            imageAltText: 'Environment Image'
-        },
         sections: [
-            // Telegram Bot Variables Section
-            {
-                header: 'Telegram Bot Variables',
+            {   // Get started section
+                header: 'Get Started with Your Bot',
                 collapsible: false,
                 numUncollapsibleWidgets: 0,
                 widgets: [
-                    // Bot Token Variable
-                    {
-                        TextInput: {
-                            label: 'Bot API Token',
-                            fieldName: 'bot_token',
-                            placeholder: 'Enter bot API token',
-                            value: '{bot_token}'
+                    {   // Bot setup widget
+                        DecoratedText: {
+                            text: 'Setup your bot',
+                            topLabel: '🤖 Get started',
+                            bottomLabel: 'Click the button to setup your bot',
+                            wrapText: true,
+                            textButton: {
+                                disabled: false,
+                                text: '⚙️ Setup Bot',
+                                functionName: 'EventHandler.Addon.setupBot',
+                                parameters: { action: 'setupBot' }
+                            }
                         }
                     },
-                    // Admin Chat ID Variable
-                    {
-                        TextInput: {
-                            label: 'Admin Chat ID',
-                            fieldName: 'admin_chat_id',
-                            placeholder: 'Enter admin chat ID',
-                            value: '{admin_chat_id}'
+                    {   // Webhook management widget
+                        DecoratedText: {
+                            text: 'Manage your webhooks',
+                            topLabel: '🔗 Webhook Management',
+                            bottomLabel: 'Click the button to manage your webhooks',
+                            wrapText: true,
+                            textButton: {
+                                disabled: false,
+                                text: '⚙️ Manage Webhooks',
+                                functionName: 'EventHandler.Addon.manageWebhooks',
+                                parameters: { action: 'manageWebhooks' }
+                            }
                         }
-                    }]
+                    }
+                ]
             },
-            // Server Deployment Variables Section
-            {
-                header: 'Server Deployment Variables',
-                collapsible: false,
-                numUncollapsibleWidgets: 0,
-                widgets: [{
-                    TextInput: {
-                        label: 'Deployment ID',
-                        fieldName: 'deployment_id',
-                        placeholder: 'Enter deployment ID',
-                        value: '{deployment_id}'
+            {   // Advanced Settings Section
+                header: 'Advanced Settings',
+                collapsible: true,
+                numUncollapsibleWidgets: 1,
+                widgets: [
+                    {   // Automation management widget
+                        DecoratedText: {
+                            text: 'Automation management',
+                            topLabel: 'Automations {total}',
+                            bottomLabel: 'Manage your automations here',
+                            wrapText: true,
+                            textButton: {
+                                disabled: false,
+                                text: '⚡',
+                                functionName: 'EventHandler.Addon.automation',
+                                parameters: { action: 'manageAutomations' }
+                            }
+                        }
+                    },
+                    {  // Contacts management widget
+                        DecoratedText: {
+                            text: 'Contacts management',
+                            topLabel: 'Contacts {total}',
+                            bottomLabel: 'Manage your contacts here',
+                            wrapText: true,
+                            textButton: {
+                                disabled: false,
+                                text: '👥',
+                                functionName: 'EventHandler.Addon.contacts',
+                                parameters: { action: 'manageContacts' }
+                            }
+                        }
                     }
-                }, {
-                    TextInput: {
-                        label: 'Default language',
-                        fieldName: 'default_language',
-                        placeholder: 'Enter default language',
-                        value: '{default_language}'
-                    }
-                }
                 ]
             }
         ],
         fixedFooter: {
             primaryButton: {
                 textButton: {
-                    text: 'Save',
+                    text: '💾 Save',
+                    onClick: {
+                        action: 'EventHandler.Addon.saveSettings',
+                    }
+                }
+            }
+        }
+    }
+};
+
+EMD.BotSetup = {
+    entityName: 'Bot Setup',
+    displayName: 'Bot Setup',
+    pluralDisplayName: 'Bot Setups',
+    cardMeta: {
+        name: 'bot_setup_Card',
+        header: {
+            title: 'Setup Environment Variables',
+            subTitle: 'Configure your bot environment variables here.',
+            imageUrl: EMD.DEFAULT_IMAGE_URL,
+            imageStyle: CardService.ImageStyle.SQUARE,
+            imageAltText: 'Environment Image'
+        },
+        sections:
+            [
+                {  // General Settings Section
+                    header: 'General Settings',
+                    collapsible: false,
+                    numUncollapsibleWidgets: 0,
+                    widgets: [
+                        {   // Log Events Setting
+                            TextInput: {
+                                label: 'Debug Mode (Set to true or any other value for false)',
+                                fieldName: 'debug_mode',
+                                placeholder: 'Enter debug mode (true/false)',
+                                value: '{debug_mode}'
+                            }
+                        },
+                        {   // Default Language Variable
+                            TextInput: {
+                                label: 'Default language',
+                                fieldName: 'default_language',
+                                placeholder: 'Enter default language',
+                                value: '{default_language}'
+                            }
+                        }
+                    ]
+                },
+                {   // Telegram API Variables Section
+                    header: 'Telegram API Variables',
+                    collapsible: false,
+                    numUncollapsibleWidgets: 0,
+                    widgets: [
+                        { // Bot Token Variable
+                            TextInput: {
+                                label: 'Bot API Token',
+                                fieldName: 'bot_token',
+                                placeholder: 'Enter bot API token',
+                                value: '{bot_token}'
+                            }
+                        },
+                        { // Admin Chat ID Variable
+                            TextInput: {
+                                label: 'Admin Chat ID',
+                                fieldName: 'admin_chat_id',
+                                placeholder: 'Enter admin chat ID',
+                                value: '{admin_chat_id}'
+                            }
+                        }]
+                },
+                {   // Server Deployment Variables Section
+                    header: 'Server Deployment Variables',
+                    collapsible: false,
+                    numUncollapsibleWidgets: 0,
+                    widgets: [
+                        {   // Deployment ID Variable
+                            TextInput: {
+                                label: 'Deployment ID',
+                                fieldName: 'deployment_id',
+                                placeholder: 'Enter deployment ID',
+                                value: '{deployment_id}'
+                            }
+                        }
+                    ]
+                }
+            ],
+        fixedFooter: {
+            primaryButton: {
+                textButton: {
+                    text: '💾 Save',
                     onClick: {
                         action: 'EventHandler.Addon.saveSettings',
                     }
@@ -145,30 +199,59 @@ EMD.Bot = {
     displayName: 'Bot',
     pluralDisplayName: 'Bots',
     sheetMeta: {
-        name: 'Bots',
+        name: '🤖 Bots',
         columns: ['Parameter', 'default', 'es', 'fr', 'ar', 'de', 'it', 'pt', 'ru', 'zh', 'ja', 'ko', 'he'],
         sample_data: [
-            ['name', 'Sample Bot', 'Bot de Ejemplo', 'Bot d\'exemple', 'بوت تجريبي', 'Beispiel-Bot', 'Bot di esempio', 'Bot de Exemplo', 'Пример бота', '示例机器人', 'サンプルボット', '샘플 봇', 'בוט לדוגמה'],
-            ['short_description', 'This is a sample bot.', 'Este es un bot de ejemplo.', 'Ceci est un bot d\'exemple.', 'هذا بوت تجريبي.', 'Dies ist ein Beispiel-Bot.', 'Questo è un bot di esempio.', 'Este é um bot de exemplo.', 'Это пример бота.', '这是一个示例机器人。', 'これはサンプルボットです。', '이것은 샘플 봇입니다.', 'זהו בוט לדוגמה.'],
+            // bot name; 0-64 characters. Pass an empty string to remove the dedicated name for the given language.
+            ['name',
+                '🤖 Bot hub, Private, Secure, Easy to use',
+                '🤖 Centro de bots, privado, seguro, fácil de usar',
+                '🤖 Centre de bots, privé, sécurisé, facile à utiliser',
+                '🤖 مركز الروبوتات، خاص، آمن، سهل الاستخدام',
+                '🤖 Bot-Zentrale, privat, sicher, einfach zu bedienen',
+                '🤖 Centro bot, privato, sicuro, facile da usare',
+                '🤖 Central de bots, privado, seguro, fácil de usar',
+                'Центр ботов, приватный, безопасный, простой в использовании',
+                '🤖 机器人中心，私密，安全，易于使用',
+                '🤖 ボットハブ、プライベート、セキュア、使いやすい',
+                '🤖 봇 허브, 개인용, 안전함, 사용하기 쉬움',
+                '🤖 מרכז בוטים, פרטי, מאובטח, קל לשימוש'],
+            // short description for the bot; 0-120 characters.
+            // Pass an empty string to remove the dedicated short description for the given language.
+            ['short_description',
+                'Learn what your bot can do for you.',
+                'Este es un bot de ejemplo.', 'Ceci est un bot d\'exemple.', 'هذا بوت تجريبي.', 'Dies ist ein Beispiel-Bot.', 'Questo è un bot di esempio.', 'Este é um bot de exemplo.', 'Это пример бота.', '这是一个示例机器人。', 'これはサンプルボットです。', '이것은 샘플 봇입니다.', 'זהו בוט לדוגמה.'],
+            // bot description; 0-512 characters. Pass an empty string to remove the dedicated description for the given language.
             ['description', 'This bot demonstrates basic functionality.', 'Este bot demuestra funcionalidad básica.', 'Ce bot démontre une fonctionnalité de base.', 'هذا البوت يوضح الوظائف الأساسية.', 'Dieser Bot demonstriert grundlegende Funktionen.', 'Questo bot dimostra la funzionalità di base.', 'Este bot demonstra funcionalidade básica.', 'Этот бот демонстрирует базовый функционал.', '该机器人演示了基本功能。', 'このボットは基本的な機能を示しています。', '이 봇은 기본 기능을 보여줍니다.', 'בוט זה מדגים פונקציונליות בסיסית.']
+            // A JSON-serialized list of bot commands to be set as the list of the bot's commands.
+            // At most 100 commands can be specified.
             ['commands', JSON.stringify(
                 [
-                    {
+                    {   // '/start' command
+                        // Text of the command; 1-32 characters. Can contain only lowercase English letters, digits and underscores.
                         command: '/start',
+                        // Description of the command; 1-256 characters.
                         description: 'Start the bot'
-                    }, {
+                    },
+                    {   // '/home' command
+                        // Text of the command; 1-32 characters. Can contain only lowercase English letters, digits and underscores.
                         command: '/home',
+                        // Description of the command; 1-256 characters.
                         description: 'Home (This command will show you main menu, home page)'
-                    }, {
+                    },
+                    {   // '/howami' command
                         command: '/howami',
                         description: 'Who am I? (This command will tell you about yourself and your "chat_id")'
-                    }, {
+                    },
+                    {   // '/whoru' command
                         command: '/whoru',
                         description: 'Who are you? (This command will tell you about the bot)'
-                    }, {
+                    },
+                    {   // '/help' command
                         command: '/help',
                         description: 'Get help on using the bot, or report an issue'
-                    }, {
+                    },
+                    {   // '/about' command
                         command: '/about',
                         description: 'About the bot'
                     }
@@ -249,14 +332,13 @@ EMD.Bot = {
     }
 };
 
-
 EMD.Automation = {
     entityName: 'Automation',
     displayName: 'Automation',
     pluralDisplayName: 'Automations',
     sheetMeta: {
-        name: 'Automations',
-        columns: ['ID', 'default', 'es', 'fr', 'ar', 'de', 'it', 'pt', 'ru', 'zh', 'ja', 'ko', 'he'],
+        name: '⚡ Automations',
+        columns: ['action', 'default', 'es', 'fr', 'ar', 'de', 'it', 'pt', 'ru', 'zh', 'ja', 'ko', 'he'],
         sample_data:
             [
                 ['_not_found_',
