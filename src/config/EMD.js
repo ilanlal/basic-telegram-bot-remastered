@@ -2,7 +2,7 @@
 class EMD {
     constructor() {
     }
-}
+};
 
 EMD.DEFAULT_IMAGE_URL = 'https://raw.githubusercontent.com/ilanlal/basic-telegram-bot-remastered/refs/heads/vnext/assets/logo128.png';
 
@@ -63,7 +63,7 @@ EMD.Home = {
             }]
         }]
     }
-}
+};
 
 EMD.Environment = {
     entityName: 'Environment',
@@ -135,7 +135,7 @@ EMD.Environment = {
             }
         }
     }
-}
+};
 
 EMD.Bot = {
     entityName: 'Bot',
@@ -273,7 +273,7 @@ EMD.Bot = {
             }
         }
     }
-}
+};
 
 EMD.Automation = {
     entityName: 'Automation',
@@ -740,7 +740,7 @@ EMD.Automation = {
                     }])]
             ]
     }
-}
+};
 
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = { EMD };
