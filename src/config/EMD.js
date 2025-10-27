@@ -79,14 +79,12 @@ EMD.Environment = {
             imageAltText: 'Environment Image'
         },
         sections: [
-            // Telegram Bot Variables Section
-            {
+            {   // Telegram Bot Variables Section
                 header: 'Telegram Bot Variables',
                 collapsible: false,
                 numUncollapsibleWidgets: 0,
                 widgets: [
-                    // Bot Token Variable
-                    {
+                    { // Bot Token Variable
                         TextInput: {
                             label: 'Bot API Token',
                             fieldName: 'bot_token',
@@ -94,8 +92,7 @@ EMD.Environment = {
                             value: '{bot_token}'
                         }
                     },
-                    // Admin Chat ID Variable
-                    {
+                    { // Admin Chat ID Variable
                         TextInput: {
                             label: 'Admin Chat ID',
                             fieldName: 'admin_chat_id',
@@ -104,12 +101,12 @@ EMD.Environment = {
                         }
                     }]
             },
-            // Server Deployment Variables Section
-            {
+            {   // Server Deployment Variables Section
                 header: 'Server Deployment Variables',
                 collapsible: false,
                 numUncollapsibleWidgets: 0,
                 widgets: [{
+                    // Deployment ID Variable
                     TextInput: {
                         label: 'Deployment ID',
                         fieldName: 'deployment_id',
@@ -117,20 +114,20 @@ EMD.Environment = {
                         value: '{deployment_id}'
                     }
                 }, {
+                    // Default Language Variable
                     TextInput: {
                         label: 'Default language',
                         fieldName: 'default_language',
                         placeholder: 'Enter default language',
                         value: '{default_language}'
                     }
-                }
-                ]
+                }]
             }
         ],
         fixedFooter: {
             primaryButton: {
                 textButton: {
-                    text: 'Save',
+                    text: '💾 Save',
                     onClick: {
                         action: 'EventHandler.Addon.saveSettings',
                     }
@@ -148,27 +145,56 @@ EMD.Bot = {
         name: 'Bots',
         columns: ['Parameter', 'default', 'es', 'fr', 'ar', 'de', 'it', 'pt', 'ru', 'zh', 'ja', 'ko', 'he'],
         sample_data: [
-            ['name', 'Sample Bot', 'Bot de Ejemplo', 'Bot d\'exemple', 'بوت تجريبي', 'Beispiel-Bot', 'Bot di esempio', 'Bot de Exemplo', 'Пример бота', '示例机器人', 'サンプルボット', '샘플 봇', 'בוט לדוגמה'],
-            ['short_description', 'This is a sample bot.', 'Este es un bot de ejemplo.', 'Ceci est un bot d\'exemple.', 'هذا بوت تجريبي.', 'Dies ist ein Beispiel-Bot.', 'Questo è un bot di esempio.', 'Este é um bot de exemplo.', 'Это пример бота.', '这是一个示例机器人。', 'これはサンプルボットです。', '이것은 샘플 봇입니다.', 'זהו בוט לדוגמה.'],
+            // bot name; 0-64 characters. Pass an empty string to remove the dedicated name for the given language.
+            ['name',
+                '🤖 Bot hub, Private, Secure, Easy to use',
+                '🤖 Centro de bots, privado, seguro, fácil de usar',
+                '🤖 Centre de bots, privé, sécurisé, facile à utiliser',
+                '🤖 مركز الروبوتات، خاص، آمن، سهل الاستخدام',
+                '🤖 Bot-Zentrale, privat, sicher, einfach zu bedienen',
+                '🤖 Centro bot, privato, sicuro, facile da usare',
+                '🤖 Central de bots, privado, seguro, fácil de usar',
+                'Центр ботов, приватный, безопасный, простой в использовании',
+                '🤖 机器人中心，私密，安全，易于使用',
+                '🤖 ボットハブ、プライベート、セキュア、使いやすい',
+                '🤖 봇 허브, 개인용, 안전함, 사용하기 쉬움',
+                '🤖 מרכז בוטים, פרטי, מאובטח, קל לשימוש'],
+            // short description for the bot; 0-120 characters.
+            // Pass an empty string to remove the dedicated short description for the given language.
+            ['short_description',
+                'Learn what your bot can do for you.',
+                'Este es un bot de ejemplo.', 'Ceci est un bot d\'exemple.', 'هذا بوت تجريبي.', 'Dies ist ein Beispiel-Bot.', 'Questo è un bot di esempio.', 'Este é um bot de exemplo.', 'Это пример бота.', '这是一个示例机器人。', 'これはサンプルボットです。', '이것은 샘플 봇입니다.', 'זהו בוט לדוגמה.'],
+            // bot description; 0-512 characters. Pass an empty string to remove the dedicated description for the given language.
             ['description', 'This bot demonstrates basic functionality.', 'Este bot demuestra funcionalidad básica.', 'Ce bot démontre une fonctionnalité de base.', 'هذا البوت يوضح الوظائف الأساسية.', 'Dieser Bot demonstriert grundlegende Funktionen.', 'Questo bot dimostra la funzionalità di base.', 'Este bot demonstra funcionalidade básica.', 'Этот бот демонстрирует базовый функционал.', '该机器人演示了基本功能。', 'このボットは基本的な機能を示しています。', '이 봇은 기본 기능을 보여줍니다.', 'בוט זה מדגים פונקציונליות בסיסית.']
+            // A JSON-serialized list of bot commands to be set as the list of the bot's commands.
+            // At most 100 commands can be specified.
             ['commands', JSON.stringify(
                 [
-                    {
+                    {   // '/start' command
+                        // Text of the command; 1-32 characters. Can contain only lowercase English letters, digits and underscores.
                         command: '/start',
+                        // Description of the command; 1-256 characters.
                         description: 'Start the bot'
-                    }, {
+                    },
+                    {   // '/home' command
+                        // Text of the command; 1-32 characters. Can contain only lowercase English letters, digits and underscores.
                         command: '/home',
+                        // Description of the command; 1-256 characters.
                         description: 'Home (This command will show you main menu, home page)'
-                    }, {
+                    },
+                    {   // '/howami' command
                         command: '/howami',
                         description: 'Who am I? (This command will tell you about yourself and your "chat_id")'
-                    }, {
+                    },
+                    {   // '/whoru' command
                         command: '/whoru',
                         description: 'Who are you? (This command will tell you about the bot)'
-                    }, {
+                    },
+                    {   // '/help' command
                         command: '/help',
                         description: 'Get help on using the bot, or report an issue'
-                    }, {
+                    },
+                    {   // '/about' command
                         command: '/about',
                         description: 'About the bot'
                     }
