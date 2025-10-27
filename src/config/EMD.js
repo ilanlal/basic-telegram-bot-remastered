@@ -78,40 +78,65 @@ EMD.Environment = {
             imageStyle: CardService.ImageStyle.SQUARE,
             imageAltText: 'Environment Image'
         },
-        sections: [{
-            header: 'Environment Details',
-            collapsible: false,
-            numUncollapsibleWidgets: 0,
-            widgets: [{
-                TextInput: {
-                    label: 'Bot API Token',
-                    name: 'bot_token',
-                    placeholder: 'Enter bot API token',
-                    value: '{bot_token}'
+        sections: [
+            // Telegram Bot Variables Section
+            {
+                header: 'Telegram Bot Variables',
+                collapsible: false,
+                numUncollapsibleWidgets: 0,
+                widgets: [
+                    // Bot Token Variable
+                    {
+                        TextInput: {
+                            label: 'Bot API Token',
+                            name: 'bot_token',
+                            placeholder: 'Enter bot API token',
+                            value: '{bot_token}'
+                        }
+                    },
+                    // Admin Chat ID Variable
+                    {
+                        TextInput: {
+                            label: 'Admin Chat ID',
+                            name: 'admin_chat_id',
+                            placeholder: 'Enter admin chat ID',
+                            value: '{admin_chat_id}'
+                        }
+                    }]
+            },
+            // Server Deployment Variables Section
+            {
+                header: 'Server Deployment Variables',
+                collapsible: false,
+                numUncollapsibleWidgets: 0,
+                widgets: [{
+                    TextInput: {
+                        label: 'Deployment ID',
+                        name: 'deployment_id',
+                        placeholder: 'Enter deployment ID',
+                        value: '{deployment_id}'
+                    }
+                }, {
+                    TextInput: {
+                        label: 'Default language',
+                        name: 'default_language',
+                        placeholder: 'Enter default language',
+                        value: '{default_language}'
+                    }
                 }
-            }, {
-                TextInput: {
-                    label: 'Deployment ID',
-                    name: 'deployment_id',
-                    placeholder: 'Enter deployment ID',
-                    value: '{deployment_id}'
+                ]
+            }
+        ],
+        fixedFooter: {
+            primaryButton: {
+                textButton: {
+                    text: 'Save',
+                    onClick: {
+                        action: 'EventHandler.Addon.saveSettings',
+                    }
                 }
-            }, {
-                TextInput: {
-                    label: 'Admin Chat ID',
-                    name: 'admin_chat_id',
-                    placeholder: 'Enter admin chat ID',
-                    value: '{admin_chat_id}'
-                }
-            }, {
-                TextInput: {
-                    label: 'Default language',
-                    name: 'default_language',
-                    placeholder: 'Enter default language',
-                    value: '{default_language}'
-                }
-            }]
-        }]
+            }
+        }
     }
 };
 
