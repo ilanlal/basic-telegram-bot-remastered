@@ -69,17 +69,49 @@ EMD.Environment = {
     entityName: 'Environment',
     displayName: 'Environment',
     pluralDisplayName: 'Environments',
-    sheetMeta: {
-        name: 'Environments',
-        columns: ['Parameter', 'Value', 'Description'],
-        sample_data: [
-            ['[BOT_API_TOKEN]', '[YOUR_BOT_API_TOKEN]', 'API token for accessing the Telegram Bot API'],
-            ['ADMIN_CHAT_ID', '[YOUR_ADMIN_CHAT_ID]', 'Telegram chat ID of the bot administrator'],
-            ['DEPLOYMENT_ID', '[YOUR_DEPLOYMENT_ID]', 'Deployment ID, after deploying the Google Apps Script project'],
-            ['DEFAULT_LANGUAGE', 'en', 'Default language for global defaults'],
-            ['DEBUG_MODE', 'false', 'Enable or disable debug mode'],
-            ['PRIVATE_KEY', '[YOUR_PRIVATE_KEY]', 'Private key for accessing certain APIs']
-        ]
+    cardMeta: {
+        name: 'environmentCard',
+        header: {
+            title: 'Environment',
+            subTitle: 'Manage your environments variables here',
+            imageUrl: EMD.DEFAULT_IMAGE_URL,
+            imageStyle: CardService.ImageStyle.SQUARE,
+            imageAltText: 'Environment Image'
+        },
+        sections: [{
+            header: 'Environment Details',
+            collapsible: false,
+            numUncollapsibleWidgets: 0,
+            widgets: [{
+                TextInput: {
+                    label: 'Bot API Token',
+                    name: 'bot_token',
+                    placeholder: 'Enter bot API token',
+                    value: '{bot_token}'
+                }
+            }, {
+                TextInput: {
+                    label: 'Deployment ID',
+                    name: 'deployment_id',
+                    placeholder: 'Enter deployment ID',
+                    value: '{deployment_id}'
+                }
+            }, {
+                TextInput: {
+                    label: 'Admin Chat ID',
+                    name: 'admin_chat_id',
+                    placeholder: 'Enter admin chat ID',
+                    value: '{admin_chat_id}'
+                }
+            }, {
+                TextInput: {
+                    label: 'Default language',
+                    name: 'default_language',
+                    placeholder: 'Enter default language',
+                    value: '{default_language}'
+                }
+            }]
+        }]
     }
 };
 
