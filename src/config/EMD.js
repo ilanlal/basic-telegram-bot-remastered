@@ -89,7 +89,7 @@ EMD.Environment = {
                     {
                         TextInput: {
                             label: 'Bot API Token',
-                            name: 'bot_token',
+                            fieldName: 'bot_token',
                             placeholder: 'Enter bot API token',
                             value: '{bot_token}'
                         }
@@ -98,7 +98,7 @@ EMD.Environment = {
                     {
                         TextInput: {
                             label: 'Admin Chat ID',
-                            name: 'admin_chat_id',
+                            fieldName: 'admin_chat_id',
                             placeholder: 'Enter admin chat ID',
                             value: '{admin_chat_id}'
                         }
@@ -112,14 +112,14 @@ EMD.Environment = {
                 widgets: [{
                     TextInput: {
                         label: 'Deployment ID',
-                        name: 'deployment_id',
+                        fieldName: 'deployment_id',
                         placeholder: 'Enter deployment ID',
                         value: '{deployment_id}'
                     }
                 }, {
                     TextInput: {
                         label: 'Default language',
-                        name: 'default_language',
+                        fieldName: 'default_language',
                         placeholder: 'Enter default language',
                         value: '{default_language}'
                     }
