@@ -63,7 +63,7 @@ EMD.Home = {
             }]
         }]
     }
-};
+}
 
 EMD.Environment = {
     entityName: 'Environment',
@@ -135,7 +135,7 @@ EMD.Environment = {
             }
         }
     }
-};
+}
 
 EMD.Bot = {
     entityName: 'Bot',
@@ -273,8 +273,7 @@ EMD.Bot = {
             }
         }
     }
-};
-
+}
 
 EMD.Automation = {
     entityName: 'Automation',
@@ -741,7 +740,7 @@ EMD.Automation = {
                     }])]
             ]
     }
-};
+}
 
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = { EMD };
