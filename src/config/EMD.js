@@ -120,29 +120,6 @@ EMD.BotSetup = {
         },
         sections:
             [
-                {  // General Settings Section
-                    header: 'General Settings',
-                    collapsible: false,
-                    numUncollapsibleWidgets: 0,
-                    widgets: [
-                        {   // Log Events Setting
-                            TextInput: {
-                                label: 'Debug Mode (Set to true or any other value for false)',
-                                fieldName: 'debug_mode',
-                                placeholder: 'Enter debug mode (true/false)',
-                                value: '{debug_mode}'
-                            }
-                        },
-                        {   // Default Language Variable
-                            TextInput: {
-                                label: 'Default language',
-                                fieldName: 'default_language',
-                                placeholder: 'Enter default language',
-                                value: '{default_language}'
-                            }
-                        }
-                    ]
-                },
                 {   // Telegram API Variables Section
                     header: 'Telegram API Variables',
                     collapsible: false,
@@ -179,6 +156,29 @@ EMD.BotSetup = {
                             }
                         }
                     ]
+                },
+                {  // General Settings Section
+                    header: 'General Settings',
+                    collapsible: false,
+                    numUncollapsibleWidgets: 0,
+                    widgets: [
+                        {   // Log Events Setting
+                            TextInput: {
+                                label: 'Debug Mode (Set to true or any other value for false)',
+                                fieldName: 'debug_mode',
+                                placeholder: 'Enter debug mode (true/false)',
+                                value: '{debug_mode}'
+                            }
+                        },
+                        {   // Default Language Variable
+                            TextInput: {
+                                label: 'Default language',
+                                fieldName: 'default_language',
+                                placeholder: 'Enter default language',
+                                value: '{default_language}'
+                            }
+                        }
+                    ]
                 }
             ],
         fixedFooter: {
@@ -191,16 +191,10 @@ EMD.BotSetup = {
                 }
             }
         }
-    }
-};
-
-EMD.Bot = {
-    entityName: 'Bot',
-    displayName: 'Bot',
-    pluralDisplayName: 'Bots',
+    },
     sheetMeta: {
-        name: '🤖 Bots',
-        columns: ['Parameter', 'default', 'es', 'fr', 'ar', 'de', 'it', 'pt', 'ru', 'zh', 'ja', 'ko', 'he'],
+        name: '🤖 Bot',
+        columns: ['param', 'default', 'es', 'fr', 'ar', 'de', 'it', 'pt', 'ru', 'zh', 'ja', 'ko', 'he'],
         sample_data: [
             // bot name; 0-64 characters. Pass an empty string to remove the dedicated name for the given language.
             ['name',
@@ -219,10 +213,32 @@ EMD.Bot = {
             // short description for the bot; 0-120 characters.
             // Pass an empty string to remove the dedicated short description for the given language.
             ['short_description',
-                'Learn what your bot can do for you.',
-                'Este es un bot de ejemplo.', 'Ceci est un bot d\'exemple.', 'هذا بوت تجريبي.', 'Dies ist ein Beispiel-Bot.', 'Questo è un bot di esempio.', 'Este é um bot de exemplo.', 'Это пример бота.', '这是一个示例机器人。', 'これはサンプルボットです。', '이것은 샘플 봇입니다.', 'זהו בוט לדוגמה.'],
+                'What bot can do? Take a journey with this bot, explore its features!',
+                '¿Qué puede hacer el bot? ¡Emprende un viaje con este bot y explora sus funciones!',
+                'Que peut faire le bot ? Partez en voyage avec ce bot et explorez ses fonctionnalités !',
+                'ماذا يمكن أن يفعل الروبوت؟ انطلق في رحلة مع هذا الروبوت واستكشف ميزاته!',
+                'Was kann der Bot tun? Machen Sie eine Reise mit diesem Bot und erkunden Sie seine Funktionen!',
+                'Cosa può fare il bot? Fai un viaggio con questo bot ed esplora le sue funzionalità!',
+                'O que o bot pode fazer? Faça uma jornada com este bot e explore seus recursos!',
+                'Что может делать бот? Отправьтесь в путешествие с этим ботом и исследуйте его функции!',
+                '机器人能做什么？与这个机器人一起踏上旅程，探索它的功能！',
+                'ボットは何ができますか？このボットと一緒に旅をして、その機能を探検しましょう！',
+                '봇은 무엇을 할 수 있나요? 이 봇과 함께 여행을 떠나 그 기능을 탐험해보세요!',
+                'מה הבוט יכול לעשות? צא למסע עם הבוט הזה, חקור את התכונות שלו!'],
             // bot description; 0-512 characters. Pass an empty string to remove the dedicated description for the given language.
-            ['description', 'This bot demonstrates basic functionality.', 'Este bot demuestra funcionalidad básica.', 'Ce bot démontre une fonctionnalité de base.', 'هذا البوت يوضح الوظائف الأساسية.', 'Dieser Bot demonstriert grundlegende Funktionen.', 'Questo bot dimostra la funzionalità di base.', 'Este bot demonstra funcionalidade básica.', 'Этот бот демонстрирует базовый функционал.', '该机器人演示了基本功能。', 'このボットは基本的な機能を示しています。', '이 봇은 기본 기능을 보여줍니다.', 'בוט זה מדגים פונקציונליות בסיסית.']
+            ['description',
+                'This bot demonstrates basic functionality.',
+                'Este bot demuestra funcionalidad básica.',
+                'Ce bot démontre une fonctionnalité de base.',
+                'هذا البوت يوضح الوظائف الأساسية.',
+                'Dieser Bot demonstriert grundlegende Funktionen.',
+                'Questo bot dimostra la funzionalità di base.',
+                'Este bot demonstra funcionalidade básica.',
+                'Этот бот демонстрирует базовый функционал.',
+                '该机器人演示了基本功能。',
+                'このボットは基本的な機能を示しています。',
+                '이 봇은 기본 기능을 보여줍니다.',
+                'בוט זה מדגים פונקציונליות בסיסית.']
             // A JSON-serialized list of bot commands to be set as the list of the bot's commands.
             // At most 100 commands can be specified.
             ['commands', JSON.stringify(
@@ -257,15 +273,21 @@ EMD.Bot = {
                     }
                 ])]
         ]
-    },
+    }
+};
+
+EMD.WebhookSetup = {
+    entityName: 'Webhook',
+    displayName: 'Webhook',
+    pluralDisplayName: 'Webhooks',
     cardMeta: {
-        name: 'bot_dashboard_Card',
+        name: 'webhook_Card',
         header: {
-            title: '🤖 - [YOUR_BOT_API_TOKEN]',
-            subTitle: 'Control panel for your bot.',
+            title: 'Webhook Management',
+            subTitle: 'Manage your bot webhooks here.',
             imageUrl: EMD.DEFAULT_IMAGE_URL,
             imageStyle: CardService.ImageStyle.SQUARE,
-            imageAltText: 'Bot Image'
+            imageAltText: 'Webhook Image'
         },
         sections:
             [

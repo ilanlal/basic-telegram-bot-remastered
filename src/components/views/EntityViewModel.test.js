@@ -5,7 +5,7 @@ const EntityViewModel = require('./EntityViewModel');
 
 describe('EntityViewModel', () => {
     const tests = [
-        EMD.Bot,
+        EMD.WebhookSetup,
         EMD.Home,
         EMD.Automation,
         EMD.BotSetup

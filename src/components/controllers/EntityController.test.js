@@ -16,7 +16,7 @@ describe('Entity Controller', () => {
                 cardService: CardService,
                 activeSpreadsheet: SpreadsheetApp.getActiveSpreadsheet()
             });
-        const actionResponseBuilder = entityController.pushCard(EMD.Bot.cardMeta);
+        const actionResponseBuilder = entityController.pushCard(EMD.WebhookSetup.cardMeta);
         expect(actionResponseBuilder).toBeDefined();
         const builtResponse = actionResponseBuilder.build();
         expect(builtResponse).toBeDefined();
