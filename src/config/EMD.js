@@ -227,7 +227,7 @@ EMD.BotSetup = {
                 'מה הבוט יכול לעשות? צא למסע עם הבוט הזה, חקור את התכונות שלו!'],
             // bot description; 0-512 characters. Pass an empty string to remove the dedicated description for the given language.
             ['description',
-                'This bot demonstrates basic functionality.',
+                'Store, Knowledge Base, and more - all in one bot platform.',
                 'Este bot demuestra funcionalidad básica.',
                 'Ce bot démontre une fonctionnalité de base.',
                 'هذا البوت يوضح الوظائف الأساسية.',
