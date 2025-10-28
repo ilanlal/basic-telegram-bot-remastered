@@ -194,11 +194,11 @@ EMD.BotSetup = {
     },
     sheetMeta: {
         name: '🤖 Bot',
-        columns: ['param', 'default', 'es', 'fr', 'ar', 'de', 'it', 'pt', 'ru', 'zh', 'ja', 'ko', 'he'],
+        columns: ['param', 'description', 'default', 'es', 'fr', 'ar', 'de', 'it', 'pt', 'ru', 'zh', 'ja', 'ko', 'he'],
         sample_data: [
-            // bot name; 0-64 characters. Pass an empty string to remove the dedicated name for the given language.
-            ['name',
-                '🤖 Bot hub, Private, Secure, Easy to use',
+            // Bot name; 0-64 characters. Pass an empty string to remove the dedicated name for the given language.
+            ['name', '💡: 0-64 characters. Pass an empty string to remove the dedicated name for the given language.',
+                '🤖 Bot Hub, Private, Secure, Easy to use',
                 '🤖 Centro de bots, privado, seguro, fácil de usar',
                 '🤖 Centre de bots, privé, sécurisé, facile à utiliser',
                 '🤖 مركز الروبوتات، خاص، آمن، سهل الاستخدام',
@@ -210,9 +210,8 @@ EMD.BotSetup = {
                 '🤖 ボットハブ、プライベート、セキュア、使いやすい',
                 '🤖 봇 허브, 개인용, 안전함, 사용하기 쉬움',
                 '🤖 מרכז בוטים, פרטי, מאובטח, קל לשימוש'],
-            // short description for the bot; 0-120 characters.
-            // Pass an empty string to remove the dedicated short description for the given language.
-            ['short_description',
+            // Short description of the bot; 0-120 characters. Pass an empty string to remove the dedicated short description for the given language.
+            ['short_description', '💡: 0-120 characters. Pass an empty string to remove the dedicated short description for the given language.',
                 'What bot can do? Take a journey with this bot, explore its features!',
                 '¿Qué puede hacer el bot? ¡Emprende un viaje con este bot y explora sus funciones!',
                 'Que peut faire le bot ? Partez en voyage avec ce bot et explorez ses fonctionnalités !',
@@ -225,8 +224,8 @@ EMD.BotSetup = {
                 'ボットは何ができますか？このボットと一緒に旅をして、その機能を探検しましょう！',
                 '봇은 무엇을 할 수 있나요? 이 봇과 함께 여행을 떠나 그 기능을 탐험해보세요!',
                 'מה הבוט יכול לעשות? צא למסע עם הבוט הזה, חקור את התכונות שלו!'],
-            // bot description; 0-512 characters. Pass an empty string to remove the dedicated description for the given language.
-            ['description',
+            // Description of the bot; 0-512 characters. Pass an empty string to remove the dedicated description for the given language.
+            ['description', '💡: 0-512 characters. Pass an empty string to remove for the given language.',
                 'Store, Knowledge Base, and more - all in one bot platform.',
                 'Este bot demuestra funcionalidad básica.',
                 'Ce bot démontre une fonctionnalité de base.',
@@ -248,20 +247,6 @@ EMD.BotSetup = {
                         command: '/start',
                         // Description of the command; 1-256 characters.
                         description: 'Start the bot'
-                    },
-                    {   // '/home' command
-                        // Text of the command; 1-32 characters. Can contain only lowercase English letters, digits and underscores.
-                        command: '/home',
-                        // Description of the command; 1-256 characters.
-                        description: 'Home (This command will show you main menu, home page)'
-                    },
-                    {   // '/howami' command
-                        command: '/howami',
-                        description: 'Who am I? (This command will tell you about yourself and your "chat_id")'
-                    },
-                    {   // '/whoru' command
-                        command: '/whoru',
-                        description: 'Who are you? (This command will tell you about the bot)'
                     },
                     {   // '/help' command
                         command: '/help',
