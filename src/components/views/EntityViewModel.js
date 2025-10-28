@@ -106,7 +106,7 @@ EntityViewModel.CardServiceWrapper = class {
     static FIXED_FOOTER_BUTTON_NOT_DEFINED_ERROR = "Fixed footer must have a primaryButton defined.";
     static TEXT_INPUT_MISSING_FIELD_NAME_ERROR = "TextInput widget must have a 'fieldName' property.";
     static DECORATED_TEXT_MISSING_CONTENT_ERROR = "DecoratedText widget must have at least one of 'text', 'decoratedText', 'topLabel', or 'bottomLabel' properties defined.";
-
+    static TEXT_BUTTON_MISSING_PROPERTIES_ERROR = "TextButton widget must have either 'text', and 'openLink' or 'onClick' defined.";
     static create(cardService = CardService) {
         return new EntityViewModel.CardServiceWrapper(cardService);
     }
@@ -156,25 +156,17 @@ EntityViewModel.CardServiceWrapper = class {
     }
 
     newFixedFooter(fixedFooterMeta = {}) {
-        if (!fixedFooterMeta.primaryButton) {
+        if (!fixedFooterMeta.primaryButton?.textButton) {
             throw new Error(EntityViewModel.CardServiceWrapper.FIXED_FOOTER_BUTTON_NOT_DEFINED_ERROR);
         }
         const fixedFooter = this._cardService.newFixedFooter();
 
-        const primaryButton = this.newTextButton({
-            text: fixedFooterMeta.primaryButton.text || 'Primary Action',
-            functionName: fixedFooterMeta.primaryButton.functionName || 'EventHandler.Addon.onPrimaryAction',
-            parameters: fixedFooterMeta.primaryButton.parameters || {}
-        });
+        const primaryButton = this.newTextButton(fixedFooterMeta.primaryButton.textButton);
         fixedFooter.setPrimaryButton(primaryButton);
 
         if (fixedFooterMeta.secondaryButton) {
             fixedFooter.setSecondaryButton(
-                this.newTextButton({
-                    text: fixedFooterMeta.secondaryButton.text || 'Secondary Action',
-                    functionName: fixedFooterMeta.secondaryButton.functionName || 'EventHandler.Addon.onSecondaryAction',
-                    parameters: fixedFooterMeta.secondaryButton.parameters || {}
-                })
+                this.newTextButton(fixedFooterMeta.secondaryButton.textButton)
             );
         }
 
@@ -267,18 +259,25 @@ EntityViewModel.CardServiceWrapper = class {
     }
 
     newTextButton(textButtonMeta = {}) {
+        if (!textButtonMeta.text || (!textButtonMeta.openLink && !textButtonMeta.onClick)) {
+            throw new Error(EntityViewModel.CardServiceWrapper.TEXT_BUTTON_MISSING_PROPERTIES_ERROR);
+        }
+
         const _ = this._cardService.newTextButton()
-            .setText(textButtonMeta.text || EntityViewModel.CardServiceWrapper.DEFAULT_BUTTON_LABEL)
+            .setText(textButtonMeta.text)
             .setDisabled(!!textButtonMeta.disabled);
 
         if (textButtonMeta.openLink) {
             _.setOpenLink(this._cardService.newOpenLink().setUrl(textButtonMeta.openLink.url || ''));
         }
-        else if (textButtonMeta.functionName) {
-            _.setOnClickAction(textButtonMeta.functionName ? this._cardService.newAction()
-                .setFunctionName(textButtonMeta.functionName || EntityViewModel.CardServiceWrapper.DEFAULT_EVENT_CLICK_FUNCTION_NAME)
-                .setParameters(textButtonMeta.parameters || {}) : null
+        else if (textButtonMeta.onClick) {
+            _.setOnClickAction(textButtonMeta.onClick.functionName ? this._cardService.newAction()
+                .setFunctionName(textButtonMeta.onClick.functionName || EntityViewModel.CardServiceWrapper.DEFAULT_EVENT_CLICK_FUNCTION_NAME)
+                .setParameters(textButtonMeta.onClick.parameters || {}) : null
             );
+        }
+        else {
+            throw new Error(EntityViewModel.CardServiceWrapper.TEXT_BUTTON_MISSING_PROPERTIES_ERROR);
         }
         return _;
     }

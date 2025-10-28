@@ -23,9 +23,11 @@ describe('Model.CardWrapper', () => {
                 it('should create a newTextButton widget with correct text', () => {
                     const textButtonMeta = {
                         text: 'Click Me',
-                        functionName: 'onClick',
-                        parameters: {
-                            action: 'click'
+                        onClick: {
+                            functionName: 'onClick',
+                            parameters: {
+                                action: 'click'
+                            }
                         }
                     };
                     const textButton = wrapper.newTextButton(textButtonMeta);
@@ -33,8 +35,8 @@ describe('Model.CardWrapper', () => {
                     const data = textButton.getData();
                     expect(data).toBeDefined();
                     expect(data.textButton.text).toBe(textButtonMeta.text);
-                    expect(data.textButton.onClick.action.actionMethodName).toBe(textButtonMeta.functionName);
-                    expect(data.textButton.onClick.action.parameters).toEqual(textButtonMeta.parameters);
+                    expect(data.textButton.onClick.action.actionMethodName).toBe(textButtonMeta.onClick.functionName);
+                    expect(data.textButton.onClick.action.parameters).toEqual(textButtonMeta.onClick.parameters);
                 });
             });
 
@@ -167,10 +169,14 @@ describe('Model.CardWrapper', () => {
             it('should create a fixed footer with a primary button', () => {
                 const footerMeta = {
                     primaryButton: {
-                        text: 'Submit',
-                        functionName: 'onSubmit',
-                        parameters: {
-                            id: 'submitAction'
+                        textButton: {
+                            text: 'Submit',
+                            onClick: {
+                                functionName: 'onSubmit',
+                                parameters: {
+                                    action: 'submitForm'
+                                }
+                            }
                         }
                     }
                 };
@@ -179,11 +185,25 @@ describe('Model.CardWrapper', () => {
                 let data = fixedFooter.getData();
                 expect(data).toBeDefined();
                 expect(data.primaryButton).toBeDefined();
-                data = data.primaryButton.getData();
-                expect(data.textButton.text).toBe(footerMeta.primaryButton.text);
-                expect(data.textButton.onClick.action.actionMethodName).toBe(footerMeta.primaryButton.functionName);
-                expect(data.textButton.onClick.action.parameters).toEqual(footerMeta.primaryButton.parameters);
-                //console.log(JSON.stringify(data, null, 2));
+                const primaryButtonData = data.primaryButton.getData();
+                expect(primaryButtonData.textButton.text).toBe(footerMeta.primaryButton.textButton.text);
+                expect(primaryButtonData.textButton.onClick.action.actionMethodName).toBe(footerMeta.primaryButton.textButton.onClick.functionName);
+                expect(primaryButtonData.textButton.onClick.action.parameters).toEqual(footerMeta.primaryButton.textButton.onClick.parameters);
+                const widgetFooter = {
+                    "textButton": {
+                        "text": "Submit",
+                        "disabled": false,
+                        "onClick": {
+                            "action": {
+                                "actionMethodName": "onSubmit",
+                                "parameters": {
+                                    "action": "submitForm"
+                                }
+                            }
+                        }
+                    }
+                }
+                console.log(JSON.stringify(data, null, 2));
             });
 
             it('should throw an error if primary button is not defined', () => {

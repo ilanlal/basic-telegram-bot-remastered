@@ -35,8 +35,10 @@ EMD.Home = {
                             textButton: {
                                 disabled: false,
                                 text: '⚙️ Setup Bot',
-                                functionName: 'EventHandler.Addon.setupBot',
-                                parameters: { action: 'setupBot' }
+                                onClick: {
+                                    functionName: 'EventHandler.Addon.setupBot',
+                                    parameters: { action: 'setupBot' }
+                                }
                             }
                         }
                     },
@@ -49,8 +51,10 @@ EMD.Home = {
                             textButton: {
                                 disabled: false,
                                 text: '⚙️ Manage Webhooks',
-                                functionName: 'EventHandler.Addon.manageWebhooks',
-                                parameters: { action: 'manageWebhooks' }
+                                onClick: {
+                                    functionName: 'EventHandler.Addon.manageWebhooks',
+                                    parameters: { action: 'manageWebhooks' }
+                                }
                             }
                         }
                     }
@@ -70,8 +74,10 @@ EMD.Home = {
                             textButton: {
                                 disabled: false,
                                 text: '⚡',
-                                functionName: 'EventHandler.Addon.automation',
-                                parameters: { action: 'manageAutomations' }
+                                onClick: {
+                                    functionName: 'EventHandler.Addon.automation',
+                                    parameters: { action: 'manageAutomations' }
+                                }
                             }
                         }
                     },
@@ -84,8 +90,10 @@ EMD.Home = {
                             textButton: {
                                 disabled: false,
                                 text: '👥',
-                                functionName: 'EventHandler.Addon.contacts',
-                                parameters: { action: 'manageContacts' }
+                                onClick: {
+                                    functionName: 'EventHandler.Addon.contacts',
+                                    parameters: { action: 'manageContacts' }
+                                }
                             }
                         }
                     }
@@ -97,7 +105,7 @@ EMD.Home = {
                 textButton: {
                     text: '💾 Save',
                     onClick: {
-                        action: 'EventHandler.Addon.saveSettings',
+                        functionName: 'EventHandler.Addon.saveSettings',
                     }
                 }
             }
@@ -186,7 +194,7 @@ EMD.BotSetup = {
                 textButton: {
                     text: '💾 Save',
                     onClick: {
-                        action: 'EventHandler.Addon.saveSettings',
+                        functionName: 'EventHandler.Addon.saveSettings',
                     }
                 }
             }
@@ -275,31 +283,7 @@ EMD.WebhookSetup = {
             imageAltText: 'Webhook Image'
         },
         sections:
-            [
-                {
-                    header: 'Verify Bot Identity',
-                    collapsible: false,
-                    numUncollapsibleWidgets: 0,
-                    widgets: [
-                        {
-                            DecoratedText: {
-                                text: '{🔘}',
-                                topLabel: 'call api/getMe',
-                                bottomLabel: 'Retrieve bot information',
-                                wrapText: true,
-                                textButton: {
-                                    text: 'Call API',
-                                    onClick: {
-                                        action: 'EventHandler.Addon.callApi',
-                                        parameters: {
-                                            api: 'getMe'
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    ]
-                },
+            [   // Webhook Management Section
                 {
                     header: 'Webhook Management',
                     collapsible: false,
@@ -307,14 +291,15 @@ EMD.WebhookSetup = {
                     widgets: [
                         {
                             DecoratedText: {
-                                text: '{🔔}',
-                                topLabel: 'call api/setWebhook',
+                                topLabel: '📡',
+                                text: 'api/setWebhook',
                                 bottomLabel: 'Set webhook for the bot',
                                 wrapText: true,
                                 textButton: {
-                                    text: 'Call API',
+                                    text: '📡 Set',
+                                    disabled: false,
                                     onClick: {
-                                        action: 'EventHandler.Addon.callApi',
+                                        functionName: 'EventHandler.Addon.setWebhook',
                                         parameters: {
                                             api: 'setWebhook'
                                         }
@@ -329,9 +314,11 @@ EMD.WebhookSetup = {
             primaryButton: {
                 textButton: {
                     text: '💫 Bind row data',
-                    functionName: 'EventHandler.Addon.onBindData',
-                    parameters: {
-                        action: 'bindData'
+                    onClick: {
+                        functionName: 'EventHandler.Addon.onBindData',
+                        parameters: {
+                            action: 'bindData'
+                        }
                     }
                 }
             }
