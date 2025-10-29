@@ -381,6 +381,15 @@ EMD.Automation = {
         columns: ['action', 'default', 'es', 'fr', 'ar', 'de', 'it', 'pt', 'ru', 'zh', 'ja', 'ko', 'he'],
         sample_data:
             [
+                ['_under_construction_',
+                    // default (en)
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: 'This feature is under construction.',
+                            parse_mode: 'HTML'
+                        }
+                    }])],
                 ['_command_not_found_',
                     // default (en)
                     JSON.stringify([{
@@ -1102,20 +1111,20 @@ EMD.Automation = {
                                         { text: "🌟 Mini App", web_app: { url: "https://example.com/mini" } }
                                     ],
                                     [
-                                        { text: "🛍️ Mini Store", web_app: { url: "https://example.com/store" } },
-                                        { text: "🐣 H.R Services", web_app: { url: "https://example.com/hr" } }
+                                        { text: "🛍️ Store", web_app: { url: "https://example.com/store" } },
+                                        { text: "🐣 H.R Solutions", callback_data: "action=hrSolutions" }
                                     ],
                                     [
-                                        { text: "📊 Surveys", callback_data: "action=surveys" },
-                                        { text: "📰 News", callback_data: "action=news" }
+                                        { text: "🔒 Secured Marketplace", callback_data: "action=privateSecure" },
+                                        { text: "💼 Agency Solutions", callback_data: "action=agencySolutions" }
                                     ],
                                     [
-                                        { text: "🚕 Call Taxi", callback_data: "action=callTaxi" },
+                                        { text: "🎯 Targeted Services", callback_data: "action=targetedServices" },
+                                        { text: "📦 Logistics", callback_data: "action=logistics" }
+                                    ],
+                                    [
+                                        { text: "🚀 Quick Actions", callback_data: "action=quickActions" },
                                         { text: "🚨 Emergency Services", callback_data: "action=emergencyServices" },
-                                    ],
-                                    [
-                                        { text: "🔒 Private & Secure", callback_data: "action=privateSecure" },
-                                        { text: "🤖 API Features", callback_data: "action=apiFeatures" }
                                     ],
                                     [
                                         { text: '❓ Help', callback_data: "/help" },
@@ -1267,18 +1276,41 @@ EMD.Automation = {
                             }
                         }
                     }])],
-                ['hrServices',
+                ['hrSolutions',
                     // default (en)
                     JSON.stringify([{
                         method: 'sendMessage',
                         payload: {
-                            text: 'H.R Services:',
+                            text: 'H.R Solutions:',
                             parse_mode: 'HTML',
                             reply_markup: {
                                 inline_keyboard: [
                                     [{ text: "👥 Employee Onboarding", callback_data: "employeeOnboarding" }],
                                     [{ text: "📄 Document Management", callback_data: "documentManagement" }],
                                     [{ text: "📊 Performance Reviews", callback_data: "performanceReviews" }]
+                                ]
+                            }
+                        }
+                    }])],
+                ['agencySolutions',
+                    // default (en)
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: 'Agency Solutions:',
+                            parse_mode: 'HTML',
+                            reply_markup: {
+                                inline_keyboard: [
+                                    [{ text: "🏢 Agency Overview", callback_data: "agencyOverview" }],
+                                    [{ text: "📋 Client Management", callback_data: "clientManagement" }],
+                                    [{ text: "📈 Performance Metrics", callback_data: "performanceMetrics" }],
+                                    [
+                                        { text: "📊 Surveys", callback_data: "action=surveys" },
+                                        { text: "📰 News", callback_data: "action=news" }], [
+                                    ],
+                                    [
+                                        { text: "🤖 Developer", callback_data: "action=apiFeatures" }
+                                    ]
                                 ]
                             }
                         }
@@ -1311,6 +1343,22 @@ EMD.Automation = {
                                     [{ text: "📰 Latest News", callback_data: "latestNews" }],
                                     [{ text: "🗞️ Trending Topics", callback_data: "trendingTopics" }],
                                     [{ text: "📅 News Archive", callback_data: "newsArchive" }]
+                                ]
+                            }
+                        }
+                    }])],
+                ['quickActions',
+                    // default (en)
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: 'Quick Actions:',
+                            parse_mode: 'HTML',
+                            reply_markup: {
+                                inline_keyboard: [
+                                    [{ text: "🚖 Call a Taxi", callback_data: "action=callTaxi" }],
+                                    [{ text: "🔍 VPN Search", callback_data: "action=search" }],
+                                    [{ text: "📦 Track Order", callback_data: "action=trackOrder" }]
                                 ]
                             }
                         }
