@@ -8,7 +8,7 @@ describe('EventHandler', () => {
         expect(handler).toBeInstanceOf(EventHandler);
     });
 
-    it('should handle OpenOnHomeCard', () => {
+    it('should onOpenHomeCard', () => {
         /* @see https://core.telegram.org/bots/api#getwebhookinfo */
         const contentText = `{
             "result": {

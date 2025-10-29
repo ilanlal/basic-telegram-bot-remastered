@@ -1,3 +1,5 @@
+const { EntityController } = require("../components/controllers/EntityController");
+
 class EventHandler {    
     get userStore() {
         if (!this._userStore) {
@@ -55,8 +57,8 @@ EventHandler.AddonWrapper = class {
 
     handleOpenHomeCard(e) {
         try {
-            return NavigationController.create(this._userStore)
-                .navigateToHomeCard()
+            return EntityController.create(this._userStore, CardService, SpreadsheetApp.getActiveSpreadsheet())
+                .pushCard(EMD.Home.cardMeta)
                 .build();
         } catch (error) {
             return this.handleError(error)
