@@ -1110,25 +1110,12 @@ EMD.Automation = {
                                         { text: "📰 News", callback_data: "action=news" }
                                     ],
                                     [
-                                        { text: "🚦 Safety Check List", callback_data: "action=safetyChecklist" },
-                                        { text: "🛠️ Maintenance Request", callback_data: "action=maintenanceRequest" }
-                                    ],
-                                    // Two buttons in one row
-                                    [
-                                        { text: "📱 Phone Number Authentication", callback_data: "action=phoneAuth" },
-                                        { text: "🦶 Fingerprint Authentication", callback_data: "action=fingerprintAuth" }
-                                    ],
-                                    [
-                                        { text: "📍 Share Location", callback_data: "photoSamples" },
-                                        { text: "🆔 [CHAT_ID] User Identity", callback_data: "photoSamples" }
-                                    ],
-                                    [
                                         { text: "🚕 Call Taxi", callback_data: "action=callTaxi" },
                                         { text: "🚨 Emergency Services", callback_data: "action=emergencyServices" },
                                     ],
                                     [
-                                        { text: "*️⃣ Custom Menu Key", callback_data: "action=refresh" },
-                                        { text: "🔑 Inline Keyboard", callback_data: "action=keypadSamples" }
+                                        { text: "🔒 Private & Secure", callback_data: "action=privateSecure" },
+                                        { text: "🤖 API Features", callback_data: "action=apiFeatures" }
                                     ],
                                     [
                                         { text: '❓ Help', callback_data: "/help" },
@@ -1328,15 +1315,29 @@ EMD.Automation = {
                             }
                         }
                     }])],
-                ['securityServices',
+                ['privateSecure',
                     // default (en)
                     JSON.stringify([{
                         method: 'sendMessage',
                         payload: {
-                            text: 'Security Services:',
+                            text: 'Privacy and Security Services:',
                             parse_mode: 'HTML',
                             reply_markup: {
                                 inline_keyboard: [
+                                    [
+                                        { text: "🔒 Virtual Private Network (VPN)", callback_data: "action=safetyChecklist" },
+                                        { text: "🛡️ Threat Assessment", callback_data: "action=threatAssessment" },
+                                        { text: "🛠️ Maintenance Request", callback_data: "action=maintenanceRequest" }
+                                    ],
+                                    // Two buttons in one row
+                                    [
+                                        { text: "📱 Phone Number Authentication", callback_data: "action=phoneAuth" },
+                                        { text: "🦶 Fingerprint Authentication", callback_data: "action=fingerprintAuth" }
+                                    ],
+                                    [
+                                        { text: "📍 Share Location", callback_data: "photoSamples" },
+                                        { text: "🆔 [CHAT_ID] User Identity", callback_data: "photoSamples" }
+                                    ],
                                     [{ text: "🔒 Access Control", callback_data: "accessControl" }],
                                     [{ text: "🛡️ Threat Assessment", callback_data: "threatAssessment" }],
                                     [{ text: "📊 Security Analytics", callback_data: "securityAnalytics" }]
@@ -1421,6 +1422,15 @@ EMD.Automation = {
                         }
                     }])
                 ],
+                ['trackOrder',
+                    // default (en)
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: 'Tracking your order...',
+                            parse_mode: 'HTML'
+                        }
+                    }])],
                 ['store',
                     // default (en)
                     JSON.stringify([{
