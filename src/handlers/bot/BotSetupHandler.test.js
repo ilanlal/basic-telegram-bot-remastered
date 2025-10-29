@@ -25,10 +25,10 @@ describe('BotSetupHandler', () => {
             const mockEvent = {
                 commonEventObject: {
                     formInputs: {
-                        'API_TOKEN': { stringInputs: { value: [token] } },
-                        'DEFAULT_LANGUAGE': { stringInputs: { value: ['en'] } },
-                        'DEPLOYMENT_ID': { stringInputs: { value: ['123'] } },
-                        'MY_CHAT_ID': { stringInputs: { value: ['456'] } }
+                        [BotSetupHandler.FORM_INPUT_NAMES.BOT_API_TOKEN]: { stringInputs: { value: [token] } },
+                        [BotSetupHandler.FORM_INPUT_NAMES.DEFAULT_LANGUAGE]: { stringInputs: { value: ['en'] } },
+                        [BotSetupHandler.FORM_INPUT_NAMES.DEPLOYMENT_ID]: { stringInputs: { value: ['123'] } },
+                        [BotSetupHandler.FORM_INPUT_NAMES.ADMIN_CHAT_ID]: { stringInputs: { value: ['456'] } }
                     }
                 }
             };
@@ -43,7 +43,22 @@ describe('BotSetupHandler', () => {
                 }
             };
             expect(() => BotSetupHandler.saveNewBotSetupInfo(mockEvent))
-                .toThrow("Form inputs are missing");
+                .toThrow(BotSetupHandler.MISSING_INPUT_ERROR);
+        });
+
+        it('should throw an error if bot API token is missing', () => {
+            const mockEvent = {
+                commonEventObject: {
+                    formInputs: {
+                        // 'txt_bot_api_token' is missing
+                        [BotSetupHandler.FORM_INPUT_NAMES.DEFAULT_LANGUAGE]: { stringInputs: { value: ['en'] } },
+                        [BotSetupHandler.FORM_INPUT_NAMES.DEPLOYMENT_ID]: { stringInputs: { value: ['123'] } },
+                        [BotSetupHandler.FORM_INPUT_NAMES.ADMIN_CHAT_ID]: { stringInputs: { value: ['456'] } }
+                    }
+                }
+            };
+            expect(() => BotSetupHandler.saveNewBotSetupInfo(mockEvent))
+                .toThrow(BotSetupHandler.MISSING_BOT_API_TOKEN_ERROR);
         });
     });
 });

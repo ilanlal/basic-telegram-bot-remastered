@@ -173,17 +173,17 @@ EMD.BotSetup = {
                         {   // Log Events Setting
                             TextInput: {
                                 label: 'Debug Mode (Set to true or any other value for false)',
-                                fieldName: 'debug_mode',
+                                fieldName: 'txt_debug_mode',
                                 placeholder: 'Enter debug mode (true/false)',
-                                value: '{debug_mode}'
+                                value: 'false'
                             }
                         },
                         {   // Default Language Variable
                             TextInput: {
                                 label: 'Default language',
-                                fieldName: 'default_language',
+                                fieldName: 'txt_default_language',
                                 placeholder: 'Enter default language',
-                                value: '{default_language}'
+                                value: 'en'
                             }
                         }
                     ]
