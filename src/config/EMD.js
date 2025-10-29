@@ -120,7 +120,7 @@ EMD.BotSetup = {
     cardMeta: {
         name: 'bot_setup_Card',
         header: {
-            title: 'Setup Environment Variables',
+            title: 'Bot Setup',
             subTitle: 'Configure your bot environment variables here.',
             imageUrl: EMD.DEFAULT_IMAGE_URL,
             imageStyle: CardService.ImageStyle.SQUARE,
@@ -128,10 +128,10 @@ EMD.BotSetup = {
         },
         sections:
             [
-                {   // Telegram API Variables Section
-                    header: 'Telegram API Variables',
-                    collapsible: false,
-                    numUncollapsibleWidgets: 0,
+                {   // Getting Started Variables Section
+                    header: 'Getting Started Variables',
+                    collapsible: true,
+                    numUncollapsibleWidgets: 2,
                     widgets: [
                         { // Bot Token Variable
                             TextInput: {
@@ -141,20 +141,6 @@ EMD.BotSetup = {
                                 value: '[YOUR_BOT_API_TOKEN]'
                             }
                         },
-                        { // Admin Chat ID Variable
-                            TextInput: {
-                                label: 'Admin Chat ID',
-                                fieldName: 'txt_admin_chat_id',
-                                placeholder: 'Enter admin chat ID',
-                                value: '[YOUR_ADMIN_CHAT_ID]'
-                            }
-                        }]
-                },
-                {   // Server Deployment Variables Section
-                    header: 'Server Deployment Variables',
-                    collapsible: false,
-                    numUncollapsibleWidgets: 0,
-                    widgets: [
                         {   // Deployment ID Variable
                             TextInput: {
                                 label: 'Deployment ID',
@@ -162,14 +148,38 @@ EMD.BotSetup = {
                                 placeholder: 'Enter deployment ID',
                                 value: '[YOUR_DEPLOYMENT_ID]'
                             }
+                        },
+                        { // DecoratedText for webhook info
+                            DecoratedText: {
+                                text: 'Webhook Info',
+                                topLabel: 'Webhook URL',
+                                bottomLabel: 'Manage your webhook settings here',
+                                wrapText: true,
+                                textButton: {
+                                    disabled: false,
+                                    text: '🔗',
+                                    onClick: {
+                                        functionName: 'EventHandler.Addon.webhook',
+                                        parameters: { action: 'manageWebhook' }
+                                    }
+                                }
+                            }
                         }
                     ]
                 },
-                {  // General Settings Section
-                    header: 'General Settings',
-                    collapsible: false,
-                    numUncollapsibleWidgets: 0,
+                {  // Development & General Settings Section
+                    header: 'Development & General Settings',
+                    collapsible: true,
+                    numUncollapsibleWidgets: 2,
                     widgets: [
+                        { // Admin Chat ID Variable
+                            TextInput: {
+                                label: 'Admin Chat ID',
+                                fieldName: 'txt_admin_chat_id',
+                                placeholder: 'Enter admin chat ID',
+                                value: '[YOUR_ADMIN_CHAT_ID]'
+                            }
+                        },
                         {   // Log Events Setting
                             TextInput: {
                                 label: 'Debug Mode (Set to true or any other value for false)',
@@ -202,10 +212,10 @@ EMD.BotSetup = {
     },
     sheetMeta: {
         name: '🤖 Bot',
-        columns: ['param', 'description', 'default', 'es', 'fr', 'ar', 'de', 'it', 'pt', 'ru', 'zh', 'ja', 'ko', 'he'],
+        columns: ['param', 'default', 'es', 'fr', 'ar', 'de', 'it', 'pt', 'ru', 'zh', 'ja', 'ko', 'he'],
         sample_data: [
             // Bot name; 0-64 characters. Pass an empty string to remove the dedicated name for the given language.
-            ['name', '💡: 0-64 characters. Pass an empty string to remove the dedicated name for the given language.',
+            ['name',
                 '🤖 Bot Hub, Private, Secure, Easy to use',
                 '🤖 Centro de bots, privado, seguro, fácil de usar',
                 '🤖 Centre de bots, privé, sécurisé, facile à utiliser',
@@ -219,7 +229,7 @@ EMD.BotSetup = {
                 '🤖 봇 허브, 개인용, 안전함, 사용하기 쉬움',
                 '🤖 מרכז בוטים, פרטי, מאובטח, קל לשימוש'],
             // Short description of the bot; 0-120 characters. Pass an empty string to remove the dedicated short description for the given language.
-            ['short_description', '💡: 0-120 characters. Pass an empty string to remove the dedicated short description for the given language.',
+            ['short_description',
                 'What bot can do? Take a journey with this bot, explore its features!',
                 '¿Qué puede hacer el bot? ¡Emprende un viaje con este bot y explora sus funciones!',
                 'Que peut faire le bot ? Partez en voyage avec ce bot et explorez ses fonctionnalités !',
@@ -233,7 +243,7 @@ EMD.BotSetup = {
                 '봇은 무엇을 할 수 있나요? 이 봇과 함께 여행을 떠나 그 기능을 탐험해보세요!',
                 'מה הבוט יכול לעשות? צא למסע עם הבוט הזה, חקור את התכונות שלו!'],
             // Description of the bot; 0-512 characters. Pass an empty string to remove the dedicated description for the given language.
-            ['description', '💡: 0-512 characters. Pass an empty string to remove for the given language.',
+            ['description',
                 '<b>Telegram Bots</b> are secure and private channels ideal marketing tools within customer relationship management (CRM) systems. \n\n'
                 + 'Promote your goods and services, send notifications, conduct surveys, and much more!\n\n'
                 + 'Group your customers, create targeted communication channels, and engage with your audience like never before!\n\n',
@@ -273,8 +283,7 @@ EMD.BotSetup = {
             ,
             // A JSON-serialized list of bot commands to be set as the list of the bot's commands.
             // At most 100 commands can be specified.
-            ['commands', '💡: A JSON-serialized list of bot commands to be set as the list of the bot\'s commands. At most 100 commands can be specified.',
-
+            ['commands',
                 JSON.stringify(
                     [
                         {   // '/start' command
@@ -290,8 +299,18 @@ EMD.BotSetup = {
                         {   // '/about' command
                             command: '/about',
                             description: 'About the bot'
+                        },
+                        { // lang command
+                            command: '/lang',
+                            description: 'send "/lang es" to set Spanish as your language, or "/lang list" to get a list of available languages'
+                        },
+                        { // '/admin' command
+                            command: '/admin',
+                            description: 'Admin command for bot management'
                         }
-                    ])]
+                    ])],
+            ['webhook_url', 
+                'https://script.google.com/macros/s/[YOUR_DEPLOYMENT_ID]/exec']
         ]
     }
 };
@@ -362,7 +381,7 @@ EMD.Automation = {
         columns: ['action', 'default', 'es', 'fr', 'ar', 'de', 'it', 'pt', 'ru', 'zh', 'ja', 'ko', 'he'],
         sample_data:
             [
-                ['_not_found_',
+                ['_command_not_found_',
                     // default (en)
                     JSON.stringify([{
                         method: 'sendMessage',
@@ -371,7 +390,13 @@ EMD.Automation = {
                             parse_mode: 'HTML',
                             reply_markup: {
                                 inline_keyboard: [
-                                    [{ text: "Home", callback_data: "/home" }]
+                                    [
+                                        { text: "Help", callback_data: "/help" },
+                                        { text: "About", callback_data: "/about" }
+                                    ],
+                                    [
+                                        { text: "Home", callback_data: "/home" }
+                                    ]
                                 ]
                             }
                         }
@@ -519,68 +544,680 @@ EMD.Automation = {
                             }
                         }
                     }])],
+                ['_action_not_found_',
+                    // default (en)
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: '🚧 Oops! We\'re sorry, but we couldn\'t recognize that action. Please try again or use /help for assistance.',
+                            parse_mode: 'HTML',
+                            reply_markup: {
+                                inline_keyboard: [
+                                    [
+                                        { text: "🆘 Help", callback_data: "action=help" },
+                                        { text: "ℹ️ About", callback_data: "action=about" }
+                                    ],
+                                    [
+                                        { text: "🏠 Home", callback_data: "/home" }
+                                    ]
+                                ]
+                            }
+                        }
+                    }]),
+                    // es
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: '🚧 ¡Vaya! Lo sentimos, pero no pudimos reconocer esa acción. Por favor, inténtalo de nuevo o utiliza /help para obtener ayuda.',
+                            parse_mode: 'HTML',
+                            reply_markup: {
+                                inline_keyboard: [
+                                    [
+                                        { text: "🆘 Ayuda", callback_data: "/help" },
+                                        { text: "ℹ️ Acerca de", callback_data: "/about" }
+                                    ],
+                                    [
+                                        { text: "🏠 Inicio", callback_data: "/home" }
+                                    ]
+                                ]
+                            }
+                        }
+                    }]),
+                    // fr
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: '🚧 Désolé, mais nous n\'avons pas pu reconnaître cette action. Veuillez réessayer ou utiliser /help pour obtenir de l\'aide.',
+                            parse_mode: 'HTML',
+                            reply_markup: {
+                                inline_keyboard: [
+                                    [
+                                        { text: "🆘 Aide", callback_data: "/help" },
+                                        { text: "ℹ️ À propos", callback_data: "/about" }
+                                    ],
+                                    [
+                                        { text: "🏠 Accueil", callback_data: "/home" }
+                                    ]
+                                ]
+                            }
+                        }
+                    }]),
+                    // ar
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: '🚧 عذرًا، لم نتمكن من التعرف على هذا الإجراء. يرجى المحاولة مرة أخرى أو استخدام /help للحصول على المساعدة.',
+                            parse_mode: 'HTML',
+                            reply_markup: {
+                                inline_keyboard: [
+                                    [
+                                        { text: "🆘 مساعدة", callback_data: "/help" },
+                                        { text: "ℹ️ حول", callback_data: "/about" }
+                                    ],
+                                    [
+                                        { text: "🏠 الرئيسية", callback_data: "/home" }
+                                    ]
+                                ]
+                            }
+                        }
+                    }]),
+                    // de
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: '🚧 Hoppla! Wir konnten diese Aktion nicht erkennen. Bitte versuchen Sie es erneut oder verwenden Sie /help, um Hilfe zu erhalten.',
+                            parse_mode: 'HTML',
+                            reply_markup: {
+                                inline_keyboard: [
+                                    [
+                                        { text: "🆘 Hilfe", callback_data: "/help" },
+                                        { text: "ℹ️ Über", callback_data: "/about" }
+                                    ],
+                                    [
+                                        { text: "🏠 Home", callback_data: "/home" }
+                                    ]
+                                ]
+                            }
+                        }
+                    }]),
+                    // it
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: '🚧 Ci scusiamo, ma non siamo riusciti a riconoscere questa azione. Per favore riprova o usa /help per ricevere assistenza.',
+                            parse_mode: 'HTML',
+                            reply_markup: {
+                                inline_keyboard: [
+                                    [
+                                        { text: "🆘 Aiuto", callback_data: "/help" },
+                                        { text: "ℹ️ Informazioni", callback_data: "/about" }
+                                    ],
+                                    [
+                                        { text: "🏠 Home", callback_data: "/home" }
+                                    ]
+                                ]
+                            }
+                        }
+                    }]),
+                    // pt
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: '🚧 Desculpe, não conseguimos reconhecer esta ação. Por favor, tente novamente ou use /help para obter assistência.',
+                            parse_mode: 'HTML',
+                            reply_markup: {
+                                inline_keyboard: [
+                                    [
+                                        { text: "🆘 Ajuda", callback_data: "/help" },
+                                        { text: "ℹ️ Sobre", callback_data: "/about" }
+                                    ],
+                                    [
+                                        { text: "🏠 Início", callback_data: "/home" }
+                                    ]
+                                ]
+                            }
+                        }
+                    }]),
+                    // ru
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: '🚧 Извините, мы не смогли распознать это действие. Пожалуйста, попробуйте еще раз или используйте /help для получения помощи.',
+                            parse_mode: 'HTML',
+                            reply_markup: {
+                                inline_keyboard: [
+                                    [
+                                        { text: "🆘 Помощь", callback_data: "/help" },
+                                        { text: "ℹ️ О нас", callback_data: "/about" }
+                                    ],
+                                    [
+                                        { text: "🏠 Главная", callback_data: "/home" }
+                                    ]
+                                ]
+                            }
+                        }
+                    }]),
+                    // zh
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: '🚧 抱歉，我们无法识别此操作。请重试或使用 /help 获取帮助。',
+                            parse_mode: 'HTML',
+                            reply_markup: {
+                                inline_keyboard: [
+                                    [
+                                        { text: "🆘 帮助", callback_data: "/help" },
+                                        { text: "ℹ️ 关于", callback_data: "/about" }
+                                    ],
+                                    [
+                                        { text: "🏠 首页", callback_data: "/home" }
+                                    ]
+                                ]
+                            }
+                        }
+                    }]),
+                    // ja
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: '🚧 申し訳ありませんが、このアクションを認識できませんでした。もう一度お試しいただくか、/help を使用してサポートを受けてください。',
+                            parse_mode: 'HTML',
+                            reply_markup: {
+                                inline_keyboard: [
+                                    [
+                                        { text: "🆘 ヘルプ", callback_data: "/help" },
+                                        { text: "ℹ️ 私たちについて", callback_data: "/about" }
+                                    ],
+                                    [
+                                        { text: "🏠 ホーム", callback_data: "/home" }
+                                    ]
+                                ]
+                            }
+                        }
+                    }]),
+                    // ko
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: '🚧 죄송합니다. 이 작업을 인식할 수 없습니다. 다시 시도하거나 /help를 사용하여 도움을 받으십시오.',
+                            parse_mode: 'HTML',
+                            reply_markup: {
+                                inline_keyboard: [
+                                    [
+                                        { text: "🆘 도움", callback_data: "/help" },
+                                        { text: "ℹ️ 정보", callback_data: "/about" }
+                                    ],
+                                    [
+                                        { text: "🏠 홈", callback_data: "/home" }
+                                    ]
+                                ]
+                            }
+                        }
+                    }]),
+                    // he
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: '🚧 סליחה, לא הצלחנו לזהות את הפעולה הזו. אנא נסה שוב או השתמש ב-/help לקבלת עזרה.',
+                            parse_mode: 'HTML',
+                            reply_markup: {
+                                inline_keyboard: [
+                                    [
+                                        { text: "🆘 עזרה", callback_data: "/help" },
+                                        { text: "ℹ️ עלינו", callback_data: "/about" }
+                                    ],
+                                    [
+                                        { text: "🏠 בית", callback_data: "/home" }
+                                    ]
+                                ]
+                            }
+                        }
+                    }]),
+                ],
                 ["/start",
                     // default (en)
                     JSON.stringify([{
                         method: 'sendMessage',
                         payload: {
-                            text: 'Hello ‼️' + '\n\n'
-                                + '<b>Welcome to <b>Bot Machine</b>! 🤖' + '\n\n'
-                                + 'By selecting "Accept All", you agree to our:\n\n'
-                                + '<a href="https://example.com/terms">Terms of Service</a> and <a href="https://example.com/privacy">Privacy Policy</a>.' + '\n'
-
-                                + '\n',
+                            text: '🐣/> Hi..' + '\n\n'
+                                + '<blockquote expandable>About me: I\'m a <b>Bot Hub</b> 🐣\n\n'
+                                + 'I\'m a <b>Bot Hub</b> 🐣\n\n'
+                                + 'I can help you explore various features and functionalities of Telegram bots.\n\n'
+                                + 'You can use me to learn about sending messages, photos, media groups, and more!\n\n'
+                                + 'Just let me know what you want to do!' + '\n\n'
+                                + '</blockquote>'
+                                + 'Click the "🐣 Accept" in the "inline keyboard" below to get started.' + '\n',
                             parse_mode: 'HTML',
                             reply_markup: {
                                 inline_keyboard: [
                                     [
-                                        { text: "Accept All", callback_data: "/home" }
+                                        { text: "🐣 Accept", callback_data: "/home" }
                                     ]
                                 ]
                             }
                         }
-                    }])],
+                    }]),
+                    // es
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: '🐣/> Hola..' + '\n\n'
+                                + '<blockquote expandable>Sobre mí: Soy un <b>Bot Hub</b> 🐣\n\n'
+                                + 'Soy un <b>Bot Hub</b> 🐣\n\n'
+                                + 'Puedo ayudarte a explorar varias funciones y características de los bots de Telegram.\n\n'
+                                + 'Puedes usarme para aprender sobre el envío de mensajes, fotos, grupos de medios y más!\n\n'
+                                + 'Solo házmelo saber lo que quieres hacer!' + '\n\n'
+                                + '</blockquote>'
+                                + 'Haz clic en "🐣 Aceptar" en el "teclado en línea" a continuación para comenzar.' + '\n',
+                            parse_mode: 'HTML',
+                            reply_markup: {
+                                inline_keyboard: [
+                                    [
+                                        { text: "🐣 Aceptar", callback_data: "/home" }
+                                    ]
+                                ]
+                            }
+                        }
+                    }]),
+                    // es
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: '🐣/> Hola..' + '\n\n'
+                                + '<blockquote expandable>Sobre mí: Soy un <b>Bot Hub</b> 🐣\n\n'
+                                + 'Soy un <b>Bot Hub</b> 🐣\n\n'
+                                + 'Puedo ayudarte a explorar varias funciones y características de los bots de Telegram.\n\n'
+                                + 'Puedes usarme para aprender sobre el envío de mensajes, fotos, grupos de medios y más!\n\n'
+                                + 'Solo házmelo saber lo que quieres hacer!' + '\n\n'
+                                + '</blockquote>'
+                                + 'Haz clic en "🐣 Aceptar" en el "teclado en línea" a continuación para comenzar.' + '\n',
+                            parse_mode: 'HTML',
+                            reply_markup: {
+                                inline_keyboard: [
+                                    [
+                                        { text: "🐣 Aceptar", callback_data: "/home" }
+                                    ]
+                                ]
+                            }
+                        }
+                    }]),
+                    // fr
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: '🐣/> Bonjour..' + '\n\n'
+                                + '<blockquote expandable>À propos de moi: Je suis un <b>Bot Hub</b> 🐣\n\n'
+                                + 'Je suis un <b>Bot Hub</b> 🐣\n\n'
+                                + 'Je peux vous aider à explorer diverses fonctionnalités et caractéristiques des bots Telegram.\n\n'
+                                + 'Vous pouvez m\'utiliser pour en savoir plus sur l\'envoi de messages, de photos, de groupes de médias, et plus encore!\n\n'
+                                + 'Faites-moi savoir ce que vous voulez faire!' + '\n\n'
+                                + '</blockquote>'
+                                + 'Cliquez sur "🐣 Accepter" dans le "clavier en ligne" ci-dessous pour commencer.' + '\n',
+                            parse_mode: 'HTML',
+                            reply_markup: {
+                                inline_keyboard: [
+                                    [
+                                        { text: "🐣 Accepter", callback_data: "/home" }
+                                    ]
+                                ]
+                            }
+                        }
+                    }]),
+                    // ar
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: '🐣/> مرحبا..' + '\n\n'
+                                + '<blockquote expandable>معلومات عني: أنا <b>بوت هاب</b> 🐣\n\n'
+                                + 'أنا <b>بوت هاب</b> 🐣\n\n'
+                                + 'يمكنني مساعدتك في استكشاف ميزات ووظائف مختلفة لروبوتات تيليجرام.\n\n'
+                                + 'يمكنك استخدامي لمعرفة المزيد عن إرسال الرسائل والصور ومجموعات الوسائط والمزيد!\n\n'
+                                + 'فقط أخبرني بما تريد القيام به!' + '\n\n'
+                                + '</blockquote>'
+                                + 'انقر على "🐣 قبول" في "لوحة المفاتيح المدمجة" أدناه للبدء.' + '\n',
+                            parse_mode: 'HTML',
+                            reply_markup: {
+                                inline_keyboard: [
+                                    [
+                                        { text: "🐣 قبول", callback_data: "/home" }
+                                    ]
+                                ]
+                            }
+                        }
+                    }]),
+                    // de
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: '🐣/> Hallo..' + '\n\n'
+                                + '<blockquote expandable>Über mich: Ich bin ein <b>Bot Hub</b> 🐣\n\n'
+                                + 'Ich bin ein <b>Bot Hub</b> 🐣\n\n'
+                                + 'Ich kann Ihnen helfen, verschiedene Funktionen und Merkmale von Telegram-Bots zu erkunden.\n\n'
+                                + 'Sie können mich verwenden, um mehr über das Senden von Nachrichten, Fotos, Mediengruppen und mehr zu erfahren!\n\n'
+                                + 'Lassen Sie mich wissen, was Sie tun möchten!' + '\n\n'
+                                + '</blockquote>'
+                                + 'Klicken Sie auf "🐣 Akzeptieren" in der untenstehenden "Inline-Tastatur", um zu beginnen.' + '\n',
+                            parse_mode: 'HTML',
+                            reply_markup: {
+                                inline_keyboard: [
+                                    [
+                                        { text: "🐣 Akzeptieren", callback_data: "/home" }
+                                    ]
+                                ]
+                            }
+                        }
+                    }]),
+                    // it
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: '🐣/> Ciao..' + '\n\n'
+                                + '<blockquote expandable>Informazioni su di me: Sono un <b>Bot Hub</b> 🐣\n\n'
+                                + 'Sono un <b>Bot Hub</b> 🐣\n\n'
+                                + 'Posso aiutarti a esplorare diverse funzionalità e caratteristiche dei bot di Telegram.\n\n'
+                                + 'Puoi usarmi per saperne di più sull\'invio di messaggi, foto, gruppi multimediali e altro ancora!\n\n'
+                                + 'Fammi sapere cosa vuoi fare!' + '\n\n'
+                                + '</blockquote>'
+                                + 'Fai clic su "🐣 Accetta" nella "tastiera inline" qui sotto per iniziare.' + '\n',
+                            parse_mode: 'HTML',
+                            reply_markup: {
+                                inline_keyboard: [
+                                    [
+                                        { text: "🐣 Accetta", callback_data: "/home" }
+                                    ]
+                                ]
+                            }
+                        }
+                    }]),
+                    // pt
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: '🐣/> Olá..' + '\n\n'
+                                + '<blockquote expandable>Sobre mim: Eu sou um <b>Bot Hub</b> 🐣\n\n'
+                                + 'Eu sou um <b>Bot Hub</b> 🐣\n\n'
+                                + 'Posso ajudá-lo a explorar várias funcionalidades e recursos dos bots do Telegram.\n\n'
+                                + 'Você pode me usar para saber mais sobre o envio de mensagens, fotos, grupos de mídia e muito mais!\n\n'
+                                + 'Deixe-me saber o que você gostaria de fazer!' + '\n\n'
+                                + '</blockquote>'
+                                + 'Clique em "🐣 Aceitar" no "teclado inline" abaixo para começar.' + '\n',
+                            parse_mode: 'HTML',
+                            reply_markup: {
+                                inline_keyboard: [
+                                    [
+                                        { text: "🐣 Aceitar", callback_data: "/home" }
+                                    ]
+                                ]
+                            }
+                        }
+                    }]),
+                    // ru
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: '🐣/> Привет..' + '\n\n'
+                                + '<blockquote expandable>Информация обо мне: Я <b>Bot Hub</b> 🐣\n\n'
+                                + 'Я <b>Bot Hub</b> 🐣\n\n'
+                                + 'Я могу помочь вам исследовать различные функции и возможности ботов Telegram.\n\n'
+                                + 'Вы можете использовать меня, чтобы узнать больше о отправке сообщений, фотографий, медиа-группах и многом другом!\n\n'
+                                + 'Дайте мне знать, что вы хотите сделать!' + '\n\n'
+                                + '</blockquote>'
+                                + 'Нажмите "🐣 Принять" на "инлайн-клавиатуре" ниже, чтобы начать.' + '\n',
+                            parse_mode: 'HTML',
+                            reply_markup: {
+                                inline_keyboard: [
+                                    [
+                                        { text: "🐣 Принять", callback_data: "/home" }
+                                    ]
+                                ]
+                            }
+                        }
+                    }]),
+                    // zh
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: '🐣/> 你好..' + '\n\n'
+                                + '<blockquote expandable>关于我: 我是一个 <b>Bot Hub</b> 🐣\n\n'
+                                + '我是一個 <b>Bot Hub</b> 🐣\n\n'
+                                + '我可以帮助您探索 Telegram 机器人的各种功能和特性。\n\n'
+                                + '您可以使用我来了解有关发送消息、照片、多媒体组等更多信息！\n\n'
+                                + '请告诉我您想做什么！' + '\n\n'
+                                + '</blockquote>'
+                                + '点击下面的 "🐣 接受" 在 "内联键盘" 开始。' + '\n',
+                            parse_mode: 'HTML',
+                            reply_markup: {
+                                inline_keyboard: [
+                                    [
+                                        { text: "🐣 接受", callback_data: "/home" }
+                                    ]
+                                ]
+                            }
+                        }
+                    }]),
+                    // ja
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: '🐣/> こんにちは..' + '\n\n'
+                                + '<blockquote expandable>私について: 私は <b>Bot Hub</b> 🐣 です。\n\n'
+                                + '私は <b>Bot Hub</b> 🐣 です。\n\n'
+                                + '私は Telegram ボットのさまざまな機能や特性を探索するお手伝いができます。\n\n'
+                                + 'メッセージ、写真、メディアグループなどの送信についてもっと知りたい場合は、私を利用できます！\n\n'
+                                + '何をしたいか教えてください！' + '\n\n'
+                                + '</blockquote>'
+                                + '下の "🐣 受け入れる" をクリックして "インラインキーボード" を開始してください。' + '\n',
+                            parse_mode: 'HTML',
+                            reply_markup: {
+                                inline_keyboard: [
+                                    [
+                                        { text: "🐣 受け入れる", callback_data: "/home" }
+                                    ]
+                                ]
+                            }
+                        }
+                    }]),
+                    // ko
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: '🐣/> 안녕하세요..' + '\n\n'
+                                + '<blockquote expandable>저에 대해: 저는 <b>Bot Hub</b> 🐣 입니다.\n\n'
+                                + '저는 <b>Bot Hub</b> 🐣 입니다.\n\n'
+                                + '저는 Telegram 봇의 다양한 기능과 특성을 탐색하는 데 도움을 드릴 수 있습니다.\n\n'
+                                + '메시지, 사진, 미디어 그룹 등을 보내는 방법에 대해 더 알고 싶다면 저를 이용해 보세요!\n\n'
+                                + '무엇을 하고 싶으신지 말씀해 주세요!' + '\n\n'
+                                + '</blockquote>'
+                                + '아래의 "🐣 수락"을 클릭하여 "인라인 키보드"를 시작하세요.' + '\n',
+                            parse_mode: 'HTML',
+                            reply_markup: {
+                                inline_keyboard: [
+                                    [
+                                        { text: "🐣 수락", callback_data: "/home" }
+                                    ]
+                                ]
+                            }
+                        }
+                    }]),
+                    // he
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: '🐣/> שלום..' + '\n\n'
+                                + '<blockquote expandable>עליי: אני <b>Bot Hub</b> 🐣 .\n\n'
+                                + 'אני <b>Bot Hub</b> 🐣 .\n\n'
+                                + 'אני יכול לעזור לך לחקור את התכונות והמאפיינים השונים של בוט טלגרם.\n\n'
+                                + 'אם אתה רוצה לדעת יותר על שליחת הודעות, תמונות, קבוצות מדיה וכו\', אתה יכול להשתמש בי!\n\n'
+                                + 'מה תרצה לעשות?' + '\n\n'
+                                + '</blockquote>'
+                                + 'לחץ על "🐣 קבל" למטה כדי להתחיל את "מקלדת אינליין".' + '\n',
+                            parse_mode: 'HTML',
+                            reply_markup: {
+                                inline_keyboard: [
+                                    [
+                                        { text: "🐣 קבל", callback_data: "/home" }
+                                    ]
+                                ]
+                            }
+                        }
+                    }]),
+                ],
                 ['/home',
                     // default (en)
                     JSON.stringify([{
                         method: 'sendPhoto',
                         payload: {
-                            caption: 'Welcome to Bot Machine! \n\n'
-                                + '<blockquote expandable>Sample Expandable Block: \n'
-                                + 'This is a simple bot that demonstrates the basic functionality of a Telegram bot.'
-                                + 'It provides the following commands:\n\n'
+                            caption: 'Welcome.\n\n'
+                                + 'I am a simple Telegram bot that showcases various features and functionalities.\n\n'
+                                + 'Click the "inline keyboard" buttons below to explore more options.\n\n'
+                                + 'Feel free to interact with me and discover what I can do!\n\n'
+                                + 'I hope you enjoy your experience! 😊\n\n'
+                                + '<blockquote expandable>Get Started: \n'
+                                + 'To get started, you can use the following commands:\n'
+                                + '1. /help - Get help on using the bot.\n'
+                                + '2. /about - Learn more about this bot.\n\n'
+                                + '</blockquote>'
+                                + '<blockquote expandable>Features: \n'
+                                + 'This bot can help you with the following:\n'
+                                + '1. Sending messages\n'
+                                + '2. Sharing photos and media\n'
+                                + '3. Creating groups and channels\n'
+                                + '4. Managing your account settings\n\n'
+                                + '</blockquote>'
+                                + '<blockquote expandable>Support: \n'
+                                + 'If you need assistance, feel free to reach out!\n'
+                                + 'You can use the /help command for guidance or to report any issues.\n\n'
+                                + '</blockquote>'
+                                + '<blockquote expandable>Feedback: \n'
+                                + 'We appreciate your feedback to improve this bot.\n'
+                                + 'Please let us know your thoughts!\n\n'
                                 + '</blockquote>',
                             photo: "https://www.gstatic.com/webp/gallery/1.jpg",
                             parse_mode: 'HTML',
                             reply_markup: {
                                 inline_keyboard: [
-                                    [{ text: "YouTube™", web_app: { url: "https://www.youtube.com" } }],
-                                    [{ text: "Send Message", callback_data: "sendMessage" }],
-                                    [{ text: "Send Photo", callback_data: "sendPhoto" }],
-                                    [{ text: "Send Media Group", callback_data: "sendMediaGroup" }],
-                                    [{ text: "How Am I?", callback_data: "/howami" }],
-                                    [{ text: "Who Are You?", callback_data: "/whoru" }],
                                     // Two buttons in one row
                                     [
-                                        { text: 'Help', callback_data: "action=help" },
-                                        { text: 'About', callback_data: "action=about" }
+                                        { text: "🌐 Web App", web_app: { url: "https://example.com" } },
+                                        { text: "🌟 Mini App", web_app: { url: "https://example.com/mini" } }
                                     ],
-                                    [{ text: "Keypad Samples", callback_data: "keypadSamples" }]
+                                    [
+                                        { text: "🛍️ Mini Store", callback_data: "messageSamples" },
+                                        { text: "🐣 H.R Services", callback_data: "messageSamples" },
+                                        { text: "📊 Surveys", callback_data: "messageSamples" },
+                                        { text: "📰 News", callback_data: "messageSamples" }
+                                    ],
+                                    // Two buttons in one row
+                                    [
+                                        { text: "📱 Phone Number Authentication", callback_data: "messageSamples" },
+                                        { text: "🦶 Fingerprint Authentication", callback_data: "messageSamples" }
+                                    ],
+                                    [
+                                        { text: "📍 Share Location", callback_data: "photoSamples" },
+                                        { text: "🆔 [CHAT_ID] User Identity", callback_data: "photoSamples" }
+                                    ],
+                                    [
+                                        { text: "🚕 Call Taxi", callback_data: "action=callTaxi" },
+                                        { text: "🚨 Emergency Services", callback_data: "action=emergencyServices" },
+                                    ],
+                                    [
+                                        { text: "*️⃣ Inline Keyboard", callback_data: "action=inlineKeyboard" },
+                                        { text: "🔑 Inline Keyboard", callback_data: "action=keypadSamples" }
+                                    ],
+                                    [
+                                        { text: '❓ Help', callback_data: "/help" },
+                                        { text: 'ℹ️ About', callback_data: "/about" }
+                                    ]
                                 ]
                             }
                         }
-                    }])],
+                    }]),
+                    // es
+                    JSON.stringify([{}]),
+                    // fr
+                    JSON.stringify([{}]),
+                    // ar
+                    JSON.stringify([{}]),
+                    // de
+                    JSON.stringify([{}]),
+                    // it
+                    JSON.stringify([{}]),
+                    // pt
+                    JSON.stringify([{}]),
+                    // ru
+                    JSON.stringify([{}]),
+                    // zh
+                    JSON.stringify([{}]),
+                    // ja
+                    JSON.stringify([{}]),
+                    // ko
+                    JSON.stringify([{}]),
+                    // he
+                    JSON.stringify([{
+                        method: 'sendPhoto',
+                        payload: {
+                            caption: 'ברוכים הבאים.\n\n'
+                                + 'אני בוט טלגרם פשוט שמציג תכונות ופונקציות שונות.\n\n'
+                                + 'לחץ על כפתורי "מקלדת אינליין" למטה כדי לגלות אפשרויות נוספות.\n\n'
+                                + 'אל תהססו ליצור איתי אינטראקציה ולגלות מה אני יכול לעשות!\n\n'
+                                + 'אני מקווה שתהנו מהחוויה! 😊\n\n'
+                                + '<blockquote expandable>התחל: \n'
+                                + 'כדי להתחיל, אתה יכול להשתמש בפקודות הבאות:\n'
+                                + '1. /help - קבל עזרה בשימוש בבוט.\n'
+                                + '2. /about - למידע נוסף על הבוט הזה.\n\n'
+                                + '</blockquote>'
+                                + '<blockquote expandable>תכונות: \n'
+                                + 'בוט זה יכול לעזור לך עם הדברים הבאים:\n'
+                                + '1. שליחת הודעות\n'
+                                + '2. שיתוף תמונות ומדיה\n'
+                                + '3. יצירת קבוצות וערוצים\n'
+                                + '4. ניהול הגדרות החשבון שלך\n\n'
+                                + '</blockquote>'
+                                + '<blockquote expandable>תמיכה: \n'
+                                + 'אם אתה זקוק לעזרה, אל תהסס לפנות!\n'
+                                + 'אתה יכול להשתמש בפקודת /help לקבלת הדרכה או לדווח על בעיות.\n\n'
+                                + '</blockquote>'
+                                + '<blockquote expandable>משוב: \n'
+                                + 'אנו מעריכים את המשוב שלך כדי לשפר את הבוט הזה.\n'
+                                + 'אנא יידע אותנו את מחשבותיך!\n\n'
+                                + '</blockquote>',
+                            photo: "https://www.gstatic.com/webp/gallery/1.jpg",
+                            parse_mode: 'HTML',
+                            reply_markup: {
+                                inline_keyboard: [
+                                    // Two buttons in one row
+                                    [
+                                        { text: "Getting Started", web_app: { url: "https://github.com/ilanlal/basic-telegram-bot-remastered#readme" } },
+                                        { text: "Report an Issue", web_app: { url: "https://github.com/ilanlal/basic-telegram-bot-remastered/issues" } }
+                                    ],
+                                    [
+                                        { text: "Home", callback_data: "action=home" }
+                                    ]
+                                ]
+                            }
+                        }
+                    }
+                    ])],
+
                 ['/help',
                     // default (en)
                     JSON.stringify([{
-                        method: 'editMessageMedia',
+                        method: 'sendPhoto',
                         payload: {
-                            caption: 'Hi there! How can I help you?',
+                            caption: '<b>Help & Support</b>\n\n' +
+                                'Need assistance? Here are some resources to help you get started:\n\n' +
+                                '1. <b>Getting Started Guide:</b> Learn how to use the bot effectively.\n' +
+                                '2. <b>FAQ:</b> Find answers to common questions.\n' +
+                                '3. <b>Contact Support:</b> Reach out to our support team for personalized help.\n\n' +
+                                '4. <b>Report an Issue:</b> If you encounter any problems, please let us know so we can improve your experience.\n\n' +
+                                'If you need assistance, feel free to reach out!\n\n',
                             parse_mode: 'HTML',
                             media: "https://www.gstatic.com/webp/gallery/2.jpg",
                             reply_markup: {
                                 inline_keyboard: [
-                                    [{ text: "BACK", callback_data: "action=start" }]
+                                    [{ text: "Getting Started", web_app: { url: "https://github.com/ilanlal/basic-telegram-bot-remastered#readme" } }],
+                                    [{ text: "Report an Issue", web_app: { url: "https://github.com/ilanlal/basic-telegram-bot-remastered/issues" } }],
+                                    [{ text: "Home", callback_data: "action=home" }]
                                 ]
                             }
                         }
@@ -588,18 +1225,106 @@ EMD.Automation = {
                 ['/about',
                     // default (en)
                     JSON.stringify([{
-                        method: 'editMessageMedia',
+                        method: 'sendPhoto',
                         payload: {
-                            caption: 'Hi there! I am a simple bot that demonstrates the basic functionality of a Telegram bot.',
+                            caption: ' About This Bot\n\n'
+                                + 'This bot is a demonstration of Telegram Bot API features including sending messages, photos, media groups, and inline keyboards.\n\n'
+                                + 'It is designed to be a simple and easy-to-use bot for users to interact with.\n\n'
+                                + 'Features include:\n\n'
+                                + '1. Sending text messages with HTML formatting.\n'
+                                + '2. Sending photos with captions and inline keyboards.\n'
+                                + '3. Sending media groups (multiple photos) in a single message.\n'
+                                + '4. Interactive inline keyboards for user engagement.\n\n'
+                                + 'Feel free to explore and interact with the bot!',
+                            parse_mode: 'HTML',
                             media: "https://www.gstatic.com/webp/gallery/3.jpg",
                             reply_markup: {
                                 inline_keyboard: [
                                     [{ text: "GitHub", web_app: { url: "https://github.com/ilanlal/basic-telegram-bot-remastered#readme" } }],
-                                    [{ text: "BACK", callback_data: "action=start" }]
+                                    [{ text: "Home", callback_data: "action=start" }]
                                 ]
                             }
                         }
                     }])],
+                ['/lang',
+                    // default (en)
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: 'I\'m a multilingual bot:'
+                                + '\n\nSelect your preferred language / Seleccione su idioma preferido / Sélectionnez votre langue préférée / اختر لغتك المفضلة / Wählen Sie Ihre bevorzugte Sprache / Seleziona la tua lingua preferita / Escolha seu idioma preferido / Выберите предпочитаемый язык / 选择您喜欢的语言 / お好みの言語を選択してください / 선호하는 언어를 선택하세요 / בחר את השפה המועדפת עליך',
+                            parse_mode: 'HTML',
+                            reply_markup: {
+                                inline_keyboard: [
+                                    [
+                                        { text: "English", callback_data: "/lang en" },
+                                        { text: "Español", callback_data: "/lang es" },
+                                        { text: "Français", callback_data: "/lang fr" },
+                                        { text: "العربية", callback_data: "/lang ar" },
+                                        { text: "Deutsch", callback_data: "/lang de" },
+                                        { text: "Italiano", callback_data: "/lang it" },
+                                        { text: "Português", callback_data: "/lang pt" },
+                                        { text: "Русский", callback_data: "/lang ru" },
+                                        { text: "中文", callback_data: "/lang zh" },
+                                        { text: "日本語", callback_data: "/lang ja" },
+                                        { text: "한국어", callback_data: "/lang ko" },
+                                        { text: "עברית", callback_data: "/lang he" }
+                                    ]
+                                ]
+                            }
+                        }
+                    }])],
+                ['emergencyServices',
+                    // default (en)
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: 'Emergency Services:',
+                            parse_mode: 'HTML',
+                            reply_markup: {
+                                inline_keyboard: [
+                                    [{ text: "🚑 Ambulance", callback_data: "emergencyAmbulance" }],
+                                    [{ text: "🚓 Police", callback_data: "emergencyPolice" }],
+                                    [{ text: "🚒 Fire Department", callback_data: "emergencyFire" }]
+                                ]
+                            }
+                        }
+                    }])
+                ],
+                ['privateInvestigatorServices',
+                    // default (en)
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: 'Private Investigator Services:',
+                            parse_mode: 'HTML',
+                            reply_markup: {
+                                inline_keyboard: [
+                                    [{ text: "🕵️‍♂️ Hire a PI", callback_data: "hirePrivateInvestigator" }],
+                                    [{ text: "📋 View Cases", callback_data: "viewPrivateInvestigatorCases" }],
+                                    [{ text: "📞 Contact PI", callback_data: "contactPrivateInvestigator" }]
+                                ]
+                            }
+                        }
+                    }])
+                ],
+                ['customerSupportServices',
+                    // default (en)
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: 'Customer Support Services:',
+                            parse_mode: 'HTML',
+                            reply_markup: {
+                                inline_keyboard: [
+                                    [{ text: "📞 Contact Support", callback_data: "contactSupport" }],
+                                    [{ text: "💬 Live Chat", callback_data: "liveChatSupport" }],
+                                    [{ text: "📚 FAQ", callback_data: "faqSupport" }]
+                                ]
+                            }
+                        }
+                    }])
+                ],
                 ['store',
                     // default (en)
                     JSON.stringify([{
