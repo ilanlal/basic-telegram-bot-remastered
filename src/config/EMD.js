@@ -136,17 +136,17 @@ EMD.BotSetup = {
                         { // Bot Token Variable
                             TextInput: {
                                 label: 'Bot API Token',
-                                fieldName: 'bot_token',
+                                fieldName: 'txt_bot_api_token',
                                 placeholder: 'Enter bot API token',
-                                value: '{bot_token}'
+                                value: '[YOUR_BOT_API_TOKEN]'
                             }
                         },
                         { // Admin Chat ID Variable
                             TextInput: {
                                 label: 'Admin Chat ID',
-                                fieldName: 'admin_chat_id',
+                                fieldName: 'txt_admin_chat_id',
                                 placeholder: 'Enter admin chat ID',
-                                value: '{admin_chat_id}'
+                                value: '[YOUR_ADMIN_CHAT_ID]'
                             }
                         }]
                 },
@@ -158,9 +158,9 @@ EMD.BotSetup = {
                         {   // Deployment ID Variable
                             TextInput: {
                                 label: 'Deployment ID',
-                                fieldName: 'deployment_id',
+                                fieldName: 'txt_deployment_id',
                                 placeholder: 'Enter deployment ID',
-                                value: '{deployment_id}'
+                                value: '[YOUR_DEPLOYMENT_ID]'
                             }
                         }
                     ]
@@ -194,7 +194,7 @@ EMD.BotSetup = {
                 textButton: {
                     text: '💾 Save',
                     onClick: {
-                        functionName: 'EventHandler.Addon.saveSettings',
+                        functionName: 'BotSetupHandler.saveNewBotSetupInfo',
                     }
                 }
             }
@@ -234,37 +234,64 @@ EMD.BotSetup = {
                 'מה הבוט יכול לעשות? צא למסע עם הבוט הזה, חקור את התכונות שלו!'],
             // Description of the bot; 0-512 characters. Pass an empty string to remove the dedicated description for the given language.
             ['description', '💡: 0-512 characters. Pass an empty string to remove for the given language.',
-                'Store, Knowledge Base, and more - all in one bot platform.',
-                'Este bot demuestra funcionalidad básica.',
-                'Ce bot démontre une fonctionnalité de base.',
-                'هذا البوت يوضح الوظائف الأساسية.',
-                'Dieser Bot demonstriert grundlegende Funktionen.',
-                'Questo bot dimostra la funzionalità di base.',
-                'Este bot demonstra funcionalidade básica.',
-                'Этот бот демонстрирует базовый функционал.',
-                '该机器人演示了基本功能。',
-                'このボットは基本的な機能を示しています。',
-                '이 봇은 기본 기능을 보여줍니다.',
-                'בוט זה מדגים פונקציונליות בסיסית.']
+                '<b>Telegram Bots</b> are secure and private channels ideal marketing tools within customer relationship management (CRM) systems. \n\n'
+                + 'Promote your goods and services, send notifications, conduct surveys, and much more!\n\n'
+                + 'Group your customers, create targeted communication channels, and engage with your audience like never before!\n\n',
+                '<b>Los bots de Telegram</b> son canales seguros y privados, herramientas de marketing ideales dentro de los sistemas de gestión de relaciones con los clientes (CRM). \n\n'
+                + 'Promociona tus productos y servicios, envía notificaciones, realiza encuestas y mucho más.\n\n'
+                + 'Agrupa a tus clientes, crea canales de comunicación segmentados y conecta con tu audiencia como nunca antes.\n\n',
+                '<b>Les bots Telegram</b> sont des canaux sécurisés et privés, des outils de marketing idéaux au sein des systèmes de gestion de la relation client (CRM). \n\n'
+                + 'Faites la promotion de vos biens et services, envoyez des notifications, réalisez des sondages, et bien plus encore !\n\n'
+                + 'Regroupez vos clients, créez des canaux de communication ciblés, et engagez-vous avec votre audience comme jamais auparavant !\n\n',
+                '<b>روبوتات تيليجرام</b> هي قنوات آمنة وخاصة، وأدوات تسويقية مثالية ضمن أنظمة إدارة علاقات العملاء (CRM). \n\n'
+                + 'قم بالترويج لمنتجاتك وخدماتك، وأرسل الإشعارات، وأجرِ الاستطلاعات، وأكثر من ذلك بكثير!\n\n'
+                + 'قم بتجميع عملائك، وأنشئ قنوات اتصال مستهدفة، وتفاعل مع جمهورك كما لم يحدث من قبل!\n\n',
+                '<b>Telegram-Bots</b> sind sichere und private Kanäle, ideale Marketing-Tools innerhalb von Customer-Relationship-Management-(CRM)-Systemen. \n\n'
+                + 'Bewerben Sie Ihre Waren und Dienstleistungen, senden Sie Benachrichtigungen, führen Sie Umfragen durch und vieles mehr!\n\n'
+                + 'Gruppieren Sie Ihre Kunden, erstellen Sie gezielte Kommunikationskanäle und interagieren Sie wie nie zuvor mit Ihrem Publikum!\n\n',
+                '<b>I bot di Telegram</b> sono canali sicuri e privati, strumenti di marketing ideali all\'interno dei sistemi di gestione delle relazioni con i clienti (CRM). \n\n'
+                + 'Promuovi i tuoi beni e servizi, invia notifiche, conduci sondaggi e molto altro!\n\n'
+                + 'Raggruppa i tuoi clienti, crea canali di comunicazione mirati e interagisci con il tuo pubblico come mai prima d\'ora!\n\n',
+                '<b>Os bots do Telegram</b> são canais seguros e privados, ferramentas de marketing ideais dentro dos sistemas de gestão de relacionamento com o cliente (CRM). \n\n'
+                + 'Promova seus bens e serviços, envie notificações, realize pesquisas e muito mais!\n\n'
+                + 'Agrupe seus clientes, crie canais de comunicação direcionados e interaja com seu público como nunca antes!\n\n',
+                '<b>Телеграм-боты</b> — это безопасные и приватные каналы, идеальные маркетинговые инструменты в системах управления взаимоотношениями с клиентами (CRM). \n\n'
+                + 'Продвигайте свои товары и услуги, отправляйте уведомления, проводите опросы и многое другое!\n\n'
+                + 'Группируйте своих клиентов, создавайте целевые каналы связи и взаимодействуйте с вашей аудиторией как никогда ранее!\n\n',
+                '<b>电报机器人</b> 是安全且私密的频道，是客户关系管理（CRM）系统中理想的营销工具。 \n\n'
+                + '推广您的商品和服务，发送通知，进行调查，等等！\n\n'
+                + '将客户分组，创建针对性的沟通渠道，与受众进行前所未有的互动！\n\n',
+                '<b>テレグラムボット</b> は、安全でプライベートなチャネルであり、顧客関係管理（CRM）システム内で理想的なマーケティングツールです。 \n\n'
+                + '商品やサービスを宣伝し、通知を送信し、アンケートを実施するなど、さまざまなことができます！\n\n'
+                + '顧客をグループ化し、ターゲットを絞ったコミュニケーションチャネルを作成し、かつてない方法でオーディエンスと交流しましょう！\n\n',
+                '<b>텔레그램 봇</b> 은 안전하고 개인적인 채널로, 고객 관계 관리(CRM) 시스템 내에서 이상적인 마케팅 도구입니다. \n\n'
+                + '상품 및 서비스를 홍보하고, 알림을 보내고, 설문 조사를 수행하는 등 다양한 작업을 수행할 수 있습니다!\n\n'
+                + '고객을 그룹화하고, 대상 커뮤니케이션 채널을 만들고, 그 어느 때보다 청중과 소통하세요!\n\n',
+                '<b>בוטים של טלגרם</b> הם ערוצים מאובטחים ופרטיים, כלים שיווקיים אידיאליים בתוך מערכות ניהול קשרי לקוחות (CRM). \n\n'
+                + 'קדם את הסחורות והשירותים שלך, שלח התראות, ערוך סקרים ועוד!\n\n'
+                + 'קבץ את הלקוחות שלך, צור ערוצי תקשורת ממוקדים ואינטראקציה עם הקהל שלך כמו שמעולם לא היה לפני כן!\n\n']
+            ,
             // A JSON-serialized list of bot commands to be set as the list of the bot's commands.
             // At most 100 commands can be specified.
-            ['commands', JSON.stringify(
-                [
-                    {   // '/start' command
-                        // Text of the command; 1-32 characters. Can contain only lowercase English letters, digits and underscores.
-                        command: '/start',
-                        // Description of the command; 1-256 characters.
-                        description: 'Start the bot'
-                    },
-                    {   // '/help' command
-                        command: '/help',
-                        description: 'Get help on using the bot, or report an issue'
-                    },
-                    {   // '/about' command
-                        command: '/about',
-                        description: 'About the bot'
-                    }
-                ])]
+            ['commands', '💡: A JSON-serialized list of bot commands to be set as the list of the bot\'s commands. At most 100 commands can be specified.',
+
+                JSON.stringify(
+                    [
+                        {   // '/start' command
+                            // Text of the command; 1-32 characters. Can contain only lowercase English letters, digits and underscores.
+                            command: '/start',
+                            // Description of the command; 1-256 characters.
+                            description: 'Start the bot'
+                        },
+                        {   // '/help' command
+                            command: '/help',
+                            description: 'Get help on using the bot, or report an issue'
+                        },
+                        {   // '/about' command
+                            command: '/about',
+                            description: 'About the bot'
+                        }
+                    ])]
         ]
     }
 };
