@@ -309,7 +309,7 @@ EMD.BotSetup = {
                             description: 'Admin command for bot management'
                         }
                     ])],
-            ['webhook_url', 
+            ['webhook_url',
                 'https://script.google.com/macros/s/[YOUR_DEPLOYMENT_ID]/exec']
         ]
     }
@@ -1102,15 +1102,21 @@ EMD.Automation = {
                                         { text: "🌟 Mini App", web_app: { url: "https://example.com/mini" } }
                                     ],
                                     [
-                                        { text: "🛍️ Mini Store", callback_data: "messageSamples" },
-                                        { text: "🐣 H.R Services", callback_data: "messageSamples" },
-                                        { text: "📊 Surveys", callback_data: "messageSamples" },
-                                        { text: "📰 News", callback_data: "messageSamples" }
+                                        { text: "🛍️ Mini Store", web_app: { url: "https://example.com/store" } },
+                                        { text: "🐣 H.R Services", web_app: { url: "https://example.com/hr" } }
+                                    ],
+                                    [
+                                        { text: "📊 Surveys", callback_data: "action=surveys" },
+                                        { text: "📰 News", callback_data: "action=news" }
+                                    ],
+                                    [
+                                        { text: "🚦 Safety Check List", callback_data: "action=safetyChecklist" },
+                                        { text: "🛠️ Maintenance Request", callback_data: "action=maintenanceRequest" }
                                     ],
                                     // Two buttons in one row
                                     [
-                                        { text: "📱 Phone Number Authentication", callback_data: "messageSamples" },
-                                        { text: "🦶 Fingerprint Authentication", callback_data: "messageSamples" }
+                                        { text: "📱 Phone Number Authentication", callback_data: "action=phoneAuth" },
+                                        { text: "🦶 Fingerprint Authentication", callback_data: "action=fingerprintAuth" }
                                     ],
                                     [
                                         { text: "📍 Share Location", callback_data: "photoSamples" },
@@ -1121,7 +1127,7 @@ EMD.Automation = {
                                         { text: "🚨 Emergency Services", callback_data: "action=emergencyServices" },
                                     ],
                                     [
-                                        { text: "*️⃣ Inline Keyboard", callback_data: "action=inlineKeyboard" },
+                                        { text: "*️⃣ Custom Menu Key", callback_data: "action=refresh" },
                                         { text: "🔑 Inline Keyboard", callback_data: "action=keypadSamples" }
                                     ],
                                     [
@@ -1274,6 +1280,86 @@ EMD.Automation = {
                             }
                         }
                     }])],
+                ['hrServices',
+                    // default (en)
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: 'H.R Services:',
+                            parse_mode: 'HTML',
+                            reply_markup: {
+                                inline_keyboard: [
+                                    [{ text: "👥 Employee Onboarding", callback_data: "employeeOnboarding" }],
+                                    [{ text: "📄 Document Management", callback_data: "documentManagement" }],
+                                    [{ text: "📊 Performance Reviews", callback_data: "performanceReviews" }]
+                                ]
+                            }
+                        }
+                    }])],
+                ['surveys',
+                    // default (en)
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: 'Survey Services:',
+                            parse_mode: 'HTML',
+                            reply_markup: {
+                                inline_keyboard: [
+                                    [{ text: "📊 Create Survey", callback_data: "createSurvey" }],
+                                    [{ text: "📋 View Surveys", callback_data: "viewSurveys" }],
+                                    [{ text: "📈 Survey Analytics", callback_data: "surveyAnalytics" }]
+                                ]
+                            }
+                        }
+                    }])],
+                ['news',
+                    // default (en)
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: 'News Services:',
+                            parse_mode: 'HTML',
+                            reply_markup: {
+                                inline_keyboard: [
+                                    [{ text: "📰 Latest News", callback_data: "latestNews" }],
+                                    [{ text: "🗞️ Trending Topics", callback_data: "trendingTopics" }],
+                                    [{ text: "📅 News Archive", callback_data: "newsArchive" }]
+                                ]
+                            }
+                        }
+                    }])],
+                ['securityServices',
+                    // default (en)
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: 'Security Services:',
+                            parse_mode: 'HTML',
+                            reply_markup: {
+                                inline_keyboard: [
+                                    [{ text: "🔒 Access Control", callback_data: "accessControl" }],
+                                    [{ text: "🛡️ Threat Assessment", callback_data: "threatAssessment" }],
+                                    [{ text: "📊 Security Analytics", callback_data: "securityAnalytics" }]
+                                ]
+                            }
+                        }
+                    }])],
+                ['safetyChecklist',
+                    // default (en)
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: 'Safety Checklist Services:',
+                            parse_mode: 'HTML',
+                            reply_markup: {
+                                inline_keyboard: [
+                                    [{ text: "✅ Daily Safety Check", callback_data: "dailySafetyCheck" }],
+                                    [{ text: "📝 Incident Reporting", callback_data: "incidentReporting" }],
+                                    [{ text: "📊 Safety Analytics", callback_data: "safetyAnalytics" }]
+                                ]
+                            }
+                        }
+                    }])],
                 ['emergencyServices',
                     // default (en)
                     JSON.stringify([{
@@ -1322,6 +1408,16 @@ EMD.Automation = {
                                     [{ text: "📚 FAQ", callback_data: "faqSupport" }]
                                 ]
                             }
+                        }
+                    }])
+                ],
+                ['callTaxi',
+                    // default (en)
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: 'Calling a taxi...',
+                            parse_mode: 'HTML'
                         }
                     }])
                 ],
