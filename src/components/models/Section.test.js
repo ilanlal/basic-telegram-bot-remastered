@@ -37,7 +37,9 @@ describe('Section', () => {
         expect(createdSection.numUncollapsibleWidgets).toBe(section.numUncollapsibleWidgets);
         expect(createdSection.widgets.length).toBe(2);
         expect(createdSection.widgets[0].id).toBe('widget1');
-        console.log(JSON.stringify(createdSection.widgets[0], null, 2));
+        expect(createdSection.widgets[0].value).toBe('value1');
+        expect(createdSection.widgets[1].id).toBe('widget2');
+        expect(createdSection.widgets[1].value).toBe(42);
     });
 
     test('should initialize with partial data', () => {

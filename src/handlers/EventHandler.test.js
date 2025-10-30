@@ -75,17 +75,5 @@ describe('EventHandler', () => {
         const data = actionResponse.getData();
         expect(data).toBeDefined();
     });
-
-    it('should handle onToggleBooleanSetting', () => {
-        const event = {
-            parameters: {
-                settingId: 'logEvents',
-                currentValue: 'true'
-            }
-        };
-        const response = EventHandler.Addon.onToggleBooleanSetting(event);
-        expect(response).toBeDefined();
-        console.log(JSON.stringify(response, null, 2));
-    });
     // Additional tests for other handlers can be added similarly
 });

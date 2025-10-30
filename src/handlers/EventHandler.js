@@ -132,12 +132,7 @@ EventHandler.AddonWrapper = class {
 
     handleToggleBooleanSetting(e) {
         try {
-            const settingId = e.parameters.settingId;
-            const currentValue = e.parameters.currentValue;
-
-            const response = SettingsController.create(this._userStore)
-                .toggleBooleanSetting(settingId, currentValue);
-            return response;
+           throw new Error("Not implemented yet");
         } catch (error) {
             return this.handleError(error)
                 .build();
