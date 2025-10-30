@@ -237,7 +237,7 @@ EntityViewModel.CardServiceWrapper = class {
             .setTopLabel(`${decoratedTextMeta.topLabel}`)
             .setWrapText(decoratedTextMeta.wrapText || false)
             .setText(`${decoratedTextMeta.text}`)
-            .setBottomLabel(`${emojiSets} ${decoratedTextMeta.bottomLabel || ''}`);
+            .setBottomLabel(`${emojiSets} ${decoratedTextMeta.bottomLabel}`);
 
         if (decoratedTextMeta.textButton) {
             decoratedText.setButton(
