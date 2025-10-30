@@ -5,27 +5,43 @@ class Widget {
 
     static tabIndex = 0;
 
-    static create(widgetMeta = {}) {
-        const { id, value = null, tabIndex = Widget.tabIndex++ } = widgetMeta;
+    static create(widgetMeta = {}, userProperties = PropertiesService.getUserProperties()) {
+        const { id, value = null, tabIndex = Widget.tabIndex++, propertyName = null } = widgetMeta;
 
         if (!id) {
             throw new Error(Widget.INVALID_ID_ERROR);
         }
 
-        const widgetInstance = new Widget(id)
+        const widgetInstance = new Widget(id, userProperties)
             .setTabIndex(tabIndex);
 
         if (value) {
             widgetInstance.setValue(value);
         }
 
-        return widgetInstance;
+        if (propertyName) {
+            widgetInstance.setPropertyName(propertyName);
+        }
+
+        return widgetInstance.bindValueFromUserProperty();
     }
 
-    constructor(id) {
+    constructor(id, userProperty) {
         this._id = id;
+        this._userProperty = userProperty;
         this._value = null;
         this._tabIndex = 0;
+        this._propertyName = null;
+    }
+
+    bindValueFromUserProperty() {
+        if (this._propertyName && this._userProperty) {
+            const value = this._userProperty.getProperty(this._propertyName);
+            if (value !== null) {
+                this.setValue(value);
+            }
+        }
+        return this;
     }
 
     /// Setters
@@ -36,6 +52,11 @@ class Widget {
 
     setTabIndex(tabIndex) {
         this._tabIndex = tabIndex;
+        return this;
+    }
+
+    setPropertyName(name) {
+        this._propertyName = name;
         return this;
     }
 
@@ -50,6 +71,10 @@ class Widget {
 
     get tabIndex() {
         return this._tabIndex;
+    }
+
+    get userProperty() {
+        return this._propertyName;
     }
 }
 

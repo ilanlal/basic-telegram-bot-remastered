@@ -197,11 +197,11 @@ EntityViewModel.CardServiceWrapper = class {
     }
 
     newWidget(widgetMeta = {}) {
-        // Bind value from 'bindToUserProperty' property if specified
-        const bindToUserProperty = widgetMeta.bindToUserProperty;
+        // Bind value from 'userProperty' property if specified
+        const userProperty = widgetMeta.userProperty;
         let value = '';
-        if (bindToUserProperty) {
-            value = this._userProperties.getProperty(bindToUserProperty) || '';
+        if (userProperty) {
+            value = this._userProperties.getProperty(userProperty) || '';
         }
 
         if (widgetMeta.DecoratedText) {

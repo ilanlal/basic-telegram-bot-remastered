@@ -1,31 +1,55 @@
+require('../../../tests');
 const { Widget } = require('./Widget');
 
 describe('Widget', () => {
-    test('should initialize with full data', () => {
-        const widget = {
+    test('should initialize with user property value', () => {
+        const propertyName = 'testUserProperty';
+        const storedValue = '00012345';
+        global.PropertiesService.getUserProperties().setProperty(propertyName, storedValue);
+        const widgetObject = {
             id: 'testId',
-            DecoratedText: {
-                text: 'Sample Text',
-                topLabel: 'Top Label',
+            propertyName: propertyName,
+            TextInput: {
+                fieldName: propertyName,
+                title: 'Test Title',
+                hint: 'Test Hint',
+                value: 'Should be overridden'
             },
             value: 'Sample Value'
         };
 
-        const widget1 = Widget.create(widget);
-        expect(widget1.id).toBe(widget.id);
-        expect(widget1.value).toBe(widget.value);
-        expect(widget1.tabIndex).toBe(0);
+        const widgetModel = Widget.create(widgetObject, global.PropertiesService.getUserProperties());
+        expect(widgetModel.id).toBe(widgetObject.id);
+        expect(widgetModel.value).toBe(storedValue);
+        expect(widgetModel.tabIndex).toBe(0);
+    });
+
+    test('should initialize with default values', () => {
+        const widgetObject = {
+            id: 'testId',
+            TextInput: {
+                fieldName: 'testFieldName',
+                title: 'Test Title',
+                hint: 'Test Hint'
+            },
+            value: 'Should not be overridden'
+        };
+
+        const widgetModel = Widget.create(widgetObject, global.PropertiesService.getUserProperties());
+        expect(widgetModel.id).toBe(widgetObject.id);
+        expect(widgetModel.value).toBe('Should not be overridden');
+        expect(widgetModel.tabIndex).toBe(1);
     });
 
     test('should throw error if id is missing', () => {
-        expect(() => Widget.create({ 
+        expect(() => Widget.create({
             // missing id
             DecoratedText: {
                 text: 'Sample Text',
                 topLabel: 'Top Label',
             },
             value: 'Sample Value'
-         }))
+        }))
             .toThrow(Widget.INVALID_ID_ERROR);
     });
 
