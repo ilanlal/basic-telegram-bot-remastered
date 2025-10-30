@@ -196,20 +196,22 @@ EntityViewModel.CardServiceWrapper = class {
     }
 
     newWidget(widgetMeta = {}, dataModel = {}) {
+        const value = dataModel[widgetMeta.fieldName] || dataModel[widgetMeta.id] || '';
+
         if (widgetMeta.DecoratedText) {
-            return this.newDecoratedText(widgetMeta.DecoratedText, dataModel);
+            return this.newDecoratedText(widgetMeta.DecoratedText, value);
         }
 
         if (widgetMeta.TextInput) {
-            return this.newTextInput(widgetMeta.TextInput, dataModel);
+            return this.newTextInput(widgetMeta.TextInput, value);
         }
 
         if (widgetMeta.TextParagraph) {
-            return this.newTextParagraph(widgetMeta.TextParagraph, dataModel);
+            return this.newTextParagraph(widgetMeta.TextParagraph, value);
         }
 
         if (widgetMeta.TextButton) {
-            return this.newTextButton(widgetMeta.TextButton, dataModel);
+            return this.newTextButton(widgetMeta.TextButton, value);
         }
 
 
@@ -217,7 +219,7 @@ EntityViewModel.CardServiceWrapper = class {
         return null;
     }
 
-    newDecoratedText(decoratedTextMeta = {}, dataModel = {}) {
+    newDecoratedText(decoratedTextMeta = {}, value = '') {
         // setText(text) and one of the keys: setTopLabel(text), or setBottomLabel(text) are required
         if (!decoratedTextMeta.text) {
             throw new Error(EntityViewModel.CardServiceWrapper.DECORATED_TEXT_MISSING_CONTENT_ERROR);
@@ -233,13 +235,13 @@ EntityViewModel.CardServiceWrapper = class {
 
         if (decoratedTextMeta.textButton) {
             decoratedText.setButton(
-                this.newTextButton(decoratedTextMeta.textButton, dataModel));
+                this.newTextButton(decoratedTextMeta.textButton, value === 'true'));
         }
 
         return decoratedText;
     }
 
-    newTextInput(inputTextMeta = {}, dataModel = {}) {
+    newTextInput(inputTextMeta = {}, value = '') {
         if (!inputTextMeta.fieldName || String(inputTextMeta.fieldName).trim() === '') {
             throw new Error(EntityViewModel.CardServiceWrapper.TEXT_INPUT_MISSING_FIELD_NAME_ERROR);
         }
@@ -261,14 +263,15 @@ EntityViewModel.CardServiceWrapper = class {
         return _;
     }
 
-    newTextButton(textButtonMeta = {}, dataModel = {}) {
+    newTextButton(textButtonMeta = {}, disabled = false, style = CardService.TextButtonStyle.TEXT) {
         if (!textButtonMeta.text || (!textButtonMeta.openLink && !textButtonMeta.onClick)) {
             throw new Error(EntityViewModel.CardServiceWrapper.TEXT_BUTTON_MISSING_PROPERTIES_ERROR);
         }
 
         const _ = this._cardService.newTextButton()
             .setText(textButtonMeta.text)
-            .setDisabled(!!textButtonMeta.disabled);
+            .setDisabled(!!disabled)
+            .setTextButtonStyle(style);
 
         if (textButtonMeta.openLink) {
             _.setOpenLink(this._cardService.newOpenLink().setUrl(textButtonMeta.openLink.url || ''));

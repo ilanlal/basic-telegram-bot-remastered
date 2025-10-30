@@ -2,6 +2,7 @@ require('../../../tests');
 const { EntityController } = require('./EntityController');
 const { EMD } = require('../../config/EMD');
 const { UserStoreFactory } = require('../../services/UserStore');
+const { SetupFlow } = require('../models/SetupFlow');
 
 describe('Entity Controller', () => {
     test('should create an instance using the static create method', () => {
@@ -9,17 +10,25 @@ describe('Entity Controller', () => {
         expect(entityController).toBeInstanceOf(EntityController);
     });
 
-    // navigateToEntityView
-    test('should call navigateToEntityView on navigation controller', () => {
+    // pushCard
+    test('should push a card to the card service', () => {
         const entityController = EntityController.create(
             UserStoreFactory.create().current,
             CardService,
             SpreadsheetApp.getActiveSpreadsheet()
         );
-        const actionResponseBuilder = entityController.pushCard(EMD.WebhookSetup.cardMeta);
+
+        // Set values from userStore if needed
+        const setupFlow = SetupFlow.create(UserStoreFactory.create().current);
+
+        const actionResponseBuilder = entityController.pushCard(EMD.Home.cardMeta, setupFlow);
         expect(actionResponseBuilder).toBeDefined();
         const builtResponse = actionResponseBuilder.build();
         expect(builtResponse).toBeDefined();
         const data = builtResponse.getData();
+        expect(data).toBeDefined();
+        expect(data.cardNavigations).toBeDefined();
+        expect(data.cardNavigations.length).toBeGreaterThan(0);
+        expect(data.cardNavigations[0].pushCard).toBeDefined();
     });
 });

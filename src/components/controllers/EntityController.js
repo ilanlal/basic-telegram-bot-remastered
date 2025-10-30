@@ -9,16 +9,14 @@ class EntityController {
         this.activeSpreadsheet = activeSpreadsheet;
     }
 
-    pushCard(cardMeta = {}) {
+    pushCard(cardMeta = {}, dataModel = {}) {
         const viewModel = EntityViewModel.create({
             cardService: this.cardService,
             activeSpreadsheet: this.activeSpreadsheet
         });
 
-        // Set values from userStore if needed
-        const setupFlow = SetupFlow.create(this.userStore);
+        const cardBuilder = viewModel.getCardBuilder(cardMeta, dataModel);
 
-        const cardBuilder = viewModel.getCardBuilder(cardMeta, setupFlow);
         return this.cardService.newActionResponseBuilder()
             .setNavigation(
                 this.cardService.newNavigation()
