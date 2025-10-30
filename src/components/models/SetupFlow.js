@@ -6,11 +6,11 @@ class SetupFlow {
 
     get trafficLight() {
         const leds = '{0}{1}{2}{3}{4}';
-        const led0 = this.state.botTokenSet ? SetupFlow.ON_LIGHT : SetupFlow.OFF_LIGHT;
-        const led1 = this.state.deploymentIdSet ? SetupFlow.ON_LIGHT : SetupFlow.OFF_LIGHT;
-        const led2 = this.state.webhookSet ? SetupFlow.ON_LIGHT : SetupFlow.OFF_LIGHT;
-        const led3 = this.state.chatIdSet ? SetupFlow.ON_LIGHT : SetupFlow.OFF_LIGHT;
-        const led4 = this.state.defaultLanguageSet ? SetupFlow.ON_LIGHT : SetupFlow.WARN_LIGHT;
+        const led0 = this.stateObject.botTokenSet ? SetupFlow.ON_LIGHT : SetupFlow.OFF_LIGHT;
+        const led1 = this.stateObject.deploymentIdSet ? SetupFlow.ON_LIGHT : SetupFlow.OFF_LIGHT;
+        const led2 = this.stateObject.webhookSet ? SetupFlow.ON_LIGHT : SetupFlow.OFF_LIGHT;
+        const led3 = this.stateObject.chatIdSet ? SetupFlow.ON_LIGHT : SetupFlow.OFF_LIGHT;
+        const led4 = this.stateObject.defaultLanguageSet ? SetupFlow.ON_LIGHT : SetupFlow.WARN_LIGHT;
 
         return leds
             .replace('{0}', led0)
@@ -21,14 +21,23 @@ class SetupFlow {
     }
 
     get isActive() {
-        return this.state.botTokenSet &&
-            this.state.deploymentIdSet &&
-            this.state.webhookSet &&
-            this.state.chatIdSet &&
-            this.state.defaultLanguageSet;
+        return this.stateObject.botTokenSet &&
+            this.stateObject.deploymentIdSet &&
+            this.stateObject.webhookSet &&
+            this.stateObject.chatIdSet &&
+            this.stateObject.defaultLanguageSet;
+    }
+    get state() {
+        return [
+            { name: 'botToken', value: this.stateObject.botToken, isSet: this.stateObject.botTokenSet },
+            { name: 'deploymentId', value: this.stateObject.deploymentId, isSet: this.stateObject.deploymentIdSet },
+            { name: 'webhookUrl', value: this.stateObject.webhookUrl, isSet: this.stateObject.webhookSet },
+            { name: 'chatId', value: this.stateObject.chatId, isSet: this.stateObject.chatIdSet },
+            { name: 'defaultLanguage', value: this.stateObject.defaultLanguage, isSet: this.stateObject.defaultLanguageSet },
+        ];
     }
 
-    get state() {
+    get stateObject() {
         return {
             botToken: this._userStore.getBotToken(),
             botTokenSet: !!this._userStore.getBotToken(),

@@ -20,7 +20,7 @@ describe('SetupFlow', () => {
     test('should set a new default language', () => {
         const newLanguageCode = 'es';
         model.setNewDefaultLanguage(newLanguageCode);
-        expect(model.state.defaultLanguage).toBe(newLanguageCode);
+        expect(model.stateObject.defaultLanguage).toBe(newLanguageCode);
     });
     
     // setNewBotToken
@@ -43,21 +43,21 @@ describe('SetupFlow', () => {
             .return(new HttpResponse().setContentText(`{"ok":true,"result":{}}`));
 
         model.setNewBotToken(newToken);
-        expect(model.state.botToken).toBe(newToken);
+        expect(model.stateObject.botToken).toBe(newToken);
     });
 
     // setNewChatId
     test('should set a new chat id', () => {
         const newChatId = 123456789;
         model.setMyNewChatId(newChatId);
-        expect(model.state.chatId).toBe(newChatId);
+        expect(model.stateObject.chatId).toBe(newChatId);
     });
 
     // setNewDeploymentId
     test('should set a new deployment id', () => {
         const newDeploymentId = 'new_deployment_id';
         model.setNewDeploymentId(newDeploymentId);
-        expect(model.state.deploymentId).toBe(newDeploymentId);
+        expect(model.stateObject.deploymentId).toBe(newDeploymentId);
     });
 
 });
