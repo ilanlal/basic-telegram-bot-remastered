@@ -17,7 +17,8 @@ class EntityController {
 
         // Set values from userStore if needed
         const setupFlow = SetupFlow.create(this.userStore);
-        const cardBuilder = viewModel.getCardBuilder(cardMeta);
+
+        const cardBuilder = viewModel.getCardBuilder(cardMeta, setupFlow);
         return this.cardService.newActionResponseBuilder()
             .setNavigation(
                 this.cardService.newNavigation()

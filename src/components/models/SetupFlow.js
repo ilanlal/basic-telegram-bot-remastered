@@ -1,4 +1,33 @@
 class SetupFlow {
+    static ON_LIGHT = '🟢';
+    static OFF_LIGHT = '🔘';
+    static WARN_LIGHT = '🟡';
+    static ERROR_LIGHT = '🔴';
+
+    get trafficLight() {
+        const leds = '{0}{1}{2}{3}{4}';
+        const led0 = this.state.botTokenSet ? SetupFlow.ON_LIGHT : SetupFlow.OFF_LIGHT;
+        const led1 = this.state.deploymentIdSet ? SetupFlow.ON_LIGHT : SetupFlow.OFF_LIGHT;
+        const led2 = this.state.webhookSet ? SetupFlow.ON_LIGHT : SetupFlow.OFF_LIGHT;
+        const led3 = this.state.chatIdSet ? SetupFlow.ON_LIGHT : SetupFlow.OFF_LIGHT;
+        const led4 = this.state.defaultLanguageSet ? SetupFlow.ON_LIGHT : SetupFlow.WARN_LIGHT;
+
+        return leds
+            .replace('{0}', led0)
+            .replace('{1}', led1)
+            .replace('{2}', led2)
+            .replace('{3}', led3)
+            .replace('{4}', led4);
+    }
+
+    get isActive() {
+        return this.state.botTokenSet &&
+            this.state.deploymentIdSet &&
+            this.state.webhookSet &&
+            this.state.chatIdSet &&
+            this.state.defaultLanguageSet;
+    }
+
     get state() {
         return {
             botToken: this._userStore.getBotToken(),

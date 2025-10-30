@@ -30,7 +30,7 @@ describe('EntityViewModel', () => {
                 it(`should create a card from the "${emd.entityName}" cardMeta`, () => {
                     if(!emd.cardMeta) return;
                     const cardMeta = emd.cardMeta;
-                    const card = viewModel.getCardBuilder(cardMeta);
+                    const card = viewModel.getCardBuilder(cardMeta, { isActive: true });
                     expect(card).toBeDefined();
                     const builtCard = card.build();
                     const data = builtCard.getData();
@@ -38,7 +38,7 @@ describe('EntityViewModel', () => {
                     expect(data.name).toBe(cardMeta.name);
                     expect(data.header).toBeDefined();
                     expect(data.header.title).toBe(cardMeta.header.title);
-                    expect(data.header.subTitle).toBe(cardMeta.header.subTitle);
+                    expect(data.header.subTitle).toBe(`${cardMeta.header.subTitle} [active:${true}]`);
                     expect(data.header.imageUrl).toBe(cardMeta.header.imageUrl);
                     expect(data.header.imageStyle).toBe(cardMeta.header.imageStyle);
                     expect(data.header.imageAltText).toBe(cardMeta.header.imageAltText);

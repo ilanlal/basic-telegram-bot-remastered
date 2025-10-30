@@ -153,12 +153,12 @@ describe('Model.CardWrapper', () => {
                     imageStyle: CardService.ImageStyle.SQUARE,
                     imageAltText: 'Test Card Image'
                 };
-                const header = wrapper.newCardHeader(headerMeta);
+                const header = wrapper.newCardHeader(headerMeta, { isActive: true });
                 expect(header).toBeDefined();
                 const data = header.getData();
                 expect(data).toBeDefined();
                 expect(data.title).toBe(headerMeta.title);
-                expect(data.subTitle).toBe(headerMeta.subTitle);
+                expect(data.subTitle).toBe(`${headerMeta.subTitle} [active:${true}]`);
                 expect(data.imageUrl).toBe(headerMeta.imageUrl);
                 expect(data.imageStyle).toBe(headerMeta.imageStyle);
                 expect(data.imageAltText).toBe(headerMeta.imageAltText);

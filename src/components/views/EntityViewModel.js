@@ -152,7 +152,7 @@ EntityViewModel.CardServiceWrapper = class {
     newCardHeader(headerMeta = {}, dataModel = {}) {
         return this._cardService.newCardHeader()
             .setTitle(`${headerMeta.title || ''}`)
-            .setSubtitle(headerMeta.subTitle || '')
+            .setSubtitle(`${headerMeta.subTitle || ''} [active:${dataModel.isActive || ''}]`)
             .setImageStyle(headerMeta.imageStyle || CardService.ImageStyle.SQUARE)
             .setImageUrl(headerMeta.imageUrl || EntityViewModel.DEFAULT_IMAGE_URL)
             .setImageAltText(headerMeta.imageAltText || 'Card Image');
