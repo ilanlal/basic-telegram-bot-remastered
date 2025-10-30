@@ -110,13 +110,14 @@ EntityViewModel.CardServiceWrapper = class {
     static TEXT_INPUT_MISSING_FIELD_NAME_ERROR = "TextInput widget must have a 'fieldName' property.";
     static DECORATED_TEXT_MISSING_CONTENT_ERROR = "DecoratedText widget must have at least one of 'text', 'decoratedText', 'topLabel', or 'bottomLabel' properties defined.";
     static TEXT_BUTTON_MISSING_PROPERTIES_ERROR = "TextButton widget must have either 'text', and 'openLink' or 'onClick' defined.";
-    static create(cardService = CardService) {
-        return new EntityViewModel.CardServiceWrapper(cardService);
+    static create(cardService = CardService, userProperties = PropertiesService.getUserProperties()) {
+        return new EntityViewModel.CardServiceWrapper(cardService, userProperties);
     }
 
-    constructor(cardService) {
+    constructor(cardService, userProperties) {
         // Use the global CardService in Apps Script environment
         this._cardService = cardService;
+        this._userProperties = userProperties;
     }
 
     newCardBuilder(cardMeta = {}, dataModel = {}) {
@@ -185,7 +186,7 @@ EntityViewModel.CardServiceWrapper = class {
 
         if (sectionMeta.widgets && Array.isArray(sectionMeta.widgets)) {
             sectionMeta.widgets.forEach(widgetMeta => {
-                const cardWidget = this.newWidget(widgetMeta, dataModel);
+                const cardWidget = this.newWidget(widgetMeta);
                 if (cardWidget) {
                     cardSection.addWidget(cardWidget);
                 }
@@ -195,8 +196,13 @@ EntityViewModel.CardServiceWrapper = class {
         return cardSection;
     }
 
-    newWidget(widgetMeta = {}, dataModel = {}) {
-        const value = dataModel[widgetMeta.fieldName] || dataModel[widgetMeta.id] || '';
+    newWidget(widgetMeta = {}) {
+        // Bind value from 'bindToUserProperty' property if specified
+        const bindToUserProperty = widgetMeta.bindToUserProperty;
+        let value = '';
+        if (bindToUserProperty) {
+            value = this._userProperties.getProperty(bindToUserProperty) || '';
+        }
 
         if (widgetMeta.DecoratedText) {
             return this.newDecoratedText(widgetMeta.DecoratedText, value);
