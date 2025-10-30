@@ -254,9 +254,9 @@ EntityViewModel.CardServiceWrapper = class {
             .setMultiline(inputTextMeta.multiline || false);
     }
 
-    newTextParagraph(textParagraphMeta = {}) {
+    newTextParagraph(textParagraphMeta = {}, value = '') {
         const _ = CardService.newTextParagraph()
-            .setText(textParagraphMeta.text || '');
+            .setText(textParagraphMeta.text || value || '');
         if (_.setMaxLines) {
             _.setMaxLines(textParagraphMeta.maxLines || EntityViewModel.CardServiceWrapper.DEFAULT_PARAGRAPH_LINE_LIMIT);
         }
@@ -271,7 +271,7 @@ EntityViewModel.CardServiceWrapper = class {
         const _ = this._cardService.newTextButton()
             .setText(textButtonMeta.text)
             .setDisabled(!!disabled)
-            .setTextButtonStyle(style);
+            .setTextButtonStyle(textButtonMeta.style || style);
 
         if (textButtonMeta.openLink) {
             _.setOpenLink(this._cardService.newOpenLink().setUrl(textButtonMeta.openLink.url || ''));
