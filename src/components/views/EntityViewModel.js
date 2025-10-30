@@ -1,4 +1,8 @@
 class EntityViewModel {
+    static ON_LIGHT = '🟢';
+    static OFF_LIGHT = '🔘';
+    static WARN_LIGHT = '🟡';
+    static ERROR_LIGHT = '🔴';
     static INVALID_MODEL_ERROR = "Invalid data model provided to ViewModel.create(meta.name), missing meta.name property.";
     static DEFAULT_IMAGE_URL = 'https://raw.githubusercontent.com/ilanlal/basic-telegram-bot-remastered/refs/heads/vnext/assets/logo128.png';
     static create({ cardService = CardService, activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet() } = {}) {
@@ -221,7 +225,7 @@ EntityViewModel.CardServiceWrapper = class {
         return null;
     }
 
-    newDecoratedText(decoratedTextMeta = {}, value = '', emojiSets = '') {
+    newDecoratedText(decoratedTextMeta = {}, value = '', emojiSets = EntityViewModel.OFF_LIGHT) {
         // setText(text) and one of the keys: setTopLabel(text), or setBottomLabel(text) are required
         if (!decoratedTextMeta.text) {
             throw new Error(EntityViewModel.CardServiceWrapper.DECORATED_TEXT_MISSING_CONTENT_ERROR);
@@ -230,7 +234,7 @@ EntityViewModel.CardServiceWrapper = class {
             throw new Error(EntityViewModel.CardServiceWrapper.DECORATED_TEXT_MISSING_CONTENT_ERROR);
         }
         const decoratedText = this._cardService.newDecoratedText()
-            .setTopLabel(`${emojiSets} ${decoratedTextMeta.topLabel}`)
+            .setTopLabel(`${decoratedTextMeta.topLabel}`)
             .setWrapText(decoratedTextMeta.wrapText || false)
             .setText(`${decoratedTextMeta.text}`)
             .setBottomLabel(`${emojiSets} ${decoratedTextMeta.bottomLabel || ''}`);

@@ -90,13 +90,14 @@ describe('Model.CardWrapper', () => {
                         topLabel: 'Top Label',
                         bottomLabel: 'Bottom Label',
                     };
-                    const decoratedText = wrapper.newDecoratedText(decoratedTextMeta);
+                    const emojiSets = '🟡';
+                    const decoratedText = wrapper.newDecoratedText(decoratedTextMeta, '', emojiSets);
                     expect(decoratedText).toBeDefined();
                     const data = decoratedText.getData();
                     expect(data).toBeDefined();
                     expect(data.text).toBe(decoratedTextMeta.text);
-                    expect(data.topLabel).toBe(' ' + decoratedTextMeta.topLabel);
-                    expect(data.bottomLabel).toBe(' ' + decoratedTextMeta.bottomLabel);
+                    expect(data.topLabel).toBe(decoratedTextMeta.topLabel);
+                    expect(data.bottomLabel).toBe(emojiSets + ' ' + decoratedTextMeta.bottomLabel);
                 });
 
                 it('should throw an error if DecoratedText content is missing', () => {
