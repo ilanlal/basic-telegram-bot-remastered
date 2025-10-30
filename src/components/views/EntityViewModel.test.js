@@ -5,10 +5,10 @@ const EntityViewModel = require('./EntityViewModel');
 
 describe('EntityViewModel', () => {
     const tests = [
-        EMD.WebhookSetup,
-        EMD.Home,
-        EMD.Automation,
-        EMD.BotSetup
+        [EMD.WebhookSetup, { isActive: true }],
+        [EMD.Home, { isActive: true }],
+        [EMD.Automation, { isActive: true }],
+        [EMD.BotSetup, { isActive: true }]
     ];
 
     it('should create an view model instance.', () => {
@@ -26,10 +26,10 @@ describe('EntityViewModel', () => {
         });
 
         tests.forEach((emd) => {
-            describe(`Testing entity: ${emd.entityName}`, () => {
-                it(`should create a card from the "${emd.entityName}" cardMeta`, () => {
-                    if(!emd.cardMeta) return;
-                    const cardMeta = emd.cardMeta;
+            describe(`Testing entity: ${emd[0].entityName}`, () => {
+                it(`should create a card from the "${emd[0].entityName}" cardMeta`, () => {
+                    if(!emd[0].cardMeta) return;
+                    const cardMeta = emd[0].cardMeta;
                     const card = viewModel.getCardBuilder(cardMeta, { isActive: true });
                     expect(card).toBeDefined();
                     const builtCard = card.build();
@@ -46,8 +46,8 @@ describe('EntityViewModel', () => {
                     expect(data.sections.length).toBe(cardMeta.sections.length);
                 });
 
-                it(`should get the active sheet from the "${emd.entityName}" sheetMeta`, () => {
-                    const sheetMeta = emd.sheetMeta;
+                it(`should get the active sheet from the "${emd[0].entityName}" sheetMeta`, () => {
+                    const sheetMeta = emd[0].sheetMeta;
                     if(!sheetMeta) return;
                     const activeSheet = viewModel.getActiveSheet(sheetMeta);
                     expect(activeSheet).toBeDefined();

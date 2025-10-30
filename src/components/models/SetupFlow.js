@@ -29,7 +29,7 @@ class SetupFlow {
     }
     get state() {
         return [
-            { name: 'botToken', value: this.stateObject.botToken, isSet: this.stateObject.botTokenSet },
+            { name: EMD.Home, value: this.stateObject.botToken, isSet: this.stateObject.botTokenSet },
             { name: 'deploymentId', value: this.stateObject.deploymentId, isSet: this.stateObject.deploymentIdSet },
             { name: 'webhookUrl', value: this.stateObject.webhookUrl, isSet: this.stateObject.webhookSet },
             { name: 'chatId', value: this.stateObject.chatId, isSet: this.stateObject.chatIdSet },
