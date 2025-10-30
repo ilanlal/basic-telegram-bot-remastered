@@ -185,7 +185,7 @@ EntityViewModel.CardServiceWrapper = class {
 
         if (sectionMeta.widgets && Array.isArray(sectionMeta.widgets)) {
             sectionMeta.widgets.forEach(widgetMeta => {
-                const cardWidget = this.newWidget(widgetMeta);
+                const cardWidget = this.newWidget(widgetMeta, dataModel);
                 if (cardWidget) {
                     cardSection.addWidget(cardWidget);
                 }
