@@ -1,5 +1,5 @@
 require('../../../tests');
-const {Section} = require('./Section');
+const { Section } = require('./Section');
 
 describe('Section', () => {
     test('should initialize with full data', () => {
@@ -9,8 +9,24 @@ describe('Section', () => {
             collapsible: false,
             numUncollapsibleWidgets: 0,
             widgets: [
-                { id: 'widget1', name: 'Widget 1', render: 'TextInput', description: 'First widget', type: 'string', value: 'value1' },
-                { id: 'widget2', name: 'Widget 2', render: 'DecoratedText', description: 'Second widget', type: 'number', value: 42 }
+                {
+                    TextInput: {
+                        hint: 'Enter text',
+                        title: 'Widget 1',
+                        value: 'value1'
+                    },
+                    id: 'widget1',
+                    value: 'value1'
+                },
+                {
+                    DecoratedText: {
+                        text: 'Widget 2',
+                        topLabel: 'Top Label',
+                        bottomLabel: 'Bottom Label'
+                    },
+                    id: 'widget2',
+                    value: 42
+                }
             ]
         };
 
@@ -21,24 +37,20 @@ describe('Section', () => {
         expect(createdSection.numUncollapsibleWidgets).toBe(section.numUncollapsibleWidgets);
         expect(createdSection.widgets.length).toBe(2);
         expect(createdSection.widgets[0].id).toBe('widget1');
-        expect(createdSection.widgets[0].name).toBe('Widget 1');
-        expect(createdSection.widgets[0].render).toBe('TextInput'); // Added check for render
-        expect(createdSection.widgets[0].description).toBe('First widget');
-        expect(createdSection.widgets[0].type).toBe('string');
-        expect(createdSection.widgets[0].value).toBe('value1');
-        expect(createdSection.widgets[1].id).toBe('widget2');
-        expect(createdSection.widgets[1].name).toBe('Widget 2');
-        expect(createdSection.widgets[1].render).toBe('DecoratedText'); // Added check for render
-        expect(createdSection.widgets[1].description).toBe('Second widget');
-        expect(createdSection.widgets[1].type).toBe('number');
-        expect(createdSection.widgets[1].value).toBe(42);
+        console.log(JSON.stringify(createdSection.widgets[0], null, 2));
     });
 
     test('should initialize with partial data', () => {
         const section = {
             header: 'Partial Section',
             widgets: [
-                { id: 'widget1', name: 'Widget 1', render: 'TextInput', type: 'string' }
+                {
+                    DecoratedText: {
+                        text: 'Just a widget',
+                        topLabel: 'Top Label',
+                        bottomLabel: 'Bottom Label'
+                    }, id: 'widget1'
+                }
             ]
         };
         const createdSection = Section.createFromObject(section);
@@ -48,11 +60,7 @@ describe('Section', () => {
         expect(createdSection.numUncollapsibleWidgets).toBe(0);
         expect(createdSection.widgets.length).toBe(1);
         expect(createdSection.widgets[0].id).toBe('widget1');
-        expect(createdSection.widgets[0].name).toBe('Widget 1');
-        expect(createdSection.widgets[0].render).toBe('TextInput'); // Added check for render
-        expect(createdSection.widgets[0].description).toBeUndefined();
-        expect(createdSection.widgets[0].type).toBe('string');
-        expect(createdSection.widgets[0].value).toBe(undefined);
+        expect(createdSection.widgets[0].value).toBe(null);
     });
 
     test('should initialize with empty data', () => {

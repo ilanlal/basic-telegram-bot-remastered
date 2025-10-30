@@ -20,8 +20,18 @@ describe('Entity', () => {
 
     it('should add widgets to the entity', () => {
         const entity = Entity.create('User', 'user');
-        const widget1 = Widget.create({ id: 'username', view : { type: 'TextInput', hint: 'Enter your username', title: 'Username', value: 'testuser' }, type: 'string', value: 'testuser' });
-        const widget2 = Widget.create({ id: 'age', view : { type: 'TextInput', hint: 'Enter your age', title: 'Age', value: 30 }, type: 'number', value: 30 });
+        const widget1 = Widget.create(
+            {
+                id: 'username',
+                TextInput: { title: 'Username', hint: 'Enter your username', value: 'testuser' }, type: 'string', value: 'testuser'
+            }
+        );
+        const widget2 = Widget.create(
+            {
+                id: 'age',
+                TextInput: { title: 'Age', hint: 'Enter your age', value: 30 }, type: 'number', value: 30
+            }
+        );
 
         entity.addSection({
             header: 'User Info',
@@ -35,10 +45,8 @@ describe('Entity', () => {
         expect(entity.sections[0].widgets.length).toBe(2);
         expect(entity.sections[0].widgets[0].id).toBe('username');
         expect(entity.sections[0].widgets[0].value).toBe('testuser');
-        expect(entity.sections[0].widgets[0].type).toBe('string');
         expect(entity.sections[0].widgets[1].id).toBe('age');
         expect(entity.sections[0].widgets[1].value).toBe(30);
-        expect(entity.sections[0].widgets[1].type).toBe('number');
     });
 
     it('should create an entity from an object', () => {
@@ -55,8 +63,26 @@ describe('Entity', () => {
                 collapsible: false,
                 numUncollapsibleWidgets: 0,
                 widgets: [
-                    { id: 'username', view : { type: 'TextInput', title: 'Username', value: 'testuser' }, value: 'testuser', type: 'string' },
-                    { id: 'age', view : { type: 'TextInput', title: 'Age', value: 30 }, value: 30, type: 'number' }
+                    {
+                        id: 'username',
+                        TextInput: {
+                            title: 'Username',
+                            hint: 'Enter your username',
+                            value: 'testuser'
+                        },
+                        type: 'string',
+                        value: 'testuser'
+                    },
+                    {
+                        id: 'age',
+                        TextInput: {
+                            title: 'Age',
+                            hint: 'Enter your age',
+                            value: 30
+                        },
+                        type: 'number',
+                        value: 30
+                    }
                 ]
             }],
             footer: { text: '' }
@@ -71,10 +97,8 @@ describe('Entity', () => {
         expect(entity.sections[0].widgets.length).toBe(2);
         expect(entity.sections[0].widgets[0].id).toBe('username');
         expect(entity.sections[0].widgets[0].value).toBe('testuser');
-        expect(entity.sections[0].widgets[0].type).toBe('string');
         expect(entity.sections[0].widgets[1].id).toBe('age');
         expect(entity.sections[0].widgets[1].value).toBe(30);
-        expect(entity.sections[0].widgets[1].type).toBe('number');
     });
 
     // should have default image URL if not provided

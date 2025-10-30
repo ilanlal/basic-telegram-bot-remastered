@@ -48,7 +48,16 @@ class Section {
     }
 
     addWidget(widget) {
-        this._widgets.push(widget);
+        let newWidget = widget;
+        if (!newWidget) {
+            throw new Error('Invalid widget: cannot be null or undefined');
+        }
+
+        if (!(newWidget instanceof Widget)) {
+            newWidget = Widget.create(newWidget);
+        }
+
+        this._widgets.push(newWidget);
         return this;
     }
 

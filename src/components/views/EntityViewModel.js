@@ -116,7 +116,7 @@ EntityViewModel.CardServiceWrapper = class {
         this._cardService = cardService;
     }
 
-    newCardBuilder(cardMeta = {}) {
+    newCardBuilder(cardMeta = {}, dataSets = {}) {
         const cardBuilder = this._cardService.newCardBuilder();
 
         // Set card name

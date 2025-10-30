@@ -1,6 +1,4 @@
-const { EntityController } = require("../components/controllers/EntityController");
-
-class EventHandler {    
+class EventHandler {
     get userStore() {
         if (!this._userStore) {
             this._userStore = UserStoreFactory.create().current;
@@ -16,7 +14,7 @@ class EventHandler {
 EventHandler.Addon = {
     onOpenHomeCard: (e) => {
         return new EventHandler.AddonWrapper(EventHandler.prototype.userStore)
-                .handleOpenHomeCard(e);
+            .handleOpenHomeCard(e);
     },
     onOpenAccountCard: (e) => {
         return new EventHandler.AddonWrapper(EventHandler.prototype.userStore)
