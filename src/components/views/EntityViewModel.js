@@ -165,12 +165,12 @@ EntityViewModel.CardServiceWrapper = class {
         }
         const fixedFooter = this._cardService.newFixedFooter();
 
-        const primaryButton = this.newTextButton(fixedFooterMeta.primaryButton.textButton, dataModel);
+        const primaryButton = this.newTextButton(fixedFooterMeta.primaryButton.textButton);
         fixedFooter.setPrimaryButton(primaryButton);
 
         if (fixedFooterMeta.secondaryButton) {
             fixedFooter.setSecondaryButton(
-                this.newTextButton(fixedFooterMeta.secondaryButton.textButton, dataModel)
+                this.newTextButton(fixedFooterMeta.secondaryButton.textButton)
             );
         }
 
@@ -197,12 +197,8 @@ EntityViewModel.CardServiceWrapper = class {
     }
 
     newWidget(widgetMeta = {}) {
-        // Bind value from 'userProperty' property if specified
-        const userProperty = widgetMeta.userProperty;
-        let value = '';
-        if (userProperty) {
-            value = this._userProperties.getProperty(userProperty) || '';
-        }
+        // Bind value from 'propertyName' property if specified
+        const value = widgetMeta.value || '';
 
         if (widgetMeta.DecoratedText) {
             return this.newDecoratedText(widgetMeta.DecoratedText, value);
@@ -217,7 +213,7 @@ EntityViewModel.CardServiceWrapper = class {
         }
 
         if (widgetMeta.TextButton) {
-            return this.newTextButton(widgetMeta.TextButton, value);
+            return this.newTextButton(widgetMeta.TextButton, !!value);
         }
 
 
@@ -225,7 +221,7 @@ EntityViewModel.CardServiceWrapper = class {
         return null;
     }
 
-    newDecoratedText(decoratedTextMeta = {}, value = '') {
+    newDecoratedText(decoratedTextMeta = {}, value = '', emojiSets = '') {
         // setText(text) and one of the keys: setTopLabel(text), or setBottomLabel(text) are required
         if (!decoratedTextMeta.text) {
             throw new Error(EntityViewModel.CardServiceWrapper.DECORATED_TEXT_MISSING_CONTENT_ERROR);
@@ -234,14 +230,14 @@ EntityViewModel.CardServiceWrapper = class {
             throw new Error(EntityViewModel.CardServiceWrapper.DECORATED_TEXT_MISSING_CONTENT_ERROR);
         }
         const decoratedText = this._cardService.newDecoratedText()
-            .setTopLabel(`${decoratedTextMeta.topLabel || ''}`)
+            .setTopLabel(`${emojiSets} ${decoratedTextMeta.topLabel}`)
             .setWrapText(decoratedTextMeta.wrapText || false)
             .setText(`${decoratedTextMeta.text}`)
-            .setBottomLabel(`${decoratedTextMeta.bottomLabel || ''}`);
+            .setBottomLabel(`${emojiSets} ${decoratedTextMeta.bottomLabel || ''}`);
 
         if (decoratedTextMeta.textButton) {
             decoratedText.setButton(
-                this.newTextButton(decoratedTextMeta.textButton, value === 'true'));
+                this.newTextButton(decoratedTextMeta.textButton, !!value));
         }
 
         return decoratedText;

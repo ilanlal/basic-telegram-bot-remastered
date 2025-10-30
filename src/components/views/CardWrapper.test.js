@@ -95,8 +95,8 @@ describe('Model.CardWrapper', () => {
                     const data = decoratedText.getData();
                     expect(data).toBeDefined();
                     expect(data.text).toBe(decoratedTextMeta.text);
-                    expect(data.topLabel).toBe(decoratedTextMeta.topLabel);
-                    expect(data.bottomLabel).toBe(decoratedTextMeta.bottomLabel);
+                    expect(data.topLabel).toBe(' ' + decoratedTextMeta.topLabel);
+                    expect(data.bottomLabel).toBe(' ' + decoratedTextMeta.bottomLabel);
                 });
 
                 it('should throw an error if DecoratedText content is missing', () => {
