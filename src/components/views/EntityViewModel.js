@@ -8,16 +8,19 @@ class EntityViewModel {
         });
     }
 
-    constructor({ sheetWrapper, cardWrapper } = {}) {
+    constructor({ sheetWrapper, cardWrapper, dataModel } = {}) {
         // Initialize SpreadsheetService
         this._sheetWrapper = sheetWrapper;
 
         // Use the global CardService in Apps Script environment
         this._cardWrapper = cardWrapper;
+
+        // Initialize Data Model
+        this._dataModel = dataModel;
     }
 
-    getCardBuilder(cardMeta = {}) {
-        return this._cardWrapper.newCardBuilder(cardMeta);
+    getCardBuilder(cardMeta = {}, dataModel = {}) {
+        return this._cardWrapper.newCardBuilder(cardMeta, dataModel);
     }
 
     getActiveSheet(sheetMeta) {
@@ -116,7 +119,7 @@ EntityViewModel.CardServiceWrapper = class {
         this._cardService = cardService;
     }
 
-    newCardBuilder(cardMeta = {}, dataSets = {}) {
+    newCardBuilder(cardMeta = {}, dataModel = {}) {
         const cardBuilder = this._cardService.newCardBuilder();
 
         // Set card name
@@ -125,13 +128,13 @@ EntityViewModel.CardServiceWrapper = class {
         // Set card header
         if (cardMeta.header) {
             cardBuilder.setHeader(
-                this.newCardHeader(cardMeta.header));
+                this.newCardHeader(cardMeta.header, dataModel));
         }
 
         // Set fixed footer if provided
         if (cardMeta.fixedFooter) {
             cardBuilder.setFixedFooter(
-                this.newFixedFooter(cardMeta.fixedFooter)
+                this.newFixedFooter(cardMeta.fixedFooter, dataModel)
             );
         }
 
@@ -139,14 +142,14 @@ EntityViewModel.CardServiceWrapper = class {
         if (cardMeta.sections && Array.isArray(cardMeta.sections)) {
             cardMeta.sections.forEach(section => {
                 cardBuilder.addSection(
-                    this.newCardSection(section));
+                    this.newCardSection(section, dataModel));
             });
         }
 
         return cardBuilder;
     }
 
-    newCardHeader(headerMeta = {}) {
+    newCardHeader(headerMeta = {}, dataModel = {}) {
         return this._cardService.newCardHeader()
             .setTitle(`${headerMeta.title || ''}`)
             .setSubtitle(headerMeta.subTitle || '')
@@ -155,25 +158,25 @@ EntityViewModel.CardServiceWrapper = class {
             .setImageAltText(headerMeta.imageAltText || 'Card Image');
     }
 
-    newFixedFooter(fixedFooterMeta = {}) {
+    newFixedFooter(fixedFooterMeta = {}, dataModel = {}) {
         if (!fixedFooterMeta.primaryButton?.textButton) {
             throw new Error(EntityViewModel.CardServiceWrapper.FIXED_FOOTER_BUTTON_NOT_DEFINED_ERROR);
         }
         const fixedFooter = this._cardService.newFixedFooter();
 
-        const primaryButton = this.newTextButton(fixedFooterMeta.primaryButton.textButton);
+        const primaryButton = this.newTextButton(fixedFooterMeta.primaryButton.textButton, dataModel);
         fixedFooter.setPrimaryButton(primaryButton);
 
         if (fixedFooterMeta.secondaryButton) {
             fixedFooter.setSecondaryButton(
-                this.newTextButton(fixedFooterMeta.secondaryButton.textButton)
+                this.newTextButton(fixedFooterMeta.secondaryButton.textButton, dataModel)
             );
         }
 
         return fixedFooter;
     }
 
-    newCardSection(sectionMeta = {}) {
+    newCardSection(sectionMeta = {}, dataModel = {}) {
         const cardSection = this._cardService.newCardSection();
         cardSection.setHeader(sectionMeta.header || '');
         cardSection.setCollapsible(sectionMeta.collapsible || false);
@@ -192,21 +195,21 @@ EntityViewModel.CardServiceWrapper = class {
         return cardSection;
     }
 
-    newWidget(widgetMeta = {}) {
+    newWidget(widgetMeta = {}, dataModel = {}) {
         if (widgetMeta.DecoratedText) {
-            return this.newDecoratedText(widgetMeta.DecoratedText);
+            return this.newDecoratedText(widgetMeta.DecoratedText, dataModel);
         }
 
         if (widgetMeta.TextInput) {
-            return this.newTextInput(widgetMeta.TextInput);
+            return this.newTextInput(widgetMeta.TextInput, dataModel);
         }
 
         if (widgetMeta.TextParagraph) {
-            return this.newTextParagraph(widgetMeta.TextParagraph);
+            return this.newTextParagraph(widgetMeta.TextParagraph, dataModel);
         }
 
         if (widgetMeta.TextButton) {
-            return this.newTextButton(widgetMeta.TextButton);
+            return this.newTextButton(widgetMeta.TextButton, dataModel);
         }
 
 
@@ -214,7 +217,7 @@ EntityViewModel.CardServiceWrapper = class {
         return null;
     }
 
-    newDecoratedText(decoratedTextMeta = {}) {
+    newDecoratedText(decoratedTextMeta = {}, dataModel = {}) {
         // setText(text) and one of the keys: setTopLabel(text), or setBottomLabel(text) are required
         if (!decoratedTextMeta.text) {
             throw new Error(EntityViewModel.CardServiceWrapper.DECORATED_TEXT_MISSING_CONTENT_ERROR);
@@ -230,13 +233,13 @@ EntityViewModel.CardServiceWrapper = class {
 
         if (decoratedTextMeta.textButton) {
             decoratedText.setButton(
-                this.newTextButton(decoratedTextMeta.textButton));
+                this.newTextButton(decoratedTextMeta.textButton, dataModel));
         }
 
         return decoratedText;
     }
 
-    newTextInput(inputTextMeta = {}) {
+    newTextInput(inputTextMeta = {}, dataModel = {}) {
         if (!inputTextMeta.fieldName || String(inputTextMeta.fieldName).trim() === '') {
             throw new Error(EntityViewModel.CardServiceWrapper.TEXT_INPUT_MISSING_FIELD_NAME_ERROR);
         }
@@ -258,7 +261,7 @@ EntityViewModel.CardServiceWrapper = class {
         return _;
     }
 
-    newTextButton(textButtonMeta = {}) {
+    newTextButton(textButtonMeta = {}, dataModel = {}) {
         if (!textButtonMeta.text || (!textButtonMeta.openLink && !textButtonMeta.onClick)) {
             throw new Error(EntityViewModel.CardServiceWrapper.TEXT_BUTTON_MISSING_PROPERTIES_ERROR);
         }

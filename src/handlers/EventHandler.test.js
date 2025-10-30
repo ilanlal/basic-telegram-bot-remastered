@@ -10,6 +10,7 @@ describe('EventHandler', () => {
 
     it('should onOpenHomeCard', () => {
         /* @see https://core.telegram.org/bots/api#getwebhookinfo */
+        const token = '[FAKE_DUMMY_BOT_TOKEN]';
         const contentText = `{
             "result": {
                 "url": "https://example.com/webhook",
@@ -23,7 +24,7 @@ describe('EventHandler', () => {
             }
         }`;
 
-        UrlFetchAppStubConfiguration.when(`https://api.telegram.org/bot[YOUR_BOT_TOKEN]/getWebhookInfo`)
+        UrlFetchAppStubConfiguration.when(`https://api.telegram.org/bot${token}/getWebhookInfo`)
             .return(new HttpResponse().setContentText(contentText));
             
         const event = {}; // Mock event object

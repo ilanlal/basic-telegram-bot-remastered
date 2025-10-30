@@ -16,23 +16,7 @@ class EntityController {
         });
 
         // Set values from userStore if needed
-        const dataSets = {};
-        const storedApiToken = this.userStore.getBotToken();
-
-        if (storedApiToken) {
-            if (Array.isArray(cardMeta.sections)) {
-                cardMeta.sections.forEach(section => {
-                    if (Array.isArray(section.widgets)) {
-                        section.widgets.forEach(widget => {
-                            if (widget.fieldName === 'botToken') {
-                                widget.initialValue = storedApiToken;
-                            }
-                        });
-                    }
-                });
-            }
-        }
-
+        const setupFlow = SetupFlow.create(this.userStore);
         const cardBuilder = viewModel.getCardBuilder(cardMeta);
         return this.cardService.newActionResponseBuilder()
             .setNavigation(
