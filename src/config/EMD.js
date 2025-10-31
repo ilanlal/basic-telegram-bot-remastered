@@ -141,6 +141,14 @@ EMD.BotSetup = {
                                 value: '[YOUR_BOT_API_TOKEN]'
                             }
                         },
+                        { // Identify Token Button
+                            TextButton: {
+                                text: '🆔 Identify Token',
+                                onClick: {
+                                    functionName: 'EventHandler.Addon.onIdentifyTokenClick'
+                                }
+                            }
+                        },
                         {   // Deployment ID Variable
                             TextInput: {
                                 label: 'Deployment ID',
@@ -167,8 +175,8 @@ EMD.BotSetup = {
                         }
                     ]
                 },
-                {  // Development & General Settings Section
-                    header: 'Development & General Settings',
+                {  // Environment variables.
+                    header: 'Environment variables',
                     collapsible: true,
                     numUncollapsibleWidgets: 2,
                     widgets: [

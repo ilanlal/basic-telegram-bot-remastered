@@ -26,7 +26,7 @@ describe('EventHandler', () => {
 
         UrlFetchAppStubConfiguration.when(`https://api.telegram.org/bot${token}/getWebhookInfo`)
             .return(new HttpResponse().setContentText(contentText));
-            
+
         const event = {}; // Mock event object
         const actionResponse = EventHandler.Addon.onOpenHomeCard(event);
         expect(actionResponse).toBeDefined();
@@ -104,5 +104,34 @@ describe('EventHandler', () => {
         expect(data.cardNavigations.length).toBeGreaterThan(0);
         expect(data.cardNavigations[0].pushCard).toBeDefined();
     });
+
+    it('should handle onIdentifyTokenClick', () => {
+        const token = '[FAKE_DUMMY_BOT_TOKEN]';
+        const contentText = `{
+            "result": {
+                "id": 123456789,
+                "is_bot": true,
+                "first_name": "TestBot",
+                "username": "TestBotUsername"
+            }
+        }`;
+
+        UrlFetchAppStubConfiguration.when(`https://api.telegram.org/bot${token}/getMe`)
+            .return(new HttpResponse().setContentText(contentText));
+
+        const event = {
+            formInput: {
+                botApiToken: token
+            }
+        };
+        const actionResponse = EventHandler.Addon.onIdentifyTokenClick(event);
+        expect(actionResponse).toBeDefined();
+        const data = actionResponse.getData();
+        expect(data).toBeDefined();
+        // notification present
+        expect(data.notification).toBeDefined();
+        expect(data.notification.text).toBe('Bot token identified successfully.');
+    });
+
     // Additional tests for other handlers can be added similarly
 });

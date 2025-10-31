@@ -51,6 +51,11 @@ EventHandler.Addon = {
     onWebhookManagementClick: (e) => {
         return new EventHandler.AddonWrapper(EventHandler.prototype.userStore)
             .handleWebhookManagementClick(e);
+    },
+    onIdentifyTokenClick: (e) => {
+        // Not implemented yet
+        return new EventHandler.AddonWrapper(EventHandler.prototype.userStore)
+            .handleIdentifyTokenClick(e);
     }
 }
 EventHandler.AddonWrapper = class {
@@ -185,6 +190,34 @@ EventHandler.AddonWrapper = class {
             return this.handleError(error)
                 .build();
         }
+    }
+
+    handleIdentifyTokenClick(e) {
+        try {
+            let token = e.parameters?.token || null;
+            if (!token) {
+                const formInputs = e.formInput;
+                token = formInputs['botApiToken'] || null;
+            }
+
+            const dataResponse = BotSetupController.create(this._userStore)
+                .setNewBotToken(token);
+
+            return this.handleOperationSuccess("Bot token identified successfully.")
+                .build();
+
+        } catch (error) {
+            return this.handleError(error)
+                .build();
+        }
+    }
+
+    handleOperationSuccess(message) {
+        // Show a success message to the user
+        return CardService.newActionResponseBuilder()
+            .setNotification(
+                CardService.newNotification()
+                    .setText(message));
     }
 
     handleError(error) {
