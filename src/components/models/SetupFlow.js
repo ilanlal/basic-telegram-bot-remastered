@@ -1,8 +1,16 @@
 class SetupFlow {
-    static ON_LIGHT = '🟢';
-    static OFF_LIGHT = '🔘';
-    static WARN_LIGHT = '🟡';
-    static ERROR_LIGHT = '🔴';
+    static get ON_LIGHT() {
+        return '🟢';
+    }
+    static get OFF_LIGHT() {
+        return '🔘';
+    }
+    static get WARN_LIGHT() {
+        return '🟡';
+    }
+    static get ERROR_LIGHT() {
+        return '🔴';
+    }
 
     get trafficLight() {
         const leds = '{0}{1}{2}{3}{4}';

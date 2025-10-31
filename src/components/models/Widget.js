@@ -3,10 +3,15 @@ class Widget {
         return 'Widget id is required';
     }
 
-    static tabIndex = 0;
+    static tabIndex() {
+        if (!this._tabIndex) {
+            this._tabIndex = 0;
+        }
+        return this._tabIndex++;
+    }
 
     static create(widgetMeta = {}, userProperties = PropertiesService.getUserProperties()) {
-        const { id, value = null, tabIndex = Widget.tabIndex++, propertyName = null } = widgetMeta;
+        const { id, value = null, tabIndex = Widget.tabIndex(), propertyName = null } = widgetMeta;
 
         if (!id) {
             throw new Error(Widget.INVALID_ID_ERROR);
