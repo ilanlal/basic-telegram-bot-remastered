@@ -1,19 +1,26 @@
 
 class EntityController {
-    static create(userStore = UserStoreFactory.create().current, cardService = CardService, activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet()) {
-        return new EntityController(userStore, cardService, activeSpreadsheet);
+    static create(
+        userStore = UserStoreFactory.create().current, 
+        cardService = CardService, 
+        activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet(),
+        userProperties = PropertiesService.getUserProperties()
+    ) {
+        return new EntityController(userStore, cardService, activeSpreadsheet, userProperties);
     }
 
-    constructor(userStore, cardService, activeSpreadsheet) {
+    constructor(userStore, cardService, activeSpreadsheet, userProperties) {
         this.userStore = userStore;
         this.cardService = cardService;
         this.activeSpreadsheet = activeSpreadsheet;
+        this.userProperties = userProperties;
     }
 
     pushCard(cardMeta = {}, ...params) {
         const viewModel = EntityViewModel.create({
             cardService: this.cardService,
-            activeSpreadsheet: this.activeSpreadsheet
+            activeSpreadsheet: this.activeSpreadsheet,
+            userProperties: this.userProperties
         });
 
         const cardDataSet = {

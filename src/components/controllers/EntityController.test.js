@@ -15,7 +15,8 @@ describe('Entity Controller', () => {
         const entityController = EntityController.create(
             UserStoreFactory.create().current,
             CardService,
-            SpreadsheetApp.getActiveSpreadsheet()
+            SpreadsheetApp.getActiveSpreadsheet(),
+            PropertiesService.getUserProperties()
         );
 
         // Set values from userStore if needed
