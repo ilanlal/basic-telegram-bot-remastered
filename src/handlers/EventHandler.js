@@ -59,7 +59,7 @@ EventHandler.Addon = {
     }
 }
 EventHandler.AddonWrapper = class {
-    constructor(userStore) {
+    constructor(userStore, userProperties = PropertiesService.getUserProperties()) {
         if (!(userStore instanceof UserStore)) {
             throw new Error("userStore must be an instance of UserStore");
         }
