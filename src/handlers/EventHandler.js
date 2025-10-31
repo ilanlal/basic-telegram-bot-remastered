@@ -196,8 +196,8 @@ EventHandler.AddonWrapper = class {
         try {
             let token = e.parameters?.token || null;
             if (!token) {
-                const formInputs = e.formInput;
-                token = formInputs['botApiToken'] || null;
+                const formInputs = e.commonEventObject.formInputs || {};
+                token = formInputs['BOT_TOKEN']?.stringInputs?.value[0] || null;
             }
 
             const dataResponse = BotSetupController.create(this._userStore)

@@ -119,12 +119,18 @@ describe('EventHandler', () => {
         UrlFetchAppStubConfiguration.when(`https://api.telegram.org/bot${token}/getMe`)
             .return(new HttpResponse().setContentText(contentText));
 
-        const event = {
-            formInput: {
-                botApiToken: token
+        const mockEvent = {
+            commonEventObject: {
+                formInputs: {
+                    ['BOT_TOKEN']: {
+                        stringInputs: {
+                            value: [token]
+                        }
+                    }
+                }
             }
         };
-        const actionResponse = EventHandler.Addon.onIdentifyTokenClick(event);
+        const actionResponse = EventHandler.Addon.onIdentifyTokenClick(mockEvent);
         expect(actionResponse).toBeDefined();
         const data = actionResponse.getData();
         expect(data).toBeDefined();
