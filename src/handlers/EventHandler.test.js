@@ -106,7 +106,7 @@ describe('EventHandler', () => {
     });
 
     it('should handle onIdentifyTokenClick', () => {
-        const token = '[FAKE_DUMMY_BOT_TOKEN]';
+        const token = '[FAKE_DUMMY_BOT_TOKEN]&#39;;>@&-_][+0!]';
         const contentText = `{
             "result": {
                 "id": 123456789,

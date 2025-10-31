@@ -53,7 +53,9 @@ class BotSetupController {
             throw new Error("Invalid bot token");
         }
 
-        const response = new TelegramBotClient(token).getMe();
+        const safeToken = decodeURIComponent(token);
+
+        const response = new TelegramBotClient(safeToken).getMe();
         if (response.getResponseCode() !== 200) {
             throw new Error("Failed to validate bot token");
         }
