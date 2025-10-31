@@ -135,7 +135,7 @@ EMD.BotSetup = {
                 {   // Getting Started Variables Section
                     header: 'Getting Started Variables',
                     collapsible: true,
-                    numUncollapsibleWidgets: 1,
+                    numUncollapsibleWidgets: 3,
                     widgets: [
                         { // Bot token set state
                             id: 'bot_token_set_state',
