@@ -122,7 +122,7 @@ describe('EventHandler', () => {
         const mockEvent = {
             commonEventObject: {
                 formInputs: {
-                    ['BOT_TOKEN']: {
+                    ['txt_bot_api_token']: {
                         stringInputs: {
                             value: [token]
                         }
