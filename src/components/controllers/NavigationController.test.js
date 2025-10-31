@@ -1,9 +1,4 @@
-require('@ilanlal/gasmocks');
-require('../../services');
-require('../models');
-require('../views');
-require('../../types');
-require('../../config');
+require('../../../tests');
 const { NavigationController } = require('./NavigationController');
 
 describe('NavigationController', () => {

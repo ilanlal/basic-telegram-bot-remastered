@@ -1,10 +1,22 @@
 class EntityViewModel {
-    static ON_LIGHT = '🟢';
-    static OFF_LIGHT = '🔘';
-    static WARN_LIGHT = '🟡';
-    static ERROR_LIGHT = '🔴';
-    static INVALID_MODEL_ERROR = "Invalid data model provided to ViewModel.create(meta.name), missing meta.name property.";
-    static DEFAULT_IMAGE_URL = 'https://raw.githubusercontent.com/ilanlal/basic-telegram-bot-remastered/refs/heads/vnext/assets/logo128.png';
+    static get ON_LIGHT() {
+        return '🟢';
+    }
+    static get OFF_LIGHT() {
+        return '🔘';
+    }
+    static get WARN_LIGHT() {
+        return '🟡';
+    }
+    static get ERROR_LIGHT() {
+        return '🔴';
+    }
+    static get INVALID_MODEL_ERROR() {
+        return "Invalid data model provided to ViewModel.create(meta.name), missing meta.name property.";
+    }
+    static get DEFAULT_IMAGE_URL() {
+        return 'https://raw.githubusercontent.com/ilanlal/basic-telegram-bot-remastered/refs/heads/vnext/assets/logo128.png';
+    }
     static create({
         cardService = CardService,
         activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet(),
@@ -105,22 +117,43 @@ EntityViewModel.SheetWrapper = class {
 
 EntityViewModel.CardServiceWrapper = class {
     // Default Button Values
-    static DEFAULT_BUTTON_LABEL = 'New Button';
-    static DEFAULT_EVENT_CLICK_FUNCTION_NAME = 'EventHandler.Addon.onButtonClick';
+    static get DEFAULT_BUTTON_LABEL() {
+        return 'New Button';
+    }
+    static get DEFAULT_EVENT_CLICK_FUNCTION_NAME() {
+        return 'EventHandler.Addon.onButtonClick';
+    }
 
     // Default Card Header Values
-    static DEFAULT_IMAGE_URL = EntityViewModel.DEFAULT_IMAGE_URL;
-    static DEFAULT_IMAGE_STYLE = CardService.ImageStyle.SQUARE;
-    static DEFAULT_IMAGE_ALT_TEXT = 'Card Image';
+    static get DEFAULT_IMAGE_URL() {
+        return EntityViewModel.DEFAULT_IMAGE_URL;
+    }
+    static get DEFAULT_IMAGE_STYLE() {
+        return CardService.ImageStyle.SQUARE;
+    }
+    static get DEFAULT_IMAGE_ALT_TEXT() {
+        return 'Card Image';
+    }
 
     // Default Text Paragraph Values
-    static DEFAULT_PARAGRAPH_LINE_LIMIT = 3;
+    static get DEFAULT_PARAGRAPH_LINE_LIMIT() {
+        return 3;
+    }
 
     // Error Messages
-    static FIXED_FOOTER_BUTTON_NOT_DEFINED_ERROR = "Fixed footer must have a primaryButton defined.";
-    static TEXT_INPUT_MISSING_FIELD_NAME_ERROR = "TextInput widget must have a 'fieldName' property.";
-    static DECORATED_TEXT_MISSING_CONTENT_ERROR = "DecoratedText widget must have at least one of 'text', 'decoratedText', 'topLabel', or 'bottomLabel' properties defined.";
-    static TEXT_BUTTON_MISSING_PROPERTIES_ERROR = "TextButton widget must have either 'text', and 'openLink' or 'onClick' defined.";
+    static get FIXED_FOOTER_BUTTON_NOT_DEFINED_ERROR() {
+        return "Fixed footer must have a primaryButton defined.";
+    }
+    static get TEXT_INPUT_MISSING_FIELD_NAME_ERROR() {
+        return "TextInput widget must have a 'fieldName' property.";
+    }
+    static get DECORATED_TEXT_MISSING_CONTENT_ERROR() {
+        return "DecoratedText widget must have at least one of 'text', 'decoratedText', 'topLabel', or 'bottomLabel' properties defined.";
+    }
+    static get TEXT_BUTTON_MISSING_PROPERTIES_ERROR() {
+        return "TextButton widget must have either 'text', and 'openLink' or 'onClick' defined.";
+    }
+
     static create(cardService = CardService, userProperties = PropertiesService.getUserProperties()) {
         return new EntityViewModel.CardServiceWrapper(cardService, userProperties);
     }

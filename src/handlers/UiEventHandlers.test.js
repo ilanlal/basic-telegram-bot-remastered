@@ -1,12 +1,5 @@
-require("@ilanlal/gasmocks");
-require('../types');
-require("../lib");
-require('../services');
-require('../components/controllers');
-require('../components/views');
-require('../components/models');
+require('../../tests');
 const { UiEventHandlers } = require('./UiEventHandlers');
-require('../config');
 
 describe('UiEventHandlers.Home Tests', () => {
     test('openAutomationRepliesCard should return a CardService.ActionResponse', () => {
