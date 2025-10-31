@@ -64,6 +64,7 @@ EventHandler.AddonWrapper = class {
             throw new Error("userStore must be an instance of UserStore");
         }
         this._userStore = userStore;
+        this._userProperties = userProperties;
     }
 
     handleOpenHomeCard(e) {
@@ -166,7 +167,7 @@ EventHandler.AddonWrapper = class {
                     this._userStore,
                     CardService,
                     SpreadsheetApp.getActiveSpreadsheet(),
-                    PropertiesService.getUserProperties())
+                    this._userProperties)
                 .pushCard(EMD.BotSetup.cardMeta, params)
                 .build();
         } catch (error) {
@@ -201,7 +202,9 @@ EventHandler.AddonWrapper = class {
             }
 
             const result = BotSetupController
-                .create(this._userStore, PropertiesService.getUserProperties())
+                .create(
+                    this._userStore,
+                    PropertiesService.getUserProperties())
                 .identifyNewBotToken(token)
                 .setNewBotToken(token);
 
