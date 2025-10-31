@@ -56,7 +56,12 @@ EventHandler.AddonWrapper = class {
     handleOpenHomeCard(e) {
         try {
             const params = [];
-            return EntityController.create(this._userStore, CardService, SpreadsheetApp.getActiveSpreadsheet())
+            return EntityController
+                .create(
+                    this._userStore,
+                    CardService,
+                    SpreadsheetApp.getActiveSpreadsheet(),
+                    PropertiesService.getUserProperties())
                 .pushCard(EMD.Home.cardMeta, params)
                 .build();
         } catch (error) {
@@ -133,7 +138,7 @@ EventHandler.AddonWrapper = class {
 
     handleToggleBooleanSetting(e) {
         try {
-           throw new Error("Not implemented yet");
+            throw new Error("Not implemented yet");
         } catch (error) {
             return this.handleError(error)
                 .build();
