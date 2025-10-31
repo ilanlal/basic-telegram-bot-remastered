@@ -2,10 +2,16 @@ require('../../../tests');
 const EntityViewModel = require('./EntityViewModel');
 
 describe('Model.CardWrapper', () => {
-    it('should create a new instance of CardWrapper', () => {
+    it('should create an instance of CardWrapper with new service instances', () => {
+        const wrapper = new EntityViewModel.CardServiceWrapper(CardService);
+        expect(wrapper).toBeDefined();
+    });
+
+    it('should create a new instance of CardWrapper with initiated service references', () => {
         const viewModel = EntityViewModel.create({
             cardService: CardService,
-            activeSpreadsheet: SpreadsheetApp.getActiveSpreadsheet()
+            activeSpreadsheet: SpreadsheetApp.getActiveSpreadsheet(),
+            userProperties: PropertiesService.getUserProperties()
         });
         expect(viewModel.cardWrapper).toBeDefined();
     });
@@ -13,7 +19,8 @@ describe('Model.CardWrapper', () => {
     describe('Testing', () => {
         const viewModel = EntityViewModel.create({
             cardService: CardService,
-            activeSpreadsheet: SpreadsheetApp.getActiveSpreadsheet()
+            activeSpreadsheet: SpreadsheetApp.getActiveSpreadsheet(),
+            userProperties: PropertiesService.getUserProperties()
         });
 
         const wrapper = viewModel.cardWrapper;
