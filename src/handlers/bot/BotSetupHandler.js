@@ -1,13 +1,19 @@
 class BotSetupHandler {
-    static MISSING_INPUT_ERROR = "Required form inputs are missing.";
-    static MISSING_BOT_API_TOKEN_ERROR = "Bot API token is required.";
-    static FORM_INPUT_NAMES = {
-        BOT_API_TOKEN: 'txt_bot_api_token',
-        DEFAULT_LANGUAGE: 'txt_default_language',
-        DEPLOYMENT_ID: 'txt_deployment_id',
-        ADMIN_CHAT_ID: 'txt_admin_chat_id',
-        DEBUG_MODE: 'txt_debug_mode'
-    };
+    static get MISSING_INPUT_ERROR() {
+        return "Required form inputs are missing.";
+    }
+    static get MISSING_BOT_API_TOKEN_ERROR() {
+        return "Bot API token is required.";
+    }
+    static get FORM_INPUT_NAMES() {
+        return {
+            BOT_API_TOKEN: 'txt_bot_api_token',
+            DEFAULT_LANGUAGE: 'txt_default_language',
+            DEPLOYMENT_ID: 'txt_deployment_id',
+            ADMIN_CHAT_ID: 'txt_admin_chat_id',
+            DEBUG_MODE: 'txt_debug_mode'
+        };
+    }
     static saveNewBotSetupInfo(e) {
         try {
             const formInputs = e && e.commonEventObject && e.commonEventObject.formInputs;
