@@ -43,6 +43,14 @@ EventHandler.Addon = {
     onToggleBooleanSetting: (e) => {
         return new EventHandler.AddonWrapper(EventHandler.prototype.userStore)
             .handleToggleBooleanSetting(e);
+    },
+    onBotSetupClick: (e) => {
+        return new EventHandler.AddonWrapper(EventHandler.prototype.userStore)
+            .handleBotSetupClick(e);
+    },
+    onWebhookManagementClick: (e) => {
+        return new EventHandler.AddonWrapper(EventHandler.prototype.userStore)
+            .handleWebhookManagementClick(e);
     }
 }
 EventHandler.AddonWrapper = class {
@@ -139,6 +147,40 @@ EventHandler.AddonWrapper = class {
     handleToggleBooleanSetting(e) {
         try {
             throw new Error("Not implemented yet");
+        } catch (error) {
+            return this.handleError(error)
+                .build();
+        }
+    }
+
+    handleBotSetupClick(e) {
+        try {
+            const params = [];
+            return EntityController
+                .create(
+                    this._userStore,
+                    CardService,
+                    SpreadsheetApp.getActiveSpreadsheet(),
+                    PropertiesService.getUserProperties())
+                .pushCard(EMD.BotSetup.cardMeta, params)
+                .build();
+        } catch (error) {
+            return this.handleError(error)
+                .build();
+        }
+    }
+
+    handleWebhookManagementClick(e) {
+        try {
+            const params = [];
+            return EntityController
+                .create(
+                    this._userStore,
+                    CardService,
+                    SpreadsheetApp.getActiveSpreadsheet(),
+                    PropertiesService.getUserProperties())
+                .pushCard(EMD.WebhookSetup.cardMeta, params)
+                .build();
         } catch (error) {
             return this.handleError(error)
                 .build();

@@ -28,15 +28,15 @@ EMD.Home = {
                 widgets: [
                     {   // Bot setup widget
                         DecoratedText: {
-                            text: 'Setup your bot',
-                            topLabel: '🤖 Get started',
-                            bottomLabel: 'Click the button to setup your bot',
+                            text: 'Click the button to setup your bot',
+                            topLabel: 'Get started',
+                            bottomLabel: '🤖',
                             wrapText: true,
                             textButton: {
                                 disabled: false,
-                                text: '⚙️ Setup Bot',
+                                text: '🤖 Set me up',
                                 onClick: {
-                                    functionName: 'EventHandler.Addon.setupBot',
+                                    functionName: 'EventHandler.Addon.onBotSetupClick',
                                     parameters: { action: 'setupBot' }
                                 }
                             }
@@ -52,7 +52,7 @@ EMD.Home = {
                                 disabled: false,
                                 text: '⚙️ Manage Webhooks',
                                 onClick: {
-                                    functionName: 'EventHandler.Addon.manageWebhooks',
+                                    functionName: 'EventHandler.Addon.onWebhookManagementClick',
                                     parameters: { action: 'manageWebhooks' }
                                 }
                             }
