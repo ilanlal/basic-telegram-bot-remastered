@@ -55,8 +55,9 @@ EventHandler.AddonWrapper = class {
 
     handleOpenHomeCard(e) {
         try {
+            const params = [];
             return EntityController.create(this._userStore, CardService, SpreadsheetApp.getActiveSpreadsheet())
-                .pushCard(EMD.Home.cardMeta)
+                .pushCard(EMD.Home.cardMeta, params)
                 .build();
         } catch (error) {
             return this.handleError(error)

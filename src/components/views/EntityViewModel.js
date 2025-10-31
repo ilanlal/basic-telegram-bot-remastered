@@ -5,26 +5,33 @@ class EntityViewModel {
     static ERROR_LIGHT = '🔴';
     static INVALID_MODEL_ERROR = "Invalid data model provided to ViewModel.create(meta.name), missing meta.name property.";
     static DEFAULT_IMAGE_URL = 'https://raw.githubusercontent.com/ilanlal/basic-telegram-bot-remastered/refs/heads/vnext/assets/logo128.png';
-    static create({ cardService = CardService, activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet() } = {}) {
+    static create({
+        cardService = CardService,
+        activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet(),
+        userProperties = PropertiesService.getUserProperties() } = {}
+    ) {
         return new EntityViewModel({
             sheetWrapper: EntityViewModel.SheetWrapper.create(activeSpreadsheet),
-            cardWrapper: EntityViewModel.CardServiceWrapper.create(cardService)
+            cardWrapper: EntityViewModel.CardServiceWrapper.create(cardService, userProperties),
+            cardDataSet: {}
         });
     }
 
-    constructor({ sheetWrapper, cardWrapper, dataModel } = {}) {
+    constructor({ sheetWrapper, cardWrapper, cardDataSet } = {}) {
         // Initialize SpreadsheetService
+        /** @type {EntityViewModel.SheetWrapper} */
         this._sheetWrapper = sheetWrapper;
 
         // Use the global CardService in Apps Script environment
+        /** @type {EntityViewModel.CardServiceWrapper} */
         this._cardWrapper = cardWrapper;
 
         // Initialize Data Model
-        this._dataModel = dataModel;
+        this._cardDataSet = cardDataSet;
     }
 
-    getCardBuilder(cardMeta = {}, dataModel = {}) {
-        return this._cardWrapper.newCardBuilder(cardMeta, dataModel);
+    getCardBuilder(cardMeta = {}, cardDataSet = {}) {
+        return this._cardWrapper.newCardBuilder(cardMeta, cardDataSet);
     }
 
     getActiveSheet(sheetMeta) {
@@ -124,7 +131,7 @@ EntityViewModel.CardServiceWrapper = class {
         this._userProperties = userProperties;
     }
 
-    newCardBuilder(cardMeta = {}, dataModel = {}) {
+    newCardBuilder(cardMeta = {}, cardDataSet = {}) {
         const cardBuilder = this._cardService.newCardBuilder();
 
         // Set card name
@@ -133,13 +140,13 @@ EntityViewModel.CardServiceWrapper = class {
         // Set card header
         if (cardMeta.header) {
             cardBuilder.setHeader(
-                this.newCardHeader(cardMeta.header, dataModel));
+                this.newCardHeader(cardMeta.header, cardDataSet));
         }
 
         // Set fixed footer if provided
         if (cardMeta.fixedFooter) {
             cardBuilder.setFixedFooter(
-                this.newFixedFooter(cardMeta.fixedFooter, dataModel)
+                this.newFixedFooter(cardMeta.fixedFooter, cardDataSet)
             );
         }
 
@@ -147,23 +154,23 @@ EntityViewModel.CardServiceWrapper = class {
         if (cardMeta.sections && Array.isArray(cardMeta.sections)) {
             cardMeta.sections.forEach(section => {
                 cardBuilder.addSection(
-                    this.newCardSection(section, dataModel));
+                    this.newCardSection(section, cardDataSet));
             });
         }
 
         return cardBuilder;
     }
 
-    newCardHeader(headerMeta = {}, dataModel = {}) {
+    newCardHeader(headerMeta = {}, cardDataSet = {}) {
         return this._cardService.newCardHeader()
             .setTitle(`${headerMeta.title || ''}`)
-            .setSubtitle(`${headerMeta.subTitle || ''} [active:${dataModel.isActive || ''}]`)
+            .setSubtitle(`${headerMeta.subTitle || ''} [active:${cardDataSet.isActive || ''}]`)
             .setImageStyle(headerMeta.imageStyle || CardService.ImageStyle.SQUARE)
             .setImageUrl(headerMeta.imageUrl || EntityViewModel.DEFAULT_IMAGE_URL)
             .setImageAltText(headerMeta.imageAltText || 'Card Image');
     }
 
-    newFixedFooter(fixedFooterMeta = {}, dataModel = {}) {
+    newFixedFooter(fixedFooterMeta = {}, cardDataSet = {}) {
         if (!fixedFooterMeta.primaryButton?.textButton) {
             throw new Error(EntityViewModel.CardServiceWrapper.FIXED_FOOTER_BUTTON_NOT_DEFINED_ERROR);
         }
@@ -181,7 +188,7 @@ EntityViewModel.CardServiceWrapper = class {
         return fixedFooter;
     }
 
-    newCardSection(sectionMeta = {}, dataModel = {}) {
+    newCardSection(sectionMeta = {}, cardDataSet = {}) {
         const cardSection = this._cardService.newCardSection();
         cardSection.setHeader(sectionMeta.header || '');
         cardSection.setCollapsible(sectionMeta.collapsible || false);
