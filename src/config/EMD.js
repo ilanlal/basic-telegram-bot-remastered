@@ -27,6 +27,7 @@ EMD.Home = {
                 numUncollapsibleWidgets: 0,
                 widgets: [
                     {   // Bot setup widget
+                        id: 'bot_setup_widget',
                         DecoratedText: {
                             text: 'Click the button to setup your bot',
                             topLabel: 'Get started',
@@ -43,6 +44,7 @@ EMD.Home = {
                         }
                     },
                     {   // Webhook management widget
+                        id: 'webhook_management_widget',
                         DecoratedText: {
                             text: 'Manage your webhooks',
                             topLabel: '🔗 Webhook Management',
@@ -66,6 +68,7 @@ EMD.Home = {
                 numUncollapsibleWidgets: 1,
                 widgets: [
                     {   // Automation management widget
+                        id: 'automation_management_widget',
                         DecoratedText: {
                             text: 'Automation management',
                             topLabel: 'Automations {total}',
@@ -82,6 +85,7 @@ EMD.Home = {
                         }
                     },
                     {  // Contacts management widget
+                        id: 'contacts_management_widget',
                         DecoratedText: {
                             text: 'Contacts management',
                             topLabel: 'Contacts {total}',
@@ -131,17 +135,25 @@ EMD.BotSetup = {
                 {   // Getting Started Variables Section
                     header: 'Getting Started Variables',
                     collapsible: true,
-                    numUncollapsibleWidgets: 2,
+                    numUncollapsibleWidgets: 1,
                     widgets: [
-                        { // Bot Token Variable
-                            TextInput: {
-                                label: 'Bot API Token',
-                                fieldName: 'txt_bot_api_token',
-                                placeholder: 'Enter bot API token',
-                                value: '[YOUR_BOT_API_TOKEN]'
+                        { // Bot token set state
+                            id: 'bot_token_set_state',
+                            TextParagraph: {
+                                text: 'Bot API Token is set.'
                             }
                         },
+                        { // Bot Token Variable
+                            id: 'bot_token_variable',
+                            TextInput: {
+                                title: 'Bot API Token',
+                                fieldName: 'txt_bot_api_token',
+                                hint: 'Enter bot API token'
+                            },
+                            propertyName: 'bot_api_token'
+                        },
                         { // Identify Token Button
+                            id: 'identify_token_button',
                             TextButton: {
                                 text: '🆔 Identify Token',
                                 onClick: {
@@ -150,14 +162,16 @@ EMD.BotSetup = {
                             }
                         },
                         {   // Deployment ID Variable
+                            id: 'deployment_id_variable',
                             TextInput: {
-                                label: 'Deployment ID',
+                                title: 'Deployment ID',
                                 fieldName: 'txt_deployment_id',
-                                placeholder: 'Enter deployment ID',
-                                value: '[YOUR_DEPLOYMENT_ID]'
-                            }
+                                hint: 'Enter deployment ID'
+                            },
+                            propertyName: 'deployment_id'
                         },
                         { // DecoratedText for webhook info
+                            id: 'webhook_info',
                             DecoratedText: {
                                 text: 'Webhook Info',
                                 topLabel: 'Webhook URL',
@@ -181,28 +195,34 @@ EMD.BotSetup = {
                     numUncollapsibleWidgets: 2,
                     widgets: [
                         { // Admin Chat ID Variable
+                            id: 'admin_chat_id_variable',
                             TextInput: {
-                                label: 'Admin Chat ID',
+                                title: 'Admin Chat ID',
                                 fieldName: 'txt_admin_chat_id',
-                                placeholder: 'Enter admin chat ID',
+                                hint: 'Enter admin chat ID',
                                 value: '[YOUR_ADMIN_CHAT_ID]'
-                            }
+                            },
+                            propertyName: 'admin_chat_id'
                         },
                         {   // Log Events Setting
+                            id: 'log_events_setting',
                             TextInput: {
-                                label: 'Debug Mode (Set to true or any other value for false)',
+                                title: 'Debug Mode (Set to true or any other value for false)',
                                 fieldName: 'txt_debug_mode',
-                                placeholder: 'Enter debug mode (true/false)',
+                                hint: 'Enter debug mode (true/false)',
                                 value: 'false'
-                            }
+                            },
+                            propertyName: 'debug_mode'
                         },
                         {   // Default Language Variable
+                            id: 'default_language_variable',
                             TextInput: {
-                                label: 'Default language',
+                                title: 'Default language',
                                 fieldName: 'txt_default_language',
-                                placeholder: 'Enter default language',
+                                hint: 'Enter default language',
                                 value: 'en'
-                            }
+                            },
+                            propertyName: 'default_language'
                         }
                     ]
                 }
@@ -344,6 +364,7 @@ EMD.WebhookSetup = {
                     numUncollapsibleWidgets: 0,
                     widgets: [
                         {
+                            id: 'set_webhook_widget',
                             DecoratedText: {
                                 topLabel: '📡',
                                 text: 'api/setWebhook',

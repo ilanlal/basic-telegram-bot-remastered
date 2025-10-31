@@ -5,7 +5,8 @@ describe('Widget', () => {
     test('should initialize with user property value', () => {
         const propertyName = 'testUserProperty';
         const storedValue = '00012345';
-        global.PropertiesService.getUserProperties().setProperty(propertyName, storedValue);
+        global.PropertiesService.getUserProperties()
+            .setProperty(propertyName, storedValue);
         const widgetObject = {
             id: 'testId',
             propertyName: propertyName,

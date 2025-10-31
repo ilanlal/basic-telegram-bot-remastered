@@ -40,7 +40,7 @@ class Widget {
     }
 
     bindValueFromUserProperty() {
-        if (this._propertyName && this._userProperty) {
+        if (this._propertyName) {
             const value = this._userProperty.getProperty(this._propertyName);
             if (value !== null) {
                 this.setValue(value);
@@ -78,9 +78,11 @@ class Widget {
         return this._tabIndex;
     }
 
-    get userProperty() {
+    get propertyName() {
         return this._propertyName;
     }
+
+    
 }
 
 

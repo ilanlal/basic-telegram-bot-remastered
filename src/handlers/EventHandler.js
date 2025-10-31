@@ -200,10 +200,12 @@ EventHandler.AddonWrapper = class {
                 token = formInputs['txt_bot_api_token']?.stringInputs?.value[0] || null;
             }
 
-            const dataResponse = BotSetupController.create(this._userStore)
+            const result = BotSetupController
+                .create(this._userStore, PropertiesService.getUserProperties())
+                .identifyNewBotToken(token)
                 .setNewBotToken(token);
 
-            return this.handleOperationSuccess("Bot token identified successfully.")
+            return this.handleOperationSuccess("👍 Bot token identified successfully.")
                 .build();
 
         } catch (error) {

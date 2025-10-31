@@ -136,7 +136,7 @@ describe('EventHandler', () => {
         expect(data).toBeDefined();
         // notification present
         expect(data.notification).toBeDefined();
-        expect(data.notification.text).toBe('Bot token identified successfully.');
+        expect(data.notification.text).toBe('👍 Bot token identified successfully.');
     });
 
     // Additional tests for other handlers can be added similarly

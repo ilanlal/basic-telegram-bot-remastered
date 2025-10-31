@@ -241,8 +241,9 @@ EntityViewModel.CardServiceWrapper = class {
     }
 
     newWidget(widgetMeta = {}) {
+        const _ = Widget.create(widgetMeta);
         // Bind value from 'propertyName' property if specified
-        const value = widgetMeta.value || '';
+        const value = _.value || '';
 
         if (widgetMeta.DecoratedText) {
             return this.newDecoratedText(widgetMeta.DecoratedText, value);
