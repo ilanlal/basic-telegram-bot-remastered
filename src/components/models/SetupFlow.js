@@ -1,24 +1,98 @@
 class SetupFlow {
-    static get ON_LIGHT() {
-        return '🟢';
-    }
-    static get OFF_LIGHT() {
-        return '🔘';
-    }
-    static get WARN_LIGHT() {
-        return '🟡';
-    }
-    static get ERROR_LIGHT() {
-        return '🔴';
+    constructor(userStore, userProperties) {
+        if (!(userStore instanceof UserStore)) {
+            throw new Error("userStore must be an instance of UserStore");
+        }
+        this._userProperties = userProperties;
+        this._userStore = userStore;
+        this._telegramBotClient = null;
+        
     }
 
+    static create(
+        userStore = UserStoreFactory.create().current,
+        userProperties = PropertiesService.getUserProperties()
+    ) {
+        return new SetupFlow(userStore, userProperties);
+    }
+
+    setNewDefaultLanguage(code) {
+        if (!code || typeof code !== 'string' || code.trim() === '') {
+            throw new Error("Invalid language code");
+        }
+        return this._userProperties.setProperty(SetupFlow.InputMeta.DEFAULT_LANGUAGE, code);
+    }
+
+    setNewBotToken(token) {
+        if (!token || typeof token !== 'string' || token.trim() === '') {
+            throw new Error("Invalid bot token");
+        }
+        const safeToken = decodeURIComponent(token);
+
+        const response = new TelegramBotClient(safeToken).getMe();
+        if (response.getResponseCode() !== 200) {
+            throw new Error("Failed to validate bot token");
+        }
+        return this._userProperties.setProperty(SetupFlow.InputMeta.BOT_API_TOKEN, safeToken);
+    }
+
+    setNewDeploymentId(id) {
+        if (!id || typeof id !== 'string' || id.trim() === '') {
+            throw new Error("Invalid deployment ID");
+        }
+
+        const safeId = decodeURIComponent(id);
+        return this._userProperties.setProperty(SetupFlow.InputMeta.DEPLOYMENT_ID, safeId);
+    }
+
+    setMyNewChatId(id) {
+        if (!id || typeof id !== 'number') {
+            throw new Error("Invalid chat ID");
+        }
+        const safeId = decodeURIComponent(id);
+        return this._userProperties.setProperty(SetupFlow.InputMeta.ADMIN_CHAT_ID, safeId);
+    }
+
+    setWebhook() {
+        const deploymentId = this._userProperties.getProperty(SetupFlow.InputMeta.DEPLOYMENT_ID);
+        if (!deploymentId) {
+            throw new Error("Deployment ID is not available. Please deploy the script as a web app.");
+        }
+        const webhookUrl = `https://script.google.com/macros/s/${deploymentId}/exec`;
+
+        const response = this.telegramBotClient.setWebhook(webhookUrl);
+        if (response.getResponseCode() !== 200) {
+            throw new Error("Failed to set webhook");
+        }
+
+        return JSON.parse(response.getContentText());
+    }
+
+    deleteWebhook() {
+        const deploymentId = this._userProperties.getProperty(SetupFlow.InputMeta.DEPLOYMENT_ID);
+        if (!deploymentId) {
+            throw new Error("Deployment ID is not available. Please deploy the script as a web app.");
+        }
+        const webhookUrl = `https://script.google.com/macros/s/${deploymentId}/exec`;
+
+        const response = this.telegramBotClient
+            .deleteWebhook(webhookUrl);
+
+        if (response.getResponseCode() !== 200) {
+            throw new Error("Failed to delete webhook");
+        }
+
+        return JSON.parse(response.getContentText());
+    }
+
+    // Getters
     get trafficLight() {
         const leds = '{0}{1}{2}{3}{4}';
-        const led0 = this.stateObject.botTokenSet ? SetupFlow.ON_LIGHT : SetupFlow.OFF_LIGHT;
-        const led1 = this.stateObject.deploymentIdSet ? SetupFlow.ON_LIGHT : SetupFlow.OFF_LIGHT;
-        const led2 = this.stateObject.webhookSet ? SetupFlow.ON_LIGHT : SetupFlow.OFF_LIGHT;
-        const led3 = this.stateObject.chatIdSet ? SetupFlow.ON_LIGHT : SetupFlow.OFF_LIGHT;
-        const led4 = this.stateObject.defaultLanguageSet ? SetupFlow.ON_LIGHT : SetupFlow.WARN_LIGHT;
+        const led0 = this.stateObject.botTokenSet ? Lights.ON : Lights.OFF;
+        const led1 = this.stateObject.deploymentIdSet ? Lights.ON : Lights.OFF;
+        const led2 = this.stateObject.webhookSet ? Lights.ON : Lights.OFF;
+        const led3 = this.stateObject.chatIdSet ? Lights.ON : Lights.OFF;
+        const led4 = this.stateObject.defaultLanguageSet ? Lights.ON : Lights.WARN;
 
         return leds
             .replace('{0}', led0)
@@ -47,16 +121,16 @@ class SetupFlow {
 
     get stateObject() {
         return {
-            botToken: this._userStore.getBotToken(),
-            botTokenSet: !!this._userStore.getBotToken(),
-            deploymentId: this._userStore.getDeploymentId(),
-            deploymentIdSet: !!this._userStore.getDeploymentId(),
+            botToken: this._userProperties.getProperty(SetupFlow.InputMeta.BOT_API_TOKEN),
+            botTokenSet: !!this._userProperties.getProperty(SetupFlow.InputMeta.BOT_API_TOKEN),
+            deploymentId: this._userProperties.getProperty(SetupFlow.InputMeta.DEPLOYMENT_ID),
+            deploymentIdSet: !!this._userProperties.getProperty(SetupFlow.InputMeta.DEPLOYMENT_ID),
             webhookUrl: this.webhookUrl,
             webhookSet: !!this.webhookUrl,
-            chatId: this._userStore.getMyChatId(),
-            chatIdSet: !!this._userStore.getMyChatId(),
-            defaultLanguage: this._userStore.getLocalizationCode(),
-            defaultLanguageSet: !!this._userStore.getLocalizationCode(),
+            chatId: this._userProperties.getProperty(SetupFlow.InputMeta.ADMIN_CHAT_ID),
+            chatIdSet: !!this._userProperties.getProperty(SetupFlow.InputMeta.ADMIN_CHAT_ID),
+            defaultLanguage: this._userProperties.getProperty(SetupFlow.InputMeta.DEFAULT_LANGUAGE),
+            defaultLanguageSet: !!this._userProperties.getProperty(SetupFlow.InputMeta.DEFAULT_LANGUAGE),
         }
     }
 
@@ -83,85 +157,15 @@ class SetupFlow {
         }
         return JSON.parse(response.getContentText())?.result?.url || null;
     }
-
-    constructor(userStore) {
-        if (!(userStore instanceof UserStore)) {
-            throw new Error("userStore must be an instance of UserStore");
-        }
-        this._userStore = userStore;
-        this._telegramBotClient = null;
-    }
-
-    setNewDefaultLanguage(code) {
-        if (!code || typeof code !== 'string' || code.trim() === '') {
-            throw new Error("Invalid language code");
-        }
-        return this._userStore.setLocalizationCode(code);
-    }
-
-    setNewBotToken(token) {
-        if (!token || typeof token !== 'string' || token.trim() === '') {
-            throw new Error("Invalid bot token");
-        }
-
-        const response = new TelegramBotClient(token).getMe();
-        if (response.getResponseCode() !== 200) {
-            throw new Error("Failed to validate bot token");
-        }
-        return this._userStore.setBotToken(token);
-    }
-
-    setNewDeploymentId(id) {
-        if (!id || typeof id !== 'string' || id.trim() === '') {
-            throw new Error("Invalid deployment ID");
-        }
-        return this._userStore.setDeploymentId(id);
-    }
-
-    setMyNewChatId(id) {
-        if (!id || typeof id !== 'number') {
-            throw new Error("Invalid chat ID");
-        }
-        return this._userStore.setMyChatId(id);
-    }
-
-    setWebhook() {
-        const deploymentId = this._userStore.getDeploymentId();
-        if (!deploymentId) {
-            throw new Error("Deployment ID is not available. Please deploy the script as a web app.");
-        }
-        const webhookUrl = `https://script.google.com/macros/s/${deploymentId}/exec`;
-
-        const response = this.telegramBotClient.setWebhook(webhookUrl);
-        if (response.getResponseCode() !== 200) {
-            throw new Error("Failed to set webhook");
-        }
-
-        return JSON.parse(response.getContentText());
-    }
-
-    deleteWebhook() {
-        const deploymentId = this._userStore.getDeploymentId();
-        if (!deploymentId) {
-            throw new Error("Deployment ID is not available. Please deploy the script as a web app.");
-        }
-        const webhookUrl = `https://script.google.com/macros/s/${deploymentId}/exec`;
-
-        const response = this.telegramBotClient
-            .deleteWebhook(webhookUrl);
-
-        if (response.getResponseCode() !== 200) {
-            throw new Error("Failed to delete webhook");
-        }
-
-        return JSON.parse(response.getContentText());
-    }
-
-    static create(userStore = UserStoreFactory.create().current) {
-        return new SetupFlow(userStore);
-    }
 }
 
+SetupFlow.InputMeta = {
+    BOT_API_TOKEN: 'bot_api_token',
+    DEPLOYMENT_ID: 'deployment_id',
+    ADMIN_CHAT_ID: 'admin_chat_id',
+    DEFAULT_LANGUAGE: 'default_language',
+    DEBUG_MODE: 'debug_mode'
+};
 
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = { SetupFlow };

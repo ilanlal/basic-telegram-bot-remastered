@@ -5,6 +5,7 @@ const { UserStoreFactory } = require('../../services/UserStore');
 const { SetupFlow } = require('../models/SetupFlow');
 
 describe('Entity Controller', () => {
+    const userProperties = PropertiesService.getUserProperties();
     test('should create an instance using the static create method', () => {
         const entityController = EntityController.create();
         expect(entityController).toBeInstanceOf(EntityController);
@@ -16,7 +17,7 @@ describe('Entity Controller', () => {
             UserStoreFactory.create().current,
             CardService,
             SpreadsheetApp.getActiveSpreadsheet(),
-            PropertiesService.getUserProperties()
+            userProperties
         );
 
         // Set values from userStore if needed
@@ -24,9 +25,9 @@ describe('Entity Controller', () => {
 
         const actionResponseBuilder = entityController.pushCard(
             EMD.Home.cardMeta, [
-            { name: 'active', value: setupFlow.isActive }, 
+            { name: 'active', value: setupFlow.isActive },
             { name: 'admin', value: false }]);
-            
+
         expect(actionResponseBuilder).toBeDefined();
         const builtResponse = actionResponseBuilder.build();
         expect(builtResponse).toBeDefined();

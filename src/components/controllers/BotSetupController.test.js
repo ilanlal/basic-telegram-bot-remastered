@@ -1,5 +1,4 @@
 require('../../../tests');
-const UrlFetchAppStubConfiguration = require('@ilanlal/gasmocks/src/url-fetch/classes/UrlFetchAppStubConfiguration');
 const { BotSetupController } = require('./BotSetupController');
 
 describe('BotSetupController Tests', () => {
@@ -13,7 +12,6 @@ describe('BotSetupController Tests', () => {
         beforeEach(() => {
             UrlFetchAppStubConfiguration.reset();
             controller = BotSetupController.create(
-                UserStoreFactory.create().next,
                 PropertiesService.getUserProperties()
             );
         });
@@ -55,7 +53,6 @@ describe('BotSetupController Tests', () => {
                 const userProperties = PropertiesService.getUserProperties();
                 const testToken = "new_valid_token";
                 controller = BotSetupController.create(
-                    UserStoreFactory.create().next,
                     userProperties
                 );
                 controller.setNewBotToken(testToken);

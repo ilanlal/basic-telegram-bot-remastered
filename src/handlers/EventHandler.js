@@ -243,9 +243,7 @@ EventHandler.AddonWrapper = class {
             }
 
             const controller = BotSetupController
-                .create(
-                    this._userStore,
-                    PropertiesService.getUserProperties());
+                .create(PropertiesService.getUserProperties());
 
             const result = controller.identifyNewBotToken(token);
             controller.setNewBotToken(token);

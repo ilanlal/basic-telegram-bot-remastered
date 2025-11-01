@@ -1,20 +1,7 @@
 class BotSetupController {
-    get state() {
-        return {
-            botToken: this._userStore.getBotToken(),
-            botTokenSet: !!this._userStore.getBotToken(),
-            deploymentId: this._userStore.getDeploymentId(),
-            deploymentIdSet: !!this._userStore.getDeploymentId(),
-            webhookUrl: this.webhookUrl,
-            webhookSet: !!this.webhookUrl,
-            chatId: this._userStore.getMyChatId(),
-            chatIdSet: !!this._userStore.getMyChatId()
-        }
-    }
-
     get telegramBotClient() {
         if (!this._telegramBotClient) {
-            const token = this._userStore.getBotToken();
+            const token = this._userProperties.getProperty(SetupFlow.InputMeta.BOT_API_TOKEN);
             if (!token) {
                 return null;
             }
@@ -23,30 +10,13 @@ class BotSetupController {
         return this._telegramBotClient;
     }
 
-    get webhookUrl() {
-        if (!this.telegramBotClient) {
-            return null;
-        }
-        const response = this.telegramBotClient
-            .getWebhookInfo();
-
-        if (response.getResponseCode() !== 200) {
-            return null;
-        }
-        return JSON.parse(response.getContentText())?.result?.url || null;
-    }
-
-    constructor(userStore, userProperties) {
-        if (!(userStore instanceof UserStore)) {
-            throw new Error("userStore must be an instance of UserStore");
-        }
-        this._userStore = userStore;
+    constructor(userProperties) {
         this._telegramBotClient = null;
         this._userProperties = userProperties;
     }
 
-    static create(userStore = UserStoreFactory.create().current, userProperties = PropertiesService.getUserProperties()) {
-        return new BotSetupController(userStore, userProperties);
+    static create(userProperties = PropertiesService.getUserProperties()) {
+        return new BotSetupController(userProperties);
     }
 
     identifyNewBotToken(token) {
@@ -69,7 +39,7 @@ class BotSetupController {
 
     setNewBotToken(token) {
         const safeToken = decodeURIComponent(token);
-        return this._userProperties.setProperty('bot_api_token', safeToken);
+        return this._userProperties.setProperty(SetupFlow.InputMeta.BOT_API_TOKEN, safeToken);
     }
 
     setNewDeploymentId(id) {
@@ -77,30 +47,30 @@ class BotSetupController {
             throw new Error("Invalid deployment ID");
         }
         const safeId = decodeURIComponent(id);
-        return this._userProperties.setProperty('deployment_id', safeId);
+        return this._userProperties.setProperty(SetupFlow.InputMeta.DEPLOYMENT_ID, safeId);
     }
 
     setNewChatId(id) {
         if (!id || typeof id !== 'number') {
             throw new Error("Invalid chat ID");
         }
-        return this._userProperties.setProperty('admin_chat_id', id.toString());
+        return this._userProperties.setProperty(SetupFlow.InputMeta.ADMIN_CHAT_ID, id.toString());
     }
 
     setDebugMode(isDebug) {
         const debugValue = isDebug ? 'true' : 'false';
-        return this._userProperties.setProperty('debug_mode', debugValue);
+        return this._userProperties.setProperty(SetupFlow.InputMeta.DEBUG_MODE, debugValue);
     }
 
     setDefaultLanguage(languageCode) {
         if (!languageCode || typeof languageCode !== 'string' || languageCode.trim() === '') {
             throw new Error("Invalid language code");
         }
-        return this._userProperties.setProperty('default_language', languageCode);
+        return this._userProperties.setProperty(SetupFlow.InputMeta.DEFAULT_LANGUAGE, languageCode);
     }
 
     setWebhook() {
-        const deploymentId = this._userProperties.getProperty('deployment_id');
+        const deploymentId = this._userProperties.getProperty(SetupFlow.InputMeta.DEPLOYMENT_ID);
         if (!deploymentId) {
             throw new Error("Deployment ID is not available. Please deploy the script as a web app.");
         }
@@ -115,7 +85,7 @@ class BotSetupController {
     }
 
     deleteWebhook() {
-        const deploymentId = this._userStore.getDeploymentId();
+        const deploymentId = this._userProperties.getProperty(SetupFlow.InputMeta.DEPLOYMENT_ID);
         if (!deploymentId) {
             throw new Error("Deployment ID is not available. Please deploy the script as a web app.");
         }

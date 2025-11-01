@@ -50,7 +50,7 @@ describe('SetupFlow', () => {
     test('should set a new chat id', () => {
         const newChatId = 123456789;
         model.setMyNewChatId(newChatId);
-        expect(model.stateObject.chatId).toBe(newChatId);
+        expect(model.stateObject.chatId).toBe(newChatId+"");
     });
 
     // setNewDeploymentId
