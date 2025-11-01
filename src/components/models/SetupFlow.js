@@ -1,19 +1,14 @@
 class SetupFlow {
-    constructor(userStore, userProperties) {
-        if (!(userStore instanceof UserStore)) {
-            throw new Error("userStore must be an instance of UserStore");
-        }
+    constructor(userProperties) {
         this._userProperties = userProperties;
-        this._userStore = userStore;
         this._telegramBotClient = null;
         
     }
 
     static create(
-        userStore = UserStoreFactory.create().current,
         userProperties = PropertiesService.getUserProperties()
     ) {
-        return new SetupFlow(userStore, userProperties);
+        return new SetupFlow(userProperties);
     }
 
     setNewDefaultLanguage(code) {
@@ -136,7 +131,7 @@ class SetupFlow {
 
     get telegramBotClient() {
         if (!this._telegramBotClient) {
-            const token = this._userStore.getBotToken();
+            const token = this._userProperties.getProperty(SetupFlow.InputMeta.BOT_API_TOKEN);
             if (!token) {
                 return null;
             }

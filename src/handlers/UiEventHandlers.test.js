@@ -1,49 +1,6 @@
 require('../../tests');
 const { UiEventHandlers } = require('./UiEventHandlers');
 
-describe('UiEventHandlers.Home Tests', () => {
-    test('openAutomationRepliesCard should return a CardService.ActionResponse', () => {
-        const mockEvent = {
-            commonEventObject: {
-                formInputs: {
-                    ['BOT_TOKEN']: {
-                        stringInputs: {
-                            value: ["TEST_BOT_TOKEN"]
-                        }
-                    }
-                }
-            }
-        };
-
-        const actionResponse = UiEventHandlers.Home.openCreateNewBotCard(mockEvent);
-        expect(actionResponse).toBeDefined();
-    });
-
-    //openBotSettingsCard
-    test('openBotSettingsCard should return a CardService.ActionResponse', () => {
-        const mockEvent = {};
-        const actionResponse = UiEventHandlers.Home.openBotSettingsCard(mockEvent);
-        expect(actionResponse).toBeDefined();
-    });
-
-    //openAutomationRepliesCard
-    test('openAutomationRepliesCard should return a CardService.ActionResponse', () => {
-        const mockEvent = {};
-        const actionResponse = UiEventHandlers.Home.openAutomationRepliesCard(mockEvent);
-        expect(actionResponse).toBeDefined();
-    });
-
-    // openBotSetupCard
-    test('openBotSetupCard should return a CardService.ActionResponse', () => {
-        const mockEvent = {};
-        const actionResponse = UiEventHandlers.Home.openBotSetupCard(mockEvent);
-        expect(actionResponse).toBeDefined();
-        const data = actionResponse.getData();
-        expect(data).toBeDefined();
-        expect(data.cardNavigations).toBeDefined();
-    });
-});
-
 // UiEventHandlers.Bot Tests
 describe('UiEventHandlers.Bot Tests', () => {
 

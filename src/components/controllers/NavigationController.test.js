@@ -7,7 +7,10 @@ describe('NavigationController', () => {
     beforeEach(() => {
         navigationController =
             NavigationController.create(
-                new UserStore()
+                UserStoreFactory.create().current,
+                CardService,
+                SpreadsheetApp.getActiveSpreadsheet(),
+                PropertiesService.getUserProperties()
             );
     });
 

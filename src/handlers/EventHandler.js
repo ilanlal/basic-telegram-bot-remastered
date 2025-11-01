@@ -97,6 +97,14 @@ EventHandler.Addon = {
                 EventHandler.prototype.userStore,
                 EventHandler.prototype.userProperties)
             .handleIdentifyTokenClick(e);
+    },
+    onSaveBotSetupClick: (e) => {
+        // Not implemented yet
+        return new EventHandler
+            .AddonWrapper(
+                EventHandler.prototype.userStore,
+                EventHandler.prototype.userProperties)
+            .handleSaveBotSetupClick(e);
     }
 }
 EventHandler.AddonWrapper = class {
@@ -111,6 +119,7 @@ EventHandler.AddonWrapper = class {
     handleOpenHomeCard(e) {
         try {
             const params = [];
+            const setupFlow = SetupFlow.create(this._userProperties);
             return EntityController
                 .create(
                     this._userStore,
@@ -251,6 +260,15 @@ EventHandler.AddonWrapper = class {
             return this.handleOperationSuccess("👍 Bot token identified successfully.")
                 .build();
 
+        } catch (error) {
+            return this.handleError(error)
+                .build();
+        }
+    }
+
+    handleSaveBotSetupClick(e) {
+        try {
+            throw new Error("Not implemented yet");
         } catch (error) {
             return this.handleError(error)
                 .build();

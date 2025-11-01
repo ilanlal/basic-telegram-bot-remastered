@@ -7,9 +7,7 @@ describe('SetupFlow', () => {
     let model;
 
     beforeEach(() => {
-        model = SetupFlow.create(
-            UserStoreFactory.create().next
-        );
+        model = SetupFlow.create(PropertiesService.getUserProperties());
     });
 
     test('should create a SetupFlow instance', () => {
@@ -22,7 +20,7 @@ describe('SetupFlow', () => {
         model.setNewDefaultLanguage(newLanguageCode);
         expect(model.stateObject.defaultLanguage).toBe(newLanguageCode);
     });
-    
+
     // setNewBotToken
     test('should set a new bot token', () => {
         const newToken = '[DUMMY_BOT_TOKEN]';
@@ -50,7 +48,7 @@ describe('SetupFlow', () => {
     test('should set a new chat id', () => {
         const newChatId = 123456789;
         model.setMyNewChatId(newChatId);
-        expect(model.stateObject.chatId).toBe(newChatId+"");
+        expect(model.stateObject.chatId).toBe(newChatId + "");
     });
 
     // setNewDeploymentId

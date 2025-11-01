@@ -1,23 +1,35 @@
 class NavigationController {
-    constructor(userStore) {
+    constructor(userStore, cardService, spreadsheet, userProperties) {
         this._userStore = userStore;
+        this._cardService = cardService;
+        this._spreadsheet = spreadsheet;
+        this._userProperties = userProperties;
     }
 
-    static create(userStore = UserStoreFactory.create().current) {
-        return new NavigationController(userStore);
+    static create(
+        userStore = UserStoreFactory.create().current,
+        cardService = CardService,
+        spreadsheet = SpreadsheetApp.getActiveSpreadsheet(),
+        userProperties = PropertiesService.getUserProperties()
+    ) {
+        return new NavigationController(userStore,
+            cardService, spreadsheet, userProperties);
     }
 
     navigateToHomeCard() {
-        const setupFlow = SetupFlow.create(this._userStore);
-
-        return CardService.newActionResponseBuilder()
-            .setNavigation(
-                CardService.newNavigation()
-                    .pushCard(
-                        HomeCard.create(setupFlow)
-                            .build()
-                    )
-            );
+        const setupFlow = SetupFlow.create(this._userProperties);
+        const entityController = EntityController.create(
+            this._userStore,
+            this._cardService,
+            this._spreadsheet,
+            this._userProperties
+        );
+        return entityController.pushCard(
+            EMD.Home.card({
+                isActive: setupFlow.stateObject.botTokenSet,
+                isAdmin: false
+            })
+        );
     }
 
     navigateToNewBotTokenCard() {
@@ -100,15 +112,19 @@ class NavigationController {
     }
 
     navigateToBotSetupCard() {
-        const setupFlow = SetupFlow.create(this._userStore);
-        return CardService.newActionResponseBuilder()
-            .setNavigation(
-                CardService.newNavigation()
-                    .pushCard(
-                        BotSetupCard.create(setupFlow)
-                            .build()
-                    )
-            );
+        const setupFlow = SetupFlow.create(this._userProperties);
+        const entityController = EntityController.create(
+            this._userStore,
+            this._cardService,
+            this._spreadsheet,
+            this._userProperties
+        );
+        return entityController.pushCard(
+            EMD.BotSetup.card({
+                isActive: setupFlow.stateObject.botTokenSet,
+                isAdmin: false
+            })
+        );
     }
 
     reload() {

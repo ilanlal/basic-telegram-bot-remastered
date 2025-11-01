@@ -11,7 +11,7 @@ EMD.Home = {
     entityName: 'Home',
     displayName: 'Home',
     pluralDisplayName: 'Homes',
-    card: (data={}) => {
+    card: (data = {}) => {
         return {
             name: 'homeCard',
             header:
@@ -256,118 +256,121 @@ EMD.BotSetup = {
     entityName: 'Bot Setup',
     displayName: 'Bot Setup',
     pluralDisplayName: 'Bot Setups',
-    cardMeta: {
-        name: 'bot_setup_Card',
-        header: {
-            title: 'Bot Setup',
-            subTitle: 'Configure your bot environment variables here.',
-            imageUrl: EMD.DEFAULT_IMAGE_URL,
-            imageStyle: CardService.ImageStyle.SQUARE,
-            imageAltText: 'Environment Image'
-        },
-        sections:
-            [
-                {   // Getting Started Variables Section
-                    header: 'Getting Started Variables',
-                    collapsible: true,
-                    numUncollapsibleWidgets: 3,
-                    widgets: [
-                        { // Bot token set state
-                            id: 'bot_token_set_state',
-                            TextParagraph: {
-                                text: 'Bot API Token is set.'
-                            }
-                        },
-                        { // Bot Token Variable
-                            id: 'bot_token_variable',
-                            TextInput: {
-                                title: 'Bot API Token',
-                                fieldName: 'txt_bot_api_token',
-                                hint: 'Enter bot API token'
-                            },
-                            propertyName: 'bot_api_token'
-                        },
-                        { // Identify Token Button
-                            id: 'identify_token_button',
-                            TextButton: {
-                                text: '🆔 Identify Token',
-                                onClick: {
-                                    functionName: 'EventHandler.Addon.onIdentifyTokenClick'
+    card: (data = {}) => {
+        return {
+            name: 'bot_setup_Card',
+            header: {
+                title: 'Bot Setup',
+                subTitle: 'Configure your bot environment variables here.',
+                imageUrl: EMD.DEFAULT_IMAGE_URL,
+                imageStyle: CardService.ImageStyle.SQUARE,
+                imageAltText: 'Environment Image'
+            }
+            ,
+            sections:
+                [
+                    {   // Getting Started Variables Section
+                        header: 'Getting Started Variables',
+                        collapsible: true,
+                        numUncollapsibleWidgets: 3,
+                        widgets: [
+                            { // Bot token set state
+                                id: 'bot_token_set_state',
+                                TextParagraph: {
+                                    text: 'Bot API Token is set.'
                                 }
-                            }
-                        },
-                        {   // Deployment ID Variable
-                            id: 'deployment_id_variable',
-                            TextInput: {
-                                title: 'Deployment ID',
-                                fieldName: 'txt_deployment_id',
-                                hint: 'Enter deployment ID'
                             },
-                            propertyName: 'deployment_id'
-                        },
-                        { // DecoratedText for webhook info
-                            id: 'webhook_info',
-                            DecoratedText: {
-                                text: 'Webhook Info',
-                                topLabel: 'Webhook URL',
-                                bottomLabel: 'Manage your webhook settings here',
-                                wrapText: true,
-                                textButton: {
-                                    disabled: false,
-                                    text: '🔗',
+                            { // Bot Token Variable
+                                id: 'bot_token_variable',
+                                TextInput: {
+                                    title: 'Bot API Token',
+                                    fieldName: 'txt_bot_api_token',
+                                    hint: 'Enter bot API token'
+                                },
+                                propertyName: 'bot_api_token'
+                            },
+                            { // Identify Token Button
+                                id: 'identify_token_button',
+                                TextButton: {
+                                    text: '🆔 Identify Token',
                                     onClick: {
-                                        functionName: 'EventHandler.Addon.webhook',
-                                        parameters: { action: 'manageWebhook' }
+                                        functionName: 'EventHandler.Addon.onIdentifyTokenClick'
+                                    }
+                                }
+                            },
+                            {   // Deployment ID Variable
+                                id: 'deployment_id_variable',
+                                TextInput: {
+                                    title: 'Deployment ID',
+                                    fieldName: 'txt_deployment_id',
+                                    hint: 'Enter deployment ID'
+                                },
+                                propertyName: 'deployment_id'
+                            },
+                            { // DecoratedText for webhook info
+                                id: 'webhook_info',
+                                DecoratedText: {
+                                    text: 'Webhook Info',
+                                    topLabel: 'Webhook URL',
+                                    bottomLabel: 'Manage your webhook settings here',
+                                    wrapText: true,
+                                    textButton: {
+                                        disabled: false,
+                                        text: '🔗',
+                                        onClick: {
+                                            functionName: 'EventHandler.Addon.webhook',
+                                            parameters: { action: 'manageWebhook' }
+                                        }
                                     }
                                 }
                             }
+                        ]
+                    },
+                    {  // Environment variables.
+                        header: 'Environment variables',
+                        collapsible: true,
+                        numUncollapsibleWidgets: 2,
+                        widgets: [
+                            { // Admin Chat ID Variable
+                                id: 'admin_chat_id_variable',
+                                TextInput: {
+                                    title: 'Admin Chat ID',
+                                    fieldName: 'txt_admin_chat_id',
+                                    hint: 'Enter admin chat ID',
+                                    value: '[YOUR_ADMIN_CHAT_ID]'
+                                },
+                                propertyName: 'admin_chat_id'
+                            },
+                            {   // Log Events Setting
+                                id: 'log_events_setting',
+                                TextInput: {
+                                    title: 'Debug Mode (Set to true or any other value for false)',
+                                    fieldName: 'txt_debug_mode',
+                                    hint: 'Enter debug mode (true/false)',
+                                    value: 'false'
+                                },
+                                propertyName: 'debug_mode'
+                            },
+                            {   // Default Language Variable
+                                id: 'default_language_variable',
+                                TextInput: {
+                                    title: 'Default language',
+                                    fieldName: 'txt_default_language',
+                                    hint: 'Enter default language',
+                                    value: 'en'
+                                },
+                                propertyName: 'default_language'
+                            }
+                        ]
+                    }
+                ],
+            fixedFooter: {
+                primaryButton: {
+                    textButton: {
+                        text: '💾 Save',
+                        onClick: {
+                            functionName: 'EventHandler.Addon.onSaveBotSetupClick',
                         }
-                    ]
-                },
-                {  // Environment variables.
-                    header: 'Environment variables',
-                    collapsible: true,
-                    numUncollapsibleWidgets: 2,
-                    widgets: [
-                        { // Admin Chat ID Variable
-                            id: 'admin_chat_id_variable',
-                            TextInput: {
-                                title: 'Admin Chat ID',
-                                fieldName: 'txt_admin_chat_id',
-                                hint: 'Enter admin chat ID',
-                                value: '[YOUR_ADMIN_CHAT_ID]'
-                            },
-                            propertyName: 'admin_chat_id'
-                        },
-                        {   // Log Events Setting
-                            id: 'log_events_setting',
-                            TextInput: {
-                                title: 'Debug Mode (Set to true or any other value for false)',
-                                fieldName: 'txt_debug_mode',
-                                hint: 'Enter debug mode (true/false)',
-                                value: 'false'
-                            },
-                            propertyName: 'debug_mode'
-                        },
-                        {   // Default Language Variable
-                            id: 'default_language_variable',
-                            TextInput: {
-                                title: 'Default language',
-                                fieldName: 'txt_default_language',
-                                hint: 'Enter default language',
-                                value: 'en'
-                            },
-                            propertyName: 'default_language'
-                        }
-                    ]
-                }
-            ],
-        fixedFooter: {
-            primaryButton: {
-                textButton: {
-                    text: '💾 Save',
-                    onClick: {
-                        functionName: 'BotSetupHandler.saveNewBotSetupInfo',
                     }
                 }
             }
@@ -482,57 +485,59 @@ EMD.WebhookSetup = {
     entityName: 'Webhook',
     displayName: 'Webhook',
     pluralDisplayName: 'Webhooks',
-    cardMeta: {
-        name: 'webhook_Card',
-        header: {
-            title: 'Webhook Management',
-            subTitle: 'Manage your bot webhooks here.',
-            imageUrl: EMD.DEFAULT_IMAGE_URL,
-            imageStyle: CardService.ImageStyle.SQUARE,
-            imageAltText: 'Webhook Image'
-        },
-        sections:
-            [   // Webhook Management Section
-                {
-                    header: 'Webhook Management',
-                    collapsible: false,
-                    numUncollapsibleWidgets: 0,
-                    widgets: [
-                        {
-                            id: 'set_webhook_widget',
-                            DecoratedText: {
-                                topLabel: '📡',
-                                text: 'api/setWebhook',
-                                bottomLabel: 'Set webhook for the bot',
-                                wrapText: true,
-                                textButton: {
-                                    text: '📡 Set',
-                                    disabled: false,
-                                    onClick: {
-                                        functionName: 'EventHandler.Addon.setWebhook',
-                                        parameters: {
-                                            api: 'setWebhook'
+    card: (data = {}) => {
+        return {
+            name: 'webhook_Card',
+            header: {
+                title: 'Webhook Management',
+                subTitle: 'Manage your bot webhooks here.',
+                imageUrl: EMD.DEFAULT_IMAGE_URL,
+                imageStyle: CardService.ImageStyle.SQUARE,
+                imageAltText: 'Webhook Image'
+            },
+            sections:
+                [   // Webhook Management Section
+                    {
+                        header: 'Webhook Management',
+                        collapsible: false,
+                        numUncollapsibleWidgets: 0,
+                        widgets: [
+                            {
+                                id: 'set_webhook_widget',
+                                DecoratedText: {
+                                    topLabel: '📡',
+                                    text: 'api/setWebhook',
+                                    bottomLabel: 'Set webhook for the bot',
+                                    wrapText: true,
+                                    textButton: {
+                                        text: '📡 Set',
+                                        disabled: false,
+                                        onClick: {
+                                            functionName: 'EventHandler.Addon.setWebhook',
+                                            parameters: {
+                                                api: 'setWebhook'
+                                            }
                                         }
                                     }
                                 }
                             }
-                        }
-                    ]
-                }
-            ],
-        fixedFooter: {
-            primaryButton: {
-                textButton: {
-                    text: '💫 Bind row data',
-                    onClick: {
-                        functionName: 'EventHandler.Addon.onBindData',
-                        parameters: {
-                            action: 'bindData'
+                        ]
+                    }
+                ],
+            fixedFooter: {
+                primaryButton: {
+                    textButton: {
+                        text: '💫 Bind row data',
+                        onClick: {
+                            functionName: 'EventHandler.Addon.onBindData',
+                            parameters: {
+                                action: 'bindData'
+                            }
                         }
                     }
                 }
             }
-        }
+        };
     }
 };
 

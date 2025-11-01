@@ -21,12 +21,13 @@ describe('Entity Controller', () => {
         );
 
         // Set values from userStore if needed
-        const setupFlow = SetupFlow.create(UserStoreFactory.create().current);
+        const setupFlow = SetupFlow.create(userProperties);
 
         const actionResponseBuilder = entityController.pushCard(
-            EMD.Home.cardMeta, [
-            { name: 'active', value: setupFlow.isActive },
-            { name: 'admin', value: false }]);
+            EMD.Home.card({
+                isActive: setupFlow.stateObject.botTokenSet,
+                isAdmin: false
+            }));
 
         expect(actionResponseBuilder).toBeDefined();
         const builtResponse = actionResponseBuilder.build();
