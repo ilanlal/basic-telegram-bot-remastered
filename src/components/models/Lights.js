@@ -13,6 +13,6 @@ class Lights {
     }
 }
 
-module.exports = {
-    Lights
-};
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = { Lights };
+}
