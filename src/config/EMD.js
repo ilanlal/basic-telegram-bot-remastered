@@ -11,7 +11,7 @@ EMD.Home = {
     entityName: 'Home',
     displayName: 'Home',
     pluralDisplayName: 'Homes',
-    card: (data) => {
+    card: (data={}) => {
         return {
             name: 'homeCard',
             header:
@@ -28,10 +28,10 @@ EMD.Home = {
                     collapsible: false,
                     numUncollapsibleWidgets: 0,
                     widgets: [
-                        {   // Bot setup widget
-                            id: 'bot_setup_widget',
+                        {   // Dashboard welcome widget
+                            id: 'dashboard_welcome_widget',
                             TextParagraph: {
-                                text: `Welcome to the Basic Telegram Bot Remastered! Use the buttons below to navigate through the setup and management of your Telegram bot.`
+                                text: `Data: \n\n ${JSON.stringify(data)}.`
                             }
                         }
                     ]
