@@ -166,7 +166,7 @@ describe('Model.CardWrapper', () => {
                 const data = header.getData();
                 expect(data).toBeDefined();
                 expect(data.title).toBe(headerMeta.title);
-                expect(data.subTitle).toBe(`${headerMeta.subTitle} [active:${true}]`);
+                expect(data.subTitle).toBe(`${headerMeta.subTitle}`);
                 expect(data.imageUrl).toBe(headerMeta.imageUrl);
                 expect(data.imageStyle).toBe(headerMeta.imageStyle);
                 expect(data.imageAltText).toBe(headerMeta.imageAltText);

@@ -14,13 +14,120 @@ EMD.Home = {
     card: (data) => {
         return {
             name: 'homeCard',
-            header: (data = {}) => {
-                return {
-                    title: 'Home',
-                    subTitle: 'Welcome to your home',
-                    imageUrl: EMD.DEFAULT_IMAGE_URL,
-                    imageStyle: CardService.ImageStyle.SQUARE,
-                    imageAltText: 'Home Image'
+            header:
+            {
+                title: 'Home',
+                subTitle: 'Welcome to your home',
+                imageUrl: EMD.DEFAULT_IMAGE_URL,
+                imageStyle: CardService.ImageStyle.SQUARE,
+                imageAltText: 'Home Image'
+            },
+            sections: [
+                {   // Dashboard section
+                    header: 'Dashboard',
+                    collapsible: false,
+                    numUncollapsibleWidgets: 0,
+                    widgets: [
+                        {   // Bot setup widget
+                            id: 'bot_setup_widget',
+                            TextParagraph: {
+                                text: `Welcome to the Basic Telegram Bot Remastered! Use the buttons below to navigate through the setup and management of your Telegram bot.`
+                            }
+                        }
+                    ]
+                },
+                {   // Get started section
+                    header: 'Get Started with Your Bot',
+                    collapsible: false,
+                    numUncollapsibleWidgets: 0,
+                    widgets: [
+                        {   // Bot setup widget
+                            id: 'bot_setup_widget',
+                            DecoratedText: {
+                                text: 'Click the button to setup your bot',
+                                topLabel: 'Get started',
+                                bottomLabel: '🤖',
+                                wrapText: true,
+                                textButton: {
+                                    disabled: false,
+                                    text: '🤖 Set me up',
+                                    onClick: {
+                                        functionName: 'EventHandler.Addon.onBotSetupClick',
+                                        parameters: { action: 'setupBot' }
+                                    }
+                                }
+                            }
+                        },
+                        {   // Webhook management widget
+                            id: 'webhook_management_widget',
+                            DecoratedText: {
+                                text: 'Manage your webhooks',
+                                topLabel: '🔗 Webhook Management',
+                                bottomLabel: 'Click the button to manage your webhooks',
+                                wrapText: true,
+                                textButton: {
+                                    disabled: false,
+                                    text: '⚙️ Manage Webhooks',
+                                    onClick: {
+                                        functionName: 'EventHandler.Addon.onWebhookManagementClick',
+                                        parameters: { action: 'manageWebhooks' }
+                                    }
+                                }
+                            }
+                        }
+                    ]
+                },
+                {   // Advanced Settings Section
+                    header: 'Advanced Settings',
+                    collapsible: true,
+                    numUncollapsibleWidgets: 1,
+                    widgets: [
+                        {   // Automation management widget
+                            id: 'automation_management_widget',
+                            DecoratedText: {
+                                text: 'Automation management',
+                                topLabel: 'Automations {total}',
+                                bottomLabel: 'Manage your automations here',
+                                wrapText: true,
+                                textButton: {
+                                    disabled: false,
+                                    text: '⚡',
+                                    onClick: {
+                                        functionName: 'EventHandler.Addon.automation',
+                                        parameters: { action: 'manageAutomations' }
+                                    }
+                                }
+                            }
+                        },
+                        {  // Contacts management widget
+                            id: 'contacts_management_widget',
+                            DecoratedText: {
+                                text: 'Contacts management',
+                                topLabel: 'Contacts {total}',
+                                bottomLabel: 'Manage your contacts here',
+                                wrapText: true,
+                                textButton: {
+                                    disabled: false,
+                                    text: '👥',
+                                    onClick: {
+                                        functionName: 'EventHandler.Addon.contacts',
+                                        parameters: { action: 'manageContacts' }
+                                    }
+                                }
+                            }
+                        }
+                    ]
+                }
+            ],
+            fixedFooter: {
+                primaryButton: {
+                    textButton: {
+                        text: 'Primary Action',
+                        onClick: {
+                            functionName: 'EventHandler.Addon.onPrimaryActionClick',
+                            parameters: { data }
+                        }
+                    }
                 }
             }
         };

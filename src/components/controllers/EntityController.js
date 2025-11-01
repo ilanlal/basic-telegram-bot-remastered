@@ -23,12 +23,7 @@ class EntityController {
             userProperties: this.userProperties
         });
 
-        const cardDataSet = {
-            isActive: params.find(p => p.name === 'active')?.value || true,
-            isAdmin: params.find(p => p.name === 'admin')?.value || false
-        };
-
-        const cardBuilder = viewModel.getCardBuilder(cardMeta, cardDataSet);
+        const cardBuilder = viewModel.getCardBuilder(cardMeta);
 
         return this.cardService.newActionResponseBuilder()
             .setNavigation(

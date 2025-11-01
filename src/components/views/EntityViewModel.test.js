@@ -28,7 +28,7 @@ describe('EntityViewModel', () => {
         tests.forEach((emd) => {
             describe(`Testing entity: ${emd[0].entityName}`, () => {
                 it(`should create a card from the "${emd[0].entityName}" cardMeta`, () => {
-                    if(!emd[0].cardMeta) return;
+                    if (!emd[0].cardMeta) return;
                     const cardMeta = emd[0].cardMeta;
                     const card = viewModel.getCardBuilder(cardMeta, { isActive: true });
                     expect(card).toBeDefined();
@@ -38,7 +38,7 @@ describe('EntityViewModel', () => {
                     expect(data.name).toBe(cardMeta.name);
                     expect(data.header).toBeDefined();
                     expect(data.header.title).toBe(cardMeta.header.title);
-                    expect(data.header.subTitle).toBe(`${cardMeta.header.subTitle} [active:${true}]`);
+                    expect(data.header.subTitle).toBe(`${cardMeta.header.subTitle}`);
                     expect(data.header.imageUrl).toBe(cardMeta.header.imageUrl);
                     expect(data.header.imageStyle).toBe(cardMeta.header.imageStyle);
                     expect(data.header.imageAltText).toBe(cardMeta.header.imageAltText);
@@ -46,9 +46,27 @@ describe('EntityViewModel', () => {
                     expect(data.sections.length).toBe(cardMeta.sections.length);
                 });
 
+                it(`should create a card from the "${emd[0].entityName}" card method`, () => {
+                    if (!emd[0].card) return;
+                    const card = viewModel.getCardBuilder(emd[0].card({ isActive: true, isAdmin: false }));
+                    expect(card).toBeDefined();
+                    const builtCard = card.build();
+                    const data = builtCard.getData();
+                    expect(data).toBeDefined();
+                    expect(data.name).toBe(emd[0].card().name);
+                    expect(data.header).toBeDefined();
+                    expect(data.header.title).toBe(emd[0].card().header.title);
+                    expect(data.header.subTitle).toBe(`${emd[0].card().header.subTitle}`);
+                    expect(data.header.imageUrl).toBe(emd[0].card().header.imageUrl);
+                    expect(data.header.imageStyle).toBe(emd[0].card().header.imageStyle);
+                    expect(data.header.imageAltText).toBe(emd[0].card().header.imageAltText);
+                    expect(data.sections).toBeDefined();
+                    expect(data.sections.length).toBe(emd[0].card().sections.length);
+                });
+
                 it(`should get the active sheet from the "${emd[0].entityName}" sheetMeta`, () => {
                     const sheetMeta = emd[0].sheetMeta;
-                    if(!sheetMeta) return;
+                    if (!sheetMeta) return;
                     const activeSheet = viewModel.getActiveSheet(sheetMeta);
                     expect(activeSheet).toBeDefined();
                 });
