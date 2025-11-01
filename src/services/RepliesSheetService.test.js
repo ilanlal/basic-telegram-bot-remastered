@@ -1,7 +1,5 @@
-require('@ilanlal/gasmocks');
-require('.');
+require('../../tests');
 const { RepliesSheetService } = require('./RepliesSheetService');
-require('../config');
 
 const language_code = 'en';
 const activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet();

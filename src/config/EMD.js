@@ -11,6 +11,20 @@ EMD.Home = {
     entityName: 'Home',
     displayName: 'Home',
     pluralDisplayName: 'Homes',
+    card: (data) => {
+        return {
+            name: 'homeCard',
+            header: (data = {}) => {
+                return {
+                    title: 'Home',
+                    subTitle: 'Welcome to your home',
+                    imageUrl: EMD.DEFAULT_IMAGE_URL,
+                    imageStyle: CardService.ImageStyle.SQUARE,
+                    imageAltText: 'Home Image'
+                }
+            }
+        };
+    },
     cardMeta: {
         name: 'homeCard',
         header: {
@@ -20,7 +34,21 @@ EMD.Home = {
             imageStyle: CardService.ImageStyle.SQUARE,
             imageAltText: 'Home Image'
         },
+
         sections: [
+            {   // Dashboard section
+                header: 'Dashboard',
+                collapsible: false,
+                numUncollapsibleWidgets: 0,
+                widgets: [
+                    {   // Bot setup widget
+                        id: 'bot_setup_widget',
+                        TextParagraph: {
+                            text: `Welcome to the Basic Telegram Bot Remastered! Use the buttons below to navigate through the setup and management of your Telegram bot.`
+                        }
+                    }
+                ]
+            },
             {   // Get started section
                 header: 'Get Started with Your Bot',
                 collapsible: false,
