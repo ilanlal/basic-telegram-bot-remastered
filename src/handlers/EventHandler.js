@@ -126,7 +126,12 @@ EventHandler.AddonWrapper = class {
                     CardService,
                     SpreadsheetApp.getActiveSpreadsheet(),
                     this._userProperties)
-                .pushCard(EMD.Home.cardMeta, params)
+                .pushCard(EMD.Home.card(
+                    {
+                        isActive: setupFlow.stateObject.botTokenSet,
+                        isAdmin: false
+                    }
+                ))
                 .build();
         } catch (error) {
             return this.handleError(error)
@@ -211,14 +216,20 @@ EventHandler.AddonWrapper = class {
 
     handleBotSetupClick(e) {
         try {
-            const params = [];
+            const setupFlow = SetupFlow.create(this._userProperties);
+
             return EntityController
                 .create(
                     this._userStore,
                     CardService,
                     SpreadsheetApp.getActiveSpreadsheet(),
                     this._userProperties)
-                .pushCard(EMD.BotSetup.cardMeta, params)
+                .pushCard(EMD.BotSetup.card(
+                    {
+                        isActive: setupFlow.stateObject.botTokenSet,
+                        isAdmin: false
+                    }
+                ))
                 .build();
         } catch (error) {
             return this.handleError(error)

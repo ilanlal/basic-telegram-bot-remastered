@@ -14,7 +14,8 @@ describe('EntityViewModel', () => {
     it('should create an view model instance.', () => {
         const viewModel = EntityViewModel.create({
             cardService: CardService,
-            activeSpreadsheet: SpreadsheetApp.getActiveSpreadsheet()
+            activeSpreadsheet: SpreadsheetApp.getActiveSpreadsheet(),
+            userProperties: PropertiesService.getUserProperties()
         });
         expect(viewModel).toBeDefined();
     });
@@ -22,33 +23,19 @@ describe('EntityViewModel', () => {
     describe('Entity Metadata configuration', () => {
         const viewModel = EntityViewModel.create({
             cardService: CardService,
-            activeSpreadsheet: SpreadsheetApp.getActiveSpreadsheet()
+            activeSpreadsheet: SpreadsheetApp.getActiveSpreadsheet(),
+            userProperties: PropertiesService.getUserProperties()
         });
 
         tests.forEach((emd) => {
             describe(`Testing entity: ${emd[0].entityName}`, () => {
-                it(`should create a card from the "${emd[0].entityName}" cardMeta`, () => {
-                    if (!emd[0].cardMeta) return;
-                    const cardMeta = emd[0].cardMeta;
-                    const card = viewModel.getCardBuilder(cardMeta, { isActive: true });
-                    expect(card).toBeDefined();
-                    const builtCard = card.build();
-                    const data = builtCard.getData();
-                    expect(data).toBeDefined();
-                    expect(data.name).toBe(cardMeta.name);
-                    expect(data.header).toBeDefined();
-                    expect(data.header.title).toBe(cardMeta.header.title);
-                    expect(data.header.subTitle).toBe(`${cardMeta.header.subTitle}`);
-                    expect(data.header.imageUrl).toBe(cardMeta.header.imageUrl);
-                    expect(data.header.imageStyle).toBe(cardMeta.header.imageStyle);
-                    expect(data.header.imageAltText).toBe(cardMeta.header.imageAltText);
-                    expect(data.sections).toBeDefined();
-                    expect(data.sections.length).toBe(cardMeta.sections.length);
-                });
-
                 it(`should create a card from the "${emd[0].entityName}" card method`, () => {
-                    if (!emd[0].card) return;
-                    const card = viewModel.getCardBuilder(emd[0].card({ isActive: true, isAdmin: false }));
+                    // if emd[0].card is function
+                    if (typeof emd[0].card !== 'function') return;
+                    const card = viewModel.getCardBuilder(
+                        emd[0].card(
+                            emd[1]));
+                            
                     expect(card).toBeDefined();
                     const builtCard = card.build();
                     const data = builtCard.getData();

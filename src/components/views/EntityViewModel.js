@@ -1,16 +1,4 @@
 class EntityViewModel {
-    static get ON_LIGHT() {
-        return '🟢';
-    }
-    static get OFF_LIGHT() {
-        return '🔘';
-    }
-    static get WARN_LIGHT() {
-        return '🟡';
-    }
-    static get ERROR_LIGHT() {
-        return '🔴';
-    }
     static get INVALID_MODEL_ERROR() {
         return "Invalid data model provided to ViewModel.create(meta.name), missing meta.name property.";
     }
