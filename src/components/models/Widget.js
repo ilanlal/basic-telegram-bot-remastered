@@ -26,9 +26,12 @@ class Widget {
 
         if (propertyName) {
             widgetInstance.setPropertyName(propertyName);
+            const value = userProperties.getProperty(propertyName);
+            if (value !== null) {
+                widgetInstance.setValue(value);
+            }
         }
-
-        return widgetInstance.bindValueFromUserProperty();
+        return widgetInstance;
     }
 
     constructor(id, userProperty) {
@@ -37,16 +40,6 @@ class Widget {
         this._value = null;
         this._tabIndex = 0;
         this._propertyName = null;
-    }
-
-    bindValueFromUserProperty() {
-        if (this._propertyName) {
-            const value = this._userProperty.getProperty(this._propertyName);
-            if (value !== null) {
-                this.setValue(value);
-            }
-        }
-        return this;
     }
 
     /// Setters
@@ -82,7 +75,7 @@ class Widget {
         return this._propertyName;
     }
 
-    
+
 }
 
 

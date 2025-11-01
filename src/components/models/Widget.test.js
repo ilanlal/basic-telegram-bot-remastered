@@ -5,21 +5,25 @@ describe('Widget', () => {
     test('should initialize with user property value', () => {
         const propertyName = 'testUserProperty';
         const storedValue = '00012345';
-        global.PropertiesService.getUserProperties()
+        global.PropertiesService
+            .getUserProperties()
             .setProperty(propertyName, storedValue);
+            
         const widgetObject = {
             id: 'testId',
-            propertyName: propertyName,
+            propertyName,
             TextInput: {
-                fieldName: propertyName,
+                fieldName: 'txt_' + propertyName,
                 title: 'Test Title',
-                hint: 'Test Hint',
-                value: 'Should be overridden'
-            },
-            value: 'Sample Value'
+                hint: 'Test Hint'
+            }
         };
 
-        const widgetModel = Widget.create(widgetObject, global.PropertiesService.getUserProperties());
+        const widgetModel = Widget
+            .create(
+                widgetObject,
+                global.PropertiesService.getUserProperties()
+            );
         expect(widgetModel.id).toBe(widgetObject.id);
         expect(widgetModel.value).toBe(storedValue);
         expect(widgetModel.tabIndex).toBe(0);

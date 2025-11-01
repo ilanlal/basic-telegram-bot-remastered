@@ -241,9 +241,9 @@ EntityViewModel.CardServiceWrapper = class {
     }
 
     newWidget(widgetMeta = {}) {
-        const _ = Widget.create(widgetMeta);
+        const _widgetInstance = Widget.create(widgetMeta, this._userProperties);
         // Bind value from 'propertyName' property if specified
-        const value = _.value || '';
+        const value = _widgetInstance.value || '';
 
         if (widgetMeta.DecoratedText) {
             return this.newDecoratedText(widgetMeta.DecoratedText, value);
@@ -296,8 +296,8 @@ EntityViewModel.CardServiceWrapper = class {
         return CardService.newTextInput()
             .setFieldName(inputTextMeta.fieldName)
             .setTitle(inputTextMeta.title || '')
-            .setValue(inputTextMeta.value !== undefined && inputTextMeta.value !== null ? String(inputTextMeta.value) : '')
-            .setHint(inputTextMeta.hint || inputTextMeta.description || '')
+            .setValue(value || '')
+            .setHint(inputTextMeta.hint || '')
             .setMultiline(inputTextMeta.multiline || false);
     }
 

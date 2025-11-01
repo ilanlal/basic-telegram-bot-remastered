@@ -3,6 +3,9 @@ require('../../tests');
 const { EventHandler } = require('./EventHandler');
 
 describe('EventHandler', () => {
+    beforeEach(() => {
+        UrlFetchAppStubConfiguration.reset();
+    });
     it('should create an instance of EventHandler', () => {
         const handler = new EventHandler();
         expect(handler).toBeInstanceOf(EventHandler);
@@ -109,7 +112,7 @@ describe('EventHandler', () => {
         const token = 'tcp://token[FAKE_DUMMY_BOT_TOKEN]&#39;;>@&-_][+0!]';
         const contentText = `{
             "result": {
-                "id": 123456789,
+                "id": 1234567809,
                 "is_bot": true,
                 "first_name": "TestBot",
                 "username": "TestBotUsername"

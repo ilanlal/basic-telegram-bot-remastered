@@ -6,60 +6,101 @@ class EventHandler {
         return this._userStore;
     }
 
+    get userProperties() {
+        if (!this._userProperties) {
+            this._userProperties = PropertiesService.getUserProperties();
+        }
+        return this._userProperties;
+    }
+
     constructor() {
         this._userStore = null;
+        this._userProperties = null;
     }
 };
 
 EventHandler.Addon = {
     onOpenHomeCard: (e) => {
-        return new EventHandler.AddonWrapper(EventHandler.prototype.userStore)
+        return new EventHandler
+            .AddonWrapper(
+                EventHandler.prototype.userStore,
+                EventHandler.prototype.userProperties)
             .handleOpenHomeCard(e);
     },
     onOpenAccountCard: (e) => {
-        return new EventHandler.AddonWrapper(EventHandler.prototype.userStore)
+        return new EventHandler
+            .AddonWrapper(
+                EventHandler.prototype.userStore,
+                EventHandler.prototype.userProperties)
             .handleOpenAccountCard(e);
     },
     onOpenAboutCard: (e) => {
-        return new EventHandler.AddonWrapper(EventHandler.prototype.userStore)
+        return new EventHandler
+            .AddonWrapper(
+                EventHandler.prototype.userStore,
+                EventHandler.prototype.userProperties)
             .handleOpenAboutCard(e);
     },
     onActivatePremiumClicked: (e) => {
-        return new EventHandler.AddonWrapper(EventHandler.prototype.userStore)
+        return new EventHandler
+            .AddonWrapper(
+                EventHandler.prototype.userStore,
+                EventHandler.prototype.userProperties)
             .handleActivatePremiumClicked(e);
     },
     onRevokeLicenseClicked: (e) => {
-        return new EventHandler.AddonWrapper(EventHandler.prototype.userStore)
+        return new EventHandler
+            .AddonWrapper(
+                EventHandler.prototype.userStore,
+                EventHandler.prototype.userProperties)
             .handleRevokeLicenseClicked(e);
     },
     onOpenSettingsCard: (e) => {
-        return new EventHandler.AddonWrapper(EventHandler.prototype.userStore)
+        return new EventHandler
+            .AddonWrapper(
+                EventHandler.prototype.userStore,
+                EventHandler.prototype.userProperties)
             .handleOpenSettingsCard(e);
     },
     onSaveSettingsClicked: (e) => {
-        return new EventHandler.AddonWrapper(EventHandler.prototype.userStore)
+        return new EventHandler
+            .AddonWrapper(
+                EventHandler.prototype.userStore,
+                EventHandler.prototype.userProperties)
             .handleSaveSettings(e);
     },
     onToggleBooleanSetting: (e) => {
-        return new EventHandler.AddonWrapper(EventHandler.prototype.userStore)
+        return new EventHandler
+            .AddonWrapper(
+                EventHandler.prototype.userStore,
+                EventHandler.prototype.userProperties)
             .handleToggleBooleanSetting(e);
     },
     onBotSetupClick: (e) => {
-        return new EventHandler.AddonWrapper(EventHandler.prototype.userStore)
+        return new EventHandler
+            .AddonWrapper(
+                EventHandler.prototype.userStore,
+                EventHandler.prototype.userProperties)
             .handleBotSetupClick(e);
     },
     onWebhookManagementClick: (e) => {
-        return new EventHandler.AddonWrapper(EventHandler.prototype.userStore)
+        return new EventHandler
+            .AddonWrapper(
+                EventHandler.prototype.userStore,
+                EventHandler.prototype.userProperties)
             .handleWebhookManagementClick(e);
     },
     onIdentifyTokenClick: (e) => {
         // Not implemented yet
-        return new EventHandler.AddonWrapper(EventHandler.prototype.userStore)
+        return new EventHandler
+            .AddonWrapper(
+                EventHandler.prototype.userStore,
+                EventHandler.prototype.userProperties)
             .handleIdentifyTokenClick(e);
     }
 }
 EventHandler.AddonWrapper = class {
-    constructor(userStore, userProperties = PropertiesService.getUserProperties()) {
+    constructor(userStore, userProperties) {
         if (!(userStore instanceof UserStore)) {
             throw new Error("userStore must be an instance of UserStore");
         }
@@ -75,7 +116,7 @@ EventHandler.AddonWrapper = class {
                     this._userStore,
                     CardService,
                     SpreadsheetApp.getActiveSpreadsheet(),
-                    PropertiesService.getUserProperties())
+                    this._userProperties)
                 .pushCard(EMD.Home.cardMeta, params)
                 .build();
         } catch (error) {
@@ -184,7 +225,7 @@ EventHandler.AddonWrapper = class {
                     this._userStore,
                     CardService,
                     SpreadsheetApp.getActiveSpreadsheet(),
-                    PropertiesService.getUserProperties())
+                    this._userProperties)
                 .pushCard(EMD.WebhookSetup.cardMeta, params)
                 .build();
         } catch (error) {
@@ -201,12 +242,13 @@ EventHandler.AddonWrapper = class {
                 token = formInputs['txt_bot_api_token']?.stringInputs?.value[0] || null;
             }
 
-            const result = BotSetupController
+            const controller = BotSetupController
                 .create(
                     this._userStore,
-                    PropertiesService.getUserProperties())
-                .identifyNewBotToken(token)
-                .setNewBotToken(token);
+                    PropertiesService.getUserProperties());
+
+            const result = controller.identifyNewBotToken(token);
+            controller.setNewBotToken(token);
 
             return this.handleOperationSuccess("👍 Bot token identified successfully.")
                 .build();
