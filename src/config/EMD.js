@@ -221,7 +221,7 @@ EMD.BotSetup = {
                             {
                                 id: 'webhook_setup_info',
                                 TextParagraph: {
-                                    text: `Webhook URL is currently: ${data.setupFlow?.webhookUrlSet ? '✅ Set' : '❌ Not Set'}`
+                                    text: `Webhook URL is currently: ${data.setupFlow?.webhookSet ? '✅ Set' : '❌ Not Set'}`
                                 }
                             },
                             { // DecoratedText for webhook action (set,delete)
@@ -229,14 +229,14 @@ EMD.BotSetup = {
                                 DecoratedText: {
                                     text: 'Take action on your bot webhook',
                                     topLabel: `🔗 Webhook Action`,
-                                    bottomLabel: `${data.setupFlow?.webhookUrlSet ? 'Delete or update your webhook' : 'Set up your webhook'}`,
+                                    bottomLabel: `${data.setupFlow?.webhookSet ? 'Delete or update your webhook' : 'Set up your webhook'}`,
                                     wrapText: true,
                                     textButton: {
                                         disabled: false,
-                                        text: `${data.setupFlow?.webhookUrlSet ? '🗑️ Delete Webhook' : '📡 Set Webhook'}`,
+                                        text: `${data.setupFlow?.webhookSet ? '🗑️ Delete Webhook' : '📡 Set Webhook'}`,
                                         onClick: {
                                             functionName: 'EventHandler.Addon.onWebhookManagementClick',
-                                            parameters: { action: data.setupFlow?.webhookUrlSet ? 'deleteWebhook' : 'setWebhook' }
+                                            parameters: { action: data.setupFlow?.webhookSet ? 'deleteWebhook' : 'setWebhook' }
                                         }
                                     }
                                 }
