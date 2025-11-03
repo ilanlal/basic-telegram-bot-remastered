@@ -27,6 +27,13 @@ EventHandler.Addon = {
                 EventHandler.prototype.userProperties)
             .handleOpenHomeCard(e);
     },
+    onOpenCardClick: (e) => {
+        return new EventHandler
+            .AddonWrapper(
+                EventHandler.prototype.userStore,
+                EventHandler.prototype.userProperties)
+            .handleOpenCard(e);
+    },
     onOpenAccountCard: (e) => {
         return new EventHandler
             .AddonWrapper(
@@ -143,6 +150,33 @@ EventHandler.AddonWrapper = class {
         }
     }
 
+    handleOpenCard(e) {
+        try {
+            const entityName = e.parameters?.entityName || null;
+            if (!entityName) {
+                throw new Error("'entityName' parameter is required for onOpenCard.");
+            }
+
+            // find EMD card navigation based on entityName
+            const emd = Object.values(EMD).find(emd => emd.entityName === entityName);
+            if (!emd || !emd.card) {
+                throw new Error(`No card found for entityName: ${entityName}`);
+            }
+
+            return EntityController
+                .create(
+                    this._userStore,
+                    CardService,
+                    SpreadsheetApp.getActiveSpreadsheet(),
+                    this._userProperties)
+                .pushCard(emd.card({ isAdmin: false }))
+                .build();
+        } catch (error) {
+            return this.handleError(error)
+                .build();
+        }
+    }
+
     handleOpenAccountCard(e) {
         try {
             return NavigationController.create(this._userStore)
@@ -247,7 +281,7 @@ EventHandler.AddonWrapper = class {
         try {
             const action = e.parameters?.action || null;
             if (!action) {
-                throw new Error("Action parameter is required for webhook management.");
+                throw new Error("'action' parameter is required for webhook management.");
             }
 
             const controller = BotSetupController
@@ -260,6 +294,7 @@ EventHandler.AddonWrapper = class {
             }
 
             return this.handleOperationSuccess(`👍 Webhook ${action === 'setWebhook' ? 'set' : 'deleted'} successfully.`)
+                .build();
         } catch (error) {
             return this.handleError(error)
                 .build();

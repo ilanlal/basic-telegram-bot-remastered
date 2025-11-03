@@ -44,23 +44,6 @@ EMD.Home = {
                                     }
                                 }
                             }
-                        },
-                        {   // Webhook management widget
-                            id: 'webhook_management_widget',
-                            DecoratedText: {
-                                text: 'Manage your webhooks',
-                                topLabel: '🔗 Webhook Management',
-                                bottomLabel: 'Click the button to manage your webhooks',
-                                wrapText: true,
-                                textButton: {
-                                    disabled: false,
-                                    text: '⚙️ Manage Webhooks',
-                                    onClick: {
-                                        functionName: 'EventHandler.Addon.onWebhookManagementClick',
-                                        parameters: { action: 'manageWebhooks' }
-                                    }
-                                }
-                            }
                         }
                     ]
                 },
@@ -80,8 +63,8 @@ EMD.Home = {
                                     disabled: false,
                                     text: '⚡',
                                     onClick: {
-                                        functionName: 'EventHandler.Addon.automation',
-                                        parameters: { action: 'manageAutomations' }
+                                        functionName: 'EventHandler.Addon.onOpenCardClick',
+                                        parameters: { entityName: 'Automation' }
                                     }
                                 }
                             }
@@ -182,7 +165,30 @@ EMD.BotSetup = {
                             }
                         ]
                     },
-                    { // Deployment setup
+                    {   // Bot info settings
+                        header: '🤖 Bot Information',
+                        collapsible: true,
+                        numUncollapsibleWidgets: 2,
+                        widgets: [
+                            {   // Bot info paragraph title
+                                id: 'bot_info',
+                                TextParagraph: {
+                                    text: 'Set up your bot information \n\n(name, short description, commands, etc.) from the spreadsheet below.',
+                                    maxLines: 1
+                                }
+                            },
+                            {   // Load demo data button
+                                id: 'load_demo_data_button',
+                                TextButton: {
+                                    text: '📥 Load Demo Data',
+                                    onClick: {
+                                        functionName: 'EventHandler.Addon.onLoadDemoDataClick'
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    {   // Deployment setup
                         header: '🚀 Deployment Setup',
                         collapsible: true,
                         numUncollapsibleWidgets: 1,
@@ -213,7 +219,7 @@ EMD.BotSetup = {
                             }
                         ]
                     },
-                    { // Webhook setup
+                    {   // Webhook setup
                         header: '🔗 Webhook Setup',
                         collapsible: true,
                         numUncollapsibleWidgets: 1,
@@ -243,7 +249,7 @@ EMD.BotSetup = {
                             }
                         ]
                     },
-                    { // Admin Chat ID setup
+                    {   // Admin Chat ID setup
                         header: '👤 Admin Chat ID Setup',
                         collapsible: true,
                         numUncollapsibleWidgets: 1,
@@ -276,7 +282,7 @@ EMD.BotSetup = {
                             }
                         ]
                     },
-                    {  // Environment variables.
+                    {   // Environment variables.
                         header: 'Environment variables',
                         collapsible: true,
                         numUncollapsibleWidgets: 1,
@@ -309,7 +315,7 @@ EMD.BotSetup = {
                             }
                         ]
                     },
-                    { // Data view
+                    {   // Data view
                         header: 'Data View',
                         collapsible: true,
                         numUncollapsibleWidgets: 1,
@@ -1827,6 +1833,64 @@ EMD.Automation = {
             ]
     }
 };
+
+EMD.Test = {
+    entityName: 'testEntity',
+    card: (data = {}) => {
+        return {
+            name: 'webhook_Card',
+            header: {
+                title: 'Webhook Management',
+                subTitle: 'Manage your bot webhooks here.',
+                imageUrl: EMD.DEFAULT_IMAGE_URL,
+                imageStyle: CardService.ImageStyle.SQUARE,
+                imageAltText: 'Webhook Image'
+            },
+            sections:
+                [   // Webhook Management Section
+                    {
+                        header: 'Webhook Management',
+                        collapsible: false,
+                        numUncollapsibleWidgets: 0,
+                        widgets: [
+                            {
+                                id: 'set_webhook_widget',
+                                DecoratedText: {
+                                    topLabel: '📡',
+                                    text: 'api/setWebhook',
+                                    bottomLabel: 'Set webhook for the bot',
+                                    wrapText: true,
+                                    textButton: {
+                                        text: '📡 Set',
+                                        disabled: false,
+                                        onClick: {
+                                            functionName: 'EventHandler.Addon.setWebhook',
+                                            parameters: {
+                                                api: 'setWebhook'
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                ],
+            fixedFooter: {
+                primaryButton: {
+                    textButton: {
+                        text: '💫 Bind row data',
+                        onClick: {
+                            functionName: 'EventHandler.Addon.onBindData',
+                            parameters: {
+                                action: 'bindData'
+                            }
+                        }
+                    }
+                }
+            }
+        };
+    }
+}
 
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = { EMD };
