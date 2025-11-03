@@ -511,6 +511,60 @@ EMD.Automation = {
     entityName: 'Automation',
     displayName: 'Automation',
     pluralDisplayName: 'Automations',
+    card: (data = {}) => {
+        return {
+            name: 'automation_Card',
+            header: {
+                title: 'Automation Management',
+                subTitle: 'Manage your bot automations here.',
+                imageUrl: EMD.DEFAULT_IMAGE_URL,
+                imageStyle: CardService.ImageStyle.SQUARE,
+                imageAltText: 'Automation Image'
+            },
+            sections:
+                [   // Automation Management Section
+                    {
+                        header: 'Automation Management',
+                        collapsible: false,
+                        numUncollapsibleWidgets: 0,
+                        widgets: [
+                            {
+                                id: 'create_automation_widget',
+                                DecoratedText: {
+                                    topLabel: '⚙️',
+                                    text: 'api/createAutomation',
+                                    bottomLabel: 'Create a new automation',
+                                    wrapText: true,
+                                    textButton: {
+                                        text: '⚙️ Create',
+                                        disabled: false,
+                                        onClick: {
+                                            functionName: 'EventHandler.Addon.createAutomation',
+                                            parameters: {
+                                                api: 'createAutomation'
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                ],
+            fixedFooter: {
+                primaryButton: {
+                    textButton: {
+                        text: '💫 Bind row data',
+                        onClick: {
+                            functionName: 'EventHandler.Addon.onBindData',
+                            parameters: {
+                                action: 'bindData'
+                            }
+                        }
+                    }
+                }
+            }
+        };
+    },
     sheetMeta: {
         name: '⚡ Automations',
         columns: ['action', 'default', 'es', 'fr', 'ar', 'de', 'it', 'pt', 'ru', 'zh', 'ja', 'ko', 'he'],
