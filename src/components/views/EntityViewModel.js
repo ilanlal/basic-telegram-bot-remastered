@@ -119,11 +119,6 @@ EntityViewModel.CardServiceWrapper = class {
         return 'Card Image';
     }
 
-    // Default Text Paragraph Values
-    static get DEFAULT_PARAGRAPH_LINE_LIMIT() {
-        return 1;
-    }
-
     // Error Messages
     static get FIXED_FOOTER_BUTTON_NOT_DEFINED_ERROR() {
         return "Fixed footer must have a primaryButton defined.";
@@ -250,23 +245,23 @@ EntityViewModel.CardServiceWrapper = class {
         return null;
     }
 
-    newDecoratedText(decoratedTextMeta = {}, value = '', emojiSets = EntityViewModel.OFF_LIGHT) {
+    newDecoratedText(dtMeta = {}, value = '') {
         // setText(text) and one of the keys: setTopLabel(text), or setBottomLabel(text) are required
-        if (!decoratedTextMeta.text) {
+        if (!dtMeta.text) {
             throw new Error(EntityViewModel.CardServiceWrapper.DECORATED_TEXT_MISSING_CONTENT_ERROR);
         }
-        if (!decoratedTextMeta.topLabel && !decoratedTextMeta.bottomLabel) {
+        if (!dtMeta.topLabel && !dtMeta.bottomLabel) {
             throw new Error(EntityViewModel.CardServiceWrapper.DECORATED_TEXT_MISSING_CONTENT_ERROR);
         }
         const decoratedText = this._cardService.newDecoratedText()
-            .setTopLabel(`${decoratedTextMeta.topLabel}`)
-            .setWrapText(decoratedTextMeta.wrapText || false)
-            .setText(`${decoratedTextMeta.text}`)
-            .setBottomLabel(`${emojiSets} ${decoratedTextMeta.bottomLabel}`);
+            .setTopLabel(`${dtMeta.topLabel}`)
+            .setWrapText(dtMeta.wrapText || false)
+            .setText(`${dtMeta.text}`)
+            .setBottomLabel(`${dtMeta.bottomLabel}`);
 
-        if (decoratedTextMeta.textButton) {
+        if (dtMeta.textButton) {
             decoratedText.setButton(
-                this.newTextButton(decoratedTextMeta.textButton, !!value));
+                this.newTextButton(dtMeta.textButton, !!value));
         }
 
         return decoratedText;
@@ -285,13 +280,13 @@ EntityViewModel.CardServiceWrapper = class {
             .setMultiline(inputTextMeta.multiline || false);
     }
 
-    newTextParagraph(textParagraphMeta = {}, value = '') {
-        const _ = CardService.newTextParagraph()
-            .setText(textParagraphMeta.text || value || '');
-        if (_.setMaxLines) {
-            _.setMaxLines(textParagraphMeta.maxLines || EntityViewModel.CardServiceWrapper.DEFAULT_PARAGRAPH_LINE_LIMIT);
+    newTextParagraph(tpMeta = {}, value = '') {
+        const newTextParagraph = CardService.newTextParagraph()
+            .setText(tpMeta.text || value || '');
+        if (newTextParagraph.setMaxLines && tpMeta.maxLines) {
+            newTextParagraph.setMaxLines(tpMeta.maxLines);
         }
-        return _;
+        return newTextParagraph;
     }
 
     newTextButton(textButtonMeta = {}, disabled = false, style = CardService.TextButtonStyle.TEXT) {
