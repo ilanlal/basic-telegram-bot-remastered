@@ -246,7 +246,7 @@ EMD.BotSetup = {
                     {  // Environment variables.
                         header: 'Environment variables',
                         collapsible: true,
-                        numUncollapsibleWidgets: 2,
+                        numUncollapsibleWidgets: 1,
                         widgets: [
                             { // Admin Chat ID Variable
                                 id: 'admin_chat_id_variable',
