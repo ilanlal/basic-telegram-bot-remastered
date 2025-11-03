@@ -17,8 +17,6 @@ class EntityController {
     }
 
     pushCard(cardMeta = {}) {
-        console.log('EntityController.pushCard called with cardMeta:', 
-            JSON.stringify(cardMeta, null, 2));
         const viewModel = EntityViewModel.create({
             cardService: this.cardService,
             activeSpreadsheet: this.activeSpreadsheet,

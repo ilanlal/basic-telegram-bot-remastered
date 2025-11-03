@@ -121,7 +121,7 @@ EntityViewModel.CardServiceWrapper = class {
 
     // Default Text Paragraph Values
     static get DEFAULT_PARAGRAPH_LINE_LIMIT() {
-        return 3;
+        return 1;
     }
 
     // Error Messages
