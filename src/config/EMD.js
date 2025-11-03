@@ -23,23 +23,10 @@ EMD.Home = {
                 imageAltText: 'Home Image'
             },
             sections: [
-                {   // Dashboard section
-                    header: 'Dashboard',
-                    collapsible: false,
-                    numUncollapsibleWidgets: 0,
-                    widgets: [
-                        {   // Dashboard welcome widget
-                            id: 'dashboard_welcome_widget',
-                            TextParagraph: {
-                                text: `Data: ${JSON.stringify(data, null, 2)}`
-                            }
-                        }
-                    ]
-                },
                 {   // Get started section
                     header: 'Get Started with Your Bot',
-                    collapsible: false,
-                    numUncollapsibleWidgets: 0,
+                    collapsible: true,
+                    numUncollapsibleWidgets: 1,
                     widgets: [
                         {   // Bot setup widget
                             id: 'bot_setup_widget',
@@ -114,6 +101,19 @@ EMD.Home = {
                                         parameters: { action: 'manageContacts' }
                                     }
                                 }
+                            }
+                        }
+                    ]
+                },
+                { // Data view
+                    header: 'Data View',
+                    collapsible: true,
+                    numUncollapsibleWidgets: 1,
+                    widgets: [
+                        {   // Data View widget
+                            id: 'data_view_widget',
+                            TextParagraph: {
+                                text: `Data: ${JSON.stringify(data, null, 2)}`
                             }
                         }
                     ]
