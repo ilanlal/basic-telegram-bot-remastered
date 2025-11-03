@@ -47,8 +47,7 @@
   },
   "jest": {
     "modulePaths": [
-      "node_modules",
-      "."
+      "<rootDir>/src/"
     ],
     "coverageDirectory": "./coverage/",
     "collectCoverage": false
