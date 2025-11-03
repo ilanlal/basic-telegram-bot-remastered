@@ -37,5 +37,6 @@ describe('Entity Controller', () => {
         expect(data.cardNavigations).toBeDefined();
         expect(data.cardNavigations.length).toBeGreaterThan(0);
         expect(data.cardNavigations[0].pushCard).toBeDefined();
+        //console.log(JSON.stringify(data, null, 2));
     });
 });

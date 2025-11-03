@@ -31,7 +31,7 @@ EMD.Home = {
                         {   // Dashboard welcome widget
                             id: 'dashboard_welcome_widget',
                             TextParagraph: {
-                                text: `Data: \n\n ${JSON.stringify(data)}.`
+                                text: `Data: ${JSON.stringify(data, null, 2)}`
                             }
                         }
                     ]
@@ -124,8 +124,7 @@ EMD.Home = {
                     textButton: {
                         text: 'Primary Action',
                         onClick: {
-                            functionName: 'EventHandler.Addon.onPrimaryActionClick',
-                            parameters: { data }
+                            functionName: 'EventHandler.Addon.onPrimaryActionClick'
                         }
                     }
                 }
