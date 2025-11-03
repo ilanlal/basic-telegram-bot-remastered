@@ -150,15 +150,15 @@ EMD.BotSetup = {
             ,
             sections:
                 [
-                    {   // Getting Started Variables Section
-                        header: 'Getting Started Variables',
+                    {   // identify bot api token
+                        header: 'Bot API Token',
                         collapsible: true,
-                        numUncollapsibleWidgets: 3,
+                        numUncollapsibleWidgets: 1,
                         widgets: [
                             { // Bot token set state
                                 id: 'bot_token_set_state',
                                 TextParagraph: {
-                                    text: 'Bot API Token is set.'
+                                    text: `Bot Token is currently set to: ${data.isActive ? '✅ Set' : '❌ Not Set'}`
                                 }
                             },
                             { // Bot Token Variable
@@ -178,6 +178,26 @@ EMD.BotSetup = {
                                         functionName: 'EventHandler.Addon.onIdentifyTokenClick'
                                     }
                                 }
+                            }
+                        ]
+                    },
+                    { // Webhook setup
+                        header: 'Webhook Setup',
+                        collapsible: true,
+                        numUncollapsibleWidgets: 1,
+                        widgets: [
+                            {
+                                id: 'deployment_id_info',
+                                TextParagraph: {
+                                    text: `Deployment ID is currently: ${data.setupFlow?.deploymentIdSet ? '✅ Set' : '❌ Not Set'}`
+                                        + '\n\n'
+                                        + `Your webhook is currently: ${data.setupFlow?.webhookSet ? '✅ Set' : '❌ Not Set'}`
+                                        + `\n\n`
+                                        + `Your current Deployment ID is: ${data.setupFlow?.deploymentId || '[NOT SET]'}`
+                                        + `\n\n`
+                                        + `Your current Webhook URL is: ${data.setupFlow?.webhookUrl || '[NOT SET]'}`
+
+                                }
                             },
                             {   // Deployment ID Variable
                                 id: 'deployment_id_variable',
@@ -187,6 +207,15 @@ EMD.BotSetup = {
                                     hint: 'Enter deployment ID'
                                 },
                                 propertyName: 'deployment_id'
+                            },
+                            { // Identify Deployment ID Button
+                                id: 'identify_deployment_id_button',
+                                TextButton: {
+                                    text: '💾 Save Deployment ID',
+                                    onClick: {
+                                        functionName: 'EventHandler.Addon.onIdentifyDeploymentIdClick'
+                                    }
+                                }
                             },
                             { // DecoratedText for webhook info
                                 id: 'webhook_info',
@@ -241,6 +270,19 @@ EMD.BotSetup = {
                                     value: 'en'
                                 },
                                 propertyName: 'default_language'
+                            }
+                        ]
+                    },
+                    { // Data view
+                        header: 'Data View',
+                        collapsible: true,
+                        numUncollapsibleWidgets: 1,
+                        widgets: [
+                            {   // Data View widget
+                                id: 'data_view_widget',
+                                TextParagraph: {
+                                    text: `Data: ${JSON.stringify(data, null, 2)}`
+                                }
                             }
                         ]
                     }

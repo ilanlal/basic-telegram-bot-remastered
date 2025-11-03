@@ -98,6 +98,14 @@ EventHandler.Addon = {
                 EventHandler.prototype.userProperties)
             .handleIdentifyTokenClick(e);
     },
+    onIdentifyDeploymentIdClick: (e) => {
+        return new EventHandler
+            .AddonWrapper(
+                EventHandler.prototype.userStore,
+                EventHandler.prototype.userProperties)
+            .handleIdentifyDeploymentIdClick(e);
+
+    },
     onSaveBotSetupClick: (e) => {
         // Not implemented yet
         return new EventHandler
@@ -215,7 +223,8 @@ EventHandler.AddonWrapper = class {
                 .pushCard(EMD.BotSetup.card(
                     {
                         isActive: setupFlow.stateObject.botTokenSet,
-                        isAdmin: false
+                        isAdmin: false,
+                        setupFlow: setupFlow.stateObject
                     }
                 ))
                 .build();
@@ -257,6 +266,28 @@ EventHandler.AddonWrapper = class {
             controller.setNewBotToken(token);
 
             return this.handleOperationSuccess("👍 Bot token identified successfully.")
+                .build();
+
+        } catch (error) {
+            return this.handleError(error)
+                .build();
+        }
+    }
+
+    handleIdentifyDeploymentIdClick(e) {
+        try {
+            let deploymentId = e.parameters?.deploymentId || null;
+
+            if (!deploymentId) {
+                const formInputs = e.commonEventObject.formInputs || {};
+                deploymentId = formInputs['txt_deployment_id']?.stringInputs?.value[0] || null;
+            }
+            const controller = BotSetupController
+                .create(PropertiesService.getUserProperties());
+
+            controller.setNewDeploymentId(deploymentId);
+
+            return this.handleOperationSuccess("👍 Deployment ID identified successfully.")
                 .build();
 
         } catch (error) {

@@ -27,7 +27,14 @@ class NavigationController {
         return entityController.pushCard(
             EMD.Home.card({
                 isActive: setupFlow.stateObject.botTokenSet,
-                isAdmin: false
+                isAdmin: false,
+                isPremium: false,
+                isTrial: false,
+                trialDaysLeft: 0,
+                walletBalance: 0,
+                hasAutomations: false,
+                emojiSets: Lights.ON,
+                setupFlow: setupFlow.stateObject
             })
         );
     }
