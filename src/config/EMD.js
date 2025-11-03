@@ -243,11 +243,17 @@ EMD.BotSetup = {
                             }
                         ]
                     },
-                    {  // Environment variables.
-                        header: 'Environment variables',
+                    { // Admin Chat ID setup
+                        header: '👤 Admin Chat ID Setup',
                         collapsible: true,
                         numUncollapsibleWidgets: 1,
                         widgets: [
+                            { // Admin Chat ID Info
+                                id: 'admin_chat_id_info',
+                                TextParagraph: {
+                                    text: 'This is the chat ID for the admin user.'
+                                }
+                            },
                             { // Admin Chat ID Variable
                                 id: 'admin_chat_id_variable',
                                 TextInput: {
@@ -258,25 +264,48 @@ EMD.BotSetup = {
                                 },
                                 propertyName: 'admin_chat_id'
                             },
+                            { // Save Admin Chat ID Button
+                                id: 'save_admin_chat_id_button',
+                                TextButton: {
+                                    text: '💾 Save Admin Chat ID',
+                                    onClick: {
+                                        functionName: 'EventHandler.Addon.onSaveAdminChatIdClick',
+                                        parameters: {}
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    {  // Environment variables.
+                        header: 'Environment variables',
+                        collapsible: true,
+                        numUncollapsibleWidgets: 1,
+                        widgets: [
+                            { // Title Text Paragraph
+                                id: 'env_variables_title',
+                                TextParagraph: {
+                                    text: 'Environment Variables'
+                                }
+                            },
                             {   // Log Events Setting
                                 id: 'log_events_setting',
                                 TextInput: {
                                     title: 'Debug Mode (Set to true or any other value for false)',
                                     fieldName: 'txt_debug_mode',
-                                    hint: 'Enter debug mode (true/false)',
-                                    value: 'false'
+                                    hint: 'Enter debug mode (true/false)'
                                 },
-                                propertyName: 'debug_mode'
+                                propertyName: 'debug_mode',
+                                value: 'false'
                             },
                             {   // Default Language Variable
                                 id: 'default_language_variable',
                                 TextInput: {
                                     title: 'Default language',
                                     fieldName: 'txt_default_language',
-                                    hint: 'Enter default language',
-                                    value: 'en'
+                                    hint: 'Enter default language'
                                 },
-                                propertyName: 'default_language'
+                                propertyName: 'default_language',
+                                value: 'en'
                             }
                         ]
                     },

@@ -51,7 +51,7 @@ class BotSetupController {
     }
 
     setNewChatId(id) {
-        if (!id || typeof id !== 'number') {
+        if (!id || typeof parseInt(id) !== 'number') {
             throw new Error("Invalid chat ID");
         }
         return this._userProperties.setProperty(SetupFlow.InputMeta.ADMIN_CHAT_ID, id.toString());

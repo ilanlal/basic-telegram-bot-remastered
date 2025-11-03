@@ -106,6 +106,14 @@ EventHandler.Addon = {
             .handleIdentifyDeploymentIdClick(e);
 
     },
+    onSaveAdminChatIdClick: (e) => {
+        return new EventHandler
+            .AddonWrapper(
+                EventHandler.prototype.userStore,
+                EventHandler.prototype.userProperties)
+            .handleSaveAdminChatId(e);
+
+    },
     onSaveBotSetupClick: (e) => {
         // Not implemented yet
         return new EventHandler
@@ -306,6 +314,33 @@ EventHandler.AddonWrapper = class {
     handleSaveBotSetupClick(e) {
         try {
             throw new Error("Not implemented yet");
+        } catch (error) {
+            return this.handleError(error)
+                .build();
+        }
+    }
+
+    handleSaveAdminChatId(e) {
+        try {
+            let chatId = e.parameters?.chatId || null;
+
+            if (!chatId) {
+                const formInputs = e.commonEventObject.formInputs || {};
+                chatId = formInputs['txt_admin_chat_id']?.stringInputs?.value[0] || null;
+            }
+
+            if (!chatId) {
+                throw new Error("Chat ID is required.");
+            }
+
+            const controller = BotSetupController
+                .create(PropertiesService.getUserProperties());
+
+            controller.setNewChatId(chatId);
+
+            return this.handleOperationSuccess("👍 Admin Chat ID saved successfully.")
+                .build();
+
         } catch (error) {
             return this.handleError(error)
                 .build();
