@@ -5,28 +5,30 @@ describe('Bot Model', () => {
     const sampleToken = 'sample-token-123';
 
     test('should create an instance using the constructor', () => {
-        const bot = BotModel.create(sampleToken, 'en', {});
+        const bot = BotModel.create(sampleToken, {});
         expect(bot).toBeInstanceOf(BotModel);
     });
 
     test('should return the correct token', () => {
-        const bot = BotModel.create(sampleToken, 'en', {});
+        const bot = BotModel.create(sampleToken, {});
         expect(bot.token).toBe(sampleToken);
     });
 
     test('should create an instance using the static create method', () => {
-        const bot = BotModel.create(sampleToken, 'en', {});
+        const bot = BotModel.create(sampleToken, {});
         expect(bot).toBeInstanceOf(BotModel);
     });
 
     test('should have default language set correctly', () => {
-        const bot = BotModel.create(sampleToken, 'fr', {});
+        const bot = BotModel.create(sampleToken, {})
+            .setDefaultLanguage('fr');
+
         expect(bot.defaultLanguage).toBe('fr');
     });
 
     test('should have options set correctly', () => {
         const options = { webhookUrl: 'https://example.com/webhook' };
-        const bot = BotModel.create(sampleToken, 'en', options);
+        const bot = BotModel.create(sampleToken, options);
         expect(bot.options).toEqual(options);
     });
 
@@ -106,7 +108,8 @@ describe('Bot Model', () => {
         const contentText = `{
             "result": true
         }`;
-        const webAppUrl = 'https://script.google.com/macros/s/AKfycbx.../exec';
+        const deploymentId = 'AKfycbx...';
+        const webAppUrl = `https://script.google.com/macros/s/${deploymentId}/exec`;
         const callbackUrl = `https://api.telegram.org/bot${sampleToken}/setWebhook?url=${webAppUrl}`;
         UrlFetchAppStubConfiguration.when(callbackUrl)
             .return(new HttpResponse().setContentText(contentText));
@@ -179,5 +182,9 @@ describe('Bot Model', () => {
         const response = bot.setMyShortDescription(shortDescription, language);
         expect(response.getResponseCode()).toBe(200);
         expect(response.getContentText()).toBe(contentText);
+    });
+
+    afterEach(() => {
+        UrlFetchAppStubConfiguration.reset();
     });
 });

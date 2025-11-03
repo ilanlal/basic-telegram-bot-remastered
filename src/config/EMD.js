@@ -113,7 +113,8 @@ EMD.Home = {
                         {   // Data View widget
                             id: 'data_view_widget',
                             TextParagraph: {
-                                text: `Data: ${JSON.stringify(data, null, 2)}`
+                                text: `Data: ${JSON.stringify(data, null, 2)}`,
+                                maxLines: 1
                             }
                         }
                     ]
@@ -151,7 +152,7 @@ EMD.BotSetup = {
             sections:
                 [
                     {   // identify bot api token
-                        header: 'Bot API Token',
+                        header: '🔑 Bot API Token',
                         collapsible: true,
                         numUncollapsibleWidgets: 1,
                         widgets: [
@@ -181,8 +182,8 @@ EMD.BotSetup = {
                             }
                         ]
                     },
-                    { // Webhook setup
-                        header: 'Webhook Setup',
+                    { // Deployment setup
+                        header: '🚀 Deployment Setup',
                         collapsible: true,
                         numUncollapsibleWidgets: 1,
                         widgets: [
@@ -190,13 +191,6 @@ EMD.BotSetup = {
                                 id: 'deployment_id_info',
                                 TextParagraph: {
                                     text: `Deployment ID is currently: ${data.setupFlow?.deploymentIdSet ? '✅ Set' : '❌ Not Set'}`
-                                        + '\n\n'
-                                        + `Your webhook is currently: ${data.setupFlow?.webhookSet ? '✅ Set' : '❌ Not Set'}`
-                                        + `\n\n`
-                                        + `Your current Deployment ID is: ${data.setupFlow?.deploymentId || '[NOT SET]'}`
-                                        + `\n\n`
-                                        + `Your current Webhook URL is: ${data.setupFlow?.webhookUrl || '[NOT SET]'}`
-
                                 }
                             },
                             {   // Deployment ID Variable
@@ -216,20 +210,33 @@ EMD.BotSetup = {
                                         functionName: 'EventHandler.Addon.onIdentifyDeploymentIdClick'
                                     }
                                 }
+                            }
+                        ]
+                    },
+                    { // Webhook setup
+                        header: '🔗 Webhook Setup',
+                        collapsible: true,
+                        numUncollapsibleWidgets: 1,
+                        widgets: [
+                            {
+                                id: 'webhook_setup_info',
+                                TextParagraph: {
+                                    text: `Webhook URL is currently: ${data.setupFlow?.webhookUrlSet ? '✅ Set' : '❌ Not Set'}`
+                                }
                             },
-                            { // DecoratedText for webhook info
-                                id: 'webhook_info',
+                            { // DecoratedText for webhook action (set,delete)
+                                id: 'webhook_action',
                                 DecoratedText: {
-                                    text: 'Webhook Info',
-                                    topLabel: 'Webhook URL',
-                                    bottomLabel: 'Manage your webhook settings here',
+                                    text: 'Take action on your bot webhook',
+                                    topLabel: `🔗 Webhook Action`,
+                                    bottomLabel: `${data.setupFlow?.webhookUrlSet ? 'Delete or update your webhook' : 'Set up your webhook'}`,
                                     wrapText: true,
                                     textButton: {
                                         disabled: false,
-                                        text: '🔗',
+                                        text: `${data.setupFlow?.webhookUrlSet ? '🗑️ Delete Webhook' : '📡 Set Webhook'}`,
                                         onClick: {
-                                            functionName: 'EventHandler.Addon.webhook',
-                                            parameters: { action: 'manageWebhook' }
+                                            functionName: 'EventHandler.Addon.onWebhookManagementClick',
+                                            parameters: { action: data.setupFlow?.webhookUrlSet ? 'deleteWebhook' : 'setWebhook' }
                                         }
                                     }
                                 }
@@ -281,7 +288,8 @@ EMD.BotSetup = {
                             {   // Data View widget
                                 id: 'data_view_widget',
                                 TextParagraph: {
-                                    text: `Data: ${JSON.stringify(data, null, 2)}`
+                                    text: `Data: ${JSON.stringify(data, null, 2)}`,
+                                    maxLines: 1
                                 }
                             }
                         ]

@@ -229,6 +229,7 @@ EventHandler.AddonWrapper = class {
                 ))
                 .build();
         } catch (error) {
+            console.error(error);
             return this.handleError(error)
                 .build();
         }
@@ -236,15 +237,21 @@ EventHandler.AddonWrapper = class {
 
     handleWebhookManagementClick(e) {
         try {
-            const params = [];
-            return EntityController
-                .create(
-                    this._userStore,
-                    CardService,
-                    SpreadsheetApp.getActiveSpreadsheet(),
-                    this._userProperties)
-                .pushCard(EMD.WebhookSetup.cardMeta, params)
-                .build();
+            const action = e.parameters?.action || null;
+            if (!action) {
+                throw new Error("Action parameter is required for webhook management.");
+            }
+
+            const controller = BotSetupController
+                .create(PropertiesService.getUserProperties());
+
+            if (action === 'setWebhook') {
+                controller.setWebhook();
+            } else if (action === 'deleteWebhook') {
+                controller.deleteWebhook();
+            }
+
+            return this.handleOperationSuccess(`👍 Webhook ${action === 'setWebhook' ? 'set' : 'deleted'} successfully.`)
         } catch (error) {
             return this.handleError(error)
                 .build();

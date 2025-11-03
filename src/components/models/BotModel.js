@@ -1,13 +1,18 @@
 class BotModel {
-    static create(token = '[YOUR_BOT_TOKEN]', defaultLanguage = 'en', options = {}) {
-        return new BotModel(token, defaultLanguage, options);
+    static create(token = '[YOUR_BOT_TOKEN]', options = {}) {
+        return new BotModel(token, options);
     }
 
-    constructor(token = '[YOUR_BOT_TOKEN]', defaultLanguage = 'en', options = {}) {
+    constructor(token = '[YOUR_BOT_TOKEN]', options = {}) {
         this._token = token;
-        this._defaultLanguage = defaultLanguage;
         this._options = options;
+        this._defaultLanguage = 'default';
         this._telegramClient = TelegramBotClient.newClient(token);
+    }
+
+    setDefaultLanguage(language) {
+        this._defaultLanguage = language;
+        return this;
     }
 
     getMe() {

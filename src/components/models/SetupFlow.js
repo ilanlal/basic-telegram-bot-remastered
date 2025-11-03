@@ -120,7 +120,7 @@ class SetupFlow {
             botTokenSet: !!this._userProperties.getProperty(SetupFlow.InputMeta.BOT_API_TOKEN),
             deploymentId: this._userProperties.getProperty(SetupFlow.InputMeta.DEPLOYMENT_ID),
             deploymentIdSet: !!this._userProperties.getProperty(SetupFlow.InputMeta.DEPLOYMENT_ID),
-            webhookUrl: this.webhookUrl,
+            webhookUrl: decodeURI(this.webhookUrl),
             webhookSet: !!this.webhookUrl,
             chatId: this._userProperties.getProperty(SetupFlow.InputMeta.ADMIN_CHAT_ID),
             chatIdSet: !!this._userProperties.getProperty(SetupFlow.InputMeta.ADMIN_CHAT_ID),
