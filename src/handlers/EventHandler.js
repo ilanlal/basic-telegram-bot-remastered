@@ -118,20 +118,8 @@ EventHandler.AddonWrapper = class {
 
     handleOpenHomeCard(e) {
         try {
-            const params = [];
-            const setupFlow = SetupFlow.create(this._userProperties);
-            return EntityController
-                .create(
-                    this._userStore,
-                    CardService,
-                    SpreadsheetApp.getActiveSpreadsheet(),
-                    this._userProperties)
-                .pushCard(EMD.Home.card(
-                    {
-                        isActive: setupFlow.stateObject.botTokenSet,
-                        isAdmin: false
-                    }
-                ))
+            return NavigationController.create(this._userStore)
+                .navigateToHomeCard()
                 .build();
         } catch (error) {
             return this.handleError(error)

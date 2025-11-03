@@ -16,7 +16,7 @@ class EntityController {
         this.userProperties = userProperties;
     }
 
-    pushCard(cardMeta = {}, ...params) {
+    pushCard(cardMeta = {}) {
         const viewModel = EntityViewModel.create({
             cardService: this.cardService,
             activeSpreadsheet: this.activeSpreadsheet,

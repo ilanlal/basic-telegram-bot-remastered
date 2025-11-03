@@ -31,13 +31,12 @@ describe('EntityViewModel', () => {
             describe(`Testing entity: ${emd[0].entityName}`, () => {
                 it(`should create a card from the "${emd[0].entityName}" card method`, () => {
                     // if emd[0].card is function
-                    if (typeof emd[0].card !== 'function') return;
-                    const card = viewModel.getCardBuilder(
-                        emd[0].card(
-                            emd[1]));
+                    if (!emd[0].card) return;
+                    const cardBuilder = viewModel.getCardBuilder(
+                        emd[0].card(emd[1]));
                             
-                    expect(card).toBeDefined();
-                    const builtCard = card.build();
+                    expect(cardBuilder).toBeDefined();
+                    const builtCard = cardBuilder.build();
                     const data = builtCard.getData();
                     expect(data).toBeDefined();
                     expect(data.name).toBe(emd[0].card().name);
