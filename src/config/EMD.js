@@ -515,7 +515,7 @@ EMD.Automation = {
         return {
             name: 'automation_Card',
             header: {
-                title: 'Automation Management',
+                title: '⚡ Automation Management',
                 subTitle: 'Manage your bot automations here.',
                 imageUrl: EMD.DEFAULT_IMAGE_URL,
                 imageStyle: CardService.ImageStyle.SQUARE,
@@ -531,12 +531,12 @@ EMD.Automation = {
                             {
                                 id: 'create_automation_widget',
                                 DecoratedText: {
-                                    topLabel: '⚙️',
+                                    topLabel: '⚡',
                                     text: 'api/createAutomation',
                                     bottomLabel: 'Create a new automation',
                                     wrapText: true,
                                     textButton: {
-                                        text: '⚙️ Create',
+                                        text: '⚡ Create',
                                         disabled: false,
                                         onClick: {
                                             functionName: 'EventHandler.Addon.createAutomation',
