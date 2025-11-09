@@ -92,20 +92,27 @@ EMD.Home = {
                                     }
                                 }
                             }
-                        },
-                        {  // Contacts management widget
-                            id: 'contacts_management_widget',
+                        }
+                    ]
+                },
+                { // Customer Management Section
+                    // header: 'Customer Management',
+                    collapsible: true,
+                    numUncollapsibleWidgets: 1,
+                    widgets: [
+                        {  // Customer management widget
+                            id: 'customer_management_widget',
                             DecoratedText: {
-                                text: 'Contacts management',
-                                topLabel: 'Contacts {total}',
-                                bottomLabel: 'Manage your contacts here',
+                                text: 'Customer management',
+                                topLabel: `👥 Customers ${data?.totalCustomer || 0}`,
+                                bottomLabel: 'Manage your customers here',
                                 wrapText: false,
                                 textButton: {
                                     disabled: false,
-                                    text: '👥 User Management',
+                                    text: '👥 Customer Management',
                                     onClick: {
-                                        functionName: 'EventHandler.Addon.contacts',
-                                        parameters: { action: 'manageContacts' }
+                                        functionName: 'EventHandler.Addon.onOpenCardClick',
+                                        parameters: { entityName: 'Customer' }
                                     }
                                 }
                             }
@@ -517,7 +524,7 @@ EMD.Automation = {
         return {
             name: 'automation_Card',
             header: {
-                title: '⚡ Automation Management',
+                title: '⚡ Automation & Workflows',
                 subTitle: 'Manage your bot automations here.',
                 imageUrl: EMD.DEFAULT_IMAGE_URL,
                 imageStyle: CardService.ImageStyle.SQUARE,
@@ -533,12 +540,12 @@ EMD.Automation = {
                             {
                                 id: 'create_automation_widget',
                                 DecoratedText: {
-                                    topLabel: '⚡',
-                                    text: 'api/createAutomation',
-                                    bottomLabel: 'Create a new automation',
+                                    topLabel: '⚡ Template-based Automations',
+                                    text: 'Create automations from predefined templates to get started quickly.',
+                                    bottomLabel: 'Bind template data to get started',
                                     wrapText: false,
                                     textButton: {
-                                        text: '⚡ Create',
+                                        text: '⚡ Bind Template Data',
                                         disabled: false,
                                         onClick: {
                                             functionName: 'EventHandler.Addon.onBindSheetDataClick',
@@ -551,20 +558,7 @@ EMD.Automation = {
                             }
                         ]
                     }
-                ],
-            fixedFooter: {
-                primaryButton: {
-                    textButton: {
-                        text: '💫 Bind Sheet Data',
-                        onClick: {
-                            functionName: 'EventHandler.Addon.onBindSheetDataClick',
-                            parameters: {
-                                entityName: 'Automation'
-                            }
-                        }
-                    }
-                }
-            }
+                ]
         };
     },
     sheet: (data = {}) => {
@@ -1888,6 +1882,59 @@ EMD.Automation = {
                             }
                         }])]
                 ]
+        }
+    }
+};
+
+EMD.Customer = {
+    entityName: 'Customer',
+    displayName: 'Customer',
+    pluralDisplayName: 'Customers',
+    card: (data = {}) => {
+        return {
+            name: 'customer_Card',
+            header: {
+                title: '👥 Customer Management',
+                subTitle: 'Manage your customers here.',
+                imageUrl: EMD.DEFAULT_IMAGE_URL,
+                imageStyle: CardService.ImageStyle.SQUARE,
+                imageAltText: 'Customer Image'
+            },
+            sections:
+                [
+                    { // Customer Management Section
+                        // header: 'Customer Management',
+                        collapsible: false,
+                        numUncollapsibleWidgets: 0,
+                        widgets: [
+                            {
+                                id: 'create_customer_widget',
+                                DecoratedText: {
+                                    topLabel: '🛍️',
+                                    text: 'CRM',
+                                    bottomLabel: 'Users, Accounts, Contacts management',
+                                    wrapText: false,
+                                    textButton: {
+                                        text: 'Activate Sheet',
+                                        disabled: false,
+                                        onClick: {
+                                            functionName: 'EventHandler.Addon.onBindSheetDataClick',
+                                            parameters: {
+                                                api: 'Automation'
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                ]
+        };
+    },
+    sheet: (data = {}) => {
+        return {
+            name: '🛍️ Customers Sheet',
+            columns: ['action', 'default', 'es', 'fr', 'ar', 'de', 'it', 'pt', 'ru', 'zh', 'ja', 'ko', 'he']
         }
     }
 };
