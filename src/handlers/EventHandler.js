@@ -192,7 +192,7 @@ EventHandler.AddonWrapper = class {
             // find EMD card navigation based on entityName
             const emd = Object.values(EMD).find(emd => emd.entityName === entityName);
             if (!emd || !emd.sheet) {
-                throw new Error(`No sheet found for entityName: ${entityName}`);
+                throw new Error(`Static method "sheet: (data={}) {}" not found for entityName: ${entityName}`);
             }
 
             const rs = EntityController
