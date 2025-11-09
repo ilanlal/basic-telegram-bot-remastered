@@ -268,30 +268,6 @@ EMD.BotSetup = {
                             }
                         ]
                     },
-                    {   // Bot info settings
-                        header: '🤖 Bot Information',
-                        collapsible: true,
-                        numUncollapsibleWidgets: 2,
-                        widgets: [
-                            {   // Bot info paragraph title
-                                id: 'bot_info',
-                                TextParagraph: {
-                                    text: 'Set up your bot information \n\n(name, short description, commands, etc.) from the spreadsheet below.',
-                                    maxLines: 1
-                                }
-                            },
-                            {   // Load demo data button
-                                id: 'load_demo_data_button',
-                                TextButton: {
-                                    text: '📥 Load Demo Data',
-                                    onClick: {
-                                        functionName: 'EventHandler.Addon.onBindSheetDataClick',
-                                        parameters: { entityName: 'BotSetup' }
-                                    }
-                                }
-                            }
-                        ]
-                    },
                     {   // Deployment setup
                         header: '🚀 Deployment Setup',
                         collapsible: true,
@@ -386,6 +362,20 @@ EMD.BotSetup = {
                             }
                         ]
                     },
+                    {   // Bot info settings
+                        header: '🤖 Bot Information',
+                        collapsible: true,
+                        numUncollapsibleWidgets: 2,
+                        widgets: [
+                            {   // Bot info paragraph title
+                                id: 'bot_info',
+                                TextParagraph: {
+                                    text: 'Set up your bot information \n\n(name, short description, commands, etc.) from the spreadsheet below.',
+                                    maxLines: 1
+                                }
+                            }
+                        ]
+                    },
                     {   // Data view
                         header: 'Data View',
                         collapsible: true,
@@ -402,11 +392,21 @@ EMD.BotSetup = {
                     }
                 ],
             fixedFooter: {
+                secondaryButton: {
+                    textButton: {
+                        text: '🤖 Set data from Template',
+                        onClick: {
+                            functionName: 'EventHandler.Addon.onBindSheetDataClick',
+                            parameters: { entityName: 'BotSetup' }
+                        }
+                    }
+                },
                 primaryButton: {
                     textButton: {
-                        text: '💾 Save',
+                        text: '🌐 Sync Bot',
                         onClick: {
-                            functionName: 'EventHandler.Addon.onSaveBotSetupClick',
+                            functionName: 'EventHandler.Addon.onCancelClick',
+                            parameters: {}
                         }
                     }
                 }
