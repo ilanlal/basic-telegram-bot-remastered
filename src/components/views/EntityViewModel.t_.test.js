@@ -5,10 +5,10 @@ const EntityViewModel = require('./EntityViewModel');
 
 describe('EntityViewModel', () => {
     const tests = [
-        [EMD.WebhookSetup, { isActive: true }],
         [EMD.Home, { isActive: true }],
         [EMD.Automation, { isActive: true }],
-        [EMD.BotSetup, { isActive: true }]
+        [EMD.BotSetup, { isActive: true }],
+        [EMD.EnvironmentVariables, { isActive: true }]
     ];
 
     it('should create an view model instance.', () => {

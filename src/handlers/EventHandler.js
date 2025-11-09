@@ -204,6 +204,7 @@ EventHandler.AddonWrapper = class {
                 .bindSheetSampleData(emd.sheet({}));
 
             return this.handleOperationSuccess(`👍 Sheet data for ${entityName} bound successfully.`)
+                .build();
         } catch (error) {
             return this.handleError(error)
                 .build();
