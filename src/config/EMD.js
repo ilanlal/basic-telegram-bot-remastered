@@ -379,7 +379,7 @@ EMD.BotSetup = {
                     {   // Data view
                         header: 'Data View',
                         collapsible: true,
-                        numUncollapsibleWidgets: 1,
+                        numUncollapsibleWidgets: 0,
                         widgets: [
                             {   // Data View widget
                                 id: 'data_view_widget',
