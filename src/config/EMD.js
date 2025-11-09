@@ -34,7 +34,7 @@ EMD.Home = {
                                 text: 'Environment Variables',
                                 topLabel: 'Environment Variables',
                                 bottomLabel: 'Manage your environment variables here',
-                                wrapText: true,
+                                wrapText: false,
                                 textButton: {
                                     disabled: false,
                                     text: '🌍 Manage',
@@ -58,7 +58,7 @@ EMD.Home = {
                                 text: 'Execute api actions on your bot',
                                 topLabel: 'API & Bot Setup',
                                 bottomLabel: '🤖 (getMe, setWebhook, ..)',
-                                wrapText: true,
+                                wrapText: false,
                                 textButton: {
                                     disabled: false,
                                     text: '📡 API Actions',
@@ -82,7 +82,7 @@ EMD.Home = {
                                 text: 'Automation management',
                                 topLabel: `Automation ${data?.totalAutomations || 0} workflows`,
                                 bottomLabel: '⚡ Menues, workflows, triggers',
-                                wrapText: true,
+                                wrapText: false,
                                 textButton: {
                                     disabled: false,
                                     text: '⚡ Manage',
@@ -99,7 +99,7 @@ EMD.Home = {
                                 text: 'Contacts management',
                                 topLabel: 'Contacts {total}',
                                 bottomLabel: 'Manage your contacts here',
-                                wrapText: true,
+                                wrapText: false,
                                 textButton: {
                                     disabled: false,
                                     text: '👥 User Management',
@@ -305,7 +305,7 @@ EMD.BotSetup = {
                                     text: 'Take action on your bot webhook',
                                     topLabel: `🔗 Webhook Action`,
                                     bottomLabel: `${data.setupFlow?.webhookSet ? 'Delete or update your webhook' : 'Set up your webhook'}`,
-                                    wrapText: true,
+                                    wrapText: false,
                                     textButton: {
                                         disabled: false,
                                         text: `${data.setupFlow?.webhookSet ? '🗑️ Delete Webhook' : '📡 Set Webhook'}`,
@@ -536,7 +536,7 @@ EMD.Automation = {
                                     topLabel: '⚡',
                                     text: 'api/createAutomation',
                                     bottomLabel: 'Create a new automation',
-                                    wrapText: true,
+                                    wrapText: false,
                                     textButton: {
                                         text: '⚡ Create',
                                         disabled: false,
@@ -1917,7 +1917,7 @@ EMD.Test = {
                                     topLabel: '📡',
                                     text: 'api/setWebhook',
                                     bottomLabel: 'Set webhook for the bot',
-                                    wrapText: true,
+                                    wrapText: false,
                                     textButton: {
                                         text: '📡 Set',
                                         disabled: false,
