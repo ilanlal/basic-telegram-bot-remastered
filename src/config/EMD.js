@@ -24,7 +24,7 @@ EMD.Home = {
             },
             sections: [
                 {  // Environment variables section
-                    header: 'Environment Variables',
+                    //header: 'Environment Variables',
                     collapsible: true,
                     numUncollapsibleWidgets: 1,
                     widgets: [
@@ -48,7 +48,7 @@ EMD.Home = {
                     ]
                 },
                 {   // Get started section
-                    header: 'Get Started with Your Bot',
+                    // header: 'Get Started with Your Bot',
                     collapsible: true,
                     numUncollapsibleWidgets: 1,
                     widgets: [
@@ -72,7 +72,7 @@ EMD.Home = {
                     ]
                 },
                 {   // Advanced Settings Section
-                    header: 'Advanced Settings',
+                    // header: 'Advanced Settings',
                     collapsible: true,
                     numUncollapsibleWidgets: 1,
                     widgets: [
@@ -159,9 +159,9 @@ EMD.EnvironmentVariables = {
             sections:
                 [
                     {   // Environment variables.
-                        header: 'Environment variables',
+                        //header: 'Environment variables',
                         collapsible: true,
-                        numUncollapsibleWidgets: 4,
+                        numUncollapsibleWidgets: 1,
                         widgets: [
                             { // Title Text Paragraph
                                 id: 'env_variables_title',
@@ -188,19 +188,49 @@ EMD.EnvironmentVariables = {
                                 },
                                 propertyName: 'default_language',
                                 value: 'en'
+                            }]
+                    },
+                    {   // Deployment setup
+                        header: '🚀 Deployment Setup',
+                        collapsible: true,
+                        numUncollapsibleWidgets: 1,
+                        widgets: [
+                            {
+                                id: 'deployment_id_info',
+                                TextParagraph: {
+                                    text: `Deployment ID is currently: ${data.setupFlow?.deploymentIdSet ? '✅ Set' : '❌ Not Set'}`
+                                }
+                            },
+                            {   // Deployment ID Variable
+                                id: 'deployment_id_variable',
+                                TextInput: {
+                                    title: 'Deployment ID',
+                                    fieldName: 'txt_deployment_id',
+                                    hint: 'Enter deployment ID'
+                                },
+                                propertyName: 'deployment_id'
+                            },
+                            { // Identify Deployment ID Button
+                                id: 'identify_deployment_id_button',
+                                TextButton: {
+                                    text: '💾 Save Deployment ID',
+                                    onClick: {
+                                        functionName: 'EventHandler.Addon.onIdentifyDeploymentIdClick'
+                                    }
+                                }
                             }
                         ]
                     },
                     {   // Data view
                         header: 'Data View',
                         collapsible: true,
-                        numUncollapsibleWidgets: 1,
+                        numUncollapsibleWidgets: 0,
                         widgets: [
                             {   // Data View widget
                                 id: 'data_view_widget',
                                 TextParagraph: {
                                     text: `Data: ${JSON.stringify(data, null, 2)}`,
-                                    maxLines: 1
+                                    maxLines: 10
                                 }
                             }
                         ]
@@ -238,14 +268,14 @@ EMD.BotSetup = {
             sections:
                 [
                     {   // identify bot api token
-                        header: '🔑 Bot API Token',
+                        // header: '🔑 Bot API Token',
                         collapsible: true,
                         numUncollapsibleWidgets: 1,
                         widgets: [
                             { // Bot token set state
                                 id: 'bot_token_set_state',
                                 TextParagraph: {
-                                    text: `Bot Token is currently set to: ${data.isActive ? '✅ Set' : '❌ Not Set'}`
+                                    text: `🔑 Bot Token is currently set to: ${data.isActive ? '✅ Set' : '❌ Not Set'}`
                                 }
                             },
                             { // Bot Token Variable
@@ -268,46 +298,15 @@ EMD.BotSetup = {
                             }
                         ]
                     },
-                    {   // Deployment setup
-                        header: '🚀 Deployment Setup',
-                        collapsible: true,
-                        numUncollapsibleWidgets: 1,
-                        widgets: [
-                            {
-                                id: 'deployment_id_info',
-                                TextParagraph: {
-                                    text: `Deployment ID is currently: ${data.setupFlow?.deploymentIdSet ? '✅ Set' : '❌ Not Set'}`
-                                }
-                            },
-                            {   // Deployment ID Variable
-                                id: 'deployment_id_variable',
-                                TextInput: {
-                                    title: 'Deployment ID',
-                                    fieldName: 'txt_deployment_id',
-                                    hint: 'Enter deployment ID'
-                                },
-                                propertyName: 'deployment_id'
-                            },
-                            { // Identify Deployment ID Button
-                                id: 'identify_deployment_id_button',
-                                TextButton: {
-                                    text: '💾 Save Deployment ID',
-                                    onClick: {
-                                        functionName: 'EventHandler.Addon.onIdentifyDeploymentIdClick'
-                                    }
-                                }
-                            }
-                        ]
-                    },
                     {   // Webhook setup
-                        header: '🔗 Webhook Setup',
+                        // header: '🔗 Webhook Setup',
                         collapsible: true,
                         numUncollapsibleWidgets: 1,
                         widgets: [
                             {
                                 id: 'webhook_setup_info',
                                 TextParagraph: {
-                                    text: `Webhook URL is currently: ${data.setupFlow?.webhookSet ? '✅ Set' : '❌ Not Set'}`
+                                    text: `🔗 Webhook URL is currently: ${data.setupFlow?.webhookSet ? '✅ Set' : '❌ Not Set'}`
                                 }
                             },
                             { // DecoratedText for webhook action (set,delete)
@@ -330,14 +329,14 @@ EMD.BotSetup = {
                         ]
                     },
                     {   // Admin Chat ID setup
-                        header: '👤 Admin Chat ID Setup',
+                        // header: '👤 Admin Chat ID Setup',
                         collapsible: true,
                         numUncollapsibleWidgets: 1,
                         widgets: [
                             { // Admin Chat ID Info
                                 id: 'admin_chat_id_info',
                                 TextParagraph: {
-                                    text: 'This is the chat ID for the admin user.'
+                                    text: '👤 This is the chat ID for the admin user.'
                                 }
                             },
                             { // Admin Chat ID Variable
@@ -363,9 +362,9 @@ EMD.BotSetup = {
                         ]
                     },
                     {   // Bot info settings
-                        header: '🤖 Bot Information',
+                        // header: '🤖 Bot Information',
                         collapsible: true,
-                        numUncollapsibleWidgets: 2,
+                        numUncollapsibleWidgets: 1,
                         widgets: [
                             {   // Bot info paragraph title
                                 id: 'bot_info',
@@ -385,7 +384,7 @@ EMD.BotSetup = {
                                 id: 'data_view_widget',
                                 TextParagraph: {
                                     text: `Data: ${JSON.stringify(data, null, 2)}`,
-                                    maxLines: 1
+                                    maxLines: 10
                                 }
                             }
                         ]
@@ -537,7 +536,7 @@ EMD.Automation = {
             sections:
                 [   // Automation Management Section
                     {
-                        header: 'Automation Management',
+                        // header: 'Automation Management',
                         collapsible: false,
                         numUncollapsibleWidgets: 0,
                         widgets: [
