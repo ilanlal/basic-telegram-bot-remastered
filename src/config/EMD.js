@@ -16,7 +16,7 @@ EMD.Home = {
             name: 'homeCard',
             header:
             {
-                title: 'Home',
+                title: '🏠 Home',
                 subTitle: 'Welcome to your home',
                 imageUrl: EMD.DEFAULT_IMAGE_URL,
                 imageStyle: CardService.ImageStyle.SQUARE,
@@ -37,7 +37,7 @@ EMD.Home = {
                                 wrapText: true,
                                 textButton: {
                                     disabled: false,
-                                    text: '🌍',
+                                    text: '🌍 Manage',
                                     onClick: {
                                         functionName: 'EventHandler.Addon.onOpenCardClick',
                                         parameters: { entityName: 'EnvironmentVariables' }
@@ -47,21 +47,21 @@ EMD.Home = {
                         }
                     ]
                 },
-                {   // Get started section
-                    // header: 'Get Started with Your Bot',
+                {   // Telegram Bot API actions section
+                    // header: 'Telegram Bot Setup',
                     collapsible: true,
                     numUncollapsibleWidgets: 1,
                     widgets: [
                         {   // Bot setup widget
                             id: 'bot_setup_widget',
                             DecoratedText: {
-                                text: 'Click the button to setup your bot',
-                                topLabel: 'Get started',
-                                bottomLabel: '🤖',
+                                text: 'Execute api actions on your bot',
+                                topLabel: 'API & Bot Setup',
+                                bottomLabel: '🤖 (getMe, setWebhook, ..)',
                                 wrapText: true,
                                 textButton: {
                                     disabled: false,
-                                    text: '🤖 Set me up',
+                                    text: '📡 API Actions',
                                     onClick: {
                                         functionName: 'EventHandler.Addon.onBotSetupClick',
                                         parameters: { action: 'setupBot' }
@@ -80,12 +80,12 @@ EMD.Home = {
                             id: 'automation_management_widget',
                             DecoratedText: {
                                 text: 'Automation management',
-                                topLabel: 'Automations {total}',
-                                bottomLabel: 'Manage your automations here',
+                                topLabel: `Automation ${data?.totalAutomations || 0} workflows`,
+                                bottomLabel: '⚡ Menues, workflows, triggers',
                                 wrapText: true,
                                 textButton: {
                                     disabled: false,
-                                    text: '⚡',
+                                    text: '⚡ Manage',
                                     onClick: {
                                         functionName: 'EventHandler.Addon.onOpenCardClick',
                                         parameters: { entityName: 'Automation' }
@@ -102,7 +102,7 @@ EMD.Home = {
                                 wrapText: true,
                                 textButton: {
                                     disabled: false,
-                                    text: '👥',
+                                    text: '👥 User Management',
                                     onClick: {
                                         functionName: 'EventHandler.Addon.contacts',
                                         parameters: { action: 'manageContacts' }
@@ -126,17 +126,7 @@ EMD.Home = {
                         }
                     ]
                 }
-            ],
-            fixedFooter: {
-                primaryButton: {
-                    textButton: {
-                        text: 'Primary Action',
-                        onClick: {
-                            functionName: 'EventHandler.Addon.onPrimaryActionClick'
-                        }
-                    }
-                }
-            }
+            ]
         };
     }
 };
@@ -372,6 +362,26 @@ EMD.BotSetup = {
                                     text: 'Set up your bot information \n\n(name, short description, commands, etc.) from the spreadsheet below.',
                                     maxLines: 1
                                 }
+                            },
+                            {
+                                id: 'bot_info_setup_button',
+                                TextButton: {
+                                    text: '🤖 Set data from Template',
+                                    onClick: {
+                                        functionName: 'EventHandler.Addon.onBindSheetDataClick',
+                                        parameters: { entityName: 'BotSetup' }
+                                    }
+                                }
+                            },
+                            {
+                                id: 'bot_info_sync_button',
+                                TextButton: {
+                                    text: '🌐 Sync Bot',
+                                    onClick: {
+                                        functionName: 'EventHandler.Addon.onCancelClick',
+                                        parameters: {}
+                                    }
+                                }
                             }
                         ]
                     },
@@ -389,27 +399,7 @@ EMD.BotSetup = {
                             }
                         ]
                     }
-                ],
-            fixedFooter: {
-                secondaryButton: {
-                    textButton: {
-                        text: '🤖 Set data from Template',
-                        onClick: {
-                            functionName: 'EventHandler.Addon.onBindSheetDataClick',
-                            parameters: { entityName: 'BotSetup' }
-                        }
-                    }
-                },
-                primaryButton: {
-                    textButton: {
-                        text: '🌐 Sync Bot',
-                        onClick: {
-                            functionName: 'EventHandler.Addon.onCancelClick',
-                            parameters: {}
-                        }
-                    }
-                }
-            }
+                ]
         }
     },
     sheet: (data = {}) => {
