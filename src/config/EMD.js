@@ -1933,8 +1933,8 @@ EMD.Customer = {
     },
     sheet: (data = {}) => {
         return {
-            name: '🛍️ Customers Sheet',
-            columns: ['action', 'default', 'es', 'fr', 'ar', 'de', 'it', 'pt', 'ru', 'zh', 'ja', 'ko', 'he']
+            name: '👥  Members',
+            columns: ['Created on', 'chat_id', 'username', 'First Name', 'Last Name', 'language_code', 'Data']
         }
     }
 };

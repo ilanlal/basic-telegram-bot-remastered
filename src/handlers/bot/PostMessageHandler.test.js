@@ -1,5 +1,4 @@
-require('@ilanlal/gasmocks');
-require('../../services');
+require('../../../tests');
 
 const { PostMessageHandler } = require('./PostMessageHandler');
 

@@ -5,11 +5,11 @@ class SpreadsheetService {
     }
 
     static get USERS_SHEET_NAME() {
-        return "Users";
+        return EMD.Customer.sheet({}).name;
     }
 
     static get REPLIES_SHEET_NAME() {
-        return "Replies";
+        return EMD.Automations.sheet({}).name;
     }
 
     getActiveSpreadsheet() {
@@ -94,7 +94,7 @@ SpreadsheetService.Users = {
                 .getActiveSpreadsheet()
                 .insertSheet(this.USERS_SHEET_NAME);
 
-            sheet.appendRow(['Created on', 'chat_id', 'username', 'First Name', 'Last Name', 'language_code', 'Data']);
+            sheet.appendRow(EMD.Customer.sheet({}).columns);
         }
 
         return sheet;

@@ -1,6 +1,6 @@
 class RepliesSheetService {
     static get REPLIES_SHEET_NAME() {
-        return "🤖 Replies";
+        return EMD.Automation.sheet({}).name;
     }
 
     constructor(activeSpreadsheet = null, language_code = 'en') {
