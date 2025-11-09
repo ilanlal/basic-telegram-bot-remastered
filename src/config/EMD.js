@@ -221,7 +221,7 @@ EMD.EnvironmentVariables = {
 };
 
 EMD.BotSetup = {
-    entityName: 'Bot Setup',
+    entityName: 'BotSetup',
     displayName: 'Bot Setup',
     pluralDisplayName: 'Bot Setups',
     card: (data = {}) => {
@@ -285,7 +285,8 @@ EMD.BotSetup = {
                                 TextButton: {
                                     text: '📥 Load Demo Data',
                                     onClick: {
-                                        functionName: 'EventHandler.Addon.onLoadDemoDataClick'
+                                        functionName: 'EventHandler.Addon.onBindSheetDataClick',
+                                        parameters: { entityName: 'BotSetup' }
                                     }
                                 }
                             }
