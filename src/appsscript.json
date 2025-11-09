@@ -36,20 +36,12 @@
           "runFunction": "EventHandler.Addon.onOpenAccountCard"
         },
         {
-          "label": "⚙️ Settings",
-          "runFunction": "EventHandler.Addon.onOpenSettingsCard"
-        },
-        {
           "label": "About",
           "runFunction": "EventHandler.Addon.onOpenAboutCard"
         },
         {
           "label": "Help & Support",
           "openLink": "https://github.com/ilanlal/basic-telegram-bot-remastered#readme"
-        },
-        {
-          "label": "Report an issue",
-          "openLink": "https://github.com/ilanlal/basic-telegram-bot-remastered/issues"
         }
       ]
     },

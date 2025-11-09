@@ -148,9 +148,7 @@ EventHandler.AddonWrapper = class {
 
     handleOpenHomeCard(e) {
         try {
-            return NavigationController.create(this._userStore)
-                .navigateToHomeCard()
-                .build();
+            return this.handleOpenCard({ parameters: { entityName: 'Home' } });
         } catch (error) {
             return this.handleError(error)
                 .build();
