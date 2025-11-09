@@ -115,13 +115,13 @@ EMD.Home = {
                 { // Data view
                     header: 'Data View',
                     collapsible: true,
-                    numUncollapsibleWidgets: 1,
+                    numUncollapsibleWidgets: 0,
                     widgets: [
                         {   // Data View widget
                             id: 'data_view_widget',
                             TextParagraph: {
                                 text: `Data: ${JSON.stringify(data, null, 2)}`,
-                                maxLines: 1
+                                maxLines: 10
                             }
                         }
                     ]
@@ -360,7 +360,7 @@ EMD.BotSetup = {
                                 id: 'bot_info',
                                 TextParagraph: {
                                     text: 'Set up your bot information \n\n(name, short description, commands, etc.) from the spreadsheet below.',
-                                    maxLines: 1
+                                    maxLines: 10
                                 }
                             },
                             {
