@@ -1,6 +1,4 @@
-require('@ilanlal/gasmocks');
-require('../../lib'); // Ensure the lib is loaded
-require('../../services');
+require('../../../tests');
 const { SetupFlow } = require('./SetupFlow');
 
 describe('SetupFlow', () => {
