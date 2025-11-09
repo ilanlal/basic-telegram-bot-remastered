@@ -26,18 +26,6 @@ class EntityViewModel {
         this._cardWrapper = cardWrapper;
     }
 
-    getCardBuilder(card = {}) {
-        return this._cardWrapper.newCardBuilder(card, { isActive: true });
-    }
-
-    getActiveSheet(sheetMeta) {
-        return this._sheetWrapper.getSheet(sheetMeta);
-    }
-
-    setActiveSheet(sheetMeta = {}) {
-        return this._sheetWrapper.setActiveSheet(sheetMeta);
-    }
-
     get sheetWrapper() {
         return this._sheetWrapper;
     }

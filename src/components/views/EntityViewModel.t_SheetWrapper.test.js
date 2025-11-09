@@ -7,7 +7,7 @@ describe('EntityViewModel.SheetWrapper', () => {
     });
 
     it('should create an instance of SheetWrapper with new service instances', () => {
-        const wrapper = new EntityViewModel.SheetWrapper(
+        const wrapper = EntityViewModel.SheetWrapper.create(
             SpreadsheetApp.getActiveSpreadsheet()
         );
         expect(wrapper).toBeDefined();
@@ -16,8 +16,8 @@ describe('EntityViewModel.SheetWrapper', () => {
     describe('SheetWrapper methods', () => {
         /** @type {EntityViewModel.SheetWrapper} */
         let wrapper;
-        beforeEach(() => {            
-            wrapper = new EntityViewModel.SheetWrapper(
+        beforeEach(() => {
+            wrapper = EntityViewModel.SheetWrapper.create(
                 SpreadsheetApp.getActiveSpreadsheet()
             );
         });
@@ -30,7 +30,7 @@ describe('EntityViewModel.SheetWrapper', () => {
             const activeSheet = wrapper.getSheet(sheetMeta);
             expect(activeSheet).toBeDefined();
             expect(activeSheet.getName()).toBe('Test Sheet');
-            
+
         });
 
         it('should bind sample data to the active sheet', () => {

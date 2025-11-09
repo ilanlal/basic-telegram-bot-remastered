@@ -1,8 +1,8 @@
 
 class EntityController {
     static create(
-        userStore = UserStoreFactory.create().current, 
-        cardService = CardService, 
+        userStore = UserStoreFactory.create().current,
+        cardService = CardService,
         activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet(),
         userProperties = PropertiesService.getUserProperties()
     ) {
@@ -17,13 +17,10 @@ class EntityController {
     }
 
     pushCard(cardMeta = {}) {
-        const viewModel = EntityViewModel.create({
-            cardService: this.cardService,
-            activeSpreadsheet: this.activeSpreadsheet,
-            userProperties: this.userProperties
-        });
+        const cardWeapper = EntityViewModel.CardServiceWrapper
+            .create(this.cardService, this.userProperties);
 
-        const cardBuilder = viewModel.getCardBuilder(cardMeta);
+        const cardBuilder = cardWeapper.newCardBuilder(cardMeta);
 
         return this.cardService.newActionResponseBuilder()
             .setNavigation(
@@ -32,22 +29,18 @@ class EntityController {
             );
     }
     activateSheet(sheetMeta = {}) {
-        const viewModel = EntityViewModel.create({
-            cardService: this.cardService,
-            activeSpreadsheet: this.activeSpreadsheet,
-            userProperties: this.userProperties
-        });
+        const sheetWrapper = EntityViewModel.SheetWrapper.create(
+            this.activeSpreadsheet
+        );
 
-        return viewModel.setActiveSheet(sheetMeta);
+        return sheetWrapper.setActiveSheet(sheetMeta);
     }
     bindSheetSampleData(sheetMeta = {}) {
-        const viewModel = EntityViewModel.create({
-            cardService: this.cardService,
-            activeSpreadsheet: this.activeSpreadsheet,
-            userProperties: this.userProperties
-        });
+        const sheetWrapper = EntityViewModel.SheetWrapper.create(
+            this.activeSpreadsheet
+        );
 
-        return viewModel.bindSheetSampleData(sheetMeta);
+        return sheetWrapper.bindSheetSampleData(sheetMeta);
     }
     save(edm = {}, rowIndex = -1) {
         // Implementation for save action
