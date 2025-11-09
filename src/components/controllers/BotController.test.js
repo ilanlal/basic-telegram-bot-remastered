@@ -1,8 +1,4 @@
-require("@ilanlal/gasmocks");
-require('../../types'); // Ensure the model is loaded
-require('../views'); // Ensure the component is loaded
-require('../../lib'); // Ensure the lib is loaded
-require('../../services'); // Ensure the service is loaded
+require('../../../tests');
 const { BotController } = require('./BotController');
 
 describe('BotController Tests', () => {
