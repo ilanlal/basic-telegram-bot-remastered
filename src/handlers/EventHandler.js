@@ -205,7 +205,7 @@ EventHandler.AddonWrapper = class {
                     this._userProperties)
                 .bindSheetSampleData(emd.sheet({}));
 
-                return this.handleOperationSuccess(`👍 Sheet data for ${entityName} bound successfully.`)
+            return this.handleOperationSuccess(`👍 Sheet data for ${entityName} bound successfully.`)
         } catch (error) {
             return this.handleError(error)
                 .build();
@@ -404,7 +404,7 @@ EventHandler.AddonWrapper = class {
             }
 
             const controller = BotSetupController
-                .create(PropertiesService.getUserProperties());
+                .create(this._userProperties);
 
             controller.setNewChatId(chatId);
 

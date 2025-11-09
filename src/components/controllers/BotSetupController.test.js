@@ -7,6 +7,7 @@ describe('BotSetupController Tests', () => {
     });
 
     describe('Static create method', () => {
+        /** @type {BotSetupController} */
         let controller;
 
         beforeEach(() => {

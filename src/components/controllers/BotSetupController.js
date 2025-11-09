@@ -20,21 +20,8 @@ class BotSetupController {
     }
 
     identifyNewBotToken(token) {
-        if (!token || typeof token !== 'string' || token.trim() === '') {
-            throw new Error("Invalid bot token");
-        }
-
-        const safeToken = decodeURIComponent(token);
-
-        const response = new TelegramBotClient(safeToken)
-            .getMe();
-
-        if (response.getResponseCode() !== 200) {
-            throw new Error("Failed to validate bot token: " + safeToken);
-        }
-
-        const content = response.getContentText();
-        return JSON.parse(content).result;
+        return SetupFlow.create(this._userProperties)
+            .identifyNewBotToken(token);
     }
 
     setNewBotToken(token) {
@@ -43,62 +30,31 @@ class BotSetupController {
     }
 
     setNewDeploymentId(id) {
-        if (!id || typeof id !== 'string' || id.trim() === '') {
-            throw new Error("Invalid deployment ID");
-        }
-        const safeId = decodeURIComponent(id);
-        return this._userProperties.setProperty(SetupFlow.InputMeta.DEPLOYMENT_ID, safeId);
+        return SetupFlow.create(this._userProperties)
+            .setNewDeploymentId(id);
     }
 
     setNewChatId(id) {
-        if (!id || typeof parseInt(id) !== 'number') {
-            throw new Error("Invalid chat ID");
-        }
-        return this._userProperties.setProperty(SetupFlow.InputMeta.ADMIN_CHAT_ID, id.toString());
+        return SetupFlow.create(this._userProperties)
+            .setMyNewChatId(id);
     }
 
     setDebugMode(isDebug) {
-        const debugValue = isDebug ? 'true' : 'false';
-        return this._userProperties.setProperty(SetupFlow.InputMeta.DEBUG_MODE, debugValue);
+        return SetupFlow.create(this._userProperties)
+            .setDebugMode(isDebug);
     }
 
     setDefaultLanguage(languageCode) {
-        if (!languageCode || typeof languageCode !== 'string' || languageCode.trim() === '') {
-            throw new Error("Invalid language code");
-        }
-        return this._userProperties.setProperty(SetupFlow.InputMeta.DEFAULT_LANGUAGE, languageCode);
+        return SetupFlow.create(this._userProperties)
+            .setNewDefaultLanguage(languageCode);
     }
 
     setWebhook() {
-        const deploymentId = this._userProperties.getProperty(SetupFlow.InputMeta.DEPLOYMENT_ID);
-        if (!deploymentId) {
-            throw new Error("Deployment ID is not available. Please deploy the script as a web app.");
-        }
-        const webhookUrl = `https://script.google.com/macros/s/${deploymentId}/exec`;
-
-        const response = this.telegramBotClient.setWebhook(webhookUrl);
-        if (response.getResponseCode() !== 200) {
-            throw new Error("Failed to set webhook");
-        }
-
-        return JSON.parse(response.getContentText());
+        return SetupFlow.create(this._userProperties).setWebhook();
     }
 
     deleteWebhook() {
-        const deploymentId = this._userProperties.getProperty(SetupFlow.InputMeta.DEPLOYMENT_ID);
-        if (!deploymentId) {
-            throw new Error("Deployment ID is not available. Please deploy the script as a web app.");
-        }
-        const webhookUrl = `https://script.google.com/macros/s/${deploymentId}/exec`;
-
-        const response = this.telegramBotClient
-            .deleteWebhook(webhookUrl);
-
-        if (response.getResponseCode() !== 200) {
-            throw new Error("Failed to delete webhook");
-        }
-
-        return JSON.parse(response.getContentText());
+        return SetupFlow.create(this._userProperties).deleteWebhook();
     }
 }
 

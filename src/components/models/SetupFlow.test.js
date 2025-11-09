@@ -4,6 +4,7 @@ require('../../services');
 const { SetupFlow } = require('./SetupFlow');
 
 describe('SetupFlow', () => {
+    /** @type {SetupFlow} */
     let model;
 
     beforeEach(() => {
@@ -40,7 +41,7 @@ describe('SetupFlow', () => {
         UrlFetchAppStubConfiguration.when(`https://api.telegram.org/bot${newToken}/getWebhookInfo`)
             .return(new HttpResponse().setContentText(`{"ok":true,"result":{}}`));
 
-        model.setNewBotToken(newToken);
+        model.identifyNewBotToken(newToken);
         expect(model.stateObject.botToken).toBe(newToken);
     });
 

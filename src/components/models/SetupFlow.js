@@ -2,7 +2,7 @@ class SetupFlow {
     constructor(userProperties) {
         this._userProperties = userProperties;
         this._telegramBotClient = null;
-        
+
     }
 
     static create(
@@ -18,7 +18,7 @@ class SetupFlow {
         return this._userProperties.setProperty(SetupFlow.InputMeta.DEFAULT_LANGUAGE, code);
     }
 
-    setNewBotToken(token) {
+    identifyNewBotToken(token) {
         if (!token || typeof token !== 'string' || token.trim() === '') {
             throw new Error("Invalid bot token");
         }
@@ -28,7 +28,11 @@ class SetupFlow {
         if (response.getResponseCode() !== 200) {
             throw new Error("Failed to validate bot token");
         }
-        return this._userProperties.setProperty(SetupFlow.InputMeta.BOT_API_TOKEN, safeToken);
+        this._userProperties.setProperty(SetupFlow.InputMeta.BOT_API_TOKEN, safeToken);
+
+        const contentText = response.getContentText();
+        const res = JSON.parse(contentText);
+        return res.result;
     }
 
     setNewDeploymentId(id) {
@@ -41,7 +45,7 @@ class SetupFlow {
     }
 
     setMyNewChatId(id) {
-        if (!id || typeof id !== 'number') {
+        if (!id || isNaN(id)) {
             throw new Error("Invalid chat ID");
         }
         const safeId = decodeURIComponent(id);
@@ -80,6 +84,11 @@ class SetupFlow {
         return JSON.parse(response.getContentText());
     }
 
+    setDebugMode(isDebug) {
+        const debugValue = isDebug ? 'true' : 'false';
+        return this._userProperties.setProperty(SetupFlow.InputMeta.DEBUG_MODE, debugValue);
+    }
+
     // Getters
     get trafficLight() {
         const leds = '{0}{1}{2}{3}{4}';
@@ -88,13 +97,15 @@ class SetupFlow {
         const led2 = this.stateObject.webhookSet ? Lights.ON : Lights.OFF;
         const led3 = this.stateObject.chatIdSet ? Lights.ON : Lights.OFF;
         const led4 = this.stateObject.defaultLanguageSet ? Lights.ON : Lights.WARN;
+        const led5 = this.stateObject.debugModeSet ? Lights.ON : Lights.OFF;
 
         return leds
             .replace('{0}', led0)
             .replace('{1}', led1)
             .replace('{2}', led2)
             .replace('{3}', led3)
-            .replace('{4}', led4);
+            .replace('{4}', led4)
+            .replace('{5}', led5);
     }
 
     get isActive() {
@@ -111,6 +122,7 @@ class SetupFlow {
             { name: 'webhookUrl', value: this.stateObject.webhookUrl, isSet: this.stateObject.webhookSet },
             { name: 'chatId', value: this.stateObject.chatId, isSet: this.stateObject.chatIdSet },
             { name: 'defaultLanguage', value: this.stateObject.defaultLanguage, isSet: this.stateObject.defaultLanguageSet },
+            { name: 'debugMode', value: this.stateObject.debugMode, isSet: this.stateObject.debugModeSet }
         ];
     }
 
@@ -126,6 +138,8 @@ class SetupFlow {
             chatIdSet: !!this._userProperties.getProperty(SetupFlow.InputMeta.ADMIN_CHAT_ID),
             defaultLanguage: this._userProperties.getProperty(SetupFlow.InputMeta.DEFAULT_LANGUAGE),
             defaultLanguageSet: !!this._userProperties.getProperty(SetupFlow.InputMeta.DEFAULT_LANGUAGE),
+            debugMode: this._userProperties.getProperty(SetupFlow.InputMeta.DEBUG_MODE) === 'true',
+            debugModeSet: this._userProperties.getProperty(SetupFlow.InputMeta.DEBUG_MODE) !== null
         }
     }
 
