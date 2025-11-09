@@ -34,6 +34,13 @@ EventHandler.Addon = {
                 EventHandler.prototype.userProperties)
             .handleOpenCard(e);
     },
+    onBindSheetDataClick: (e) => {
+        return new EventHandler
+            .AddonWrapper(
+                EventHandler.prototype.userStore,
+                EventHandler.prototype.userProperties)
+            .handleBindSheetData(e);
+    },
     onOpenAccountCard: (e) => {
         return new EventHandler
             .AddonWrapper(
@@ -171,6 +178,34 @@ EventHandler.AddonWrapper = class {
                     this._userProperties)
                 .pushCard(emd.card({ isAdmin: false }))
                 .build();
+        } catch (error) {
+            return this.handleError(error)
+                .build();
+        }
+    }
+
+    handleBindSheetData(e) {
+        try {
+            const entityName = e.parameters?.entityName || null;
+            if (!entityName) {
+                throw new Error("'entityName' parameter is required for onOpenCard.");
+            }
+
+            // find EMD card navigation based on entityName
+            const emd = Object.values(EMD).find(emd => emd.entityName === entityName);
+            if (!emd || !emd.sheet) {
+                throw new Error(`No sheet found for entityName: ${entityName}`);
+            }
+
+            const rs = EntityController
+                .create(
+                    this._userStore,
+                    CardService,
+                    SpreadsheetApp.getActiveSpreadsheet(),
+                    this._userProperties)
+                .bindSheetSampleData(emd.sheet({}));
+
+                return this.handleOperationSuccess(`👍 Sheet data for ${entityName} bound successfully.`)
         } catch (error) {
             return this.handleError(error)
                 .build();

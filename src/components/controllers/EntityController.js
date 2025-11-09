@@ -31,7 +31,24 @@ class EntityController {
                     .pushCard(cardBuilder.build())
             );
     }
+    activateSheet(sheetMeta = {}) {
+        const viewModel = EntityViewModel.create({
+            cardService: this.cardService,
+            activeSpreadsheet: this.activeSpreadsheet,
+            userProperties: this.userProperties
+        });
 
+        return viewModel.setActiveSheet(sheetMeta);
+    }
+    bindSheetSampleData(sheetMeta = {}) {
+        const viewModel = EntityViewModel.create({
+            cardService: this.cardService,
+            activeSpreadsheet: this.activeSpreadsheet,
+            userProperties: this.userProperties
+        });
+
+        return viewModel.bindSheetSampleData(sheetMeta);
+    }
     save(edm = {}, rowIndex = -1) {
         // Implementation for save action
     }

@@ -34,6 +34,10 @@ class EntityViewModel {
         return this._sheetWrapper.getSheet(sheetMeta);
     }
 
+    setActiveSheet(sheetMeta = {}) {
+        return this._sheetWrapper.setActiveSheet(sheetMeta);
+    }
+
     get sheetWrapper() {
         return this._sheetWrapper;
     }
@@ -80,6 +84,19 @@ EntityViewModel.SheetWrapper = class {
 
     getSheet(sheetMeta = {}) {
         return this._sheet = this.initializeSheet(sheetMeta);
+    }
+
+    bindSheetSampleData(sheetMeta = {}) {
+        const sheet = this.getSheet(sheetMeta);
+        const sampleData = sheetMeta.sample_data || [];
+        if (sampleData.length === 0) {
+            return;
+        }
+        sampleData.forEach(row => {
+            sheet.appendRow(row);
+        });
+
+        return sheet;
     }
 
     get columns() {

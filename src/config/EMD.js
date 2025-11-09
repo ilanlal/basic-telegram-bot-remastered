@@ -539,9 +539,9 @@ EMD.Automation = {
                                         text: '⚡ Create',
                                         disabled: false,
                                         onClick: {
-                                            functionName: 'EventHandler.Addon.createAutomation',
+                                            functionName: 'EventHandler.Addon.onBindSheetDataClick',
                                             parameters: {
-                                                api: 'createAutomation'
+                                                api: 'Automation'
                                             }
                                         }
                                     }
@@ -553,11 +553,11 @@ EMD.Automation = {
             fixedFooter: {
                 primaryButton: {
                     textButton: {
-                        text: '💫 Bind row data',
+                        text: '💫 Bind Sheet Data',
                         onClick: {
-                            functionName: 'EventHandler.Addon.onBindData',
+                            functionName: 'EventHandler.Addon.onBindSheetDataClick',
                             parameters: {
-                                action: 'bindData'
+                                entityName: 'Automation'
                             }
                         }
                     }
@@ -1942,6 +1942,16 @@ EMD.Test = {
                     }
                 }
             }
+        };
+    },
+    sheet: (data = {}) => {
+        return {
+            name: '🐢 Test Sheet',
+            columns: ['action', 'default', 'es', 'fr', 'ar', 'de', 'it', 'pt', 'ru', 'zh', 'ja', 'ko', 'he'],
+            sample_data: [
+                ['start', 'Start', 'Comenzar', 'Commencer', 'ابدأ', 'Starten', 'Inizia', 'Começar', 'Начать', '开始', 'スタート', '시작', 'התחל'],
+                ['help', 'Help', 'Ayuda', 'Aide', 'مساعدة', 'Hilfe', 'Aiuto', 'Ajuda', 'Помощь', '帮助', 'ヘルプ', '도움말', 'עזרה'],
+            ]
         };
     }
 }
