@@ -49,10 +49,6 @@ class AutomationModel {
         return 1; // default to second column
     }
 
-    addDemoData() {
-        Config.Samples.default.actions.forEach(row => this.sheet.appendRow(row));
-    }
-
     listRepliesKeys() {
         const range = this.sheet.getDataRange();
         const values = range.getValues();

@@ -33,7 +33,6 @@ describe('AutomationModel', () => {
         });
 
         test('should list all replies keys', () => {
-            model.addDemoData();
             const replies = model.listRepliesKeys();
             expect(replies.length).toBeGreaterThan(2);
         });
@@ -45,7 +44,6 @@ describe('AutomationModel', () => {
 
         // getReplyByKey
         test('should get reply by key', () => {
-            model.addDemoData();
             // reply is array of actions like {method: 'sendMessage', payload: {...}}
             const reply = model.getReplyByKey('/start', 'default');
             const jsonReply = JSON.parse(reply);
