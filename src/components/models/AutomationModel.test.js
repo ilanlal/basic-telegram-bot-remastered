@@ -46,11 +46,13 @@ describe('AutomationModel', () => {
         // getReplyByKey
         test('should get reply by key', () => {
             model.addDemoData();
+            // reply is array of actions like {method: 'sendMessage', payload: {...}}
             const reply = model.getReplyByKey('/start', 'default');
-            expect(reply).toBeDefined();
-            console.log(JSON.parse(reply, null, 2));
-            //expect(JSON.parse(reply).method).toBeDefined();
-            //expect(JSON.parse(reply).payload).toBeDefined();
+            const jsonReply = JSON.parse(reply);
+            expect(Array.isArray(jsonReply)).toBe(true);
+            expect(jsonReply.length).toBeGreaterThan(0);
+            expect(jsonReply[0]).toHaveProperty('method');
+            expect(jsonReply[0]).toHaveProperty('payload');
         });
 
         test('should return null for non-existing key', () => {
