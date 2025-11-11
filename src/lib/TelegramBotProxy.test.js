@@ -19,6 +19,7 @@ describe('TelegramBotProxy', () => {
         const expectedUrl = `https://api.telegram.org/bot${token}`;
         expect(botProxy.apiBaseUrl).toBe(expectedUrl);
     });
+    
     // Note: The following test is a placeholder. In a real-world scenario,
     // you would mock UrlFetchApp.fetch to avoid making actual HTTP requests.
     it('should execute action and return a response', () => {
