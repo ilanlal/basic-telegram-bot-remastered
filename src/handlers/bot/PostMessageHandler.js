@@ -32,7 +32,7 @@ class PostMessageHandler {
         }
 
         // return "notdefined" const message for all other messages input
-        return this.handleDynamicReply(chat_id, '_notdefined');
+        return this.handleDynamicReply(chat_id, '_command_not_found_');
     }
 
     verifyPersone(message) {

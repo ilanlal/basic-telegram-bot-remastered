@@ -1,23 +1,26 @@
 class AutomationHandler {
-    constructor(activeSpreadsheet) {
+    constructor(token, language_code, activeSpreadsheet) {
         this._automationModel = AutomationModel
             .create(activeSpreadsheet);
+        this._telegramBotProxy = TelegramBotProxy
+            .create(token);
+        this._languageCode = language_code;
     }
 
-    static create(activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet()) {
-        return new AutomationHandler(activeSpreadsheet);
+    static create(token = '[YOUR_TELEGRAM_BOT_TOKEN]', language_code = 'default', activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet()) {
+        return new AutomationHandler(token, language_code, activeSpreadsheet);
     }
 
     handleAutomationRequest({ chat_id, name, reply_to_message_id = null }) {
         if (!chat_id || !name) {
             throw new Error('Invalid automation request format');
         }
-        const language_code = 'default';
+
         // array of actions like {method: 'sendMessage', payload: {...}} to execute (as string)
-        let reply = this._automationModel.getReplyByKey(name, language_code);
+        let reply = this._automationModel.getReplyByKey(name, this._languageCode);
 
         if (!reply) {
-            reply = this._automationModel.getReplyByKey('_notdefined', language_code);
+            reply = this._automationModel.getReplyByKey('_action_not_found_', this._languageCode);
         }
 
         const actions = JSON.parse(reply);
@@ -29,18 +32,16 @@ class AutomationHandler {
         }
 
         // For testing purposes, return a simple status
-        return this.handleDynamicReply(chat_id, name, reply_to_message_id);
+        return JSON.stringify({ status: 'dynamic_reply_handled' });
     }
 
     executeAction(chat_id, action, reply_to_message_id) {
-        // Implement action execution logic here
-        // For example, if action.method is 'sendMessage', call the sendMessage function
-        // with action.payload, chat_id, and reply_to_message_id
-    }
-
-    handleDynamicReply(chat_id, name, reply_to_message_id = null) {
-        // Implement dynamic reply handling logic here
-        return JSON.stringify({ status: 'dynamic_reply_handled' });
+        const payload = Object.assign({}, action.payload, {
+            chat_id: chat_id,
+            reply_to_message_id: reply_to_message_id
+        });
+        const uriAction = action.method;
+        const result = this._telegramBotProxy.executeApiRequest(uriAction, payload);
     }
 }
 
