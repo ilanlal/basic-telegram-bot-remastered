@@ -27,11 +27,6 @@ describe('AutomationModel', () => {
             expect(index).toBe(1); // 'default' should be in the second column (index 1)
         });
 
-        test('should set active sheet', () => {
-            const activeSheet = model.setActiveSheet();
-            expect(activeSheet.getName()).toBe(AutomationModel.REPLIES_SHEET_NAME);
-        });
-
         test('should list all replies keys', () => {
             const replies = model.listRepliesKeys();
             expect(replies.length).toBeGreaterThan(2);

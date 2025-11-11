@@ -3,38 +3,13 @@ class AutomationModel {
         return EMD.Automation.sheet({}).name;
     }
 
-    get languageCode() {
-        return this.language_code;
-    }
-
     constructor(activeSpreadsheet) {
-        this.language_code = 'default';
-        this.activeSpreadsheet = activeSpreadsheet;
-        this.sheet = this.initialize();
+        this.sheetModel = SheetModel.create(activeSpreadsheet);
+        this.sheet = this.sheetModel.initializeSheet(EMD.Automation.sheet({}));
     }
 
     static create(activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet()) {
         return new AutomationModel(activeSpreadsheet);
-    }
-
-    initialize() {
-        this.sheet = this.activeSpreadsheet
-            .getSheetByName(AutomationModel.REPLIES_SHEET_NAME);
-        if (!this.sheet) {
-            this.sheet = this.activeSpreadsheet
-                .insertSheet(AutomationModel.REPLIES_SHEET_NAME);
-            this.sheet
-                .appendRow(EMD.Automation.sheet({}).columns);
-        }
-        return this.sheet;
-    }
-
-    setActiveSheet() {
-        if (!this.sheet) {
-            throw new Error(`${AutomationModel.REPLIES_SHEET_NAME} sheet not found. Please initialize first.`);
-        }
-
-        return this.activeSpreadsheet.setActiveSheet(this.sheet);
     }
 
     findLanguageColumnIndex(language_code) {
