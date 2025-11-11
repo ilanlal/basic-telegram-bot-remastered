@@ -230,7 +230,8 @@ Config.Samples = {
 };
 
 Config.Languages = {
-    en: Config.Samples.default
+    en: Config.Samples.default,
+    default: Config.Samples.default
     // Add other languages here as needed
 }
 

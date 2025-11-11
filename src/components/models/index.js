@@ -7,6 +7,7 @@ const { Settings } = require('./Settings');
 const { Attribute } = require('./Attribute');
 const { BotModel } = require('./BotModel');
 const { Lights } = require('./Lights');
+const { SheetModel } = require('./SheetModel');
 
 // Expose globally for tests and other scripts
 global.Attribute = Attribute;
@@ -18,3 +19,4 @@ global.Settings = Settings;
 global.Entity = Entity;
 global.Section = Section;
 global.Widget = Widget;
+global.SheetModel = SheetModel;
