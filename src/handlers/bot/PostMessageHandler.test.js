@@ -13,7 +13,7 @@ describe('PostMessageHandler', () => {
         handler = PostMessageHandler.create();
     });
 
-    test('should handle /start command and verify user', () => {
+    test('should handle verifyPerson call', () => {
         const content = {
             message: {
                 chat: { id: 12345 },
@@ -23,7 +23,9 @@ describe('PostMessageHandler', () => {
                 from: { id: 12345, language_code: 'en', username: 'testuser', first_name: 'Test', last_name: 'User' }
             }
         };
-        let response = handler.handlePostMessage(content);
+        // first call to verifyPersone should add the user response is array of user data
+        let response = handler.verifyPersone(content.message);
+        expect(Array.isArray(response)).toBe(true);
         // check if user is added to Users sheet
         let user = SpreadsheetService.Users.getUserById(content.message.from.id);
         expect(user).not.toBeNull();
@@ -31,21 +33,18 @@ describe('PostMessageHandler', () => {
         expect(user[3]).toBe(content.message.from.first_name);
         expect(user[4]).toBe(content.message.from.last_name);
         expect(user[5]).toBe(content.message.from.language_code);
-        expect(response).toContain('dynamic_reply_handled');
 
         // call again to verify no duplicate user is added
-        response = handler.handlePostMessage(content);
+        response = handler.verifyPersone(content.message);
+        expect(Array.isArray(response)).toBe(true);
+        // check if only one user entry exists in Users sheet
         let usersSheet = SpreadsheetService.Users.getUsersSheet();
         let data = usersSheet.getDataRange().getValues();
         let userCount = data.filter(row => row[1] === content.message.from.id).length;
         expect(userCount).toBe(1);
-        expect(response).toContain('dynamic_reply_handled');
-
-        // check response content
-        expect(response).toContain('_notdefined');
     });
 
-    describe('PostMessageHandler commands', () => {
+    describe('commands', () => {
         const commands = ['/start', '/whoami', '/me', '/whoru', '/whoareyou', '/botinfo', '/help', '/about'];
         commands.forEach(cmd => {
             test(`should handle ${cmd} command`, () => {
