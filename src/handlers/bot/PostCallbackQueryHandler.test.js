@@ -1,5 +1,4 @@
-require('@ilanlal/gasmocks');
-require('../../services');
+require('../../../tests')
 const { PostCallbackQueryHandler } = require('./PostCallbackQueryHandler');
 
 describe('PostCallbackQueryHandler', () => {

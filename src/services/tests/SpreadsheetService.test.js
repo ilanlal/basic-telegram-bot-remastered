@@ -1,6 +1,4 @@
-require('@ilanlal/gasmocks');
-require('..');
-require('../../config');
+require('../../../tests');
 const { SpreadsheetService } = require('../SpreadsheetService');
 
 describe('SpreadsheetService', () => {

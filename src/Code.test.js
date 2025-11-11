@@ -1,6 +1,4 @@
-require('@ilanlal/gasmocks');
-require('./services');
-require('./handlers');
+require('../tests');
 const { doGet, doPost } = require('./Code');
 
 describe('doGet', () => {
