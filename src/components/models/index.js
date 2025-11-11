@@ -1,7 +1,7 @@
 const { Entity } = require('./Entity');
 const { Section } = require('./Section');
 const { Widget } = require('./Widget');
-const { AutomationReply } = require('./AutomationReply');
+const { AutomationModel } = require('./AutomationModel');
 const { SetupFlow } = require('./SetupFlow');
 const { Settings } = require('./Settings');
 const { Attribute } = require('./Attribute');
@@ -10,7 +10,7 @@ const { Lights } = require('./Lights');
 
 // Expose globally for tests and other scripts
 global.Attribute = Attribute;
-global.AutomationReply = AutomationReply;
+global.AutomationModel = AutomationModel;
 global.SetupFlow = SetupFlow;
 global.BotModel = BotModel;
 global.Lights = Lights;
