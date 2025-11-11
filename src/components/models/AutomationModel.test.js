@@ -37,10 +37,9 @@ describe('AutomationModel', () => {
             expect(languages.length).toBeGreaterThan(0);
         });
 
-        // getReplyByKey
-        test('should get reply by key', () => {
+        test('should find data by key', () => {
             // reply is array of actions like {method: 'sendMessage', payload: {...}}
-            const reply = model.getReplyByKey('/start', 'default');
+            const reply = model.findData('/start', 'default');
             const jsonReply = JSON.parse(reply);
             expect(Array.isArray(jsonReply)).toBe(true);
             expect(jsonReply.length).toBeGreaterThan(0);
@@ -49,7 +48,7 @@ describe('AutomationModel', () => {
         });
 
         test('should return null for non-existing key', () => {
-            const reply = model.getReplyByKey('[NON_EXISTING_KEY]', 'default');
+            const reply = model.findData('[NON_EXISTING_KEY]', 'default');
             expect(reply).toBeNull();
         });
     });

@@ -6,7 +6,7 @@ class WebhookHandler {
                     .handlePostCallbackQuery(contents);
             } else if (contents.message) {
                 return PostMessageHandler.create()
-                    .handlePostMessage(contents);
+                    .handlePostMessage(contents.message);
             }
 
             return JSON.stringify({ status: 'not_handled' });

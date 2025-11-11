@@ -52,9 +52,9 @@ class AutomationModel {
         return languages;
     }
 
-    getReplyByKey(key, language_code) {
+    findData(key, language_code) {
         const range = this.sheet.getDataRange();
-        const values = range.getValues();
+        const values = range.getValues() || [];
         let langColIndex = this.findLanguageColumnIndex(language_code);
 
         if (langColIndex === -1) {

@@ -16,14 +16,15 @@ class AutomationHandler {
             throw new Error('Invalid automation request format');
         }
 
-        // array of actions like {method: 'sendMessage', payload: {...}} to execute (as string)
-        let reply = this._automationModel.getReplyByKey(name, this._languageCode);
+        // array of actions like [{method: 'sendMessage', payload: {...}}] to execute (as string)
+        let apiActionsToDoList = this._automationModel.findData(name, this._languageCode);
 
-        if (!reply) {
-            reply = this._automationModel.getReplyByKey('_action_not_found_', this._languageCode);
+        if (!apiActionsToDoList) {
+            apiActionsToDoList = this._automationModel.findData('_action_not_found_', this._languageCode);
         }
 
-        const actions = JSON.parse(reply);
+        const actions = JSON.parse(apiActionsToDoList);
+
         // Execute the reply actions
         if (Array.isArray(actions)) {
             actions.forEach(action => {
@@ -32,7 +33,7 @@ class AutomationHandler {
         }
 
         // For testing purposes, return a simple status
-        return JSON.stringify({ status: 'dynamic_reply_handled' });
+        return JSON.stringify({ status: 'dynamic_reply_handled', chat_id, name, actions_executed: actions?.length || 0 });
     }
 
     executeAction(chat_id, action, reply_to_message_id) {
@@ -41,7 +42,13 @@ class AutomationHandler {
             reply_to_message_id: reply_to_message_id
         });
         const uriAction = action.method;
-        const result = this._telegramBotProxy.executeApiRequest(uriAction, payload);
+        const response = this._telegramBotProxy.executeApiRequest(uriAction, payload);
+
+        if (response.getResponseCode() !== 200) {
+            throw new Error(`Failed to execute action ${uriAction}: ${response.getContentText()}`);
+        }
+
+        return response.getContentText();
     }
 }
 
