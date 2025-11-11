@@ -1,25 +1,25 @@
 require('../../../tests');
-const { Entity } = require('./Entity');
+const { EntityModel } = require('./EntityModel');
 const { Widget } = require('./Widget');
 
-describe('Entity', () => {
+describe('EntityModel', () => {
     // throw error if entityName is missing
     it('should throw an error if entityName is missing', () => {
-        expect(() => Entity.create())
-            .toThrow(Entity.INVALID_ENTITY_ERROR);
-        expect(() => Entity.createFromObject({ id: 'entity1' }))
-            .toThrow(Entity.INVALID_ENTITY_ERROR);
+        expect(() => EntityModel.create())
+            .toThrow(EntityModel.INVALID_ENTITY_ERROR);
+        expect(() => EntityModel.createFromObject({ id: 'entity1' }))
+            .toThrow(EntityModel.INVALID_ENTITY_ERROR);
     });
 
     it('should create an entity with custom values', () => {
-        const entity = Entity.create('User');
+        const entity = EntityModel.create('User');
         expect(entity.displayName).toBe('User');
         expect(entity.entityName).toBe('User');
         expect(entity.sections).toEqual([]);
     });
 
     it('should add widgets to the entity', () => {
-        const entity = Entity.create('User', 'user');
+        const entity = EntityModel.create('User', 'user');
         const widget1 = Widget.create(
             {
                 id: 'username',
@@ -87,7 +87,7 @@ describe('Entity', () => {
             }],
             footer: { text: '' }
         };
-        const entity = Entity.createFromObject(obj);
+        const entity = EntityModel.createFromObject(obj);
         expect(entity.displayName).toBe('User');
         expect(entity.entityName).toBe('user');
         expect(entity.sections.length).toBe(1);
@@ -103,7 +103,7 @@ describe('Entity', () => {
 
     // should have default image URL if not provided
     it('should have default image URL if not provided', () => {
-        const entity = Entity.create('Product');
-        expect(entity.imageUrl).toBe(Entity.DEFAULT_IMAGE_URL);
+        const entity = EntityModel.create('Product');
+        expect(entity.imageUrl).toBe(EntityModel.DEFAULT_IMAGE_URL);
     });
 });

@@ -1,4 +1,4 @@
-const { Entity } = require('./Entity');
+const { EntityModel } = require('./EntityModel');
 const { Section } = require('./Section');
 const { Widget } = require('./Widget');
 const { AutomationModel } = require('./AutomationModel');
@@ -16,7 +16,7 @@ global.SetupFlow = SetupFlow;
 global.BotModel = BotModel;
 global.Lights = Lights;
 global.Settings = Settings;
-global.Entity = Entity;
+global.EntityModel = EntityModel;
 global.Section = Section;
 global.Widget = Widget;
 global.SheetModel = SheetModel;

@@ -1,4 +1,4 @@
-class Entity {
+class EntityModel {
     static get INVALID_ENTITY_ERROR() {
         return 'Invalid entity: missing entityName';
     }
@@ -13,17 +13,17 @@ class Entity {
 
     static create(entityName) {
         if (!entityName || typeof entityName !== 'string' || entityName.trim() === '') {
-            throw new Error(Entity.INVALID_ENTITY_ERROR);
+            throw new Error(EntityModel.INVALID_ENTITY_ERROR);
         }
-        return new Entity(entityName);
+        return new EntityModel(entityName);
     }
 
     static createFromObject(obj = {}) {
-        const entity = Entity.create(obj.entityName);
+        const entity = EntityModel.create(obj.entityName);
         entity.setDisplayName(obj.displayName || obj.entityName);
         entity.setDescription(obj.description || '');
-        entity.setImageUrl(obj.imageUrl || Entity.DEFAULT_IMAGE_URL);
-        entity.setDisplayType(obj.displayType || Entity.DEFAULT_DISPLAY_TYPE);
+        entity.setImageUrl(obj.imageUrl || EntityModel.DEFAULT_IMAGE_URL);
+        entity.setDisplayType(obj.displayType || EntityModel.DEFAULT_DISPLAY_TYPE);
         entity.setShowNewButton(obj.showNewButton !== false);
         entity.setShowUpdateButton(obj.showUpdateButton !== false);
         entity.setShowFocusButton(obj.showFocusButton !== false);
@@ -45,12 +45,12 @@ class Entity {
         this._showNewButton = true;
         this._showUpdateButton = true;
         this._showFocusButton = true;
-        this._imageUrl = Entity.DEFAULT_IMAGE_URL;
-        this._displayType = Entity.DEFAULT_DISPLAY_TYPE; // or 'list' or 'edit'
+        this._imageUrl = EntityModel.DEFAULT_IMAGE_URL;
+        this._displayType = EntityModel.DEFAULT_DISPLAY_TYPE; // or 'list' or 'edit'
         this._sections = [];
     }
 
-     /// Setters
+    /// Setters
     addSection(section) {
         let newSection = section;
         if (!newSection) {
@@ -146,5 +146,5 @@ class Entity {
 }
 
 if (typeof module !== "undefined" && module.exports) {
-    module.exports = { Entity };
+    module.exports = { EntityModel };
 }
