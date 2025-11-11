@@ -1,11 +1,11 @@
 class PostMessageHandler {
-    constructor() {
-        this._spreadsheetService = SpreadsheetService.create(
-            SpreadsheetApp.getActiveSpreadsheet());
+    constructor(activeSpreadsheet) {
+        this._spreadsheetService = SpreadsheetService
+            .create(activeSpreadsheet);
     }
-    
-    static create() {
-        return new PostMessageHandler();
+
+    static create(activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet()) {
+        return new PostMessageHandler(activeSpreadsheet);
     }
 
     handlePostMessage(contents) {
@@ -21,10 +21,6 @@ class PostMessageHandler {
             contents.message.entities.forEach(entity => {
                 if (entity.type === "bot_command") {
                     // Handle bot command
-                    if (contents.message.text.startsWith('/start')) {
-                        this.verifyPersone(contents.message);
-                    }
-
                     return this.handleBotCommand(chat_id, contents.message);
                 }
             });
@@ -32,11 +28,11 @@ class PostMessageHandler {
 
         // reply from force input request
         if (contents.message.reply_to_message) {
-            return this.handleReplyToMessage(chat_id, contents.message);
+            return this.handleReplyToForceInput(chat_id, contents.message);
         }
 
         // return "notdefined" const message for all other messages input
-        return this.handleDynamicReply(chat_id, ['/start', '_notdefined']);
+        return this.handleDynamicReply(chat_id, '_notdefined');
     }
 
     verifyPersone(message) {
@@ -60,35 +56,34 @@ class PostMessageHandler {
     }
 
     handleBotCommand(chat_id, message) {
-        if (message.text === "/start") {
-            return this.handleDynamicReply(chat_id, ["/start", "welcome"], message.message_id);
+        // Handle /start command separately to verify persone.
+        if (message.text.startsWith('/start')) {
+            this.verifyPersone(message);
         }
 
-        if (message.text === "/help") {
-            return this.handleDynamicReply(chat_id, ["/help", "help"], message.message_id);
+        if (message.text === "/whoami" || message.text === "/me") {
+            // return this.handleDynamicReply(chat_id, ["/start", "welcome"], message.message_id);
         }
 
-        if (message.text === "/about") {
-            return this.handleDynamicReply(chat_id, ["/about", "about"], message.message_id);
+        if (message.text === "/whoru" || message.text === "/whoareyou" || message.text === "/botinfo") {
+            // return this.handleDynamicReply(chat_id, ["/start", "welcome"], message.message_id);
         }
 
-        // Implement bot command handling logic here
-        return JSON.stringify({ status: 'bot_command_handled', chat_id, command: message.text });
+        return this.handleDynamicReply(chat_id, message.text, message.message_id);
     }
 
-    handleReplyToMessage(chat_id, message) {
+    // reply from force input request
+    handleReplyToForceInput(chat_id, message) {
         // Implement reply to message handling logic here
-        return JSON.stringify({ status: 'reply_to_message_handled', chat_id, message });
+        return JSON.stringify({ status: 'reply_to_force_input_handled', chat_id, message });
     }
 
-    handleDynamicReply(chat_id, commands, reply_to_message_id = null) {
+    handleDynamicReply(chat_id, name, reply_to_message_id = null) {
         // Implement dynamic reply handling logic here
-        return JSON.stringify({ status: 'dynamic_reply_handled', commands, reply_to_message_id });
+        return JSON.stringify({ status: 'dynamic_reply_handled', name, reply_to_message_id });
     }
 }
 
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = {
-        PostMessageHandler
-    };
+    module.exports = { PostMessageHandler };
 }

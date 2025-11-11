@@ -1,15 +1,19 @@
 require('../../../tests');
 
+const SpreadsheetStubConfiguration = require('@ilanlal/gasmocks/src/spreadsheetapp/classes/SpreadsheetStubConfiguration');
+const SpreadsheetApp = require('@ilanlal/gasmocks/src/spreadsheetapp/SpreadsheetApp');
 const { PostMessageHandler } = require('./PostMessageHandler');
 
 describe('PostMessageHandler', () => {
+    /** @type {PostMessageHandler} */
     let handler;
 
     beforeEach(() => {
+        SpreadsheetStubConfiguration.reset();
         handler = PostMessageHandler.create();
     });
 
-    test('should handle /start command', () => {
+    test('should handle /start command and verify user', () => {
         const content = {
             message: {
                 chat: { id: 12345 },
@@ -36,11 +40,30 @@ describe('PostMessageHandler', () => {
         let userCount = data.filter(row => row[1] === content.message.from.id).length;
         expect(userCount).toBe(1);
         expect(response).toContain('dynamic_reply_handled');
-        
+
         // check response content
-        expect(response).toContain('/start');
         expect(response).toContain('_notdefined');
     });
+
+    describe('PostMessageHandler commands', () => {
+        const commands = ['/start', '/whoami', '/me', '/whoru', '/whoareyou', '/botinfo', '/help', '/about'];
+        commands.forEach(cmd => {
+            test(`should handle ${cmd} command`, () => {
+                const content = {
+                    message: {
+                        chat: { id: 12345 },
+                        text: cmd,
+                        message_id: 1,
+                        entities: [{ type: 'bot_command', offset: 0, length: cmd.length }],
+                        from: { id: 12345, language_code: 'en', username: 'testuser', first_name: 'Test', last_name: 'User' }
+                    }
+                };
+                let response = handler.handlePostMessage(content);
+                expect(response).toContain('dynamic_reply_handled');
+            });
+        });
+    });
+
 
     test('should throw error for invalid message format', () => {
         const content = { invalid: 'data' };

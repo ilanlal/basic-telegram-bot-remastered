@@ -1,13 +1,13 @@
 class PostCallbackQueryHandler {
-  constructor() {
-    this._spreadsheetService = SpreadsheetService.create(
-            SpreadsheetApp.getActiveSpreadsheet());
+  constructor(activeSpreadsheet) {
+    this._spreadsheetService = SpreadsheetService
+      .create(activeSpreadsheet);
   }
 
-  static create() {
-    return new PostCallbackQueryHandler();
+  static create(activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet()) {
+    return new PostCallbackQueryHandler(activeSpreadsheet);
   }
-  
+
   handlePostCallbackQuery(contents) {
     if (!contents.callback_query || !contents.callback_query.from) {
       throw new Error('Invalid callback_query format');
