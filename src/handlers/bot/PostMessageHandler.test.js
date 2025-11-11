@@ -44,7 +44,7 @@ describe('PostMessageHandler', () => {
         expect(userCount).toBe(1);
     });
 
-    describe('commands', () => {
+    describe('handleBotCommand', () => {
         const commands = ['/start', '/whoami', '/me', '/whoru', '/whoareyou', '/botinfo', '/help', '/about'];
         commands.forEach(cmd => {
             test(`should handle ${cmd} command`, () => {
@@ -57,7 +57,7 @@ describe('PostMessageHandler', () => {
                         from: { id: 12345, language_code: 'en', username: 'testuser', first_name: 'Test', last_name: 'User' }
                     }
                 };
-                let response = handler.handlePostMessage(content);
+                let response = handler.handleBotCommand(content.message.from.id, content.message);
                 expect(response).toContain('dynamic_reply_handled');
             });
         });
