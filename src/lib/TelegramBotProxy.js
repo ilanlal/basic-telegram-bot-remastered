@@ -7,14 +7,19 @@ class TelegramBotProxy {
         return new TelegramBotProxy(token);
     }
 
-    executeAction(actionName, payload = {}) {
+    executeApiRequest(uriAction, payload) {
+        const url = this.apiBaseUrl + '/' + uriAction;
+
+        if (!payload) {
+            return UrlFetchApp.fetch(url);
+        }
+
         const options = {
             'method': 'post',
             'contentType': 'application/json',
             'payload': JSON.stringify(payload)
         };
 
-        const url = this.apiBaseUrl + '/' + actionName;
         return UrlFetchApp.fetch(url, options);
     }
 
