@@ -37,10 +37,15 @@ class AutomationHandler {
     }
 
     executeAction(chat_id, action, reply_to_message_id) {
-        const payload = Object.assign({}, action.payload, {
-            chat_id: chat_id,
-            reply_to_message_id: reply_to_message_id
-        });
+        let payload = action.payload || null;
+        if (chat_id) {
+            payload = payload || {};
+            payload.chat_id = chat_id;
+        }
+        if (reply_to_message_id) {
+            payload = payload || {};
+            payload.reply_to_message_id = reply_to_message_id;
+        }
         const uriAction = action.method;
         const response = this._telegramBotProxy.executeApiRequest(uriAction, payload);
 
