@@ -3,9 +3,10 @@ class EMD {
     constructor(model = {}) {
         this.model = model;
     }
-};
+}
 
 EMD.DEFAULT_IMAGE_URL = 'https://raw.githubusercontent.com/ilanlal/basic-telegram-bot-remastered/refs/heads/vnext/assets/logo128.png';
+
 
 EMD.Home = {
     entityName: 'Home',
@@ -136,7 +137,7 @@ EMD.Home = {
             ]
         };
     }
-};
+}
 
 EMD.EnvironmentVariables = {
     entityName: 'EnvironmentVariables',
@@ -245,7 +246,7 @@ EMD.EnvironmentVariables = {
             }
         }
     }
-};
+}
 
 EMD.BotSetup = {
     entityName: 'BotSetup',
@@ -514,7 +515,60 @@ EMD.BotSetup = {
             ]
         }
     }
-};
+}
+
+EMD.Customer = {
+    entityName: 'Customer',
+    displayName: 'Customer',
+    pluralDisplayName: 'Customers',
+    card: (data = {}) => {
+        return {
+            name: 'customer_Card',
+            header: {
+                title: '👥 Customer Management',
+                subTitle: 'Manage your customers here.',
+                imageUrl: EMD.DEFAULT_IMAGE_URL,
+                imageStyle: CardService.ImageStyle.SQUARE,
+                imageAltText: 'Customer Image'
+            },
+            sections:
+                [
+                    { // Customer Management Section
+                        // header: 'Customer Management',
+                        collapsible: false,
+                        numUncollapsibleWidgets: 0,
+                        widgets: [
+                            {
+                                id: 'create_customer_widget',
+                                DecoratedText: {
+                                    topLabel: '🛍️',
+                                    text: 'CRM',
+                                    bottomLabel: 'Users, Accounts, Contacts management',
+                                    wrapText: false,
+                                    textButton: {
+                                        text: 'Activate Sheet',
+                                        disabled: false,
+                                        onClick: {
+                                            functionName: 'EventHandler.Addon.onBindSheetDataClick',
+                                            parameters: {
+                                                api: 'Automation'
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                ]
+        };
+    },
+    sheet: (data = {}) => {
+        return {
+            name: '👥  Members',
+            columns: ['Created on', 'chat_id', 'username', 'First Name', 'Last Name', 'language_code', 'Data']
+        }
+    }
+}
 
 EMD.Automation = {
     entityName: 'Automation',
@@ -1884,60 +1938,7 @@ EMD.Automation = {
                 ]
         }
     }
-};
-
-EMD.Customer = {
-    entityName: 'Customer',
-    displayName: 'Customer',
-    pluralDisplayName: 'Customers',
-    card: (data = {}) => {
-        return {
-            name: 'customer_Card',
-            header: {
-                title: '👥 Customer Management',
-                subTitle: 'Manage your customers here.',
-                imageUrl: EMD.DEFAULT_IMAGE_URL,
-                imageStyle: CardService.ImageStyle.SQUARE,
-                imageAltText: 'Customer Image'
-            },
-            sections:
-                [
-                    { // Customer Management Section
-                        // header: 'Customer Management',
-                        collapsible: false,
-                        numUncollapsibleWidgets: 0,
-                        widgets: [
-                            {
-                                id: 'create_customer_widget',
-                                DecoratedText: {
-                                    topLabel: '🛍️',
-                                    text: 'CRM',
-                                    bottomLabel: 'Users, Accounts, Contacts management',
-                                    wrapText: false,
-                                    textButton: {
-                                        text: 'Activate Sheet',
-                                        disabled: false,
-                                        onClick: {
-                                            functionName: 'EventHandler.Addon.onBindSheetDataClick',
-                                            parameters: {
-                                                api: 'Automation'
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        ]
-                    }
-                ]
-        };
-    },
-    sheet: (data = {}) => {
-        return {
-            name: '👥  Members',
-            columns: ['Created on', 'chat_id', 'username', 'First Name', 'Last Name', 'language_code', 'Data']
-        }
-    }
-};
+}
 
 EMD.Test = {
     entityName: 'testEntity',
