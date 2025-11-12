@@ -1,5 +1,7 @@
 class SheetModel {
-    static INVALID_MODEL_ERROR = 'Sheet model must have a valid name property';
+    static INVALID_MODEL_ERROR() {
+        return 'Sheet model must have a valid name property';
+    }
 
     static create(activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet()) {
         return new SheetModel(activeSpreadsheet);

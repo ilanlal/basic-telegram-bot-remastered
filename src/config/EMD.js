@@ -5,7 +5,7 @@ class EMD {
     }
 }
 
-EMD.DEFAULT_IMAGE_URL = 'https://raw.githubusercontent.com/ilanlal/basic-telegram-bot-remastered/refs/heads/vnext/assets/logo128.png';
+EMD.DEFAULT_IMAGE_URL = 'https://raw.githubusercontent.com/ilanlal/basic-telegram-bot-remastered/main/assets/logo480.png';
 
 
 EMD.Home = {
@@ -152,51 +152,18 @@ EMD.EnvironmentVariables = {
                 imageUrl: EMD.DEFAULT_IMAGE_URL,
                 imageStyle: CardService.ImageStyle.SQUARE,
                 imageAltText: 'Environment Image'
-            }
-            ,
+            },
             sections:
                 [
-                    {   // Environment variables.
-                        //header: 'Environment variables',
-                        collapsible: true,
-                        numUncollapsibleWidgets: 1,
-                        widgets: [
-                            { // Title Text Paragraph
-                                id: 'env_variables_title',
-                                TextParagraph: {
-                                    text: 'Environment Variables'
-                                }
-                            },
-                            {   // Log Events Setting
-                                id: 'log_events_setting',
-                                TextInput: {
-                                    title: 'Debug Mode (Set to true or any other value for false)',
-                                    fieldName: 'txt_debug_mode',
-                                    hint: 'Enter debug mode (true/false)'
-                                },
-                                propertyName: 'debug_mode',
-                                value: 'false'
-                            },
-                            {   // Default Language Variable
-                                id: 'default_language_variable',
-                                TextInput: {
-                                    title: 'Default language',
-                                    fieldName: 'txt_default_language',
-                                    hint: 'Enter default language'
-                                },
-                                propertyName: 'default_language',
-                                value: 'en'
-                            }]
-                    },
                     {   // Deployment setup
-                        header: '🚀 Deployment Setup',
+                        // header: '🚀 Deployment Setup',
                         collapsible: true,
                         numUncollapsibleWidgets: 1,
                         widgets: [
                             {
                                 id: 'deployment_id_info',
                                 TextParagraph: {
-                                    text: `Deployment ID is currently: ${data.setupFlow?.deploymentIdSet ? '✅ Set' : '❌ Not Set'}`
+                                    text: `🚀 Deployment ID is currently: ${data.setupFlow?.deploymentIdSet ? '✅ Set' : '❌ Not Set'}`
                                 }
                             },
                             {   // Deployment ID Variable
@@ -219,6 +186,133 @@ EMD.EnvironmentVariables = {
                             }
                         ]
                     },
+                    {   // Acative Spreadsheet ID setup
+                        // header: '🔩 Active Spreadsheet Setup',
+                        collapsible: true,
+                        numUncollapsibleWidgets: 1,
+                        widgets: [
+                            {
+                                id: 'active_spreadsheet_id_info',
+                                TextParagraph: {
+                                    text: `📊 Active Spreadsheet ID is currently: ${data.setupFlow?.activeSpreadsheetIdSet ? '✅ Set' : '❌ Not Set'}`
+                                }
+                            },
+                            {   // Active Spreadsheet ID Variable
+                                id: 'active_spreadsheet_id_variable',
+                                TextInput: {
+                                    title: 'Active Spreadsheet ID',
+                                    fieldName: 'txt_active_spreadsheet_id',
+                                    hint: 'Enter active spreadsheet ID'
+                                },
+                                propertyName: 'active_spreadsheet_id'
+                            },
+                            { // Save Active Spreadsheet ID Button
+                                id: 'identify_active_spreadsheet_id_button',
+                                TextButton: {
+                                    text: '💾 Save Active Spreadsheet ID',
+                                    onClick: {
+                                        functionName: 'EventHandler.Addon.onIdentifyActiveSpreadsheetIdClick'
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    {   // Default Language setup
+                        // header: '🔩 Default Language Setup',
+                        collapsible: true,
+                        numUncollapsibleWidgets: 1,
+                        widgets: [
+                            {
+                                id: 'default_language_info',
+                                TextParagraph: {
+                                    text: `🌐 Default Language is currently: ${data.setupFlow?.defaultLanguageSet ? '✅ Set' : '❌ Not Set'}`
+                                }
+                            },
+                            {   // Default Language Variable
+                                id: 'default_language_variable',
+                                TextInput: {
+                                    title: 'Default Language',
+                                    fieldName: 'txt_default_language',
+                                    hint: 'Enter default language'
+                                },
+                                propertyName: 'default_language'
+                            },
+                            { // Save Default Language Button
+                                id: 'identify_default_language_button',
+                                TextButton: {
+                                    text: '💾 Save Default Language',
+                                    onClick: {
+                                        functionName: 'EventHandler.Addon.onIdentifyDefaultLanguageClick'
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    {   // Admin Chat ID setup
+                        // header: 'Admin Chat ID Setup',
+                        collapsible: true,
+                        numUncollapsibleWidgets: 1,
+                        widgets: [
+                            { // Admin Chat ID Info
+                                id: 'admin_chat_id_info',
+                                TextParagraph: {
+                                    text: '🪪 This is the chat ID for the admin user.'
+                                }
+                            },
+                            { // Admin Chat ID Variable
+                                id: 'admin_chat_id_variable',
+                                TextInput: {
+                                    title: 'Admin Chat ID',
+                                    fieldName: 'txt_admin_chat_id',
+                                    hint: 'Enter admin chat ID',
+                                    value: '[YOUR_ADMIN_CHAT_ID]'
+                                },
+                                propertyName: 'admin_chat_id'
+                            },
+                            { // Save Admin Chat ID Button
+                                id: 'save_admin_chat_id_button',
+                                TextButton: {
+                                    text: '💾 Save Admin Chat ID',
+                                    onClick: {
+                                        functionName: 'EventHandler.Addon.onSaveAdminChatIdClick',
+                                        parameters: {}
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    {   // Log Events Setting
+                        //header: 'Environment variables',
+                        collapsible: true,
+                        numUncollapsibleWidgets: 1,
+                        widgets: [
+                            {
+                                id: 'log_events_info',
+                                TextParagraph: {
+                                    text: `🛰️ Log Events is currently: ${data.setupFlow?.logEventsSet ? '✅ Set' : '❌ Not Set'}`
+                                }
+                            },
+                            {   // Log Events widget
+                                id: 'log_events_widget',
+                                TextInput: {
+                                    title: 'Log Events (Set to true or any other value for false)',
+                                    fieldName: 'txt_log_events',
+                                    hint: 'Enter log events (true/false)'
+                                },
+                                propertyName: 'log_events',
+                                value: 'false'
+                            },
+                            {
+                                id: 'save_log_events_button',
+                                TextButton: {
+                                    text: '💾 Save Log Events',
+                                    onClick: {
+                                        functionName: 'EventHandler.Addon.onSaveLogEventsClick'
+                                    }
+                                }
+                            }
+                        ]
+                    },
                     {   // Data view
                         header: 'Data View',
                         collapsible: true,
@@ -233,17 +327,7 @@ EMD.EnvironmentVariables = {
                             }
                         ]
                     }
-                ],
-            fixedFooter: {
-                primaryButton: {
-                    textButton: {
-                        text: '💾 Save',
-                        onClick: {
-                            functionName: 'EventHandler.Addon.onSaveBotSetupClick',
-                        }
-                    }
-                }
-            }
+                ]
         }
     }
 }
@@ -321,39 +405,6 @@ EMD.BotSetup = {
                                             functionName: 'EventHandler.Addon.onWebhookManagementClick',
                                             parameters: { action: data.setupFlow?.webhookSet ? 'deleteWebhook' : 'setWebhook' }
                                         }
-                                    }
-                                }
-                            }
-                        ]
-                    },
-                    {   // Admin Chat ID setup
-                        // header: '👤 Admin Chat ID Setup',
-                        collapsible: true,
-                        numUncollapsibleWidgets: 1,
-                        widgets: [
-                            { // Admin Chat ID Info
-                                id: 'admin_chat_id_info',
-                                TextParagraph: {
-                                    text: '👤 This is the chat ID for the admin user.'
-                                }
-                            },
-                            { // Admin Chat ID Variable
-                                id: 'admin_chat_id_variable',
-                                TextInput: {
-                                    title: 'Admin Chat ID',
-                                    fieldName: 'txt_admin_chat_id',
-                                    hint: 'Enter admin chat ID',
-                                    value: '[YOUR_ADMIN_CHAT_ID]'
-                                },
-                                propertyName: 'admin_chat_id'
-                            },
-                            { // Save Admin Chat ID Button
-                                id: 'save_admin_chat_id_button',
-                                TextButton: {
-                                    text: '💾 Save Admin Chat ID',
-                                    onClick: {
-                                        functionName: 'EventHandler.Addon.onSaveAdminChatIdClick',
-                                        parameters: {}
                                     }
                                 }
                             }
@@ -1023,6 +1074,236 @@ EMD.Automation = {
                             }
                         }]),
                     ],
+                    ['_unauthorized_',
+                        // default (en)
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: '🚫 Oops! You are not authorized to perform this action. Please contact the administrator if you believe this is an error.',
+                                parse_mode: 'HTML',
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [
+                                            { text: "🆘 Help", callback_data: "action=help" },
+                                            { text: "ℹ️ About", callback_data: "action=about" }
+                                        ],
+                                        [
+                                            { text: "🏠 Home", callback_data: "/home" }
+                                        ]
+                                    ]
+                                }
+                            }
+                        }]),
+                        // es
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: '🚫 ¡Ups! No estás autorizado para realizar esta acción. Por favor, contacta al administrador si crees que esto es un error.',
+                                parse_mode: 'HTML',
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [
+                                            { text: "🆘 Ayuda", callback_data: "action=help" },
+                                            { text: "ℹ️ Acerca de", callback_data: "action=about" }
+                                        ],
+                                        [
+                                            { text: "🏠 Inicio", callback_data: "/home" }
+                                        ]
+                                    ]
+                                }
+                            }
+                        }]),
+                        // fr
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: '🚫 Désolé, vous n\'êtes pas autorisé à effectuer cette action. Veuillez contacter l\'administrateur si vous pensez qu\'il s\'agit d\'une erreur.',
+                                parse_mode: 'HTML',
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [
+                                            { text: "🆘 Aide", callback_data: "action=help" },
+                                            { text: "ℹ️ À propos", callback_data: "action=about" }
+                                        ],
+                                        [
+                                            { text: "🏠 Accueil", callback_data: "/home" }
+                                        ]
+                                    ]
+                                }
+                            }
+                        }]),
+                        // ar
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: '🚫 عذرًا، أنت غير مصرح لك بتنفيذ هذا الإجراء. يرجى الاتصال بالمسؤول إذا كنت تعتقد أن هذه خطأ.',
+                                parse_mode: 'HTML',
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [
+                                            { text: "🆘 مساعدة", callback_data: "action=help" },
+                                            { text: "ℹ️ حول", callback_data: "action=about" }
+                                        ],
+                                        [
+                                            { text: "🏠 الرئيسية", callback_data: "/home" }
+                                        ]
+                                    ]
+                                }
+                            }
+                        }]),
+                        // de
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: '🚫 Entschuldigung, Sie sind nicht berechtigt, diese Aktion auszuführen. Bitte kontaktieren Sie den Administrator, wenn Sie denken, dass dies ein Fehler ist.',
+                                parse_mode: 'HTML',
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [
+                                            { text: "🆘 Hilfe", callback_data: "action=help" },
+                                            { text: "ℹ️ Über", callback_data: "action=about" }
+                                        ],
+                                        [
+                                            { text: "🏠 Startseite", callback_data: "/home" }
+                                        ]
+                                    ]
+                                }
+                            }
+                        }]),
+                        // it
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: '🚫 Ci scusiamo, non sei autorizzato a eseguire questa azione. Contatta l\'amministratore se pensi che si tratti di un errore.',
+                                parse_mode: 'HTML',
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [
+                                            { text: "🆘 Aiuto", callback_data: "action=help" },
+                                            { text: "ℹ️ Informazioni", callback_data: "action=about" }
+                                        ],
+                                        [
+                                            { text: "🏠 Home", callback_data: "/home" }
+                                        ]
+                                    ]
+                                }
+                            }
+                        }]),
+                        // pt
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: '🚫 Desculpe, você não tem permissão para executar esta ação. Entre em contato com o administrador se achar que isso é um erro.',
+                                parse_mode: 'HTML',
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [
+                                            { text: "🆘 Ajuda", callback_data: "action=help" },
+                                            { text: "ℹ️ Sobre", callback_data: "action=about" }
+                                        ],
+                                        [
+                                            { text: "🏠 Início", callback_data: "/home" }
+                                        ]
+                                    ]
+                                }
+                            }
+                        }]),
+                        // ru
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: '🚫 Извините, у вас нет разрешения на выполнение этого действия. Пожалуйста, свяжитесь с администратором, если вы считаете, что это ошибка.',
+                                parse_mode: 'HTML',
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [
+                                            { text: "🆘 Помощь", callback_data: "action=help" },
+                                            { text: "ℹ️ Информация", callback_data: "action=about" }
+                                        ],
+                                        [
+                                            { text: "🏠 Главная", callback_data: "/home" }
+                                        ]
+                                    ]
+                                }
+                            }
+                        }]),
+                        // zh
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: '🚫 对不起，您没有权限执行此操作。如果您认为这是一个错误，请联系管理员。',
+                                parse_mode: 'HTML',
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [
+                                            { text: "🆘 帮助", callback_data: "action=help" },
+                                            { text: "ℹ️ 信息", callback_data: "action=about" }
+                                        ],
+                                        [
+                                            { text: "🏠 首页", callback_data: "/home" }
+                                        ]
+                                    ]
+                                }
+                            }
+                        }]),
+                        // ja
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: '🚫 申し訳ありませんが、この操作を実行する権限がありません。これがエラーだと思われる場合は、管理者に連絡してください。',
+                                parse_mode: 'HTML',
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [
+                                            { text: "🆘 ヘルプ", callback_data: "action=help" },
+                                            { text: "ℹ️ 情報", callback_data: "action=about" }
+                                        ],
+                                        [
+                                            { text: "🏠 ホーム", callback_data: "/home" }
+                                        ]
+                                    ]
+                                }
+                            }
+                        }]),
+                        // ko
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: '🚫 죄송하지만 이 작업을 수행할 권한이 없습니다. 이것이 오류라고 생각되면 관리자에게 문의하십시오.',
+                                parse_mode: 'HTML',
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [
+                                            { text: "🆘 도움말", callback_data: "action=help" },
+                                            { text: "ℹ️ 정보", callback_data: "action=about" }
+                                        ],
+                                        [
+                                            { text: "🏠 홈", callback_data: "/home" }
+                                        ]
+                                    ]
+                                }
+                            }
+                        }]),
+                        // he
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: '🚫 מצטער, אבל אין לך הרשאה לבצע פעולה זו. אם אתה חושב שזה שגיאה, אנא פנה למנהל.',
+                                parse_mode: 'HTML',
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [
+                                            { text: "🆘 עזרה", callback_data: "action=help" },
+                                            { text: "ℹ️ מידע", callback_data: "action=about" }
+                                        ],
+                                        [
+                                            { text: "🏠 בית", callback_data: "/home" }
+                                        ]
+                                    ]
+                                }
+                            }
+                        }])
+                    ],
                     ["/start",
                         // default (en)
                         JSON.stringify([{
@@ -1440,7 +1721,27 @@ EMD.Automation = {
                             }
                         }
                         ])],
-
+                    ['/admin',
+                        // default (en)
+                        JSON.stringify([{
+                            method: 'sendPhoto',
+                            payload: {
+                                caption: '<b>Admin Panel</b>\n\n' +
+                                    'Welcome to the Admin Panel. Here you can manage various aspects of the bot and its functionalities.\n\n' +
+                                    'Use the buttons below to navigate through the admin features.',
+                                parse_mode: 'HTML',
+                                media: "https://www.gstatic.com/webp/gallery/2.jpg",
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "User Management", callback_data: "adminUserManagement" }],
+                                        [{ text: "Bot Settings", callback_data: "adminBotSettings" }],
+                                        [{ text: "Analytics", callback_data: "adminAnalytics" }],
+                                        [{ text: "System Logs", callback_data: "adminSystemLogs" }],
+                                        [{ text: "Home", callback_data: "action=home" }]
+                                    ]
+                                }
+                            }
+                        }])],
                     ['/help',
                         // default (en)
                         JSON.stringify([{
