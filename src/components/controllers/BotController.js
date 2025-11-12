@@ -1,96 +1,90 @@
-/* eslint-disable no-undef */
-// version: 1.0.0
-
 class BotController {
-    constructor(userStore = null, telegramBotClient = null) {
-        this._services = {
-            /** @type {UserStore | null} */
-            _userStore: userStore,
-            /** @type {TelegramBotClient | null} */
-            _telegramBotClient: telegramBotClient
-        };
-    }
-
-    navigateToHome() {
-        return CardService.newActionResponseBuilder()
-            .setNavigation(
-                CardService.newNavigation()
-                    .pushCard(
-                        new HomeCard().build()
-                    )
-            );
-    }
-
-    navigateToSetup() {
-        return CardService.newActionResponseBuilder()
-            .setNavigation(
-                CardService.newNavigation()
-                    .pushCard(
-                        new BotSetupCard().build()
-                    )
-            );
-    }
-
-    saveBotToken(e) {
-        //console.log("saveBotToken called with event:", e);
-
-        const botToken = e?.commonEventObject
-            ?.formInputs?.[BotSetupCard.INPUTS.BOT_TOKEN]
-            ?.stringInputs.value[0] || BotSetupCard.INPUTS.BOT_TOKEN;
-
-        //console.log("Bot token:", botToken);
-        // Todo: getMe to approve validation
-        this._services._userStore.setTelegramBotInfo(
-            new TelegramBotInfo()
-                .setBotToken(botToken)
-                .setCreatedOn(new Date())
-                .setLastSync(new Date())
-                .setUser(TelegramUser.newTelegramUser())
-        );
-
-        return this.navigateToHome();
-    }
-}
-
-class BotControllerFactory {
-    constructor() {
-        this._userStore = null; 
-        this._telegramBotClient = null;
-    }
-
-    withUserStore(userStore) {
+    constructor(userStore) {
         if (!(userStore instanceof UserStore)) {
             throw new Error("userStore must be an instance of UserStore");
         }
 
+        /** @type {UserStore} */
         this._userStore = userStore;
-        return this;
     }
 
-    withTelegramBotClient(telegramBotClient) {
-        if (!(telegramBotClient instanceof TelegramBotClient)) {
-            throw new Error("telegramBotClient must be an instance of TelegramBotClient");
+    static create(userStore = UserStoreFactory.create().current) {
+        return new BotController(userStore);
+    }
+
+    registerBotToken(token) {
+        if (!token || typeof token !== 'string' || token.trim() === '') {
+            throw new Error("Invalid bot token");
         }
 
-        this._telegramBotClient = telegramBotClient;
+        const botClient = new TelegramBotClient(token);
+        const response = botClient.getMe();
+
+        if (response.getResponseCode() !== 200) {
+            throw new Error("Failed to validate bot token");
+        }
+        this._userStore.setBotToken(token);
+        const contentText = response.getContentText();
+        const res = JSON.parse(contentText);
+        const user = new TelegramUser()
+            .setId(res.result.id)
+            .setIsBot(res.result.is_bot)
+            .setFirstName(res.result.first_name)
+            .setLastName(res.result.last_name)
+            .setUsername(res.result.username)
+            .setLanguageCode(res.result.language_code);
+
+        return this._userStore
+            .setTelegramBotInfo(
+                new TelegramBotInfo()
+                    .setName(user.getUsername())
+                    .setBotToken(token)
+                    .setCreatedOn(new Date())
+                    .setLastSync(new Date())
+                    .setUser(user)
+            );
+    }
+
+    saveBotSettings({name, shortDescription, longDescription}) {
+        return { status: 'success', message: `Bot name "${name}" saved successfully.` };
+    }
+
+    setWebhook() {
+        return SetupFlow.create(this._userStore).setWebhook();
+    }
+
+    deleteWebhook() {
+        return SetupFlow.create(this._userStore).deleteWebhook();
+    }
+
+    saveMyChatId(chat_id) {
+        if (!chat_id || isNaN(chat_id)) {
+            throw new Error("Invalid chat_id");
+        }
+        this._userStore.setMyChatId(chat_id);
         return this;
     }
 
-    build() {
-        return new BotController(
-            this._userStore,
-            this._telegramBotClient
-        );
+    saveDeploymentId(deploymentId) {
+        if (!deploymentId || typeof deploymentId !== 'string') {
+            throw new Error("Invalid deploymentId");
+        }
+        this._userStore.setDeploymentId(deploymentId);
+        return this;
     }
 
-    static create() {
-        return new BotControllerFactory();
+    saveDefaultLanguage(languageCode) {
+        if (!languageCode || typeof languageCode !== 'string') {
+            throw new Error("Invalid language code");
+        }
+        this._userStore.setLocalizationCode(languageCode);
+        return this;
     }
 }
 
+
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = {
-        BotController,
-        BotControllerFactory
+        BotController
     };
 }

@@ -1,9 +1,14 @@
-const { BotController, BotControllerFactory } = require('./BotController');
-const { AboutController, AboutControllerFactory } = require('./AboutController');
+const { BotSetupController } = require('./BotSetupController');
+const { NavigationController } = require('./NavigationController');
+const { BotController } = require('./BotController');
 const { AccountController, AccountControllerFactory } = require('./AccountController');
-global.BotController = BotController;
-global.BotControllerFactory = BotControllerFactory;
-global.AboutController = AboutController;
-global.AboutControllerFactory = AboutControllerFactory;
-global.AccountController = AccountController;
+const { SettingsController } = require('./SettingsController');
+const { EntityController } = require('./EntityController');
+
+global.EntityController = EntityController;
+global.BotSetupController = BotSetupController;
 global.AccountControllerFactory = AccountControllerFactory;
+global.AccountController = AccountController;
+global.BotController = BotController;
+global.NavigationController = NavigationController;
+global.SettingsController = SettingsController;

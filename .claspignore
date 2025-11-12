@@ -1,5 +1,12 @@
-# Ignore tests
+# Ignore files for clasp
 
-**/*test.js
-**/*test_.js
+**/node_modules/**
+**/dist/**
+**/tests/**
+**/__tests__/**
+**/__mocks__/**
+**/__snapshots__/**
+**/build/**
+**/.vscode/**
+**/*.test.js
 **/index.js

@@ -7,21 +7,29 @@ function onInstall(e) {
 }
 
 function onOpen(e) {
-    
+
 }
 
-/**
- * @see https://developers.google.com/apps-script/guides/web
- */
 function doGet(e) {
+    return JSON.stringify({ status: 'ok' });
+}
+
+function doPost(e) {
     try {
-        // Call the QUnit runner to execute tests
-        const runner = new QUnitRunner(e);
-        return runner.getHtml();
+        const contents = JSON.parse(e.postData.contents);
+        // Handle the webhook event
+        return WebhookHandler.handlePostUpdateRequest(contents);
     } catch (error) {
-        // Handle any errors that occur during the execution
-        Logger.log("Error in doGet: " + error.message);
-        // Return an error message to the user
-        return HtmlService.createHtmlOutput("Error: " + error.message);
+        throw error;
     }
+}
+
+// Export the functions for testing
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = {
+        onInstall,
+        onOpen,
+        doGet,
+        doPost
+    };
 }

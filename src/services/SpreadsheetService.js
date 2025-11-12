@@ -5,11 +5,15 @@ class SpreadsheetService {
     }
 
     static get USERS_SHEET_NAME() {
-        return "Users";
+        return EMD.Customer.sheet({}).name;
     }
 
-    static get RESOURCES_SHEET_NAME() {
-        return "Resources";
+    static get REPLIES_SHEET_NAME() {
+        return EMD.Automations.sheet({}).name;
+    }
+
+    getActiveSpreadsheet() {
+        return this._activeSpreadsheet;
     }
 
     setActiveSheet(sheet) {
@@ -24,12 +28,12 @@ class SpreadsheetService {
     getSheetByName(name) {
         return this._activeSpreadsheet?.getSheetByName(name);
     }
-    
+
     constructor(activeSpreadsheet = null) {
         this._activeSpreadsheet = activeSpreadsheet;
     }
 
-    static newSpreadsheetService(activeSpreadsheet, sheetName = null) {
+    static create(activeSpreadsheet, sheetName = null) {
         if (!activeSpreadsheet) {
             throw new Error("No active spreadsheet provided");
         }
@@ -39,55 +43,39 @@ class SpreadsheetService {
         return new SpreadsheetService(activeSpreadsheet)
             .setActiveSheet(sheet);
     }
+}
 
-    writeEvent({ dc, action, chat_id, content, event }) {
-        const sheet = this.getSheetByName(this.EVENT_LOG_SHEET_NAME);
-        const datestring = new Date().toISOString();
-        sheet.appendRow([datestring, dc, action, chat_id, content, event]);
-    }
-
-    writeError({ dc, action, chat_id, content, event }) {
-        const sheet = this.getSheetByName(this.EVENT_LOG_SHEET_NAME);
-        const datestring = new Date().toISOString();
-        sheet.appendRow([datestring, dc, action, chat_id, content, event]);
-    }
-
-    getEventLogSheet_() {
-        const monthAsNumber = new Date().getMonth() + 1;
-        return SpreadsheetApp
-            .getActiveSpreadsheet()
-            .getSheetByName(this.EVENT_LOG_SHEET_NAME + ' ' + monthAsNumber)
-            ?? SpreadsheetApp
-                .getActiveSpreadsheet()
-                .insertSheet(this.EVENT_LOG_SHEET_NAME + ' ' + monthAsNumber, 0)
-                .appendRow(['Created On', 'DC', 'Action', 'chat_id', 'content', 'event']);
-    }
-
-    findLangColIndex(langCodeText) {
-        const range = this.getSheetByName(this.RESOURCES_SHEET_NAME).getDataRange();
-
-        const firstRow = range.getValues()[0];
-        for (var col = 1; col < firstRow.length; col++) {
-            if (firstRow[col] == langCodeText) {
-                return col;
-            }
+SpreadsheetService.Events = {
+    initialize: ({ activeSpreadsheet }) => {
+        let sheet = activeSpreadsheet
+            .getSheetByName(SpreadsheetService.EVENT_LOG_SHEET_NAME);
+        if (!sheet) {
+            sheet = activeSpreadsheet.insertSheet(SpreadsheetService.EVENT_LOG_SHEET_NAME);
+            sheet.appendRow(['Created On', 'DC', 'Action', 'chat_id', 'content', 'event']);
         }
-        // Default when not found
-        return 1;
+        return sheet;
+    },
+    logEvent: ({ dc, action, chat_id, content, event }) => {
+        const sheet = SpreadsheetService.Events.initialize({
+            activeSpreadsheet: SpreadsheetApp.getActiveSpreadsheet()
+        });
+        const datestring = new Date().toISOString();
+        sheet.appendRow([datestring, dc, action, chat_id, content, event]);
     }
+}
 
-    addUser(chat_id, data) {
-        const sheet = this.getUsersSheet_();
+SpreadsheetService.Users = {
+    addUser: (chat_id, data) => {
+        const sheet = SpreadsheetService.Users.getUsersSheet();
         const datestring = new Date().toISOString();
 
         const user = [datestring, chat_id, data.username, data.first_name, data.last_name, data.language_code, data];
         sheet.appendRow(user);
 
-        return persone;
-    }
-
-    getUserById(id) {
-        const range = this.getSheetByName(this.USERS_SHEET_NAME).getDataRange();
+        return user;
+    },
+    getUserById: (id) => {
+        const range = SpreadsheetService.Users.getUsersSheet().getDataRange();
         const values = range.getValues();
         for (var row = 0; row < values.length; row++) {
             if (values[row][1] == id) { //chat_id
@@ -95,35 +83,24 @@ class SpreadsheetService {
             }
         }
         return null;
-    }
+    },
+    getUsersSheet: () => {
+        let sheet = SpreadsheetApp.getActiveSpreadsheet()
+            .getSheetByName(SpreadsheetService.USERS_SHEET_NAME);
 
-    getResourceByKey(key) {
-        const range = this.getSheetByName(this.RESOURCES_SHEET_NAME).getDataRange();
-        const values = range.getValues();
-        for (var row = 0; row < values.length; row++) {
-            if (values[row][0] == key) {
-                return values[row][this.LANG_COL_INDEX];
-            }
+        if (!sheet) {
+            // Create the sheet if it doesn't exist
+            sheet = SpreadsheetApp
+                .getActiveSpreadsheet()
+                .insertSheet(this.USERS_SHEET_NAME);
+
+            sheet.appendRow(EMD.Customer.sheet({}).columns);
         }
-        return null;
-    }
 
-    getResourcesSheet_() {
-        return SpreadsheetApp.getActiveSpreadsheet()
-            .getSheetByName(this.RESOURCES_SHEET_NAME)
-            ?? SpreadsheetApp
-                .getActiveSpreadsheet()
-                .insertSheet(this.RESOURCES_SHEET_NAME, 0)
-                .appendRow(['KEY', 'en'])
-                .appendRow(['sampel1', 'Hello World..'])
-                .appendRow(['sampel2', 'Pleas select..']);
+        return sheet;
     }
+}
 
-    getUsersSheet_() {
-        return SpreadsheetApp.getActiveSpreadsheet()
-            .getSheetByName(this.USERS_SHEET_NAME) ?? SpreadsheetApp
-                .getActiveSpreadsheet()
-                .insertSheet(this.USERS_SHEET_NAME, 0)
-                .appendRow(['Created on', 'chat_id', 'username', 'First Name', 'Last Name', 'language_code', 'Data']);
-    }
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = { SpreadsheetService };
 }

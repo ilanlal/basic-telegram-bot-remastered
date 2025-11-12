@@ -1,4 +1,6 @@
 const { UserStore, UserStoreFactory } = require('./UserStore');
-
-global.UserStore = UserStore;
+const { SpreadsheetService } = require('../services/SpreadsheetService');
+    
 global.UserStoreFactory = UserStoreFactory;
+global.SpreadsheetService = SpreadsheetService;
+global.UserStore = UserStore;

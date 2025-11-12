@@ -1,15 +1,5 @@
 {
   "timeZone": "America/New_York",
-  "dependencies": {
-    "libraries": [
-      {
-        "userSymbol": "QUnit",
-        "version": "0",
-        "libraryId": "1jvNKvJric7Kbc6wWphMJZIfJ0w8wurlHymoGpkE-i26P_srJifxQhFr1",
-        "developmentMode": true
-      }
-    ]
-  },
   "exceptionLogging": "STACKDRIVER",
   "runtimeVersion": "V8",
   "webapp": {
@@ -17,21 +7,43 @@
     "access": "ANYONE_ANONYMOUS"
   },
   "oauthScopes": [
+    "https://www.googleapis.com/auth/script.locale",
     "https://www.googleapis.com/auth/spreadsheets.currentonly",
-    "https://www.googleapis.com/auth/script.container.ui",
-    "https://www.googleapis.com/auth/script.external_request",
-    "https://www.googleapis.com/auth/userinfo.email"
+    "https://www.googleapis.com/auth/script.external_request"
   ],
   "addOns": {
     "common": {
       "name": "Basic Telegram Bot",
       "logoUrl": "https://raw.githubusercontent.com/ilanlal/basic-telegram-bot-remastered/main/assets/logo24.png",
       "layoutProperties": {
-        "primaryColor": "#2772ed"
+        "primaryColor": "#2772ed",
+        "secondaryColor": "#1010ff"
       },
+      "openLinkUrlPrefixes": [
+        "https://raw.githubusercontent.com/ilanlal/",
+        "https://www.github.com/ilanlal/",
+        "https://github.com/ilanlal/",
+        "https://www.easyadm.com",
+        "https://easyadm.com"
+      ],
       "homepageTrigger": {
-        "runFunction": "onDefaultHomePageOpen"
-      }
+        "runFunction": "EventHandler.Addon.onOpenHomeCard"
+      },
+      "useLocaleFromApp": true,
+      "universalActions": [
+        {
+          "label": "Account",
+          "runFunction": "EventHandler.Addon.onOpenAccountCard"
+        },
+        {
+          "label": "About",
+          "runFunction": "EventHandler.Addon.onOpenAboutCard"
+        },
+        {
+          "label": "Help & Support",
+          "openLink": "https://github.com/ilanlal/basic-telegram-bot-remastered#readme"
+        }
+      ]
     },
     "sheets": {}
   },
