@@ -27,13 +27,6 @@ EventHandler.Addon = {
                 EventHandler.prototype.userProperties)
             .handleOpenHomeCard(e);
     },
-    onOpenCardClick: (e) => {
-        return new EventHandler
-            .AddonWrapper(
-                EventHandler.prototype.userStore,
-                EventHandler.prototype.userProperties)
-            .handleOpenCard(e);
-    },
     onBindSheetDataClick: (e) => {
         return new EventHandler
             .AddonWrapper(
@@ -75,20 +68,6 @@ EventHandler.Addon = {
                 EventHandler.prototype.userStore,
                 EventHandler.prototype.userProperties)
             .handleOpenSettingsCard(e);
-    },
-    onSaveSettingsClicked: (e) => {
-        return new EventHandler
-            .AddonWrapper(
-                EventHandler.prototype.userStore,
-                EventHandler.prototype.userProperties)
-            .handleSaveSettings(e);
-    },
-    onToggleBooleanSetting: (e) => {
-        return new EventHandler
-            .AddonWrapper(
-                EventHandler.prototype.userStore,
-                EventHandler.prototype.userProperties)
-            .handleToggleBooleanSetting(e);
     },
     onBotSetupClick: (e) => {
         return new EventHandler
@@ -203,71 +182,8 @@ EventHandler.AddonWrapper = class {
 
     handleOpenHomeCard(e) {
         try {
-            return this.handleOpenCard({ parameters: { entityName: 'Home' } });
-        } catch (error) {
-            return this.handleError(error)
-                .build();
-        }
-    }
-
-    handleOpenCard(e) {
-        try {
-            const entityName = e.parameters?.entityName || null;
-            
-            if (!entityName) {
-                throw new Error("'entityName' parameter is required for onOpenCard.");
-            }
-
-            // find EMD card navigation based on entityName
-            const emd = Object.values(EMD).find(emd => emd.entityName === entityName);
-            if (!emd || !emd.card) {
-                throw new Error(`No card found for entityName: ${entityName}`);
-            }
-            const setupFlow = SetupFlow.create(this._userProperties);
-            const state = setupFlow.stateObject;
-            return EntityController
-                .create(
-                    this._userStore,
-                    CardService,
-                    SpreadsheetApp.getActiveSpreadsheet(),
-                    this._userProperties)
-                .pushCard(emd.card({
-                    isActive: state.botTokenSet,
-                    isAdmin: false,
-                    setupFlow: state,
-                    getMeResult: setupFlow.getMeResult,
-                    getWebhookInfoResult: setupFlow.getWebhookInfoResult
-                }))
-                .build();
-        } catch (error) {
-            return this.handleError(error)
-                .build();
-        }
-    }
-
-    handleBindSheetData(e) {
-        try {
-            const entityName = e.parameters?.entityName || null;
-            if (!entityName) {
-                throw new Error("'entityName' parameter is required for onOpenCard.");
-            }
-
-            // find EMD card navigation based on entityName
-            const emd = Object.values(EMD).find(emd => emd.entityName === entityName);
-            if (!emd || !emd.sheet) {
-                throw new Error(`Static method "sheet: (data={}) {}" not found for entityName: ${entityName}`);
-            }
-
-            const rs = EntityController
-                .create(
-                    this._userStore,
-                    CardService,
-                    SpreadsheetApp.getActiveSpreadsheet(),
-                    this._userProperties)
-                .bindSheetSampleData(emd.sheet({}));
-
-            return this.handleOperationSuccess(`👍 Sheet data for ${entityName} bound successfully.`)
-                .build();
+            return EntityHandler.Addon
+                .onOpenCardClick({ parameters: { entityName: 'Home' } });
         } catch (error) {
             return this.handleError(error)
                 .build();
@@ -323,26 +239,6 @@ EventHandler.AddonWrapper = class {
             return NavigationController.create(this._userStore)
                 .navigateToSettingsCard()
                 .build();
-        } catch (error) {
-            return this.handleError(error)
-                .build();
-        }
-    }
-
-    handleSaveSettings(e) {
-        try {
-            return SettingsController.create(this._userStore)
-                .saveSettings(e)
-                .build();
-        } catch (error) {
-            return this.handleError(error)
-                .build();
-        }
-    }
-
-    handleToggleBooleanSetting(e) {
-        try {
-            throw new Error("Not implemented yet");
         } catch (error) {
             return this.handleError(error)
                 .build();

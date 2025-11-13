@@ -40,7 +40,7 @@ EMD.Home = {
                                     disabled: false,
                                     text: '🌍 Manage',
                                     onClick: {
-                                        functionName: 'EventHandler.Addon.onOpenCardClick',
+                                        functionName: 'EntityHandler.Addon.onOpenCardClick',
                                         parameters: {
                                             entityName: 'EnvironmentVariables',
                                             setupFlow: decodeURIComponent(JSON.stringify(data?.setupFlow || {}))
@@ -91,7 +91,7 @@ EMD.Home = {
                                     disabled: false,
                                     text: '⚡ Manage',
                                     onClick: {
-                                        functionName: 'EventHandler.Addon.onOpenCardClick',
+                                        functionName: 'EntityHandler.Addon.onOpenCardClick',
                                         parameters: { entityName: 'Automation' }
                                     }
                                 }
@@ -115,7 +115,7 @@ EMD.Home = {
                                     disabled: false,
                                     text: '👥 Customer Management',
                                     onClick: {
-                                        functionName: 'EventHandler.Addon.onOpenCardClick',
+                                        functionName: 'EntityHandler.Addon.onOpenCardClick',
                                         parameters: { entityName: 'Customer' }
                                     }
                                 }
