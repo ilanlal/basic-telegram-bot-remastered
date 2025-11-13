@@ -16,28 +16,6 @@ class NavigationController {
             cardService, spreadsheet, userProperties);
     }
 
-    navigateToHomeCard() {
-        const setupFlow = SetupFlow.create(this._userProperties);
-        const entityController = EntityController.create(
-            this._userStore,
-            this._cardService,
-            this._spreadsheet,
-            this._userProperties
-        );
-        return entityController.pushCard(
-            EMD.Home.card({
-                isActive: setupFlow.stateObject.botTokenSet,
-                isAdmin: false,
-                isPremium: false,
-                isTrial: false,
-                trialDaysLeft: 0,
-                walletBalance: 0,
-                hasAutomations: false,
-                emojiSets: Lights.ON,
-                setupFlow: setupFlow.stateObject
-            })
-        );
-    }
 
     navigateToAboutCard() {
         // package.json is not accessible in GAS environment

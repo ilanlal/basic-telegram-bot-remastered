@@ -62,13 +62,6 @@ EventHandler.Addon = {
                 EventHandler.prototype.userProperties)
             .handleRevokeLicenseClicked(e);
     },
-    onOpenSettingsCard: (e) => {
-        return new EventHandler
-            .AddonWrapper(
-                EventHandler.prototype.userStore,
-                EventHandler.prototype.userProperties)
-            .handleOpenSettingsCard(e);
-    },
     onBotSetupClick: (e) => {
         return new EventHandler
             .AddonWrapper(
@@ -133,17 +126,6 @@ EventHandler.AddonWrapper = class {
         try {
             return AccountController.create(this._userStore)
                 .revokePremium(e)
-                .build();
-        } catch (error) {
-            return this.handleError(error)
-                .build();
-        }
-    }
-
-    handleOpenSettingsCard(e) {
-        try {
-            return NavigationController.create(this._userStore)
-                .navigateToSettingsCard()
                 .build();
         } catch (error) {
             return this.handleError(error)

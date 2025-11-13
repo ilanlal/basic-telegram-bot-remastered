@@ -72,14 +72,6 @@ describe('EventHandler', () => {
         expect(data.cardNavigations[0].pushCard).toBeDefined();
     });
 
-    it('should handle onOpenSettingsCard', () => {
-        const event = {}; // Mock event object
-        const actionResponse = EventHandler.Addon.onOpenSettingsCard(event);
-        expect(actionResponse).toBeDefined();
-        const data = actionResponse.getData();
-        expect(data).toBeDefined();
-    });
-
     it('should handle onBotSetupClick', () => {
         const token = '[FAKE_DUMMY_BOT_TOKEN]';
         const contentText = `{
