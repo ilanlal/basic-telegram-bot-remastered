@@ -147,6 +147,15 @@ describe('EventHandler', () => {
             }
         }`;
 
+        UrlFetchAppStubConfiguration.when(`https://api.telegram.org/bot${token}/getMe`)
+            .return(new HttpResponse().setContentText(JSON.stringify({
+                result: {
+                    id: 1234567809,
+                    is_bot: true,
+                    first_name: "TestBot",
+                    username: "TestBotUsername"
+                }
+            })));
         UrlFetchAppStubConfiguration.when(`https://api.telegram.org/bot${token}/getWebhookInfo`)
             .return(new HttpResponse().setContentText(contentText));
         const event = {}; // Mock event object

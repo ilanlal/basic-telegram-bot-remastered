@@ -44,9 +44,14 @@ class BotSetupController {
             .setDebugMode(isDebug);
     }
 
-    setDefaultLanguage(languageCode) {
+    setNewDefaultLanguage(languageCode) {
         return SetupFlow.create(this._userProperties)
             .setNewDefaultLanguage(languageCode);
+    }
+
+    setNewActiveSpreadsheetId(spreadsheetId) {
+        return SetupFlow.create(this._userProperties)
+            .setNewActiveSpreadsheetId(spreadsheetId);
     }
 
     setWebhook() {

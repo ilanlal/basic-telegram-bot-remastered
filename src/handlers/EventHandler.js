@@ -135,6 +135,61 @@ EventHandler.Addon = {
                 EventHandler.prototype.userStore,
                 EventHandler.prototype.userProperties)
             .handleSaveBotSetupClick(e);
+    },
+    onIdentifyActiveSpreadsheetIdClick: (e) => {
+        // Not implemented yet
+        return new EventHandler
+            .AddonWrapper(
+                EventHandler.prototype.userStore,
+                EventHandler.prototype.userProperties)
+            .handleIdentifyActiveSpreadsheetId(e);
+    },
+    onSaveDefaultLanguageClick: (e) => {
+        return new EventHandler
+            .AddonWrapper(
+                EventHandler.prototype.userStore,
+                EventHandler.prototype.userProperties)
+            .handleSaveDefaultLanguage(e);
+    },
+    onSaveLogEventsClick: (e) => {
+        // Not implemented yet
+        return new EventHandler
+            .AddonWrapper(
+                EventHandler.prototype.userStore,
+                EventHandler.prototype.userProperties)
+            .handleSaveLogEvents(e);
+    },
+    onSetMyNameClick: (e) => {
+        // Not implemented yet
+        return new EventHandler
+            .AddonWrapper(
+                EventHandler.prototype.userStore,
+                EventHandler.prototype.userProperties)
+            .handleSetMyNameClick(e);
+    },
+    onSetMyDescriptionClick: (e) => {
+        // Not implemented yet
+        return new EventHandler
+            .AddonWrapper(
+                EventHandler.prototype.userStore,
+                EventHandler.prototype.userProperties)
+            .handleSetMyDescriptionClick(e);
+    },
+    onSetMyShortDescriptionClick: (e) => {
+        // Not implemented yet
+        return new EventHandler
+            .AddonWrapper(
+                EventHandler.prototype.userStore,
+                EventHandler.prototype.userProperties)
+            .handleSetMyShortDescriptionClick(e);
+    },
+    onSetMyCommandsClick: (e) => {
+        // Not implemented yet
+        return new EventHandler
+            .AddonWrapper(
+                EventHandler.prototype.userStore,
+                EventHandler.prototype.userProperties)
+            .handleSetMyCommandsClick(e);
     }
 }
 EventHandler.AddonWrapper = class {
@@ -158,6 +213,7 @@ EventHandler.AddonWrapper = class {
     handleOpenCard(e) {
         try {
             const entityName = e.parameters?.entityName || null;
+            
             if (!entityName) {
                 throw new Error("'entityName' parameter is required for onOpenCard.");
             }
@@ -167,14 +223,21 @@ EventHandler.AddonWrapper = class {
             if (!emd || !emd.card) {
                 throw new Error(`No card found for entityName: ${entityName}`);
             }
-
+            const setupFlow = SetupFlow.create(this._userProperties);
+            const state = setupFlow.stateObject;
             return EntityController
                 .create(
                     this._userStore,
                     CardService,
                     SpreadsheetApp.getActiveSpreadsheet(),
                     this._userProperties)
-                .pushCard(emd.card({ isAdmin: false }))
+                .pushCard(emd.card({
+                    isActive: state.botTokenSet,
+                    isAdmin: false,
+                    setupFlow: state,
+                    getMeResult: setupFlow.getMeResult,
+                    getWebhookInfoResult: setupFlow.getWebhookInfoResult
+                }))
                 .build();
         } catch (error) {
             return this.handleError(error)
@@ -300,7 +363,9 @@ EventHandler.AddonWrapper = class {
                     {
                         isActive: setupFlow.stateObject.botTokenSet,
                         isAdmin: false,
-                        setupFlow: setupFlow.stateObject
+                        setupFlow: setupFlow.stateObject,
+                        getMeResult: setupFlow.getMeResult,
+                        getWebhookInfoResult: setupFlow.getWebhookInfoResult
                     }
                 ))
                 .build();
@@ -410,6 +475,113 @@ EventHandler.AddonWrapper = class {
             return this.handleOperationSuccess("👍 Admin Chat ID saved successfully.")
                 .build();
 
+        } catch (error) {
+            return this.handleError(error)
+                .build();
+        }
+    }
+
+    handleIdentifyActiveSpreadsheetId(e) {
+        try {
+            let spreadsheetId = e.parameters?.spreadsheetId || null;
+
+            if (!spreadsheetId) {
+                const formInputs = e.commonEventObject.formInputs || {};
+                spreadsheetId = formInputs['txt_active_spreadsheet_id']?.stringInputs?.value[0] || null;
+            }
+
+            if (!spreadsheetId) {
+                throw new Error("Spreadsheet ID is required.");
+            }
+
+            const controller = BotSetupController
+                .create(this._userProperties);
+
+            controller.setNewActiveSpreadsheetId(spreadsheetId);
+
+            return this.handleOperationSuccess("👍 Active Spreadsheet ID saved successfully.")
+                .build();
+
+        } catch (error) {
+            return this.handleError(error)
+                .build();
+        }
+    }
+
+    handleSaveDefaultLanguage(e) {
+        try {
+            let languageCode = e.parameters?.languageCode || null;
+
+            if (!languageCode) {
+                const formInputs = e.commonEventObject.formInputs || {};
+                languageCode = formInputs['txt_default_language']?.stringInputs?.value[0] || null;
+            }
+
+            if (!languageCode) {
+                throw new Error("Language code is required.");
+            }
+
+            const controller = BotSetupController
+                .create(this._userProperties);
+
+            controller.setNewDefaultLanguage(languageCode);
+
+            return this.handleOperationSuccess("👍 Default language saved successfully.")
+                .build();
+
+        } catch (error) {
+            return this.handleError(error)
+                .build();
+        }
+    }
+
+    handleSaveLogEvents(e) {
+        try {
+            let logEvents = e.parameters.txt_log_events || null;
+            if (!logEvents) {
+                const formInputs = e.commonEventObject.formInputs || {};
+                logEvents = formInputs['txt_log_events']?.stringInputs?.value[0] || null;
+            }
+
+            if (!logEvents) {
+                logEvents = 'false';
+            }
+
+            const controller = BotSetupController
+                .create(this._userProperties);
+
+            controller.setDebugMode(logEvents === 'true');
+
+            return this.handleOperationSuccess("👍 Log events setting saved successfully.")
+                .build();
+
+        } catch (error) {
+            return this.handleError(error)
+                .build();
+        }
+    }
+
+    handleSetMyNameClick(e) {
+        try {
+            throw new Error("Not implemented yet");
+        } catch (error) {
+            return this.handleError(error)
+                .build();
+        }
+    }
+
+    handleSetMyDescriptionClick(e) {
+        try {
+            throw new Error("Not implemented yet");
+        } catch (error) {
+            return this.handleError(error)
+                .build();
+        }
+    }
+
+    handleSetMyShortDescriptionClick(e) {
+        try {
+            throw new Error("Not implemented yet");
         } catch (error) {
             return this.handleError(error)
                 .build();

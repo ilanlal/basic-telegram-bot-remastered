@@ -89,6 +89,15 @@ class SetupFlow {
         return this._userProperties.setProperty(SetupFlow.InputMeta.DEBUG_MODE, debugValue);
     }
 
+    setNewActiveSpreadsheetId(spreadsheetId) {
+        if (!spreadsheetId || typeof spreadsheetId !== 'string' || spreadsheetId.trim() === '') {
+            spreadsheetId = '[current]';
+        }
+
+        const safeId = decodeURIComponent(spreadsheetId);
+        return this._userProperties.setProperty(SetupFlow.InputMeta.ACTIVE_SPREADSHEET_ID, safeId);
+    }
+
     // Getters
     get trafficLight() {
         const leds = '{0}{1}{2}{3}{4}';
@@ -139,7 +148,9 @@ class SetupFlow {
             defaultLanguage: this._userProperties.getProperty(SetupFlow.InputMeta.DEFAULT_LANGUAGE),
             defaultLanguageSet: !!this._userProperties.getProperty(SetupFlow.InputMeta.DEFAULT_LANGUAGE),
             debugMode: this._userProperties.getProperty(SetupFlow.InputMeta.DEBUG_MODE) === 'true',
-            debugModeSet: this._userProperties.getProperty(SetupFlow.InputMeta.DEBUG_MODE) !== null
+            debugModeSet: this._userProperties.getProperty(SetupFlow.InputMeta.DEBUG_MODE) === 'true',
+            activateSpreadsheetId: this._userProperties.getProperty(SetupFlow.InputMeta.ACTIVE_SPREADSHEET_ID),
+            activateSpreadsheetIdSet: this._userProperties.getProperty(SetupFlow.InputMeta.ACTIVE_SPREADSHEET_ID) !== null
         }
     }
 
@@ -166,6 +177,32 @@ class SetupFlow {
         }
         return JSON.parse(response.getContentText())?.result?.url || null;
     }
+
+    get getWebhookInfoResult() {
+        if (!this.telegramBotClient) {
+            return null;
+        }
+        const response = this.telegramBotClient
+            .getWebhookInfo();
+
+        if (response.getResponseCode() !== 200) {
+            return null;
+        }
+        return JSON.parse(response.getContentText())?.result || null;
+    }
+
+    get getMeResult() {
+        if (!this.telegramBotClient) {
+            return null;
+        }
+        const response = this.telegramBotClient
+            .getMe();
+
+        if (response.getResponseCode() !== 200) {
+            return null;
+        }
+        return JSON.parse(response.getContentText())?.result || null;
+    }
 }
 
 SetupFlow.InputMeta = {
@@ -173,7 +210,8 @@ SetupFlow.InputMeta = {
     DEPLOYMENT_ID: 'deployment_id',
     ADMIN_CHAT_ID: 'admin_chat_id',
     DEFAULT_LANGUAGE: 'default_language',
-    DEBUG_MODE: 'debug_mode'
+    DEBUG_MODE: 'debug_mode_set',
+    ACTIVE_SPREADSHEET_ID: 'active_spreadsheet_id'
 };
 
 if (typeof module !== 'undefined' && module.exports) {
