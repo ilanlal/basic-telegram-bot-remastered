@@ -109,7 +109,13 @@ BotHandler.AddonWrapper = class {
 
     handleSetMyNameClick(e) {
         try {
-            throw new Error("Not implemented yet");
+            const controller = BotSetupController
+                .create(this._userProperties);
+            
+            const response = controller.setMyName();
+
+            return this.handleOperationSuccess("👍 Bot name set successfully.")
+                .build();
         } catch (error) {
             return this.handleError(error)
                 .build();
@@ -128,6 +134,21 @@ BotHandler.AddonWrapper = class {
     handleSetMyShortDescriptionClick(e) {
         try {
             throw new Error("Not implemented yet");
+        } catch (error) {
+            return this.handleError(error)
+                .build();
+        }
+    }
+
+    handleSetMyCommandsClick(e) {
+        try {
+            const controller = BotSetupController
+                .create(this._userProperties);
+
+            const response = controller.setMyCommands();
+
+            return this.handleOperationSuccess("👍 Bot commands set successfully.")
+                .build();
         } catch (error) {
             return this.handleError(error)
                 .build();

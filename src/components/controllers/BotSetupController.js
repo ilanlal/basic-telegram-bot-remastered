@@ -61,6 +61,22 @@ class BotSetupController {
     deleteWebhook() {
         return SetupFlow.create(this._userProperties).deleteWebhook();
     }
+
+    setMyName() {
+        return SetupFlow.create(this._userProperties).setMyName();
+    }
+
+    setMyDescription() {
+        return SetupFlow.create(this._userProperties).setMyDescription();
+    }
+
+    setMyShortDescription() {
+        return SetupFlow.create(this._userProperties).setMyShortDescription();
+    }
+
+    setMyCommands() {
+        return SetupFlow.create(this._userProperties).setMyCommands();
+    }
 }
 
 

@@ -28,11 +28,19 @@ class SetupFlow {
         if (response.getResponseCode() !== 200) {
             throw new Error("Failed to validate bot token");
         }
-        this._userProperties.setProperty(SetupFlow.InputMeta.BOT_API_TOKEN, safeToken);
+        this.setNewBotToken(safeToken);
 
         const contentText = response.getContentText();
         const res = JSON.parse(contentText);
         return res.result;
+    }
+
+    setNewBotToken(token) {
+        if (!token || typeof token !== 'string' || token.trim() === '') {
+            throw new Error("Invalid bot token");
+        }
+        const safeToken = decodeURIComponent(token);
+        return this._userProperties.setProperty(SetupFlow.InputMeta.BOT_API_TOKEN, safeToken);
     }
 
     setNewDeploymentId(id) {
@@ -98,6 +106,38 @@ class SetupFlow {
         return this._userProperties.setProperty(SetupFlow.InputMeta.ACTIVE_SPREADSHEET_ID, safeId);
     }
 
+    setMyName(name, language_code) {  
+        const response = this.telegramBotClient.setMyName(name, language_code);
+        if (response.getResponseCode() !== 200) {
+            throw new Error("Failed to set bot name");
+        }
+        return JSON.parse(response.getContentText());
+    }
+
+    setMyDescription(description, language_code) {
+        const response = this.telegramBotClient.setMyDescription(description, language_code);
+        if (response.getResponseCode() !== 200) {
+            throw new Error("Failed to set bot description");
+        }
+        return JSON.parse(response.getContentText());
+    }
+
+    setMyShortDescription(short_description, language_code) {
+        const response = this.telegramBotClient.setMyShortDescription(short_description, language_code);
+        if (response.getResponseCode() !== 200) {
+            throw new Error("Failed to set bot short description");
+        }
+        return JSON.parse(response.getContentText());
+    }
+
+    setMyCommands(commands, language_code, scope) {
+        const response = this.telegramBotClient.setMyCommands(commands, language_code, scope);
+        if (response.getResponseCode() !== 200) {
+            throw new Error("Failed to set bot commands");
+        }
+        return JSON.parse(response.getContentText());
+    }
+
     // Getters
     get trafficLight() {
         const leds = '{0}{1}{2}{3}{4}';
@@ -124,6 +164,7 @@ class SetupFlow {
             this.stateObject.chatIdSet &&
             this.stateObject.defaultLanguageSet;
     }
+
     get state() {
         return [
             { name: EMD.Home, value: this.stateObject.botToken, isSet: this.stateObject.botTokenSet },
@@ -136,10 +177,13 @@ class SetupFlow {
     }
 
     get stateObject() {
+        const token = this._userProperties.getProperty(SetupFlow.InputMeta.BOT_API_TOKEN);
+        const deploymentId = this._userProperties.getProperty(SetupFlow.InputMeta.DEPLOYMENT_ID);
         return {
-            botToken: this._userProperties.getProperty(SetupFlow.InputMeta.BOT_API_TOKEN),
+            // show 4 first and 4 last characters of the token
+            botToken: token ? `${token.substring(0, 4)}****${token.substring(token.length - 4)}` : null,
             botTokenSet: !!this._userProperties.getProperty(SetupFlow.InputMeta.BOT_API_TOKEN),
-            deploymentId: this._userProperties.getProperty(SetupFlow.InputMeta.DEPLOYMENT_ID),
+            deploymentId: deploymentId?`${deploymentId.substring(0, 4)}****${deploymentId.substring(deploymentId.length - 4)}`:null,
             deploymentIdSet: !!this._userProperties.getProperty(SetupFlow.InputMeta.DEPLOYMENT_ID),
             webhookUrl: decodeURI(this.webhookUrl),
             webhookSet: !!this.webhookUrl,
