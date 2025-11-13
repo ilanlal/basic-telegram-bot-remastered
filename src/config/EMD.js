@@ -40,8 +40,11 @@ EMD.Home = {
                                     disabled: false,
                                     text: '🌍 Manage',
                                     onClick: {
-                                        functionName: 'EventHandler.Addon.onOpenCardClick',
-                                        parameters: { entityName: 'EnvironmentVariables' }
+                                        functionName: 'EntityHandler.Addon.onOpenCardClick',
+                                        parameters: {
+                                            entityName: 'EnvironmentVariables',
+                                            setupFlow: decodeURIComponent(JSON.stringify(data?.setupFlow || {}))
+                                        }
                                     }
                                 }
                             }
@@ -88,7 +91,7 @@ EMD.Home = {
                                     disabled: false,
                                     text: '⚡ Manage',
                                     onClick: {
-                                        functionName: 'EventHandler.Addon.onOpenCardClick',
+                                        functionName: 'EntityHandler.Addon.onOpenCardClick',
                                         parameters: { entityName: 'Automation' }
                                     }
                                 }
@@ -112,7 +115,7 @@ EMD.Home = {
                                     disabled: false,
                                     text: '👥 Customer Management',
                                     onClick: {
-                                        functionName: 'EventHandler.Addon.onOpenCardClick',
+                                        functionName: 'EntityHandler.Addon.onOpenCardClick',
                                         parameters: { entityName: 'Customer' }
                                     }
                                 }
@@ -180,7 +183,7 @@ EMD.EnvironmentVariables = {
                                 TextButton: {
                                     text: '💾 Save Deployment ID',
                                     onClick: {
-                                        functionName: 'EventHandler.Addon.onIdentifyDeploymentIdClick'
+                                        functionName: 'EnvironmentHandler.Addon.onIdentifyDeploymentIdClick'
                                     }
                                 }
                             }
@@ -194,7 +197,7 @@ EMD.EnvironmentVariables = {
                             {
                                 id: 'active_spreadsheet_id_info',
                                 TextParagraph: {
-                                    text: `📊 Active Spreadsheet ID is currently: ${data.setupFlow?.activeSpreadsheetIdSet ? '✅ Set' : '❌ Not Set'}`
+                                    text: `📊 Active Spreadsheet ID is currently: ${data.setupFlow?.activeSpreadsheetIdSet ? 'Custome' : '[current]'}`
                                 }
                             },
                             {   // Active Spreadsheet ID Variable
@@ -202,8 +205,9 @@ EMD.EnvironmentVariables = {
                                 TextInput: {
                                     title: 'Active Spreadsheet ID',
                                     fieldName: 'txt_active_spreadsheet_id',
-                                    hint: 'Enter active spreadsheet ID'
+                                    hint: 'Only "[current]" works for now'
                                 },
+                                value: '[current]',
                                 propertyName: 'active_spreadsheet_id'
                             },
                             { // Save Active Spreadsheet ID Button
@@ -211,7 +215,7 @@ EMD.EnvironmentVariables = {
                                 TextButton: {
                                     text: '💾 Save Active Spreadsheet ID',
                                     onClick: {
-                                        functionName: 'EventHandler.Addon.onIdentifyActiveSpreadsheetIdClick'
+                                        functionName: 'EnvironmentHandler.Addon.onIdentifyActiveSpreadsheetIdClick'
                                     }
                                 }
                             }
@@ -235,6 +239,7 @@ EMD.EnvironmentVariables = {
                                     fieldName: 'txt_default_language',
                                     hint: 'Enter default language'
                                 },
+                                value: 'default',
                                 propertyName: 'default_language'
                             },
                             { // Save Default Language Button
@@ -242,7 +247,7 @@ EMD.EnvironmentVariables = {
                                 TextButton: {
                                     text: '💾 Save Default Language',
                                     onClick: {
-                                        functionName: 'EventHandler.Addon.onIdentifyDefaultLanguageClick'
+                                        functionName: 'EnvironmentHandler.Addon.onSaveDefaultLanguageClick'
                                     }
                                 }
                             }
@@ -256,7 +261,7 @@ EMD.EnvironmentVariables = {
                             { // Admin Chat ID Info
                                 id: 'admin_chat_id_info',
                                 TextParagraph: {
-                                    text: '🪪 This is the chat ID for the admin user.'
+                                    text: `👑 Admin Chat ID is currently: ${data.setupFlow?.chatIdSet ? '✅ Set' : '❌ Not Set'}`
                                 }
                             },
                             { // Admin Chat ID Variable
@@ -274,7 +279,7 @@ EMD.EnvironmentVariables = {
                                 TextButton: {
                                     text: '💾 Save Admin Chat ID',
                                     onClick: {
-                                        functionName: 'EventHandler.Addon.onSaveAdminChatIdClick',
+                                        functionName: 'EnvironmentHandler.Addon.onSaveAdminChatIdClick',
                                         parameters: {}
                                     }
                                 }
@@ -289,7 +294,7 @@ EMD.EnvironmentVariables = {
                             {
                                 id: 'log_events_info',
                                 TextParagraph: {
-                                    text: `🛰️ Log Events is currently: ${data.setupFlow?.logEventsSet ? '✅ Set' : '❌ Not Set'}`
+                                    text: `🛰️ Log Events currently: ${data.setupFlow?.debugModeSet ? '🟢 On' : '🔴 Off'}`
                                 }
                             },
                             {   // Log Events widget
@@ -297,17 +302,16 @@ EMD.EnvironmentVariables = {
                                 TextInput: {
                                     title: 'Log Events (Set to true or any other value for false)',
                                     fieldName: 'txt_log_events',
-                                    hint: 'Enter log events (true/false)'
+                                    hint: '"true" is on, anything else is off',
                                 },
-                                propertyName: 'log_events',
-                                value: 'false'
+                                propertyName: 'debug_mode_set'
                             },
                             {
                                 id: 'save_log_events_button',
                                 TextButton: {
                                     text: '💾 Save Log Events',
                                     onClick: {
-                                        functionName: 'EventHandler.Addon.onSaveLogEventsClick'
+                                        functionName: 'EnvironmentHandler.Addon.onSaveLogEventsClick'
                                     }
                                 }
                             }
@@ -357,10 +361,16 @@ EMD.BotSetup = {
                             { // Bot token set state
                                 id: 'bot_token_set_state',
                                 TextParagraph: {
-                                    text: `🔑 Bot Token is currently set to: ${data.isActive ? '✅ Set' : '❌ Not Set'}`
+                                    text: `🔑 Bot Token currently: ${data.isActive ? '✅ Set' : '❌ Not Set'}`
                                 }
                             },
-                            { // Bot Token Variable
+                            { // Get Me Result
+                                id: 'get_me_result',
+                                TextParagraph: {
+                                    text: JSON.stringify(data.getMeResult || {}, null, 2)
+                                }
+                            },
+                            { // Bot Token input variable
                                 id: 'bot_token_variable',
                                 TextInput: {
                                     title: 'Bot API Token',
@@ -374,7 +384,7 @@ EMD.BotSetup = {
                                 TextButton: {
                                     text: '🆔 Identify Token',
                                     onClick: {
-                                        functionName: 'EventHandler.Addon.onIdentifyTokenClick'
+                                        functionName: 'EnvironmentHandler.Addon.onIdentifyTokenClick'
                                     }
                                 }
                             }
@@ -388,7 +398,13 @@ EMD.BotSetup = {
                             {
                                 id: 'webhook_setup_info',
                                 TextParagraph: {
-                                    text: `🔗 Webhook URL is currently: ${data.setupFlow?.webhookSet ? '✅ Set' : '❌ Not Set'}`
+                                    text: `🔗 Webhook currently: ${data.setupFlow?.webhookSet ? '✅ Active' : '🔴 Inactive'}`
+                                }
+                            },
+                            { // Webhook URL info
+                                id: 'webhook_url_info',
+                                TextParagraph: {
+                                    text: JSON.stringify(data.getWebhookInfoResult || {}, null, 2)
                                 }
                             },
                             { // DecoratedText for webhook action (set,delete)
@@ -402,7 +418,7 @@ EMD.BotSetup = {
                                         disabled: false,
                                         text: `${data.setupFlow?.webhookSet ? '🗑️ Delete Webhook' : '📡 Set Webhook'}`,
                                         onClick: {
-                                            functionName: 'EventHandler.Addon.onWebhookManagementClick',
+                                            functionName: 'BotHandler.Addon.onWebhookManagementClick',
                                             parameters: { action: data.setupFlow?.webhookSet ? 'deleteWebhook' : 'setWebhook' }
                                         }
                                     }
@@ -422,22 +438,52 @@ EMD.BotSetup = {
                                     maxLines: 10
                                 }
                             },
-                            {
-                                id: 'bot_info_setup_button',
+                            {   // Bind Sheet with sample Data Button
+                                id: 'bot_info_bind_sheet_button',
                                 TextButton: {
-                                    text: '🤖 Set data from Template',
+                                    text: '📄 Bind Sheet with Sample Data',
                                     onClick: {
-                                        functionName: 'EventHandler.Addon.onBindSheetDataClick',
+                                        functionName: 'EntityHandler.Addon.onBindSheetDataClick',
                                         parameters: { entityName: 'BotSetup' }
                                     }
                                 }
                             },
-                            {
-                                id: 'bot_info_sync_button',
+                            {   // setMyName Button
+                                id: 'bot_info_set_my_name_button',
                                 TextButton: {
-                                    text: '🌐 Sync Bot',
+                                    text: '🌐 api/setMyName',
                                     onClick: {
-                                        functionName: 'EventHandler.Addon.onCancelClick',
+                                        functionName: 'BotHandler.Addon.onSetMyNameClick',
+                                        parameters: {}
+                                    }
+                                }
+                            },
+                            {   // setMyDescription Button
+                                id: 'bot_info_set_my_description_button',
+                                TextButton: {
+                                    text: '🌐 api/setMyDescription',
+                                    onClick: {
+                                        functionName: 'BotHandler.Addon.onSetMyDescriptionClick',
+                                        parameters: {}
+                                    }
+                                }
+                            },
+                            {  // setMyShortDescription Button
+                                id: 'bot_info_set_my_short_description_button',
+                                TextButton: {
+                                    text: '🌐 api/setMyShortDescription',
+                                    onClick: {
+                                        functionName: 'BotHandler.Addon.onSetMyShortDescriptionClick',
+                                        parameters: {}
+                                    }
+                                }
+                            },
+                            {  // setMyCommands Button
+                                id: 'bot_info_set_my_commands_button',
+                                TextButton: {
+                                    text: '🌐 api/setMyCommands',
+                                    onClick: {
+                                        functionName: 'BotHandler.Addon.onSetMyCommandsClick',
                                         parameters: {}
                                     }
                                 }
@@ -600,7 +646,7 @@ EMD.Customer = {
                                         text: 'Activate Sheet',
                                         disabled: false,
                                         onClick: {
-                                            functionName: 'EventHandler.Addon.onBindSheetDataClick',
+                                            functionName: 'EntityHandler.Addon.onBindSheetDataClick',
                                             parameters: {
                                                 api: 'Automation'
                                             }
@@ -653,7 +699,7 @@ EMD.Automation = {
                                         text: '⚡ Bind Template Data',
                                         disabled: false,
                                         onClick: {
-                                            functionName: 'EventHandler.Addon.onBindSheetDataClick',
+                                            functionName: 'EntityHandler.Addon.onBindSheetDataClick',
                                             parameters: {
                                                 api: 'Automation'
                                             }

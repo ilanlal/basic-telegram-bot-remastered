@@ -83,11 +83,10 @@ describe('BotSetupController Tests', () => {
                     userProperties
                 );
                 controller.setDebugMode(true);
-                expect(userProperties.getProperty("debug_mode")).toBe('true');
+                expect(userProperties.getProperty(SetupFlow.InputMeta.DEBUG_MODE)).toBe('true');
                 controller.setDebugMode(false);
-                expect(userProperties.getProperty("debug_mode")).toBe('false');
+                expect(userProperties.getProperty(SetupFlow.InputMeta.DEBUG_MODE)).toBe('false');
             });
-
             // setWebhook method.
             test("setWebhook should call telegram client to set webhook", () => {
                 const sampleToken = '[FAKE_DUMMY_BOT_TOKEN]';
@@ -107,6 +106,26 @@ describe('BotSetupController Tests', () => {
                 const response = controller.setWebhook();
                 expect(response).toBeDefined();
                 expect(response.result).toBe(true);
+            });
+            //setNewDefaultLanguage method.
+            test("setNewDefaultLanguage should store the language code", () => {
+                const userProperties = PropertiesService.getUserProperties();
+                const testLanguageCode = "es";
+                controller = BotSetupController.create(
+                    userProperties
+                );
+                controller.setNewDefaultLanguage(testLanguageCode);
+                expect(userProperties.getProperty("default_language")).toBe(testLanguageCode);
+            });
+            // setNewActiveSpreadsheetId method.
+            test("setNewActiveSpreadsheetId should store the spreadsheet ID", () => {
+                const userProperties = PropertiesService.getUserProperties();
+                const testSpreadsheetId = "spreadsheet_12345";
+                controller = BotSetupController.create(
+                    userProperties
+                );
+                controller.setNewActiveSpreadsheetId(testSpreadsheetId);
+                expect(userProperties.getProperty("active_spreadsheet_id")).toBe(testSpreadsheetId);
             });
         });
     });
