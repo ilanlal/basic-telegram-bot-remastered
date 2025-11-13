@@ -40,7 +40,7 @@ EntityHandler.AddonWrapper = class {
     handleOpenCard(e) {
         try {
             const entityName = e.parameters?.entityName || null;
-            
+
             if (!entityName) {
                 throw new Error("'entityName' parameter is required for onOpenCard.");
             }
@@ -50,6 +50,17 @@ EntityHandler.AddonWrapper = class {
             if (!emd || !emd.card) {
                 throw new Error(`No card found for entityName: ${entityName}`);
             }
+            const userInfo = {
+                isPremium: false,
+                isAdmin: false
+            }
+            const packageInfo = {
+                version: Config.getVersion(),
+                build: Config.getBuild(),
+                author: Config.getAuthor(),
+                license: Config.getLicense(),
+                repository: Config.getRepository()
+            };
             const setupFlow = SetupFlow.create(this._userProperties);
             const state = setupFlow.stateObject;
             return EntityController
@@ -63,7 +74,9 @@ EntityHandler.AddonWrapper = class {
                     isAdmin: false,
                     setupFlow: state,
                     getMeResult: setupFlow.getMeResult,
-                    getWebhookInfoResult: setupFlow.getWebhookInfoResult
+                    getWebhookInfoResult: setupFlow.getWebhookInfoResult,
+                    packageInfo: packageInfo,
+                    userInfo: userInfo
                 }))
                 .build();
         } catch (error) {

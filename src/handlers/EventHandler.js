@@ -90,10 +90,9 @@ EventHandler.AddonWrapper = class {
     }
 
     handleOpenAccountCard(e) {
-        try {
-            return NavigationController.create(this._userStore)
-                .navigateToAccountCard()
-                .build();
+         try {
+            return EntityHandler.Addon
+                .onOpenCardClick({ parameters: { entityName: 'Account' } });
         } catch (error) {
             return this.handleError(error)
                 .build();
@@ -102,9 +101,8 @@ EventHandler.AddonWrapper = class {
 
     handleOpenAboutCard(e) {
         try {
-            return NavigationController.create(this._userStore)
-                .navigateToAboutCard()
-                .build();
+            return EntityHandler.Addon
+                .onOpenCardClick({ parameters: { entityName: 'About' } });
         } catch (error) {
             return this.handleError(error)
                 .build();

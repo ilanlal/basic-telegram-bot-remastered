@@ -1,5 +1,5 @@
-require('../../../tests');
-const EntityViewModel = require('./EntityViewModel');
+require('../../../../tests');
+const EntityViewModel = require('../EntityViewModel');
 
 describe('Model.CardWrapper', () => {
     it('should create an instance of CardWrapper with new service instances', () => {

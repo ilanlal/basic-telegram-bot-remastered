@@ -8,7 +8,9 @@ describe('EntityViewModel', () => {
         [EMD.Home, { isActive: true }],
         [EMD.Automation, { isActive: true }],
         [EMD.BotSetup, { isActive: true }],
-        [EMD.EnvironmentVariables, { isActive: true }]
+        [EMD.EnvironmentVariables, { isActive: true }],
+        [EMD.Account, { isActive: true }],
+        [EMD.About, { isActive: true }]
     ];
 
     it('should create an view model instance.', () => {

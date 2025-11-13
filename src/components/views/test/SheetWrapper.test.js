@@ -1,5 +1,5 @@
-require('../../../tests');
-const EntityViewModel = require('./EntityViewModel');
+require('../../../../tests');
+const EntityViewModel = require('../EntityViewModel');
 
 describe('EntityViewModel.SheetWrapper', () => {
     beforeEach(() => {

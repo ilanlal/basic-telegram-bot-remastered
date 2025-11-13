@@ -7,7 +7,6 @@ class EMD {
 
 EMD.DEFAULT_IMAGE_URL = 'https://raw.githubusercontent.com/ilanlal/basic-telegram-bot-remastered/main/assets/logo480.png';
 
-
 EMD.Home = {
     entityName: 'Home',
     displayName: 'Home',
@@ -2284,6 +2283,104 @@ EMD.Automation = {
                         }])]
                 ]
         }
+    }
+}
+
+EMD.About = {
+    entityName: 'About',
+    card: (data = {}) => {
+        return {
+            name: 'about_Card',
+            header: {
+                title: 'About This Addon',
+                subTitle: 'Learn more about this Addon.',
+                imageUrl: EMD.DEFAULT_IMAGE_URL,
+                imageStyle: CardService.ImageStyle.SQUARE,
+                imageAltText: 'About Image'
+            },
+            sections: [
+                {
+                    // header: 'About This Addon',
+                    widgets: [
+                        {
+                            id: 'about_text_paragraph',
+                            TextParagraph: {
+                                text: 'This addon is designed to help you manage your tasks efficiently.'
+                            }
+                        },
+                        { // Version Info widget
+                            id: 'version_info_widget',
+                            TextParagraph: {
+                                text: `Version: ${data.packageInfo?.version || 'N/A'} (Build: ${data.packageInfo?.build || 'N/A'})`
+                            }
+                        }
+                    ]
+                },
+                {   // Data view
+                    header: 'Data View',
+                    collapsible: true,
+                    numUncollapsibleWidgets: 0,
+                    widgets: [
+                        {   // Data View widget
+                            id: 'data_view_widget',
+                            TextParagraph: {
+                                text: `Data: ${JSON.stringify(data, null, 2)}`,
+                                maxLines: 10
+                            }
+                        }
+                    ]
+                }
+            ]
+        };
+    }
+}
+
+EMD.Account = {
+    entityName: 'Account',
+    card: (data = {}) => {
+        return {
+            name: 'account_Card',
+            header: {
+                title: 'Account Management',
+                subTitle: 'Manage your account settings and preferences.',
+                imageUrl: EMD.DEFAULT_IMAGE_URL,
+                imageStyle: CardService.ImageStyle.SQUARE,
+                imageAltText: 'Account Image'
+            },
+            sections: [
+                {
+                    // header: 'Account Management',
+                    widgets: [
+                        {
+                            id: 'account_text_paragraph',
+                            TextParagraph: {
+                                text: 'Manage your account settings and preferences here.'
+                            }
+                        },
+                        { // user Info widget
+                            id: 'user_info_widget',
+                            TextParagraph: {
+                                text: `User is ${data.userInfo?.isPremium ? 'a Premium' : 'a Free'} user.`
+                            }
+                        }
+                    ]
+                },
+                {   // Data view
+                    header: 'Data View',
+                    collapsible: true,
+                    numUncollapsibleWidgets: 0,
+                    widgets: [
+                        {   // Data View widget
+                            id: 'data_view_widget',
+                            TextParagraph: {
+                                text: `Data: ${JSON.stringify(data, null, 2)}`,
+                                maxLines: 10
+                            }
+                        }
+                    ]
+                }
+            ]
+        };
     }
 }
 

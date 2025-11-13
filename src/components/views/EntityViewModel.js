@@ -245,9 +245,7 @@ EntityViewModel.CardServiceWrapper = class {
             return this.newTextButton(widgetMeta.TextButton, !!value);
         }
 
-
-        console.warn(`Unknown widget type: ${Object.keys(widgetMeta).join(', ')}, defaulting to view.type`);
-        return null;
+        throw new Error(`Unsupported widget type in widgetMeta: ${JSON.stringify(widgetMeta)}`);
     }
 
     newDecoratedText(dtMeta = {}, value = '') {
