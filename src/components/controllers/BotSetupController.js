@@ -1,7 +1,7 @@
 class BotSetupController {
     get telegramBotClient() {
         if (!this._telegramBotClient) {
-            const token = this._userProperties.getProperty(SetupFlow.InputMeta.BOT_API_TOKEN);
+            const token = this._userProperties.getProperty(EnvironmentModel.InputMeta.BOT_API_TOKEN);
             if (!token) {
                 return null;
             }
@@ -20,38 +20,43 @@ class BotSetupController {
     }
 
     identifyNewBotToken(token) {
+        const safeToken = decodeURIComponent(token);
         return SetupFlow.create(this._userProperties)
-            .identifyNewBotToken(token);
+            .identifyNewBotToken(safeToken);
     }
 
     setNewBotToken(token) {
         const safeToken = decodeURIComponent(token);
-        return this._userProperties.setProperty(SetupFlow.InputMeta.BOT_API_TOKEN, safeToken);
+        return EnvironmentModel.create(this._userProperties)
+            .setNewBotToken(safeToken);
     }
 
     setNewDeploymentId(id) {
-        return SetupFlow.create(this._userProperties)
-            .setNewDeploymentId(id);
+        const safeId = decodeURIComponent(id);
+        return EnvironmentModel.create(this._userProperties)
+            .setNewDeploymentId(safeId);
     }
 
     setNewChatId(id) {
-        return SetupFlow.create(this._userProperties)
-            .setMyNewChatId(id);
+        const safeId = decodeURIComponent(id);
+        return EnvironmentModel.create(this._userProperties)
+            .setMyNewChatId(safeId);
     }
 
     setDebugMode(isDebug) {
-        return SetupFlow.create(this._userProperties)
+        return EnvironmentModel.create(this._userProperties)
             .setDebugMode(isDebug);
     }
 
     setNewDefaultLanguage(languageCode) {
-        return SetupFlow.create(this._userProperties)
+        return EnvironmentModel.create(this._userProperties)
             .setNewDefaultLanguage(languageCode);
     }
 
     setNewActiveSpreadsheetId(spreadsheetId) {
-        return SetupFlow.create(this._userProperties)
-            .setNewActiveSpreadsheetId(spreadsheetId);
+        const safeId = decodeURIComponent(spreadsheetId);
+        return EnvironmentModel.create(this._userProperties)
+            .setNewActiveSpreadsheetId(safeId);
     }
 
     setWebhook() {
@@ -60,6 +65,22 @@ class BotSetupController {
 
     deleteWebhook() {
         return SetupFlow.create(this._userProperties).deleteWebhook();
+    }
+
+    setMyName() {
+        return SetupFlow.create(this._userProperties).setMyName();
+    }
+
+    setMyDescription() {
+        return SetupFlow.create(this._userProperties).setMyDescription();
+    }
+
+    setMyShortDescription() {
+        return SetupFlow.create(this._userProperties).setMyShortDescription();
+    }
+
+    setMyCommands() {
+        return SetupFlow.create(this._userProperties).setMyCommands();
     }
 }
 

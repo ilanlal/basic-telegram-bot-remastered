@@ -93,7 +93,7 @@ class PostMessageHandler {
 
     handleDynamicReply(chat_id, name, language_code = 'default', reply_to_message_id = null) {
         const token = this._userProperties
-            .getProperty(SetupFlow.InputMeta.BOT_API_TOKEN) || '[YOUR_TELEGRAM_BOT_TOKEN]';
+            .getProperty(EnvironmentModel.InputMeta.BOT_API_TOKEN) || '[YOUR_TELEGRAM_BOT_TOKEN]';
 
         const automationHandler = AutomationHandler
             .create(token, language_code, this._activeSpreadsheet);

@@ -2,7 +2,6 @@ require('../../../tests');
 const { EntityController } = require('./EntityController');
 const { EMD } = require('../../config/EMD');
 const { UserStoreFactory } = require('../../services/UserStore');
-const { SetupFlow } = require('../models/SetupFlow');
 
 describe('Entity Controller', () => {
     const userProperties = PropertiesService.getUserProperties();
@@ -14,20 +13,14 @@ describe('Entity Controller', () => {
     // pushCard
     test('should push a card to the card service', () => {
         const entityController = EntityController.create(
-            UserStoreFactory.create().current,
+            null,
             CardService,
             SpreadsheetApp.getActiveSpreadsheet(),
             userProperties
         );
 
-        // Set values from userStore if needed
-        const setupFlow = SetupFlow.create(userProperties);
-
         const actionResponseBuilder = entityController.pushCard(
-            EMD.Home.card({
-                isActive: setupFlow.stateObject.botTokenSet,
-                isAdmin: false
-            }));
+            EMD.Home.card({}));
 
         expect(actionResponseBuilder).toBeDefined();
         const builtResponse = actionResponseBuilder.build();

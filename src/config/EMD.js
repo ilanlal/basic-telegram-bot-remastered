@@ -31,18 +31,17 @@ EMD.Home = {
                         {   // Environment variables widget
                             id: 'environment_variables_widget',
                             DecoratedText: {
-                                text: 'Environment Variables',
-                                topLabel: 'Environment Variables',
-                                bottomLabel: 'Manage your environment variables here',
+                                text: data?.environmentTraffic || 'Configure your environment variables to get started',
+                                topLabel: 'Step #1: Environment Variables',
+                                bottomLabel: 'Click 🔩 to manage your environment variables',
                                 wrapText: false,
                                 textButton: {
                                     disabled: false,
-                                    text: '🌍 Manage',
+                                    text: '🔩',
                                     onClick: {
                                         functionName: 'EntityHandler.Addon.onOpenCardClick',
                                         parameters: {
-                                            entityName: 'EnvironmentVariables',
-                                            setupFlow: decodeURIComponent(JSON.stringify(data?.setupFlow || {}))
+                                            entityName: 'EnvironmentVariables'
                                         }
                                     }
                                 }
@@ -58,13 +57,13 @@ EMD.Home = {
                         {   // Bot setup widget
                             id: 'bot_setup_widget',
                             DecoratedText: {
-                                text: 'Execute api actions on your bot',
-                                topLabel: 'API & Bot Setup',
-                                bottomLabel: '🤖 (getMe, setWebhook, ..)',
+                                text: 'Step #2: Setup Your Bot',
+                                topLabel: '📡 Bot Setup',
+                                bottomLabel: 'Click on 🤖 to setup your bot API token, set bot info & webhook',
                                 wrapText: false,
                                 textButton: {
                                     disabled: false,
-                                    text: '📡 API Actions',
+                                    text: '🤖',
                                     onClick: {
                                         functionName: 'EventHandler.Addon.onBotSetupClick',
                                         parameters: { action: 'setupBot' }
@@ -74,21 +73,21 @@ EMD.Home = {
                         }
                     ]
                 },
-                {   // Advanced Settings Section
-                    // header: 'Advanced Settings',
+                {   // Automation Section
+                    // header: 'Automation',
                     collapsible: true,
                     numUncollapsibleWidgets: 1,
                     widgets: [
                         {   // Automation management widget
                             id: 'automation_management_widget',
                             DecoratedText: {
-                                text: 'Automation management',
-                                topLabel: `Automation ${data?.totalAutomations || 0} workflows`,
-                                bottomLabel: '⚡ Menues, workflows, triggers',
+                                text: 'Automation - Workflow Management',
+                                topLabel: `Total: ${data?.totalAutomations || 0} workflows`,
+                                bottomLabel: 'Click ⚡ to manage your automations',
                                 wrapText: false,
                                 textButton: {
                                     disabled: false,
-                                    text: '⚡ Manage',
+                                    text: '⚡',
                                     onClick: {
                                         functionName: 'EntityHandler.Addon.onOpenCardClick',
                                         parameters: { entityName: 'Automation' }
@@ -106,13 +105,13 @@ EMD.Home = {
                         {  // Customer management widget
                             id: 'customer_management_widget',
                             DecoratedText: {
-                                text: 'Customer management',
-                                topLabel: `👥 Customers ${data?.totalCustomer || 0}`,
-                                bottomLabel: 'Manage your customers here',
+                                text: 'CRM: Manage Your Customers',
+                                topLabel: `Total: ${data?.totalCustomer || 0} customers`,
+                                bottomLabel: 'Click 👥 to manage your customers (telegram users)',
                                 wrapText: false,
                                 textButton: {
                                     disabled: false,
-                                    text: '👥 Customer Management',
+                                    text: '👥',
                                     onClick: {
                                         functionName: 'EntityHandler.Addon.onOpenCardClick',
                                         parameters: { entityName: 'Customer' }
@@ -149,7 +148,7 @@ EMD.EnvironmentVariables = {
         return {
             name: 'environment_variables_Card',
             header: {
-                title: '🌍 Environment Variables',
+                title: '🔩 Environment Variables',
                 subTitle: 'Configure your environment variables here.',
                 imageUrl: EMD.DEFAULT_IMAGE_URL,
                 imageStyle: CardService.ImageStyle.SQUARE,
@@ -165,7 +164,7 @@ EMD.EnvironmentVariables = {
                             {
                                 id: 'deployment_id_info',
                                 TextParagraph: {
-                                    text: `🚀 Deployment ID is currently: ${data.setupFlow?.deploymentIdSet ? '✅ Set' : '❌ Not Set'}`
+                                    text: `🚀 Deployment ID is currently: ${data.environmentVariables?.deploymentIdSet ? '✅ Set' : '❌ Not Set'}`
                                 }
                             },
                             {   // Deployment ID Variable
@@ -196,7 +195,7 @@ EMD.EnvironmentVariables = {
                             {
                                 id: 'active_spreadsheet_id_info',
                                 TextParagraph: {
-                                    text: `📊 Active Spreadsheet ID is currently: ${data.setupFlow?.activeSpreadsheetIdSet ? 'Custome' : '[current]'}`
+                                    text: `📊 Active Spreadsheet ID is currently: ${data.environmentVariables?.activeSpreadsheetIdSet ? 'Custome' : '[current]'}`
                                 }
                             },
                             {   // Active Spreadsheet ID Variable
@@ -228,7 +227,7 @@ EMD.EnvironmentVariables = {
                             {
                                 id: 'default_language_info',
                                 TextParagraph: {
-                                    text: `🌐 Default Language is currently: ${data.setupFlow?.defaultLanguageSet ? '✅ Set' : '❌ Not Set'}`
+                                    text: `🌐 Default Language is currently: ${data.environmentVariables?.defaultLanguageSet ? '✅ Set' : '❌ Not Set'}`
                                 }
                             },
                             {   // Default Language Variable
@@ -260,7 +259,7 @@ EMD.EnvironmentVariables = {
                             { // Admin Chat ID Info
                                 id: 'admin_chat_id_info',
                                 TextParagraph: {
-                                    text: `👑 Admin Chat ID is currently: ${data.setupFlow?.chatIdSet ? '✅ Set' : '❌ Not Set'}`
+                                    text: `👑 Admin Chat ID is currently: ${data.environmentVariables?.chatIdSet ? '✅ Set' : '❌ Not Set'}`
                                 }
                             },
                             { // Admin Chat ID Variable
@@ -293,7 +292,7 @@ EMD.EnvironmentVariables = {
                             {
                                 id: 'log_events_info',
                                 TextParagraph: {
-                                    text: `🛰️ Log Events currently: ${data.setupFlow?.debugModeSet ? '🟢 On' : '🔴 Off'}`
+                                    text: `🛰️ Log Events currently: ${data.environmentVariables?.debugModeSet ? '🟢 On' : '🔴 Off'}`
                                 }
                             },
                             {   // Log Events widget
@@ -383,7 +382,7 @@ EMD.BotSetup = {
                                 TextButton: {
                                     text: '🆔 Identify Token',
                                     onClick: {
-                                        functionName: 'EnvironmentHandler.Addon.onIdentifyTokenClick'
+                                        functionName: 'BotHandler.Addon.onIdentifyTokenClick'
                                     }
                                 }
                             }
@@ -622,7 +621,7 @@ EMD.Customer = {
             name: 'customer_Card',
             header: {
                 title: '👥 Customer Management',
-                subTitle: 'Manage your customers here.',
+                subTitle: 'Manage your customers here. Customers are your Telegram bot users.',
                 imageUrl: EMD.DEFAULT_IMAGE_URL,
                 imageStyle: CardService.ImageStyle.SQUARE,
                 imageAltText: 'Customer Image'
@@ -647,7 +646,7 @@ EMD.Customer = {
                                         onClick: {
                                             functionName: 'EntityHandler.Addon.onBindSheetDataClick',
                                             parameters: {
-                                                api: 'Automation'
+                                                api: 'Customer'
                                             }
                                         }
                                     }

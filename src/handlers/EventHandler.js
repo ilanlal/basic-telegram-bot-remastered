@@ -134,7 +134,7 @@ EventHandler.AddonWrapper = class {
     handleBotSetupClick(e) {
         try {
             const setupFlow = SetupFlow.create(this._userProperties);
-
+            const environmentModel = EnvironmentModel.create(this._userProperties);
             return EntityController
                 .create(
                     this._userStore,
@@ -143,8 +143,8 @@ EventHandler.AddonWrapper = class {
                     this._userProperties)
                 .pushCard(EMD.BotSetup.card(
                     {
-                        isActive: setupFlow.stateObject.botTokenSet,
                         isAdmin: false,
+                        environmentVariables: environmentModel.state,
                         setupFlow: setupFlow.stateObject,
                         getMeResult: setupFlow.getMeResult,
                         getWebhookInfoResult: setupFlow.getWebhookInfoResult

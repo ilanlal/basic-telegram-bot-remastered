@@ -83,9 +83,9 @@ describe('BotSetupController Tests', () => {
                     userProperties
                 );
                 controller.setDebugMode(true);
-                expect(userProperties.getProperty(SetupFlow.InputMeta.DEBUG_MODE)).toBe('true');
+                expect(userProperties.getProperty(EnvironmentModel.InputMeta.DEBUG_MODE)).toBe('true');
                 controller.setDebugMode(false);
-                expect(userProperties.getProperty(SetupFlow.InputMeta.DEBUG_MODE)).toBe('false');
+                expect(userProperties.getProperty(EnvironmentModel.InputMeta.DEBUG_MODE)).toBe('false');
             });
             // setWebhook method.
             test("setWebhook should call telegram client to set webhook", () => {

@@ -12,6 +12,13 @@ class BotHandler {
 };
 
 BotHandler.Addon = {
+    onIdentifyTokenClick: (e) => {
+        // Not implemented yet
+        return new BotHandler
+            .AddonWrapper(
+                BotHandler.prototype.userProperties)
+            .handleIdentifyTokenClick(e);
+    },
     onWebhookManagementClick: (e) => {
         return new BotHandler
             .AddonWrapper(
@@ -21,28 +28,28 @@ BotHandler.Addon = {
     onSetMyNameClick: (e) => {
         // Not implemented yet
         return new BotHandler
-            .AddonWrapper(                
+            .AddonWrapper(
                 BotHandler.prototype.userProperties)
             .handleSetMyNameClick(e);
     },
     onSetMyDescriptionClick: (e) => {
         // Not implemented yet
         return new BotHandler
-            .AddonWrapper(                
+            .AddonWrapper(
                 BotHandler.prototype.userProperties)
             .handleSetMyDescriptionClick(e);
     },
     onSetMyShortDescriptionClick: (e) => {
         // Not implemented yet
         return new BotHandler
-            .AddonWrapper(                
+            .AddonWrapper(
                 BotHandler.prototype.userProperties)
             .handleSetMyShortDescriptionClick(e);
     },
     onSetMyCommandsClick: (e) => {
         // Not implemented yet
         return new BotHandler
-            .AddonWrapper(                
+            .AddonWrapper(
                 BotHandler.prototype.userProperties)
             .handleSetMyCommandsClick(e);
     }
@@ -51,6 +58,29 @@ BotHandler.Addon = {
 BotHandler.AddonWrapper = class {
     constructor(userProperties) {
         this._userProperties = userProperties;
+    }
+
+    handleIdentifyTokenClick(e) {
+        try {
+            let token = e.parameters?.token || null;
+            if (!token) {
+                const formInputs = e.commonEventObject.formInputs || {};
+                token = formInputs['txt_bot_api_token']?.stringInputs?.value[0] || null;
+            }
+
+            const controller = BotSetupController
+                .create(this._userProperties);
+
+            const result = controller.identifyNewBotToken(token);
+            controller.setNewBotToken(token);
+
+            return this.handleOperationSuccess("👍 Bot token identified successfully.")
+                .build();
+
+        } catch (error) {
+            return this.handleError(error)
+                .build();
+        }
     }
 
     handleWebhookManagementClick(e) {
@@ -79,7 +109,13 @@ BotHandler.AddonWrapper = class {
 
     handleSetMyNameClick(e) {
         try {
-            throw new Error("Not implemented yet");
+            const controller = BotSetupController
+                .create(this._userProperties);
+            
+            const response = controller.setMyName();
+
+            return this.handleOperationSuccess("👍 Bot name set successfully.")
+                .build();
         } catch (error) {
             return this.handleError(error)
                 .build();
@@ -98,6 +134,21 @@ BotHandler.AddonWrapper = class {
     handleSetMyShortDescriptionClick(e) {
         try {
             throw new Error("Not implemented yet");
+        } catch (error) {
+            return this.handleError(error)
+                .build();
+        }
+    }
+
+    handleSetMyCommandsClick(e) {
+        try {
+            const controller = BotSetupController
+                .create(this._userProperties);
+
+            const response = controller.setMyCommands();
+
+            return this.handleOperationSuccess("👍 Bot commands set successfully.")
+                .build();
         } catch (error) {
             return this.handleError(error)
                 .build();
