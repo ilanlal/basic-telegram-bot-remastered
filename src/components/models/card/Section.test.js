@@ -1,4 +1,4 @@
-require('../../../tests');
+require('../../../../tests');
 const { Section } = require('./Section');
 
 describe('Section', () => {
