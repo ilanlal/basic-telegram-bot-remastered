@@ -418,7 +418,7 @@ EMD.BotSetup = {
                                         disabled: false,
                                         text: `${data.setupFlow?.webhookSet ? '🗑️ Delete Webhook' : '📡 Set Webhook'}`,
                                         onClick: {
-                                            functionName: 'EventHandler.Addon.onWebhookManagementClick',
+                                            functionName: 'BotHandler.Addon.onWebhookManagementClick',
                                             parameters: { action: data.setupFlow?.webhookSet ? 'deleteWebhook' : 'setWebhook' }
                                         }
                                     }
@@ -443,7 +443,7 @@ EMD.BotSetup = {
                                 TextButton: {
                                     text: '📄 Bind Sheet with Sample Data',
                                     onClick: {
-                                        functionName: 'EventHandler.Addon.onBindSheetDataClick',
+                                        functionName: 'EntityHandler.Addon.onBindSheetDataClick',
                                         parameters: { entityName: 'BotSetup' }
                                     }
                                 }
@@ -453,7 +453,7 @@ EMD.BotSetup = {
                                 TextButton: {
                                     text: '🌐 api/setMyName',
                                     onClick: {
-                                        functionName: 'EventHandler.Addon.onSetMyNameClick',
+                                        functionName: 'BotHandler.Addon.onSetMyNameClick',
                                         parameters: {}
                                     }
                                 }
@@ -463,7 +463,7 @@ EMD.BotSetup = {
                                 TextButton: {
                                     text: '🌐 api/setMyDescription',
                                     onClick: {
-                                        functionName: 'EventHandler.Addon.onSetMyDescriptionClick',
+                                        functionName: 'BotHandler.Addon.onSetMyDescriptionClick',
                                         parameters: {}
                                     }
                                 }
@@ -473,7 +473,7 @@ EMD.BotSetup = {
                                 TextButton: {
                                     text: '🌐 api/setMyShortDescription',
                                     onClick: {
-                                        functionName: 'EventHandler.Addon.onSetMyShortDescriptionClick',
+                                        functionName: 'BotHandler.Addon.onSetMyShortDescriptionClick',
                                         parameters: {}
                                     }
                                 }
@@ -483,7 +483,7 @@ EMD.BotSetup = {
                                 TextButton: {
                                     text: '🌐 api/setMyCommands',
                                     onClick: {
-                                        functionName: 'EventHandler.Addon.onSetMyCommandsClick',
+                                        functionName: 'BotHandler.Addon.onSetMyCommandsClick',
                                         parameters: {}
                                     }
                                 }
@@ -646,7 +646,7 @@ EMD.Customer = {
                                         text: 'Activate Sheet',
                                         disabled: false,
                                         onClick: {
-                                            functionName: 'EventHandler.Addon.onBindSheetDataClick',
+                                            functionName: 'EntityHandler.Addon.onBindSheetDataClick',
                                             parameters: {
                                                 api: 'Automation'
                                             }
@@ -699,7 +699,7 @@ EMD.Automation = {
                                         text: '⚡ Bind Template Data',
                                         disabled: false,
                                         onClick: {
-                                            functionName: 'EventHandler.Addon.onBindSheetDataClick',
+                                            functionName: 'EntityHandler.Addon.onBindSheetDataClick',
                                             parameters: {
                                                 api: 'Automation'
                                             }

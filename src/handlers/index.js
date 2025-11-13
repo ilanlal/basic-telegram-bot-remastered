@@ -1,10 +1,11 @@
-const { WebhookHandler } = require('./bot/WebhookHandler');
-const { PostMessageHandler } = require('./bot/PostMessageHandler');
-const { PostCallbackQueryHandler } = require('./bot/PostCallbackQueryHandler');
+const { WebhookHandler } = require('./webhook/WebhookHandler');
+const { PostMessageHandler } = require('./webhook/PostMessageHandler');
+const { PostCallbackQueryHandler } = require('./webhook/PostCallbackQueryHandler');
 const { EventHandler } = require('./EventHandler');
-const { AutomationHandler } = require('./bot/AutomationHandler');
+const { AutomationHandler } = require('./webhook/AutomationHandler');
 const { EntityHandler } = require('./EntityHandler');
 const { EnvironmentHandler } = require('./EnvironmentHandler');
+const { BotHandler } = require('./BotHandler');
 // Export handlers for use in Code.js
 
 
@@ -15,3 +16,4 @@ global.WebhookHandler = WebhookHandler;
 global.AutomationHandler = AutomationHandler;
 global.EventHandler = EventHandler;
 global.EnvironmentHandler = EnvironmentHandler;
+global.BotHandler = BotHandler;

@@ -75,45 +75,6 @@ EventHandler.Addon = {
                 EventHandler.prototype.userStore,
                 EventHandler.prototype.userProperties)
             .handleBotSetupClick(e);
-    },
-    onWebhookManagementClick: (e) => {
-        return new EventHandler
-            .AddonWrapper(
-                EventHandler.prototype.userStore,
-                EventHandler.prototype.userProperties)
-            .handleWebhookManagementClick(e);
-    },
-    onSetMyNameClick: (e) => {
-        // Not implemented yet
-        return new EventHandler
-            .AddonWrapper(
-                EventHandler.prototype.userStore,
-                EventHandler.prototype.userProperties)
-            .handleSetMyNameClick(e);
-    },
-    onSetMyDescriptionClick: (e) => {
-        // Not implemented yet
-        return new EventHandler
-            .AddonWrapper(
-                EventHandler.prototype.userStore,
-                EventHandler.prototype.userProperties)
-            .handleSetMyDescriptionClick(e);
-    },
-    onSetMyShortDescriptionClick: (e) => {
-        // Not implemented yet
-        return new EventHandler
-            .AddonWrapper(
-                EventHandler.prototype.userStore,
-                EventHandler.prototype.userProperties)
-            .handleSetMyShortDescriptionClick(e);
-    },
-    onSetMyCommandsClick: (e) => {
-        // Not implemented yet
-        return new EventHandler
-            .AddonWrapper(
-                EventHandler.prototype.userStore,
-                EventHandler.prototype.userProperties)
-            .handleSetMyCommandsClick(e);
     }
 }
 EventHandler.AddonWrapper = class {
@@ -242,33 +203,6 @@ EventHandler.AddonWrapper = class {
     }
 
     handleSaveBotSetupClick(e) {
-        try {
-            throw new Error("Not implemented yet");
-        } catch (error) {
-            return this.handleError(error)
-                .build();
-        }
-    }
-
-    handleSetMyNameClick(e) {
-        try {
-            throw new Error("Not implemented yet");
-        } catch (error) {
-            return this.handleError(error)
-                .build();
-        }
-    }
-
-    handleSetMyDescriptionClick(e) {
-        try {
-            throw new Error("Not implemented yet");
-        } catch (error) {
-            return this.handleError(error)
-                .build();
-        }
-    }
-
-    handleSetMyShortDescriptionClick(e) {
         try {
             throw new Error("Not implemented yet");
         } catch (error) {

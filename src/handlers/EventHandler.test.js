@@ -80,43 +80,6 @@ describe('EventHandler', () => {
         expect(data).toBeDefined();
     });
 
-    it('should handle onWebhookManagementClick action: "setWebhook"', () => {
-        const sampleToken = '[FAKE_DUMMY_BOT_TOKEN]';
-        const deploymentId = 'AKfycbx...';
-        const callbackUrl = `https://script.google.com/macros/s/${deploymentId}/exec`;
-        const setWebhookUri = `https://api.telegram.org/bot${sampleToken}/setWebhook?url=${callbackUrl}`;
-        UrlFetchAppStubConfiguration.when(setWebhookUri)
-            .return(new HttpResponse()
-                .setContentText(JSON.stringify({ result: true })));
-        const getWebhookInfoUri = `https://api.telegram.org/bot${sampleToken}/getWebhookInfo`;
-        UrlFetchAppStubConfiguration.when(getWebhookInfoUri)
-            .return(new HttpResponse()
-                .setContentText(JSON.stringify({
-                    result: {
-                        url: callbackUrl,
-                        has_custom_certificate: false,
-                        pending_update_count: 0,
-                        ip_address: "192.0.2.1",
-                        last_error_date: 0,
-                        last_error_message: "",
-                        max_connections: 40,
-                        allowed_updates: []
-                    }
-                })));
-        const userProperties = PropertiesService.getUserProperties();
-        controller = BotSetupController.create(
-            userProperties
-        );
-        controller.setNewDeploymentId(deploymentId);
-        controller.setNewBotToken(sampleToken);
-        const event = {
-            parameters: { action: 'setWebhook' }
-        }; // Mock event object
-        const actionResponse = EventHandler.Addon.onWebhookManagementClick(event);
-        expect(actionResponse).toBeDefined();
-        console.log(JSON.stringify(actionResponse, null, 2))
-    });
-
     it('should handle onBotSetupClick', () => {
         const token = '[FAKE_DUMMY_BOT_TOKEN]';
         const contentText = `{
