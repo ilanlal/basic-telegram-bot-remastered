@@ -383,7 +383,7 @@ EMD.BotSetup = {
                                 TextButton: {
                                     text: '🆔 Identify Token',
                                     onClick: {
-                                        functionName: 'EnvironmentHandler.Addon.onIdentifyTokenClick'
+                                        functionName: 'BotHandler.Addon.onIdentifyTokenClick'
                                     }
                                 }
                             }

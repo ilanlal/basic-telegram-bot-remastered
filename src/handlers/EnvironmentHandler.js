@@ -12,13 +12,6 @@ class EnvironmentHandler {
 };
 
 EnvironmentHandler.Addon = {
-    onIdentifyTokenClick: (e) => {
-        // Not implemented yet
-        return new EnvironmentHandler
-            .AddonWrapper(
-                EnvironmentHandler.prototype.userProperties)
-            .handleIdentifyTokenClick(e);
-    },
     onIdentifyDeploymentIdClick: (e) => {
         return new EnvironmentHandler
             .AddonWrapper(
@@ -57,29 +50,6 @@ EnvironmentHandler.Addon = {
 EnvironmentHandler.AddonWrapper = class {
     constructor(userProperties) {
         this._userProperties = userProperties;
-    }
-
-    handleIdentifyTokenClick(e) {
-        try {
-            let token = e.parameters?.token || null;
-            if (!token) {
-                const formInputs = e.commonEventObject.formInputs || {};
-                token = formInputs['txt_bot_api_token']?.stringInputs?.value[0] || null;
-            }
-
-            const controller = BotSetupController
-                .create(this._userProperties);
-
-            const result = controller.identifyNewBotToken(token);
-            controller.setNewBotToken(token);
-
-            return this.handleOperationSuccess("👍 Bot token identified successfully.")
-                .build();
-
-        } catch (error) {
-            return this.handleError(error)
-                .build();
-        }
     }
 
     handleIdentifyDeploymentIdClick(e) {
