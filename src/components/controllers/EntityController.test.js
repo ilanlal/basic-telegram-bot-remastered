@@ -13,7 +13,6 @@ describe('Entity Controller', () => {
     // pushCard
     test('should push a card to the card service', () => {
         const entityController = EntityController.create(
-            null,
             CardService,
             SpreadsheetApp.getActiveSpreadsheet(),
             userProperties

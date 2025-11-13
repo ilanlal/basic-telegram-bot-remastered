@@ -68,19 +68,36 @@ class BotSetupController {
     }
 
     setMyName() {
-        return SetupFlow.create(this._userProperties).setMyName();
+        // get list of [{name: 'Bot Name', language_code: 'en'}, ...]
+        const botNames = [];
+        botNames.forEach(({ name, language_code }) => {
+            SetupFlow.create(this._userProperties).setMyName({ name, language_code });
+        });
+        return true;
     }
 
     setMyDescription() {
-        return SetupFlow.create(this._userProperties).setMyDescription();
+        const botDescriptions = [];
+        botDescriptions.forEach(({ description, language_code }) => {
+            SetupFlow.create(this._userProperties).setMyDescription({ description, language_code });
+        });
+        return true;
     }
 
     setMyShortDescription() {
-        return SetupFlow.create(this._userProperties).setMyShortDescription();
+        const botShortDescriptions = [];
+        botShortDescriptions.forEach(({ short_description, language_code }) => {
+            SetupFlow.create(this._userProperties).setMyShortDescription({ short_description, language_code });
+        });
+        return true;
     }
 
     setMyCommands() {
-        return SetupFlow.create(this._userProperties).setMyCommands();
+        const botCommandsList = [];
+        botCommandsList.forEach(({ commands, language_code, scope }) => {
+            SetupFlow.create(this._userProperties).setMyCommands({ commands, language_code, scope });
+        });
+        return true;
     }
 }
 

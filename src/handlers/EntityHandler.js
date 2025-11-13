@@ -66,7 +66,6 @@ EntityHandler.AddonWrapper = class {
             
             return EntityController
                 .create(
-                    null,
                     CardService,
                     SpreadsheetApp.getActiveSpreadsheet(),
                     this._userProperties)
@@ -101,7 +100,6 @@ EntityHandler.AddonWrapper = class {
 
             const rs = EntityController
                 .create(
-                    null,
                     CardService,
                     SpreadsheetApp.getActiveSpreadsheet(),
                     this._userProperties)

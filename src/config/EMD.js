@@ -706,6 +706,31 @@ EMD.Automation = {
                                 }
                             }
                         ]
+                    },
+                    { // clear cache memory section
+                        // header: 'Cache Management',
+                        collapsible: true,
+                        widgets: [
+                            {
+                                id: 'clear_cache_widget',
+                                DecoratedText: {
+                                    topLabel: '🧹 Clear Cache',
+                                    text: 'Clear the cache to free up memory and improve performance.',
+                                    bottomLabel: 'This action cannot be undone.',
+                                    wrapText: false,
+                                    textButton: {
+                                        text: '🧹 Clear Cache',
+                                        disabled: false,
+                                        onClick: {
+                                            functionName: 'EntityHandler.Addon.onClearCacheClick',
+                                            parameters: {
+                                                prefix: 'Automation'
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        ]
                     }
                 ]
         };

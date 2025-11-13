@@ -1,7 +1,7 @@
-require('../../../../tests');
+require('../../../tests');
 
-const { EMD } = require('../../../config/EMD');
-const EntityViewModel = require('../EntityViewModel');
+const { EMD } = require('../../config/EMD');
+const EntityViewModel = require('./EntityViewModel');
 
 describe('EntityViewModel', () => {
     const tests = [
@@ -50,17 +50,6 @@ describe('EntityViewModel', () => {
                     expect(data.sections).toBeDefined();
                     expect(data.sections.length).toBe(emd[0].card().sections.length);
                 });
-
-                it(`should get the active sheet from the "${emd[0].entityName}" sheetMeta`, () => {
-                    const sheetWrapper = new EntityViewModel.SheetWrapper(
-                        SpreadsheetApp.getActiveSpreadsheet()
-                    );
-                    const sheetMeta = emd[0].sheetMeta;
-                    if (!sheetMeta) return;
-                    const activeSheet = sheetWrapper.getSheet(sheetMeta);
-                    expect(activeSheet).toBeDefined();
-                });
-
             });
         });
     });

@@ -62,6 +62,10 @@ class SetupFlow {
     }
 
     setMyName({ name, language_code } = {}) {
+        if (!name || typeof name !== 'string' || name.trim() === '') {
+            throw new Error("Invalid bot name");
+        }
+
         const response = this.telegramBotClient.setMyName(name, language_code);
         if (response.getResponseCode() !== 200) {
             throw new Error("Failed to set bot name");
