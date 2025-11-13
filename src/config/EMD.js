@@ -41,8 +41,7 @@ EMD.Home = {
                                     onClick: {
                                         functionName: 'EntityHandler.Addon.onOpenCardClick',
                                         parameters: {
-                                            entityName: 'EnvironmentVariables',
-                                            setupFlow: decodeURIComponent(JSON.stringify(data?.setupFlow || {}))
+                                            entityName: 'EnvironmentVariables'
                                         }
                                     }
                                 }
@@ -165,7 +164,7 @@ EMD.EnvironmentVariables = {
                             {
                                 id: 'deployment_id_info',
                                 TextParagraph: {
-                                    text: `🚀 Deployment ID is currently: ${data.setupFlow?.deploymentIdSet ? '✅ Set' : '❌ Not Set'}`
+                                    text: `🚀 Deployment ID is currently: ${data.environmentVariables?.deploymentIdSet ? '✅ Set' : '❌ Not Set'}`
                                 }
                             },
                             {   // Deployment ID Variable
@@ -196,7 +195,7 @@ EMD.EnvironmentVariables = {
                             {
                                 id: 'active_spreadsheet_id_info',
                                 TextParagraph: {
-                                    text: `📊 Active Spreadsheet ID is currently: ${data.setupFlow?.activeSpreadsheetIdSet ? 'Custome' : '[current]'}`
+                                    text: `📊 Active Spreadsheet ID is currently: ${data.environmentVariables?.activeSpreadsheetIdSet ? 'Custome' : '[current]'}`
                                 }
                             },
                             {   // Active Spreadsheet ID Variable
@@ -228,7 +227,7 @@ EMD.EnvironmentVariables = {
                             {
                                 id: 'default_language_info',
                                 TextParagraph: {
-                                    text: `🌐 Default Language is currently: ${data.setupFlow?.defaultLanguageSet ? '✅ Set' : '❌ Not Set'}`
+                                    text: `🌐 Default Language is currently: ${data.environmentVariables?.defaultLanguageSet ? '✅ Set' : '❌ Not Set'}`
                                 }
                             },
                             {   // Default Language Variable
@@ -260,7 +259,7 @@ EMD.EnvironmentVariables = {
                             { // Admin Chat ID Info
                                 id: 'admin_chat_id_info',
                                 TextParagraph: {
-                                    text: `👑 Admin Chat ID is currently: ${data.setupFlow?.chatIdSet ? '✅ Set' : '❌ Not Set'}`
+                                    text: `👑 Admin Chat ID is currently: ${data.environmentVariables?.chatIdSet ? '✅ Set' : '❌ Not Set'}`
                                 }
                             },
                             { // Admin Chat ID Variable
@@ -293,7 +292,7 @@ EMD.EnvironmentVariables = {
                             {
                                 id: 'log_events_info',
                                 TextParagraph: {
-                                    text: `🛰️ Log Events currently: ${data.setupFlow?.debugModeSet ? '🟢 On' : '🔴 Off'}`
+                                    text: `🛰️ Log Events currently: ${data.environmentVariables?.debugModeSet ? '🟢 On' : '🔴 Off'}`
                                 }
                             },
                             {   // Log Events widget

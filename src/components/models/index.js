@@ -5,6 +5,7 @@ const { AutomationModel } = require('./AutomationModel');
 const { SetupFlow } = require('./SetupFlow');
 const { Lights } = require('./Lights');
 const { SheetModel } = require('./SheetModel');
+const { EnvironmentModel } = require('./EnvironmentModel');
 
 // Expose globally for tests and other scripts
 global.AutomationModel = AutomationModel;
@@ -14,3 +15,4 @@ global.EntityModel = EntityModel;
 global.Section = Section;
 global.Widget = Widget;
 global.SheetModel = SheetModel;
+global.EnvironmentModel = EnvironmentModel;

@@ -62,7 +62,8 @@ EntityHandler.AddonWrapper = class {
                 repository: Config.getRepository()
             };
             const setupFlow = SetupFlow.create(this._userProperties);
-            const state = setupFlow.stateObject;
+            const environmentModel = EnvironmentModel.create(this._userProperties);
+            
             return EntityController
                 .create(
                     null,
@@ -70,9 +71,9 @@ EntityHandler.AddonWrapper = class {
                     SpreadsheetApp.getActiveSpreadsheet(),
                     this._userProperties)
                 .pushCard(emd.card({
-                    isActive: state.botTokenSet,
                     isAdmin: false,
-                    setupFlow: state,
+                    setupFlow: setupFlow.stateObject,
+                    environmentVariables: environmentModel.state,
                     getMeResult: setupFlow.getMeResult,
                     getWebhookInfoResult: setupFlow.getWebhookInfoResult,
                     packageInfo: packageInfo,
