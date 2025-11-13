@@ -1,13 +1,16 @@
 class SetupFlow {
-    constructor(userProperties) {
+    constructor(userProperties, activeSpreadsheet) {
         this._userProperties = userProperties;
         this._telegramBotClient = null;
+        this.sheetModel = SheetModel.create(activeSpreadsheet);
+        this.sheet = this.sheetModel.initializeSheet(EMD.BotSetup.sheet({}));
     }
 
     static create(
-        userProperties = PropertiesService.getUserProperties()
+        userProperties = PropertiesService.getUserProperties(),
+        activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet()
     ) {
-        return new SetupFlow(userProperties);
+        return new SetupFlow(userProperties, activeSpreadsheet);
     }
 
 
