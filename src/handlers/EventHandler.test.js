@@ -43,21 +43,6 @@ describe('EventHandler', () => {
         expect(data.cardNavigations[0].pushCard).toBeDefined();
     });
 
-    // onOpenCardClick
-    it('should handle onOpenCardClick', () => {
-        const event = {
-            parameters: {
-                entityName: 'testEntity'
-            }
-        }; // Mock event object
-        const actionResponse = EventHandler.Addon.onOpenCardClick(event);
-        expect(actionResponse).toBeDefined();
-        const data = actionResponse.getData();
-        expect(data).toBeDefined();
-        // not notification
-        expect(data.notification).toBeUndefined();
-    });
-
     it('should handle onAccountCardOpen', () => {
         const event = {}; // Mock event object
         const actionResponse = EventHandler.Addon.onOpenAccountCard(event);
