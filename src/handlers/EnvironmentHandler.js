@@ -104,15 +104,6 @@ EnvironmentHandler.AddonWrapper = class {
         }
     }
 
-    handleSaveBotSetupClick(e) {
-        try {
-            throw new Error("Not implemented yet");
-        } catch (error) {
-            return this.handleError(error)
-                .build();
-        }
-    }
-
     handleSaveAdminChatId(e) {
         try {
             let chatId = e.parameters?.chatId || null;

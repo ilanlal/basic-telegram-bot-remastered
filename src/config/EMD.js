@@ -183,7 +183,7 @@ EMD.EnvironmentVariables = {
                                 TextButton: {
                                     text: '💾 Save Deployment ID',
                                     onClick: {
-                                        functionName: 'EventHandler.Addon.onIdentifyDeploymentIdClick'
+                                        functionName: 'EnvironmentHandler.Addon.onIdentifyDeploymentIdClick'
                                     }
                                 }
                             }
@@ -215,7 +215,7 @@ EMD.EnvironmentVariables = {
                                 TextButton: {
                                     text: '💾 Save Active Spreadsheet ID',
                                     onClick: {
-                                        functionName: 'EventHandler.Addon.onIdentifyActiveSpreadsheetIdClick'
+                                        functionName: 'EnvironmentHandler.Addon.onIdentifyActiveSpreadsheetIdClick'
                                     }
                                 }
                             }
@@ -247,7 +247,7 @@ EMD.EnvironmentVariables = {
                                 TextButton: {
                                     text: '💾 Save Default Language',
                                     onClick: {
-                                        functionName: 'EventHandler.Addon.onSaveDefaultLanguageClick'
+                                        functionName: 'EnvironmentHandler.Addon.onSaveDefaultLanguageClick'
                                     }
                                 }
                             }
@@ -279,7 +279,7 @@ EMD.EnvironmentVariables = {
                                 TextButton: {
                                     text: '💾 Save Admin Chat ID',
                                     onClick: {
-                                        functionName: 'EventHandler.Addon.onSaveAdminChatIdClick',
+                                        functionName: 'EnvironmentHandler.Addon.onSaveAdminChatIdClick',
                                         parameters: {}
                                     }
                                 }
@@ -311,7 +311,7 @@ EMD.EnvironmentVariables = {
                                 TextButton: {
                                     text: '💾 Save Log Events',
                                     onClick: {
-                                        functionName: 'EventHandler.Addon.onSaveLogEventsClick'
+                                        functionName: 'EnvironmentHandler.Addon.onSaveLogEventsClick'
                                     }
                                 }
                             }
@@ -384,7 +384,7 @@ EMD.BotSetup = {
                                 TextButton: {
                                     text: '🆔 Identify Token',
                                     onClick: {
-                                        functionName: 'EventHandler.Addon.onIdentifyTokenClick'
+                                        functionName: 'EnvironmentHandler.Addon.onIdentifyTokenClick'
                                     }
                                 }
                             }
