@@ -80,4 +80,19 @@ describe('SetupFlow', () => {
         
         expect(response.result).toBe(true);
     });
+
+    // deleteWebhook
+    test('should delete webhook', () => {
+        const sampleToken = '[FAKE_DUMMY_BOT_TOKEN]';
+        const deploymentId = 'AKfycbx...';
+        const callbackUrl = `https://script.google.com/macros/s/${deploymentId}/exec`;
+        const deleteWebhookUri = `https://api.telegram.org/bot${sampleToken}/deleteWebhook?url=${callbackUrl}`;
+        UrlFetchAppStubConfiguration.when(deleteWebhookUri)
+            .return(new HttpResponse()
+                .setContentText(JSON.stringify({ result: true })));
+        model.setNewDeploymentId(deploymentId);
+        model.setNewBotToken(sampleToken);
+        const response = model.deleteWebhook(callbackUrl);
+        expect(response.result).toBe(true);
+    });
 });
