@@ -1,7 +1,7 @@
-require('../../../tests');
+require('../../../../tests');
 
-const { EMD } = require('../../config/EMD');
-const EntityViewModel = require('./EntityViewModel');
+const { EMD } = require('../../../config/EMD');
+const EntityViewModel = require('../EntityViewModel');
 
 describe('EntityViewModel', () => {
     const tests = [
