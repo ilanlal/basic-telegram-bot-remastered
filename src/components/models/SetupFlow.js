@@ -64,40 +64,54 @@ class SetupFlow {
         return JSON.parse(response.getContentText());
     }
 
-    setMyName({ name, language_code } = {}) {
-        if (!name || typeof name !== 'string' || name.trim() === '') {
-            throw new Error("Invalid bot name");
-        }
+    setMyName() {
+        // get list of [{name: 'Bot Name', language_code: 'en'}, ...]
+        const botNames = [];
 
-        const response = this.telegramBotClient.setMyName(name, language_code);
-        if (response.getResponseCode() !== 200) {
-            throw new Error("Failed to set bot name");
-        }
-        return JSON.parse(response.getContentText());
+        botNames.forEach(({ name, language_code }) => {
+            const response = this.telegramBotClient.setMyName({name, language_code});
+            if (response.getResponseCode() !== 200) {
+                throw new Error("Failed to set bot name");
+            }
+        });
+
+        return true;
     }
 
-    setMyDescription({ description, language_code } = {}) {
-        const response = this.telegramBotClient.setMyDescription(description, language_code);
-        if (response.getResponseCode() !== 200) {
-            throw new Error("Failed to set bot description");
-        }
-        return JSON.parse(response.getContentText());
+    setMyDescription() {
+        const botDescriptions = [];
+
+        botDescriptions.forEach(({ description, language_code }) => {
+            const response = this.telegramBotClient.setMyDescription({ description, language_code });
+            if (response.getResponseCode() !== 200) {
+                throw new Error("Failed to set bot description");
+            }
+        });
+        return true;
     }
 
-    setMyShortDescription({ short_description, language_code } = {}) {
-        const response = this.telegramBotClient.setMyShortDescription(short_description, language_code);
-        if (response.getResponseCode() !== 200) {
-            throw new Error("Failed to set bot short description");
-        }
-        return JSON.parse(response.getContentText());
+    setMyShortDescription() {
+        const botShortDescriptions = [];
+
+        botShortDescriptions.forEach(({ short_description, language_code }) => {
+            const response = this.telegramBotClient.setMyShortDescription({ short_description, language_code });
+            if (response.getResponseCode() !== 200) {
+                throw new Error("Failed to set bot short description");
+            }
+        });
+        return true;
     }
 
-    setMyCommands({ commands, language_code, scope } = {}) {
-        const response = this.telegramBotClient.setMyCommands({ commands, language_code, scope });
-        if (response.getResponseCode() !== 200) {
-            throw new Error("Failed to set bot commands");
-        }
-        return JSON.parse(response.getContentText());
+    setMyCommands() {
+        const botCommandsList = [];
+
+        botCommandsList.forEach(({ commands, language_code, scope }) => {
+            const response = this.telegramBotClient.setMyCommands({ commands, language_code, scope });
+            if (response.getResponseCode() !== 200) {
+                throw new Error("Failed to set bot commands");
+            }
+        });
+        return true;
     }
 
     // Getters

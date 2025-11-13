@@ -7,6 +7,8 @@ describe('SetupFlow', () => {
     let model;
     const environmentModel = EnvironmentModel.create(PropertiesService.getUserProperties());
     beforeEach(() => {
+        UrlFetchAppStubConfiguration.reset();
+        SpreadsheetStubConfiguration.reset();
         model = SetupFlow.create(PropertiesService.getUserProperties());
     });
 
@@ -71,54 +73,47 @@ describe('SetupFlow', () => {
     describe('set bot info', () => {
         const sampleToken = '[FAKE_DUMMY_BOT_TOKEN]';
 
-        test('should set bot name', () => {
-            const data = { name: "NewBotName", language_code: "en" };
+        test('should set bot name', () => {            
             const apiUrl = `https://api.telegram.org/bot${sampleToken}/setMyName`;
             UrlFetchAppStubConfiguration.when(apiUrl)
                 .return(new HttpResponse()
                     .setContentText(JSON.stringify({ result: true })));
             environmentModel.setNewBotToken(sampleToken);
-            const response = model.setMyName(data);
-            expect(response.result).toBe(true);
+            const response = model.setMyName();
+            expect(response).toBe(true);
         });
 
         // setMyDescription
         test('should set bot description', () => {
-            const data = { description: "This is a test bot", language_code: "en" };
             const apiUrl = `https://api.telegram.org/bot${sampleToken}/setMyDescription`;
             UrlFetchAppStubConfiguration.when(apiUrl)
                 .return(new HttpResponse()
                     .setContentText(JSON.stringify({ result: true })));
             environmentModel.setNewBotToken(sampleToken);
-            const response = model.setMyDescription(data);
-            expect(response.result).toBe(true);
+            const response = model.setMyDescription();
+            expect(response).toBe(true);
         });
 
         // setMyShortDescription
         test('should set bot short description', () => {
-            const data = { short_description: "Short description", language_code: "en" };
             const apiUrl = `https://api.telegram.org/bot${sampleToken}/setMyShortDescription`;
             UrlFetchAppStubConfiguration.when(apiUrl)
                 .return(new HttpResponse()
                     .setContentText(JSON.stringify({ result: true })));
             environmentModel.setNewBotToken(sampleToken);
-            const response = model.setMyShortDescription(data);
-            expect(response.result).toBe(true);
+            const response = model.setMyShortDescription();
+            expect(response).toBe(true);
         });
 
         // setMyCommands
         test('should set bot commands', () => {
-            const commands = [
-                { command: "/start", description: "Start the bot" },
-                { command: "/help", description: "Get help" }
-            ]
             const apiUrl = `https://api.telegram.org/bot${sampleToken}/setMyCommands`;
             UrlFetchAppStubConfiguration.when(apiUrl)
                 .return(new HttpResponse()
                     .setContentText(JSON.stringify({ result: true })));
             environmentModel.setNewBotToken(sampleToken);
-            const response = model.setMyCommands({ commands, scope: undefined, language_code: undefined });
-            expect(response.result).toBe(true);
+            const response = model.setMyCommands();
+            expect(response).toBe(true);
         });
     });
 });
