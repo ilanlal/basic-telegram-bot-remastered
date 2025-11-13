@@ -39,43 +39,6 @@ class NavigationController {
         );
     }
 
-    navigateToNewBotTokenCard() {
-        const setupFlow = SetupFlow.create(this._userStore);
-
-        return CardService.newActionResponseBuilder()
-            .setNavigation(
-                CardService.newNavigation()
-                    .pushCard(
-                        NewBotTokenCard.create(setupFlow)
-                            .build()
-                    )
-            );
-    }
-
-    navigateToUsersManagementCard() {
-        return CardService.newActionResponseBuilder()
-            .setNavigation(
-                CardService.newNavigation()
-                    .pushCard(
-                        new UsersManagementCard()
-                            .build()
-                    )
-            );
-    }
-
-    navigateToAutomationCard() {
-        // Placeholder for future implementation
-        return CardService.newActionResponseBuilder()
-            .setNavigation(
-                CardService.newNavigation()
-                    .pushCard(
-                        BotAutomationsCard
-                            .create({})
-                            .build()
-                    )
-            );
-    }
-
     navigateToAboutCard() {
         // package.json is not accessible in GAS environment
         const packageInfo = {
@@ -106,32 +69,6 @@ class NavigationController {
                             .build()
                     )
             );
-    }
-
-    navigateToSettingsCard() {
-        // load settings from user properties
-        const settingsModel = Settings.create().load();
-        return CardService.newActionResponseBuilder()
-            .setNavigation(CardService
-                .newNavigation()
-                .pushCard(SettingsCard.create(settingsModel)
-                    .build()));
-    }
-
-    navigateToBotSetupCard() {
-        const setupFlow = SetupFlow.create(this._userProperties);
-        const entityController = EntityController.create(
-            this._userStore,
-            this._cardService,
-            this._spreadsheet,
-            this._userProperties
-        );
-        return entityController.pushCard(
-            EMD.BotSetup.card({
-                isActive: setupFlow.stateObject.botTokenSet,
-                isAdmin: false
-            })
-        );
     }
 
     reload() {
