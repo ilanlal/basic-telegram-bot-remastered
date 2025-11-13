@@ -31,13 +31,13 @@ EMD.Home = {
                         {   // Environment variables widget
                             id: 'environment_variables_widget',
                             DecoratedText: {
-                                text: 'Environment Variables',
-                                topLabel: 'Environment Variables',
-                                bottomLabel: 'Manage your environment variables here',
+                                text: data?.environmentTraffic || 'Configure your environment variables to get started',
+                                topLabel: 'Step #1: Environment Variables',
+                                bottomLabel: 'Click 🔩 to manage your environment variables',
                                 wrapText: false,
                                 textButton: {
                                     disabled: false,
-                                    text: '🌍 Manage',
+                                    text: '🔩',
                                     onClick: {
                                         functionName: 'EntityHandler.Addon.onOpenCardClick',
                                         parameters: {
@@ -57,13 +57,13 @@ EMD.Home = {
                         {   // Bot setup widget
                             id: 'bot_setup_widget',
                             DecoratedText: {
-                                text: 'Execute api actions on your bot',
-                                topLabel: 'API & Bot Setup',
-                                bottomLabel: '🤖 (getMe, setWebhook, ..)',
+                                text: 'Step #2: Setup Your Bot',
+                                topLabel: '📡 Bot Setup',
+                                bottomLabel: 'Click on 🤖 to setup your bot API token, set bot info & webhook',
                                 wrapText: false,
                                 textButton: {
                                     disabled: false,
-                                    text: '📡 API Actions',
+                                    text: '🤖',
                                     onClick: {
                                         functionName: 'EventHandler.Addon.onBotSetupClick',
                                         parameters: { action: 'setupBot' }
@@ -73,21 +73,21 @@ EMD.Home = {
                         }
                     ]
                 },
-                {   // Advanced Settings Section
-                    // header: 'Advanced Settings',
+                {   // Automation Section
+                    // header: 'Automation',
                     collapsible: true,
                     numUncollapsibleWidgets: 1,
                     widgets: [
                         {   // Automation management widget
                             id: 'automation_management_widget',
                             DecoratedText: {
-                                text: 'Automation management',
-                                topLabel: `Automation ${data?.totalAutomations || 0} workflows`,
-                                bottomLabel: '⚡ Menues, workflows, triggers',
+                                text: 'Automation - Workflow Management',
+                                topLabel: `Total: ${data?.totalAutomations || 0} workflows`,
+                                bottomLabel: 'Click ⚡ to manage your automations',
                                 wrapText: false,
                                 textButton: {
                                     disabled: false,
-                                    text: '⚡ Manage',
+                                    text: '⚡',
                                     onClick: {
                                         functionName: 'EntityHandler.Addon.onOpenCardClick',
                                         parameters: { entityName: 'Automation' }
@@ -105,13 +105,13 @@ EMD.Home = {
                         {  // Customer management widget
                             id: 'customer_management_widget',
                             DecoratedText: {
-                                text: 'Customer management',
-                                topLabel: `👥 Customers ${data?.totalCustomer || 0}`,
-                                bottomLabel: 'Manage your customers here',
+                                text: 'CRM: Manage Your Customers',
+                                topLabel: `Total: ${data?.totalCustomer || 0} customers`,
+                                bottomLabel: 'Click 👥 to manage your customers (telegram users)',
                                 wrapText: false,
                                 textButton: {
                                     disabled: false,
-                                    text: '👥 Customer Management',
+                                    text: '👥',
                                     onClick: {
                                         functionName: 'EntityHandler.Addon.onOpenCardClick',
                                         parameters: { entityName: 'Customer' }
@@ -148,7 +148,7 @@ EMD.EnvironmentVariables = {
         return {
             name: 'environment_variables_Card',
             header: {
-                title: '🌍 Environment Variables',
+                title: '🔩 Environment Variables',
                 subTitle: 'Configure your environment variables here.',
                 imageUrl: EMD.DEFAULT_IMAGE_URL,
                 imageStyle: CardService.ImageStyle.SQUARE,
@@ -621,7 +621,7 @@ EMD.Customer = {
             name: 'customer_Card',
             header: {
                 title: '👥 Customer Management',
-                subTitle: 'Manage your customers here.',
+                subTitle: 'Manage your customers here. Customers are your Telegram bot users.',
                 imageUrl: EMD.DEFAULT_IMAGE_URL,
                 imageStyle: CardService.ImageStyle.SQUARE,
                 imageAltText: 'Customer Image'
@@ -646,7 +646,7 @@ EMD.Customer = {
                                         onClick: {
                                             functionName: 'EntityHandler.Addon.onBindSheetDataClick',
                                             parameters: {
-                                                api: 'Automation'
+                                                api: 'Customer'
                                             }
                                         }
                                     }
