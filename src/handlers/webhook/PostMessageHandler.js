@@ -40,6 +40,29 @@ class PostMessageHandler {
         return this.handleDynamicReply(chat_id, '_command_not_found_');
     }
 
+    handleBotCommand(chat_id, message) {
+        const command = message.text?.split(' ')[0];
+        const language_code = message.from?.language_code || 'default';
+        const message_id = message.message_id;
+        // Handle /start command separately to verify persone.
+        if (command === '/start') {
+            this.verifyPersone(message);
+        }
+
+        if (command === "/whoami" || command === "/me") {
+            // return this.handleDynamicReply(chat_id, ["/start", "welcome"], message.message_id);
+        }
+
+        if (command === "/whoru" || command === "/whoareyou" || command === "/botinfo") {
+            // return this.handleDynamicReply(chat_id, ["/start", "welcome"], message.message_id);
+        }
+
+        if (command === "/admin") {
+        }
+
+        return this.handleDynamicReply(chat_id, command, language_code, message_id);
+    }
+
     verifyPersone(message) {
         if (!message.from || !message.from.id) {
             throw new Error('Invalid message format: missing from.id');
@@ -59,27 +82,6 @@ class PostMessageHandler {
                 language_code: message.from.language_code
             });
     }
-
-    handleBotCommand(chat_id, message) {
-        const command = message.text?.split(' ')[0];
-        const language_code = message.from?.language_code || 'default';
-        const message_id = message.message_id;
-        // Handle /start command separately to verify persone.
-        if (command === '/start') {
-            this.verifyPersone(message);
-        }
-
-        if (command === "/whoami" || command === "/me") {
-            // return this.handleDynamicReply(chat_id, ["/start", "welcome"], message.message_id);
-        }
-
-        if (command === "/whoru" || command === "/whoareyou" || command === "/botinfo") {
-            // return this.handleDynamicReply(chat_id, ["/start", "welcome"], message.message_id);
-        }
-
-        return this.handleDynamicReply(chat_id, command, language_code, message_id);
-    }
-
     // reply from force input request
     handleReplyToForceInput(chat_id, message) {
         // Implement reply to message handling logic here

@@ -14,6 +14,11 @@ class WebhookHandler {
             throw error;
         }
     }
+
+    static handleException(error) {
+        console.error('Error handling webhook request:', error);
+        return JSON.stringify({ status: 'error', message: error.message });
+    }
 }
 
 if (typeof module !== 'undefined' && module.exports) {

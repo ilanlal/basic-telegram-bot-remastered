@@ -11,6 +11,9 @@ class LoggerModel {
     }
 
     logEvent({ dc, action, chat_id, content, event }) {
+        if (!this.isDebug) {
+            return;
+        }
         const datestring = new Date().toISOString();
         this.sheet.appendRow([datestring, dc, action, chat_id, content, event]);
     }

@@ -6,6 +6,7 @@ const SpreadsheetApp = require('@ilanlal/gasmocks/src/spreadsheetapp/Spreadsheet
 const { SheetModel } = require('./SheetModel');
 const { EMD } = require('../../config/EMD');
 const { LoggerModel } = require('./LoggerModel');
+const { EnvironmentModel } = require('./EnvironmentModel');
 
 describe('LoggerModel', () => {
     beforeEach(() => {
@@ -25,6 +26,7 @@ describe('LoggerModel', () => {
                 content: 'TestContent',
                 event: 'TestEvent'
             };
+            EnvironmentModel.create().setDebugMode(true);
             LoggerModel.create().logEvent(mockEvent);
             const sheet = SpreadsheetApp.getActiveSpreadsheet()
                 .getSheetByName(EMD.Logger.sheet({}).name);
