@@ -1,5 +1,5 @@
-require('../../../tests');
-const { SpreadsheetService } = require('../SpreadsheetService');
+require('../../tests');
+const { SpreadsheetService } = require('./SpreadsheetService');
 
 describe('SpreadsheetService.Events', () => {
     beforeEach(() => {

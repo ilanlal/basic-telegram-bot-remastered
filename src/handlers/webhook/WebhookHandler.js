@@ -1,5 +1,5 @@
 class WebhookHandler {
-    static handlePostUpdateRequest(contents) {
+    static handlePostUpdateRequest(contents, isDebug = false) {
         try {
             if (contents.callback_query) {
                 return PostCallbackQueryHandler.create()

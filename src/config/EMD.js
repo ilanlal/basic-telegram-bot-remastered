@@ -2408,6 +2408,17 @@ EMD.Account = {
     }
 }
 
+EMD.Logger = {
+    entityName: 'eventLog',
+    sheet: (data = {}) => {
+        return {
+            name: '📜 Event Log',
+            columns: ['Created On', 'DC', 'Action', 'chat_id', 'content', 'event'],
+            sample_data: []
+        };
+    }
+}
+
 EMD.Test = {
     entityName: 'testEntity',
     card: (data = {}) => {

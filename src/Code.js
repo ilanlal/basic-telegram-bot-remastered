@@ -17,8 +17,13 @@ function doGet(e) {
 function doPost(e) {
     try {
         const contents = JSON.parse(e.postData.contents);
+        const isDebug = PropertiesService.getUserProperties()
+            .getProperty(EnvironmentModel.InputMeta.DEBUG_MODE) === 'true';
+        if (isDebug) {
+            console.log('Received POST contents:', JSON.stringify(contents, null, 2));
+        }
         // Handle the webhook event
-        return WebhookHandler.handlePostUpdateRequest(contents);
+        return WebhookHandler.handlePostUpdateRequest(contents, isDebug);
     } catch (error) {
         throw error;
     }

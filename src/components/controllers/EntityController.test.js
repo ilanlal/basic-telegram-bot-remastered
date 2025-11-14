@@ -1,7 +1,6 @@
 require('../../../tests');
 const { EntityController } = require('./EntityController');
 const { EMD } = require('../../config/EMD');
-const { UserStoreFactory } = require('../../services/UserStore');
 
 describe('Entity Controller', () => {
     const userProperties = PropertiesService.getUserProperties();
