@@ -72,6 +72,15 @@ class EnvironmentModel {
         return this._userProperties.setProperty(EnvironmentModel.InputMeta.WEBHOOK_CALLBACK_URL, safeUrl);
     }
 
+    setNewTestDeploymentId(id) {
+        if (!id || typeof id !== 'string' || id.trim() === '') {
+            throw new Error("Invalid test deployment ID");
+        }
+
+        const safeId = decodeURIComponent(id);
+        return this._userProperties.setProperty(EnvironmentModel.InputMeta.TEST_DEPLLOYMENT_ID, safeId);
+    }
+
     // Getters
     get trafficLight() {
         const leds = '{0}{1}{2}{3}{4}';
@@ -104,11 +113,13 @@ class EnvironmentModel {
             defaultLanguageSet: !!this._userProperties.getProperty(EnvironmentModel.InputMeta.DEFAULT_LANGUAGE),
             debugMode: this._userProperties.getProperty(EnvironmentModel.InputMeta.DEBUG_MODE) === 'true',
             debugModeSet: this._userProperties.getProperty(EnvironmentModel.InputMeta.DEBUG_MODE) === 'true',
-            activateSpreadsheetId: this._userProperties.getProperty(EnvironmentModel.InputMeta.ACTIVE_SPREADSHEET_ID),
-            activateSpreadsheetIdSet: this._userProperties.getProperty(EnvironmentModel.InputMeta.ACTIVE_SPREADSHEET_ID) !== null,
+            activeSpreadsheetId: this._userProperties.getProperty(EnvironmentModel.InputMeta.ACTIVE_SPREADSHEET_ID),
+            activeSpreadsheetIdSet: this._userProperties.getProperty(EnvironmentModel.InputMeta.ACTIVE_SPREADSHEET_ID) !== null,
             environment: this._userProperties.getProperty(EnvironmentModel.InputMeta.ENVIRONMENT) || 'exec',
             webhookCallbackUrl: this._userProperties.getProperty(EnvironmentModel.InputMeta.WEBHOOK_CALLBACK_URL),
-            webhookCallbackUrlSet: !!this._userProperties.getProperty(EnvironmentModel.InputMeta.WEBHOOK_CALLBACK_URL)
+            webhookCallbackUrlSet: !!this._userProperties.getProperty(EnvironmentModel.InputMeta.WEBHOOK_CALLBACK_URL),
+            testDeploymentId: this._userProperties.getProperty(EnvironmentModel.InputMeta.TEST_DEPLLOYMENT_ID),
+            testDeploymentIdSet: !!this._userProperties.getProperty(EnvironmentModel.InputMeta.TEST_DEPLLOYMENT_ID)
         }
     }
 }
@@ -116,6 +127,7 @@ class EnvironmentModel {
 EnvironmentModel.InputMeta = {
     BOT_API_TOKEN: 'bot_api_token',
     DEPLOYMENT_ID: 'deployment_id',
+    TEST_DEPLLOYMENT_ID: 'test_deployment_id',
     ADMIN_CHAT_ID: 'admin_chat_id',
     DEFAULT_LANGUAGE: 'default_language',
     DEBUG_MODE: 'debug_mode_set',

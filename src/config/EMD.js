@@ -167,24 +167,23 @@ EMD.EnvironmentVariables = {
                                     text: `🚀 Deployment ID is currently: ${data.environmentVariables?.deploymentIdSet ? '✅ Set' : '❌ Not Set'}`
                                 }
                             },
-                            {   // Deployment ID Variable
+                            {   // Production Deployment ID Variable
                                 id: 'deployment_id_variable',
                                 TextInput: {
-                                    title: 'Deployment ID',
+                                    title: 'Production Deployment ID',
                                     fieldName: 'txt_deployment_id',
-                                    hint: 'Enter deployment ID'
+                                    hint: 'Enter production deployment ID'
                                 },
-                                propertyName: 'deployment_id'
+                                propertyName: EnvironmentModel.InputMeta.DEPLOYMENT_ID
                             },
-                            { // Environment text input (exec / dev)
-                                id: 'environment_text_input',
+                            {   // Test Deployment ID Variable
+                                id: 'test_deployment_id_variable',
                                 TextInput: {
-                                    title: 'Environment',
-                                    fieldName: 'txt_environment',
-                                    hint: 'Enter environment (exec / dev)'
+                                    title: 'Test Deployment ID',
+                                    fieldName: 'txt_test_deployment_id',
+                                    hint: 'Enter test deployment ID'
                                 },
-                                value: 'exec',
-                                propertyName: 'environment'
+                                propertyName: EnvironmentModel.InputMeta.TEST_DEPLLOYMENT_ID
                             },
                             { // Identify Deployment ID Button
                                 id: 'identify_deployment_id_button',

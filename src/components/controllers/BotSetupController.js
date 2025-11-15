@@ -71,6 +71,11 @@ class BotSetupController {
             .setNewWebhookCallbackUrl(url);
     }
 
+    setNewTestDeploymentId(id) {
+        return EnvironmentModel.create(this._userProperties)
+            .setNewTestDeploymentId(id);
+    }
+
     setWebhook() {
         return SetupFlow.create(this._userProperties, this._activeSpreadsheet)
             .setWebhook();

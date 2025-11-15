@@ -152,7 +152,18 @@ describe('BotSetupController Tests', () => {
                 );
                 controller.setNewEnvironment(testEnvironment);
                 expect(userProperties.getProperty("environment")).toBe(testEnvironment);
-            });     
+            });
+
+            // setNewTestDeploymentId method.
+            test("setNewTestDeploymentId should store the test deployment ID", () => {
+                const userProperties = PropertiesService.getUserProperties();
+                const testDeploymentId = "test_deployment_12345";
+                controller = BotSetupController.create(
+                    userProperties
+                );
+                controller.setNewTestDeploymentId(testDeploymentId);
+                expect(userProperties.getProperty("test_deployment_id")).toBe(testDeploymentId);
+            });
 
             describe('Bot info methods', () => {
                 const sampleToken = '[FAKE_DUMMY_BOT_TOKEN]';

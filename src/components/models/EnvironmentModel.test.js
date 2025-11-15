@@ -49,5 +49,19 @@ describe('EnvironmentModel Tests', () => {
             model.setDebugMode(false);
             expect(model.state.debugModeSet).toBe(false);
         });
+
+        // setNewActiveSpreadsheetId
+        test('should set a new active spreadsheet id', () => {
+            const newSpreadsheetId = 'new_spreadsheet_id';
+            model.setNewActiveSpreadsheetId(newSpreadsheetId);
+            expect(model.state.activeSpreadsheetId).toBe(newSpreadsheetId);
+        });
+
+        // setNewTestDeploymentId
+        test('should set a new test deployment id', () => {
+            const newTestDeploymentId = 'test_deployment_id_123';
+            model.setNewTestDeploymentId(newTestDeploymentId);
+            expect(model._userProperties.getProperty(EnvironmentModel.InputMeta.TEST_DEPLLOYMENT_ID)).toBe(newTestDeploymentId);
+        });
     });
 });

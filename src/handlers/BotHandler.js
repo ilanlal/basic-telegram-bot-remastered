@@ -66,23 +66,6 @@ BotHandler.Addon = {
                 BotHandler.prototype.userProperties,
                 BotHandler.prototype.activeSpreadsheet)
             .handleSetMyCommandsClick(e);
-    },
-    onSetMyEnvironmentClick: (e) => {
-        // Not implemented yet
-        return new BotHandler
-            .AddonWrapper(
-                BotHandler.prototype.userProperties,
-                BotHandler.prototype.activeSpreadsheet)
-            .handleSetMyEnvironmentClick(e);
-    },
-    onSetWebhookCallbackUrlClick: (e) => {
-        // Not implemented yet
-        return new BotHandler
-            .AddonWrapper(
-                BotHandler.prototype.userProperties,
-                BotHandler.prototype.activeSpreadsheet
-            )
-            .handleSetWebhookCallbackUrlClick(e);
     }
 }
 
@@ -195,41 +178,6 @@ BotHandler.AddonWrapper = class {
 
             return this.handleOperationSuccess("👍 Bot commands set successfully."
                 + ` total: ${Object.keys(response.langs).length} languages.`)
-                .build();
-        } catch (error) {
-            return this.handleError(error)
-                .build();
-        }
-    }
-
-    handleSetMyEnvironmentClick(e) {
-        try {
-            let environment = e.parameters?.environment || null;
-
-            const controller = BotSetupController
-                .create(this._userProperties, this._activeSpreadsheet);
-
-            const response = controller.setMyEnvironment(environment);
-
-            return this.handleOperationSuccess("👍 Bot environment set successfully."
-                + ` total: ${Object.keys(response.langs).length} languages.`)
-                .build();
-        } catch (error) {
-            return this.handleError(error)
-                .build();
-        }
-    }
-
-    handleSetWebhookCallbackUrlClick(e) {
-        try {
-            let url = e.parameters?.url || null;
-
-            const controller = BotSetupController
-                .create(this._userProperties, this._activeSpreadsheet);
-
-            const response = controller.setWebhookCallbackUrl(url);
-
-            return this.handleOperationSuccess("👍 Webhook callback URL set successfully.")
                 .build();
         } catch (error) {
             return this.handleError(error)

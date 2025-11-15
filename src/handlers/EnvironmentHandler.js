@@ -6,8 +6,16 @@ class EnvironmentHandler {
         return this._userProperties;
     }
 
+    get activeSpreadsheet() {
+        if (!this._activeSpreadsheet) {
+            this._activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+        }
+        return this._activeSpreadsheet;
+    }
+
     constructor() {
         this._userProperties = null;
+        this._activeSpreadsheet = null;
     }
 };
 
@@ -21,7 +29,7 @@ EnvironmentHandler.Addon = {
     },
     onSaveAdminChatIdClick: (e) => {
         return new EnvironmentHandler
-            .AddonWrapper(                
+            .AddonWrapper(
                 EnvironmentHandler.prototype.userProperties)
             .handleSaveAdminChatId(e);
 
@@ -29,7 +37,7 @@ EnvironmentHandler.Addon = {
     onIdentifyActiveSpreadsheetIdClick: (e) => {
         // Not implemented yet
         return new EnvironmentHandler
-            .AddonWrapper(                
+            .AddonWrapper(
                 EnvironmentHandler.prototype.userProperties)
             .handleIdentifyActiveSpreadsheetId(e);
     },
@@ -45,11 +53,37 @@ EnvironmentHandler.Addon = {
             .AddonWrapper(
                 EnvironmentHandler.prototype.userProperties)
             .handleSaveLogEvents(e);
+    },
+    onSetMyEnvironmentClick: (e) => {
+        // Not implemented yet
+        return new EnvironmentHandler
+            .AddonWrapper(
+                EnvironmentHandler.prototype.userProperties,
+                EnvironmentHandler.prototype.activeSpreadsheet)
+            .handleSetMyEnvironmentClick(e);
+    },
+    onSetWebhookCallbackUrlClick: (e) => {
+        // Not implemented yet
+        return new EnvironmentHandler
+            .AddonWrapper(
+                EnvironmentHandler.prototype.userProperties,
+                EnvironmentHandler.prototype.activeSpreadsheet
+            )
+            .handleSetWebhookCallbackUrlClick(e);
+    },
+    onSetTestDeploymentIdClick: (e) => {
+        // Not implemented yet
+        return new EnvironmentHandler
+            .AddonWrapper(
+                EnvironmentHandler.prototype.userProperties,
+                EnvironmentHandler.prototype.activeSpreadsheet)
+            .handleSetTestDeploymentIdClick(e);
     }
 }
 EnvironmentHandler.AddonWrapper = class {
-    constructor(userProperties) {
+    constructor(userProperties, activeSpreadsheet) {
         this._userProperties = userProperties;
+        this._activeSpreadsheet = activeSpreadsheet;
     }
 
     handleIdentifyDeploymentIdClick(e) {
@@ -175,6 +209,58 @@ EnvironmentHandler.AddonWrapper = class {
             return this.handleOperationSuccess("👍 Log events setting saved successfully.")
                 .build();
 
+        } catch (error) {
+            return this.handleError(error)
+                .build();
+        }
+    }
+
+    handleSetMyEnvironmentClick(e) {
+        try {
+            let environment = e.parameters?.environment || 'exec';
+
+            const controller = BotSetupController
+                .create(this._userProperties, this._activeSpreadsheet);
+
+            const response = controller.setMyEnvironment(environment);
+
+            return this.handleOperationSuccess("👍 Bot environment set successfully."
+                + ` total: ${Object.keys(response.langs).length} languages.`)
+                .build();
+        } catch (error) {
+            return this.handleError(error)
+                .build();
+        }
+    }
+
+    handleSetWebhookCallbackUrlClick(e) {
+        try {
+            let url = e.parameters?.url || null;
+
+            const controller = BotSetupController
+                .create(this._userProperties, this._activeSpreadsheet);
+
+            const response = controller.setWebhookCallbackUrl(url);
+
+            return this.handleOperationSuccess("👍 Webhook callback URL set successfully.")
+                .build();
+        } catch (error) {
+            return this.handleError(error)
+                .build();
+        }
+    }
+
+    handleSetTestDeploymentIdClick(e) {
+        try {
+            let id = e.parameters?.id || null;
+
+            const controller = BotSetupController
+                .create(this._userProperties, this._activeSpreadsheet);
+
+            const response = controller.setNewTestDeploymentId(id);
+
+            return this.handleOperationSuccess("👍 Test deployment ID set successfully.")
+                .build();
         } catch (error) {
             return this.handleError(error)
                 .build();
