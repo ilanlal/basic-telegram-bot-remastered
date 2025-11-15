@@ -1,10 +1,27 @@
 class WebhookHandler {
-    static handlePostUpdateRequest(contents, isDebug = false) {
+    static handlePostUpdateRequest(contents) {
         try {
             if (contents.callback_query) {
+                LoggerModel.create(this._userProperties, this._activeSpreadsheet)
+                    .logEvent({
+                        dc: 'PostCallbackQueryHandler',
+                        action: 'handlePostCallbackQuery',
+                        chat_id: contents.callback_query.from.id || 'unknown',
+                        content: JSON.stringify(contents),
+                        event: 'received_callback_query'
+                    });
+
                 return PostCallbackQueryHandler.create()
                     .handlePostCallbackQuery(contents);
             } else if (contents.message) {
+                LoggerModel.create(this._userProperties, this._activeSpreadsheet)
+                    .logEvent({
+                        dc: 'PostMessageHandler',
+                        action: 'handlePostMessage',
+                        chat_id: contents.message?.from?.id || 'unknown',
+                        content: JSON.stringify(contents.message),
+                        event: 'received_message'
+                    });
                 return PostMessageHandler.create()
                     .handlePostMessage(contents.message);
             }

@@ -30,11 +30,11 @@ describe('CustomerModel', () => {
         it('should add a new customer then get it by chat ID', () => {
             const newCustomer = {
                 id: '12345',
-                is_bot: false,
                 first_name: 'John',
                 last_name: 'Doe',
                 username: 'johndoe',
-                language_code: 'en'
+                language_code: 'en',
+                is_bot: false
             };
             const addedCustomer = model.addNewCustomer(Object.values(newCustomer));
             expect(addedCustomer).toEqual(expect.arrayContaining([expect.any(String), ...Object.values(newCustomer)]));

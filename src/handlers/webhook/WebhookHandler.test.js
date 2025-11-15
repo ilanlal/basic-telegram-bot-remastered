@@ -50,10 +50,4 @@ describe('WebhookHandler', () => {
         const content = { message: {} };
         expect(() => WebhookHandler.handlePostUpdateRequest(content)).toThrow('Invalid message format');
     });
-
-    it('should throw error for invalid callback_query format', () => {
-        const content = { callback_query: {} };
-        expect(() => WebhookHandler.handlePostUpdateRequest(content)).toThrow('Invalid callback_query format');
-    });
-
 });

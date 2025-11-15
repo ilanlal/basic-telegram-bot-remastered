@@ -953,7 +953,7 @@ EMD.Customer = {
     sheet: (data = {}) => {
         return {
             name: '👥  Members',
-            columns: ['Created on', 'chat_id', 'username', 'First Name', 'Last Name', 'language_code', 'Data']
+            columns: ['Created on', 'chat_id', 'username', 'First Name', 'Last Name', 'language_code', 'is_bot', 'Data']
         }
     }
 }
