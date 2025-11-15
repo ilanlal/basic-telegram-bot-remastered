@@ -8,13 +8,19 @@ const { CustomerModel } = require('../../components/models/CustomerModel');
 describe('PostMessageHandler', () => {
     /** @type {PostMessageHandler} */
     let handler;
+    const dummyToken = 'DUMMY_BOT_TOKEN';
 
     beforeEach(() => {
         SpreadsheetStubConfiguration.reset();
+        // Set dummy bot token in user properties
+        PropertiesService.getUserProperties().setProperty(EnvironmentModel.InputMeta.BOT_API_TOKEN, dummyToken);
         handler = PostMessageHandler.create(
-            SpreadsheetApp.getActiveSpreadsheet(),
-            PropertiesService.getUserProperties()
+            PropertiesService.getUserProperties(),
+            SpreadsheetApp.getActiveSpreadsheet()
         );
+        SheetModel.create(SpreadsheetApp.getActiveSpreadsheet())
+            .bindSheetSampleData(EMD.Automation.sheet({}));
+
     });
 
     test('should handle verifyPerson call', () => {
@@ -65,11 +71,30 @@ describe('PostMessageHandler', () => {
                     }
                 };
                 let response = handler.handleBotCommand(content.message.from.id, content.message);
-                expect(response).toContain('dynamic_reply_handled');
+                expect(response).toBe(true);
             });
         });
     });
 
+    describe('handlePostMessage', () => {
+        const commands = ['/start', '/whoami', '/me', '/whoru', '/whoareyou', '/botinfo', '/help', '/about'];
+        commands.forEach(cmd => {
+            test(`should handle ${cmd} message`, () => {
+                const content = {
+                    message: {
+                        chat: { id: 12345 },
+                        text: cmd,
+                        message_id: 1,
+                        entities: [{ type: 'bot_command', offset: 0, length: cmd.length }],
+                        from: { id: 12345, language_code: 'en', username: 'testuser', first_name: 'Test', last_name: 'User' }
+                    }
+                };
+                let response = handler.handlePostMessage(content.message);
+                const responseObj = JSON.parse(response);
+                expect(responseObj.actions_executed).toBe(1);
+            });
+        });
+    });
 
     test('should throw error for invalid message format', () => {
         const content = { invalid: 'data' };

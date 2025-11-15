@@ -384,7 +384,7 @@ EMD.BotSetup = {
                                     fieldName: 'txt_bot_api_token',
                                     hint: 'Enter bot API token'
                                 },
-                                propertyName: 'bot_api_token'
+                                propertyName: EnvironmentModel.InputMeta.BOT_API_TOKEN
                             },
                             { // Identify Token Button
                                 id: 'identify_token_button',
