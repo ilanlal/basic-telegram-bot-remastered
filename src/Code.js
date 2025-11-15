@@ -23,7 +23,7 @@ function doPost(e) {
             console.log('Received POST contents:', JSON.stringify(contents, null, 2));
         }
         // Handle the webhook event
-        return WebhookHandler.handlePostUpdateRequest(contents, isDebug);
+        return WebhookHandler.handlePostUpdateRequest(contents);
     } catch (error) {
         throw error;
     }

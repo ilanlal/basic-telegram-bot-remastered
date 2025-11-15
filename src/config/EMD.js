@@ -412,7 +412,7 @@ EMD.BotSetup = {
                                 id: 'webhook_url_info',
                                 TextParagraph: {
                                     text: JSON.stringify(data.getWebhookInfoResult || {}, null, 2),
-                                    maxLines: 3
+                                    maxLines: 35
                                 }
                             },
                             { // DecoratedText for prod webhook action (set,delete)
@@ -423,10 +423,10 @@ EMD.BotSetup = {
                                     bottomLabel: `${data.setupFlow?.webhookSet ? 'Delete or update your webhook' : 'Set up your webhook'}`,
                                     wrapText: false,
                                     textButton: {
-                                        disabled: false,
+                                        disabled: (data.environmentVariables?.deploymentIdSet ? false : true) || (data.environmentVariables?.botTokenSet ? false : true),
                                         text: `${data.setupFlow?.webhookSet ? '🗑️ Delete Webhook' : '📡 Set Webhook'}`,
                                         onClick: {
-                                            functionName: 'BotHandler.Addon.onWebhookManagementClick',
+                                            functionName: 'BotHandler.Addon.onWebhookToggelClick',
                                             parameters: {
                                                 action: data.setupFlow?.webhookSet ? 'deleteWebhook' : 'setWebhook',
                                                 environment: 'exec'
@@ -443,10 +443,10 @@ EMD.BotSetup = {
                                     bottomLabel: `${data.setupFlow?.webhookSet ? 'Delete or update your webhook' : 'Set up your webhook'}`,
                                     wrapText: false,
                                     textButton: {
-                                        disabled: false,
+                                        disabled: (data.environmentVariables?.testDeploymentIdSet ? false : true) || (data.environmentVariables?.botTokenSet ? false : true),
                                         text: `${data.setupFlow?.webhookSet ? '🗑️ Delete Webhook' : '📡 Set Webhook'}`,
                                         onClick: {
-                                            functionName: 'BotHandler.Addon.onWebhookManagementClick',
+                                            functionName: 'BotHandler.Addon.onWebhookToggelClick',
                                             parameters: {
                                                 action: data.setupFlow?.webhookSet ? 'deleteWebhook' : 'setWebhook',
                                                 environment: 'test'

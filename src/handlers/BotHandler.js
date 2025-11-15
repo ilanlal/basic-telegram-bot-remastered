@@ -28,12 +28,12 @@ BotHandler.Addon = {
                 BotHandler.prototype.activeSpreadsheet)
             .handleIdentifyTokenClick(e);
     },
-    onWebhookManagementClick: (e) => {
+    onWebhookToggelClick: (e) => {
         return new BotHandler
             .AddonWrapper(
                 BotHandler.prototype.userProperties,
                 BotHandler.prototype.activeSpreadsheet)
-            .handleWebhookManagementClick(e);
+            .handleWebhookToggelClick(e);
     },
     onSetMyNameClick: (e) => {
         // Not implemented yet
@@ -98,7 +98,7 @@ BotHandler.AddonWrapper = class {
         }
     }
 
-    handleWebhookManagementClick(e) {
+    handleWebhookToggelClick(e) {
         try {
             const action = e.parameters?.action || null;
             const environment = e.parameters?.environment || 'test';

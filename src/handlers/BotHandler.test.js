@@ -12,7 +12,7 @@ describe('BotHandler', () => {
         expect(handler).toBeInstanceOf(BotHandler);
     });
 
-    it('should handle onWebhookManagementClick action: "setWebhook"', () => {
+    it('should handle onWebhookToggleClick', () => {
         const sampleToken = '[FAKE_DUMMY_BOT_TOKEN]';
         const deploymentId = 'AKfycbx...';
         const callbackUrl = `https://script.google.com/macros/s/${deploymentId}/exec`;
@@ -44,7 +44,7 @@ describe('BotHandler', () => {
         const event = {
             parameters: { action: 'setWebhook' }
         }; // Mock event object
-        const actionResponse = BotHandler.Addon.onWebhookManagementClick(event);
+        const actionResponse = BotHandler.Addon.onWebhookToggelClick(event);
         expect(actionResponse).toBeDefined();
         console.log(JSON.stringify(actionResponse, null, 2))
     });

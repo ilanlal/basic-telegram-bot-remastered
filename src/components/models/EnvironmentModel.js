@@ -135,7 +135,8 @@ EnvironmentModel.InputMeta = {
     DEBUG_MODE: 'debug_mode_set',
     ACTIVE_SPREADSHEET_ID: 'active_spreadsheet_id',
     ENVIRONMENT: 'environment',
-    WEBHOOK_CALLBACK_URL: 'webhook_callback_url'
+    WEBHOOK_CALLBACK_URL: 'webhook_callback_url',
+    AUTOMATION_ENABLED: 'automation_enabled'
 };
 
 if (typeof module !== 'undefined' && module.exports) {
