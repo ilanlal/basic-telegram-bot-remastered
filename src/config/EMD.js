@@ -49,7 +49,7 @@ EMD.Home = {
                         }
                     ]
                 },
-                {   // Telegram Bot API actions section
+                {   // Bot Setup Section
                     // header: 'Telegram Bot Setup',
                     collapsible: true,
                     numUncollapsibleWidgets: 1,
@@ -65,8 +65,8 @@ EMD.Home = {
                                     disabled: false,
                                     text: '🤖',
                                     onClick: {
-                                        functionName: 'EventHandler.Addon.onBotSetupClick',
-                                        parameters: { action: 'setupBot' }
+                                        functionName: 'EntityHandler.Addon.onOpenCardClick',
+                                        parameters: { entityName: 'BotSetup' }
                                     }
                                 }
                             }

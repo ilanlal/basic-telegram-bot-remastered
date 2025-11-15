@@ -65,11 +65,28 @@ class SetupFlow {
     }
 
     setMyName() {
-        // get list of [{name: 'Bot Name', language_code: 'en'}, ...]
-        const botNames = [];
+        const model = BotModel.create(this.sheetModel.activeSpreadsheet);
+        const langs = model.listLanguages().map(({ lang }) => lang);
 
-        botNames.forEach(({ name, language_code }) => {
-            const response = this.telegramBotClient.setMyName({name, language_code});
+        langs.forEach((language_code) => {
+            if (language_code === 'key') return; // skip key column
+            if (language_code === '') return; // skip empty language code
+            // get name value for the language
+            const text = model.getValue('name', language_code);
+            // skip empty texts
+            if (!text || text.trim() === '') {
+                return;
+            }
+
+            // set bot name
+            let response;
+            if (language_code === 'default') {
+                response = this.telegramBotClient.setMyName({ name: text });
+            } else {
+                response = this.telegramBotClient.setMyName({ name: text, language_code });
+            }
+
+            // check response
             if (response.getResponseCode() !== 200) {
                 throw new Error("Failed to set bot name");
             }
@@ -78,10 +95,28 @@ class SetupFlow {
     }
 
     setMyDescription() {
-        const botDescriptions = [];
+        const model = BotModel.create(this.sheetModel.activeSpreadsheet);
+        const langs = model.listLanguages().map(({ lang }) => lang);
 
-        botDescriptions.forEach(({ description, language_code }) => {
-            const response = this.telegramBotClient.setMyDescription({ description, language_code });
+        langs.forEach((language_code) => {
+            if (language_code === 'key') return; // skip key column
+            if (language_code === '') return; // skip empty language code
+            // get description value for the language
+            const text = model.getValue('description', language_code);
+            // skip empty texts
+            if (!text || text.trim() === '') {
+                return;
+            }
+
+            // set bot name
+            let response;
+            if (language_code === 'default') {
+                response = this.telegramBotClient.setMyDescription({ description: text });
+            } else {
+                response = this.telegramBotClient.setMyDescription({ description: text, language_code });
+            }
+
+            // check response
             if (response.getResponseCode() !== 200) {
                 throw new Error("Failed to set bot description");
             }
@@ -90,10 +125,28 @@ class SetupFlow {
     }
 
     setMyShortDescription() {
-        const botShortDescriptions = [];
+        const model = BotModel.create(this.sheetModel.activeSpreadsheet);
+        const langs = model.listLanguages().map(({ lang }) => lang);
 
-        botShortDescriptions.forEach(({ short_description, language_code }) => {
-            const response = this.telegramBotClient.setMyShortDescription({ short_description, language_code });
+        langs.forEach((language_code) => {
+            if (language_code === 'key') return; // skip key column
+            if (language_code === '') return; // skip empty language code
+            // get short description value for the language
+            const text = model.getValue('short_description', language_code);
+            // skip empty texts
+            if (!text || text.trim() === '') {
+                return;
+            }
+
+            // set bot name
+            let response;
+            if (language_code === 'default') {
+                response = this.telegramBotClient.setMyShortDescription({ short_description: text });
+            } else {
+                response = this.telegramBotClient.setMyShortDescription({ short_description: text, language_code });
+            }
+
+            // check response
             if (response.getResponseCode() !== 200) {
                 throw new Error("Failed to set bot short description");
             }
@@ -102,10 +155,29 @@ class SetupFlow {
     }
 
     setMyCommands() {
-        const botCommandsList = [];
+        const model = BotModel.create(this.sheetModel.activeSpreadsheet);
+        const langs = model.listLanguages().map(({ lang }) => lang);
 
-        botCommandsList.forEach(({ commands, language_code, scope }) => {
-            const response = this.telegramBotClient.setMyCommands({ commands, language_code, scope });
+        langs.forEach((language_code) => {
+            if (language_code === 'key') return; // skip key column
+            if (language_code === '') return; // skip empty language code
+            // get commands value for the language
+            const text = model.getValue('commands', language_code);
+            // skip empty texts
+            if (!text || text.trim() === '') {
+                return;
+            }
+    
+            // set bot commands
+            const commands = JSON.parse(text);
+            let response;
+            if (language_code === 'default') {
+                response = this.telegramBotClient.setMyCommands({ commands });
+            } else {
+                response = this.telegramBotClient.setMyCommands({ commands, language_code });
+            }
+
+            // check response
             if (response.getResponseCode() !== 200) {
                 throw new Error("Failed to set bot commands");
             }

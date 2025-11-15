@@ -71,7 +71,7 @@ EntityHandler.AddonWrapper = class {
                     this._userProperties)
                 .pushCard(emd.card({
                     isAdmin: false,
-                    setupFlow: setupFlow.stateObject,
+                    setupFlow: setupFlow.state,
                     environmentVariables: environmentModel.state,
                     getMeResult: setupFlow.getMeResult,
                     getWebhookInfoResult: setupFlow.getWebhookInfoResult,

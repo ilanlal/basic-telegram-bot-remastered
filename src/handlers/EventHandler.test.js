@@ -72,44 +72,5 @@ describe('EventHandler', () => {
         expect(data.cardNavigations[0].pushCard).toBeDefined();
     });
 
-    it('should handle onBotSetupClick', () => {
-        const token = '[FAKE_DUMMY_BOT_TOKEN]';
-        const contentText = `{
-            "result": {
-                "url": "https://example.com/webhook",
-                "has_custom_certificate": false,
-                "pending_update_count": 0,
-                "ip_address": "192.0.2.1",
-                "last_error_date": 0,
-                "last_error_message": "",
-                "max_connections": 40,
-                "allowed_updates": []
-            }
-        }`;
-
-        UrlFetchAppStubConfiguration.when(`https://api.telegram.org/bot${token}/getMe`)
-            .return(new HttpResponse().setContentText(JSON.stringify({
-                result: {
-                    id: 1234567809,
-                    is_bot: true,
-                    first_name: "TestBot",
-                    username: "TestBotUsername"
-                }
-            })));
-        UrlFetchAppStubConfiguration.when(`https://api.telegram.org/bot${token}/getWebhookInfo`)
-            .return(new HttpResponse().setContentText(contentText));
-        const event = {}; // Mock event object
-        const actionResponse = EventHandler.Addon.onBotSetupClick(event);
-        expect(actionResponse).toBeDefined();
-        const data = actionResponse.getData();
-        expect(data).toBeDefined();
-        // not notification
-        expect(data.notification).toBeUndefined();
-        //{ cardNavigations: [ { pushCard: [Object] } ] }
-        expect(data.cardNavigations).toBeDefined();
-        expect(data.cardNavigations.length).toBeGreaterThan(0);
-        expect(data.cardNavigations[0].pushCard).toBeDefined();
-    });
-
     // Additional tests for other handlers can be added similarly
 });
