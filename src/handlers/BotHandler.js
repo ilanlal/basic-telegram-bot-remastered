@@ -6,8 +6,16 @@ class BotHandler {
         return this._userProperties;
     }
 
+    get activeSpreadsheet() {
+        if (!this._activeSpreadsheet) {
+            this._activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+        }
+        return this._activeSpreadsheet;
+    }
+
     constructor() {
         this._userProperties = null;
+        this._activeSpreadsheet = null;
     }
 };
 
@@ -56,8 +64,9 @@ BotHandler.Addon = {
 }
 
 BotHandler.AddonWrapper = class {
-    constructor(userProperties) {
+    constructor(userProperties, activeSpreadsheet) {
         this._userProperties = userProperties;
+        this._activeSpreadsheet = activeSpreadsheet;
     }
 
     handleIdentifyTokenClick(e) {
@@ -69,7 +78,7 @@ BotHandler.AddonWrapper = class {
             }
 
             const controller = BotSetupController
-                .create(this._userProperties);
+                .create(this._userProperties, this._activeSpreadsheet);
 
             const result = controller.identifyNewBotToken(token);
             controller.setNewBotToken(token);
@@ -91,7 +100,7 @@ BotHandler.AddonWrapper = class {
             }
 
             const controller = BotSetupController
-                .create(PropertiesService.getUserProperties());
+                .create(this._userProperties, this._activeSpreadsheet);
 
             if (action === 'setWebhook') {
                 controller.setWebhook();
@@ -110,11 +119,12 @@ BotHandler.AddonWrapper = class {
     handleSetMyNameClick(e) {
         try {
             const controller = BotSetupController
-                .create(this._userProperties);
-            
+                .create(this._userProperties, this._activeSpreadsheet);
+
             const response = controller.setMyName();
 
-            return this.handleOperationSuccess("👍 Bot name set successfully.")
+            return this.handleOperationSuccess("👍 Bot name set successfully."
+                + ` total: ${Object.keys(response.langs).length} languages.`)
                 .build();
         } catch (error) {
             return this.handleError(error)
@@ -124,7 +134,13 @@ BotHandler.AddonWrapper = class {
 
     handleSetMyDescriptionClick(e) {
         try {
-            throw new Error("Not implemented yet");
+            const controller = BotSetupController
+                .create(this._userProperties, this._activeSpreadsheet);
+
+            const response = controller.setMyDescription();
+            return this.handleOperationSuccess("👍 Bot description set successfully."
+                + ` total: ${Object.keys(response.langs).length} languages.`)
+                .build();
         } catch (error) {
             return this.handleError(error)
                 .build();
@@ -133,7 +149,14 @@ BotHandler.AddonWrapper = class {
 
     handleSetMyShortDescriptionClick(e) {
         try {
-            throw new Error("Not implemented yet");
+            const controller = BotSetupController
+                .create(this._userProperties, this._activeSpreadsheet);
+
+            const response = controller.setMyShortDescription();
+
+            return this.handleOperationSuccess("👍 Bot short description set successfully."
+                + ` total: ${Object.keys(response.langs).length} languages.`)
+                .build();
         } catch (error) {
             return this.handleError(error)
                 .build();
@@ -143,11 +166,12 @@ BotHandler.AddonWrapper = class {
     handleSetMyCommandsClick(e) {
         try {
             const controller = BotSetupController
-                .create(this._userProperties);
+                .create(this._userProperties, this._activeSpreadsheet);
 
             const response = controller.setMyCommands();
 
-            return this.handleOperationSuccess("👍 Bot commands set successfully.")
+            return this.handleOperationSuccess("👍 Bot commands set successfully."
+                + ` total: ${Object.keys(response.langs).length} languages.`)
                 .build();
         } catch (error) {
             return this.handleError(error)

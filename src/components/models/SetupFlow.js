@@ -150,9 +150,7 @@ class SetupFlow {
     }
 
     setMyCommands() {
-        const model = BotModel.create(
-            this.sheetModel.activeSpreadsheet);
-
+        const model = BotModel.create(this.sheetModel.activeSpreadsheet);
         const langs = model.getLanguages().map(({ lang }) => lang);
 
         langs.forEach((language_code) => {
@@ -164,12 +162,12 @@ class SetupFlow {
             }
 
             // set bot commands
-            const commands = JSON.parse(text);
+            const parsedCommands = JSON.parse(text);
             let response;
             if (language_code === '' || language_code === 'default') {
-                response = this.telegramBotClient.setMyCommands({ commands });
+                response = this.telegramBotClient.setMyCommands({ commands: parsedCommands });
             } else {
-                response = this.telegramBotClient.setMyCommands({ commands, language_code });
+                response = this.telegramBotClient.setMyCommands({ commands: parsedCommands, language_code });
             }
 
             // check response

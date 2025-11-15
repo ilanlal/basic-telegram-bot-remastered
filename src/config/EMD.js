@@ -508,7 +508,7 @@ EMD.BotSetup = {
     sheet: (data = {}) => {
         return {
             name: '🤖 Bot',
-            columns: ['param', 'default', 'es', 'fr', 'ar', 'de', 'it', 'pt', 'ru', 'zh', 'ja', 'ko', 'he'],
+            columns: ['key', 'default', 'es', 'fr', 'ar', 'de', 'it', 'pt', 'ru', 'zh', 'ja', 'ko', 'he'],
             sample_data: [
                 // Bot name; 0-64 characters. Pass an empty string to remove the dedicated name for the given language.
                 ['name',

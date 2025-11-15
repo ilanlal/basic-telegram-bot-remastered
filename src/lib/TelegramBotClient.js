@@ -438,7 +438,7 @@ class TelegramBotClient {
       'method': "post",
       'payload': {
         'scope': scope,
-        'commands': commands,
+        'commands': JSON.stringify(commands),
         'language_code': language_code
       }
     };
