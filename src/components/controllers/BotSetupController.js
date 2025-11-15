@@ -61,6 +61,16 @@ class BotSetupController {
             .setNewActiveSpreadsheetId(safeId);
     }
 
+    setNewEnvironment(env) {
+        return EnvironmentModel.create(this._userProperties)
+            .setNewEnvironment(env);
+    }
+
+    setNewWebhookCallbackUrl(url) {
+        return EnvironmentModel.create(this._userProperties)
+            .setNewWebhookCallbackUrl(url);
+    }
+
     setWebhook() {
         return SetupFlow.create(this._userProperties, this._activeSpreadsheet)
             .setWebhook();

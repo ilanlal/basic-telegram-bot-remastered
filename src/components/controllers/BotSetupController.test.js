@@ -132,6 +132,28 @@ describe('BotSetupController Tests', () => {
                 expect(userProperties.getProperty("active_spreadsheet_id")).toBe(testSpreadsheetId);
             });
 
+            // setNewWebhookCallbackUrl method. 
+            test("setNewWebhookCallbackUrl should store the webhook callback URL", () => {
+                const userProperties = PropertiesService.getUserProperties();
+                const testUrl = "https://example.com/webhook";
+                controller = BotSetupController.create(
+                    userProperties
+                );
+                controller.setNewWebhookCallbackUrl(testUrl);
+                expect(userProperties.getProperty("webhook_callback_url")).toBe(testUrl);
+            });
+
+            // setNewEnvironment method.
+            test("setNewEnvironment should store the environment", () => {
+                const userProperties = PropertiesService.getUserProperties();
+                const testEnvironment = "production";
+                controller = BotSetupController.create(
+                    userProperties
+                );
+                controller.setNewEnvironment(testEnvironment);
+                expect(userProperties.getProperty("environment")).toBe(testEnvironment);
+            });     
+
             describe('Bot info methods', () => {
                 const sampleToken = '[FAKE_DUMMY_BOT_TOKEN]';
                 EnvironmentModel.create(

@@ -57,6 +57,21 @@ class EnvironmentModel {
         return this._userProperties.setProperty(EnvironmentModel.InputMeta.ACTIVE_SPREADSHEET_ID, safeId);
     }
 
+    setNewEnvironment(env) {
+        if (!env || typeof env !== 'string' || env.trim() === '') {
+            throw new Error("Invalid environment");
+        }
+        return this._userProperties.setProperty(EnvironmentModel.InputMeta.ENVIRONMENT, env);
+    }
+
+    setNewWebhookCallbackUrl(url) { 
+        if (!url || typeof url !== 'string' || url.trim() === '') {
+            throw new Error("Invalid webhook callback URL");
+        }
+        const safeUrl = decodeURIComponent(url);
+        return this._userProperties.setProperty(EnvironmentModel.InputMeta.WEBHOOK_CALLBACK_URL, safeUrl);
+    }
+
     // Getters
     get trafficLight() {
         const leds = '{0}{1}{2}{3}{4}';
@@ -90,7 +105,10 @@ class EnvironmentModel {
             debugMode: this._userProperties.getProperty(EnvironmentModel.InputMeta.DEBUG_MODE) === 'true',
             debugModeSet: this._userProperties.getProperty(EnvironmentModel.InputMeta.DEBUG_MODE) === 'true',
             activateSpreadsheetId: this._userProperties.getProperty(EnvironmentModel.InputMeta.ACTIVE_SPREADSHEET_ID),
-            activateSpreadsheetIdSet: this._userProperties.getProperty(EnvironmentModel.InputMeta.ACTIVE_SPREADSHEET_ID) !== null
+            activateSpreadsheetIdSet: this._userProperties.getProperty(EnvironmentModel.InputMeta.ACTIVE_SPREADSHEET_ID) !== null,
+            environment: this._userProperties.getProperty(EnvironmentModel.InputMeta.ENVIRONMENT) || 'exec',
+            webhookCallbackUrl: this._userProperties.getProperty(EnvironmentModel.InputMeta.WEBHOOK_CALLBACK_URL),
+            webhookCallbackUrlSet: !!this._userProperties.getProperty(EnvironmentModel.InputMeta.WEBHOOK_CALLBACK_URL)
         }
     }
 }
@@ -101,7 +119,9 @@ EnvironmentModel.InputMeta = {
     ADMIN_CHAT_ID: 'admin_chat_id',
     DEFAULT_LANGUAGE: 'default_language',
     DEBUG_MODE: 'debug_mode_set',
-    ACTIVE_SPREADSHEET_ID: 'active_spreadsheet_id'
+    ACTIVE_SPREADSHEET_ID: 'active_spreadsheet_id',
+    ENVIRONMENT: 'environment',
+    WEBHOOK_CALLBACK_URL: 'webhook_callback_url'
 };
 
 if (typeof module !== 'undefined' && module.exports) {

@@ -176,6 +176,16 @@ EMD.EnvironmentVariables = {
                                 },
                                 propertyName: 'deployment_id'
                             },
+                            { // Environment text input (exec / dev)
+                                id: 'environment_text_input',
+                                TextInput: {
+                                    title: 'Environment',
+                                    fieldName: 'txt_environment',
+                                    hint: 'Enter environment (exec / dev)'
+                                },
+                                value: 'exec',
+                                propertyName: 'environment'
+                            },
                             { // Identify Deployment ID Button
                                 id: 'identify_deployment_id_button',
                                 TextButton: {
