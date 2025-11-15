@@ -188,9 +188,9 @@ class SetupFlow {
     // Getters
     get trafficLight() {
         const leds = '{0}{1}{2}';
-        const led0 = this.stateObject.botTokenSet ? Lights.ON : Lights.OFF;
-        const led1 = this.stateObject.deploymentIdSet ? Lights.ON : Lights.OFF;
-        const led2 = this.stateObject.webhookSet ? Lights.ON : Lights.OFF;
+        const led0 = this.state.botTokenSet ? Lights.ON : Lights.OFF;
+        const led1 = this.state.deploymentIdSet ? Lights.ON : Lights.OFF;
+        const led2 = this.state.webhookSet ? Lights.ON : Lights.OFF;
 
         return leds
             .replace('{0}', led0)
@@ -198,17 +198,18 @@ class SetupFlow {
             .replace('{2}', led2);
     }
 
-    get stateObject() {
+    get state() {
         const token = this._userProperties.getProperty(EnvironmentModel.InputMeta.BOT_API_TOKEN);
         const deploymentId = this._userProperties.getProperty(EnvironmentModel.InputMeta.DEPLOYMENT_ID);
+        const _webhookUrl = this.webhookUrl;
         return {
             // show 4 first and 4 last characters of the token
             botToken: token ? `${token.substring(0, 4)}****${token.substring(token.length - 4)}` : null,
             botTokenSet: !!this._userProperties.getProperty(EnvironmentModel.InputMeta.BOT_API_TOKEN),
             deploymentId: deploymentId ? `${deploymentId.substring(0, 4)}****${deploymentId.substring(deploymentId.length - 4)}` : null,
             deploymentIdSet: !!this._userProperties.getProperty(EnvironmentModel.InputMeta.DEPLOYMENT_ID),
-            webhookUrl: decodeURI(this.webhookUrl),
-            webhookSet: !!this.webhookUrl
+            webhookUrl: decodeURI(_webhookUrl),
+            webhookSet: !!_webhookUrl
         }
     }
 

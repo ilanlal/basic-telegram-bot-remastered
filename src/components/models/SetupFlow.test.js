@@ -17,7 +17,7 @@ describe('SetupFlow', () => {
     });
 
     // identifyNewBotToken
-    test('should set a new bot token', () => {
+    test('should successfully identify a new bot token', () => {
         const newToken = '[DUMMY_BOT_TOKEN]';
         const contentText = `{
             "result": {
@@ -33,10 +33,20 @@ describe('SetupFlow', () => {
             .return(new HttpResponse()
                 .setContentText(contentText));
         UrlFetchAppStubConfiguration.when(`https://api.telegram.org/bot${newToken}/getWebhookInfo`)
-            .return(new HttpResponse().setContentText(`{"ok":true,"result":{}}`));
-
+            .return(new HttpResponse()
+                .setContentText(`{
+                    "ok": true,
+                    "result": {
+                        "url": "https://script.google.com/macros/s/.../exec",
+                        "has_custom_certificate": false,
+                        "pending_update_count": 0,
+                        "last_error_date": 0,
+                        "last_error_message": "",
+                        "max_connections": 40
+                    }
+                }`));
         model.identifyNewBotToken(newToken);
-        expect(model.stateObject.botToken).toBe(newToken ? `${newToken.substring(0, 4)}****${newToken.substring(newToken.length - 4)}` : null);
+        expect(model.state.botToken).toBe(newToken ? `${newToken.substring(0, 4)}****${newToken.substring(newToken.length - 4)}` : null);
     });
 
     describe('webhook', () => {
@@ -73,7 +83,7 @@ describe('SetupFlow', () => {
     describe('set bot info', () => {
         const sampleToken = '[FAKE_DUMMY_BOT_TOKEN]';
 
-        test('should set bot name', () => {            
+        test('should set bot name', () => {
             const apiUrl = `https://api.telegram.org/bot${sampleToken}/setMyName`;
             UrlFetchAppStubConfiguration.when(apiUrl)
                 .return(new HttpResponse()
