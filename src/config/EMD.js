@@ -426,7 +426,7 @@ EMD.BotSetup = {
                                         disabled: (data.environmentVariables?.deploymentIdSet ? false : true) || (data.environmentVariables?.botTokenSet ? false : true),
                                         text: `${data.setupFlow?.webhookSet ? '🗑️ Delete Webhook' : '📡 Set Webhook'}`,
                                         onClick: {
-                                            functionName: 'BotHandler.Addon.onWebhookToggelClick',
+                                            functionName: 'BotHandler.Addon.onWebhookToggleClick',
                                             parameters: {
                                                 action: data.setupFlow?.webhookSet ? 'deleteWebhook' : 'setWebhook',
                                                 environment: 'exec'
@@ -446,7 +446,7 @@ EMD.BotSetup = {
                                         disabled: data.setupFlow?.webhookSet ? true : (data.environmentVariables?.testDeploymentIdSet ? false : true) || (data.environmentVariables?.botTokenSet ? false : true),
                                         text: `${data.setupFlow?.webhookSet ? '🗑️ Delete Webhook' : '📡 Set Webhook'}`,
                                         onClick: {
-                                            functionName: 'BotHandler.Addon.onWebhookToggelClick',
+                                            functionName: 'BotHandler.Addon.onWebhookToggleClick',
                                             parameters: {
                                                 action: data.setupFlow?.webhookSet ? 'deleteWebhook' : 'setWebhook',
                                                 environment: 'test'

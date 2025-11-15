@@ -36,7 +36,7 @@ class PostMessageHandler {
             return this.handleReplyToForceInput(chat_id, message);
         }
 
-        // execute dynamic reply on any message
+        // execute dynamic reply handling for the query
         return this.handleDynamicReply(chat_id, query, language_code, message.message_id);
     }
 
