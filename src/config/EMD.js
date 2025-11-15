@@ -439,11 +439,11 @@ EMD.BotSetup = {
                                 id: 'test_webhook_action',
                                 DecoratedText: {
                                     text: 'Test Webhook Action',
-                                    topLabel: `🔗 Webhook Action`,
+                                    topLabel: `🔗 Test Webhook Action`,
                                     bottomLabel: `${data.setupFlow?.webhookSet ? 'Delete or update your webhook' : 'Set up your webhook'}`,
                                     wrapText: false,
                                     textButton: {
-                                        disabled: (data.environmentVariables?.testDeploymentIdSet ? false : true) || (data.environmentVariables?.botTokenSet ? false : true),
+                                        disabled: data.setupFlow?.webhookSet ? true : (data.environmentVariables?.testDeploymentIdSet ? false : true) || (data.environmentVariables?.botTokenSet ? false : true),
                                         text: `${data.setupFlow?.webhookSet ? '🗑️ Delete Webhook' : '📡 Set Webhook'}`,
                                         onClick: {
                                             functionName: 'BotHandler.Addon.onWebhookToggelClick',
