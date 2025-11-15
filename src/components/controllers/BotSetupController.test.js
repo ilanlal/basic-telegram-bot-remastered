@@ -95,6 +95,7 @@ describe('BotSetupController Tests', () => {
             test("setWebhook should call telegram client to set webhook", () => {
                 const sampleToken = '[FAKE_DUMMY_BOT_TOKEN]';
                 const deploymentId = 'AKfycbx...';
+                const testDeploymentId = 'test_AKfycbx...';
                 const callbackUrl = `https://script.google.com/macros/s/${deploymentId}/exec`;
                 const setWebhookUri = `https://api.telegram.org/bot${sampleToken}/setWebhook?url=${callbackUrl}`;
                 UrlFetchAppStubConfiguration.when(setWebhookUri)
@@ -106,6 +107,7 @@ describe('BotSetupController Tests', () => {
                     userProperties
                 );
                 controller.setNewDeploymentId(deploymentId);
+                controller.setNewTestDeploymentId(testDeploymentId);
                 controller.setNewBotToken(sampleToken);
                 const response = controller.setWebhook();
                 expect(response).toBeDefined();

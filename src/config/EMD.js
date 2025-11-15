@@ -411,13 +411,14 @@ EMD.BotSetup = {
                             { // Webhook URL info
                                 id: 'webhook_url_info',
                                 TextParagraph: {
-                                    text: JSON.stringify(data.getWebhookInfoResult || {}, null, 2)
+                                    text: JSON.stringify(data.getWebhookInfoResult || {}, null, 2),
+                                    maxLines: 3
                                 }
                             },
-                            { // DecoratedText for webhook action (set,delete)
-                                id: 'webhook_action',
+                            { // DecoratedText for prod webhook action (set,delete)
+                                id: 'prod_webhook_action',
                                 DecoratedText: {
-                                    text: 'Take action on your bot webhook',
+                                    text: 'Production Webhook Action',
                                     topLabel: `🔗 Webhook Action`,
                                     bottomLabel: `${data.setupFlow?.webhookSet ? 'Delete or update your webhook' : 'Set up your webhook'}`,
                                     wrapText: false,
@@ -426,7 +427,30 @@ EMD.BotSetup = {
                                         text: `${data.setupFlow?.webhookSet ? '🗑️ Delete Webhook' : '📡 Set Webhook'}`,
                                         onClick: {
                                             functionName: 'BotHandler.Addon.onWebhookManagementClick',
-                                            parameters: { action: data.setupFlow?.webhookSet ? 'deleteWebhook' : 'setWebhook' }
+                                            parameters: {
+                                                action: data.setupFlow?.webhookSet ? 'deleteWebhook' : 'setWebhook',
+                                                environment: 'exec'
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            { // DecoratedText for test webhook action (set,delete)
+                                id: 'test_webhook_action',
+                                DecoratedText: {
+                                    text: 'Test Webhook Action',
+                                    topLabel: `🔗 Webhook Action`,
+                                    bottomLabel: `${data.setupFlow?.webhookSet ? 'Delete or update your webhook' : 'Set up your webhook'}`,
+                                    wrapText: false,
+                                    textButton: {
+                                        disabled: false,
+                                        text: `${data.setupFlow?.webhookSet ? '🗑️ Delete Webhook' : '📡 Set Webhook'}`,
+                                        onClick: {
+                                            functionName: 'BotHandler.Addon.onWebhookManagementClick',
+                                            parameters: {
+                                                action: data.setupFlow?.webhookSet ? 'deleteWebhook' : 'setWebhook',
+                                                environment: 'test'
+                                            }
                                         }
                                     }
                                 }

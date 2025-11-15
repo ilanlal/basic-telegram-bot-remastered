@@ -47,6 +47,22 @@ class SetupFlow {
         return JSON.parse(response.getContentText());
     }
 
+    setTestWebhook() {
+        const deploymentId = this._userProperties
+            .getProperty(EnvironmentModel.InputMeta.TEST_DEPLOYMENT_ID);
+        if (!deploymentId) {
+            throw new Error("Test Deployment ID is not available. Please deploy the script as a web app.");
+        }
+        const webhookUrl = `https://script.google.com/macros/s/${deploymentId}/dev`;
+
+        const response = this.telegramBotClient.setWebhook(webhookUrl);
+        if (response.getResponseCode() !== 200) {
+            throw new Error("Failed to set webhook");
+        }
+
+        return JSON.parse(response.getContentText());
+    }
+
     deleteWebhook() {
         const deploymentId = this._userProperties.getProperty(EnvironmentModel.InputMeta.DEPLOYMENT_ID);
         if (!deploymentId) {
