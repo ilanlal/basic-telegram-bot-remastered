@@ -12,9 +12,13 @@ describe('BotSetupController Tests', () => {
 
         beforeEach(() => {
             UrlFetchAppStubConfiguration.reset();
+            SpreadsheetStubConfiguration.reset();
             controller = BotSetupController.create(
-                PropertiesService.getUserProperties()
+                PropertiesService.getUserProperties(),
+                SpreadsheetApp.getActiveSpreadsheet()
             );
+            SheetModel.create(SpreadsheetApp.getActiveSpreadsheet())
+                .bindSheetSampleData(EMD.BotSetup.sheet({}));
         });
 
         test("BotSetupController instance should be created", () => {
@@ -126,6 +130,51 @@ describe('BotSetupController Tests', () => {
                 );
                 controller.setNewActiveSpreadsheetId(testSpreadsheetId);
                 expect(userProperties.getProperty("active_spreadsheet_id")).toBe(testSpreadsheetId);
+            });
+
+            describe('Bot info methods', () => {
+                const sampleToken = '[FAKE_DUMMY_BOT_TOKEN]';
+                EnvironmentModel.create(
+                    PropertiesService.getUserProperties(),
+                    SpreadsheetApp.getActiveSpreadsheet()
+                ).setNewBotToken(sampleToken);
+
+                test("setMyName should set bot name", () => {
+                    const apiUrl = `https://api.telegram.org/bot${sampleToken}/setMyName`;
+                    UrlFetchAppStubConfiguration.when(apiUrl)
+                        .return(new HttpResponse()
+                            .setContentText(JSON.stringify({ result: true })));
+                    const response = controller.setMyName();
+                    expect(JSON.stringify(response.langs)).toContain('default');
+                });
+
+                test("setMyDescription should set bot description", () => {
+                    const apiUrl = `https://api.telegram.org/bot${sampleToken}/setMyDescription`;
+                    UrlFetchAppStubConfiguration.when(apiUrl)
+                        .return(new HttpResponse()
+                            .setContentText(JSON.stringify({ result: true })));
+                    const response = controller.setMyDescription();
+                    expect(JSON.stringify(response.langs)).toContain('default');
+                });
+
+                test("setMyShortDescription should set bot short description", () => {
+                    const apiUrl = `https://api.telegram.org/bot${sampleToken}/setMyShortDescription`;
+                    UrlFetchAppStubConfiguration.when(apiUrl)
+                        .return(new HttpResponse()
+                            .setContentText(JSON.stringify({ result: true })));
+                    const response = controller.setMyShortDescription();
+                    expect(JSON.stringify(response.langs)).toContain('default');
+                });
+
+                test("setMyCommands should set bot commands", () => {
+                    const apiUrl = `https://api.telegram.org/bot${sampleToken}/setMyCommands`;
+                    UrlFetchAppStubConfiguration.when(apiUrl)
+                        .return(new HttpResponse()
+                            .setContentText(JSON.stringify({ result: true })));
+                    const response = controller.setMyCommands();
+                    expect(JSON.stringify(response.langs)).toContain('default');
+                });
+
             });
         });
     });

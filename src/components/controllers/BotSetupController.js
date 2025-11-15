@@ -10,18 +10,20 @@ class BotSetupController {
         return this._telegramBotClient;
     }
 
-    constructor(userProperties) {
+    constructor(userProperties, activeSpreadsheet) {
         this._telegramBotClient = null;
         this._userProperties = userProperties;
+        this._activeSpreadsheet = activeSpreadsheet;
     }
 
-    static create(userProperties = PropertiesService.getUserProperties()) {
-        return new BotSetupController(userProperties);
+    static create(userProperties = PropertiesService.getUserProperties(),
+        activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet()) {
+        return new BotSetupController(userProperties, activeSpreadsheet);
     }
 
     identifyNewBotToken(token) {
         const safeToken = decodeURIComponent(token);
-        return SetupFlow.create(this._userProperties)
+        return SetupFlow.create(this._userProperties, this._activeSpreadsheet)
             .identifyNewBotToken(safeToken);
     }
 
@@ -60,27 +62,33 @@ class BotSetupController {
     }
 
     setWebhook() {
-        return SetupFlow.create(this._userProperties).setWebhook();
+        return SetupFlow.create(this._userProperties, this._activeSpreadsheet)
+            .setWebhook();
     }
 
     deleteWebhook() {
-        return SetupFlow.create(this._userProperties).deleteWebhook();
+        return SetupFlow.create(this._userProperties, this._activeSpreadsheet)
+            .deleteWebhook();
     }
 
     setMyName() {
-        return SetupFlow.create(this._userProperties).setMyName();
+        return SetupFlow.create(this._userProperties, this._activeSpreadsheet)
+            .setMyName();
     }
 
     setMyDescription() {
-        return SetupFlow.create(this._userProperties).setMyDescription();
+        return SetupFlow.create(this._userProperties, this._activeSpreadsheet)
+            .setMyDescription();
     }
 
     setMyShortDescription() {
-        return SetupFlow.create(this._userProperties).setMyShortDescription();
+        return SetupFlow.create(this._userProperties, this._activeSpreadsheet)
+            .setMyShortDescription();
     }
 
     setMyCommands() {
-        return SetupFlow.create(this._userProperties).setMyCommands();
+        return SetupFlow.create(this._userProperties, this._activeSpreadsheet)
+            .setMyCommands();
     }
 }
 

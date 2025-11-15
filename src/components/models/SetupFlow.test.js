@@ -9,7 +9,10 @@ describe('SetupFlow', () => {
     beforeEach(() => {
         UrlFetchAppStubConfiguration.reset();
         SpreadsheetStubConfiguration.reset();
-        model = SetupFlow.create(PropertiesService.getUserProperties());
+        model = SetupFlow.create(PropertiesService.getUserProperties(),
+            SpreadsheetApp.getActiveSpreadsheet());
+        SheetModel.create(SpreadsheetApp.getActiveSpreadsheet())
+            .bindSheetSampleData(EMD.BotSetup.sheet({}));
     });
 
     test('should create a SetupFlow instance', () => {

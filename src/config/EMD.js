@@ -604,7 +604,267 @@ EMD.BotSetup = {
                                 command: '/admin',
                                 description: 'Admin command for bot management'
                             }
-                        ])],
+                        ]),
+                    // Spanish
+                    JSON.stringify(
+                        [
+                            {   // '/start' command
+                                command: '/start',
+                                description: 'Iniciar el bot'
+                            },
+                            {   // '/help' command
+                                command: '/help',
+                                description: 'Obtener ayuda sobre el uso del bot o informar un problema'
+                            },
+                            {   // '/about' command
+                                command: '/about',
+                                description: 'Acerca del bot'
+                            },
+                            { // lang command
+                                command: '/lang',
+                                description: 'envía "/lang es" para establecer el español como tu idioma, o "/lang list" para obtener una lista de idiomas disponibles'
+                            },
+                            { // '/admin' command
+                                command: '/admin',
+                                description: 'Comando de administrador para la gestión del bot'
+                            }
+                        ]),
+                    // French
+                    JSON.stringify(
+                        [
+                            {   // '/start' command
+                                command: '/start',
+                                description: 'Démarrer le bot'
+                            },
+                            {   // '/help' command
+                                command: '/help',
+                                description: 'Obtenir de l\'aide sur l\'utilisation du bot ou signaler un problème'
+                            },
+                            {   // '/about' command
+                                command: '/about',
+                                description: 'À propos du bot'
+                            },
+                            { // lang command
+                                command: '/lang',
+                                description: 'envoyer "/lang fr" pour définir le français comme votre langue, ou "/lang list" pour obtenir une liste des langues disponibles'
+                            },
+                            { // '/admin' command
+                                command: '/admin',
+                                description: 'Commande d\'administration pour la gestion du bot'
+                            }
+                        ]),
+                    // Arabic
+                    JSON.stringify(
+                        [
+                            {   // '/start' command
+                                command: '/start',
+                                description: 'بدء تشغيل البوت'
+                            },
+                            {   // '/help' command
+                                command: '/help',
+                                description: 'الحصول على مساعدة حول استخدام البوت أو الإبلاغ عن مشكلة'
+                            },
+                            {   // '/about' command
+                                command: '/about',
+                                description: 'معلومات عن البوت'
+                            },
+                            { // lang command
+                                command: '/lang',
+                                description: 'أرسل "/lang ar" لتعيين العربية كلغتك، أو "/lang list" للحصول على قائمة باللغات المتاحة'
+                            },
+                            { // '/admin' command
+                                command: '/admin',
+                                description: 'أمر الإدارة لإدارة البوت'
+                            }
+                        ]),
+                    // German
+                    JSON.stringify(
+                        [
+                            {   // '/start' command
+                                command: '/start',
+                                description: 'Bot starten'
+                            },
+                            {   // '/help' command
+                                command: '/help',
+                                description: 'Hilfe zur Verwendung des Bots oder zur Meldung eines Problems erhalten'
+                            },
+                            {   // '/about' command
+                                command: '/about',
+                                description: 'Über den Bot'
+                            },
+                            { // lang command
+                                command: '/lang',
+                                description: 'Senden Sie "/lang de", um Deutsch als Ihre Sprache festzulegen, oder "/lang list", um eine Liste der verfügbaren Sprachen zu erhalten'
+                            },
+                            { // '/admin' command
+                                command: '/admin',
+                                description: 'Admin-Befehl zur Verwaltung des Bots'
+                            }
+                        ]),
+                    // Italian
+                    JSON.stringify(
+                        [
+                            {   // '/start' command
+                                command: '/start',
+                                description: 'Avvia il bot'
+                            },
+                            {   // '/help' command
+                                command: '/help',
+                                description: 'Ottieni aiuto sull\'uso del bot o segnala un problema'
+                            },
+                            {   // '/about' command
+                                command: '/about',
+                                description: 'Informazioni sul bot'
+                            },
+                            { // lang command
+                                command: '/lang',
+                                description: 'Invia "/lang it" per impostare l\'italiano come lingua, oppure "/lang list" per ottenere un elenco delle lingue disponibili'
+                            },
+                            { // '/admin' command
+                                command: '/admin',
+                                description: 'Comando di amministrazione per gestire il bot'
+                            }
+                        ]),
+                    // Portuguese
+                    JSON.stringify([
+                        {   // '/start' command
+                            command: '/start',
+                            description: 'Iniciar o bot'
+                        },
+                        {   // '/help' command
+                            command: '/help',
+                            description: 'Obter ajuda sobre o uso do bot ou relatar um problema'
+                        },
+                        {   // '/about' command
+                            command: '/about',
+                            description: 'Informações sobre o bot'
+                        },
+                        { // lang command
+                            command: '/lang',
+                            description: 'Envie "/lang pt" para definir o português como seu idioma, ou "/lang list" para obter uma lista de idiomas disponíveis'
+                        },
+                        { // '/admin' command
+                            command: '/admin',
+                            description: 'Comando de administração para gerenciar o bot'
+                        }
+                    ]),
+                    // Russian
+                    JSON.stringify([
+                        {   // '/start' command
+                            command: '/start',
+                            description: 'Запустить бота'
+                        },
+                        {   // '/help' command
+                            command: '/help',
+                            description: 'Получить помощь по использованию бота или сообщить о проблеме'
+                        },
+                        {   // '/about' command
+                            command: '/about',
+                            description: 'Информация о боте'
+                        },
+                        { // lang command
+                            command: '/lang',
+                            description: 'Отправьте "/lang ru", чтобы установить русский в качестве вашего языка, или "/lang list", чтобы получить список доступных языков'
+                        },
+                        { // '/admin' command
+                            command: '/admin',
+                            description: 'Команда администратора для управления ботом'
+                        }
+                    ]),
+                    // Chinese
+                    JSON.stringify([
+                        {   // '/start' command
+                            command: '/start',
+                            description: '启动机器人'
+                        },
+                        {   // '/help' command
+                            command: '/help',
+                            description: '获取有关使用机器人的帮助或报告问题'
+                        },
+                        {   // '/about' command
+                            command: '/about',
+                            description: '有关机器人的信息'
+                        },
+                        { // lang command
+                            command: '/lang',
+                            description: '发送"/lang zh"将中文设置为您的语言，或"/lang list"以获取可用语言的列表'
+                        },
+                        { // '/admin' command
+                            command: '/admin',
+                            description: '用于管理机器人的管理员命令'
+                        }
+                    ]),
+                    // Japanese
+                    JSON.stringify([
+                        {   // '/start' command
+                            command: '/start',
+                            description: 'ボットを開始します'
+                        },
+                        {   // '/help' command
+                            command: '/help',
+                            description: 'ボットの使用に関するヘルプを取得するか、問題を報告します'
+                        },
+                        {   // '/about' command
+                            command: '/about',
+                            description: 'ボットに関する情報'
+                        },
+                        { // lang command
+                            command: '/lang',
+                            description: '"/lang ja"を送信して日本語をあなたの言語として設定するか、"/lang list"を送信して利用可能な言語のリストを取得します'
+                        },
+                        { // '/admin' command
+                            command: '/admin',
+                            description: 'ボットを管理するための管理者コマンド'
+                        }
+                    ]),
+                    // Korean
+                    JSON.stringify([
+                        {   // '/start' command
+                            command: '/start',
+                            description: '봇을 시작합니다'
+                        },
+                        {   // '/help' command
+                            command: '/help',
+                            description: '봇 사용에 대한 도움을 받거나 문제를 보고합니다'
+                        },
+                        {   // '/about' command
+                            command: '/about',
+                            description: '봇에 대한 정보'
+                        },
+                        { // lang command
+                            command: '/lang',
+                            description: '"/lang ko"를 보내어 한국어를 귀하의 언어로 설정하거나 "/lang list"를 보내어 사용 가능한 언어 목록을 가져옵니다'
+                        },
+                        { // '/admin' command
+                            command: '/admin',
+                            description: '봇을 관리하기 위한 관리자 명령'
+                        }
+                    ]),
+                    // Hebrew
+                    JSON.stringify([
+                        {   // '/start' command
+                            command: '/start',
+                            description: 'הפעל את הבוט'
+                        },
+                        {   // '/help' command
+                            command: '/help',
+                            description: 'קבל עזרה בשימוש בבוט או דווח על בעיות'
+                        },
+                        {   // '/about' command
+                            command: '/about',
+                            description: 'מידע על הבוט'
+                        },
+                        { // lang command
+                            command: '/lang',
+                            description: 'שלח "/lang he" כדי להגדיר את העברית כשפה שלך, או "/lang list" כדי לקבל רשימה של שפות זמינות'
+                        },
+                        { // '/admin' command
+                            command: '/admin',
+                            description: 'פקודת מנהל עבור ניהול הבוט'
+                        }
+                    ])
+                ],
+                // Webhook URL
                 ['webhook_url',
                     'https://script.google.com/macros/s/[YOUR_DEPLOYMENT_ID]/exec']
             ]
