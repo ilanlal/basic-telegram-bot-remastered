@@ -130,7 +130,7 @@ EMD.Home = {
                             id: 'data_view_widget',
                             TextParagraph: {
                                 text: `Data: ${JSON.stringify(data, null, 2)}`,
-                                maxLines: 10
+                                maxLines: 35
                             }
                         }
                     ]
@@ -324,7 +324,7 @@ EMD.EnvironmentVariables = {
                                 id: 'data_view_widget',
                                 TextParagraph: {
                                     text: `Data: ${JSON.stringify(data, null, 2)}`,
-                                    maxLines: 10
+                                    maxLines: 35
                                 }
                             }
                         ]
@@ -359,7 +359,7 @@ EMD.BotSetup = {
                             { // Bot token set state
                                 id: 'bot_token_set_state',
                                 TextParagraph: {
-                                    text: `🔑 Bot Token currently: ${data.isActive ? '✅ Set' : '❌ Not Set'}`
+                                    text: `🔑 Bot Token currently: ${data.setupFlow?.botTokenSet ? '✅ Set' : '❌ Not Set'}`
                                 }
                             },
                             { // Get Me Result
@@ -497,7 +497,7 @@ EMD.BotSetup = {
                                 id: 'data_view_widget',
                                 TextParagraph: {
                                     text: `Data: ${JSON.stringify(data, null, 2)}`,
-                                    maxLines: 10
+                                    maxLines: 35
                                 }
                             }
                         ]
@@ -2609,7 +2609,7 @@ EMD.About = {
                             id: 'data_view_widget',
                             TextParagraph: {
                                 text: `Data: ${JSON.stringify(data, null, 2)}`,
-                                maxLines: 10
+                                maxLines: 35
                             }
                         }
                     ]
@@ -2658,7 +2658,7 @@ EMD.Account = {
                             id: 'data_view_widget',
                             TextParagraph: {
                                 text: `Data: ${JSON.stringify(data, null, 2)}`,
-                                maxLines: 10
+                                maxLines: 35
                             }
                         }
                     ]
