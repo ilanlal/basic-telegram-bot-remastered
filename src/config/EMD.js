@@ -183,14 +183,14 @@ EMD.EnvironmentVariables = {
                                     fieldName: 'txt_test_deployment_id',
                                     hint: 'Enter test deployment ID'
                                 },
-                                propertyName: EnvironmentModel.InputMeta.TEST_DEPLLOYMENT_ID
+                                propertyName: EnvironmentModel.InputMeta.TEST_DEPLOYMENT_ID
                             },
                             { // Identify Deployment ID Button
                                 id: 'identify_deployment_id_button',
                                 TextButton: {
                                     text: '💾 Save Deployment ID',
                                     onClick: {
-                                        functionName: 'EnvironmentHandler.Addon.onIdentifyDeploymentIdClick'
+                                        functionName: 'EnvironmentHandler.Addon.onSaveDeploymentIdClick'
                                     }
                                 }
                             }

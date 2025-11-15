@@ -20,11 +20,11 @@ class EnvironmentHandler {
 };
 
 EnvironmentHandler.Addon = {
-    onIdentifyDeploymentIdClick: (e) => {
+    onSaveDeploymentIdClick: (e) => {
         return new EnvironmentHandler
             .AddonWrapper(
                 EnvironmentHandler.prototype.userProperties)
-            .handleIdentifyDeploymentIdClick(e);
+            .handleSaveDeploymentIdClick(e);
 
     },
     onSaveAdminChatIdClick: (e) => {
@@ -86,10 +86,18 @@ EnvironmentHandler.AddonWrapper = class {
         this._activeSpreadsheet = activeSpreadsheet;
     }
 
-    handleIdentifyDeploymentIdClick(e) {
+    handleSaveDeploymentIdClick(e) {
         try {
-            const deploymentId = e.parameters?.deploymentId || null;
-            const testDeploymentId = e.parameters?.testDeploymentId || null;
+            let deploymentId = e.parameters?.deploymentId || null;
+            if (!deploymentId) {
+                const formInputs = e.commonEventObject.formInputs || {};
+                deploymentId = formInputs['txt_deployment_id']?.stringInputs?.value[0] || null;
+            }
+            let testDeploymentId = e.parameters?.testDeploymentId || null;
+            if (!testDeploymentId) {
+                const formInputs = e.commonEventObject.formInputs || {};
+                testDeploymentId = formInputs['txt_test_deployment_id']?.stringInputs?.value[0] || null;
+            }
 
             const controller = BotSetupController
                 .create(this._userProperties, this._activeSpreadsheet);

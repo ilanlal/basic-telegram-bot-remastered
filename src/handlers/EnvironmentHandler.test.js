@@ -11,13 +11,27 @@ describe('EnvironmentHandler', () => {
         expect(handler).toBeInstanceOf(EnvironmentHandler);
     });
 
-    // handleIdentifyDeploymentIdClick
-    it('should handle onIdentifyDeploymentIdClick', () => {
+    // handleSaveDeploymentIdClick
+    it('should handle onSaveDeploymentIdClick', () => {
         const deploymentId = 'AKfycbx...';
+        const testDeploymentId = 'AKfycbz...';
         const mockEvent = {
-            parameters: { deploymentId: deploymentId }
+            commonEventObject: {
+                formInputs: {
+                    ['txt_deployment_id']: {
+                        stringInputs: {
+                            value: [deploymentId]
+                        }
+                    },
+                    ['txt_test_deployment_id']: {
+                        stringInputs: {
+                            value: [testDeploymentId]
+                        }
+                    }
+                }
+            }
         };
-        const actionResponse = EnvironmentHandler.Addon.onIdentifyDeploymentIdClick(mockEvent);
+        const actionResponse = EnvironmentHandler.Addon.onSaveDeploymentIdClick(mockEvent);
         expect(actionResponse).toBeDefined();
         const data = actionResponse.getData();
         expect(data).toBeDefined();
