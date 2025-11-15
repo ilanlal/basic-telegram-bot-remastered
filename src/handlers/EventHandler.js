@@ -66,7 +66,7 @@ EventHandler.AddonWrapper = class {
     }
 
     handleOpenAccountCard(e) {
-         return EntityHandler.Addon
+        return EntityHandler.Addon
                 .onOpenCardClick({ parameters: { entityName: 'Account' } });
     }
 
