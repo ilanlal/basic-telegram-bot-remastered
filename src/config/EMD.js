@@ -7,7 +7,6 @@ class EMD {
 
 EMD.DEFAULT_IMAGE_URL = 'https://raw.githubusercontent.com/ilanlal/basic-telegram-bot-remastered/main/assets/logo480.png';
 
-
 EMD.Home = {
     entityName: 'Home',
     displayName: 'Home',
@@ -32,18 +31,17 @@ EMD.Home = {
                         {   // Environment variables widget
                             id: 'environment_variables_widget',
                             DecoratedText: {
-                                text: 'Environment Variables',
-                                topLabel: 'Environment Variables',
-                                bottomLabel: 'Manage your environment variables here',
+                                text: data?.environmentTraffic || 'Configure your environment variables to get started',
+                                topLabel: 'Step #1: Environment Variables',
+                                bottomLabel: 'Click 🔩 to manage your environment variables',
                                 wrapText: false,
                                 textButton: {
                                     disabled: false,
-                                    text: '🌍 Manage',
+                                    text: '🔩',
                                     onClick: {
                                         functionName: 'EntityHandler.Addon.onOpenCardClick',
                                         parameters: {
-                                            entityName: 'EnvironmentVariables',
-                                            setupFlow: decodeURIComponent(JSON.stringify(data?.setupFlow || {}))
+                                            entityName: 'EnvironmentVariables'
                                         }
                                     }
                                 }
@@ -51,7 +49,7 @@ EMD.Home = {
                         }
                     ]
                 },
-                {   // Telegram Bot API actions section
+                {   // Bot Setup Section
                     // header: 'Telegram Bot Setup',
                     collapsible: true,
                     numUncollapsibleWidgets: 1,
@@ -59,37 +57,37 @@ EMD.Home = {
                         {   // Bot setup widget
                             id: 'bot_setup_widget',
                             DecoratedText: {
-                                text: 'Execute api actions on your bot',
-                                topLabel: 'API & Bot Setup',
-                                bottomLabel: '🤖 (getMe, setWebhook, ..)',
+                                text: 'Step #2: Setup Your Bot',
+                                topLabel: '📡 Bot Setup',
+                                bottomLabel: 'Click on 🤖 to setup your bot API token, set bot info & webhook',
                                 wrapText: false,
                                 textButton: {
                                     disabled: false,
-                                    text: '📡 API Actions',
+                                    text: '🤖',
                                     onClick: {
-                                        functionName: 'EventHandler.Addon.onBotSetupClick',
-                                        parameters: { action: 'setupBot' }
+                                        functionName: 'EntityHandler.Addon.onOpenCardClick',
+                                        parameters: { entityName: 'BotSetup' }
                                     }
                                 }
                             }
                         }
                     ]
                 },
-                {   // Advanced Settings Section
-                    // header: 'Advanced Settings',
+                {   // Automation Section
+                    // header: 'Automation',
                     collapsible: true,
                     numUncollapsibleWidgets: 1,
                     widgets: [
                         {   // Automation management widget
                             id: 'automation_management_widget',
                             DecoratedText: {
-                                text: 'Automation management',
-                                topLabel: `Automation ${data?.totalAutomations || 0} workflows`,
-                                bottomLabel: '⚡ Menues, workflows, triggers',
+                                text: 'Automation - Workflow Management',
+                                topLabel: `Total: ${data?.totalAutomations || 0} workflows`,
+                                bottomLabel: 'Click ⚡ to manage your automations',
                                 wrapText: false,
                                 textButton: {
                                     disabled: false,
-                                    text: '⚡ Manage',
+                                    text: '⚡',
                                     onClick: {
                                         functionName: 'EntityHandler.Addon.onOpenCardClick',
                                         parameters: { entityName: 'Automation' }
@@ -107,13 +105,13 @@ EMD.Home = {
                         {  // Customer management widget
                             id: 'customer_management_widget',
                             DecoratedText: {
-                                text: 'Customer management',
-                                topLabel: `👥 Customers ${data?.totalCustomer || 0}`,
-                                bottomLabel: 'Manage your customers here',
+                                text: 'CRM: Manage Your Customers',
+                                topLabel: `Total: ${data?.totalCustomer || 0} customers`,
+                                bottomLabel: 'Click 👥 to manage your customers (telegram users)',
                                 wrapText: false,
                                 textButton: {
                                     disabled: false,
-                                    text: '👥 Customer Management',
+                                    text: '👥',
                                     onClick: {
                                         functionName: 'EntityHandler.Addon.onOpenCardClick',
                                         parameters: { entityName: 'Customer' }
@@ -132,7 +130,7 @@ EMD.Home = {
                             id: 'data_view_widget',
                             TextParagraph: {
                                 text: `Data: ${JSON.stringify(data, null, 2)}`,
-                                maxLines: 10
+                                maxLines: 35
                             }
                         }
                     ]
@@ -150,7 +148,7 @@ EMD.EnvironmentVariables = {
         return {
             name: 'environment_variables_Card',
             header: {
-                title: '🌍 Environment Variables',
+                title: '🔩 Environment Variables',
                 subTitle: 'Configure your environment variables here.',
                 imageUrl: EMD.DEFAULT_IMAGE_URL,
                 imageStyle: CardService.ImageStyle.SQUARE,
@@ -166,24 +164,33 @@ EMD.EnvironmentVariables = {
                             {
                                 id: 'deployment_id_info',
                                 TextParagraph: {
-                                    text: `🚀 Deployment ID is currently: ${data.setupFlow?.deploymentIdSet ? '✅ Set' : '❌ Not Set'}`
+                                    text: `🚀 Deployment ID is currently: ${data.environmentVariables?.deploymentIdSet ? '✅ Set' : '❌ Not Set'}`
                                 }
                             },
-                            {   // Deployment ID Variable
+                            {   // Production Deployment ID Variable
                                 id: 'deployment_id_variable',
                                 TextInput: {
-                                    title: 'Deployment ID',
+                                    title: 'Production Deployment ID',
                                     fieldName: 'txt_deployment_id',
-                                    hint: 'Enter deployment ID'
+                                    hint: 'Enter production deployment ID'
                                 },
-                                propertyName: 'deployment_id'
+                                propertyName: EnvironmentModel.InputMeta.DEPLOYMENT_ID
+                            },
+                            {   // Test Deployment ID Variable
+                                id: 'test_deployment_id_variable',
+                                TextInput: {
+                                    title: 'Test Deployment ID',
+                                    fieldName: 'txt_test_deployment_id',
+                                    hint: 'Enter test deployment ID'
+                                },
+                                propertyName: EnvironmentModel.InputMeta.TEST_DEPLOYMENT_ID
                             },
                             { // Identify Deployment ID Button
                                 id: 'identify_deployment_id_button',
                                 TextButton: {
                                     text: '💾 Save Deployment ID',
                                     onClick: {
-                                        functionName: 'EnvironmentHandler.Addon.onIdentifyDeploymentIdClick'
+                                        functionName: 'EnvironmentHandler.Addon.onSaveDeploymentIdClick'
                                     }
                                 }
                             }
@@ -197,7 +204,7 @@ EMD.EnvironmentVariables = {
                             {
                                 id: 'active_spreadsheet_id_info',
                                 TextParagraph: {
-                                    text: `📊 Active Spreadsheet ID is currently: ${data.setupFlow?.activeSpreadsheetIdSet ? 'Custome' : '[current]'}`
+                                    text: `📊 Active Spreadsheet ID is currently: ${data.environmentVariables?.activeSpreadsheetIdSet ? 'Custome' : '[current]'}`
                                 }
                             },
                             {   // Active Spreadsheet ID Variable
@@ -229,7 +236,7 @@ EMD.EnvironmentVariables = {
                             {
                                 id: 'default_language_info',
                                 TextParagraph: {
-                                    text: `🌐 Default Language is currently: ${data.setupFlow?.defaultLanguageSet ? '✅ Set' : '❌ Not Set'}`
+                                    text: `🌐 Default Language is currently: ${data.environmentVariables?.defaultLanguageSet ? '✅ Set' : '❌ Not Set'}`
                                 }
                             },
                             {   // Default Language Variable
@@ -261,7 +268,7 @@ EMD.EnvironmentVariables = {
                             { // Admin Chat ID Info
                                 id: 'admin_chat_id_info',
                                 TextParagraph: {
-                                    text: `👑 Admin Chat ID is currently: ${data.setupFlow?.chatIdSet ? '✅ Set' : '❌ Not Set'}`
+                                    text: `👑 Admin Chat ID is currently: ${data.environmentVariables?.chatIdSet ? '✅ Set' : '❌ Not Set'}`
                                 }
                             },
                             { // Admin Chat ID Variable
@@ -294,7 +301,7 @@ EMD.EnvironmentVariables = {
                             {
                                 id: 'log_events_info',
                                 TextParagraph: {
-                                    text: `🛰️ Log Events currently: ${data.setupFlow?.debugModeSet ? '🟢 On' : '🔴 Off'}`
+                                    text: `🛰️ Log Events currently: ${data.environmentVariables?.debugModeSet ? '🟢 On' : '🔴 Off'}`
                                 }
                             },
                             {   // Log Events widget
@@ -326,7 +333,7 @@ EMD.EnvironmentVariables = {
                                 id: 'data_view_widget',
                                 TextParagraph: {
                                     text: `Data: ${JSON.stringify(data, null, 2)}`,
-                                    maxLines: 10
+                                    maxLines: 35
                                 }
                             }
                         ]
@@ -361,7 +368,7 @@ EMD.BotSetup = {
                             { // Bot token set state
                                 id: 'bot_token_set_state',
                                 TextParagraph: {
-                                    text: `🔑 Bot Token currently: ${data.isActive ? '✅ Set' : '❌ Not Set'}`
+                                    text: `🔑 Bot Token currently: ${data.setupFlow?.botTokenSet ? '✅ Set' : '❌ Not Set'}`
                                 }
                             },
                             { // Get Me Result
@@ -377,14 +384,14 @@ EMD.BotSetup = {
                                     fieldName: 'txt_bot_api_token',
                                     hint: 'Enter bot API token'
                                 },
-                                propertyName: 'bot_api_token'
+                                propertyName: EnvironmentModel.InputMeta.BOT_API_TOKEN
                             },
                             { // Identify Token Button
                                 id: 'identify_token_button',
                                 TextButton: {
                                     text: '🆔 Identify Token',
                                     onClick: {
-                                        functionName: 'EnvironmentHandler.Addon.onIdentifyTokenClick'
+                                        functionName: 'BotHandler.Addon.onIdentifyTokenClick'
                                     }
                                 }
                             }
@@ -404,22 +411,46 @@ EMD.BotSetup = {
                             { // Webhook URL info
                                 id: 'webhook_url_info',
                                 TextParagraph: {
-                                    text: JSON.stringify(data.getWebhookInfoResult || {}, null, 2)
+                                    text: JSON.stringify(data.getWebhookInfoResult || {}, null, 2),
+                                    maxLines: 35
                                 }
                             },
-                            { // DecoratedText for webhook action (set,delete)
-                                id: 'webhook_action',
+                            { // DecoratedText for prod webhook action (set,delete)
+                                id: 'prod_webhook_action',
                                 DecoratedText: {
-                                    text: 'Take action on your bot webhook',
+                                    text: 'Production Webhook Action',
                                     topLabel: `🔗 Webhook Action`,
                                     bottomLabel: `${data.setupFlow?.webhookSet ? 'Delete or update your webhook' : 'Set up your webhook'}`,
                                     wrapText: false,
                                     textButton: {
-                                        disabled: false,
+                                        disabled: (data.environmentVariables?.deploymentIdSet ? false : true) || (data.environmentVariables?.botTokenSet ? false : true),
                                         text: `${data.setupFlow?.webhookSet ? '🗑️ Delete Webhook' : '📡 Set Webhook'}`,
                                         onClick: {
-                                            functionName: 'BotHandler.Addon.onWebhookManagementClick',
-                                            parameters: { action: data.setupFlow?.webhookSet ? 'deleteWebhook' : 'setWebhook' }
+                                            functionName: 'BotHandler.Addon.onWebhookToggleClick',
+                                            parameters: {
+                                                action: data.setupFlow?.webhookSet ? 'deleteWebhook' : 'setWebhook',
+                                                environment: 'exec'
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            { // DecoratedText for test webhook action (set,delete)
+                                id: 'test_webhook_action',
+                                DecoratedText: {
+                                    text: 'Test Webhook Action',
+                                    topLabel: `🔗 Test Webhook Action`,
+                                    bottomLabel: `${data.setupFlow?.webhookSet ? 'Delete or update your webhook' : 'Set up your webhook'}`,
+                                    wrapText: false,
+                                    textButton: {
+                                        disabled: data.setupFlow?.webhookSet ? true : (data.environmentVariables?.testDeploymentIdSet ? false : true) || (data.environmentVariables?.botTokenSet ? false : true),
+                                        text: `${data.setupFlow?.webhookSet ? '🗑️ Delete Webhook' : '📡 Set Webhook'}`,
+                                        onClick: {
+                                            functionName: 'BotHandler.Addon.onWebhookToggleClick',
+                                            parameters: {
+                                                action: data.setupFlow?.webhookSet ? 'deleteWebhook' : 'setWebhook',
+                                                environment: 'test'
+                                            }
                                         }
                                     }
                                 }
@@ -499,7 +530,7 @@ EMD.BotSetup = {
                                 id: 'data_view_widget',
                                 TextParagraph: {
                                     text: `Data: ${JSON.stringify(data, null, 2)}`,
-                                    maxLines: 10
+                                    maxLines: 35
                                 }
                             }
                         ]
@@ -510,7 +541,7 @@ EMD.BotSetup = {
     sheet: (data = {}) => {
         return {
             name: '🤖 Bot',
-            columns: ['param', 'default', 'es', 'fr', 'ar', 'de', 'it', 'pt', 'ru', 'zh', 'ja', 'ko', 'he'],
+            columns: ['key', 'default', 'es', 'fr', 'ar', 'de', 'it', 'pt', 'ru', 'zh', 'ja', 'ko', 'he'],
             sample_data: [
                 // Bot name; 0-64 characters. Pass an empty string to remove the dedicated name for the given language.
                 ['name',
@@ -542,40 +573,40 @@ EMD.BotSetup = {
                     'מה הבוט יכול לעשות? צא למסע עם הבוט הזה, חקור את התכונות שלו!'],
                 // Description of the bot; 0-512 characters. Pass an empty string to remove the dedicated description for the given language.
                 ['description',
-                    '<b>Telegram Bots</b> are secure and private channels ideal marketing tools within customer relationship management (CRM) systems. \n\n'
+                    'Telegram Bots are secure and private channels ideal marketing tools within customer relationship management (CRM) systems. \n\n'
                     + 'Promote your goods and services, send notifications, conduct surveys, and much more!\n\n'
                     + 'Group your customers, create targeted communication channels, and engage with your audience like never before!\n\n',
-                    '<b>Los bots de Telegram</b> son canales seguros y privados, herramientas de marketing ideales dentro de los sistemas de gestión de relaciones con los clientes (CRM). \n\n'
+                    'Los bots de Telegram son canales seguros y privados, herramientas de marketing ideales dentro de los sistemas de gestión de relaciones con los clientes (CRM). \n\n'
                     + 'Promociona tus productos y servicios, envía notificaciones, realiza encuestas y mucho más.\n\n'
                     + 'Agrupa a tus clientes, crea canales de comunicación segmentados y conecta con tu audiencia como nunca antes.\n\n',
-                    '<b>Les bots Telegram</b> sont des canaux sécurisés et privés, des outils de marketing idéaux au sein des systèmes de gestion de la relation client (CRM). \n\n'
+                    'Les bots Telegram sont des canaux sécurisés et privés, des outils de marketing idéaux au sein des systèmes de gestion de la relation client (CRM). \n\n'
                     + 'Faites la promotion de vos biens et services, envoyez des notifications, réalisez des sondages, et bien plus encore !\n\n'
                     + 'Regroupez vos clients, créez des canaux de communication ciblés, et engagez-vous avec votre audience comme jamais auparavant !\n\n',
-                    '<b>روبوتات تيليجرام</b> هي قنوات آمنة وخاصة، وأدوات تسويقية مثالية ضمن أنظمة إدارة علاقات العملاء (CRM). \n\n'
+                    'روبوتات تيليجرام هي قنوات آمنة وخاصة، وأدوات تسويقية مثالية ضمن أنظمة إدارة علاقات العملاء (CRM). \n\n'
                     + 'قم بالترويج لمنتجاتك وخدماتك، وأرسل الإشعارات، وأجرِ الاستطلاعات، وأكثر من ذلك بكثير!\n\n'
                     + 'قم بتجميع عملائك، وأنشئ قنوات اتصال مستهدفة، وتفاعل مع جمهورك كما لم يحدث من قبل!\n\n',
-                    '<b>Telegram-Bots</b> sind sichere und private Kanäle, ideale Marketing-Tools innerhalb von Customer-Relationship-Management-(CRM)-Systemen. \n\n'
+                    'Telegram-Bots sind sichere und private Kanäle, ideale Marketing-Tools innerhalb von Customer-Relationship-Management-(CRM)-Systemen. \n\n'
                     + 'Bewerben Sie Ihre Waren und Dienstleistungen, senden Sie Benachrichtigungen, führen Sie Umfragen durch und vieles mehr!\n\n'
                     + 'Gruppieren Sie Ihre Kunden, erstellen Sie gezielte Kommunikationskanäle und interagieren Sie wie nie zuvor mit Ihrem Publikum!\n\n',
-                    '<b>I bot di Telegram</b> sono canali sicuri e privati, strumenti di marketing ideali all\'interno dei sistemi di gestione delle relazioni con i clienti (CRM). \n\n'
+                    'I bot di Telegram sono canali sicuri e privati, strumenti di marketing ideali all\'interno dei sistemi di gestione delle relazioni con i clienti (CRM). \n\n'
                     + 'Promuovi i tuoi beni e servizi, invia notifiche, conduci sondaggi e molto altro!\n\n'
                     + 'Raggruppa i tuoi clienti, crea canali di comunicazione mirati e interagisci con il tuo pubblico come mai prima d\'ora!\n\n',
-                    '<b>Os bots do Telegram</b> são canais seguros e privados, ferramentas de marketing ideais dentro dos sistemas de gestão de relacionamento com o cliente (CRM). \n\n'
+                    'Os bots do Telegram são canais seguros e privados, ferramentas de marketing ideais dentro dos sistemas de gestão de relacionamento com o cliente (CRM). \n\n'
                     + 'Promova seus bens e serviços, envie notificações, realize pesquisas e muito mais!\n\n'
                     + 'Agrupe seus clientes, crie canais de comunicação direcionados e interaja com seu público como nunca antes!\n\n',
-                    '<b>Телеграм-боты</b> — это безопасные и приватные каналы, идеальные маркетинговые инструменты в системах управления взаимоотношениями с клиентами (CRM). \n\n'
+                    'Телеграм-боты — это безопасные и приватные каналы, идеальные маркетинговые инструменты в системах управления взаимоотношениями с клиентами (CRM). \n\n'
                     + 'Продвигайте свои товары и услуги, отправляйте уведомления, проводите опросы и многое другое!\n\n'
                     + 'Группируйте своих клиентов, создавайте целевые каналы связи и взаимодействуйте с вашей аудиторией как никогда ранее!\n\n',
-                    '<b>电报机器人</b> 是安全且私密的频道，是客户关系管理（CRM）系统中理想的营销工具。 \n\n'
+                    '电报机器人 是安全且私密的频道，是客户关系管理（CRM）系统中理想的营销工具。 \n\n'
                     + '推广您的商品和服务，发送通知，进行调查，等等！\n\n'
                     + '将客户分组，创建针对性的沟通渠道，与受众进行前所未有的互动！\n\n',
-                    '<b>テレグラムボット</b> は、安全でプライベートなチャネルであり、顧客関係管理（CRM）システム内で理想的なマーケティングツールです。 \n\n'
+                    'テレグラムボット は、安全でプライベートなチャネルであり、顧客関係管理（CRM）システム内で理想的なマーケティングツールです。 \n\n'
                     + '商品やサービスを宣伝し、通知を送信し、アンケートを実施するなど、さまざまなことができます！\n\n'
                     + '顧客をグループ化し、ターゲットを絞ったコミュニケーションチャネルを作成し、かつてない方法でオーディエンスと交流しましょう！\n\n',
-                    '<b>텔레그램 봇</b> 은 안전하고 개인적인 채널로, 고객 관계 관리(CRM) 시스템 내에서 이상적인 마케팅 도구입니다. \n\n'
+                    '텔레그램 봇 은 안전하고 개인적인 채널로, 고객 관계 관리(CRM) 시스템 내에서 이상적인 마케팅 도구입니다. \n\n'
                     + '상품 및 서비스를 홍보하고, 알림을 보내고, 설문 조사를 수행하는 등 다양한 작업을 수행할 수 있습니다!\n\n'
                     + '고객을 그룹화하고, 대상 커뮤니케이션 채널을 만들고, 그 어느 때보다 청중과 소통하세요!\n\n',
-                    '<b>בוטים של טלגרם</b> הם ערוצים מאובטחים ופרטיים, כלים שיווקיים אידיאליים בתוך מערכות ניהול קשרי לקוחות (CRM). \n\n'
+                    'בוטים של טלגרם הם ערוצים מאובטחים ופרטיים, כלים שיווקיים אידיאליים בתוך מערכות ניהול קשרי לקוחות (CRM). \n\n'
                     + 'קדם את הסחורות והשירותים שלך, שלח התראות, ערוך סקרים ועוד!\n\n'
                     + 'קבץ את הלקוחות שלך, צור ערוצי תקשורת ממוקדים ואינטראקציה עם הקהל שלך כמו שמעולם לא היה לפני כן!\n\n']
                 ,
@@ -606,7 +637,267 @@ EMD.BotSetup = {
                                 command: '/admin',
                                 description: 'Admin command for bot management'
                             }
-                        ])],
+                        ]),
+                    // Spanish
+                    JSON.stringify(
+                        [
+                            {   // '/start' command
+                                command: '/start',
+                                description: 'Iniciar el bot'
+                            },
+                            {   // '/help' command
+                                command: '/help',
+                                description: 'Obtener ayuda sobre el uso del bot o informar un problema'
+                            },
+                            {   // '/about' command
+                                command: '/about',
+                                description: 'Acerca del bot'
+                            },
+                            { // lang command
+                                command: '/lang',
+                                description: 'envía "/lang es" para establecer el español como tu idioma, o "/lang list" para obtener una lista de idiomas disponibles'
+                            },
+                            { // '/admin' command
+                                command: '/admin',
+                                description: 'Comando de administrador para la gestión del bot'
+                            }
+                        ]),
+                    // French
+                    JSON.stringify(
+                        [
+                            {   // '/start' command
+                                command: '/start',
+                                description: 'Démarrer le bot'
+                            },
+                            {   // '/help' command
+                                command: '/help',
+                                description: 'Obtenir de l\'aide sur l\'utilisation du bot ou signaler un problème'
+                            },
+                            {   // '/about' command
+                                command: '/about',
+                                description: 'À propos du bot'
+                            },
+                            { // lang command
+                                command: '/lang',
+                                description: 'envoyer "/lang fr" pour définir le français comme votre langue, ou "/lang list" pour obtenir une liste des langues disponibles'
+                            },
+                            { // '/admin' command
+                                command: '/admin',
+                                description: 'Commande d\'administration pour la gestion du bot'
+                            }
+                        ]),
+                    // Arabic
+                    JSON.stringify(
+                        [
+                            {   // '/start' command
+                                command: '/start',
+                                description: 'بدء تشغيل البوت'
+                            },
+                            {   // '/help' command
+                                command: '/help',
+                                description: 'الحصول على مساعدة حول استخدام البوت أو الإبلاغ عن مشكلة'
+                            },
+                            {   // '/about' command
+                                command: '/about',
+                                description: 'معلومات عن البوت'
+                            },
+                            { // lang command
+                                command: '/lang',
+                                description: 'أرسل "/lang ar" لتعيين العربية كلغتك، أو "/lang list" للحصول على قائمة باللغات المتاحة'
+                            },
+                            { // '/admin' command
+                                command: '/admin',
+                                description: 'أمر الإدارة لإدارة البوت'
+                            }
+                        ]),
+                    // German
+                    JSON.stringify(
+                        [
+                            {   // '/start' command
+                                command: '/start',
+                                description: 'Bot starten'
+                            },
+                            {   // '/help' command
+                                command: '/help',
+                                description: 'Hilfe zur Verwendung des Bots oder zur Meldung eines Problems erhalten'
+                            },
+                            {   // '/about' command
+                                command: '/about',
+                                description: 'Über den Bot'
+                            },
+                            { // lang command
+                                command: '/lang',
+                                description: 'Senden Sie "/lang de", um Deutsch als Ihre Sprache festzulegen, oder "/lang list", um eine Liste der verfügbaren Sprachen zu erhalten'
+                            },
+                            { // '/admin' command
+                                command: '/admin',
+                                description: 'Admin-Befehl zur Verwaltung des Bots'
+                            }
+                        ]),
+                    // Italian
+                    JSON.stringify(
+                        [
+                            {   // '/start' command
+                                command: '/start',
+                                description: 'Avvia il bot'
+                            },
+                            {   // '/help' command
+                                command: '/help',
+                                description: 'Ottieni aiuto sull\'uso del bot o segnala un problema'
+                            },
+                            {   // '/about' command
+                                command: '/about',
+                                description: 'Informazioni sul bot'
+                            },
+                            { // lang command
+                                command: '/lang',
+                                description: 'Invia "/lang it" per impostare l\'italiano come lingua, oppure "/lang list" per ottenere un elenco delle lingue disponibili'
+                            },
+                            { // '/admin' command
+                                command: '/admin',
+                                description: 'Comando di amministrazione per gestire il bot'
+                            }
+                        ]),
+                    // Portuguese
+                    JSON.stringify([
+                        {   // '/start' command
+                            command: '/start',
+                            description: 'Iniciar o bot'
+                        },
+                        {   // '/help' command
+                            command: '/help',
+                            description: 'Obter ajuda sobre o uso do bot ou relatar um problema'
+                        },
+                        {   // '/about' command
+                            command: '/about',
+                            description: 'Informações sobre o bot'
+                        },
+                        { // lang command
+                            command: '/lang',
+                            description: 'Envie "/lang pt" para definir o português como seu idioma, ou "/lang list" para obter uma lista de idiomas disponíveis'
+                        },
+                        { // '/admin' command
+                            command: '/admin',
+                            description: 'Comando de administração para gerenciar o bot'
+                        }
+                    ]),
+                    // Russian
+                    JSON.stringify([
+                        {   // '/start' command
+                            command: '/start',
+                            description: 'Запустить бота'
+                        },
+                        {   // '/help' command
+                            command: '/help',
+                            description: 'Получить помощь по использованию бота или сообщить о проблеме'
+                        },
+                        {   // '/about' command
+                            command: '/about',
+                            description: 'Информация о боте'
+                        },
+                        { // lang command
+                            command: '/lang',
+                            description: 'Отправьте "/lang ru", чтобы установить русский в качестве вашего языка, или "/lang list", чтобы получить список доступных языков'
+                        },
+                        { // '/admin' command
+                            command: '/admin',
+                            description: 'Команда администратора для управления ботом'
+                        }
+                    ]),
+                    // Chinese
+                    JSON.stringify([
+                        {   // '/start' command
+                            command: '/start',
+                            description: '启动机器人'
+                        },
+                        {   // '/help' command
+                            command: '/help',
+                            description: '获取有关使用机器人的帮助或报告问题'
+                        },
+                        {   // '/about' command
+                            command: '/about',
+                            description: '有关机器人的信息'
+                        },
+                        { // lang command
+                            command: '/lang',
+                            description: '发送"/lang zh"将中文设置为您的语言，或"/lang list"以获取可用语言的列表'
+                        },
+                        { // '/admin' command
+                            command: '/admin',
+                            description: '用于管理机器人的管理员命令'
+                        }
+                    ]),
+                    // Japanese
+                    JSON.stringify([
+                        {   // '/start' command
+                            command: '/start',
+                            description: 'ボットを開始します'
+                        },
+                        {   // '/help' command
+                            command: '/help',
+                            description: 'ボットの使用に関するヘルプを取得するか、問題を報告します'
+                        },
+                        {   // '/about' command
+                            command: '/about',
+                            description: 'ボットに関する情報'
+                        },
+                        { // lang command
+                            command: '/lang',
+                            description: '"/lang ja"を送信して日本語をあなたの言語として設定するか、"/lang list"を送信して利用可能な言語のリストを取得します'
+                        },
+                        { // '/admin' command
+                            command: '/admin',
+                            description: 'ボットを管理するための管理者コマンド'
+                        }
+                    ]),
+                    // Korean
+                    JSON.stringify([
+                        {   // '/start' command
+                            command: '/start',
+                            description: '봇을 시작합니다'
+                        },
+                        {   // '/help' command
+                            command: '/help',
+                            description: '봇 사용에 대한 도움을 받거나 문제를 보고합니다'
+                        },
+                        {   // '/about' command
+                            command: '/about',
+                            description: '봇에 대한 정보'
+                        },
+                        { // lang command
+                            command: '/lang',
+                            description: '"/lang ko"를 보내어 한국어를 귀하의 언어로 설정하거나 "/lang list"를 보내어 사용 가능한 언어 목록을 가져옵니다'
+                        },
+                        { // '/admin' command
+                            command: '/admin',
+                            description: '봇을 관리하기 위한 관리자 명령'
+                        }
+                    ]),
+                    // Hebrew
+                    JSON.stringify([
+                        {   // '/start' command
+                            command: '/start',
+                            description: 'הפעל את הבוט'
+                        },
+                        {   // '/help' command
+                            command: '/help',
+                            description: 'קבל עזרה בשימוש בבוט או דווח על בעיות'
+                        },
+                        {   // '/about' command
+                            command: '/about',
+                            description: 'מידע על הבוט'
+                        },
+                        { // lang command
+                            command: '/lang',
+                            description: 'שלח "/lang he" כדי להגדיר את העברית כשפה שלך, או "/lang list" כדי לקבל רשימה של שפות זמינות'
+                        },
+                        { // '/admin' command
+                            command: '/admin',
+                            description: 'פקודת מנהל עבור ניהול הבוט'
+                        }
+                    ])
+                ],
+                // Webhook URL
                 ['webhook_url',
                     'https://script.google.com/macros/s/[YOUR_DEPLOYMENT_ID]/exec']
             ]
@@ -623,7 +914,7 @@ EMD.Customer = {
             name: 'customer_Card',
             header: {
                 title: '👥 Customer Management',
-                subTitle: 'Manage your customers here.',
+                subTitle: 'Manage your customers here. Customers are your Telegram bot users.',
                 imageUrl: EMD.DEFAULT_IMAGE_URL,
                 imageStyle: CardService.ImageStyle.SQUARE,
                 imageAltText: 'Customer Image'
@@ -648,7 +939,7 @@ EMD.Customer = {
                                         onClick: {
                                             functionName: 'EntityHandler.Addon.onBindSheetDataClick',
                                             parameters: {
-                                                api: 'Automation'
+                                                entityName: 'Customer'
                                             }
                                         }
                                     }
@@ -662,7 +953,7 @@ EMD.Customer = {
     sheet: (data = {}) => {
         return {
             name: '👥  Members',
-            columns: ['Created on', 'chat_id', 'username', 'First Name', 'Last Name', 'language_code', 'Data']
+            columns: ['Created on', 'chat_id', 'username', 'First Name', 'Last Name', 'language_code', 'is_bot', 'Data']
         }
     }
 }
@@ -701,7 +992,32 @@ EMD.Automation = {
                                         onClick: {
                                             functionName: 'EntityHandler.Addon.onBindSheetDataClick',
                                             parameters: {
-                                                api: 'Automation'
+                                                entityName: 'Automation'
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    { // clear cache memory section
+                        // header: 'Cache Management',
+                        collapsible: true,
+                        widgets: [
+                            {
+                                id: 'clear_cache_widget',
+                                DecoratedText: {
+                                    topLabel: '🧹 Clear Cache',
+                                    text: 'Clear the cache to free up memory and improve performance.',
+                                    bottomLabel: 'This action cannot be undone.',
+                                    wrapText: false,
+                                    textButton: {
+                                        text: '🧹 Clear Cache',
+                                        disabled: false,
+                                        onClick: {
+                                            functionName: 'EntityHandler.Addon.onClearCacheClick',
+                                            parameters: {
+                                                prefix: 'Automation'
                                             }
                                         }
                                     }
@@ -1776,7 +2092,7 @@ EMD.Automation = {
                                     'Welcome to the Admin Panel. Here you can manage various aspects of the bot and its functionalities.\n\n' +
                                     'Use the buttons below to navigate through the admin features.',
                                 parse_mode: 'HTML',
-                                media: "https://www.gstatic.com/webp/gallery/2.jpg",
+                                photo: "https://www.gstatic.com/webp/gallery/2.jpg",
                                 reply_markup: {
                                     inline_keyboard: [
                                         [{ text: "User Management", callback_data: "adminUserManagement" }],
@@ -1801,7 +2117,7 @@ EMD.Automation = {
                                     '4. <b>Report an Issue:</b> If you encounter any problems, please let us know so we can improve your experience.\n\n' +
                                     'If you need assistance, feel free to reach out!\n\n',
                                 parse_mode: 'HTML',
-                                media: "https://www.gstatic.com/webp/gallery/2.jpg",
+                                photo: "https://www.gstatic.com/webp/gallery/2.jpg",
                                 reply_markup: {
                                     inline_keyboard: [
                                         [{ text: "Getting Started", web_app: { url: "https://github.com/ilanlal/basic-telegram-bot-remastered#readme" } }],
@@ -1826,7 +2142,7 @@ EMD.Automation = {
                                     + '4. Interactive inline keyboards for user engagement.\n\n'
                                     + 'Feel free to explore and interact with the bot!',
                                 parse_mode: 'HTML',
-                                media: "https://www.gstatic.com/webp/gallery/3.jpg",
+                                photo: "https://www.gstatic.com/webp/gallery/3.jpg",
                                 reply_markup: {
                                     inline_keyboard: [
                                         [{ text: "GitHub", web_app: { url: "https://github.com/ilanlal/basic-telegram-bot-remastered#readme" } }],
@@ -2284,6 +2600,115 @@ EMD.Automation = {
                         }])]
                 ]
         }
+    }
+}
+
+EMD.About = {
+    entityName: 'About',
+    card: (data = {}) => {
+        return {
+            name: 'about_Card',
+            header: {
+                title: 'About This Addon',
+                subTitle: 'Learn more about this Addon.',
+                imageUrl: EMD.DEFAULT_IMAGE_URL,
+                imageStyle: CardService.ImageStyle.SQUARE,
+                imageAltText: 'About Image'
+            },
+            sections: [
+                {
+                    // header: 'About This Addon',
+                    widgets: [
+                        {
+                            id: 'about_text_paragraph',
+                            TextParagraph: {
+                                text: 'This addon is designed to help you manage your tasks efficiently.'
+                            }
+                        },
+                        { // Version Info widget
+                            id: 'version_info_widget',
+                            TextParagraph: {
+                                text: `Version: ${data.packageInfo?.version || 'N/A'} (Build: ${data.packageInfo?.build || 'N/A'})`
+                            }
+                        }
+                    ]
+                },
+                {   // Data view
+                    header: 'Data View',
+                    collapsible: true,
+                    numUncollapsibleWidgets: 0,
+                    widgets: [
+                        {   // Data View widget
+                            id: 'data_view_widget',
+                            TextParagraph: {
+                                text: `Data: ${JSON.stringify(data, null, 2)}`,
+                                maxLines: 35
+                            }
+                        }
+                    ]
+                }
+            ]
+        };
+    }
+}
+
+EMD.Account = {
+    entityName: 'Account',
+    card: (data = {}) => {
+        return {
+            name: 'account_Card',
+            header: {
+                title: 'Account Management',
+                subTitle: 'Manage your account settings and preferences.',
+                imageUrl: EMD.DEFAULT_IMAGE_URL,
+                imageStyle: CardService.ImageStyle.SQUARE,
+                imageAltText: 'Account Image'
+            },
+            sections: [
+                {
+                    // header: 'Account Management',
+                    widgets: [
+                        {
+                            id: 'account_text_paragraph',
+                            TextParagraph: {
+                                text: 'Manage your account settings and preferences here.'
+                            }
+                        },
+                        { // user Info widget
+                            id: 'user_info_widget',
+                            TextParagraph: {
+                                text: `User is ${data.userInfo?.isPremium ? 'a Premium' : 'a Free'} user.`
+                            }
+                        }
+                    ]
+                },
+                {   // Data view
+                    header: 'Data View',
+                    collapsible: true,
+                    numUncollapsibleWidgets: 0,
+                    widgets: [
+                        {   // Data View widget
+                            id: 'data_view_widget',
+                            TextParagraph: {
+                                text: `Data: ${JSON.stringify(data, null, 2)}`,
+                                maxLines: 35
+                            }
+                        }
+                    ]
+                }
+            ]
+        };
+    }
+}
+
+EMD.Logger = {
+    entityName: 'eventLog',
+    sheet: (data = {}) => {
+        return {
+            name: '📜 Event Log',
+            columns: ['Created On', 'DC', 'Action', 'chat_id', 'content', 'event'],
+            sample_data: []
+        };
     }
 }
 

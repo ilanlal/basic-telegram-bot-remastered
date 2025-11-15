@@ -1,22 +1,18 @@
 class SetupFlow {
-    constructor(userProperties) {
+    constructor(userProperties, activeSpreadsheet) {
         this._userProperties = userProperties;
         this._telegramBotClient = null;
-
+        this.sheetModel = SheetModel.create(activeSpreadsheet);
+        this.sheet = this.sheetModel.initializeSheet(EMD.BotSetup.sheet({}));
     }
 
     static create(
-        userProperties = PropertiesService.getUserProperties()
+        userProperties = PropertiesService.getUserProperties(),
+        activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet()
     ) {
-        return new SetupFlow(userProperties);
+        return new SetupFlow(userProperties, activeSpreadsheet);
     }
 
-    setNewDefaultLanguage(code) {
-        if (!code || typeof code !== 'string' || code.trim() === '') {
-            throw new Error("Invalid language code");
-        }
-        return this._userProperties.setProperty(SetupFlow.InputMeta.DEFAULT_LANGUAGE, code);
-    }
 
     identifyNewBotToken(token) {
         if (!token || typeof token !== 'string' || token.trim() === '') {
@@ -28,32 +24,16 @@ class SetupFlow {
         if (response.getResponseCode() !== 200) {
             throw new Error("Failed to validate bot token");
         }
-        this._userProperties.setProperty(SetupFlow.InputMeta.BOT_API_TOKEN, safeToken);
+        EnvironmentModel.create(this._userProperties)
+            .setNewBotToken(safeToken);
 
         const contentText = response.getContentText();
         const res = JSON.parse(contentText);
         return res.result;
     }
 
-    setNewDeploymentId(id) {
-        if (!id || typeof id !== 'string' || id.trim() === '') {
-            throw new Error("Invalid deployment ID");
-        }
-
-        const safeId = decodeURIComponent(id);
-        return this._userProperties.setProperty(SetupFlow.InputMeta.DEPLOYMENT_ID, safeId);
-    }
-
-    setMyNewChatId(id) {
-        if (!id || isNaN(id)) {
-            throw new Error("Invalid chat ID");
-        }
-        const safeId = decodeURIComponent(id);
-        return this._userProperties.setProperty(SetupFlow.InputMeta.ADMIN_CHAT_ID, safeId);
-    }
-
     setWebhook() {
-        const deploymentId = this._userProperties.getProperty(SetupFlow.InputMeta.DEPLOYMENT_ID);
+        const deploymentId = this._userProperties.getProperty(EnvironmentModel.InputMeta.DEPLOYMENT_ID);
         if (!deploymentId) {
             throw new Error("Deployment ID is not available. Please deploy the script as a web app.");
         }
@@ -67,8 +47,24 @@ class SetupFlow {
         return JSON.parse(response.getContentText());
     }
 
+    setTestWebhook() {
+        const deploymentId = this._userProperties
+            .getProperty(EnvironmentModel.InputMeta.TEST_DEPLOYMENT_ID);
+        if (!deploymentId) {
+            throw new Error("Test Deployment ID is not available. Please deploy the script as a web app.");
+        }
+        const webhookUrl = `https://script.google.com/macros/s/${deploymentId}/dev`;
+
+        const response = this.telegramBotClient.setWebhook(webhookUrl);
+        if (response.getResponseCode() !== 200) {
+            throw new Error("Failed to set webhook");
+        }
+
+        return JSON.parse(response.getContentText());
+    }
+
     deleteWebhook() {
-        const deploymentId = this._userProperties.getProperty(SetupFlow.InputMeta.DEPLOYMENT_ID);
+        const deploymentId = this._userProperties.getProperty(EnvironmentModel.InputMeta.DEPLOYMENT_ID);
         if (!deploymentId) {
             throw new Error("Deployment ID is not available. Please deploy the script as a web app.");
         }
@@ -84,79 +80,151 @@ class SetupFlow {
         return JSON.parse(response.getContentText());
     }
 
-    setDebugMode(isDebug) {
-        const debugValue = isDebug ? 'true' : 'false';
-        return this._userProperties.setProperty(SetupFlow.InputMeta.DEBUG_MODE, debugValue);
+    setMyName() {
+        const model = BotModel.create(this.sheetModel.activeSpreadsheet);
+        const langs = model.getLanguages()
+            .map(({ lang }) => lang);
+
+        langs.forEach((language_code) => {
+            // get name value for the language
+            const text = model.getValue('name', language_code);
+            // skip empty texts
+            if (!text || text.trim() === '') {
+                throw new Error(`Name for language "${language_code}" is empty`);
+            }
+
+            // set bot name
+            let response;
+            if (language_code === '' || language_code === 'default') {
+                response = this.telegramBotClient.setMyName({ name: text });
+            } else {
+                response = this.telegramBotClient.setMyName({ name: text, language_code });
+            }
+
+            // check response
+            if (response.getResponseCode() !== 200) {
+                throw new Error("Failed to set bot name");
+            }
+        });
+        return { langs };
     }
 
-    setNewActiveSpreadsheetId(spreadsheetId) {
-        if (!spreadsheetId || typeof spreadsheetId !== 'string' || spreadsheetId.trim() === '') {
-            spreadsheetId = '[current]';
-        }
+    setMyDescription() {
+        const model = BotModel.create(this.sheetModel.activeSpreadsheet);
+        const langs = model.getLanguages().map(({ lang }) => lang);
 
-        const safeId = decodeURIComponent(spreadsheetId);
-        return this._userProperties.setProperty(SetupFlow.InputMeta.ACTIVE_SPREADSHEET_ID, safeId);
+        langs.forEach((language_code) => {
+            // get description value for the language
+            const text = model.getValue('description', language_code);
+            // skip empty texts
+            if (!text || text.trim() === '') {
+                throw new Error(`Description for language "${language_code}" is empty`);
+            }
+
+            // set bot name
+            let response;
+            if (language_code === '' || language_code === 'default') {
+                response = this.telegramBotClient.setMyDescription({ description: text });
+            } else {
+                response = this.telegramBotClient.setMyDescription({ description: text, language_code });
+            }
+
+            // check response
+            if (response.getResponseCode() !== 200) {
+                throw new Error("Failed to set bot description");
+            }
+        });
+        return { langs };
+    }
+
+    setMyShortDescription() {
+        const model = BotModel.create(this.sheetModel.activeSpreadsheet);
+        const langs = model.getLanguages().map(({ lang }) => lang);
+
+        langs.forEach((language_code) => {
+            // get short description value for the language
+            const text = model.getValue('short_description', language_code);
+            // skip empty texts
+            if (!text || text.trim() === '') {
+                throw new Error(`Short description for language "${language_code}" is empty`);
+            }
+
+            // set bot short description
+            let response;
+            if (language_code === '' || language_code === 'default') {
+                response = this.telegramBotClient.setMyShortDescription({ short_description: text });
+            } else {
+                response = this.telegramBotClient.setMyShortDescription({ short_description: text, language_code });
+            }
+
+            // check response
+            if (response.getResponseCode() !== 200) {
+                throw new Error("Failed to set bot short description");
+            }
+        });
+        return { langs };
+    }
+
+    setMyCommands() {
+        const model = BotModel.create(this.sheetModel.activeSpreadsheet);
+        const langs = model.getLanguages().map(({ lang }) => lang);
+
+        langs.forEach((language_code) => {
+            // get commands value for the language
+            const text = model.getValue('commands', language_code);
+            // skip empty texts
+            if (!text || text.trim() === '') {
+                throw new Error(`key "commands" for language "${language_code}" are empty`);
+            }
+
+            // set bot commands
+            const parsedCommands = JSON.parse(text);
+            let response;
+            if (language_code === '' || language_code === 'default') {
+                response = this.telegramBotClient.setMyCommands({ commands: parsedCommands });
+            } else {
+                response = this.telegramBotClient.setMyCommands({ commands: parsedCommands, language_code });
+            }
+
+            // check response
+            if (response.getResponseCode() !== 200) {
+                throw new Error("Failed to set bot commands");
+            }
+        });
+        return { langs };
     }
 
     // Getters
     get trafficLight() {
-        const leds = '{0}{1}{2}{3}{4}';
-        const led0 = this.stateObject.botTokenSet ? Lights.ON : Lights.OFF;
-        const led1 = this.stateObject.deploymentIdSet ? Lights.ON : Lights.OFF;
-        const led2 = this.stateObject.webhookSet ? Lights.ON : Lights.OFF;
-        const led3 = this.stateObject.chatIdSet ? Lights.ON : Lights.OFF;
-        const led4 = this.stateObject.defaultLanguageSet ? Lights.ON : Lights.WARN;
-        const led5 = this.stateObject.debugModeSet ? Lights.ON : Lights.OFF;
+        const leds = '{0}{1}{2}';
+        const led0 = this.state.botTokenSet ? Lights.ON : Lights.OFF;
+        const led1 = this.state.deploymentIdSet ? Lights.ON : Lights.OFF;
+        const led2 = this.state.webhookSet ? Lights.ON : Lights.OFF;
 
         return leds
             .replace('{0}', led0)
             .replace('{1}', led1)
-            .replace('{2}', led2)
-            .replace('{3}', led3)
-            .replace('{4}', led4)
-            .replace('{5}', led5);
+            .replace('{2}', led2);
     }
 
-    get isActive() {
-        return this.stateObject.botTokenSet &&
-            this.stateObject.deploymentIdSet &&
-            this.stateObject.webhookSet &&
-            this.stateObject.chatIdSet &&
-            this.stateObject.defaultLanguageSet;
-    }
     get state() {
-        return [
-            { name: EMD.Home, value: this.stateObject.botToken, isSet: this.stateObject.botTokenSet },
-            { name: 'deploymentId', value: this.stateObject.deploymentId, isSet: this.stateObject.deploymentIdSet },
-            { name: 'webhookUrl', value: this.stateObject.webhookUrl, isSet: this.stateObject.webhookSet },
-            { name: 'chatId', value: this.stateObject.chatId, isSet: this.stateObject.chatIdSet },
-            { name: 'defaultLanguage', value: this.stateObject.defaultLanguage, isSet: this.stateObject.defaultLanguageSet },
-            { name: 'debugMode', value: this.stateObject.debugMode, isSet: this.stateObject.debugModeSet }
-        ];
-    }
-
-    get stateObject() {
+        const token = this._userProperties.getProperty(EnvironmentModel.InputMeta.BOT_API_TOKEN);
+        const deploymentId = this._userProperties.getProperty(EnvironmentModel.InputMeta.DEPLOYMENT_ID);
+        const _webhookUrl = this.webhookUrl;
         return {
-            botToken: this._userProperties.getProperty(SetupFlow.InputMeta.BOT_API_TOKEN),
-            botTokenSet: !!this._userProperties.getProperty(SetupFlow.InputMeta.BOT_API_TOKEN),
-            deploymentId: this._userProperties.getProperty(SetupFlow.InputMeta.DEPLOYMENT_ID),
-            deploymentIdSet: !!this._userProperties.getProperty(SetupFlow.InputMeta.DEPLOYMENT_ID),
-            webhookUrl: decodeURI(this.webhookUrl),
-            webhookSet: !!this.webhookUrl,
-            chatId: this._userProperties.getProperty(SetupFlow.InputMeta.ADMIN_CHAT_ID),
-            chatIdSet: !!this._userProperties.getProperty(SetupFlow.InputMeta.ADMIN_CHAT_ID),
-            defaultLanguage: this._userProperties.getProperty(SetupFlow.InputMeta.DEFAULT_LANGUAGE),
-            defaultLanguageSet: !!this._userProperties.getProperty(SetupFlow.InputMeta.DEFAULT_LANGUAGE),
-            debugMode: this._userProperties.getProperty(SetupFlow.InputMeta.DEBUG_MODE) === 'true',
-            debugModeSet: this._userProperties.getProperty(SetupFlow.InputMeta.DEBUG_MODE) === 'true',
-            activateSpreadsheetId: this._userProperties.getProperty(SetupFlow.InputMeta.ACTIVE_SPREADSHEET_ID),
-            activateSpreadsheetIdSet: this._userProperties.getProperty(SetupFlow.InputMeta.ACTIVE_SPREADSHEET_ID) !== null
+            // show 4 first and 4 last characters of the token
+            botToken: token ? `${token.substring(0, 4)}****${token.substring(token.length - 4)}` : null,
+            botTokenSet: !!this._userProperties.getProperty(EnvironmentModel.InputMeta.BOT_API_TOKEN),
+            deploymentId: deploymentId ? `${deploymentId.substring(0, 4)}****${deploymentId.substring(deploymentId.length - 4)}` : null,
+            deploymentIdSet: !!this._userProperties.getProperty(EnvironmentModel.InputMeta.DEPLOYMENT_ID),
+            webhookUrl: decodeURI(_webhookUrl),
+            webhookSet: !!_webhookUrl
         }
     }
 
     get telegramBotClient() {
         if (!this._telegramBotClient) {
-            const token = this._userProperties.getProperty(SetupFlow.InputMeta.BOT_API_TOKEN);
+            const token = this._userProperties.getProperty(EnvironmentModel.InputMeta.BOT_API_TOKEN);
             if (!token) {
                 return null;
             }
@@ -204,15 +272,6 @@ class SetupFlow {
         return JSON.parse(response.getContentText())?.result || null;
     }
 }
-
-SetupFlow.InputMeta = {
-    BOT_API_TOKEN: 'bot_api_token',
-    DEPLOYMENT_ID: 'deployment_id',
-    ADMIN_CHAT_ID: 'admin_chat_id',
-    DEFAULT_LANGUAGE: 'default_language',
-    DEBUG_MODE: 'debug_mode_set',
-    ACTIVE_SPREADSHEET_ID: 'active_spreadsheet_id'
-};
 
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = { SetupFlow };

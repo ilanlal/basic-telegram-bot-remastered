@@ -21,11 +21,15 @@ describe('doPost', () => {
                         date: Math.floor(Date.now() / 1000),
                         reply_to_message: null,
                         message_id: 1,
-                        text: 'Hello'
+                        text: '/home'
                     }
                 })
             }
         };
+        const dummyToken = 'DUMMY_BOT_TOKEN';
+
+        // Set dummy bot token in user properties
+        PropertiesService.getUserProperties().setProperty(EnvironmentModel.InputMeta.BOT_API_TOKEN, dummyToken);
         const response = doPost(event);
         expect(response).toBeDefined();
     });

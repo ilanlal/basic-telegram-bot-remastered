@@ -3,14 +3,24 @@ require('../../../tests');
 const SpreadsheetStubConfiguration = require('@ilanlal/gasmocks/src/spreadsheetapp/classes/SpreadsheetStubConfiguration');
 const SpreadsheetApp = require('@ilanlal/gasmocks/src/spreadsheetapp/SpreadsheetApp');
 const { PostMessageHandler } = require('./PostMessageHandler');
+const { CustomerModel } = require('../../components/models/CustomerModel');
 
 describe('PostMessageHandler', () => {
     /** @type {PostMessageHandler} */
     let handler;
+    const dummyToken = 'DUMMY_BOT_TOKEN';
 
     beforeEach(() => {
         SpreadsheetStubConfiguration.reset();
-        handler = PostMessageHandler.create();
+        // Set dummy bot token in user properties
+        PropertiesService.getUserProperties().setProperty(EnvironmentModel.InputMeta.BOT_API_TOKEN, dummyToken);
+        handler = PostMessageHandler.create(
+            PropertiesService.getUserProperties(),
+            SpreadsheetApp.getActiveSpreadsheet()
+        );
+        SheetModel.create(SpreadsheetApp.getActiveSpreadsheet())
+            .bindSheetSampleData(EMD.Automation.sheet({}));
+
     });
 
     test('should handle verifyPerson call', () => {
@@ -24,24 +34,27 @@ describe('PostMessageHandler', () => {
             }
         };
         // first call to verifyPersone should add the user response is array of user data
-        let response = handler.verifyPersone(content.message);
-        expect(Array.isArray(response)).toBe(true);
+        // [timestamp, chat_id, is_bot, first_name, last_name, username, language_code]
+        let customer = handler.verifyPersone(content.message);
+        expect(Array.isArray(customer)).toBe(true);
+
         // check if user is added to Users sheet
-        let user = SpreadsheetService.Users.getUserById(content.message.from.id);
-        expect(user).not.toBeNull();
-        expect(user[2]).toBe(content.message.from.username);
-        expect(user[3]).toBe(content.message.from.first_name);
-        expect(user[4]).toBe(content.message.from.last_name);
-        expect(user[5]).toBe(content.message.from.language_code);
+        const sheetName = CustomerModel.SHEET_NAME;
+        const customerSheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(sheetName);
+        expect(customerSheet).not.toBeNull();
+        let data = customerSheet.getDataRange().getValues();
+        let addedUser = data.find(row => row[1] === content.message.from.id);
+        expect(addedUser).toBeDefined();
+        expect(addedUser[1]).toBe(content.message.from.id);
+        expect(addedUser[3]).toBe(content.message.from.first_name);
 
         // call again to verify no duplicate user is added
         response = handler.verifyPersone(content.message);
         expect(Array.isArray(response)).toBe(true);
         // check if only one user entry exists in Users sheet
-        let usersSheet = SpreadsheetService.Users.getUsersSheet();
-        let data = usersSheet.getDataRange().getValues();
-        let userCount = data.filter(row => row[1] === content.message.from.id).length;
-        expect(userCount).toBe(1);
+        data = customerSheet.getDataRange().getValues();
+        const users = data.filter(row => row[1] === content.message.from.id);
+        expect(users.length).toBe(1);
     });
 
     describe('handleBotCommand', () => {
@@ -58,11 +71,30 @@ describe('PostMessageHandler', () => {
                     }
                 };
                 let response = handler.handleBotCommand(content.message.from.id, content.message);
-                expect(response).toContain('dynamic_reply_handled');
+                expect(response).toBe(true);
             });
         });
     });
 
+    describe('handlePostMessage', () => {
+        const commands = ['/start', '/whoami', '/me', '/whoru', '/whoareyou', '/botinfo', '/help', '/about'];
+        commands.forEach(cmd => {
+            test(`should handle ${cmd} message`, () => {
+                const content = {
+                    message: {
+                        chat: { id: 12345 },
+                        text: cmd,
+                        message_id: 1,
+                        entities: [{ type: 'bot_command', offset: 0, length: cmd.length }],
+                        from: { id: 12345, language_code: 'en', username: 'testuser', first_name: 'Test', last_name: 'User' }
+                    }
+                };
+                let response = handler.handlePostMessage(content.message);
+                const responseObj = JSON.parse(response);
+                expect(responseObj.actions_executed).toBe(1);
+            });
+        });
+    });
 
     test('should throw error for invalid message format', () => {
         const content = { invalid: 'data' };

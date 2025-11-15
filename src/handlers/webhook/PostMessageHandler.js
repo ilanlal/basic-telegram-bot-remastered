@@ -1,11 +1,11 @@
 class PostMessageHandler {
-    constructor(activeSpreadsheet, userProperties) {
+    constructor(userProperties, activeSpreadsheet) {
         this._activeSpreadsheet = activeSpreadsheet;
         this._userProperties = userProperties;
     }
 
-    static create(activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet(), userProperties = PropertiesService.getUserProperties()) {
-        return new PostMessageHandler(activeSpreadsheet, userProperties);
+    static create(userProperties = PropertiesService.getUserProperties(), activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet()) {
+        return new PostMessageHandler(userProperties, activeSpreadsheet);
     }
 
     handlePostMessage(message) {
@@ -15,11 +15,11 @@ class PostMessageHandler {
 
         const chat_id = message.from.id;
         const language_code = message.from.language_code;
-        const text = message.text;
+        const query = message.text;
 
         if (message?.successful_payment) {
             // Handle successful payment
-            return this.handleDynamicReply(chat_id, '_payment_successful_');
+            return this.handleDynamicReply(chat_id, '_payment_successful_', language_code, message.message_id);
         }
 
         if (message.entities && Array.isArray(message.entities)) {
@@ -36,8 +36,32 @@ class PostMessageHandler {
             return this.handleReplyToForceInput(chat_id, message);
         }
 
-        // return "notdefined" const message for all other messages input
-        return this.handleDynamicReply(chat_id, '_command_not_found_');
+        // execute dynamic reply handling for the query
+        return this.handleDynamicReply(chat_id, query, language_code, message.message_id);
+    }
+
+    handleBotCommand(chat_id, message) {
+        const query = message.text?.split(' ')[0];
+        const language_code = message.from?.language_code || 'default';
+        const message_id = message.message_id;
+        // Handle /start command separately to verify persone.
+        if (query === '/start') {
+            this.verifyPersone(message);
+        }
+
+        if (query === "/whoami" || query === "/me") {
+            // TODO: implement whoami command handling
+        }
+
+        if (query === "/whoru" || query === "/whoareyou" || query === "/botinfo") {
+            // TODO: implement botinfo command handling
+        }
+
+        if (query === "/admin") {
+            // TODO: implement admin command handling
+        }
+
+        return true;
     }
 
     verifyPersone(message) {
@@ -45,41 +69,10 @@ class PostMessageHandler {
             throw new Error('Invalid message format: missing from.id');
         }
 
-        const user = SpreadsheetService.Users.getUserById(message.from.id);
-        if (user) {
-            return user;
-        }
-
-        return SpreadsheetService.Users.addUser(
-            message.from.id,
-            {
-                username: message.from.username,
-                first_name: message.from.first_name,
-                last_name: message.from.last_name,
-                language_code: message.from.language_code
-            });
+        return CustomerController
+            .create(this._userProperties, this._activeSpreadsheet)
+            .verifyCustomer(message);
     }
-
-    handleBotCommand(chat_id, message) {
-        const command = message.text?.split(' ')[0];
-        const language_code = message.from?.language_code || 'default';
-        const message_id = message.message_id;
-        // Handle /start command separately to verify persone.
-        if (command === '/start') {
-            this.verifyPersone(message);
-        }
-
-        if (command === "/whoami" || command === "/me") {
-            // return this.handleDynamicReply(chat_id, ["/start", "welcome"], message.message_id);
-        }
-
-        if (command === "/whoru" || command === "/whoareyou" || command === "/botinfo") {
-            // return this.handleDynamicReply(chat_id, ["/start", "welcome"], message.message_id);
-        }
-
-        return this.handleDynamicReply(chat_id, command, language_code, message_id);
-    }
-
     // reply from force input request
     handleReplyToForceInput(chat_id, message) {
         // Implement reply to message handling logic here
@@ -91,20 +84,16 @@ class PostMessageHandler {
         return JSON.stringify({ status: 'payment_handled', chat_id, payment });
     }
 
-    handleDynamicReply(chat_id, name, language_code = 'default', reply_to_message_id = null) {
-        const token = this._userProperties
-            .getProperty(SetupFlow.InputMeta.BOT_API_TOKEN) || '[YOUR_TELEGRAM_BOT_TOKEN]';
-
+    handleDynamicReply(chat_id, query, language_code, reply_to_message_id = null) {
         const automationHandler = AutomationHandler
-            .create(token, language_code, this._activeSpreadsheet);
+            .create(this._userProperties, this._activeSpreadsheet);
 
-        const response = automationHandler.handleAutomationRequest({
+        return automationHandler.handleAutomationRequest({
+            language_code,
             chat_id,
-            name,
+            query,
             reply_to_message_id
         });
-
-        return JSON.stringify({ status: 'dynamic_reply_handled', response });
     }
 }
 

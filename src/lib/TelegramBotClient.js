@@ -395,7 +395,7 @@ class TelegramBotClient {
       'method': "post",
       'payload': {
         'name': name,
-        'language_code': language_code
+        'language_code': language_code ?? ''
       }
     };
     const url = this.getApiBaseUrl() + "/setMyName";
@@ -437,8 +437,8 @@ class TelegramBotClient {
     const data = {
       'method': "post",
       'payload': {
-        'scope': scope,
-        'commands': commands,
+        //'scope': scope,
+        'commands': JSON.stringify(commands),
         'language_code': language_code
       }
     };

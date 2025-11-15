@@ -6,65 +6,111 @@ class BotHandler {
         return this._userProperties;
     }
 
+    get activeSpreadsheet() {
+        if (!this._activeSpreadsheet) {
+            this._activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+        }
+        return this._activeSpreadsheet;
+    }
+
     constructor() {
         this._userProperties = null;
+        this._activeSpreadsheet = null;
     }
 };
 
 BotHandler.Addon = {
-    onWebhookManagementClick: (e) => {
+    onIdentifyTokenClick: (e) => {
+        // Not implemented yet
         return new BotHandler
             .AddonWrapper(
-                BotHandler.prototype.userProperties)
-            .handleWebhookManagementClick(e);
+                BotHandler.prototype.userProperties,
+                BotHandler.prototype.activeSpreadsheet)
+            .handleIdentifyTokenClick(e);
+    },
+    onWebhookToggleClick: (e) => {
+        return new BotHandler
+            .AddonWrapper(
+                BotHandler.prototype.userProperties,
+                BotHandler.prototype.activeSpreadsheet)
+            .handleWebhookToggleClick(e);
     },
     onSetMyNameClick: (e) => {
         // Not implemented yet
         return new BotHandler
-            .AddonWrapper(                
-                BotHandler.prototype.userProperties)
+            .AddonWrapper(
+                BotHandler.prototype.userProperties,
+                BotHandler.prototype.activeSpreadsheet)
             .handleSetMyNameClick(e);
     },
     onSetMyDescriptionClick: (e) => {
         // Not implemented yet
         return new BotHandler
-            .AddonWrapper(                
-                BotHandler.prototype.userProperties)
+            .AddonWrapper(
+                BotHandler.prototype.userProperties,
+                BotHandler.prototype.activeSpreadsheet)
             .handleSetMyDescriptionClick(e);
     },
     onSetMyShortDescriptionClick: (e) => {
         // Not implemented yet
         return new BotHandler
-            .AddonWrapper(                
-                BotHandler.prototype.userProperties)
+            .AddonWrapper(
+                BotHandler.prototype.userProperties,
+                BotHandler.prototype.activeSpreadsheet)
             .handleSetMyShortDescriptionClick(e);
     },
     onSetMyCommandsClick: (e) => {
         // Not implemented yet
         return new BotHandler
-            .AddonWrapper(                
-                BotHandler.prototype.userProperties)
+            .AddonWrapper(
+                BotHandler.prototype.userProperties,
+                BotHandler.prototype.activeSpreadsheet)
             .handleSetMyCommandsClick(e);
     }
 }
 
 BotHandler.AddonWrapper = class {
-    constructor(userProperties) {
+    constructor(userProperties, activeSpreadsheet) {
         this._userProperties = userProperties;
+        this._activeSpreadsheet = activeSpreadsheet;
     }
 
-    handleWebhookManagementClick(e) {
+    handleIdentifyTokenClick(e) {
+        try {
+            let token = e.parameters?.token || null;
+            if (!token) {
+                const formInputs = e.commonEventObject.formInputs || {};
+                token = formInputs['txt_bot_api_token']?.stringInputs?.value[0] || null;
+            }
+
+            const controller = BotSetupController
+                .create(this._userProperties, this._activeSpreadsheet);
+
+            const result = controller.identifyNewBotToken(token);
+            controller.setNewBotToken(token);
+
+            return this.handleOperationSuccess("👍 Bot token identified successfully.")
+                .build();
+
+        } catch (error) {
+            return this.handleError(error)
+                .build();
+        }
+    }
+
+    handleWebhookToggleClick(e) {
         try {
             const action = e.parameters?.action || null;
+            const environment = e.parameters?.environment || 'test';
             if (!action) {
                 throw new Error("'action' parameter is required for webhook management.");
             }
 
             const controller = BotSetupController
-                .create(PropertiesService.getUserProperties());
+                .create(this._userProperties, this._activeSpreadsheet);
 
             if (action === 'setWebhook') {
-                controller.setWebhook();
+                controller.setWebhook(environment);
             } else if (action === 'deleteWebhook') {
                 controller.deleteWebhook();
             }
@@ -79,7 +125,14 @@ BotHandler.AddonWrapper = class {
 
     handleSetMyNameClick(e) {
         try {
-            throw new Error("Not implemented yet");
+            const controller = BotSetupController
+                .create(this._userProperties, this._activeSpreadsheet);
+
+            const response = controller.setMyName();
+
+            return this.handleOperationSuccess("👍 Bot name set successfully."
+                + ` total: ${Object.keys(response.langs).length} languages.`)
+                .build();
         } catch (error) {
             return this.handleError(error)
                 .build();
@@ -88,7 +141,13 @@ BotHandler.AddonWrapper = class {
 
     handleSetMyDescriptionClick(e) {
         try {
-            throw new Error("Not implemented yet");
+            const controller = BotSetupController
+                .create(this._userProperties, this._activeSpreadsheet);
+
+            const response = controller.setMyDescription();
+            return this.handleOperationSuccess("👍 Bot description set successfully."
+                + ` total: ${Object.keys(response.langs).length} languages.`)
+                .build();
         } catch (error) {
             return this.handleError(error)
                 .build();
@@ -97,7 +156,30 @@ BotHandler.AddonWrapper = class {
 
     handleSetMyShortDescriptionClick(e) {
         try {
-            throw new Error("Not implemented yet");
+            const controller = BotSetupController
+                .create(this._userProperties, this._activeSpreadsheet);
+
+            const response = controller.setMyShortDescription();
+
+            return this.handleOperationSuccess("👍 Bot short description set successfully."
+                + ` total: ${Object.keys(response.langs).length} languages.`)
+                .build();
+        } catch (error) {
+            return this.handleError(error)
+                .build();
+        }
+    }
+
+    handleSetMyCommandsClick(e) {
+        try {
+            const controller = BotSetupController
+                .create(this._userProperties, this._activeSpreadsheet);
+
+            const response = controller.setMyCommands();
+
+            return this.handleOperationSuccess("👍 Bot commands set successfully."
+                + ` total: ${Object.keys(response.langs).length} languages.`)
+                .build();
         } catch (error) {
             return this.handleError(error)
                 .build();

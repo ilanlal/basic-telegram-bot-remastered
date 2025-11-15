@@ -1,11 +1,11 @@
 class PostCallbackQueryHandler {
-  constructor(activeSpreadsheet) {
-    this._spreadsheetService = SpreadsheetService
-      .create(activeSpreadsheet);
+  constructor(userProperties, activeSpreadsheet) {
+    this._userProperties = userProperties;
+    this._activeSpreadsheet = activeSpreadsheet;
   }
 
-  static create(activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet()) {
-    return new PostCallbackQueryHandler(activeSpreadsheet);
+  static create(userProperties = PropertiesService.getUserProperties(), activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet()) {
+    return new PostCallbackQueryHandler(userProperties, activeSpreadsheet);
   }
 
   handlePostCallbackQuery(contents) {
@@ -14,17 +14,16 @@ class PostCallbackQueryHandler {
     }
     const chat_id = contents.callback_query.from.id;
     const language_code = contents.callback_query.from.language_code;
-    const data = contents.callback_query.data;
+    const query = contents.callback_query.data;
+    const message_id = contents.callback_query.message?.message_id || null;
 
-    // todo: send loading answer callback query
-    //vm.sendLoadingAnswerCallbackQuery(contents.callback_query.id);
-    //vm.handleCallbackQuery(chat_id, contents.callback_query);
-    return JSON.stringify({ status: 'callback_query_received' });
-  }
-
-  handleCallbackQuery(chat_id, data) {
-    // Implement callback query handling logic here
-    return JSON.stringify({ status: 'callback_query_handled' });
+    return AutomationHandler.create(this._userProperties, this._activeSpreadsheet)
+      .handleAutomationRequest({
+        language_code,
+        chat_id,
+        query,
+        message_id
+      });
   }
 }
 

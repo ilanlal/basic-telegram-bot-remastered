@@ -12,9 +12,13 @@ describe('BotSetupController Tests', () => {
 
         beforeEach(() => {
             UrlFetchAppStubConfiguration.reset();
+            SpreadsheetStubConfiguration.reset();
             controller = BotSetupController.create(
-                PropertiesService.getUserProperties()
+                PropertiesService.getUserProperties(),
+                SpreadsheetApp.getActiveSpreadsheet()
             );
+            SheetModel.create(SpreadsheetApp.getActiveSpreadsheet())
+                .bindSheetSampleData(EMD.BotSetup.sheet({}));
         });
 
         test("BotSetupController instance should be created", () => {
@@ -83,14 +87,15 @@ describe('BotSetupController Tests', () => {
                     userProperties
                 );
                 controller.setDebugMode(true);
-                expect(userProperties.getProperty(SetupFlow.InputMeta.DEBUG_MODE)).toBe('true');
+                expect(userProperties.getProperty(EnvironmentModel.InputMeta.DEBUG_MODE)).toBe('true');
                 controller.setDebugMode(false);
-                expect(userProperties.getProperty(SetupFlow.InputMeta.DEBUG_MODE)).toBe('false');
+                expect(userProperties.getProperty(EnvironmentModel.InputMeta.DEBUG_MODE)).toBe('false');
             });
             // setWebhook method.
             test("setWebhook should call telegram client to set webhook", () => {
                 const sampleToken = '[FAKE_DUMMY_BOT_TOKEN]';
                 const deploymentId = 'AKfycbx...';
+                const testDeploymentId = 'test_AKfycbx...';
                 const callbackUrl = `https://script.google.com/macros/s/${deploymentId}/exec`;
                 const setWebhookUri = `https://api.telegram.org/bot${sampleToken}/setWebhook?url=${callbackUrl}`;
                 UrlFetchAppStubConfiguration.when(setWebhookUri)
@@ -102,6 +107,7 @@ describe('BotSetupController Tests', () => {
                     userProperties
                 );
                 controller.setNewDeploymentId(deploymentId);
+                controller.setNewTestDeploymentId(testDeploymentId);
                 controller.setNewBotToken(sampleToken);
                 const response = controller.setWebhook();
                 expect(response).toBeDefined();
@@ -126,6 +132,86 @@ describe('BotSetupController Tests', () => {
                 );
                 controller.setNewActiveSpreadsheetId(testSpreadsheetId);
                 expect(userProperties.getProperty("active_spreadsheet_id")).toBe(testSpreadsheetId);
+            });
+
+            // setNewWebhookCallbackUrl method. 
+            test("setNewWebhookCallbackUrl should store the webhook callback URL", () => {
+                const userProperties = PropertiesService.getUserProperties();
+                const testUrl = "https://example.com/webhook";
+                controller = BotSetupController.create(
+                    userProperties
+                );
+                controller.setNewWebhookCallbackUrl(testUrl);
+                expect(userProperties.getProperty("webhook_callback_url")).toBe(testUrl);
+            });
+
+            // setNewEnvironment method.
+            test("setNewEnvironment should store the environment", () => {
+                const userProperties = PropertiesService.getUserProperties();
+                const testEnvironment = "production";
+                controller = BotSetupController.create(
+                    userProperties,
+                    SpreadsheetApp.getActiveSpreadsheet()
+                );
+                controller.setNewEnvironment(testEnvironment);
+                expect(userProperties.getProperty("environment")).toBe(testEnvironment);
+            });
+
+            // setNewTestDeploymentId method.
+            test("setNewTestDeploymentId should store the test deployment ID", () => {
+                const userProperties = PropertiesService.getUserProperties();
+                const testDeploymentId = "test_deployment_12345";
+                controller = BotSetupController.create(
+                    userProperties,
+                    SpreadsheetApp.getActiveSpreadsheet()
+                );
+                controller.setNewTestDeploymentId(testDeploymentId);
+                expect(userProperties.getProperty(EnvironmentModel.InputMeta.TEST_DEPLOYMENT_ID)).toBe(testDeploymentId);
+            });
+
+            describe('Bot info methods', () => {
+                const sampleToken = '[FAKE_DUMMY_BOT_TOKEN]';
+                EnvironmentModel.create(
+                    PropertiesService.getUserProperties(),
+                    SpreadsheetApp.getActiveSpreadsheet()
+                ).setNewBotToken(sampleToken);
+
+                test("setMyName should set bot name", () => {
+                    const apiUrl = `https://api.telegram.org/bot${sampleToken}/setMyName`;
+                    UrlFetchAppStubConfiguration.when(apiUrl)
+                        .return(new HttpResponse()
+                            .setContentText(JSON.stringify({ result: true })));
+                    const response = controller.setMyName();
+                    expect(JSON.stringify(response.langs)).toContain('default');
+                });
+
+                test("setMyDescription should set bot description", () => {
+                    const apiUrl = `https://api.telegram.org/bot${sampleToken}/setMyDescription`;
+                    UrlFetchAppStubConfiguration.when(apiUrl)
+                        .return(new HttpResponse()
+                            .setContentText(JSON.stringify({ result: true })));
+                    const response = controller.setMyDescription();
+                    expect(JSON.stringify(response.langs)).toContain('default');
+                });
+
+                test("setMyShortDescription should set bot short description", () => {
+                    const apiUrl = `https://api.telegram.org/bot${sampleToken}/setMyShortDescription`;
+                    UrlFetchAppStubConfiguration.when(apiUrl)
+                        .return(new HttpResponse()
+                            .setContentText(JSON.stringify({ result: true })));
+                    const response = controller.setMyShortDescription();
+                    expect(JSON.stringify(response.langs)).toContain('default');
+                });
+
+                test("setMyCommands should set bot commands", () => {
+                    const apiUrl = `https://api.telegram.org/bot${sampleToken}/setMyCommands`;
+                    UrlFetchAppStubConfiguration.when(apiUrl)
+                        .return(new HttpResponse()
+                            .setContentText(JSON.stringify({ result: true })));
+                    const response = controller.setMyCommands();
+                    expect(JSON.stringify(response.langs)).toContain('default');
+                });
+
             });
         });
     });

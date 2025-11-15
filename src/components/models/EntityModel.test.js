@@ -1,6 +1,6 @@
 require('../../../tests');
 const { EntityModel } = require('./EntityModel');
-const { Widget } = require('./Widget');
+const { Widget } = require('./card/Widget');
 
 describe('EntityModel', () => {
     // throw error if entityName is missing

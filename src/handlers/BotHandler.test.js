@@ -12,7 +12,7 @@ describe('BotHandler', () => {
         expect(handler).toBeInstanceOf(BotHandler);
     });
 
-    it('should handle onWebhookManagementClick action: "setWebhook"', () => {
+    it('should handle onWebhookToggleClick', () => {
         const sampleToken = '[FAKE_DUMMY_BOT_TOKEN]';
         const deploymentId = 'AKfycbx...';
         const callbackUrl = `https://script.google.com/macros/s/${deploymentId}/exec`;
@@ -44,8 +44,43 @@ describe('BotHandler', () => {
         const event = {
             parameters: { action: 'setWebhook' }
         }; // Mock event object
-        const actionResponse = BotHandler.Addon.onWebhookManagementClick(event);
+        const actionResponse = BotHandler.Addon.onWebhookToggleClick(event);
         expect(actionResponse).toBeDefined();
         console.log(JSON.stringify(actionResponse, null, 2))
+    });
+
+
+    it('should handle onIdentifyTokenClick', () => {
+        const token = 'tcp://token[FAKE_DUMMY_BOT_TOKEN]&#39;;>@&-_][+0!]';
+        const contentText = `{
+            "result": {
+                "id": 1234567809,
+                "is_bot": true,
+                "first_name": "TestBot",
+                "username": "TestBotUsername"
+            }
+        }`;
+
+        UrlFetchAppStubConfiguration.when(`https://api.telegram.org/bot${token}/getMe`)
+            .return(new HttpResponse().setContentText(contentText));
+
+        const mockEvent = {
+            commonEventObject: {
+                formInputs: {
+                    ['txt_bot_api_token']: {
+                        stringInputs: {
+                            value: [token]
+                        }
+                    }
+                }
+            }
+        };
+        const actionResponse = BotHandler.Addon.onIdentifyTokenClick(mockEvent);
+        expect(actionResponse).toBeDefined();
+        const data = actionResponse.getData();
+        expect(data).toBeDefined();
+        // notification present
+        expect(data.notification).toBeDefined();
+        expect(data.notification.text).toBe('👍 Bot token identified successfully.');
     });
 });

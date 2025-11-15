@@ -1,26 +1,31 @@
 class AutomationHandler {
-    constructor(token, language_code, activeSpreadsheet) {
-        this._automationModel = AutomationModel
-            .create(activeSpreadsheet);
-        this._telegramBotProxy = TelegramBotProxy
-            .create(token);
-        this._languageCode = language_code;
+    constructor(userProperties, activeSpreadsheet) {
+        this._automationModel = AutomationModel.create(activeSpreadsheet);
+        const token = userProperties.getProperty(EnvironmentModel.InputMeta.BOT_API_TOKEN);
+        if (!token) {
+            throw new Error('Bot token is not set in user properties');
+        }
+        this._telegramBotProxy = TelegramBotProxy.create(token);
+        this._languageCode = userProperties.getProperty(EnvironmentModel.InputMeta.LANGUAGE_CODE) || 'default';
     }
 
-    static create(token = '[YOUR_TELEGRAM_BOT_TOKEN]', language_code = 'default', activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet()) {
-        return new AutomationHandler(token, language_code, activeSpreadsheet);
+    static create(
+        userProperties = PropertiesService.getUserProperties(),
+        activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet()
+    ) {
+        return new AutomationHandler(userProperties, activeSpreadsheet);
     }
 
-    handleAutomationRequest({ chat_id, name, reply_to_message_id = null }) {
-        if (!chat_id || !name) {
+    handleAutomationRequest({ language_code, chat_id, query, reply_to_message_id = null }) {
+        if (!chat_id || !query) {
             throw new Error('Invalid automation request format');
         }
 
         // array of actions like [{method: 'sendMessage', payload: {...}}] to execute (as string)
-        let apiActionsToDoList = this._automationModel.findData(name, this._languageCode);
+        let apiActionsToDoList = this._automationModel.findData(query, language_code || this._languageCode);
 
         if (!apiActionsToDoList) {
-            apiActionsToDoList = this._automationModel.findData('_action_not_found_', this._languageCode);
+            apiActionsToDoList = this._automationModel.findData('_action_not_found_', language_code || this._languageCode);
         }
 
         const actions = JSON.parse(apiActionsToDoList);
@@ -33,7 +38,7 @@ class AutomationHandler {
         }
 
         // For testing purposes, return a simple status
-        return JSON.stringify({ status: 'dynamic_reply_handled', chat_id, name, actions_executed: actions?.length || 0 });
+        return JSON.stringify({ status: 'dynamic_reply_handled', chat_id, query, actions_executed: actions?.length || 0 });
     }
 
     executeAction(chat_id, action, reply_to_message_id) {

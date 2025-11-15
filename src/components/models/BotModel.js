@@ -1,69 +1,77 @@
 class BotModel {
-    static create(token = '[YOUR_BOT_TOKEN]', options = {}) {
-        return new BotModel(token, options);
+    static get SHEET_NAME() {
+        return EMD.BotSetup.sheet({}).name;
     }
 
-    constructor(token = '[YOUR_BOT_TOKEN]', options = {}) {
-        this._token = token;
-        this._options = options;
-        this._defaultLanguage = 'default';
-        this._telegramClient = TelegramBotClient.newClient(token);
+    constructor(activeSpreadsheet) {
+        this.sheetModel = SheetModel.create(activeSpreadsheet);
+        this.sheet = this.sheetModel.initializeSheet(EMD.BotSetup.sheet({}));
     }
 
-    setDefaultLanguage(language) {
-        this._defaultLanguage = language;
-        return this;
+    static create(activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet()) {
+        return new BotModel(activeSpreadsheet);
     }
 
-    getMe() {
-        return this._telegramClient.getMe();
+    findLanguageColumnIndex(language_code) {
+        const range = this.sheet.getDataRange();
+        const values = range.getValues();
+
+        for (let col = 0; col < values[0].length; col++) {
+            if (values[0][col] === language_code) {
+                return col;
+            }
+        }
+        return 1; // default to second column
     }
 
-    getWebhookInfo() {
-        return this._telegramClient.getWebhookInfo();
+    getKeys() {
+        const range = this.sheet.getDataRange();
+        const values = range.getValues();
+        const keys = [];
+        for (let row = 1; row < values.length; row++) { // Skip header row
+            const key = values[row][0];
+            if (key && key.trim() !== '') {
+                keys.push({ key, row });
+            }
+        }
+        return keys;
     }
 
-    setWebhook(webhookUrl = '[YOUR_WEBHOOK_URL]') {
-        return this._telegramClient.setWebhook(webhookUrl);
+    getLanguages() {
+        const range = this.sheet.getDataRange();
+        const values = range.getValues();
+        const languages = [];
+        for (let col = 1; col < values[0].length; col++) { // Skip key column
+            const lang = values[0][col];
+            if (lang && lang.trim() !== '') {
+                languages.push({
+                    lang, col
+                });
+            }
+        }
+        return languages;
     }
 
-    deleteWebhook(webhookUrl = '[YOUR_WEBHOOK_URL]') {
-        return this._telegramClient.deleteWebhook(webhookUrl);
-    }
+    getValue(key, language_code) {
+        const range = this.sheet.getDataRange();
+        const values = range.getValues() || [];
+        let langColIndex = this.findLanguageColumnIndex(language_code);
 
-    setMyCommands(commands = [], language, scope = 'default') {
-        return this._telegramClient.setMyCommands({ commands, language, scope });
-    }
-
-    setMyName(name, language) {
-        return this._telegramClient.setMyName(name, language);
-    }
-
-    setMyDescription(description, language) {
-        return this._telegramClient.setMyDescription(description, language);
-    }
-
-    setMyShortDescription(shortDescription, language) {
-        return this._telegramClient.setMyShortDescription(shortDescription, language);
-    }
-
-    get defaultLanguage() {
-        return this._defaultLanguage;
-    }
-
-    get token() {
-        return this._token;
-    }
-
-    get options() {
-        return this._options;
-    }
-
-    get telegramClient() {
-        return this._telegramClient;
+        if (langColIndex === -1) {
+            // throw new Error(`Language code "${language_code}" not found in Replies sheet.`);
+            langColIndex = 1; // Default to second column if language not found
+        }
+        for (let row = 1; row < values.length; row++) { // Skip header row
+            if (values[row][0] === key) {
+                return values[row][langColIndex];
+            }
+        }
+        return null;
     }
 }
 
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { BotModel };
+    module.exports = {
+        BotModel
+    };
 }

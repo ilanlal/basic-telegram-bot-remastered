@@ -8,7 +8,9 @@ describe('EntityViewModel', () => {
         [EMD.Home, { isActive: true }],
         [EMD.Automation, { isActive: true }],
         [EMD.BotSetup, { isActive: true }],
-        [EMD.EnvironmentVariables, { isActive: true }]
+        [EMD.EnvironmentVariables, { isActive: true }],
+        [EMD.Account, { isActive: true }],
+        [EMD.About, { isActive: true }]
     ];
 
     it('should create an view model instance.', () => {
@@ -48,17 +50,6 @@ describe('EntityViewModel', () => {
                     expect(data.sections).toBeDefined();
                     expect(data.sections.length).toBe(emd[0].card().sections.length);
                 });
-
-                it(`should get the active sheet from the "${emd[0].entityName}" sheetMeta`, () => {
-                    const sheetWrapper = new EntityViewModel.SheetWrapper(
-                        SpreadsheetApp.getActiveSpreadsheet()
-                    );
-                    const sheetMeta = emd[0].sheetMeta;
-                    if (!sheetMeta) return;
-                    const activeSheet = sheetWrapper.getSheet(sheetMeta);
-                    expect(activeSheet).toBeDefined();
-                });
-
             });
         });
     });

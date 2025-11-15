@@ -11,38 +11,58 @@ describe('EnvironmentHandler', () => {
         expect(handler).toBeInstanceOf(EnvironmentHandler);
     });
 
-    it('should handle onIdentifyTokenClick', () => {
-        const token = 'tcp://token[FAKE_DUMMY_BOT_TOKEN]&#39;;>@&-_][+0!]';
-        const contentText = `{
-            "result": {
-                "id": 1234567809,
-                "is_bot": true,
-                "first_name": "TestBot",
-                "username": "TestBotUsername"
-            }
-        }`;
-
-        UrlFetchAppStubConfiguration.when(`https://api.telegram.org/bot${token}/getMe`)
-            .return(new HttpResponse().setContentText(contentText));
-
+    // handleSaveDeploymentIdClick
+    it('should handle onSaveDeploymentIdClick', () => {
+        const deploymentId = 'AKfycbx...';
+        const testDeploymentId = 'AKfycbz...';
         const mockEvent = {
             commonEventObject: {
                 formInputs: {
-                    ['txt_bot_api_token']: {
+                    ['txt_deployment_id']: {
                         stringInputs: {
-                            value: [token]
+                            value: [deploymentId]
+                        }
+                    },
+                    ['txt_test_deployment_id']: {
+                        stringInputs: {
+                            value: [testDeploymentId]
                         }
                     }
                 }
             }
         };
-        const actionResponse = EnvironmentHandler.Addon.onIdentifyTokenClick(mockEvent);
+        const actionResponse = EnvironmentHandler.Addon.onSaveDeploymentIdClick(mockEvent);
         expect(actionResponse).toBeDefined();
         const data = actionResponse.getData();
         expect(data).toBeDefined();
         // notification present
         expect(data.notification).toBeDefined();
-        expect(data.notification.text).toBe('👍 Bot token identified successfully.');
+        expect(data.notification.text).toContain('Deployment ID identified successfully.');
+    });
+
+    // handleSaveDefaultLanguage
+    it('should handle onSaveDefaultLanguageClick', () => {
+        const languageCode = 'en';
+        const mockEvent = {
+            parameters: { languageCode: languageCode }
+        };
+        const actionResponse = EnvironmentHandler.Addon.onSaveDefaultLanguageClick(mockEvent);
+        expect(actionResponse).toBeDefined();
+        const data = actionResponse.getData();
+        expect(data).toBeDefined();
+        // notification present
+        expect(data.notification).toBeDefined();
+        expect(data.notification.text).toContain('Default language saved successfully.');
+    });
+
+    // handleSaveLogEvents
+    it('should handle onSaveLogEventsClick', () => {
+        const mockEvent = {
+            // Mock event properties if needed
+        };
+        const actionResponse = EnvironmentHandler.Addon.onSaveLogEventsClick(mockEvent);
+        expect(actionResponse).toBeDefined();
+        // Further assertions can be added based on the expected behavior
     });
 
     // handleSaveAdminChatId
@@ -67,6 +87,36 @@ describe('EnvironmentHandler', () => {
         // notification present
         expect(data.notification).toBeDefined();
         expect(data.notification.text).toBe('👍 Admin Chat ID saved successfully.');
+    });
+
+    // handleSetMyEnvironmentClick
+    it('should handle onSetMyEnvironmentClick', () => {
+        const mockEvent = {
+            // Mock event properties if needed
+        };
+        const actionResponse = EnvironmentHandler.Addon.onSetMyEnvironmentClick(mockEvent);
+        expect(actionResponse).toBeDefined();
+        // Further assertions can be added based on the expected behavior
+    });
+
+    // handleSetWebhookCallbackUrlClick
+    it('should handle onSetWebhookCallbackUrlClick', () => {
+        const mockEvent = {
+            // Mock event properties if needed
+        };
+        const actionResponse = EnvironmentHandler.Addon.onSetWebhookCallbackUrlClick(mockEvent);
+        expect(actionResponse).toBeDefined();
+        // Further assertions can be added based on the expected behavior
+    });
+
+    // handleSetTestDeploymentIdClick
+    it('should handle onSetTestDeploymentIdClick', () => {
+        const mockEvent = {
+            // Mock event properties if needed
+        };
+        const actionResponse = EnvironmentHandler.Addon.onSetTestDeploymentIdClick(mockEvent);
+        expect(actionResponse).toBeDefined();
+        // Further assertions can be added based on the expected behavior
     });
 
     afterEach(() => {

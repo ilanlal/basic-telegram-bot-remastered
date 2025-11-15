@@ -11,96 +11,19 @@ class EntityViewModel {
         userProperties = PropertiesService.getUserProperties() } = {}
     ) {
         return new EntityViewModel({
-            sheetWrapper: EntityViewModel.SheetWrapper.create(activeSpreadsheet),
             cardWrapper: EntityViewModel.CardServiceWrapper.create(cardService, userProperties)
         });
     }
 
-    constructor({ sheetWrapper, cardWrapper } = {}) {
-        // Initialize SpreadsheetService
-        /** @type {EntityViewModel.SheetWrapper} */
-        this._sheetWrapper = sheetWrapper;
-
+    constructor({ cardWrapper } = {}) {
         // Use the global CardService in Apps Script environment
         /** @type {EntityViewModel.CardServiceWrapper} */
         this._cardWrapper = cardWrapper;
     }
 
-    get sheetWrapper() {
-        return this._sheetWrapper;
-    }
-
     /** @returns {EntityViewModel.CardServiceWrapper} */
     get cardWrapper() {
         return this._cardWrapper;
-    }
-};
-
-EntityViewModel.SheetWrapper = class {
-    static create(activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet()) {
-        return new EntityViewModel.SheetWrapper(activeSpreadsheet);
-    }
-    constructor(activeSpreadsheet) {
-        this._activeSpreadsheet = activeSpreadsheet;
-        this._columns = [];
-        this._sheetName = null;
-        this._sheet = null;
-    }
-
-    initializeSheet(sheetMeta = {}) {
-        if (!sheetMeta.name) {
-            throw new Error(EntityViewModel.INVALID_MODEL_ERROR);
-        }
-        this._sheetName = sheetMeta.name;
-        this._columns = sheetMeta.columns || [];
-        let sheet = this._activeSpreadsheet.getSheetByName(this._sheetName);
-        if (!sheet) {
-            sheet = this._activeSpreadsheet.insertSheet(this._sheetName);
-
-            if (this._columns.length > 0) {
-                sheet.appendRow(this._columns);
-            }
-        }
-        this._sheet = sheet;
-        return sheet;
-    }
-
-    setActiveSheet(sheetMeta = {}) {
-        return this._activeSpreadsheet
-            .setActiveSheet(this.getSheet(sheetMeta));
-    }
-
-    getSheet(sheetMeta = {}) {
-        return this._sheet = this.initializeSheet(sheetMeta);
-    }
-
-    bindSheetSampleData(sheetMeta = {}) {
-        const sheet = this.getSheet(sheetMeta);
-        const sampleData = sheetMeta.sample_data || [];
-        if (sampleData.length === 0) {
-            return;
-        }
-        sampleData.forEach(row => {
-            sheet.appendRow(row);
-        });
-
-        return sheet;
-    }
-
-    get columns() {
-        return this._columns;
-    }
-
-    get sheet() {
-        return this._sheet;
-    }
-
-    get activeSpreadsheet() {
-        return this._activeSpreadsheet;
-    }
-
-    get sheetName() {
-        return this._sheetName;
     }
 };
 
@@ -245,9 +168,7 @@ EntityViewModel.CardServiceWrapper = class {
             return this.newTextButton(widgetMeta.TextButton, !!value);
         }
 
-
-        console.warn(`Unknown widget type: ${Object.keys(widgetMeta).join(', ')}, defaulting to view.type`);
-        return null;
+        throw new Error(`Unsupported widget type in widgetMeta: ${JSON.stringify(widgetMeta)}`);
     }
 
     newDecoratedText(dtMeta = {}, value = '') {

@@ -1,16 +1,14 @@
 
 class EntityController {
     static create(
-        userStore = UserStoreFactory.create().current,
         cardService = CardService,
         activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet(),
         userProperties = PropertiesService.getUserProperties()
     ) {
-        return new EntityController(userStore, cardService, activeSpreadsheet, userProperties);
+        return new EntityController(cardService, activeSpreadsheet, userProperties);
     }
 
-    constructor(userStore, cardService, activeSpreadsheet, userProperties) {
-        this.userStore = userStore;
+    constructor(cardService, activeSpreadsheet, userProperties) {
         this.cardService = cardService;
         this.activeSpreadsheet = activeSpreadsheet;
         this.userProperties = userProperties;
@@ -29,18 +27,12 @@ class EntityController {
             );
     }
     activateSheet(sheetMeta = {}) {
-        const sheetWrapper = EntityViewModel.SheetWrapper.create(
-            this.activeSpreadsheet
-        );
-
-        return sheetWrapper.setActiveSheet(sheetMeta);
+        const sheetModel = SheetModel.create(this.activeSpreadsheet);
+        return sheetModel.setActiveSheet(sheetMeta);
     }
     bindSheetSampleData(sheetMeta = {}) {
-        const sheetWrapper = EntityViewModel.SheetWrapper.create(
-            this.activeSpreadsheet
-        );
-
-        return sheetWrapper.bindSheetSampleData(sheetMeta);
+        const sheetModel = SheetModel.create(this.activeSpreadsheet);
+        return sheetModel.bindSheetSampleData(sheetMeta);
     }
     save(edm = {}, rowIndex = -1) {
         // Implementation for save action

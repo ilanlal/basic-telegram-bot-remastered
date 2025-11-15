@@ -1,190 +1,58 @@
 require('../../../tests');
 const { BotModel } = require('./BotModel');
+const { Entity } = require('./EntityModel');
+const SpreadsheetStubConfiguration = require('@ilanlal/gasmocks/src/spreadsheetapp/classes/SpreadsheetStubConfiguration');
+const SpreadsheetApp = require('@ilanlal/gasmocks/src/spreadsheetapp/SpreadsheetApp');
+const { SheetModel } = require('./SheetModel');
+const { EMD } = require('../../config/EMD');
 
-describe('Bot Model', () => {
-    const sampleToken = 'sample-token-123';
-
-    test('should create an instance using the constructor', () => {
-        const bot = BotModel.create(sampleToken, {});
-        expect(bot).toBeInstanceOf(BotModel);
+describe('BotModel', () => {
+    beforeEach(() => {
+        SpreadsheetStubConfiguration.reset();
+        SheetModel.create(SpreadsheetApp.getActiveSpreadsheet())
+            .bindSheetSampleData(EMD.BotSetup.sheet({}));
     });
 
-    test('should return the correct token', () => {
-        const bot = BotModel.create(sampleToken, {});
-        expect(bot.token).toBe(sampleToken);
+    it('should create an instance', () => {
+        const model = BotModel.create();
+        expect(model).toBeInstanceOf(BotModel);
     });
 
-    test('should create an instance using the static create method', () => {
-        const bot = BotModel.create(sampleToken, {});
-        expect(bot).toBeInstanceOf(BotModel);
-    });
+    describe('model methods', () => {
+        const model = BotModel.create();
 
-    test('should have default language set correctly', () => {
-        const bot = BotModel.create(sampleToken, {})
-            .setDefaultLanguage('fr');
+        test('should find language column index', () => {
+            const index = model.findLanguageColumnIndex('default');
+            expect(index).toBe(1); // 'default' should be in the second column (index 1)
+        });
 
-        expect(bot.defaultLanguage).toBe('fr');
-    });
+        test('should list all keys', () => {
+            const keys = model.getKeys();
+            expect(keys.length).toBeGreaterThan(2);
+        });
 
-    test('should have options set correctly', () => {
-        const options = { webhookUrl: 'https://example.com/webhook' };
-        const bot = BotModel.create(sampleToken, options);
-        expect(bot.options).toEqual(options);
-    });
+        test('should list all languages', () => {
+            const languages = model.getLanguages();
+            expect(languages.length).toBeGreaterThan(6);
+            expect(JSON.stringify(languages)).toContain('default');
+        });
 
-    // getMe
-    test('should call getMe on telegram client', () => {
-        const contentText = `{
-            "result": {
-                "id": 123456789,
-                "is_bot": true,
-                "first_name": "Test",
-                "last_name": "User",
-                "username": "testuser",
-                "language_code": "en"
-            }
-        }`;
+        test('should find value by key', () => {
+            // reply is array of actions like {method: 'sendMessage', payload: {...}}
+            const text = model.getValue('name', 'default');
+            expect(text).toBe(EMD.BotSetup.sheet({}).sample_data[0][1]);
+        });
 
-        UrlFetchAppStubConfiguration.when(`https://api.telegram.org/bot${sampleToken}/getMe`)
-            .return(new HttpResponse().setContentText(contentText));
-
-        const bot = BotModel.create(sampleToken);
-        const response = bot.getMe();
-
-        expect(response.getResponseCode()).toBe(200);
-        expect(response.getContentText()).toBe(contentText);
-    });
-
-    // getWebhookInfo
-    test('should call getWebhookInfo on telegram client', () => {
-        const contentText = `{
-            "result": {
-                "url": "https://example.com/webhook",
-                "has_custom_certificate": false,
-                "pending_update_count": 0,
-                "ip_address": null
-            }
-        }`;
-
-        UrlFetchAppStubConfiguration.when(`https://api.telegram.org/bot${sampleToken}/getWebhookInfo`)
-            .return(new HttpResponse().setContentText(contentText));
-
-        const bot = BotModel.create(sampleToken);
-        const response = bot.getWebhookInfo();
-        expect(response.getResponseCode()).toBe(200);
-        expect(response.getContentText()).toBe(contentText);
-    });
-
-    // setMyCommands
-    test('should call setMyCommands on telegram client', () => {
-        const language = 'en';
-        const scope = 'default';
-        const contentText = `{
-            "result": true
-        }`;
-        const commands = [
-            {
-                command: "start",
-                scope: "Start the bot"
-            },
-            {
-                command: "help",
-                scope: "Get help"
-            }
-        ];
-
-        UrlFetchAppStubConfiguration.when(`https://api.telegram.org/bot${sampleToken}/setMyCommands`)
-            .return(new HttpResponse().setContentText(contentText));
-
-        const bot = BotModel.create(sampleToken);
-        const response = bot.setMyCommands(commands, language, scope);
-
-        expect(response.getResponseCode()).toBe(200);
-        expect(response.getContentText()).toBe(contentText);
-    });
-
-    // setWebhook
-    test('should call setWebhook on telegram client', () => {
-        const contentText = `{
-            "result": true
-        }`;
-        const deploymentId = 'AKfycbx...';
-        const webAppUrl = `https://script.google.com/macros/s/${deploymentId}/exec`;
-        const callbackUrl = `https://api.telegram.org/bot${sampleToken}/setWebhook?url=${webAppUrl}`;
-        UrlFetchAppStubConfiguration.when(callbackUrl)
-            .return(new HttpResponse().setContentText(contentText));
-
-
-        const bot = BotModel.create(sampleToken);
-        const response = bot.setWebhook(webAppUrl);
-        expect(response.getResponseCode()).toBe(200);
-        expect(response.getContentText()).toBe(contentText);
-    });
-
-    // deleteWebhook
-    test('should call deleteWebhook on telegram client', () => {
-        const contentText = `{
-            "result": true
-        }`;
-        const webAppUrl = 'https://script.google.com/macros/s/AKfycbx.../exec';
-        const callbackUrl = `https://api.telegram.org/bot${sampleToken}/deleteWebhook?url=${webAppUrl}`;
-        UrlFetchAppStubConfiguration.when(callbackUrl)
-            .return(new HttpResponse().setContentText(contentText));
-        const bot = BotModel.create(sampleToken);
-        const response = bot.deleteWebhook(webAppUrl);
-        expect(response.getResponseCode()).toBe(200);
-        expect(response.getContentText()).toBe(contentText);
-    });
-
-    // setMyName
-    test('should call setMyName on telegram client', () => {
-        const contentText = `{
-            "result": true
-        }`;
-        const name = 'Test Bot Name';
-        const language = 'en';
-        const callbackUrl = `https://api.telegram.org/bot${sampleToken}/setMyName`;
-        UrlFetchAppStubConfiguration.when(callbackUrl)
-            .return(new HttpResponse().setContentText(contentText));
-        const bot = BotModel.create(sampleToken);
-        const response = bot.setMyName(name, language);
-        expect(response.getResponseCode()).toBe(200);
-        expect(response.getContentText()).toBe(contentText);
-    });
-
-    // setMyDescription
-    test('should call setMyDescription on telegram client', () => {
-        const contentText = `{
-            "result": true
-        }`;
-        const description = 'Test Bot Description';
-        const language = 'en';
-        const callbackUrl = `https://api.telegram.org/bot${sampleToken}/setMyDescription`;
-        UrlFetchAppStubConfiguration.when(callbackUrl)
-            .return(new HttpResponse().setContentText(contentText));
-        const bot = BotModel.create(sampleToken);
-        const response = bot.setMyDescription(description, language);
-        expect(response.getResponseCode()).toBe(200);
-        expect(response.getContentText()).toBe(contentText);
-    });
-
-    // setMyShortDescription
-    test('should call setMyShortDescription on telegram client', () => {
-        const contentText = `{
-            "result": true
-        }`;
-        const shortDescription = 'Test Short Description';
-        const language = 'en';
-        const callbackUrl = `https://api.telegram.org/bot${sampleToken}/setMyShortDescription`;
-        UrlFetchAppStubConfiguration.when(callbackUrl)
-            .return(new HttpResponse().setContentText(contentText));
-        const bot = BotModel.create(sampleToken);
-        const response = bot.setMyShortDescription(shortDescription, language);
-        expect(response.getResponseCode()).toBe(200);
-        expect(response.getContentText()).toBe(contentText);
+        test('should return null for non-existing key', () => {
+            const reply = model.getValue('[NON_EXISTING_KEY]', 'default');
+            expect(reply).toBeNull();
+        });
     });
 
     afterEach(() => {
-        UrlFetchAppStubConfiguration.reset();
+        jest.clearAllMocks();
     });
+
 });
+
+
