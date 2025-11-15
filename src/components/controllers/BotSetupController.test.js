@@ -148,7 +148,8 @@ describe('BotSetupController Tests', () => {
                 const userProperties = PropertiesService.getUserProperties();
                 const testEnvironment = "production";
                 controller = BotSetupController.create(
-                    userProperties
+                    userProperties,
+                    SpreadsheetApp.getActiveSpreadsheet()
                 );
                 controller.setNewEnvironment(testEnvironment);
                 expect(userProperties.getProperty("environment")).toBe(testEnvironment);
@@ -159,10 +160,11 @@ describe('BotSetupController Tests', () => {
                 const userProperties = PropertiesService.getUserProperties();
                 const testDeploymentId = "test_deployment_12345";
                 controller = BotSetupController.create(
-                    userProperties
+                    userProperties,
+                    SpreadsheetApp.getActiveSpreadsheet()
                 );
                 controller.setNewTestDeploymentId(testDeploymentId);
-                expect(userProperties.getProperty("test_deployment_id")).toBe(testDeploymentId);
+                expect(userProperties.getProperty(EnvironmentModel.InputMeta.TEST_DEPLOYMENT_ID)).toBe(testDeploymentId);
             });
 
             describe('Bot info methods', () => {

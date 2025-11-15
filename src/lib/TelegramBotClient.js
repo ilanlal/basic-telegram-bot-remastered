@@ -437,7 +437,7 @@ class TelegramBotClient {
     const data = {
       'method': "post",
       'payload': {
-        'scope': scope,
+        //'scope': scope,
         'commands': JSON.stringify(commands),
         'language_code': language_code
       }

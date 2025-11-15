@@ -28,7 +28,8 @@ class EnvironmentModel {
 
     setNewDeploymentId(id) {
         if (!id || typeof id !== 'string' || id.trim() === '') {
-            throw new Error("Invalid deployment ID");
+            this._userProperties.deleteProperty(EnvironmentModel.InputMeta.DEPLOYMENT_ID);
+            return;
         }
 
         const safeId = decodeURIComponent(id);
@@ -73,12 +74,12 @@ class EnvironmentModel {
     }
 
     setNewTestDeploymentId(id) {
-        if (!id || typeof id !== 'string' || id.trim() === '') {
-            throw new Error("Invalid test deployment ID");
+        if (!id || id.trim() === '') {
+            this._userProperties.deleteProperty(EnvironmentModel.InputMeta.TEST_DEPLOYMENT_ID);
+            return;
         }
-
         const safeId = decodeURIComponent(id);
-        return this._userProperties.setProperty(EnvironmentModel.InputMeta.TEST_DEPLLOYMENT_ID, safeId);
+        return this._userProperties.setProperty(EnvironmentModel.InputMeta.TEST_DEPLOYMENT_ID, safeId);
     }
 
     // Getters
@@ -101,6 +102,7 @@ class EnvironmentModel {
     get state() {
         const token = this._userProperties.getProperty(EnvironmentModel.InputMeta.BOT_API_TOKEN);
         const deploymentId = this._userProperties.getProperty(EnvironmentModel.InputMeta.DEPLOYMENT_ID);
+        const testDeploymentId = this._userProperties.getProperty(EnvironmentModel.InputMeta.TEST_DEPLOYMENT_ID);
         return {
             // show 4 first and 4 last characters of the token
             botToken: token ? `${token.substring(0, 4)}****${token.substring(token.length - 4)}` : null,
@@ -118,8 +120,8 @@ class EnvironmentModel {
             environment: this._userProperties.getProperty(EnvironmentModel.InputMeta.ENVIRONMENT) || 'exec',
             webhookCallbackUrl: this._userProperties.getProperty(EnvironmentModel.InputMeta.WEBHOOK_CALLBACK_URL),
             webhookCallbackUrlSet: !!this._userProperties.getProperty(EnvironmentModel.InputMeta.WEBHOOK_CALLBACK_URL),
-            testDeploymentId: this._userProperties.getProperty(EnvironmentModel.InputMeta.TEST_DEPLLOYMENT_ID),
-            testDeploymentIdSet: !!this._userProperties.getProperty(EnvironmentModel.InputMeta.TEST_DEPLLOYMENT_ID)
+            testDeploymentId: testDeploymentId ? `${testDeploymentId.substring(0, 4)}****${testDeploymentId.substring(testDeploymentId.length - 4)}` : null,
+            testDeploymentIdSet: !!this._userProperties.getProperty(EnvironmentModel.InputMeta.TEST_DEPLOYMENT_ID)
         }
     }
 }
@@ -127,7 +129,7 @@ class EnvironmentModel {
 EnvironmentModel.InputMeta = {
     BOT_API_TOKEN: 'bot_api_token',
     DEPLOYMENT_ID: 'deployment_id',
-    TEST_DEPLLOYMENT_ID: 'test_deployment_id',
+    TEST_DEPLOYMENT_ID: 'test_deployment_id',
     ADMIN_CHAT_ID: 'admin_chat_id',
     DEFAULT_LANGUAGE: 'default_language',
     DEBUG_MODE: 'debug_mode_set',

@@ -61,7 +61,7 @@ describe('EnvironmentModel Tests', () => {
         test('should set a new test deployment id', () => {
             const newTestDeploymentId = 'test_deployment_id_123';
             model.setNewTestDeploymentId(newTestDeploymentId);
-            expect(model._userProperties.getProperty(EnvironmentModel.InputMeta.TEST_DEPLLOYMENT_ID)).toBe(newTestDeploymentId);
+            expect(model.state.testDeploymentId).toBe(newTestDeploymentId ? `${newTestDeploymentId.substring(0, 4)}****${newTestDeploymentId.substring(newTestDeploymentId.length - 4)}` : null);
         });
     });
 });

@@ -88,16 +88,14 @@ EnvironmentHandler.AddonWrapper = class {
 
     handleIdentifyDeploymentIdClick(e) {
         try {
-            let deploymentId = e.parameters?.deploymentId || null;
+            const deploymentId = e.parameters?.deploymentId || null;
+            const testDeploymentId = e.parameters?.testDeploymentId || null;
 
-            if (!deploymentId) {
-                const formInputs = e.commonEventObject.formInputs || {};
-                deploymentId = formInputs['txt_deployment_id']?.stringInputs?.value[0] || null;
-            }
             const controller = BotSetupController
-                .create(PropertiesService.getUserProperties());
+                .create(this._userProperties, this._activeSpreadsheet);
 
             controller.setNewDeploymentId(deploymentId);
+            controller.setNewTestDeploymentId(testDeploymentId);
 
             return this.handleOperationSuccess("👍 Deployment ID identified successfully.")
                 .build();
@@ -122,7 +120,7 @@ EnvironmentHandler.AddonWrapper = class {
             }
 
             const controller = BotSetupController
-                .create(this._userProperties);
+                .create(this._userProperties, this._activeSpreadsheet);
 
             controller.setNewChatId(chatId);
 
@@ -149,7 +147,7 @@ EnvironmentHandler.AddonWrapper = class {
             }
 
             const controller = BotSetupController
-                .create(this._userProperties);
+                .create(this._userProperties, this._activeSpreadsheet);
 
             controller.setNewActiveSpreadsheetId(spreadsheetId);
 
@@ -176,7 +174,7 @@ EnvironmentHandler.AddonWrapper = class {
             }
 
             const controller = BotSetupController
-                .create(this._userProperties);
+                .create(this._userProperties, this._activeSpreadsheet);
 
             controller.setNewDefaultLanguage(languageCode);
 
@@ -202,7 +200,7 @@ EnvironmentHandler.AddonWrapper = class {
             }
 
             const controller = BotSetupController
-                .create(this._userProperties);
+                .create(this._userProperties, this._activeSpreadsheet);
 
             controller.setDebugMode(logEvents === 'true');
 
