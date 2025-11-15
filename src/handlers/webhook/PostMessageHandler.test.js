@@ -3,6 +3,7 @@ require('../../../tests');
 const SpreadsheetStubConfiguration = require('@ilanlal/gasmocks/src/spreadsheetapp/classes/SpreadsheetStubConfiguration');
 const SpreadsheetApp = require('@ilanlal/gasmocks/src/spreadsheetapp/SpreadsheetApp');
 const { PostMessageHandler } = require('./PostMessageHandler');
+const { CustomerModel } = require('../../components/models/CustomerModel');
 
 describe('PostMessageHandler', () => {
     /** @type {PostMessageHandler} */
@@ -10,7 +11,10 @@ describe('PostMessageHandler', () => {
 
     beforeEach(() => {
         SpreadsheetStubConfiguration.reset();
-        handler = PostMessageHandler.create();
+        handler = PostMessageHandler.create(
+            SpreadsheetApp.getActiveSpreadsheet(),
+            PropertiesService.getUserProperties()
+        );
     });
 
     test('should handle verifyPerson call', () => {
@@ -24,24 +28,27 @@ describe('PostMessageHandler', () => {
             }
         };
         // first call to verifyPersone should add the user response is array of user data
-        let response = handler.verifyPersone(content.message);
-        expect(Array.isArray(response)).toBe(true);
+        // [timestamp, chat_id, is_bot, first_name, last_name, username, language_code]
+        let customer = handler.verifyPersone(content.message);
+        expect(Array.isArray(customer)).toBe(true);
+
         // check if user is added to Users sheet
-        let user = SpreadsheetService.Users.getUserById(content.message.from.id);
-        expect(user).not.toBeNull();
-        expect(user[2]).toBe(content.message.from.username);
-        expect(user[3]).toBe(content.message.from.first_name);
-        expect(user[4]).toBe(content.message.from.last_name);
-        expect(user[5]).toBe(content.message.from.language_code);
+        const sheetName = CustomerModel.SHEET_NAME;
+        const customerSheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(sheetName);
+        expect(customerSheet).not.toBeNull();
+        let data = customerSheet.getDataRange().getValues();
+        let addedUser = data.find(row => row[1] === content.message.from.id);
+        expect(addedUser).toBeDefined();
+        expect(addedUser[1]).toBe(content.message.from.id);
+        expect(addedUser[3]).toBe(content.message.from.first_name);
 
         // call again to verify no duplicate user is added
         response = handler.verifyPersone(content.message);
         expect(Array.isArray(response)).toBe(true);
         // check if only one user entry exists in Users sheet
-        let usersSheet = SpreadsheetService.Users.getUsersSheet();
-        let data = usersSheet.getDataRange().getValues();
-        let userCount = data.filter(row => row[1] === content.message.from.id).length;
-        expect(userCount).toBe(1);
+        data = customerSheet.getDataRange().getValues();
+        const users = data.filter(row => row[1] === content.message.from.id);
+        expect(users.length).toBe(1);
     });
 
     describe('handleBotCommand', () => {

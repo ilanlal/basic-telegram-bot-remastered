@@ -68,19 +68,9 @@ class PostMessageHandler {
             throw new Error('Invalid message format: missing from.id');
         }
 
-        const user = SpreadsheetService.Users.getUserById(message.from.id);
-        if (user) {
-            return user;
-        }
-
-        return SpreadsheetService.Users.addUser(
-            message.from.id,
-            {
-                username: message.from.username,
-                first_name: message.from.first_name,
-                last_name: message.from.last_name,
-                language_code: message.from.language_code
-            });
+        return CustomerController
+            .create(this._userProperties, this._activeSpreadsheet)
+            .verifyCustomer(message);
     }
     // reply from force input request
     handleReplyToForceInput(chat_id, message) {

@@ -7,7 +7,8 @@ const { Lights } = require('./Lights');
 const { SheetModel } = require('./SheetModel');
 const { EnvironmentModel } = require('./EnvironmentModel');
 const { LoggerModel } = require('./LoggerModel');
-const {  BotModel } = require('./BotModel');
+const { BotModel } = require('./BotModel');
+const { CustomerModel } = require('./CustomerModel');
 
 // Expose globally for tests and other scripts
 global.AutomationModel = AutomationModel;
@@ -20,3 +21,4 @@ global.SheetModel = SheetModel;
 global.EnvironmentModel = EnvironmentModel;
 global.LoggerModel = LoggerModel;
 global.BotModel = BotModel;
+global.CustomerModel = CustomerModel;
