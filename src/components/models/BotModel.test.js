@@ -26,17 +26,18 @@ describe('BotModel', () => {
             expect(index).toBe(1); // 'default' should be in the second column (index 1)
         });
 
-        test('should list all replies keys', () => {
-            const replies = model.listRepliesKeys();
-            expect(replies.length).toBeGreaterThan(2);
+        test('should list all keys', () => {
+            const keys = model.getKeys();
+            expect(keys.length).toBeGreaterThan(2);
         });
 
         test('should list all languages', () => {
-            const languages = model.listLanguages();
-            expect(languages.length).toBeGreaterThan(0);
+            const languages = model.getLanguages();
+            expect(languages.length).toBeGreaterThan(6);
+            expect(JSON.stringify(languages)).toContain('default');
         });
 
-        test('should find data by key', () => {
+        test('should find value by key', () => {
             // reply is array of actions like {method: 'sendMessage', payload: {...}}
             const text = model.getValue('name', 'default');
             expect(text).toBe(EMD.BotSetup.sheet({}).sample_data[0][1]);

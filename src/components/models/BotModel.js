@@ -24,7 +24,7 @@ class BotModel {
         return 1; // default to second column
     }
 
-    listRepliesKeys() {
+    getKeys() {
         const range = this.sheet.getDataRange();
         const values = range.getValues();
         const keys = [];
@@ -37,7 +37,7 @@ class BotModel {
         return keys;
     }
 
-    listLanguages() {
+    getLanguages() {
         const range = this.sheet.getDataRange();
         const values = range.getValues();
         const languages = [];

@@ -66,7 +66,8 @@ class SetupFlow {
 
     setMyName() {
         const model = BotModel.create(this.sheetModel.activeSpreadsheet);
-        const langs = model.listLanguages().map(({ lang }) => lang);
+        const langs = model.getLanguages()
+            .map(({ lang }) => lang);
 
         langs.forEach((language_code) => {
             if (language_code === 'key') return; // skip key column
@@ -96,7 +97,7 @@ class SetupFlow {
 
     setMyDescription() {
         const model = BotModel.create(this.sheetModel.activeSpreadsheet);
-        const langs = model.listLanguages().map(({ lang }) => lang);
+        const langs = model.getLanguages().map(({ lang }) => lang);
 
         langs.forEach((language_code) => {
             if (language_code === 'key') return; // skip key column
@@ -126,7 +127,7 @@ class SetupFlow {
 
     setMyShortDescription() {
         const model = BotModel.create(this.sheetModel.activeSpreadsheet);
-        const langs = model.listLanguages().map(({ lang }) => lang);
+        const langs = model.getLanguages().map(({ lang }) => lang);
 
         langs.forEach((language_code) => {
             if (language_code === 'key') return; // skip key column
@@ -156,7 +157,7 @@ class SetupFlow {
 
     setMyCommands() {
         const model = BotModel.create(this.sheetModel.activeSpreadsheet);
-        const langs = model.listLanguages().map(({ lang }) => lang);
+        const langs = model.getLanguages().map(({ lang }) => lang);
 
         langs.forEach((language_code) => {
             if (language_code === 'key') return; // skip key column
@@ -167,7 +168,7 @@ class SetupFlow {
             if (!text || text.trim() === '') {
                 return;
             }
-    
+
             // set bot commands
             const commands = JSON.parse(text);
             let response;
