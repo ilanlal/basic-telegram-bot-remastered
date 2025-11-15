@@ -74,7 +74,6 @@ class SetupFlow {
                 throw new Error("Failed to set bot name");
             }
         });
-
         return true;
     }
 
