@@ -92,7 +92,7 @@ class SetupFlow {
                 throw new Error("Failed to set bot name");
             }
         });
-        return true;
+        return { langs };
     }
 
     setMyDescription() {
@@ -122,7 +122,7 @@ class SetupFlow {
                 throw new Error("Failed to set bot description");
             }
         });
-        return true;
+        return { langs };
     }
 
     setMyShortDescription() {
@@ -152,7 +152,7 @@ class SetupFlow {
                 throw new Error("Failed to set bot short description");
             }
         });
-        return true;
+        return { langs };
     }
 
     setMyCommands() {
@@ -183,7 +183,7 @@ class SetupFlow {
                 throw new Error("Failed to set bot commands");
             }
         });
-        return true;
+        return { langs };
     }
 
     // Getters
