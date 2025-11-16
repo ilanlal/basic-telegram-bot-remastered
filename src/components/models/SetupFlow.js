@@ -85,9 +85,11 @@ class SetupFlow {
         const langs = model.getLanguages()
             .map(({ lang }) => lang);
 
-        // First value is always (default language) for unmapped language codes
+        // First [0] value is always (default language) for unmapped language codes
         const defaultLang = langs[0];
-        let response = this.telegramBotClient.setMyName({ name: model.getValue('name', defaultLang) });
+        // get name value for the default language
+        const fallbackName = model.getValue('name', defaultLang);
+        let response = this.telegramBotClient.setMyName({ name: fallbackName });
         if (response.getResponseCode() !== 200) {
             throw new Error("Failed to set bot name for default language");
         }
@@ -95,19 +97,15 @@ class SetupFlow {
         // Process all languages
         langs.forEach((language_code) => {
             // get name value for the language
-            const text = model.getValue('name', language_code);
+            const localizedName = model.getValue('name', language_code);
             // skip empty texts
-            if (!text || text.trim() === '') {
+            if (!localizedName || localizedName.trim() === '') {
                 throw new Error(`Name for language "${language_code}" is empty`);
             }
 
             // set bot name
 
-            if (language_code === '' || language_code === 'default') {
-                response = this.telegramBotClient.setMyName({ name: text });
-            } else {
-                response = this.telegramBotClient.setMyName({ name: text, language_code });
-            }
+            response = this.telegramBotClient.setMyName({ name: localizedName, language_code });
 
             // check response
             if (response.getResponseCode() !== 200) {
@@ -120,7 +118,14 @@ class SetupFlow {
     setMyDescription() {
         const model = BotModel.create(this.sheetModel.activeSpreadsheet);
         const langs = model.getLanguages().map(({ lang }) => lang);
-
+        // First [0] value is always (default language) for unmapped language codes
+        const defaultLang = langs[0];
+        // get description value for the default language
+        const fallbackDescription = model.getValue('description', defaultLang);
+        let response = this.telegramBotClient.setMyDescription({ description: fallbackDescription });
+        if (response.getResponseCode() !== 200) {
+            throw new Error("Failed to set bot description for default language");
+        }
         langs.forEach((language_code) => {
             // get description value for the language
             const text = model.getValue('description', language_code);
@@ -130,12 +135,7 @@ class SetupFlow {
             }
 
             // set bot name
-            let response;
-            if (language_code === '' || language_code === 'default') {
-                response = this.telegramBotClient.setMyDescription({ description: text });
-            } else {
-                response = this.telegramBotClient.setMyDescription({ description: text, language_code });
-            }
+            response = this.telegramBotClient.setMyDescription({ description: text, language_code });
 
             // check response
             if (response.getResponseCode() !== 200) {
@@ -148,7 +148,14 @@ class SetupFlow {
     setMyShortDescription() {
         const model = BotModel.create(this.sheetModel.activeSpreadsheet);
         const langs = model.getLanguages().map(({ lang }) => lang);
-
+        // First [0] value is always (default language) for unmapped language codes
+        const defaultLang = langs[0];
+        // get short description value for the default language
+        const fallbackDescription = model.getValue('short_description', defaultLang);
+        let response = this.telegramBotClient.setMyShortDescription({ short_description: fallbackDescription });
+        if (response.getResponseCode() !== 200) {
+            throw new Error("Failed to set bot short description for default language");
+        }
         langs.forEach((language_code) => {
             // get short description value for the language
             const text = model.getValue('short_description', language_code);
@@ -158,12 +165,7 @@ class SetupFlow {
             }
 
             // set bot short description
-            let response;
-            if (language_code === '' || language_code === 'default') {
-                response = this.telegramBotClient.setMyShortDescription({ short_description: text });
-            } else {
-                response = this.telegramBotClient.setMyShortDescription({ short_description: text, language_code });
-            }
+            response = this.telegramBotClient.setMyShortDescription({ short_description: text, language_code });
 
             // check response
             if (response.getResponseCode() !== 200) {
@@ -176,7 +178,15 @@ class SetupFlow {
     setMyCommands() {
         const model = BotModel.create(this.sheetModel.activeSpreadsheet);
         const langs = model.getLanguages().map(({ lang }) => lang);
+        // First [0] value is always (default language) for unmapped language codes
+        const defaultLang = langs[0];
+        // get commands value for the default language
+        const fallbackCommands = model.getValue('commands', defaultLang);
 
+        let response = this.telegramBotClient.setMyCommands({ commands: JSON.parse(fallbackCommands) });
+        if (response.getResponseCode() !== 200) {
+            throw new Error("Failed to set bot commands for default language");
+        }
         langs.forEach((language_code) => {
             // get commands value for the language
             const text = model.getValue('commands', language_code);
@@ -187,12 +197,7 @@ class SetupFlow {
 
             // set bot commands
             const parsedCommands = JSON.parse(text);
-            let response;
-            if (language_code === '' || language_code === 'default') {
-                response = this.telegramBotClient.setMyCommands({ commands: parsedCommands });
-            } else {
-                response = this.telegramBotClient.setMyCommands({ commands: parsedCommands, language_code });
-            }
+            response = this.telegramBotClient.setMyCommands({ commands: parsedCommands, language_code });
 
             // check response
             if (response.getResponseCode() !== 200) {

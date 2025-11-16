@@ -6,6 +6,7 @@ describe('SetupFlow', () => {
     /** @type {SetupFlow} */
     let model;
     const environmentModel = EnvironmentModel.create(PropertiesService.getUserProperties());
+    const sampleToken = '[FAKE_DUMMY_BOT_TOKEN]';
     beforeEach(() => {
         UrlFetchAppStubConfiguration.reset();
         SpreadsheetStubConfiguration.reset();
@@ -53,7 +54,6 @@ describe('SetupFlow', () => {
     });
 
     describe('webhook', () => {
-        const sampleToken = '[FAKE_DUMMY_BOT_TOKEN]';
         const deploymentId = 'AKfycbx...';
         const callbackUrl = `https://script.google.com/macros/s/${deploymentId}/exec`;
 
@@ -84,8 +84,6 @@ describe('SetupFlow', () => {
     });
 
     describe('set bot info', () => {
-        const sampleToken = '[FAKE_DUMMY_BOT_TOKEN]';
-
         test('should set bot name', () => {
             const apiUrl = `https://api.telegram.org/bot${sampleToken}/setMyName`;
             UrlFetchAppStubConfiguration.when(apiUrl)
