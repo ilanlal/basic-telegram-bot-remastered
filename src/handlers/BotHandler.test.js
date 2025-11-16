@@ -44,7 +44,7 @@ describe('BotHandler', () => {
         const event = {
             parameters: { action: 'setWebhook' }
         }; // Mock event object
-        const actionResponse = BotHandler.Addon.onWebhookToggelClick(event);
+        const actionResponse = BotHandler.Addon.onWebhookToggleClick(event);
         expect(actionResponse).toBeDefined();
         console.log(JSON.stringify(actionResponse, null, 2))
     });
