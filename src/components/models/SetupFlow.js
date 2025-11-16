@@ -85,6 +85,14 @@ class SetupFlow {
         const langs = model.getLanguages()
             .map(({ lang }) => lang);
 
+        // First value is always (default language) for unmapped language codes
+        const defaultLang = langs[0];
+        let response = this.telegramBotClient.setMyName({ name: model.getValue('name', defaultLang) });
+        if (response.getResponseCode() !== 200) {
+            throw new Error("Failed to set bot name for default language");
+        }
+
+        // Process all languages
         langs.forEach((language_code) => {
             // get name value for the language
             const text = model.getValue('name', language_code);
@@ -94,7 +102,7 @@ class SetupFlow {
             }
 
             // set bot name
-            let response;
+
             if (language_code === '' || language_code === 'default') {
                 response = this.telegramBotClient.setMyName({ name: text });
             } else {

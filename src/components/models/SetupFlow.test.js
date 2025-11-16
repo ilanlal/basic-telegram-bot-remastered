@@ -93,7 +93,7 @@ describe('SetupFlow', () => {
                     .setContentText(JSON.stringify({ result: true })));
             environmentModel.setNewBotToken(sampleToken);
             const response = model.setMyName();
-            expect(JSON.stringify(response.langs)).toContain('default');
+            expect(response.langs.length).toBeGreaterThan(0);
         });
 
         // setMyDescription
@@ -104,7 +104,7 @@ describe('SetupFlow', () => {
                     .setContentText(JSON.stringify({ result: true })));
             environmentModel.setNewBotToken(sampleToken);
             const response = model.setMyDescription();
-            expect(JSON.stringify(response.langs)).toContain('default');
+            expect(response.langs.length).toBeGreaterThan(0);
         });
 
         // setMyShortDescription
@@ -115,7 +115,7 @@ describe('SetupFlow', () => {
                     .setContentText(JSON.stringify({ result: true })));
             environmentModel.setNewBotToken(sampleToken);
             const response = model.setMyShortDescription();
-            expect(JSON.stringify(response.langs)).toContain('default');
+            expect(response.langs.length).toBeGreaterThan(0);
         });
 
         // setMyCommands
@@ -126,7 +126,7 @@ describe('SetupFlow', () => {
                     .setContentText(JSON.stringify({ result: true })));
             environmentModel.setNewBotToken(sampleToken);
             const response = model.setMyCommands();
-            expect(JSON.stringify(response.langs)).toContain('default');
+            expect(response.langs.length).toBeGreaterThan(0);
         });
     });
 });

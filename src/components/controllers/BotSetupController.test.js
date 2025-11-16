@@ -182,7 +182,7 @@ describe('BotSetupController Tests', () => {
                         .return(new HttpResponse()
                             .setContentText(JSON.stringify({ result: true })));
                     const response = controller.setMyName();
-                    expect(JSON.stringify(response.langs)).toContain('default');
+                    expect(response.langs.length).toBeGreaterThan(0);
                 });
 
                 test("setMyDescription should set bot description", () => {
@@ -191,7 +191,7 @@ describe('BotSetupController Tests', () => {
                         .return(new HttpResponse()
                             .setContentText(JSON.stringify({ result: true })));
                     const response = controller.setMyDescription();
-                    expect(JSON.stringify(response.langs)).toContain('default');
+                    expect(response.langs.length).toBeGreaterThan(0);
                 });
 
                 test("setMyShortDescription should set bot short description", () => {
@@ -200,7 +200,7 @@ describe('BotSetupController Tests', () => {
                         .return(new HttpResponse()
                             .setContentText(JSON.stringify({ result: true })));
                     const response = controller.setMyShortDescription();
-                    expect(JSON.stringify(response.langs)).toContain('default');
+                    expect(response.langs.length).toBeGreaterThan(0);
                 });
 
                 test("setMyCommands should set bot commands", () => {
@@ -209,7 +209,7 @@ describe('BotSetupController Tests', () => {
                         .return(new HttpResponse()
                             .setContentText(JSON.stringify({ result: true })));
                     const response = controller.setMyCommands();
-                    expect(JSON.stringify(response.langs)).toContain('default');
+                    expect(response.langs.length).toBeGreaterThan(0);
                 });
 
             });

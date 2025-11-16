@@ -1,6 +1,5 @@
 require('../../../tests');
 const { BotModel } = require('./BotModel');
-const { Entity } = require('./EntityModel');
 const SpreadsheetStubConfiguration = require('@ilanlal/gasmocks/src/spreadsheetapp/classes/SpreadsheetStubConfiguration');
 const SpreadsheetApp = require('@ilanlal/gasmocks/src/spreadsheetapp/SpreadsheetApp');
 const { SheetModel } = require('./SheetModel');
@@ -34,7 +33,6 @@ describe('BotModel', () => {
         test('should list all languages', () => {
             const languages = model.getLanguages();
             expect(languages.length).toBeGreaterThan(6);
-            expect(JSON.stringify(languages)).toContain('default');
         });
 
         test('should find value by key', () => {
