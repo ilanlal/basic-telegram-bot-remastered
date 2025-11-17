@@ -37,8 +37,8 @@ describe('BotModel', () => {
 
         test('should find value by key', () => {
             // reply is array of actions like {method: 'sendMessage', payload: {...}}
-            const text = model.getValue('name', 'default');
-            expect(text).toBe(EMD.BotSetup.sheet({}).sample_data[0][1]);
+            const text = model.getValue('name', 'es');
+            expect(text).toBe(EMD.BotSetup.sheet({}).sample_data[0][2]);
         });
 
         test('should return null for non-existing key', () => {

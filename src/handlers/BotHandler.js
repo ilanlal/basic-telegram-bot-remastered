@@ -131,7 +131,7 @@ BotHandler.AddonWrapper = class {
             const response = controller.setMyName();
 
             return this.handleOperationSuccess("👍 Bot name set successfully."
-                + ` total: ${Object.keys(response.langs).length} languages.`)
+                + ` total: ${response.langs.length} languages.`)
                 .build();
         } catch (error) {
             return this.handleError(error)
