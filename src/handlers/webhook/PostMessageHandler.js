@@ -4,7 +4,7 @@ class PostMessageHandler {
         this._userProperties = userProperties;
     }
 
-    static create(userProperties = PropertiesService.getScriptProperties(), activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet()) {
+    static create(userProperties = PropertiesService.getDocumentProperties(), activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet()) {
         return new PostMessageHandler(userProperties, activeSpreadsheet);
     }
 

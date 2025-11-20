@@ -1,7 +1,7 @@
 class EntityHandler {
     get userProperties() {
         if (!this._userProperties) {
-            this._userProperties = PropertiesService.getScriptProperties();
+            this._userProperties = PropertiesService.getDocumentProperties();
         }
         return this._userProperties;
     }

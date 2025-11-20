@@ -8,7 +8,7 @@ class SetupFlow {
     }
 
     static create(
-        userProperties = PropertiesService.getScriptProperties(),
+        userProperties = PropertiesService.getDocumentProperties(),
         activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet()
     ) {
         return new SetupFlow(userProperties, activeSpreadsheet);

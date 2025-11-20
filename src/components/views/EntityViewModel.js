@@ -8,7 +8,7 @@ class EntityViewModel {
     static create({
         cardService = CardService,
         activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet(),
-        userProperties = PropertiesService.getScriptProperties() } = {}
+        userProperties = PropertiesService.getDocumentProperties() } = {}
     ) {
         return new EntityViewModel({
             cardWrapper: EntityViewModel.CardServiceWrapper.create(cardService, userProperties)
@@ -61,7 +61,7 @@ EntityViewModel.CardServiceWrapper = class {
         return "TextButton widget must have either 'text', and 'openLink' or 'onClick' defined.";
     }
 
-    static create(cardService = CardService, userProperties = PropertiesService.getScriptProperties()) {
+    static create(cardService = CardService, userProperties = PropertiesService.getDocumentProperties()) {
         return new EntityViewModel.CardServiceWrapper(cardService, userProperties);
     }
 

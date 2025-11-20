@@ -4,7 +4,7 @@ class PostCallbackQueryHandler {
     this._activeSpreadsheet = activeSpreadsheet;
   }
 
-  static create(userProperties = PropertiesService.getScriptProperties(), activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet()) {
+  static create(userProperties = PropertiesService.getDocumentProperties(), activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet()) {
     return new PostCallbackQueryHandler(userProperties, activeSpreadsheet);
   }
 

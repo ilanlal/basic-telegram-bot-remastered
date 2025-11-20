@@ -5,12 +5,12 @@ const { EnvironmentModel } = require('./EnvironmentModel');
 describe('SetupFlow', () => {
     /** @type {SetupFlow} */
     let model;
-    const environmentModel = EnvironmentModel.create(PropertiesService.getScriptProperties());
+    const environmentModel = EnvironmentModel.create(PropertiesService.getDocumentProperties());
     const sampleToken = '[FAKE_DUMMY_BOT_TOKEN]';
     beforeEach(() => {
         UrlFetchAppStubConfiguration.reset();
         SpreadsheetStubConfiguration.reset();
-        model = SetupFlow.create(PropertiesService.getScriptProperties(),
+        model = SetupFlow.create(PropertiesService.getDocumentProperties(),
             SpreadsheetApp.getActiveSpreadsheet());
         SheetModel.create(SpreadsheetApp.getActiveSpreadsheet())
             .bindSheetSampleData(EMD.BotSetup.sheet({}));

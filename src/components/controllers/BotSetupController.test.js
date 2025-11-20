@@ -14,7 +14,7 @@ describe('BotSetupController Tests', () => {
             UrlFetchAppStubConfiguration.reset();
             SpreadsheetStubConfiguration.reset();
             controller = BotSetupController.create(
-                PropertiesService.getScriptProperties(),
+                PropertiesService.getDocumentProperties(),
                 SpreadsheetApp.getActiveSpreadsheet()
             );
             SheetModel.create(SpreadsheetApp.getActiveSpreadsheet())
@@ -55,7 +55,7 @@ describe('BotSetupController Tests', () => {
                 }).toThrow("Invalid bot token");
             });
             test("setNewBotToken should store the token", () => {
-                const userProperties = PropertiesService.getScriptProperties();
+                const userProperties = PropertiesService.getDocumentProperties();
                 const testToken = "new_valid_token";
                 controller = BotSetupController.create(
                     userProperties
@@ -64,7 +64,7 @@ describe('BotSetupController Tests', () => {
                 expect(userProperties.getProperty("bot_api_token")).toBe(testToken);
             });
             test("setNewDeploymentId should store the deployment ID", () => {
-                const userProperties = PropertiesService.getScriptProperties();
+                const userProperties = PropertiesService.getDocumentProperties();
                 const testDeploymentId = "deployment_12345";
                 controller = BotSetupController.create(
                     userProperties
@@ -73,7 +73,7 @@ describe('BotSetupController Tests', () => {
                 expect(userProperties.getProperty("deployment_id")).toBe(testDeploymentId);
             });
             test("setNewChatId should store the chat ID", () => {
-                const userProperties = PropertiesService.getScriptProperties();
+                const userProperties = PropertiesService.getDocumentProperties();
                 const testChatId = 987654321;
                 controller = BotSetupController.create(
                     userProperties
@@ -82,7 +82,7 @@ describe('BotSetupController Tests', () => {
                 expect(userProperties.getProperty("admin_chat_id")).toBe(testChatId.toString());
             });
             test("setDebugMode should store the debug mode", () => {
-                const userProperties = PropertiesService.getScriptProperties();
+                const userProperties = PropertiesService.getDocumentProperties();
                 controller = BotSetupController.create(
                     userProperties
                 );
@@ -102,7 +102,7 @@ describe('BotSetupController Tests', () => {
                     .return(new HttpResponse()
                         .setContentText(JSON.stringify({ result: true })));
 
-                const userProperties = PropertiesService.getScriptProperties();
+                const userProperties = PropertiesService.getDocumentProperties();
                 controller = BotSetupController.create(
                     userProperties
                 );
@@ -115,7 +115,7 @@ describe('BotSetupController Tests', () => {
             });
             //setNewDefaultLanguage method.
             test("setNewDefaultLanguage should store the language code", () => {
-                const userProperties = PropertiesService.getScriptProperties();
+                const userProperties = PropertiesService.getDocumentProperties();
                 const testLanguageCode = "es";
                 controller = BotSetupController.create(
                     userProperties
@@ -125,7 +125,7 @@ describe('BotSetupController Tests', () => {
             });
             // setNewActiveSpreadsheetId method.
             test("setNewActiveSpreadsheetId should store the spreadsheet ID", () => {
-                const userProperties = PropertiesService.getScriptProperties();
+                const userProperties = PropertiesService.getDocumentProperties();
                 const testSpreadsheetId = "spreadsheet_12345";
                 controller = BotSetupController.create(
                     userProperties
@@ -136,7 +136,7 @@ describe('BotSetupController Tests', () => {
 
             // setNewWebhookCallbackUrl method. 
             test("setNewWebhookCallbackUrl should store the webhook callback URL", () => {
-                const userProperties = PropertiesService.getScriptProperties();
+                const userProperties = PropertiesService.getDocumentProperties();
                 const testUrl = "https://example.com/webhook";
                 controller = BotSetupController.create(
                     userProperties
@@ -147,7 +147,7 @@ describe('BotSetupController Tests', () => {
 
             // setNewEnvironment method.
             test("setNewEnvironment should store the environment", () => {
-                const userProperties = PropertiesService.getScriptProperties();
+                const userProperties = PropertiesService.getDocumentProperties();
                 const testEnvironment = "production";
                 controller = BotSetupController.create(
                     userProperties,
@@ -159,7 +159,7 @@ describe('BotSetupController Tests', () => {
 
             // setNewTestDeploymentId method.
             test("setNewTestDeploymentId should store the test deployment ID", () => {
-                const userProperties = PropertiesService.getScriptProperties();
+                const userProperties = PropertiesService.getDocumentProperties();
                 const testDeploymentId = "test_deployment_12345";
                 controller = BotSetupController.create(
                     userProperties,
@@ -172,7 +172,7 @@ describe('BotSetupController Tests', () => {
             describe('Bot info methods', () => {
                 const sampleToken = '[FAKE_DUMMY_BOT_TOKEN]';
                 EnvironmentModel.create(
-                    PropertiesService.getScriptProperties(),
+                    PropertiesService.getDocumentProperties(),
                     SpreadsheetApp.getActiveSpreadsheet()
                 ).setNewBotToken(sampleToken);
 

@@ -12,7 +12,7 @@ describe('AutomationHandler', () => {
     beforeEach(() => {
         SpreadsheetStubConfiguration.reset();
         // Set dummy bot token in user properties
-        PropertiesService.getScriptProperties().setProperty(EnvironmentModel.InputMeta.BOT_API_TOKEN, dummyToken);
+        PropertiesService.getDocumentProperties().setProperty(EnvironmentModel.InputMeta.BOT_API_TOKEN, dummyToken);
         handler = AutomationHandler.create();
         SheetModel.create(SpreadsheetApp.getActiveSpreadsheet())
             .bindSheetSampleData(EMD.Automation.sheet({}));

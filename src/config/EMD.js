@@ -1848,28 +1848,6 @@ EMD.Automation = {
                                 }
                             }
                         }]),
-                        // es
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: '🐣/> Hola..' + '\n\n'
-                                    + '<blockquote expandable>Sobre mí: Soy un <b>Bot Hub</b> 🐣\n\n'
-                                    + 'Soy un <b>Bot Hub</b> 🐣\n\n'
-                                    + 'Puedo ayudarte a explorar varias funciones y características de los bots de Telegram.\n\n'
-                                    + 'Puedes usarme para aprender sobre el envío de mensajes, fotos, grupos de medios y más!\n\n'
-                                    + 'Solo házmelo saber lo que quieres hacer!' + '\n\n'
-                                    + '</blockquote>'
-                                    + 'Haz clic en "🐣 Aceptar" en el "teclado en línea" a continuación para comenzar.' + '\n',
-                                parse_mode: 'HTML',
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [
-                                            { text: "🐣 Aceptar", callback_data: "/home" }
-                                        ]
-                                    ]
-                                }
-                            }
-                        }]),
                         // fr
                         JSON.stringify([{
                             method: 'sendMessage',
@@ -2595,47 +2573,6 @@ EMD.Automation = {
                         JSON.stringify([{
                             method: 'sendPhoto',
                             payload: {
-                                caption: '<b>시작하기</b>\n\n' +
-                                    '이 봇을 사용하여 다양한 작업을 수행할 수 있습니다. 시작하려면 다음 명령어를 사용하세요:\n\n' +
-                                    '1. /help - 봇 사용에 대한 도움말을 가져옵니다.\n' +
-                                    '2. /about - 이 봇에 대한 자세한 정보를 가져옵니다.\n\n' +
-                                    '</blockquote>'
-                                    + '<blockquote expandable>기능: \n'
-                                    + '이 봇은 다음과 같은 작업을 도와줄 수 있습니다:\n'
-                                    + '1. 메시지 전송\n'
-                                    + '2. 이미지 및 미디어 공유\n'
-                                    + '3. 그룹 및 채널 생성\n'
-                                    + '4. 계정 설정 관리\n\n'
-                                    + '</blockquote>'
-                                    + '<blockquote expandable>지원: \n'
-                                    + '도움이 필요하시면 언제든지 문의해 주세요!\n'
-                                    + '/help 명령어를 사용하여 안내를 받거나 문제를 보고해 주세요.\n\n'
-                                    + '</blockquote>'
-                                    + '<blockquote expandable>피드백: \n'
-                                    + '이 봇을 개선하기 위해 귀하의 피드백을 소중히 여기고 있습니다.\n'
-                                    + '귀하의 생각을 들려주세요!\n\n'
-                                    + '</blockquote>',
-                                photo: "https://www.gstatic.com/webp/gallery/1.jpg",
-                                parse_mode: 'HTML',
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        // 한 줄에 2개의 버튼
-                                        [
-                                            { text: "시작하기", web_app: { url: "https://github.com/ilanlal/basic-telegram-bot-remastered#readme" } },
-                                            { text: "문제 보고", web_app: { url: "https://github.com/ilanlal/basic-telegram-bot-remastered/issues" } }
-                                        ],
-                                        [
-                                            { text: "홈", callback_data: "home" }
-                                        ]
-                                    ]
-                                }
-                            }
-                        }])],
-                    ['/admin',
-                        // default (en)
-                        JSON.stringify([{
-                            method: 'sendPhoto',
-                            payload: {
                                 caption: '<b>Admin Panel</b>\n\n' +
                                     'Welcome to the Admin Panel. Here you can manage various aspects of the bot and its functionalities.\n\n' +
                                     'Use the buttons below to navigate through the admin features.',
@@ -2651,7 +2588,228 @@ EMD.Automation = {
                                     ]
                                 }
                             }
+                        }]),
+                        // es
+                        JSON.stringify([{
+                            method: 'sendPhoto',
+                            payload: {
+                                caption: '<b>Panel de Administración</b>\n\n' +
+                                    'Bienvenido al Panel de Administración. Aquí puedes gestionar varios aspectos del bot y sus funcionalidades.\n\n' +
+                                    'Utiliza los botones de abajo para navegar por las funciones de administración.',
+                                parse_mode: 'HTML',
+                                photo: "https://www.gstatic.com/webp/gallery/2.jpg",
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "Gestión de Usuarios", callback_data: "adminUserManagement" }],
+                                        [{ text: "Configuración del Bot", callback_data: "adminBotSettings" }],
+                                        [{ text: "Analítica", callback_data: "adminAnalytics" }],
+                                        [{ text: "Registros del Sistema", callback_data: "adminSystemLogs" }],
+                                        [{ text: "Inicio", callback_data: "home" }]
+                                    ]
+                                }
+                            }
+                        }]),
+                        // french (fr)
+                        JSON.stringify([{
+                            method: 'sendPhoto',
+                            payload: {
+                                caption: '<b>Panneau d\'Administration</b>\n\n' +
+                                    'Bienvenue dans le Panneau d\'Administration. Ici, vous pouvez gérer divers aspects du bot et de ses fonctionnalités.\n\n' +
+                                    'Utilisez les boutons ci-dessous pour naviguer dans les fonctionnalités d\'administration.',
+                                parse_mode: 'HTML',
+                                photo: "https://www.gstatic.com/webp/gallery/2.jpg",
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "Gestion des Utilisateurs", callback_data: "adminUserManagement" }],
+                                        [{ text: "Paramètres du Bot", callback_data: "adminBotSettings" }],
+                                        [{ text: "Analytique", callback_data: "adminAnalytics" }],
+                                        [{ text: "Journaux du Système", callback_data: "adminSystemLogs" }],
+                                        [{ text: "Accueil", callback_data: "home" }]
+                                    ]
+                                }
+                            }
+                        }]),
+                        // AR
+                        JSON.stringify([{
+                            method: 'sendPhoto',
+                            payload: {
+                                caption: '<b>لوحة التحكم</b>\n\n' +
+                                    'مرحبًا بك في لوحة التحكم. هنا يمكنك إدارة جوانب مختلفة من الروبوت وميزاته.\n\n' +
+                                    'استخدم الأزرار أدناه للتنقل بين ميزات الإدارة.',
+                                parse_mode: 'HTML',
+                                photo: "https://www.gstatic.com/webp/gallery/2.jpg",
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "إدارة المستخدمين", callback_data: "adminUserManagement" }],
+                                        [{ text: "إعدادات الروبوت", callback_data: "adminBotSettings" }],
+                                        [{ text: "تحليلات", callback_data: "adminAnalytics" }],
+                                        [{ text: "سجلات النظام", callback_data: "adminSystemLogs" }],
+                                        [{ text: "الصفحة الرئيسية", callback_data: "home" }]
+                                    ]
+                                }
+                            }
+                        }]),
+                        // DE
+                        JSON.stringify([{
+                            method: 'sendPhoto',
+                            payload: {
+                                caption: '<b>Administrationsbereich</b>\n\n' +
+                                    'Willkommen im Administrationsbereich. Hier können Sie verschiedene Aspekte des Bots und seiner Funktionen verwalten.\n\n' +
+                                    'Verwenden Sie die Schaltflächen unten, um durch die Verwaltungsfunktionen zu navigieren.',
+                                parse_mode: 'HTML',
+                                photo: "https://www.gstatic.com/webp/gallery/2.jpg",
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "Benutzerverwaltung", callback_data: "adminUserManagement" }],
+                                        [{ text: "Bot-Einstellungen", callback_data: "adminBotSettings" }],
+                                        [{ text: "Analytik", callback_data: "adminAnalytics" }],
+                                        [{ text: "Systemprotokolle", callback_data: "adminSystemLogs" }],
+                                        [{ text: "Startseite", callback_data: "home" }]
+                                    ]
+                                }
+                            }
+                        }]),
+                        // IT
+                        JSON.stringify([{
+                            method: 'sendPhoto',
+                            payload: {
+                                caption: '<b>Area di Amministrazione</b>\n\n' +
+                                    'Benvenuto nell\'area di amministrazione. Qui puoi gestire vari aspetti del bot e delle sue funzionalità.\n\n' +
+                                    'Utilizza i pulsanti qui sotto per navigare tra le funzioni di amministrazione.',
+                                parse_mode: 'HTML',
+                                photo: "https://www.gstatic.com/webp/gallery/2.jpg",
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "Gestione Utenti", callback_data: "adminUserManagement" }],
+                                        [{ text: "Impostazioni Bot", callback_data: "adminBotSettings" }],
+                                        [{ text: "Analitica", callback_data: "adminAnalytics" }],
+                                        [{ text: "Log di Sistema", callback_data: "adminSystemLogs" }],
+                                        [{ text: "Home", callback_data: "home" }]
+                                    ]
+                                }
+                            }
+                        }]),
+                        // PT
+                        JSON.stringify([{
+                            method: 'sendPhoto',
+                            payload: {
+                                caption: '<b>Área de Administração</b>\n\n' +
+                                    'Bem-vindo à área de administração. Aqui você pode gerenciar vários aspectos do bot e suas funcionalidades.\n\n' +
+                                    'Use os botões abaixo para navegar pelas funções de administração.',
+                                parse_mode: 'HTML',
+                                photo: "https://www.gstatic.com/webp/gallery/2.jpg",
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "Gerenciamento de Usuários", callback_data: "adminUserManagement" }],
+                                        [{ text: "Configurações do Bot", callback_data: "adminBotSettings" }],
+                                        [{ text: "Análise", callback_data: "adminAnalytics" }],
+                                        [{ text: "Logs do Sistema", callback_data: "adminSystemLogs" }],
+                                        [{ text: "Início", callback_data: "home" }]
+                                    ]
+                                }
+                            }
+                        }]),
+                        // RU
+                        JSON.stringify([{
+                            method: 'sendPhoto',
+                            payload: {
+                                caption: '<b>Административная зона</b>\n\n' +
+                                    'Добро пожаловать в административную зону. Здесь вы можете управлять различными аспектами бота и его функциональностью.\n\n' +
+                                    'Используйте кнопки ниже, чтобы перейти к функциям администрирования.',
+                                parse_mode: 'HTML',
+                                photo: "https://www.gstatic.com/webp/gallery/2.jpg",
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "Управление пользователями", callback_data: "adminUserManagement" }],
+                                        [{ text: "Настройки бота", callback_data: "adminBotSettings" }],
+                                        [{ text: "Аналитика", callback_data: "adminAnalytics" }],
+                                        [{ text: "Журнал системы", callback_data: "adminSystemLogs" }],
+                                        [{ text: "Главная", callback_data: "home" }]
+                                    ]
+                                }
+                            }
+                        }]),
+                        // ZH
+                        JSON.stringify([{
+                            method: 'sendPhoto',
+                            payload: {
+                                caption: '<b>管理区域</b>\n\n' +
+                                    '欢迎来到管理区域。在这里，您可以管理机器人的各个方面及其功能。\n\n' +
+                                    '请使用下面的按钮浏览管理功能。',
+                                parse_mode: 'HTML',
+                                photo: "https://www.gstatic.com/webp/gallery/2.jpg",
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "用户管理", callback_data: "adminUserManagement" }],
+                                        [{ text: "机器人设置", callback_data: "adminBotSettings" }],
+                                        [{ text: "分析", callback_data: "adminAnalytics" }],
+                                        [{ text: "系统日志", callback_data: "adminSystemLogs" }],
+                                        [{ text: "首页", callback_data: "home" }]
+                                    ]
+                                }
+                            }
+                        }]),
+                        // JA
+                        JSON.stringify([{
+                            method: 'sendPhoto',
+                            payload: {
+                                caption: '<b>管理エリア</b>\n\n' +
+                                    '管理エリアへようこそ。ここでは、ボットのさまざまな側面と機能を管理できます。\n\n' +
+                                    '管理機能に移動するには、以下のボタンを使用してください。',
+                                parse_mode: 'HTML',
+                                photo: "https://www.gstatic.com/webp/gallery/2.jpg",
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "ユーザー管理", callback_data: "adminUserManagement" }],
+                                        [{ text: "ボット設定", callback_data: "adminBotSettings" }],
+                                        [{ text: "分析", callback_data: "adminAnalytics" }],
+                                        [{ text: "システムログ", callback_data: "adminSystemLogs" }],
+                                        [{ text: "ホーム", callback_data: "home" }]
+                                    ]
+                                }
+                            }
+                        }]),
+                        // KO
+                        JSON.stringify([{
+                            method: 'sendPhoto',
+                            payload: {
+                                caption: '<b>관리 영역</b>\n\n' +
+                                    '관리 영역에 오신 것을 환영합니다. 여기에서 봇의 다양한 측면과 기능을 관리할 수 있습니다.\n\n' +
+                                    '관리 기능으로 이동하려면 아래 버튼을 사용하세요.',
+                                parse_mode: 'HTML',
+                                photo: "https://www.gstatic.com/webp/gallery/2.jpg",
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "사용자 관리", callback_data: "adminUserManagement" }],
+                                        [{ text: "봇 설정", callback_data: "adminBotSettings" }],
+                                        [{ text: "분석", callback_data: "adminAnalytics" }],
+                                        [{ text: "시스템 로그", callback_data: "adminSystemLogs" }],
+                                        [{ text: "홈", callback_data: "home" }]
+                                    ]
+                                }
+                            }
+                        }]),
+                        // HE
+                        JSON.stringify([{
+                            method: 'sendPhoto',
+                            payload: {
+                                caption: '<b>אזור ניהול</b>\n\n' +
+                                    'ברוכים הבאים לאזור הניהול. כאן תוכלו לנהל את ההיבטים והפונקציות השונות של הבוט.\n\n' +
+                                    'כדי לעבור לפונקציות הניהול, השתמשו בכפתורים למטה.',
+                                parse_mode: 'HTML',
+                                photo: "https://www.gstatic.com/webp/gallery/2.jpg",
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "ניהול משתמשים", callback_data: "adminUserManagement" }],
+                                        [{ text: "הגדרות בוט", callback_data: "adminBotSettings" }],
+                                        [{ text: "אנליטיקה", callback_data: "adminAnalytics" }],
+                                        [{ text: "יומני מערכת", callback_data: "adminSystemLogs" }],
+                                        [{ text: "בית", callback_data: "home" }]
+                                    ]
+                                }
+                            }
                         }])],
+
                     ['/help',
                         // default (en)
                         JSON.stringify([{
