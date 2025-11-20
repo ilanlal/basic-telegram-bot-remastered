@@ -1,6 +1,6 @@
 class WebhookHandler {
     static handlePostUpdateRequest(contents) {
-        const userProperties = PropertiesService.getUserProperties();
+        const userProperties = PropertiesService.getScriptProperties();
         const activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet();
         try {
             if (contents.callback_query) {

@@ -29,7 +29,7 @@ describe('doPost', () => {
         const dummyToken = 'DUMMY_BOT_TOKEN';
 
         // Set dummy bot token in user properties
-        PropertiesService.getUserProperties().setProperty(EnvironmentModel.InputMeta.BOT_API_TOKEN, dummyToken);
+        PropertiesService.getScriptProperties().setProperty(EnvironmentModel.InputMeta.BOT_API_TOKEN, dummyToken);
         const response = doPost(event);
         expect(response).toBeDefined();
     });

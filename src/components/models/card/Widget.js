@@ -10,7 +10,7 @@ class Widget {
         return this._tabIndex++;
     }
 
-    static create(widgetMeta = {}, userProperties = PropertiesService.getUserProperties()) {
+    static create(widgetMeta = {}, userProperties = PropertiesService.getScriptProperties()) {
         const { id, value = null, tabIndex = Widget.tabIndex(), propertyName = null } = widgetMeta;
 
         if (!id) {

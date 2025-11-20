@@ -17,7 +17,7 @@ class BotSetupController {
     }
 
     static create(
-        userProperties = PropertiesService.getUserProperties(),
+        userProperties = PropertiesService.getScriptProperties(),
         activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet()
     ) {
         return new BotSetupController(userProperties, activeSpreadsheet);

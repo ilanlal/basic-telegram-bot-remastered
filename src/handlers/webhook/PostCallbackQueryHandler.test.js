@@ -9,7 +9,7 @@ describe('PostCallbackQueryHandler', () => {
     beforeEach(() => {
         SpreadsheetStubConfiguration.reset();
         // Set dummy bot token in user properties
-        PropertiesService.getUserProperties().setProperty(EnvironmentModel.InputMeta.BOT_API_TOKEN, dummyToken);
+        PropertiesService.getScriptProperties().setProperty(EnvironmentModel.InputMeta.BOT_API_TOKEN, dummyToken);
         handler = PostCallbackQueryHandler.create();
         SheetModel.create(SpreadsheetApp.getActiveSpreadsheet())
             .bindSheetSampleData(EMD.Automation.sheet({}));

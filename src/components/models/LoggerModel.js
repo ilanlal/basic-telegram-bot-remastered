@@ -1,5 +1,5 @@
 class LoggerModel {
-    static create(userProperties = PropertiesService.getUserProperties(), activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet()) {
+    static create(userProperties = PropertiesService.getScriptProperties(), activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet()) {
         return new LoggerModel(userProperties, activeSpreadsheet);
     }
 

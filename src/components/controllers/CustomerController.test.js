@@ -8,7 +8,7 @@ describe('CustomerController', () => {
     });
 
     it('should create an instance', () => {
-        const userProperties = PropertiesService.getUserProperties();
+        const userProperties = PropertiesService.getScriptProperties();
         const activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet();
         const controller = CustomerController.create(userProperties, activeSpreadsheet);
         expect(controller).toBeInstanceOf(CustomerController);
@@ -16,7 +16,7 @@ describe('CustomerController', () => {
 
     // addNewCustomer
     it('should add a new customer', () => {
-        const userProperties = PropertiesService.getUserProperties();
+        const userProperties = PropertiesService.getScriptProperties();
         const activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet();
         const controller = CustomerController.create(userProperties, activeSpreadsheet);
         const mockedMessage = {

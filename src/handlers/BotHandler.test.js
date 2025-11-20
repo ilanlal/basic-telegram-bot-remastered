@@ -35,7 +35,7 @@ describe('BotHandler', () => {
                         allowed_updates: []
                     }
                 })));
-        const userProperties = PropertiesService.getUserProperties();
+        const userProperties = PropertiesService.getScriptProperties();
         controller = BotSetupController.create(
             userProperties
         );

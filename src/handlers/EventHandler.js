@@ -1,7 +1,7 @@
 class EventHandler {
     get userProperties() {
         if (!this._userProperties) {
-            this._userProperties = PropertiesService.getUserProperties();
+            this._userProperties = PropertiesService.getScriptProperties();
         }
         return this._userProperties;
     }

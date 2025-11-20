@@ -6,7 +6,7 @@ class EnvironmentModel {
     }
 
     static create(
-        userProperties = PropertiesService.getUserProperties()
+        userProperties = PropertiesService.getScriptProperties()
     ) {
         return new EnvironmentModel(userProperties);
     }

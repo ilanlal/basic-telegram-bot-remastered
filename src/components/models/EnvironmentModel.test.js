@@ -11,7 +11,7 @@ describe('EnvironmentModel Tests', () => {
         let model;
 
         beforeEach(() => {
-            model = EnvironmentModel.create(PropertiesService.getUserProperties());
+            model = EnvironmentModel.create(PropertiesService.getScriptProperties());
         });
 
         // setNewBotToken

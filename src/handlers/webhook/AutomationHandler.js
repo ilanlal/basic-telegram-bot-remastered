@@ -10,7 +10,7 @@ class AutomationHandler {
     }
 
     static create(
-        userProperties = PropertiesService.getUserProperties(),
+        userProperties = PropertiesService.getScriptProperties(),
         activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet()
     ) {
         return new AutomationHandler(userProperties, activeSpreadsheet);
