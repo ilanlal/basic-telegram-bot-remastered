@@ -1,5 +1,5 @@
 require('../tests');
-const { doGet, doPost } = require('./Code');
+const { doGet, doPost, scaffold_documentProperties, scaffold_scriptProperties } = require('./Code');
 
 describe('doGet', () => {
     it('should run doGet message handler', () => {
@@ -32,5 +32,19 @@ describe('doPost', () => {
         PropertiesService.getDocumentProperties().setProperty(EnvironmentModel.InputMeta.BOT_API_TOKEN, dummyToken);
         const response = doPost(event);
         expect(response).toBeDefined();
+    });
+});
+
+describe('scaffold functions', () => {
+    it('should scaffold script properties without errors', () => {
+        expect(() => {
+            scaffold_scriptProperties();
+        }).not.toThrow();
+    });
+
+    it('should scaffold document properties without errors', () => {
+        expect(() => {
+            scaffold_documentProperties();
+        }).not.toThrow();
     });
 });
