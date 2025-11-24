@@ -15,14 +15,24 @@ class PostCallbackQueryHandler {
     const chat_id = contents.callback_query.from.id;
     const language_code = contents.callback_query.from.language_code;
     const query = contents.callback_query.data;
-    const message_id = contents.callback_query.message?.message_id || null;
+    const message_id = contents.callback_query.message.message_id || null;
 
-    return AutomationHandler.create(this._userProperties, this._activeSpreadsheet)
+    const res = AutomationHandler.create(this._userProperties, this._activeSpreadsheet)
       .handleAutomationRequest({
         language_code,
         chat_id,
         query,
-        message_id
+        reply_to_message_id: message_id
+      });
+
+    return AutomationHandler.create(this._userProperties, this._activeSpreadsheet)
+      .executeAction(null, {
+        method: 'answerCallbackQuery',
+        payload: {
+          callback_query_id: contents.callback_query.id,
+          text: '👌',
+          show_alert: false
+        }
       });
   }
 }

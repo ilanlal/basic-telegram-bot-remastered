@@ -78,12 +78,7 @@ class BotSetupController {
             .setNewTestDeploymentId(id);
     }
 
-    setWebhook(environment) {
-        if (environment === 'test' || environment === 'dev' || environment === 'development' || environment === '') {
-            return SetupFlow.create(this._userProperties, this._activeSpreadsheet)
-                .setTestWebhook();
-        }
-
+    setWebhook() {
         return SetupFlow.create(this._userProperties, this._activeSpreadsheet)
             .setWebhook();
     }

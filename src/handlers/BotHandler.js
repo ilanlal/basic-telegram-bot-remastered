@@ -101,7 +101,7 @@ BotHandler.AddonWrapper = class {
     handleWebhookToggleClick(e) {
         try {
             const action = e.parameters?.action || null;
-            const environment = e.parameters?.environment || 'test';
+            
             if (!action) {
                 throw new Error("'action' parameter is required for webhook management.");
             }
@@ -110,7 +110,7 @@ BotHandler.AddonWrapper = class {
                 .create(this._userProperties, this._activeSpreadsheet);
 
             if (action === 'setWebhook') {
-                controller.setWebhook(environment);
+                controller.setWebhook();
             } else if (action === 'deleteWebhook') {
                 controller.deleteWebhook();
             }

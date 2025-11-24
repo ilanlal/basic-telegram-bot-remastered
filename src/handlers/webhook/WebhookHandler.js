@@ -15,6 +15,7 @@ class WebhookHandler {
 
                 return PostCallbackQueryHandler.create(userProperties, activeSpreadsheet)
                     .handlePostCallbackQuery(contents);
+
             } else if (contents.message) {
                 LoggerModel.create(userProperties, activeSpreadsheet)
                     .logEvent({
@@ -31,11 +32,11 @@ class WebhookHandler {
             return JSON.stringify({ status: 'not_handled' });
         } catch (error) {
             LoggerModel.create(userProperties, activeSpreadsheet)
-                .logEvent({
+                .logError({
                     dc: 'error',
                     action: error.message || '_no_message_',
                     chat_id: '0000',
-                    content: JSON.stringify(error),
+                    content: JSON.stringify(contents),
                     event: 'error_handling'
                 });
             throw error;

@@ -1,6 +1,8 @@
 require('../../tests');
 
 const { BotHandler } = require('./BotHandler');
+const { BotSetupController } = require('../components/controllers/BotSetupController');
+const { EnvironmentModel } = require('../components/models/EnvironmentModel');
 
 describe('BotHandler', () => {
     beforeEach(() => {
@@ -17,6 +19,14 @@ describe('BotHandler', () => {
         const deploymentId = 'AKfycbx...';
         const callbackUrl = `https://script.google.com/macros/s/${deploymentId}/exec`;
         const setWebhookUri = `https://api.telegram.org/bot${sampleToken}/setWebhook?url=${callbackUrl}`;
+        PropertiesService.getDocumentProperties().setProperty(
+            EnvironmentModel.InputMeta.BOT_API_TOKEN,
+            sampleToken
+        );
+        PropertiesService.getDocumentProperties().setProperty(
+            EnvironmentModel.InputMeta.DEPLOYMENT_ID,
+            deploymentId
+        );
         UrlFetchAppStubConfiguration.when(setWebhookUri)
             .return(new HttpResponse()
                 .setContentText(JSON.stringify({ result: true })));
@@ -46,7 +56,11 @@ describe('BotHandler', () => {
         }; // Mock event object
         const actionResponse = BotHandler.Addon.onWebhookToggleClick(event);
         expect(actionResponse).toBeDefined();
-        console.log(JSON.stringify(actionResponse, null, 2))
+        const data = actionResponse.getData();
+        expect(data).toBeDefined();
+        // notification present
+        expect(data.notification).toBeDefined();
+        expect(data.notification.text).toBe('👍 Webhook set successfully.');
     });
 
 
