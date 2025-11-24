@@ -156,46 +156,6 @@ EMD.EnvironmentVariables = {
             },
             sections:
                 [
-                    {   // Deployment setup
-                        // header: '🚀 Deployment Setup',
-                        collapsible: true,
-                        numUncollapsibleWidgets: 1,
-                        widgets: [
-                            {
-                                id: 'deployment_id_info',
-                                TextParagraph: {
-                                    text: `🚀 Deployment ID is currently: ${data.environmentVariables?.deploymentIdSet ? '✅ Set' : '❌ Not Set'}`
-                                }
-                            },
-                            {   // Production Deployment ID Variable
-                                id: 'deployment_id_variable',
-                                TextInput: {
-                                    title: 'Production Deployment ID',
-                                    fieldName: 'txt_deployment_id',
-                                    hint: 'Enter production deployment ID'
-                                },
-                                propertyName: EnvironmentModel.InputMeta.DEPLOYMENT_ID
-                            },
-                            {   // Test Deployment ID Variable
-                                id: 'test_deployment_id_variable',
-                                TextInput: {
-                                    title: 'Test Deployment ID',
-                                    fieldName: 'txt_test_deployment_id',
-                                    hint: 'Enter test deployment ID'
-                                },
-                                propertyName: EnvironmentModel.InputMeta.TEST_DEPLOYMENT_ID
-                            },
-                            { // Identify Deployment ID Button
-                                id: 'identify_deployment_id_button',
-                                TextButton: {
-                                    text: '💾 Save Deployment ID',
-                                    onClick: {
-                                        functionName: 'EnvironmentHandler.Addon.onSaveDeploymentIdClick'
-                                    }
-                                }
-                            }
-                        ]
-                    },
                     {   // Acative Spreadsheet ID setup
                         // header: '🔩 Active Spreadsheet Setup',
                         collapsible: true,
@@ -392,6 +352,46 @@ EMD.BotSetup = {
                                     text: '🆔 Identify Token',
                                     onClick: {
                                         functionName: 'BotHandler.Addon.onIdentifyTokenClick'
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    {   // Deployment setup
+                        // header: '🚀 Deployment Setup',
+                        collapsible: true,
+                        numUncollapsibleWidgets: 1,
+                        widgets: [
+                            {
+                                id: 'deployment_id_info',
+                                TextParagraph: {
+                                    text: `🚀 Deployment ID is currently: ${data.environmentVariables?.deploymentIdSet ? '✅ Set' : '❌ Not Set'}`
+                                }
+                            },
+                            {   // Production Deployment ID Variable
+                                id: 'deployment_id_variable',
+                                TextInput: {
+                                    title: 'Production Deployment ID',
+                                    fieldName: 'txt_deployment_id',
+                                    hint: 'Enter production deployment ID'
+                                },
+                                propertyName: EnvironmentModel.InputMeta.DEPLOYMENT_ID
+                            },
+                            {   // Test Deployment ID Variable
+                                id: 'test_deployment_id_variable',
+                                TextInput: {
+                                    title: 'Test Deployment ID',
+                                    fieldName: 'txt_test_deployment_id',
+                                    hint: 'Enter test deployment ID'
+                                },
+                                propertyName: EnvironmentModel.InputMeta.TEST_DEPLOYMENT_ID
+                            },
+                            { // Identify Deployment ID Button
+                                id: 'identify_deployment_id_button',
+                                TextButton: {
+                                    text: '💾 Save Deployment ID',
+                                    onClick: {
+                                        functionName: 'EnvironmentHandler.Addon.onSaveDeploymentIdClick'
                                     }
                                 }
                             }
