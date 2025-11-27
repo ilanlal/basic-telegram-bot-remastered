@@ -88,11 +88,26 @@ class PostMessageHandler {
         const automationHandler = AutomationHandler
             .create(this._userProperties, this._activeSpreadsheet);
 
+        let reply_to_message_id_local = reply_to_message_id;
+        // create container for the reply_to_message_id for any command.
+        const response = automationHandler.executeAction(chat_id, {
+            method: 'sendMessage',
+            payload: {
+                text: '⌛ ...'
+            }
+        });
+
+        const responseContent = JSON.parse(response);
+        if (responseContent && responseContent.result && responseContent.result.message_id) {
+            reply_to_message_id_local = responseContent.result.message_id;
+        }
+
+        // Execute the dynamic reply handling on the local container message_id
         return automationHandler.handleAutomationRequest({
             language_code,
             chat_id,
             query,
-            reply_to_message_id
+            reply_to_message_id: reply_to_message_id_local
         });
     }
 }

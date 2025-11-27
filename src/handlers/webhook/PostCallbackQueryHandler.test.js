@@ -7,6 +7,7 @@ describe('PostCallbackQueryHandler', () => {
     const dummyToken = 'DUMMY_BOT_TOKEN';
 
     beforeEach(() => {
+        UrlFetchAppStubConfiguration.reset();
         SpreadsheetStubConfiguration.reset();
         // Set dummy bot token in user properties
         PropertiesService.getDocumentProperties().setProperty(EnvironmentModel.InputMeta.BOT_API_TOKEN, dummyToken);
@@ -33,6 +34,29 @@ describe('PostCallbackQueryHandler', () => {
                 }
             }
         };
+        const sendMessgeUrl = `https://api.telegram.org/bot${dummyToken}/sendMessage`;
+        const sendPhotoUrl = `https://api.telegram.org/bot${dummyToken}/sendPhoto`;
+        const answerCallbackQueryUrl = `https://api.telegram.org/bot${dummyToken}/answerCallbackQuery`;
+
+        UrlFetchAppStubConfiguration.when(sendMessgeUrl)
+            .return(new HttpResponse()
+                .setContentText(JSON.stringify({
+                    result: {
+                        message_id: 1,
+                    }
+                })));
+        UrlFetchAppStubConfiguration.when(sendPhotoUrl)
+            .return(new HttpResponse()
+                .setContentText(JSON.stringify({
+                    result: {
+                        message_id: 1,
+                    }
+                })));
+        UrlFetchAppStubConfiguration.when(answerCallbackQueryUrl)
+            .return(new HttpResponse()
+                .setContentText(JSON.stringify({
+                    result: true
+                })));
 
         const response = handler.handlePostCallbackQuery(content);
         expect(response).toBeDefined();

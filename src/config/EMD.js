@@ -1083,6 +1083,16 @@ EMD.Automation = {
             columns: ['action', 'en', 'es', 'fr', 'ar', 'de', 'it', 'pt', 'ru', 'zh', 'ja', 'ko', 'he'],
             sample_data:
                 [
+                    ['_preload_messages_',
+                        // default (en)
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Loading your request... Please wait a moment.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                    ],
                     ['_under_construction_',
                         // default (en)
                         JSON.stringify([{

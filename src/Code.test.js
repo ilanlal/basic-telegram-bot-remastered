@@ -10,6 +10,13 @@ describe('doGet', () => {
 });
 
 describe('doPost', () => {
+    const dummyToken = 'DUMMY_BOT_TOKEN';
+
+    beforeEach(() => {
+        UrlFetchAppStubConfiguration.reset();
+        PropertiesService.getDocumentProperties().setProperty(EnvironmentModel.InputMeta.BOT_API_TOKEN, dummyToken);
+    });
+
     it('should run doPost message handler', () => {
         const event = {
             postData: {
@@ -26,7 +33,14 @@ describe('doPost', () => {
                 })
             }
         };
-        const dummyToken = 'DUMMY_BOT_TOKEN';
+        
+        UrlFetchAppStubConfiguration.when(`https://api.telegram.org/bot${dummyToken}/sendMessage`)
+            .return(new HttpResponse()
+                .setContentText(JSON.stringify({
+                    result: {
+                        message_id: 1,
+                    }
+                })));
 
         // Set dummy bot token in user properties
         PropertiesService.getDocumentProperties().setProperty(EnvironmentModel.InputMeta.BOT_API_TOKEN, dummyToken);

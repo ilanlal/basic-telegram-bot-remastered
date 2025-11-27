@@ -18,7 +18,7 @@ class AutomationHandler {
         return new AutomationHandler(userProperties, activeSpreadsheet);
     }
 
-    handleAutomationRequest({ language_code, chat_id, query, reply_to_message_id = null }) {
+    handleAutomationRequest({ language_code, chat_id, query, reply_to_message_id = null, callback_query_id = null }) {
         if (!chat_id || !query) {
             throw new Error('Invalid automation request format');
         }
@@ -35,7 +35,7 @@ class AutomationHandler {
         // Execute the reply actions
         if (Array.isArray(actions)) {
             actions.forEach(action => {
-                this.executeAction(chat_id, action, reply_to_message_id);
+                this.executeAction(chat_id, action, reply_to_message_id, callback_query_id);
             });
         }
 
@@ -43,14 +43,14 @@ class AutomationHandler {
         return JSON.stringify({ status: 'dynamic_reply_handled', chat_id, query, actions_executed: actions?.length || 0 });
     }
 
-    executeAction(chat_id, action, reply_to_message_id) {
+    executeAction(chat_id, action, reply_to_message_id, callback_query_id = null) {
         LoggerModel.create(this._userProperties, this._activeSpreadsheet)
             .logEvent({
                 dc: 'automation_action',
                 action: action.method || '_no_method_',
                 chat_id: chat_id || '0000',
                 content: JSON.stringify(action),
-                event: `reply_to_message_id: ${reply_to_message_id || 'none'}`
+                event: `reply_to_message_id: ${reply_to_message_id || 'none'} | callback_query_id: ${callback_query_id || 'none'}`
             });
 
         let payload = action.payload || null;
@@ -73,8 +73,8 @@ class AutomationHandler {
         const uriAction = action.method;
         const response = this._telegramBotProxy.executeApiRequest(uriAction, payload);
 
-        if (response.getResponseCode() !== 200) {
-            throw new Error(`Failed to execute action ${uriAction}: ${response.getContentText()}`);
+        if (response?.getResponseCode() !== 200) {
+            throw new Error(`Failed to execute action ${uriAction}: ${response?.getContentText() || 'No response'}`);
         }
 
         return response.getContentText();

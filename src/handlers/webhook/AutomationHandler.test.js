@@ -24,6 +24,17 @@ describe('AutomationHandler', () => {
             chat_id: 12345,
             language_code: 'en'
         };
+
+        const sendMessgeUrl = `https://api.telegram.org/bot${dummyToken}/sendMessage`;
+
+        UrlFetchAppStubConfiguration.when(sendMessgeUrl)
+            .return(new HttpResponse()
+                .setContentText(JSON.stringify({
+                    result: {
+                        message_id: 1,
+                    }
+                })));
+
         let response = handler.handleAutomationRequest(content);
         const responseObj = JSON.parse(response);
         expect(responseObj.actions_executed).toBeGreaterThan(0);

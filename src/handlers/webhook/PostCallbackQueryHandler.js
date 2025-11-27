@@ -22,7 +22,8 @@ class PostCallbackQueryHandler {
         language_code,
         chat_id,
         query,
-        reply_to_message_id: message_id
+        reply_to_message_id: message_id,
+        callback_query_id: contents.callback_query.id
       });
 
     return AutomationHandler.create(this._userProperties, this._activeSpreadsheet)
