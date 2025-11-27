@@ -35,7 +35,7 @@ class AutomationHandler {
         // Execute the reply actions
         if (Array.isArray(actions)) {
             actions.forEach((action, index) => {
-                this.executeAction(chat_id, action, reply_to_message_id, callback_query_id);
+                const lastActionResult = this.executeAction(chat_id, action, reply_to_message_id, callback_query_id);
                 if ((index % 3 === 0) || (index % 5 === 0) || (index % 8 === 0)) Utilities?.sleep?.(index*25); // To avoid hitting rate limits
             });
         }
@@ -55,7 +55,7 @@ class AutomationHandler {
             });
 
         let payload = action.payload || null;
-        if (chat_id) {
+        if (chat_id && action.method && !action.method.startsWith('answerCallbackQuery')) {
             payload = payload || {};
             payload.chat_id = chat_id;
         }
