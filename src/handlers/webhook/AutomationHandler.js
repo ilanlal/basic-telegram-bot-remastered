@@ -34,8 +34,9 @@ class AutomationHandler {
 
         // Execute the reply actions
         if (Array.isArray(actions)) {
-            actions.forEach(action => {
+            actions.forEach((action, index) => {
                 this.executeAction(chat_id, action, reply_to_message_id, callback_query_id);
+                if ((index % 3 === 0) || (index % 5 === 0) || (index % 8 === 0)) Utilities?.sleep?.(index*25); // To avoid hitting rate limits
             });
         }
 
