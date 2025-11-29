@@ -28,6 +28,16 @@ class WebhookHandler {
                 return PostMessageHandler.create(userProperties, activeSpreadsheet)
                     .handlePostMessage(contents.message);
             }
+            else {
+                LoggerModel.create(userProperties, activeSpreadsheet)
+                    .logEvent({
+                        dc: 'unknown_update',
+                        action: '_no_action_',
+                        chat_id: '0000',
+                        content: JSON.stringify(contents),
+                        event: 'received_unknown_update'
+                    });
+            }
 
             return JSON.stringify({ status: 'not_handled' });
         } catch (error) {

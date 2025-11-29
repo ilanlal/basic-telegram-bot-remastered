@@ -31,12 +31,15 @@ class AutomationHandler {
         }
 
         const actions = JSON.parse(apiActionsToDoList);
+        let localReplyToMessageId = reply_to_message_id;
 
         // Execute the reply actions
         if (Array.isArray(actions)) {
             actions.forEach((action, index) => {
-                const lastActionResult = this.executeAction(chat_id, action, reply_to_message_id, callback_query_id);
-                if ((index % 3 === 0) || (index % 5 === 0) || (index % 8 === 0)) Utilities?.sleep?.(index*25); // To avoid hitting rate limits
+                const lastActionResult = this.executeAction(chat_id, action, localReplyToMessageId, callback_query_id);
+                // Update localReplyToMessageId for chaining actions that depend on previous message
+                const actionContent = JSON.parse(lastActionResult);
+                localReplyToMessageId = actionContent.result?.message_id || localReplyToMessageId;
             });
         }
 
@@ -54,14 +57,34 @@ class AutomationHandler {
                 event: `reply_to_message_id: ${reply_to_message_id || 'none'} | callback_query_id: ${callback_query_id || 'none'}`
             });
 
+        // Handle delay if specified
+        if (action.delay_ms && !isNaN(action.delay_ms)) {
+            Utilities?.sleep?.(action.delay_ms);
+        }
+
+        // Handle next action chaining
+        if (action.next) {
+            // Chain the next action after a delay
+            return this.handleAutomationRequest({
+                language_code: this._languageCode,
+                chat_id,
+                query: action.next,
+                reply_to_message_id,
+                callback_query_id
+            });
+        }
+
         let payload = action.payload || null;
-        if (chat_id && action.method && !action.method.startsWith('answerCallbackQuery')) {
+        const method = action.method || '';
+
+        // If it's an answerCallbackQuery, add callback_query_id to payload
+        if (chat_id && !method.startsWith('answerCallbackQuery')) {
             payload = payload || {};
             payload.chat_id = chat_id;
         }
 
         // if action.method is starting with 'edit' or 'delete', add message_id to payload
-        if (action.method && (action.method.startsWith('edit') || action.method.startsWith('delete')) && reply_to_message_id) {
+        if ((method.startsWith('edit') || method.startsWith('delete')) && reply_to_message_id) {
             payload = payload || {};
             payload.message_id = reply_to_message_id;
         }
@@ -71,7 +94,7 @@ class AutomationHandler {
         //    payload = payload || {};
         //    payload.reply_to_message_id = reply_to_message_id;
         //}
-        const uriAction = action.method;
+        const uriAction = method;
         const response = this._telegramBotProxy.executeApiRequest(uriAction, payload);
 
         if (response?.getResponseCode() !== 200) {

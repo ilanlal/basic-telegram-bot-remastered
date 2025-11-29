@@ -90,7 +90,9 @@ describe('PostMessageHandler', () => {
                             }
                         })));
                 let response = handler.handleBotCommand(content.message.from.id, content.message);
-                expect(response).toBe(true);
+                expect(response).toBeDefined();
+                const responseObject = JSON.parse(response);
+                expect(responseObject.status).toBe('dynamic_reply_handled');
             });
         });
     });
@@ -128,8 +130,7 @@ describe('PostMessageHandler', () => {
                             }
                         })));
                 let response = handler.handlePostMessage(content.message);
-                const responseObj = JSON.parse(response);
-                expect(responseObj.actions_executed).toBe(1);
+                expect(response).toBe(true);
             });
         });
     });

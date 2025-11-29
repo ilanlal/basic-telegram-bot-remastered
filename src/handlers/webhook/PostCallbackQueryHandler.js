@@ -25,16 +25,7 @@ class PostCallbackQueryHandler {
         reply_to_message_id: message_id,
         callback_query_id: contents.callback_query.id
       });
-
-    return AutomationHandler.create(this._userProperties, this._activeSpreadsheet)
-      .executeAction(null, {
-        method: 'answerCallbackQuery',
-        payload: {
-          callback_query_id: contents.callback_query.id,
-          text: '👌',
-          show_alert: false
-        }
-      });
+    return res;
   }
 }
 

@@ -2895,6 +2895,58 @@ EMD.Automation = {
                                 }
                             }
                         }])],
+                    ['/sendPoll',
+                        // default (en)
+                        JSON.stringify([{
+                            method: 'sendPoll',
+                            payload: {
+                                question: 'Which feature do you like the most in this bot?',
+                                question_parse_mode: 'HTML',
+                                options: JSON.stringify([
+                                    'Text Messages with HTML formatting',
+                                    'Photos with captions and inline keyboards',
+                                    'Media Groups (albums) with multiple photos',
+                                    'Interactive Inline Keyboards'
+                                ]),
+                                protect_content: true,
+                                open_period: 7,
+                                is_anonymous: false,
+                                explanation: 'Your feedback helps us improve the bot and add more exciting features!',
+                                explanation_parse_mode: 'HTML',
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "🏠 Start", callback_data: "/start" }]
+                                    ]
+                                }
+                            }
+                        }])],
+                    ['/sendQuiz',
+                        // default (en)
+                        JSON.stringify([{
+                            method: 'sendPoll',
+                            payload: {
+                                question: 'What is the <b>main</b> advantage of using Interactive Inline Keyboards in Telegram bots? ✨',
+                                question_parse_mode: 'HTML',
+                                options: JSON.stringify([
+                                    'They allow sending larger files',
+                                    'They enable real-time user interaction',
+                                    'They improve message delivery speed',
+                                    'They support multimedia content'
+                                ]),
+                                protect_content: true,
+                                open_period: 7,
+                                is_anonymous: false,
+                                type: 'quiz',
+                                correct_option_id: 3,
+                                explanation: 'Interactive Inline Keyboards allow users to engage directly with the bot, making the experience more dynamic and user-friendly!',
+                                explanation_parse_mode: 'HTML',
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "🏠 Start", callback_data: "/start" }]
+                                    ]
+                                }
+                            }
+                        }])],
                     ['coreFeatures',
                         // default (en)
                         JSON.stringify([{
