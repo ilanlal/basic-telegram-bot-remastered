@@ -28,14 +28,37 @@ class WebhookHandler {
                 return PostMessageHandler.create(userProperties, activeSpreadsheet)
                     .handlePostMessage(contents.message);
             }
+            else if (contents.poll_answer) {
+                LoggerModel.create(userProperties, activeSpreadsheet)
+                    .logEvent({
+                        dc: 'poll_answer',
+                        action: contents.poll_answer.poll_id || '_no_poll_id_',
+                        chat_id: contents.poll_answer?.user?.id || '0000',
+                        content: JSON.stringify(contents.poll_answer),
+                        event: 'received_poll_answer'
+                    });
+
+                //return PostPollAnswerHandler.create(userProperties, activeSpreadsheet)
+                //.handlePostPollAnswer(contents.poll_answer);
+            }
+            else if (contents.poll) {
+                LoggerModel.create(userProperties, activeSpreadsheet)
+                    .logEvent({
+                        dc: 'poll',
+                        action: contents.poll.id || '_no_poll_id_',
+                        chat_id: '0000',
+                        content: JSON.stringify(contents.poll),
+                        event: 'received_poll'
+                    });
+            }
             else {
                 LoggerModel.create(userProperties, activeSpreadsheet)
                     .logEvent({
                         dc: 'unknown_update',
-                        action: '_no_action_',
+                        action: 'webhook_not_handled',
                         chat_id: '0000',
                         content: JSON.stringify(contents),
-                        event: 'received_unknown_update'
+                        event: 'webhook_not_handled'
                     });
             }
 
@@ -44,7 +67,7 @@ class WebhookHandler {
             LoggerModel.create(userProperties, activeSpreadsheet)
                 .logError({
                     dc: 'error',
-                    action: error.message || '_no_message_',
+                    action: error.message || 'error_handling',
                     chat_id: '0000',
                     content: JSON.stringify(contents),
                     event: 'error_handling'
