@@ -1813,7 +1813,7 @@ EMD.Automation = {
                             }
                         }])
                     ],
-                    ["/start",
+                    ['/start',
                         // default (en)
                         JSON.stringify([{
                             method: 'sendMessage',
@@ -2101,6 +2101,9 @@ EMD.Automation = {
                                                 { text: 'API Features', callback_data: "/apis" }
                                             ],
                                             [
+                                                { text: 'Store', callback_data: "/store" }
+                                            ],
+                                            [
                                                 { text: '❓ Help', callback_data: "/help" }
                                             ]
                                         ]
@@ -2125,7 +2128,7 @@ EMD.Automation = {
                                         [{ text: "Bot Settings", callback_data: "adminBotSettings" }],
                                         [{ text: "Analytics", callback_data: "adminAnalytics" }],
                                         [{ text: "System Logs", callback_data: "adminSystemLogs" }],
-                                        [{ text: "Home", callback_data: "home" }]
+                                        [{ text: "Home", callback_data: "/home" }]
                                     ]
                                 }
                             }
@@ -2145,7 +2148,7 @@ EMD.Automation = {
                                         [{ text: "Configuración del Bot", callback_data: "adminBotSettings" }],
                                         [{ text: "Analítica", callback_data: "adminAnalytics" }],
                                         [{ text: "Registros del Sistema", callback_data: "adminSystemLogs" }],
-                                        [{ text: "Inicio", callback_data: "home" }]
+                                        [{ text: "Inicio", callback_data: "/home" }]
                                     ]
                                 }
                             }
@@ -2165,7 +2168,7 @@ EMD.Automation = {
                                         [{ text: "Paramètres du Bot", callback_data: "adminBotSettings" }],
                                         [{ text: "Analytique", callback_data: "adminAnalytics" }],
                                         [{ text: "Journaux du Système", callback_data: "adminSystemLogs" }],
-                                        [{ text: "Accueil", callback_data: "home" }]
+                                        [{ text: "Accueil", callback_data: "/home" }]
                                     ]
                                 }
                             }
@@ -2185,7 +2188,7 @@ EMD.Automation = {
                                         [{ text: "إعدادات الروبوت", callback_data: "adminBotSettings" }],
                                         [{ text: "تحليلات", callback_data: "adminAnalytics" }],
                                         [{ text: "سجلات النظام", callback_data: "adminSystemLogs" }],
-                                        [{ text: "الصفحة الرئيسية", callback_data: "home" }]
+                                        [{ text: "الصفحة الرئيسية", callback_data: "/home" }]
                                     ]
                                 }
                             }
@@ -2205,7 +2208,7 @@ EMD.Automation = {
                                         [{ text: "Bot-Einstellungen", callback_data: "adminBotSettings" }],
                                         [{ text: "Analytik", callback_data: "adminAnalytics" }],
                                         [{ text: "Systemprotokolle", callback_data: "adminSystemLogs" }],
-                                        [{ text: "Startseite", callback_data: "home" }]
+                                        [{ text: "Startseite", callback_data: "/home" }]
                                     ]
                                 }
                             }
@@ -2225,7 +2228,7 @@ EMD.Automation = {
                                         [{ text: "Impostazioni Bot", callback_data: "adminBotSettings" }],
                                         [{ text: "Analitica", callback_data: "adminAnalytics" }],
                                         [{ text: "Log di Sistema", callback_data: "adminSystemLogs" }],
-                                        [{ text: "Home", callback_data: "home" }]
+                                        [{ text: "Home", callback_data: "/home" }]
                                     ]
                                 }
                             }
@@ -2245,7 +2248,7 @@ EMD.Automation = {
                                         [{ text: "Configurações do Bot", callback_data: "adminBotSettings" }],
                                         [{ text: "Análise", callback_data: "adminAnalytics" }],
                                         [{ text: "Logs do Sistema", callback_data: "adminSystemLogs" }],
-                                        [{ text: "Início", callback_data: "home" }]
+                                        [{ text: "Início", callback_data: "/home" }]
                                     ]
                                 }
                             }
@@ -2265,7 +2268,7 @@ EMD.Automation = {
                                         [{ text: "Настройки бота", callback_data: "adminBotSettings" }],
                                         [{ text: "Аналитика", callback_data: "adminAnalytics" }],
                                         [{ text: "Журнал системы", callback_data: "adminSystemLogs" }],
-                                        [{ text: "Главная", callback_data: "home" }]
+                                        [{ text: "Главная", callback_data: "/home" }]
                                     ]
                                 }
                             }
@@ -2285,7 +2288,7 @@ EMD.Automation = {
                                         [{ text: "机器人设置", callback_data: "adminBotSettings" }],
                                         [{ text: "分析", callback_data: "adminAnalytics" }],
                                         [{ text: "系统日志", callback_data: "adminSystemLogs" }],
-                                        [{ text: "首页", callback_data: "home" }]
+                                        [{ text: "首页", callback_data: "/home" }]
                                     ]
                                 }
                             }
@@ -2305,7 +2308,7 @@ EMD.Automation = {
                                         [{ text: "ボット設定", callback_data: "adminBotSettings" }],
                                         [{ text: "分析", callback_data: "adminAnalytics" }],
                                         [{ text: "システムログ", callback_data: "adminSystemLogs" }],
-                                        [{ text: "ホーム", callback_data: "home" }]
+                                        [{ text: "ホーム", callback_data: "/home" }]
                                     ]
                                 }
                             }
@@ -2325,7 +2328,7 @@ EMD.Automation = {
                                         [{ text: "봇 설정", callback_data: "adminBotSettings" }],
                                         [{ text: "분석", callback_data: "adminAnalytics" }],
                                         [{ text: "시스템 로그", callback_data: "adminSystemLogs" }],
-                                        [{ text: "홈", callback_data: "home" }]
+                                        [{ text: "홈", callback_data: "/home" }]
                                     ]
                                 }
                             }
@@ -2345,7 +2348,7 @@ EMD.Automation = {
                                         [{ text: "הגדרות בוט", callback_data: "adminBotSettings" }],
                                         [{ text: "אנליטיקה", callback_data: "adminAnalytics" }],
                                         [{ text: "יומני מערכת", callback_data: "adminSystemLogs" }],
-                                        [{ text: "בית", callback_data: "home" }]
+                                        [{ text: "בית", callback_data: "/home" }]
                                     ]
                                 }
                             }
@@ -2369,7 +2372,7 @@ EMD.Automation = {
                                     inline_keyboard: [
                                         [{ text: "Getting Started", web_app: { url: "https://github.com/ilanlal/basic-telegram-bot-remastered#readme" } }],
                                         [{ text: "Report an Issue", web_app: { url: "https://github.com/ilanlal/basic-telegram-bot-remastered/issues" } }],
-                                        [{ text: "Home", callback_data: "home" }]
+                                        [{ text: "Home", callback_data: "/home" }]
                                     ]
                                 }
                             }
@@ -2426,83 +2429,7 @@ EMD.Automation = {
                                 }
                             }
                         }])],
-                    ['safetyChecklist',
-                        // default (en)
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: 'Safety Checklist Services:',
-                                parse_mode: 'HTML',
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [{ text: "✅ Daily Safety Check", callback_data: "dailySafetyCheck" }],
-                                        [{ text: "📝 Incident Reporting", callback_data: "incidentReporting" }],
-                                        [{ text: "📊 Safety Analytics", callback_data: "safetyAnalytics" }]
-                                    ]
-                                }
-                            }
-                        }])],
-                    ['emergencyServices',
-                        // default (en)
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: 'Emergency Services:',
-                                parse_mode: 'HTML',
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [{ text: "🚑 Ambulance", callback_data: "emergencyAmbulance" }],
-                                        [{ text: "🚓 Police", callback_data: "emergencyPolice" }],
-                                        [{ text: "🚒 Fire Department", callback_data: "emergencyFire" }]
-                                    ]
-                                }
-                            }
-                        }])
-                    ],
-                    ['privateInvestigatorServices',
-                        // default (en)
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: 'Private Investigator Services:',
-                                parse_mode: 'HTML',
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [{ text: "🕵️‍♂️ Hire a PI", callback_data: "hirePrivateInvestigator" }],
-                                        [{ text: "📋 View Cases", callback_data: "viewPrivateInvestigatorCases" }],
-                                        [{ text: "📞 Contact PI", callback_data: "contactPrivateInvestigator" }]
-                                    ]
-                                }
-                            }
-                        }])
-                    ],
-                    ['customerSupportServices',
-                        // default (en)
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: 'Customer Support Services:',
-                                parse_mode: 'HTML',
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [{ text: "📞 Contact Support", callback_data: "contactSupport" }],
-                                        [{ text: "💬 Live Chat", callback_data: "liveChatSupport" }],
-                                        [{ text: "📚 FAQ", callback_data: "faqSupport" }]
-                                    ]
-                                }
-                            }
-                        }])
-                    ],
-                    ['trackOrder',
-                        // default (en)
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: 'Tracking your order...',
-                                parse_mode: 'HTML'
-                            }
-                        }])],
-                    ['store',
+                    ['/store',
                         // default (en)
                         JSON.stringify([{
                             method: 'sendPhoto',
@@ -2512,73 +2439,195 @@ EMD.Automation = {
                                 parse_mode: 'HTML',
                                 reply_markup: {
                                     inline_keyboard: [
-                                        [{ text: "Browse Products", callback_data: "browseProducts" }],
-                                        [{ text: "View Cart", callback_data: "viewCart" }],
-                                        [{ text: "Checkout", callback_data: "checkout" }],
-                                        [{ text: "BACK", callback_data: "start" }]
+                                        [{ text: "Category A", callback_data: "#categoryA" }],
+                                        [{ text: "Category B", callback_data: "#categoryB" }],
+                                        [{ text: "Category C", callback_data: "#categoryC" }],
+                                        [{ text: "Category D", callback_data: "#categoryD" }],
+                                        [{ text: "Category E", callback_data: "#categoryE" }],
+                                        [{ text: "Home", callback_data: "/home" }]
                                     ]
                                 }
                             }
                         }])],
-                    ['browseProducts',
+                    ['#categoryA',
+                        // default (en)
+                        JSON.stringify([
+                            {
+                                method: 'sendMessage',
+                                payload: {
+                                    text: 'Welcome to Category A! Here you can find a variety of products and services tailored to your needs.',
+                                    parse_mode: 'HTML'
+                                }
+                            },
+                            {
+                                method: 'sendPhoto',
+                                payload: {
+                                    caption: 'Product #1: An amazing product that you will love! \n\n'
+                                        + '<b>Price:</b> $19.99\n'
+                                        + '<i>Description:</i> This product is made from high-quality materials and offers great value for money.\n\n'
+                                        + 'Click "Add to Cart" to purchase this product.',
+                                    photo: "https://www.gstatic.com/webp/gallery/1.jpg",
+                                    parse_mode: 'HTML',
+                                    reply_markup: {
+                                        inline_keyboard: [
+                                            [{ text: "✨ Buy Now", callback_data: "buyNow" }],
+                                            [{ text: "Back to Store", callback_data: "/store" }]
+                                        ]
+                                    }
+                                }
+                            }, {
+                                method: 'sendPhoto',
+                                payload: {
+                                    caption: 'Product #2: Another fantastic product that you will adore! \n\n'
+                                        + '<b>Price:</b> $29.99\n'
+                                        + '<i>Description:</i> This product is designed to meet your needs and exceed your expectations.\n\n'
+                                        + 'Click "Add to Cart" to purchase this product.',
+                                    photo: "https://www.gstatic.com/webp/gallery/2.jpg",
+                                    parse_mode: 'HTML',
+                                    reply_markup: {
+                                        inline_keyboard: [
+                                            [{ text: "✨ Buy Now", callback_data: "buyNow" }],
+                                            [{ text: "Back to Store", callback_data: "/store" }]
+                                        ]
+                                    }
+                                }
+                            },
+                            {
+                                method: 'sendPhoto',
+                                payload: {
+                                    caption: 'Product #3: A must-have product for everyone! \n\n'
+                                        + '<b>Price:</b> $39.99\n'
+                                        + '<i>Description:</i> This product is essential for your daily needs and offers exceptional quality.\n\n'
+                                        + 'Click "Add to Cart" to purchase this product.',
+                                    photo: "https://www.gstatic.com/webp/gallery/3.jpg",
+                                    parse_mode: 'HTML',
+                                    reply_markup: {
+                                        inline_keyboard: [
+                                            [{ text: "✨ Buy Now", callback_data: "buyNow" }],
+                                            [{ text: "Back to Store", callback_data: "/store" }]
+                                        ]
+                                    }
+                                }
+                            }
+                        ])],
+                    ['#categoryB',
                         // default (en)
                         JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Welcome to Category B! Here you can find a variety of products and services tailored to your needs.',
+                                parse_mode: 'HTML'
+                            }
+                        },
+                        {
                             method: 'sendPhoto',
                             payload: {
-                                caption: 'Product A: An amazing product that you will love! \n\n'
-                                    + '<b>Price:</b> $19.99\n'
+                                caption: 'Product #1: An amazing product that you will love! \n\n'
+                                    + '<b>Price:</b> $24.99\n'
+                                    + '<i>Description:</i> This product is made from high-quality materials and offers great value for money.\n\n'
+                                    + 'Click "Add to Cart" to purchase this product.',
+                                photo: "https://www.gstatic.com/webp/gallery/`.jpg",
+                                parse_mode: 'HTML',
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "✨ Buy Now", callback_data: "buyNow" }],
+                                        [{ text: "Back to Store", callback_data: "/store" }]
+                                    ]
+                                }
+                            }
+                        }, {
+                            method: 'sendPhoto',
+                            payload: {
+                                caption: 'Product #2: Another fantastic product that you will adore! \n\n'
+                                    + '<b>Price:</b> $34.99\n'
+                                    + '<i>Description:</i> This product is designed to meet your needs and exceed your expectations.\n\n'
+                                    + 'Click "Add to Cart" to purchase this product.',
+                                photo: "https://www.gstatic.com/webp/gallery/3.jpg",
+                                parse_mode: 'HTML',
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "✨ Buy Now", callback_data: "buyNow" }],
+                                        [{ text: "Back to Store", callback_data: "/store" }]
+                                    ]
+                                }
+                            }
+                        }])],
+                    ['#categoryC',
+                        // default (en)
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Welcome to Category C! Here you can find a variety of products and services tailored to your needs.',
+                                parse_mode: 'HTML'
+                            }
+                        },
+                        {
+                            method: 'sendPhoto',
+                            payload: {
+                                caption: 'Product #1: An amazing product that you will love! \n\n'
+                                    + '<b>Price:</b> $14.99\n'
+                                    + '<i>Description:</i> This product is made from high-quality materials and offers great value for money.\n\n'
+                                    + 'Click "Add to Cart" to purchase this product.',
+                                photo: "https://www.gstatic.com/webp/gallery/2.jpg",
+                                parse_mode: 'HTML',
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "✨ Buy Now", callback_data: "buyNow" }],
+                                        [{ text: "Back to Store", callback_data: "/store" }]
+                                    ]
+                                }
+                            }
+                        }])],
+                    ['#categoryD',
+                        // default (en)
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Welcome to Category D! Here you can find a variety of products and services tailored to your needs.',
+                                parse_mode: 'HTML'
+                            }
+                        }, {
+                            method: 'sendPhoto',
+                            payload: {
+                                caption: 'Product #1: An amazing product that you will love! \n\n'
+                                    + '<b>Price:</b> $39.99\n'
                                     + '<i>Description:</i> This product is made from high-quality materials and offers great value for money.\n\n'
                                     + 'Click "Add to Cart" to purchase this product.',
                                 photo: "https://www.gstatic.com/webp/gallery/1.jpg",
                                 parse_mode: 'HTML',
                                 reply_markup: {
                                     inline_keyboard: [
-                                        [{ text: "➕ Add to Cart", callback_data: "addToCart_productA" }],
-                                        [{ text: "👀 Watch price", callback_data: "watchPrice_productA" }]
+                                        [{ text: "✨ Buy Now", callback_data: "buyNow" }],
+                                        [{ text: "Back to Store", callback_data: "/store" }]
                                     ]
                                 }
+                            }
+                        }])],
+                    ['#categoryE',
+                        // default (en)
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Welcome to Category E! Here you can find a variety of products and services tailored to your needs.',
+                                parse_mode: 'HTML'
                             }
                         }, {
                             method: 'sendPhoto',
                             payload: {
-                                caption: 'Product B: Another fantastic product that meets your needs! \n\n',
-                                photo: "https://www.gstatic.com/webp/gallery/2.jpg",
+                                caption: 'Product #1: An amazing product that you will love! \n\n'
+                                    + '<b>Price:</b> $49.99\n'
+                                    + '<i>Description:</i> This product is made from high-quality materials and offers great value for money.\n\n'
+                                    + 'Click "Add to Cart" to purchase this product.',
+                                photo: "https://www.gstatic.com/webp/gallery/6.jpg",
                                 parse_mode: 'HTML',
                                 reply_markup: {
                                     inline_keyboard: [
-                                        [{ text: "➕ Add to Cart", callback_data: "addToCart_productB" }],
-                                        [{ text: "👀 Watch price", callback_data: "watchPrice_productB" }]
+                                        [{ text: "✨ Buy Now", callback_data: "buyNow" }],
+                                        [{ text: "Back to Store", callback_data: "/store" }]
                                     ]
                                 }
                             }
-                        }, {
-                            method: 'sendPhoto',
-                            payload: {
-                                caption: 'Product C: A must-have item for everyone! \n\n',
-                                photo: "https://www.gstatic.com/webp/gallery/3.jpg",
-                                parse_mode: 'HTML',
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [{ text: "➕ Add to Cart", callback_data: "addToCart_productC" }],
-                                        [{ text: "👀 Watch price", callback_data: "watchPrice_productC" }]
-                                    ]
-                                }
-                            }
-                        }, {
-                            method: 'sendPhoto',
-                            payload: {
-                                caption: 'Product C: A must-have item for everyone! \n\n',
-                                photo: "https://www.gstatic.com/webp/gallery/3.jpg",
-                                parse_mode: 'HTML',
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [{ text: "➕ Add to Cart", callback_data: "addToCart_productC" }],
-                                        [{ text: "👀 Watch price", callback_data: "watchPrice_productC" }]
-                                    ]
-                                }
-                            }
-                        }
-                        ])],
+                        }])],
                     ['/apis',
                         // default (en)
                         JSON.stringify([{
@@ -2599,7 +2648,7 @@ EMD.Automation = {
                                         [{ text: "Inline Keyboard", callback_data: "#inlineKeyboard" }],
                                         [{ text: "Send Poll", callback_data: "#sendPoll" }],
                                         [{ text: "Send Quiz", callback_data: "#sendQuiz" }],
-                                        [{ text: "Start", callback_data: "/start" }]
+                                        [{ text: "Home", callback_data: "/home" }]
                                     ]
                                 }
                             }
@@ -2717,7 +2766,7 @@ EMD.Automation = {
                                 explanation_parse_mode: 'HTML',
                                 reply_markup: {
                                     inline_keyboard: [
-                                        [{ text: "🏠 Start", callback_data: "/start" }]
+                                        [{ text: "🏠 Start", callback_data: "/home" }]
                                     ]
                                 }
                             }
@@ -2744,7 +2793,7 @@ EMD.Automation = {
                                 explanation_parse_mode: 'HTML',
                                 reply_markup: {
                                     inline_keyboard: [
-                                        [{ text: "🏠 Start", callback_data: "/start" }]
+                                        [{ text: "🏠 Start", callback_data: "/home" }]
                                     ]
                                 }
                             }
@@ -2792,7 +2841,7 @@ EMD.Automation = {
                                 text: 'Main Menu:',
                                 reply_markup: {
                                     inline_keyboard: [
-                                        [{ text: "🏠 Home", callback_data: "/start" }],
+                                        [{ text: "🏠 Home", callback_data: "/home" }],
                                         [{ text: "ℹ️ About", callback_data: "/about" }],
                                         [{ text: "❓ Help", callback_data: "/help" }]
                                     ]
