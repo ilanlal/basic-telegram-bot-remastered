@@ -2353,7 +2353,57 @@ EMD.Automation = {
                                 }
                             }
                         }])],
-
+                    ['/about_me',
+                        // default (en)
+                        JSON.stringify([
+                            {
+                                method: 'sendMessage',
+                                payload: {
+                                    text: '✨ About Me ✨\n\n',
+                                    parse_mode: 'HTML'
+                                }
+                            },
+                            {
+                                method: 'editMessageText',
+                                delay_ms: 500,
+                                payload: {
+                                    text: '✨ About Me ✨\n\n <blockquote>This bot is developed to showcase the capabilities of the Telegram Bot API. \n\n'
+                                        + 'It demonstrates how to send messages, photos, media groups, and interactive inline keyboards. \n\n'
+                                        + 'I\'m going to update this message with more details shortly... \n\n</blockquote>',
+                                    parse_mode: 'HTML'
+                                }
+                            },
+                            {
+                                method: 'editMessageMedia',
+                                delay_ms: 2000,
+                                payload: {
+                                    caption: '✨ About Me ✨\n\n <blockquote>This bot is developed to showcase the capabilities of the Telegram Bot API. \n\n'
+                                        + 'It demonstrates how to send messages, photos, media groups, and interactive inline keyboards. \n\n'
+                                        + 'I\'m going to update this message with more details shortly... \n\n</blockquote>'
+                                        + '<b>Here is an image to make it more interesting!</b>',
+                                    media: { type: 'photo', media: 'https://www.gstatic.com/webp/gallery/2.jpg' },
+                                    parse_mode: 'HTML'
+                                }
+                            },
+                            { "next": "#main_menu" }
+                        ])
+                    ],
+                    ['#main_menu',
+                        // default (en)
+                        JSON.stringify([{
+                            method: 'editMessageReplyMarkup',
+                            payload: {
+                                text: 'Main Menu:',
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "🏠 Home", callback_data: "/home" }],
+                                        [{ text: "ℹ️ About", callback_data: "/about" }],
+                                        [{ text: "❓ Help", callback_data: "/help" }]
+                                    ]
+                                }
+                            }
+                        }])
+                    ],
                     ['/help',
                         // default (en)
                         JSON.stringify([{
@@ -2460,149 +2510,218 @@ EMD.Automation = {
                                 }
                             },
                             {
-                                method: 'sendPhoto',
+                                method: 'sendInvoice',
                                 payload: {
-                                    caption: 'Product #1: An amazing product that you will love! \n\n'
-                                        + '<b>Price:</b> $19.99\n'
-                                        + '<i>Description:</i> This product is made from high-quality materials and offers great value for money.\n\n'
-                                        + 'Click "Add to Cart" to purchase this product.',
-                                    photo: "https://www.gstatic.com/webp/gallery/1.jpg",
-                                    parse_mode: 'HTML',
-                                    reply_markup: {
-                                        inline_keyboard: [
-                                            [{ text: "✨ Buy Now", callback_data: "buyNow" }],
-                                            [{ text: "Back to Store", callback_data: "/store" }]
-                                        ]
-                                    }
+                                    title: 'Product #1',
+                                    description: 'An amazing product that you will love! \n\n'
+                                        + 'This product is made from high-quality materials and offers great value for money.\n\n',
+                                    photo_url: "https://www.gstatic.com/webp/gallery/1.jpg",
+                                    photo_width: 240,
+                                    currency: 'XTR',
+                                    payload: 'custom_payload_123', // Custom payload for your reference
+                                    prices: JSON.stringify([
+                                        { label: 'Total', amount: 550 } // Amount in smallest units (e.g., cents)
+                                    ]),
                                 }
                             }, {
-                                method: 'sendPhoto',
+                                method: 'sendInvoice',
                                 payload: {
-                                    caption: 'Product #2: Another fantastic product that you will adore! \n\n'
-                                        + '<b>Price:</b> $29.99\n'
-                                        + '<i>Description:</i> This product is designed to meet your needs and exceed your expectations.\n\n'
-                                        + 'Click "Add to Cart" to purchase this product.',
-                                    photo: "https://www.gstatic.com/webp/gallery/2.jpg",
-                                    parse_mode: 'HTML',
-                                    reply_markup: {
-                                        inline_keyboard: [
-                                            [{ text: "✨ Buy Now", callback_data: "buyNow" }],
-                                            [{ text: "Back to Store", callback_data: "/store" }]
-                                        ]
-                                    }
+                                    title: 'Product #2',
+                                    description: 'An amazing product that you will love! \n\n'
+                                        + 'This product is made from high-quality materials and offers great value for money.\n\n'
+                                        + 'Available in multiple colors and sizes.',
+                                    photo_url: "https://www.gstatic.com/webp/gallery/2.jpg",
+                                    photo_width: 240,
+                                    currency: 'XTR',
+                                    payload: 'custom_payload_124', // Custom payload for your reference
+                                    prices: JSON.stringify([
+                                        { label: 'Total', amount: 980 } // Amount in smallest units (e.g., cents)
+
+                                    ]),
                                 }
                             },
                             {
-                                method: 'sendPhoto',
+                                method: 'sendInvoice',
                                 payload: {
-                                    caption: 'Product #3: A must-have product for everyone! \n\n'
-                                        + '<b>Price:</b> $39.99\n'
-                                        + '<i>Description:</i> This product is essential for your daily needs and offers exceptional quality.\n\n'
-                                        + 'Click "Add to Cart" to purchase this product.',
-                                    photo: "https://www.gstatic.com/webp/gallery/3.jpg",
-                                    parse_mode: 'HTML',
-                                    reply_markup: {
-                                        inline_keyboard: [
-                                            [{ text: "✨ Buy Now", callback_data: "buyNow" }],
-                                            [{ text: "Back to Store", callback_data: "/store" }]
-                                        ]
-                                    }
+                                    title: 'Product #3',
+                                    description: 'An amazing product that you will love! \n\n'
+                                        + 'This product is made from high-quality materials and offers great value for money.\n\n'
+                                        + 'Shipping included.',
+                                    photo_url: "https://www.gstatic.com/webp/gallery/3.jpg",
+                                    photo_width: 240,
+                                    currency: 'XTR',
+                                    payload: 'custom_payload_125', // Custom payload for your reference
+                                    prices: JSON.stringify([
+                                        { label: 'Total', amount: 1200 } // Amount in smallest units (e.g., cents)
+                                    ]),
                                 }
-                            }
+                            }, { "next": "/store" }
                         ])],
                     ['#categoryB',
                         // default (en)
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: 'Welcome to Category B! Here you can find a variety of products and services tailored to your needs.',
-                                parse_mode: 'HTML'
-                            }
-                        },
-                        {
-                            method: 'sendPhoto',
-                            payload: {
-                                caption: 'Product #1: An amazing product that you will love! \n\n'
-                                    + '<b>Price:</b> $24.99\n'
-                                    + '<i>Description:</i> This product is made from high-quality materials and offers great value for money.\n\n'
-                                    + 'Click "Add to Cart" to purchase this product.',
-                                photo: "https://www.gstatic.com/webp/gallery/`.jpg",
-                                parse_mode: 'HTML',
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [{ text: "✨ Buy Now", callback_data: "buyNow" }],
-                                        [{ text: "Back to Store", callback_data: "/store" }]
-                                    ]
+                        JSON.stringify([
+                            {
+                                method: 'sendMessage',
+                                payload: {
+                                    text: 'Welcome to Category B! Here you can find a variety of products and services tailored to your needs.',
+                                    parse_mode: 'HTML'
                                 }
-                            }
-                        }, {
-                            method: 'sendPhoto',
-                            payload: {
-                                caption: 'Product #2: Another fantastic product that you will adore! \n\n'
-                                    + '<b>Price:</b> $34.99\n'
-                                    + '<i>Description:</i> This product is designed to meet your needs and exceed your expectations.\n\n'
-                                    + 'Click "Add to Cart" to purchase this product.',
-                                photo: "https://www.gstatic.com/webp/gallery/3.jpg",
-                                parse_mode: 'HTML',
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [{ text: "✨ Buy Now", callback_data: "buyNow" }],
-                                        [{ text: "Back to Store", callback_data: "/store" }]
-                                    ]
+                            },
+                            {
+                                method: 'sendInvoice',
+                                payload: {
+                                    title: 'Product #10',
+                                    description: 'An amazing product that you will love! \n\n'
+                                        + 'This product is made from high-quality materials and offers great value for money.\n\n',
+                                    photo_url: "https://www.gstatic.com/webp/gallery/1.jpg",
+                                    photo_width: 240,
+                                    currency: 'XTR',
+                                    payload: 'custom_payload_130', // Custom payload for your reference
+                                    prices: JSON.stringify([
+                                        { label: 'Total', amount: 450 } // Amount in smallest units (e.g., cents)
+                                    ]),
                                 }
-                            }
-                        }])],
+                            }, {
+                                method: 'sendInvoice',
+                                payload: {
+                                    title: 'Product #20',
+                                    description: 'An amazing product that you will love! \n\n'
+                                        + 'This product is made from high-quality materials and offers great value for money.\n\n',
+                                    photo_url: "https://www.gstatic.com/webp/gallery/2.jpg",
+                                    photo_width: 240,
+                                    currency: 'XTR',
+                                    payload: 'custom_payload_124', // Custom payload for your reference
+                                    prices: JSON.stringify([
+                                        { label: 'Total', amount: 45 } // Amount in smallest units (e.g., cents)
+                                    ]),
+                                }
+                            },
+                            {
+                                method: 'sendInvoice',
+                                payload: {
+                                    title: 'Product #30',
+                                    description: 'An amazing product that you will love! \n\n'
+                                        + 'This product is made from high-quality materials and offers great value for money.\n\n',
+                                    photo_url: "https://www.gstatic.com/webp/gallery/3.jpg",
+                                    photo_width: 240,
+                                    currency: 'XTR',
+                                    payload: 'custom_payload_125', // Custom payload for your reference
+                                    prices: JSON.stringify([
+                                        { label: 'Total', amount: 300 } // Amount in smallest units (e.g., cents)
+                                    ]),
+                                }
+                            }, { "next": "/store" }
+                        ])],
                     ['#categoryC',
                         // default (en)
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: 'Welcome to Category C! Here you can find a variety of products and services tailored to your needs.',
-                                parse_mode: 'HTML'
-                            }
-                        },
-                        {
-                            method: 'sendPhoto',
-                            payload: {
-                                caption: 'Product #1: An amazing product that you will love! \n\n'
-                                    + '<b>Price:</b> $14.99\n'
-                                    + '<i>Description:</i> This product is made from high-quality materials and offers great value for money.\n\n'
-                                    + 'Click "Add to Cart" to purchase this product.',
-                                photo: "https://www.gstatic.com/webp/gallery/2.jpg",
-                                parse_mode: 'HTML',
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [{ text: "✨ Buy Now", callback_data: "buyNow" }],
-                                        [{ text: "Back to Store", callback_data: "/store" }]
-                                    ]
+                        JSON.stringify([
+                            {
+                                method: 'sendMessage',
+                                payload: {
+                                    text: 'Welcome to Category C! Here you can find a variety of products and services tailored to your needs.',
+                                    parse_mode: 'HTML'
                                 }
-                            }
-                        }])],
+                            },
+                            {
+                                method: 'sendInvoice',
+                                payload: {
+                                    title: 'Product # 100',
+                                    description: 'An amazing product that you will love! \n\n'
+                                        + 'This product is made from high-quality materials and offers great value for money.\n\n',
+                                    photo_url: "https://www.gstatic.com/webp/gallery/1.jpg",
+                                    photo_width: 240,
+                                    currency: 'XTR',
+                                    payload: 'custom_payload_130', // Custom payload for your reference
+                                    prices: JSON.stringify([
+                                        { label: 'Total', amount: 1250 } // Amount in smallest units (e.g., cents)
+                                    ]),
+                                }
+                            }, {
+                                method: 'sendInvoice',
+                                payload: {
+                                    title: 'Product # 122',
+                                    description: 'An amazing product that you will love! \n\n'
+                                        + 'This product is made from high-quality materials and offers great value for money.\n\n',
+                                    photo_url: "https://www.gstatic.com/webp/gallery/2.jpg",
+                                    photo_width: 240,
+                                    currency: 'XTR',
+                                    payload: 'custom_payload_124', // Custom payload for your reference
+                                    prices: JSON.stringify([
+                                        { label: 'Total', amount: 5580 } // Amount in smallest units (e.g., cents)
+                                    ]),
+                                }
+                            },
+                            {
+                                method: 'sendInvoice',
+                                payload: {
+                                    title: 'Product # 33',
+                                    description: 'An amazing product that you will love! \n\n'
+                                        + 'This product is made from high-quality materials and offers great value for money.\n\n',
+                                    photo_url: "https://www.gstatic.com/webp/gallery/3.jpg",
+                                    photo_width: 240,
+                                    currency: 'XTR',
+                                    payload: 'custom_payload_125', // Custom payload for your reference
+                                    prices: JSON.stringify([
+                                        { label: 'Total', amount: 1200 } // Amount in smallest units (e.g., cents)
+                                    ]),
+                                }
+                            }, { "next": "/store" }
+                        ])],
                     ['#categoryD',
                         // default (en)
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: 'Welcome to Category D! Here you can find a variety of products and services tailored to your needs.',
-                                parse_mode: 'HTML'
-                            }
-                        }, {
-                            method: 'sendPhoto',
-                            payload: {
-                                caption: 'Product #1: An amazing product that you will love! \n\n'
-                                    + '<b>Price:</b> $39.99\n'
-                                    + '<i>Description:</i> This product is made from high-quality materials and offers great value for money.\n\n'
-                                    + 'Click "Add to Cart" to purchase this product.',
-                                photo: "https://www.gstatic.com/webp/gallery/1.jpg",
-                                parse_mode: 'HTML',
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [{ text: "✨ Buy Now", callback_data: "buyNow" }],
-                                        [{ text: "Back to Store", callback_data: "/store" }]
-                                    ]
+                        JSON.stringify([
+                            {
+                                method: 'sendMessage',
+                                payload: {
+                                    text: 'Welcome to Category D! Here you can find a variety of products and services tailored to your needs.',
+                                    parse_mode: 'HTML'
                                 }
-                            }
-                        }])],
+                            },
+                            {
+                                method: 'sendInvoice',
+                                payload: {
+                                    title: 'Product #11',
+                                    description: 'An amazing product that you will love! \n\n'
+                                        + 'This product is made from high-quality materials and offers great value for money.\n\n',
+                                    photo_url: "https://www.gstatic.com/webp/gallery/1.jpg",
+                                    photo_width: 240,
+                                    currency: 'XTR',
+                                    payload: 'custom_payload_130', // Custom payload for your reference
+                                    prices: JSON.stringify([
+                                        { label: 'Total', amount: 123 } // Amount in smallest units (e.g., cents)
+                                    ]),
+                                }
+                            }, {
+                                method: 'sendInvoice',
+                                payload: {
+                                    title: 'Product #12',
+                                    description: 'An amazing product that you will love! \n\n'
+                                        + 'This product is made from high-quality materials and offers great value for money.\n\n',
+                                    photo_url: "https://www.gstatic.com/webp/gallery/2.jpg",
+                                    photo_width: 240,
+                                    currency: 'XTR',
+                                    payload: 'custom_payload_124', // Custom payload for your reference
+                                    prices: JSON.stringify([
+                                        { label: 'Total', amount: 550 } // Amount in smallest units (e.g., cents)
+                                    ]),
+                                }
+                            },
+                            {
+                                method: 'sendInvoice',
+                                payload: {
+                                    title: 'Product #13',
+                                    description: 'An amazing product that you will love! \n\n'
+                                        + 'This product is made from high-quality materials and offers great value for money.\n\n',
+                                    photo_url: "https://www.gstatic.com/webp/gallery/3.jpg",
+                                    photo_width: 240,
+                                    currency: 'XTR',
+                                    payload: 'custom_payload_125', // Custom payload for your reference
+                                    prices: JSON.stringify([
+                                        { label: 'Total', amount: 1200 } // Amount in smallest units (e.g., cents)
+                                    ]),
+                                }
+                            }, { "next": "/store" }
+                        ])],
                     ['#categoryE',
                         // default (en)
                         JSON.stringify([{
@@ -2612,22 +2731,50 @@ EMD.Automation = {
                                 parse_mode: 'HTML'
                             }
                         }, {
-                            method: 'sendPhoto',
+                            // send paid media as sample after invoice
+                            method: 'sendPaidMedia',
                             payload: {
-                                caption: 'Product #1: An amazing product that you will love! \n\n'
-                                    + '<b>Price:</b> $49.99\n'
-                                    + '<i>Description:</i> This product is made from high-quality materials and offers great value for money.\n\n'
-                                    + 'Click "Add to Cart" to purchase this product.',
-                                photo: "https://www.gstatic.com/webp/gallery/6.jpg",
-                                parse_mode: 'HTML',
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [{ text: "✨ Buy Now", callback_data: "buyNow" }],
-                                        [{ text: "Back to Store", callback_data: "/store" }]
-                                    ]
-                                }
+                                protect_content: true,
+                                star_count: 1000,
+                                media: [
+                                    {
+                                        type: 'photo',
+                                        media: 'https://www.gstatic.com/webp/gallery/1.jpg',
+                                        caption: 'Thank you for your purchase! Here is your paid media content.'
+                                    }
+                                ]
                             }
-                        }])],
+                        },
+                        {
+                            // send paid media as sample after invoice
+                            method: 'sendPaidMedia',
+                            payload: {
+                                protect_content: true,
+                                star_count: 2400,
+                                media: [
+                                    {
+                                        type: 'photo',
+                                        media: 'https://www.gstatic.com/webp/gallery/3.jpg',
+                                        caption: 'Thank you for your purchase! Here is your paid media content.'
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            // send paid media as sample after invoice
+                            method: 'sendPaidMedia',
+                            payload: {
+                                protect_content: true,
+                                star_count: 1400,
+                                media: [
+                                    {
+                                        type: 'photo',
+                                        media: 'https://www.gstatic.com/webp/gallery/2.jpg',
+                                        caption: 'Thank you for your purchase! Here is your paid media content.'
+                                    }
+                                ]
+                            }
+                        }, { "next": "/store" }])],
                     ['/apis',
                         // default (en)
                         JSON.stringify([{
@@ -2798,56 +2945,35 @@ EMD.Automation = {
                                 }
                             }
                         }])],
-                    ['/about_me',
+                    ['/payments',
                         // default (en)
                         JSON.stringify([
                             {
-                                method: 'sendMessage',
+                                method: 'sendInvoice',
                                 payload: {
-                                    text: '✨ About Me ✨\n\n',
-                                    parse_mode: 'HTML'
+                                    title: 'Sample Product',
+                                    description: 'This is a sample product for demonstration purposes.',
+                                    payload: 'sample_product_payload',
+                                    currency: 'XTR',
+                                    prices: JSON.stringify([
+                                        { label: 'Total', amount: 100 } // amount in the smallest units of the currency (e.g., cents)
+                                    ])
                                 }
-                            },
-                            {
-                                method: 'editMessageText',
-                                delay_ms: 500,
+                            }, {
+                                // send paid media as sample after invoice
+                                method: 'sendPaidMedia',
                                 payload: {
-                                    text: '✨ About Me ✨\n\n <blockquote>This bot is developed to showcase the capabilities of the Telegram Bot API. \n\n'
-                                        + 'It demonstrates how to send messages, photos, media groups, and interactive inline keyboards. \n\n'
-                                        + 'I\'m going to update this message with more details shortly... \n\n</blockquote>',
-                                    parse_mode: 'HTML'
-                                }
-                            },
-                            {
-                                method: 'editMessageMedia',
-                                delay_ms: 2000,
-                                payload: {
-                                    caption: '✨ About Me ✨\n\n <blockquote>This bot is developed to showcase the capabilities of the Telegram Bot API. \n\n'
-                                        + 'It demonstrates how to send messages, photos, media groups, and interactive inline keyboards. \n\n'
-                                        + 'I\'m going to update this message with more details shortly... \n\n</blockquote>'
-                                        + '<b>Here is an image to make it more interesting!</b>',
-                                    media: { type: 'photo', media: 'https://www.gstatic.com/webp/gallery/2.jpg' },
-                                    parse_mode: 'HTML'
-                                }
-                            },
-                            { "next": "#main_menu" }
-                        ])
-                    ],
-                    ['#main_menu',
-                        // default (en)
-                        JSON.stringify([{
-                            method: 'editMessageReplyMarkup',
-                            payload: {
-                                text: 'Main Menu:',
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [{ text: "🏠 Home", callback_data: "/home" }],
-                                        [{ text: "ℹ️ About", callback_data: "/about" }],
-                                        [{ text: "❓ Help", callback_data: "/help" }]
+                                    protect_content: true,
+                                    star_count: 100,
+                                    media: [
+                                        {
+                                            type: 'photo',
+                                            media: 'https://www.gstatic.com/webp/gallery/1.jpg',
+                                            caption: 'Thank you for your purchase! Here is your paid media content.'
+                                        }
                                     ]
                                 }
-                            }
-                        }])
+                            }])
                     ]
                 ]
         }
