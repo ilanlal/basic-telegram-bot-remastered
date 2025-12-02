@@ -395,7 +395,7 @@ class TelegramBotClient {
       'method': "post",
       'payload': {
         'name': name,
-        'language_code': language_code
+        'language_code': language_code ?? ''
       }
     };
     const url = this.getApiBaseUrl() + "/setMyName";

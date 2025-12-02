@@ -90,10 +90,7 @@ class AutomationHandler {
         }
 
         // Add reply_to_message_id if provided
-        //if (reply_to_message_id) {
-        //    payload = payload || {};
-        //    payload.reply_to_message_id = reply_to_message_id;
-        //}
+
         const uriAction = method;
         const response = this._telegramBotProxy.executeApiRequest(uriAction, payload);
 

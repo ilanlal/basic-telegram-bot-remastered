@@ -67,10 +67,10 @@ class WebhookHandler {
             LoggerModel.create(userProperties, activeSpreadsheet)
                 .logError({
                     dc: 'error',
-                    action: error.message || 'error_handling',
+                    action: error.message || 'unknown_error',
                     chat_id: '0000',
                     content: JSON.stringify(contents),
-                    event: 'error_handling'
+                    event: error.message || 'unknown_error'
                 });
             throw error;
         }

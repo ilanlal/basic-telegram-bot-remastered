@@ -15,7 +15,7 @@ class PostCallbackQueryHandler {
     const chat_id = contents.callback_query.from.id;
     const language_code = contents.callback_query.from.language_code;
     const query = contents.callback_query.data;
-    const message_id = contents.callback_query.message.message_id || null;
+    const message_id = contents.callback_query.message ? contents.callback_query.message.message_id : null;
 
     const res = AutomationHandler.create(this._userProperties, this._activeSpreadsheet)
       .handleAutomationRequest({

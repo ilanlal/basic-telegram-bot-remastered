@@ -222,7 +222,7 @@ EntityViewModel.CardServiceWrapper = class {
 
         const _ = this._cardService.newTextButton()
             .setText(textButtonMeta.text)
-            .setDisabled(!!textButtonMeta.disabled || disabled)
+            .setDisabled(typeof disabled === 'boolean' ? disabled : !!textButtonMeta.disabled)
             .setTextButtonStyle(textButtonMeta.style || style);
 
         if (textButtonMeta.openLink) {
