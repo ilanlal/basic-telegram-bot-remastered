@@ -85,11 +85,17 @@ function sendPaidPhoto(chat_id) {
     const proxy = new TelegramBotProxy(token);
 
     // Send a paid photo
-    const photoResponse = proxy.executeApiRequest('sendPhoto', {
-        chat_id,
-        photo: 'https://www.gstatic.com/webp/gallery/2.jpg',
-        caption: 'Here is your paid photo!'
-    });
+    const photoResponse = proxy.executeApiRequest('sendPaidMedia', {
+                                protect_content: true,
+                                star_count: 1000,
+                                media: [
+                                    {
+                                        type: 'photo',
+                                        media: 'https://www.gstatic.com/webp/gallery/1.jpg',
+                                        caption: 'Thank you for your purchase! Here is your paid media content.'
+                                    }
+                                ]
+                            });
 
     if (photoResponse?.getResponseCode() !== 200) {
         throw new Error(`Failed to send paid photo: ${photoResponse?.getContentText() || 'No response'}`);
