@@ -13,7 +13,10 @@ A simple Telegram bot client for Google Apps Script.
 
 ## Crash Course
 
-Copy the contents of the `src/lib/TelegramBotClient.js` file into new file named `TelegramBotClient.gs` in your Google Apps Script project.
+Copy the contents of the `src/lib/TelegramBotProxy.js` file into new file named `TelegramBotProxy.gs` in your Google Apps Script project.
+
+> Note: the file extension should be `.gs` for Google Apps Script.
+> This library provides a simple interface to interact with the Telegram Bot API. all API methods are accessible via the `executeApiRequest` method.
 
 Then, you can use the following code to send a message using your Telegram bot:
 
@@ -23,22 +26,87 @@ Then, you can use the following code to send a message using your Telegram bot:
 const chat_id = '[YOUR_CHAT_ID]';
 const token = '[YOUR_BOT_TOKEN]';
 
-// Create a new instance of the TelegramBotClient class
-const client = new TelegramBotClient(token);
+// Create a new instance of the TelegramBotProxy class
+const proxy = new TelegramBotProxy(token);
 
 // Send a message to the chat
-client.sendMessage({ chat_id, text: 'Hello, world!' })
-    .then(response => {
-        console.log('Message sent:', response);
-    })
-    .catch(error => {
-        console.error('Error sending message:', error);
-    });
+const response = proxy.executeApiRequest('sendMessage', { chat_id, text: 'Hello from Google Apps Script!' });
+
+if (response?.getResponseCode() !== 200) {
+    throw new Error(`Failed to execute action: ${response?.getContentText() || 'No response'}`);
+}
+
 ```
 
 ## Advanced Usage
 
-Setting webhook:
+### Getting payments
+
+To handle payments using your Telegram bot, you can use one of the following code snippets.:
+
+#### 1. Sending an Invoice
+
+```javascript
+function sendInvoice() {
+    // Replace the placeholders with your chat_id and bot token
+    const chat_id = '[YOUR_CHAT_ID]';
+    const token = '[YOUR_BOT_TOKEN]';
+    const proxy = new TelegramBotProxy(token);
+    // Create & send an invoice
+    const invoiceResponse = proxy.executeApiRequest('sendInvoice', {
+        chat_id,
+        title: 'Test Product',
+        description: 'This is a test product',
+        payload: 'test_payload',
+        currency: 'XTR',
+        prices: JSON.stringify([
+            { label: 'Total', amount: 1000 } // Amount in smallest units (e.g., cents)
+        ]),
+        photo_url: 'https://www.gstatic.com/webp/gallery/1.jpg',
+        photo_width: 240
+    });
+
+    if (invoiceResponse?.getResponseCode() !== 200) {
+        throw new Error(`Failed to send invoice: ${invoiceResponse?.getContentText() || 'No response'}`);
+    }
+}
+```
+
+#### 2. Sending a Paid media
+
+To send a paid media (like a photo) after receiving a successful payment, you can use the following code snippet:
+
+> Paid media should be sent only after confirming the payment via the `pre_checkout_query` and `successful_payment` updates from Telegram.
+
+```javascript
+function sendPaidPhoto(chat_id) {
+    // Replace the placeholder with your bot token
+    const token = '[YOUR_BOT_TOKEN]';
+    const proxy = new TelegramBotProxy(token);
+
+    // Send a paid photo
+    const photoResponse = proxy.executeApiRequest('sendPaidMedia', {
+                                protect_content: true,
+                                star_count: 1000,
+                                media: [
+                                    {
+                                        type: 'photo',
+                                        media: 'https://www.gstatic.com/webp/gallery/1.jpg',
+                                        caption: 'Thank you for your purchase! Here is your paid media content.'
+                                    }
+                                ]
+                            });
+
+    if (photoResponse?.getResponseCode() !== 200) {
+        throw new Error(`Failed to send paid photo: ${photoResponse?.getContentText() || 'No response'}`);
+    }
+}
+```
+
+### Setting up a Webhook
+
+First, copy the contents of the `src/lib/TelegramBotClient.js` file into a new file named `TelegramBotClient.gs` in your Google Apps Script project.
+Then, you can use the following code snippets to set up a webhook and handle incoming updates:
 
 ```javascript
 // Replace the placeholders with your bot token you generated from BotFather
@@ -51,10 +119,12 @@ const client = new TelegramBotClient(token);
 client.setWebhook(webDeploymentUrl);
 ```
 
-Handling incoming updates:
+#### Handling Incoming Updates
+
+When Telegram sends updates to your webhook URL, you can handle them using the following code snippet:
 
 ```javascript
-// Handle incoming updates
+// Handle incoming inline updates from Telegram
 function doPost(e) {
     const update = JSON.parse(e.postData.contents);
     
@@ -64,16 +134,19 @@ function doPost(e) {
 
         // Echo the received message
         const token = '[YOUR_BOT_TOKEN]';
-        const client = new TelegramBotClient(token);
+        const proxy = new TelegramBotProxy(token);
 
-        client.sendMessage({ chat_id, text: `You said: ${text}` });
+        const response = proxy.executeApiRequest('sendMessage', { chat_id, text: `You said: ${text}` });
+        if (response?.getResponseCode() !== 200) {
+            throw new Error(`Failed to execute action: ${response?.getContentText() || 'No response'}`);
+        }
     }
 }
 ```
 
 ## Roadmap
 
-- Backoffice to manage multiple bots and users
+- Create a comprehensive set of examples and documentation.
 
 ## Overview
 
