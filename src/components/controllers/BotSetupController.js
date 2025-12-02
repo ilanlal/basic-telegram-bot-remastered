@@ -16,8 +16,10 @@ class BotSetupController {
         this._activeSpreadsheet = activeSpreadsheet;
     }
 
-    static create(userProperties = PropertiesService.getUserProperties(),
-        activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet()) {
+    static create(
+        userProperties = PropertiesService.getDocumentProperties(),
+        activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet()
+    ) {
         return new BotSetupController(userProperties, activeSpreadsheet);
     }
 
@@ -76,12 +78,7 @@ class BotSetupController {
             .setNewTestDeploymentId(id);
     }
 
-    setWebhook(environment) {
-        if (environment === 'test' || environment === 'dev' || environment === 'development' || environment === '') {
-            return SetupFlow.create(this._userProperties, this._activeSpreadsheet)
-                .setTestWebhook();
-        }
-
+    setWebhook() {
         return SetupFlow.create(this._userProperties, this._activeSpreadsheet)
             .setWebhook();
     }

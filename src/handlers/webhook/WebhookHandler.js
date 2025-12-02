@@ -1,6 +1,6 @@
 class WebhookHandler {
     static handlePostUpdateRequest(contents) {
-        const userProperties = PropertiesService.getUserProperties();
+        const userProperties = PropertiesService.getDocumentProperties();
         const activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet();
         try {
             if (contents.callback_query) {
@@ -15,6 +15,7 @@ class WebhookHandler {
 
                 return PostCallbackQueryHandler.create(userProperties, activeSpreadsheet)
                     .handlePostCallbackQuery(contents);
+
             } else if (contents.message) {
                 LoggerModel.create(userProperties, activeSpreadsheet)
                     .logEvent({
@@ -27,16 +28,49 @@ class WebhookHandler {
                 return PostMessageHandler.create(userProperties, activeSpreadsheet)
                     .handlePostMessage(contents.message);
             }
+            else if (contents.poll_answer) {
+                LoggerModel.create(userProperties, activeSpreadsheet)
+                    .logEvent({
+                        dc: 'poll_answer',
+                        action: contents.poll_answer.poll_id || '_no_poll_id_',
+                        chat_id: contents.poll_answer?.user?.id || '0000',
+                        content: JSON.stringify(contents.poll_answer),
+                        event: 'received_poll_answer'
+                    });
+
+                //return PostPollAnswerHandler.create(userProperties, activeSpreadsheet)
+                //.handlePostPollAnswer(contents.poll_answer);
+            }
+            else if (contents.poll) {
+                LoggerModel.create(userProperties, activeSpreadsheet)
+                    .logEvent({
+                        dc: 'poll',
+                        action: contents.poll.id || '_no_poll_id_',
+                        chat_id: '0000',
+                        content: JSON.stringify(contents.poll),
+                        event: 'received_poll'
+                    });
+            }
+            else {
+                LoggerModel.create(userProperties, activeSpreadsheet)
+                    .logEvent({
+                        dc: 'unknown_update',
+                        action: 'webhook_not_handled',
+                        chat_id: '0000',
+                        content: JSON.stringify(contents),
+                        event: 'webhook_not_handled'
+                    });
+            }
 
             return JSON.stringify({ status: 'not_handled' });
         } catch (error) {
             LoggerModel.create(userProperties, activeSpreadsheet)
-                .logEvent({
+                .logError({
                     dc: 'error',
-                    action: error.message || '_no_message_',
+                    action: error.message || 'unknown_error',
                     chat_id: '0000',
-                    content: JSON.stringify(error),
-                    event: 'error_handling'
+                    content: JSON.stringify(contents),
+                    event: error.message || 'unknown_error'
                 });
             throw error;
         }

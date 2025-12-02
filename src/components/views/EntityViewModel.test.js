@@ -17,7 +17,7 @@ describe('EntityViewModel', () => {
         const viewModel = EntityViewModel.create({
             cardService: CardService,
             activeSpreadsheet: SpreadsheetApp.getActiveSpreadsheet(),
-            userProperties: PropertiesService.getUserProperties()
+            userProperties: PropertiesService.getDocumentProperties()
         });
         expect(viewModel).toBeDefined();
     });
@@ -28,7 +28,7 @@ describe('EntityViewModel', () => {
                 it(`should create a card from the "${emd[0].entityName}" card method`, () => {
                     const cardWeapper = EntityViewModel.CardServiceWrapper.create(
                         CardService,
-                        PropertiesService.getUserProperties()
+                        PropertiesService.getDocumentProperties()
                     );
 
                     // if emd[0].card is function

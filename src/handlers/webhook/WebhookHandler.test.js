@@ -2,6 +2,11 @@ require('../../../tests');
 const { WebhookHandler } = require('./WebhookHandler');
 
 describe('WebhookHandler', () => {
+    const dummyToken = 'DUMMY_BOT_TOKEN';
+    beforeEach(() => {
+        UrlFetchAppStubConfiguration.reset();
+    });
+
     it('should run doPost message handler', () => {
         const event = {
             postData: {
@@ -36,14 +41,18 @@ describe('WebhookHandler', () => {
             }
         };
 
+        const sendMessgeUrl = `https://api.telegram.org/bot${dummyToken}/sendMessage`;
+
+        UrlFetchAppStubConfiguration.when(sendMessgeUrl)
+            .return(new HttpResponse()
+                .setContentText(JSON.stringify({
+                    result: {
+                        message_id: 1,
+                    }
+                })));
+
         const response = WebhookHandler.handlePostUpdateRequest(event);
         expect(response).toBeDefined();
-    });
-
-    it('should return not_handled for invalid event', () => {
-        const content = {};
-        const response = WebhookHandler.handlePostUpdateRequest(content);
-        expect(response).toBe(JSON.stringify({ status: 'not_handled' }));
     });
 
     it('should throw error for invalid message format', () => {

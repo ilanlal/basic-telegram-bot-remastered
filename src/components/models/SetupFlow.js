@@ -2,12 +2,13 @@ class SetupFlow {
     constructor(userProperties, activeSpreadsheet) {
         this._userProperties = userProperties;
         this._telegramBotClient = null;
+        this._activeSpreadsheet = activeSpreadsheet;
         this.sheetModel = SheetModel.create(activeSpreadsheet);
         this.sheet = this.sheetModel.initializeSheet(EMD.BotSetup.sheet({}));
     }
 
     static create(
-        userProperties = PropertiesService.getUserProperties(),
+        userProperties = PropertiesService.getDocumentProperties(),
         activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet()
     ) {
         return new SetupFlow(userProperties, activeSpreadsheet);
@@ -81,9 +82,8 @@ class SetupFlow {
     }
 
     setMyName() {
-        const model = BotModel.create(this.sheetModel.activeSpreadsheet);
-        const langs = model.getLanguages()
-            .map(({ lang }) => lang);
+        const model = BotModel.create(this._activeSpreadsheet);
+        const langs = model.getLanguages().map(({ lang }) => lang);
 
         langs.forEach((language_code) => {
             // get name value for the language
@@ -94,12 +94,7 @@ class SetupFlow {
             }
 
             // set bot name
-            let response;
-            if (language_code === '' || language_code === 'default') {
-                response = this.telegramBotClient.setMyName({ name: text });
-            } else {
-                response = this.telegramBotClient.setMyName({ name: text, language_code });
-            }
+            const response = this.telegramBotClient.setMyName({ name: text, language_code });
 
             // check response
             if (response.getResponseCode() !== 200) {
@@ -110,7 +105,7 @@ class SetupFlow {
     }
 
     setMyDescription() {
-        const model = BotModel.create(this.sheetModel.activeSpreadsheet);
+        const model = BotModel.create(this._activeSpreadsheet);
         const langs = model.getLanguages().map(({ lang }) => lang);
 
         langs.forEach((language_code) => {
@@ -122,12 +117,7 @@ class SetupFlow {
             }
 
             // set bot name
-            let response;
-            if (language_code === '' || language_code === 'default') {
-                response = this.telegramBotClient.setMyDescription({ description: text });
-            } else {
-                response = this.telegramBotClient.setMyDescription({ description: text, language_code });
-            }
+            const response = this.telegramBotClient.setMyDescription({ description: text, language_code });
 
             // check response
             if (response.getResponseCode() !== 200) {
@@ -138,7 +128,7 @@ class SetupFlow {
     }
 
     setMyShortDescription() {
-        const model = BotModel.create(this.sheetModel.activeSpreadsheet);
+        const model = BotModel.create(this._activeSpreadsheet);
         const langs = model.getLanguages().map(({ lang }) => lang);
 
         langs.forEach((language_code) => {
@@ -150,12 +140,7 @@ class SetupFlow {
             }
 
             // set bot short description
-            let response;
-            if (language_code === '' || language_code === 'default') {
-                response = this.telegramBotClient.setMyShortDescription({ short_description: text });
-            } else {
-                response = this.telegramBotClient.setMyShortDescription({ short_description: text, language_code });
-            }
+            const response = this.telegramBotClient.setMyShortDescription({ short_description: text, language_code });
 
             // check response
             if (response.getResponseCode() !== 200) {
@@ -166,7 +151,7 @@ class SetupFlow {
     }
 
     setMyCommands() {
-        const model = BotModel.create(this.sheetModel.activeSpreadsheet);
+        const model = BotModel.create(this._activeSpreadsheet);
         const langs = model.getLanguages().map(({ lang }) => lang);
 
         langs.forEach((language_code) => {
@@ -179,12 +164,7 @@ class SetupFlow {
 
             // set bot commands
             const parsedCommands = JSON.parse(text);
-            let response;
-            if (language_code === '' || language_code === 'default') {
-                response = this.telegramBotClient.setMyCommands({ commands: parsedCommands });
-            } else {
-                response = this.telegramBotClient.setMyCommands({ commands: parsedCommands, language_code });
-            }
+            const response = this.telegramBotClient.setMyCommands({ commands: parsedCommands, language_code });
 
             // check response
             if (response.getResponseCode() !== 200) {

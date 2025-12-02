@@ -20,7 +20,41 @@ function doPost(e) {
         // Handle the webhook event
         return WebhookHandler.handlePostUpdateRequest(contents);
     } catch (error) {
+        console.error('Error in doPost:', error);
         throw error;
+    }
+}
+
+function scaffold_scriptProperties() {
+    // Scaffold function for setting up initial configurations
+
+    const props = EnvironmentModel.InputMeta;
+    // Set default values for each property if not already set
+    const scriptProperties = PropertiesService.getScriptProperties();
+
+    for (const key in props) {
+        if (props.hasOwnProperty(key)) {
+            const currentValue = scriptProperties.getProperty(props[key]);
+            if (currentValue === null) {
+                scriptProperties.setProperty(props[key], 'default');
+            }
+        }
+    }
+}
+
+function scaffold_documentProperties() {
+    // Scaffold function for copying initial configurations to document properties from script properties
+    const props = EnvironmentModel.InputMeta;
+    const documentProperties = PropertiesService.getDocumentProperties();
+    const scriptProperties = PropertiesService.getScriptProperties();
+
+    for (const key in props) {
+        if (props.hasOwnProperty(key)) {
+            const currentValue = documentProperties.getProperty(props[key]);
+            if (currentValue === null) {
+                documentProperties.setProperty(props[key], scriptProperties.getProperty(props[key]) || 'default');
+            }
+        }
     }
 }
 
@@ -30,6 +64,8 @@ if (typeof module !== 'undefined' && module.exports) {
         onInstall,
         onOpen,
         doGet,
-        doPost
+        doPost,
+        scaffold_scriptProperties,
+        scaffold_documentProperties
     };
 }

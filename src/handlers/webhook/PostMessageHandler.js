@@ -4,7 +4,7 @@ class PostMessageHandler {
         this._userProperties = userProperties;
     }
 
-    static create(userProperties = PropertiesService.getUserProperties(), activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet()) {
+    static create(userProperties = PropertiesService.getDocumentProperties(), activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet()) {
         return new PostMessageHandler(userProperties, activeSpreadsheet);
     }
 
@@ -16,12 +16,6 @@ class PostMessageHandler {
         const chat_id = message.from.id;
         const language_code = message.from.language_code;
         const query = message.text;
-
-        if (message?.successful_payment) {
-            // Handle successful payment
-            return this.handleDynamicReply(chat_id, '_payment_successful_', language_code, message.message_id);
-        }
-
         if (message.entities && Array.isArray(message.entities)) {
             message.entities.forEach(entity => {
                 if (entity.type === "bot_command") {
@@ -31,13 +25,18 @@ class PostMessageHandler {
             });
         }
 
+        if (message?.successful_payment) {
+            // Handle successful payment
+            return this.processMessageDynamicResponse(chat_id, '_payment_successful_', language_code, message.message_id);
+        }
+
         // reply from force input request
         if (message.reply_to_message) {
             return this.handleReplyToForceInput(chat_id, message);
         }
 
         // execute dynamic reply handling for the query
-        return this.handleDynamicReply(chat_id, query, language_code, message.message_id);
+        return true; //this.handleDynamicReply(chat_id, query, language_code, message.message_id);
     }
 
     handleBotCommand(chat_id, message) {
@@ -61,7 +60,7 @@ class PostMessageHandler {
             // TODO: implement admin command handling
         }
 
-        return true;
+        return this.processMessageDynamicResponse(chat_id, query, language_code);
     }
 
     verifyPersone(message) {
@@ -84,15 +83,16 @@ class PostMessageHandler {
         return JSON.stringify({ status: 'payment_handled', chat_id, payment });
     }
 
-    handleDynamicReply(chat_id, query, language_code, reply_to_message_id = null) {
+    processMessageDynamicResponse(chat_id, query, language_code) {
         const automationHandler = AutomationHandler
             .create(this._userProperties, this._activeSpreadsheet);
 
+        // Execute the dynamic reply handling on the local container message_id
         return automationHandler.handleAutomationRequest({
             language_code,
             chat_id,
             query,
-            reply_to_message_id
+            reply_to_message_id: null
         });
     }
 }

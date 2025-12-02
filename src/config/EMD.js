@@ -156,46 +156,6 @@ EMD.EnvironmentVariables = {
             },
             sections:
                 [
-                    {   // Deployment setup
-                        // header: '🚀 Deployment Setup',
-                        collapsible: true,
-                        numUncollapsibleWidgets: 1,
-                        widgets: [
-                            {
-                                id: 'deployment_id_info',
-                                TextParagraph: {
-                                    text: `🚀 Deployment ID is currently: ${data.environmentVariables?.deploymentIdSet ? '✅ Set' : '❌ Not Set'}`
-                                }
-                            },
-                            {   // Production Deployment ID Variable
-                                id: 'deployment_id_variable',
-                                TextInput: {
-                                    title: 'Production Deployment ID',
-                                    fieldName: 'txt_deployment_id',
-                                    hint: 'Enter production deployment ID'
-                                },
-                                propertyName: EnvironmentModel.InputMeta.DEPLOYMENT_ID
-                            },
-                            {   // Test Deployment ID Variable
-                                id: 'test_deployment_id_variable',
-                                TextInput: {
-                                    title: 'Test Deployment ID',
-                                    fieldName: 'txt_test_deployment_id',
-                                    hint: 'Enter test deployment ID'
-                                },
-                                propertyName: EnvironmentModel.InputMeta.TEST_DEPLOYMENT_ID
-                            },
-                            { // Identify Deployment ID Button
-                                id: 'identify_deployment_id_button',
-                                TextButton: {
-                                    text: '💾 Save Deployment ID',
-                                    onClick: {
-                                        functionName: 'EnvironmentHandler.Addon.onSaveDeploymentIdClick'
-                                    }
-                                }
-                            }
-                        ]
-                    },
                     {   // Acative Spreadsheet ID setup
                         // header: '🔩 Active Spreadsheet Setup',
                         collapsible: true,
@@ -397,6 +357,46 @@ EMD.BotSetup = {
                             }
                         ]
                     },
+                    {   // Deployment setup
+                        // header: '🚀 Deployment Setup',
+                        collapsible: true,
+                        numUncollapsibleWidgets: 1,
+                        widgets: [
+                            {
+                                id: 'deployment_id_info',
+                                TextParagraph: {
+                                    text: `🚀 Deployment ID is currently: ${data.environmentVariables?.deploymentIdSet ? '✅ Set' : '❌ Not Set'}`
+                                }
+                            },
+                            {   // Production Deployment ID Variable
+                                id: 'deployment_id_variable',
+                                TextInput: {
+                                    title: 'Production Deployment ID',
+                                    fieldName: 'txt_deployment_id',
+                                    hint: 'Enter production deployment ID'
+                                },
+                                propertyName: EnvironmentModel.InputMeta.DEPLOYMENT_ID
+                            },
+                            {   // Test Deployment ID Variable
+                                id: 'test_deployment_id_variable',
+                                TextInput: {
+                                    title: 'Test Deployment ID',
+                                    fieldName: 'txt_test_deployment_id',
+                                    hint: 'Enter test deployment ID'
+                                },
+                                propertyName: EnvironmentModel.InputMeta.TEST_DEPLOYMENT_ID
+                            },
+                            { // Identify Deployment ID Button
+                                id: 'identify_deployment_id_button',
+                                TextButton: {
+                                    text: '💾 Save Deployment ID',
+                                    onClick: {
+                                        functionName: 'EnvironmentHandler.Addon.onSaveDeploymentIdClick'
+                                    }
+                                }
+                            }
+                        ]
+                    },
                     {   // Webhook setup
                         // header: '🔗 Webhook Setup',
                         collapsible: true,
@@ -541,7 +541,7 @@ EMD.BotSetup = {
     sheet: (data = {}) => {
         return {
             name: '🤖 Bot',
-            columns: ['key', 'default', 'es', 'fr', 'ar', 'de', 'it', 'pt', 'ru', 'zh', 'ja', 'ko', 'he'],
+            columns: ['key', 'en', 'es', 'fr', 'ar', 'de', 'it', 'pt', 'ru', 'zh', 'ja', 'ko', 'he'],
             sample_data: [
                 // Bot name; 0-64 characters. Pass an empty string to remove the dedicated name for the given language.
                 ['name',
@@ -621,6 +621,11 @@ EMD.BotSetup = {
                                 // Description of the command; 1-256 characters.
                                 description: 'Start the bot'
                             },
+                            { // '/home' command
+                                command: '/home',
+                                description: 'Go to the main menu'
+
+                            },
                             {   // '/help' command
                                 command: '/help',
                                 description: 'Get help on using the bot, or report an issue'
@@ -644,6 +649,10 @@ EMD.BotSetup = {
                             {   // '/start' command
                                 command: '/start',
                                 description: 'Iniciar el bot'
+                            },
+                            {   // '/home' command
+                                command: '/home',
+                                description: 'Ir al menú principal'
                             },
                             {   // '/help' command
                                 command: '/help',
@@ -669,6 +678,10 @@ EMD.BotSetup = {
                                 command: '/start',
                                 description: 'Démarrer le bot'
                             },
+                            {   // '/home' command
+                                command: '/home',
+                                description: 'Aller au menu principal'
+                            },
                             {   // '/help' command
                                 command: '/help',
                                 description: 'Obtenir de l\'aide sur l\'utilisation du bot ou signaler un problème'
@@ -692,6 +705,10 @@ EMD.BotSetup = {
                             {   // '/start' command
                                 command: '/start',
                                 description: 'بدء تشغيل البوت'
+                            },
+                            {   // '/home' command
+                                command: '/home',
+                                description: 'الذهاب إلى القائمة الرئيسية'
                             },
                             {   // '/help' command
                                 command: '/help',
@@ -717,6 +734,10 @@ EMD.BotSetup = {
                                 command: '/start',
                                 description: 'Bot starten'
                             },
+                            {   // '/home' command
+                                command: '/home',
+                                description: 'Gehe zum Hauptmenü'
+                            },
                             {   // '/help' command
                                 command: '/help',
                                 description: 'Hilfe zur Verwendung des Bots oder zur Meldung eines Problems erhalten'
@@ -741,6 +762,10 @@ EMD.BotSetup = {
                                 command: '/start',
                                 description: 'Avvia il bot'
                             },
+                            {   // '/home' command
+                                command: '/home',
+                                description: 'Vai al menu principale'
+                            },
                             {   // '/help' command
                                 command: '/help',
                                 description: 'Ottieni aiuto sull\'uso del bot o segnala un problema'
@@ -763,6 +788,10 @@ EMD.BotSetup = {
                         {   // '/start' command
                             command: '/start',
                             description: 'Iniciar o bot'
+                        },
+                        {   // '/home' command
+                            command: '/home',
+                            description: 'Ir para o menu principal'
                         },
                         {   // '/help' command
                             command: '/help',
@@ -787,6 +816,10 @@ EMD.BotSetup = {
                             command: '/start',
                             description: 'Запустить бота'
                         },
+                        {   // '/home' command
+                            command: '/home',
+                            description: 'Перейти в главное меню'
+                        },
                         {   // '/help' command
                             command: '/help',
                             description: 'Получить помощь по использованию бота или сообщить о проблеме'
@@ -809,6 +842,10 @@ EMD.BotSetup = {
                         {   // '/start' command
                             command: '/start',
                             description: '启动机器人'
+                        },
+                        {   // '/home' command
+                            command: '/home',
+                            description: '进入主菜单'
                         },
                         {   // '/help' command
                             command: '/help',
@@ -833,6 +870,10 @@ EMD.BotSetup = {
                             command: '/start',
                             description: 'ボットを開始します'
                         },
+                        {   // '/home' command
+                            command: '/home',
+                            description: 'メインメニューに移動します'
+                        },
                         {   // '/help' command
                             command: '/help',
                             description: 'ボットの使用に関するヘルプを取得するか、問題を報告します'
@@ -856,6 +897,10 @@ EMD.BotSetup = {
                             command: '/start',
                             description: '봇을 시작합니다'
                         },
+                        {   // '/home' command
+                            command: '/home',
+                            description: '메인 메뉴로 이동합니다'
+                        },
                         {   // '/help' command
                             command: '/help',
                             description: '봇 사용에 대한 도움을 받거나 문제를 보고합니다'
@@ -878,6 +923,10 @@ EMD.BotSetup = {
                         {   // '/start' command
                             command: '/start',
                             description: 'הפעל את הבוט'
+                        },
+                        {   // '/home' command
+                            command: '/home',
+                            description: 'עבור לתפריט הראשי'
                         },
                         {   // '/help' command
                             command: '/help',
@@ -1031,15 +1080,113 @@ EMD.Automation = {
     sheet: (data = {}) => {
         return {
             name: '⚡ Automations',
-            columns: ['action', 'default', 'es', 'fr', 'ar', 'de', 'it', 'pt', 'ru', 'zh', 'ja', 'ko', 'he'],
+            columns: ['action', 'en', 'es', 'fr', 'ar', 'de', 'it', 'pt', 'ru', 'zh', 'ja', 'ko', 'he'],
             sample_data:
                 [
+                    ['_preload_messages_',
+                        // default (en)
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Loading your request... Please wait a moment.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                    ],
                     ['_under_construction_',
                         // default (en)
                         JSON.stringify([{
                             method: 'sendMessage',
                             payload: {
-                                text: 'This feature is under construction.',
+                                text: '🚧 This feature is under construction. Please check back later for updates!',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // es
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: '🚧 Esta función está en construcción. ¡Por favor, vuelve más tarde para obtener actualizaciones!',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // fr
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: '🚧 Cette fonctionnalité est en cours de développement. Veuillez revenir plus tard pour des mises à jour !',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ar
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: '🚧 هذه الميزة قيد الإنشاء. يرجى التحقق مرة أخرى لاحقًا للحصول على التحديثات!',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // de
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: '🚧 Diese Funktion ist im Aufbau. Bitte schauen Sie später wieder vorbei, um Updates zu erhalten!',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // it
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: '🚧 Questa funzionalità è in fase di sviluppo. Si prega di tornare più tardi per ulteriori aggiornamenti!',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // pt
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: '🚧 Esta função está em construção. Por favor, volte mais tarde para obter atualizações!',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ru
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: '🚧 Эта функция находится в разработке. Пожалуйста, вернитесь позже за обновлениями!',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // zh
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: '🚧 此功能正在开发中。请稍后再回来查看更新！',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ja
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: '🚧 この機能は開発中です。後でもう一度確認してください！',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ko
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: '🚧 이 기능은 현재 개발 중입니다. 나중에 다시 확인하여 업데이트를 받으세요!',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // he
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: '🚧 זו פונקציה בבנייה. אנא חזור מאוחר יותר לעדכונים!',
                                 parse_mode: 'HTML'
                             }
                         }])],
@@ -1216,8 +1363,8 @@ EMD.Automation = {
                                 reply_markup: {
                                     inline_keyboard: [
                                         [
-                                            { text: "🆘 Help", callback_data: "action=help" },
-                                            { text: "ℹ️ About", callback_data: "action=about" }
+                                            { text: "🆘 Help", callback_data: "help" },
+                                            { text: "ℹ️ About", callback_data: "about" }
                                         ],
                                         [
                                             { text: "🏠 Home", callback_data: "/home" }
@@ -1446,8 +1593,8 @@ EMD.Automation = {
                                 reply_markup: {
                                     inline_keyboard: [
                                         [
-                                            { text: "🆘 Help", callback_data: "action=help" },
-                                            { text: "ℹ️ About", callback_data: "action=about" }
+                                            { text: "🆘 Help", callback_data: "help" },
+                                            { text: "ℹ️ About", callback_data: "about" }
                                         ],
                                         [
                                             { text: "🏠 Home", callback_data: "/home" }
@@ -1465,8 +1612,8 @@ EMD.Automation = {
                                 reply_markup: {
                                     inline_keyboard: [
                                         [
-                                            { text: "🆘 Ayuda", callback_data: "action=help" },
-                                            { text: "ℹ️ Acerca de", callback_data: "action=about" }
+                                            { text: "🆘 Ayuda", callback_data: "help" },
+                                            { text: "ℹ️ Acerca de", callback_data: "about" }
                                         ],
                                         [
                                             { text: "🏠 Inicio", callback_data: "/home" }
@@ -1484,8 +1631,8 @@ EMD.Automation = {
                                 reply_markup: {
                                     inline_keyboard: [
                                         [
-                                            { text: "🆘 Aide", callback_data: "action=help" },
-                                            { text: "ℹ️ À propos", callback_data: "action=about" }
+                                            { text: "🆘 Aide", callback_data: "help" },
+                                            { text: "ℹ️ À propos", callback_data: "about" }
                                         ],
                                         [
                                             { text: "🏠 Accueil", callback_data: "/home" }
@@ -1503,8 +1650,8 @@ EMD.Automation = {
                                 reply_markup: {
                                     inline_keyboard: [
                                         [
-                                            { text: "🆘 مساعدة", callback_data: "action=help" },
-                                            { text: "ℹ️ حول", callback_data: "action=about" }
+                                            { text: "🆘 مساعدة", callback_data: "help" },
+                                            { text: "ℹ️ حول", callback_data: "about" }
                                         ],
                                         [
                                             { text: "🏠 الرئيسية", callback_data: "/home" }
@@ -1522,8 +1669,8 @@ EMD.Automation = {
                                 reply_markup: {
                                     inline_keyboard: [
                                         [
-                                            { text: "🆘 Hilfe", callback_data: "action=help" },
-                                            { text: "ℹ️ Über", callback_data: "action=about" }
+                                            { text: "🆘 Hilfe", callback_data: "help" },
+                                            { text: "ℹ️ Über", callback_data: "about" }
                                         ],
                                         [
                                             { text: "🏠 Startseite", callback_data: "/home" }
@@ -1541,8 +1688,8 @@ EMD.Automation = {
                                 reply_markup: {
                                     inline_keyboard: [
                                         [
-                                            { text: "🆘 Aiuto", callback_data: "action=help" },
-                                            { text: "ℹ️ Informazioni", callback_data: "action=about" }
+                                            { text: "🆘 Aiuto", callback_data: "help" },
+                                            { text: "ℹ️ Informazioni", callback_data: "about" }
                                         ],
                                         [
                                             { text: "🏠 Home", callback_data: "/home" }
@@ -1560,8 +1707,8 @@ EMD.Automation = {
                                 reply_markup: {
                                     inline_keyboard: [
                                         [
-                                            { text: "🆘 Ajuda", callback_data: "action=help" },
-                                            { text: "ℹ️ Sobre", callback_data: "action=about" }
+                                            { text: "🆘 Ajuda", callback_data: "help" },
+                                            { text: "ℹ️ Sobre", callback_data: "about" }
                                         ],
                                         [
                                             { text: "🏠 Início", callback_data: "/home" }
@@ -1579,8 +1726,8 @@ EMD.Automation = {
                                 reply_markup: {
                                     inline_keyboard: [
                                         [
-                                            { text: "🆘 Помощь", callback_data: "action=help" },
-                                            { text: "ℹ️ Информация", callback_data: "action=about" }
+                                            { text: "🆘 Помощь", callback_data: "help" },
+                                            { text: "ℹ️ Информация", callback_data: "about" }
                                         ],
                                         [
                                             { text: "🏠 Главная", callback_data: "/home" }
@@ -1598,8 +1745,8 @@ EMD.Automation = {
                                 reply_markup: {
                                     inline_keyboard: [
                                         [
-                                            { text: "🆘 帮助", callback_data: "action=help" },
-                                            { text: "ℹ️ 信息", callback_data: "action=about" }
+                                            { text: "🆘 帮助", callback_data: "help" },
+                                            { text: "ℹ️ 信息", callback_data: "about" }
                                         ],
                                         [
                                             { text: "🏠 首页", callback_data: "/home" }
@@ -1617,8 +1764,8 @@ EMD.Automation = {
                                 reply_markup: {
                                     inline_keyboard: [
                                         [
-                                            { text: "🆘 ヘルプ", callback_data: "action=help" },
-                                            { text: "ℹ️ 情報", callback_data: "action=about" }
+                                            { text: "🆘 ヘルプ", callback_data: "help" },
+                                            { text: "ℹ️ 情報", callback_data: "about" }
                                         ],
                                         [
                                             { text: "🏠 ホーム", callback_data: "/home" }
@@ -1636,8 +1783,8 @@ EMD.Automation = {
                                 reply_markup: {
                                     inline_keyboard: [
                                         [
-                                            { text: "🆘 도움말", callback_data: "action=help" },
-                                            { text: "ℹ️ 정보", callback_data: "action=about" }
+                                            { text: "🆘 도움말", callback_data: "help" },
+                                            { text: "ℹ️ 정보", callback_data: "about" }
                                         ],
                                         [
                                             { text: "🏠 홈", callback_data: "/home" }
@@ -1655,8 +1802,8 @@ EMD.Automation = {
                                 reply_markup: {
                                     inline_keyboard: [
                                         [
-                                            { text: "🆘 עזרה", callback_data: "action=help" },
-                                            { text: "ℹ️ מידע", callback_data: "action=about" }
+                                            { text: "🆘 עזרה", callback_data: "help" },
+                                            { text: "ℹ️ מידע", callback_data: "about" }
                                         ],
                                         [
                                             { text: "🏠 בית", callback_data: "/home" }
@@ -1666,7 +1813,7 @@ EMD.Automation = {
                             }
                         }])
                     ],
-                    ["/start",
+                    ['/start',
                         // default (en)
                         JSON.stringify([{
                             method: 'sendMessage',
@@ -1684,28 +1831,6 @@ EMD.Automation = {
                                     inline_keyboard: [
                                         [
                                             { text: "🐣 Accept", callback_data: "/home" }
-                                        ]
-                                    ]
-                                }
-                            }
-                        }]),
-                        // es
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: '🐣/> Hola..' + '\n\n'
-                                    + '<blockquote expandable>Sobre mí: Soy un <b>Bot Hub</b> 🐣\n\n'
-                                    + 'Soy un <b>Bot Hub</b> 🐣\n\n'
-                                    + 'Puedo ayudarte a explorar varias funciones y características de los bots de Telegram.\n\n'
-                                    + 'Puedes usarme para aprender sobre el envío de mensajes, fotos, grupos de medios y más!\n\n'
-                                    + 'Solo házmelo saber lo que quieres hacer!' + '\n\n'
-                                    + '</blockquote>'
-                                    + 'Haz clic en "🐣 Aceptar" en el "teclado en línea" a continuación para comenzar.' + '\n',
-                                parse_mode: 'HTML',
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [
-                                            { text: "🐣 Aceptar", callback_data: "/home" }
                                         ]
                                     ]
                                 }
@@ -1956,133 +2081,37 @@ EMD.Automation = {
                     ],
                     ['/home',
                         // default (en)
-                        JSON.stringify([{
-                            method: 'sendPhoto',
-                            payload: {
-                                caption: 'Welcome.\n\n'
-                                    + 'I am a simple Telegram bot that showcases various features and functionalities.\n\n'
-                                    + 'Click the "inline keyboard" buttons below to explore more options.\n\n'
-                                    + 'Feel free to interact with me and discover what I can do!\n\n'
-                                    + 'I hope you enjoy your experience! 😊\n\n'
-                                    + '<blockquote expandable>Get Started: \n'
-                                    + 'To get started, you can use the following commands:\n'
-                                    + '1. /help - Get help on using the bot.\n'
-                                    + '2. /about - Learn more about this bot.\n\n'
-                                    + '</blockquote>'
-                                    + '<blockquote expandable>Features: \n'
-                                    + 'This bot can help you with the following:\n'
-                                    + '1. Sending messages\n'
-                                    + '2. Sharing photos and media\n'
-                                    + '3. Creating groups and channels\n'
-                                    + '4. Managing your account settings\n\n'
-                                    + '</blockquote>'
-                                    + '<blockquote expandable>Support: \n'
-                                    + 'If you need assistance, feel free to reach out!\n'
-                                    + 'You can use the /help command for guidance or to report any issues.\n\n'
-                                    + '</blockquote>'
-                                    + '<blockquote expandable>Feedback: \n'
-                                    + 'We appreciate your feedback to improve this bot.\n'
-                                    + 'Please let us know your thoughts!\n\n'
-                                    + '</blockquote>',
-                                photo: "https://www.gstatic.com/webp/gallery/1.jpg",
-                                parse_mode: 'HTML',
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        // Two buttons in one row
-                                        [
-                                            { text: "🌐 Web App", web_app: { url: "https://example.com" } },
-                                            { text: "🌟 Mini App", web_app: { url: "https://example.com/mini" } }
-                                        ],
-                                        [
-                                            { text: "🛍️ Store", web_app: { url: "https://example.com/store" } },
-                                            { text: "🐣 H.R Solutions", callback_data: "action=hrSolutions" }
-                                        ],
-                                        [
-                                            { text: "🔒 Secured Marketplace", callback_data: "action=privateSecure" },
-                                            { text: "💼 Agency Solutions", callback_data: "action=agencySolutions" }
-                                        ],
-                                        [
-                                            { text: "🎯 Targeted Services", callback_data: "action=targetedServices" },
-                                            { text: "📦 Logistics", callback_data: "action=logistics" }
-                                        ],
-                                        [
-                                            { text: "🚀 Quick Actions", callback_data: "action=quickActions" },
-                                            { text: "🚨 Emergency Services", callback_data: "action=emergencyServices" },
-                                        ],
-                                        [
-                                            { text: '❓ Help', callback_data: "/help" },
-                                            { text: 'ℹ️ About', callback_data: "/about" }
+                        JSON.stringify([
+                            {
+                                method: 'sendPhoto',
+                                payload: {
+                                    caption: 'Welcome.\n\n'
+                                        + 'I am a simple Telegram bot that showcases various features and functionalities.\n\n'
+                                        + 'Feel free to interact with me and discover what I can do!\n\n'
+                                        + 'I hope you enjoy your experience! 😊\n\n'
+                                        + '<blockquote expandable>Feedback: \n'
+                                        + 'We appreciate your feedback to improve this bot.\n'
+                                        + 'Please let us know your thoughts!\n\n'
+                                        + '</blockquote>',
+                                    photo: "https://www.gstatic.com/webp/gallery/1.jpg",
+                                    parse_mode: 'HTML',
+                                    reply_markup: {
+                                        inline_keyboard: [
+                                            [
+                                                { text: 'API Features', callback_data: "/apis" }
+                                            ],
+                                            [
+                                                { text: 'Store', callback_data: "/store" }
+                                            ],
+                                            [
+                                                { text: '❓ Help', callback_data: "/help" }
+                                            ]
                                         ]
-                                    ]
+                                    }
                                 }
                             }
-                        }]),
-                        // es
-                        JSON.stringify([{}]),
-                        // fr
-                        JSON.stringify([{}]),
-                        // ar
-                        JSON.stringify([{}]),
-                        // de
-                        JSON.stringify([{}]),
-                        // it
-                        JSON.stringify([{}]),
-                        // pt
-                        JSON.stringify([{}]),
-                        // ru
-                        JSON.stringify([{}]),
-                        // zh
-                        JSON.stringify([{}]),
-                        // ja
-                        JSON.stringify([{}]),
-                        // ko
-                        JSON.stringify([{}]),
-                        // he
-                        JSON.stringify([{
-                            method: 'sendPhoto',
-                            payload: {
-                                caption: 'ברוכים הבאים.\n\n'
-                                    + 'אני בוט טלגרם פשוט שמציג תכונות ופונקציות שונות.\n\n'
-                                    + 'לחץ על כפתורי "מקלדת אינליין" למטה כדי לגלות אפשרויות נוספות.\n\n'
-                                    + 'אל תהססו ליצור איתי אינטראקציה ולגלות מה אני יכול לעשות!\n\n'
-                                    + 'אני מקווה שתהנו מהחוויה! 😊\n\n'
-                                    + '<blockquote expandable>התחל: \n'
-                                    + 'כדי להתחיל, אתה יכול להשתמש בפקודות הבאות:\n'
-                                    + '1. /help - קבל עזרה בשימוש בבוט.\n'
-                                    + '2. /about - למידע נוסף על הבוט הזה.\n\n'
-                                    + '</blockquote>'
-                                    + '<blockquote expandable>תכונות: \n'
-                                    + 'בוט זה יכול לעזור לך עם הדברים הבאים:\n'
-                                    + '1. שליחת הודעות\n'
-                                    + '2. שיתוף תמונות ומדיה\n'
-                                    + '3. יצירת קבוצות וערוצים\n'
-                                    + '4. ניהול הגדרות החשבון שלך\n\n'
-                                    + '</blockquote>'
-                                    + '<blockquote expandable>תמיכה: \n'
-                                    + 'אם אתה זקוק לעזרה, אל תהסס לפנות!\n'
-                                    + 'אתה יכול להשתמש בפקודת /help לקבלת הדרכה או לדווח על בעיות.\n\n'
-                                    + '</blockquote>'
-                                    + '<blockquote expandable>משוב: \n'
-                                    + 'אנו מעריכים את המשוב שלך כדי לשפר את הבוט הזה.\n'
-                                    + 'אנא יידע אותנו את מחשבותיך!\n\n'
-                                    + '</blockquote>',
-                                photo: "https://www.gstatic.com/webp/gallery/1.jpg",
-                                parse_mode: 'HTML',
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        // Two buttons in one row
-                                        [
-                                            { text: "Getting Started", web_app: { url: "https://github.com/ilanlal/basic-telegram-bot-remastered#readme" } },
-                                            { text: "Report an Issue", web_app: { url: "https://github.com/ilanlal/basic-telegram-bot-remastered/issues" } }
-                                        ],
-                                        [
-                                            { text: "Home", callback_data: "action=home" }
-                                        ]
-                                    ]
-                                }
-                            }
-                        }
-                        ])],
+                        ])
+                    ],
                     ['/admin',
                         // default (en)
                         JSON.stringify([{
@@ -2099,11 +2128,282 @@ EMD.Automation = {
                                         [{ text: "Bot Settings", callback_data: "adminBotSettings" }],
                                         [{ text: "Analytics", callback_data: "adminAnalytics" }],
                                         [{ text: "System Logs", callback_data: "adminSystemLogs" }],
-                                        [{ text: "Home", callback_data: "action=home" }]
+                                        [{ text: "Home", callback_data: "/home" }]
+                                    ]
+                                }
+                            }
+                        }]),
+                        // es
+                        JSON.stringify([{
+                            method: 'sendPhoto',
+                            payload: {
+                                caption: '<b>Panel de Administración</b>\n\n' +
+                                    'Bienvenido al Panel de Administración. Aquí puedes gestionar varios aspectos del bot y sus funcionalidades.\n\n' +
+                                    'Utiliza los botones de abajo para navegar por las funciones de administración.',
+                                parse_mode: 'HTML',
+                                photo: "https://www.gstatic.com/webp/gallery/2.jpg",
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "Gestión de Usuarios", callback_data: "adminUserManagement" }],
+                                        [{ text: "Configuración del Bot", callback_data: "adminBotSettings" }],
+                                        [{ text: "Analítica", callback_data: "adminAnalytics" }],
+                                        [{ text: "Registros del Sistema", callback_data: "adminSystemLogs" }],
+                                        [{ text: "Inicio", callback_data: "/home" }]
+                                    ]
+                                }
+                            }
+                        }]),
+                        // french (fr)
+                        JSON.stringify([{
+                            method: 'sendPhoto',
+                            payload: {
+                                caption: '<b>Panneau d\'Administration</b>\n\n' +
+                                    'Bienvenue dans le Panneau d\'Administration. Ici, vous pouvez gérer divers aspects du bot et de ses fonctionnalités.\n\n' +
+                                    'Utilisez les boutons ci-dessous pour naviguer dans les fonctionnalités d\'administration.',
+                                parse_mode: 'HTML',
+                                photo: "https://www.gstatic.com/webp/gallery/2.jpg",
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "Gestion des Utilisateurs", callback_data: "adminUserManagement" }],
+                                        [{ text: "Paramètres du Bot", callback_data: "adminBotSettings" }],
+                                        [{ text: "Analytique", callback_data: "adminAnalytics" }],
+                                        [{ text: "Journaux du Système", callback_data: "adminSystemLogs" }],
+                                        [{ text: "Accueil", callback_data: "/home" }]
+                                    ]
+                                }
+                            }
+                        }]),
+                        // AR
+                        JSON.stringify([{
+                            method: 'sendPhoto',
+                            payload: {
+                                caption: '<b>لوحة التحكم</b>\n\n' +
+                                    'مرحبًا بك في لوحة التحكم. هنا يمكنك إدارة جوانب مختلفة من الروبوت وميزاته.\n\n' +
+                                    'استخدم الأزرار أدناه للتنقل بين ميزات الإدارة.',
+                                parse_mode: 'HTML',
+                                photo: "https://www.gstatic.com/webp/gallery/2.jpg",
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "إدارة المستخدمين", callback_data: "adminUserManagement" }],
+                                        [{ text: "إعدادات الروبوت", callback_data: "adminBotSettings" }],
+                                        [{ text: "تحليلات", callback_data: "adminAnalytics" }],
+                                        [{ text: "سجلات النظام", callback_data: "adminSystemLogs" }],
+                                        [{ text: "الصفحة الرئيسية", callback_data: "/home" }]
+                                    ]
+                                }
+                            }
+                        }]),
+                        // DE
+                        JSON.stringify([{
+                            method: 'sendPhoto',
+                            payload: {
+                                caption: '<b>Administrationsbereich</b>\n\n' +
+                                    'Willkommen im Administrationsbereich. Hier können Sie verschiedene Aspekte des Bots und seiner Funktionen verwalten.\n\n' +
+                                    'Verwenden Sie die Schaltflächen unten, um durch die Verwaltungsfunktionen zu navigieren.',
+                                parse_mode: 'HTML',
+                                photo: "https://www.gstatic.com/webp/gallery/2.jpg",
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "Benutzerverwaltung", callback_data: "adminUserManagement" }],
+                                        [{ text: "Bot-Einstellungen", callback_data: "adminBotSettings" }],
+                                        [{ text: "Analytik", callback_data: "adminAnalytics" }],
+                                        [{ text: "Systemprotokolle", callback_data: "adminSystemLogs" }],
+                                        [{ text: "Startseite", callback_data: "/home" }]
+                                    ]
+                                }
+                            }
+                        }]),
+                        // IT
+                        JSON.stringify([{
+                            method: 'sendPhoto',
+                            payload: {
+                                caption: '<b>Area di Amministrazione</b>\n\n' +
+                                    'Benvenuto nell\'area di amministrazione. Qui puoi gestire vari aspetti del bot e delle sue funzionalità.\n\n' +
+                                    'Utilizza i pulsanti qui sotto per navigare tra le funzioni di amministrazione.',
+                                parse_mode: 'HTML',
+                                photo: "https://www.gstatic.com/webp/gallery/2.jpg",
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "Gestione Utenti", callback_data: "adminUserManagement" }],
+                                        [{ text: "Impostazioni Bot", callback_data: "adminBotSettings" }],
+                                        [{ text: "Analitica", callback_data: "adminAnalytics" }],
+                                        [{ text: "Log di Sistema", callback_data: "adminSystemLogs" }],
+                                        [{ text: "Home", callback_data: "/home" }]
+                                    ]
+                                }
+                            }
+                        }]),
+                        // PT
+                        JSON.stringify([{
+                            method: 'sendPhoto',
+                            payload: {
+                                caption: '<b>Área de Administração</b>\n\n' +
+                                    'Bem-vindo à área de administração. Aqui você pode gerenciar vários aspectos do bot e suas funcionalidades.\n\n' +
+                                    'Use os botões abaixo para navegar pelas funções de administração.',
+                                parse_mode: 'HTML',
+                                photo: "https://www.gstatic.com/webp/gallery/2.jpg",
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "Gerenciamento de Usuários", callback_data: "adminUserManagement" }],
+                                        [{ text: "Configurações do Bot", callback_data: "adminBotSettings" }],
+                                        [{ text: "Análise", callback_data: "adminAnalytics" }],
+                                        [{ text: "Logs do Sistema", callback_data: "adminSystemLogs" }],
+                                        [{ text: "Início", callback_data: "/home" }]
+                                    ]
+                                }
+                            }
+                        }]),
+                        // RU
+                        JSON.stringify([{
+                            method: 'sendPhoto',
+                            payload: {
+                                caption: '<b>Административная зона</b>\n\n' +
+                                    'Добро пожаловать в административную зону. Здесь вы можете управлять различными аспектами бота и его функциональностью.\n\n' +
+                                    'Используйте кнопки ниже, чтобы перейти к функциям администрирования.',
+                                parse_mode: 'HTML',
+                                photo: "https://www.gstatic.com/webp/gallery/2.jpg",
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "Управление пользователями", callback_data: "adminUserManagement" }],
+                                        [{ text: "Настройки бота", callback_data: "adminBotSettings" }],
+                                        [{ text: "Аналитика", callback_data: "adminAnalytics" }],
+                                        [{ text: "Журнал системы", callback_data: "adminSystemLogs" }],
+                                        [{ text: "Главная", callback_data: "/home" }]
+                                    ]
+                                }
+                            }
+                        }]),
+                        // ZH
+                        JSON.stringify([{
+                            method: 'sendPhoto',
+                            payload: {
+                                caption: '<b>管理区域</b>\n\n' +
+                                    '欢迎来到管理区域。在这里，您可以管理机器人的各个方面及其功能。\n\n' +
+                                    '请使用下面的按钮浏览管理功能。',
+                                parse_mode: 'HTML',
+                                photo: "https://www.gstatic.com/webp/gallery/2.jpg",
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "用户管理", callback_data: "adminUserManagement" }],
+                                        [{ text: "机器人设置", callback_data: "adminBotSettings" }],
+                                        [{ text: "分析", callback_data: "adminAnalytics" }],
+                                        [{ text: "系统日志", callback_data: "adminSystemLogs" }],
+                                        [{ text: "首页", callback_data: "/home" }]
+                                    ]
+                                }
+                            }
+                        }]),
+                        // JA
+                        JSON.stringify([{
+                            method: 'sendPhoto',
+                            payload: {
+                                caption: '<b>管理エリア</b>\n\n' +
+                                    '管理エリアへようこそ。ここでは、ボットのさまざまな側面と機能を管理できます。\n\n' +
+                                    '管理機能に移動するには、以下のボタンを使用してください。',
+                                parse_mode: 'HTML',
+                                photo: "https://www.gstatic.com/webp/gallery/2.jpg",
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "ユーザー管理", callback_data: "adminUserManagement" }],
+                                        [{ text: "ボット設定", callback_data: "adminBotSettings" }],
+                                        [{ text: "分析", callback_data: "adminAnalytics" }],
+                                        [{ text: "システムログ", callback_data: "adminSystemLogs" }],
+                                        [{ text: "ホーム", callback_data: "/home" }]
+                                    ]
+                                }
+                            }
+                        }]),
+                        // KO
+                        JSON.stringify([{
+                            method: 'sendPhoto',
+                            payload: {
+                                caption: '<b>관리 영역</b>\n\n' +
+                                    '관리 영역에 오신 것을 환영합니다. 여기에서 봇의 다양한 측면과 기능을 관리할 수 있습니다.\n\n' +
+                                    '관리 기능으로 이동하려면 아래 버튼을 사용하세요.',
+                                parse_mode: 'HTML',
+                                photo: "https://www.gstatic.com/webp/gallery/2.jpg",
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "사용자 관리", callback_data: "adminUserManagement" }],
+                                        [{ text: "봇 설정", callback_data: "adminBotSettings" }],
+                                        [{ text: "분석", callback_data: "adminAnalytics" }],
+                                        [{ text: "시스템 로그", callback_data: "adminSystemLogs" }],
+                                        [{ text: "홈", callback_data: "/home" }]
+                                    ]
+                                }
+                            }
+                        }]),
+                        // HE
+                        JSON.stringify([{
+                            method: 'sendPhoto',
+                            payload: {
+                                caption: '<b>אזור ניהול</b>\n\n' +
+                                    'ברוכים הבאים לאזור הניהול. כאן תוכלו לנהל את ההיבטים והפונקציות השונות של הבוט.\n\n' +
+                                    'כדי לעבור לפונקציות הניהול, השתמשו בכפתורים למטה.',
+                                parse_mode: 'HTML',
+                                photo: "https://www.gstatic.com/webp/gallery/2.jpg",
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "ניהול משתמשים", callback_data: "adminUserManagement" }],
+                                        [{ text: "הגדרות בוט", callback_data: "adminBotSettings" }],
+                                        [{ text: "אנליטיקה", callback_data: "adminAnalytics" }],
+                                        [{ text: "יומני מערכת", callback_data: "adminSystemLogs" }],
+                                        [{ text: "בית", callback_data: "/home" }]
                                     ]
                                 }
                             }
                         }])],
+                    ['/about_me',
+                        // default (en)
+                        JSON.stringify([
+                            {
+                                method: 'sendMessage',
+                                payload: {
+                                    text: '✨ About Me ✨\n\n',
+                                    parse_mode: 'HTML'
+                                }
+                            },
+                            {
+                                method: 'editMessageText',
+                                delay_ms: 500,
+                                payload: {
+                                    text: '✨ About Me ✨\n\n <blockquote>This bot is developed to showcase the capabilities of the Telegram Bot API. \n\n'
+                                        + 'It demonstrates how to send messages, photos, media groups, and interactive inline keyboards. \n\n'
+                                        + 'I\'m going to update this message with more details shortly... \n\n</blockquote>',
+                                    parse_mode: 'HTML'
+                                }
+                            },
+                            {
+                                method: 'editMessageMedia',
+                                delay_ms: 2000,
+                                payload: {
+                                    caption: '✨ About Me ✨\n\n <blockquote>This bot is developed to showcase the capabilities of the Telegram Bot API. \n\n'
+                                        + 'It demonstrates how to send messages, photos, media groups, and interactive inline keyboards. \n\n'
+                                        + 'I\'m going to update this message with more details shortly... \n\n</blockquote>'
+                                        + '<b>Here is an image to make it more interesting!</b>',
+                                    media: { type: 'photo', media: 'https://www.gstatic.com/webp/gallery/2.jpg' },
+                                    parse_mode: 'HTML'
+                                }
+                            },
+                            { "next": "#main_menu" }
+                        ])
+                    ],
+                    ['#main_menu',
+                        // default (en)
+                        JSON.stringify([{
+                            method: 'editMessageReplyMarkup',
+                            payload: {
+                                text: 'Main Menu:',
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "🏠 Home", callback_data: "/home" }],
+                                        [{ text: "ℹ️ About", callback_data: "/about" }],
+                                        [{ text: "❓ Help", callback_data: "/help" }]
+                                    ]
+                                }
+                            }
+                        }])
+                    ],
                     ['/help',
                         // default (en)
                         JSON.stringify([{
@@ -2122,7 +2422,7 @@ EMD.Automation = {
                                     inline_keyboard: [
                                         [{ text: "Getting Started", web_app: { url: "https://github.com/ilanlal/basic-telegram-bot-remastered#readme" } }],
                                         [{ text: "Report an Issue", web_app: { url: "https://github.com/ilanlal/basic-telegram-bot-remastered/issues" } }],
-                                        [{ text: "Home", callback_data: "action=home" }]
+                                        [{ text: "Home", callback_data: "/home" }]
                                     ]
                                 }
                             }
@@ -2146,7 +2446,7 @@ EMD.Automation = {
                                 reply_markup: {
                                     inline_keyboard: [
                                         [{ text: "GitHub", web_app: { url: "https://github.com/ilanlal/basic-telegram-bot-remastered#readme" } }],
-                                        [{ text: "Home", callback_data: "action=start" }]
+                                        [{ text: "Home", callback_data: "start" }]
                                     ]
                                 }
                             }
@@ -2179,210 +2479,7 @@ EMD.Automation = {
                                 }
                             }
                         }])],
-                    ['hrSolutions',
-                        // default (en)
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: 'H.R Solutions:',
-                                parse_mode: 'HTML',
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [{ text: "👥 Employee Onboarding", callback_data: "employeeOnboarding" }],
-                                        [{ text: "📄 Document Management", callback_data: "documentManagement" }],
-                                        [{ text: "📊 Performance Reviews", callback_data: "performanceReviews" }]
-                                    ]
-                                }
-                            }
-                        }])],
-                    ['agencySolutions',
-                        // default (en)
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: 'Agency Solutions:',
-                                parse_mode: 'HTML',
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [{ text: "🏢 Agency Overview", callback_data: "agencyOverview" }],
-                                        [{ text: "📋 Client Management", callback_data: "clientManagement" }],
-                                        [{ text: "📈 Performance Metrics", callback_data: "performanceMetrics" }],
-                                        [
-                                            { text: "📊 Surveys", callback_data: "action=surveys" },
-                                            { text: "📰 News", callback_data: "action=news" }], [
-                                        ],
-                                        [
-                                            { text: "🤖 Developer", callback_data: "action=apiFeatures" }
-                                        ]
-                                    ]
-                                }
-                            }
-                        }])],
-                    ['surveys',
-                        // default (en)
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: 'Survey Services:',
-                                parse_mode: 'HTML',
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [{ text: "📊 Create Survey", callback_data: "createSurvey" }],
-                                        [{ text: "📋 View Surveys", callback_data: "viewSurveys" }],
-                                        [{ text: "📈 Survey Analytics", callback_data: "surveyAnalytics" }]
-                                    ]
-                                }
-                            }
-                        }])],
-                    ['news',
-                        // default (en)
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: 'News Services:',
-                                parse_mode: 'HTML',
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [{ text: "📰 Latest News", callback_data: "latestNews" }],
-                                        [{ text: "🗞️ Trending Topics", callback_data: "trendingTopics" }],
-                                        [{ text: "📅 News Archive", callback_data: "newsArchive" }]
-                                    ]
-                                }
-                            }
-                        }])],
-                    ['quickActions',
-                        // default (en)
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: 'Quick Actions:',
-                                parse_mode: 'HTML',
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [{ text: "🚖 Call a Taxi", callback_data: "action=callTaxi" }],
-                                        [{ text: "🔍 VPN Search", callback_data: "action=search" }],
-                                        [{ text: "📦 Track Order", callback_data: "action=trackOrder" }]
-                                    ]
-                                }
-                            }
-                        }])],
-                    ['privateSecure',
-                        // default (en)
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: 'Privacy and Security Services:',
-                                parse_mode: 'HTML',
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [
-                                            { text: "🔒 Virtual Private Network (VPN)", callback_data: "action=safetyChecklist" },
-                                            { text: "🛡️ Threat Assessment", callback_data: "action=threatAssessment" },
-                                            { text: "🛠️ Maintenance Request", callback_data: "action=maintenanceRequest" }
-                                        ],
-                                        // Two buttons in one row
-                                        [
-                                            { text: "📱 Phone Number Authentication", callback_data: "action=phoneAuth" },
-                                            { text: "🦶 Fingerprint Authentication", callback_data: "action=fingerprintAuth" }
-                                        ],
-                                        [
-                                            { text: "📍 Share Location", callback_data: "photoSamples" },
-                                            { text: "🆔 [CHAT_ID] User Identity", callback_data: "photoSamples" }
-                                        ],
-                                        [{ text: "🔒 Access Control", callback_data: "accessControl" }],
-                                        [{ text: "🛡️ Threat Assessment", callback_data: "threatAssessment" }],
-                                        [{ text: "📊 Security Analytics", callback_data: "securityAnalytics" }]
-                                    ]
-                                }
-                            }
-                        }])],
-                    ['safetyChecklist',
-                        // default (en)
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: 'Safety Checklist Services:',
-                                parse_mode: 'HTML',
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [{ text: "✅ Daily Safety Check", callback_data: "dailySafetyCheck" }],
-                                        [{ text: "📝 Incident Reporting", callback_data: "incidentReporting" }],
-                                        [{ text: "📊 Safety Analytics", callback_data: "safetyAnalytics" }]
-                                    ]
-                                }
-                            }
-                        }])],
-                    ['emergencyServices',
-                        // default (en)
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: 'Emergency Services:',
-                                parse_mode: 'HTML',
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [{ text: "🚑 Ambulance", callback_data: "emergencyAmbulance" }],
-                                        [{ text: "🚓 Police", callback_data: "emergencyPolice" }],
-                                        [{ text: "🚒 Fire Department", callback_data: "emergencyFire" }]
-                                    ]
-                                }
-                            }
-                        }])
-                    ],
-                    ['privateInvestigatorServices',
-                        // default (en)
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: 'Private Investigator Services:',
-                                parse_mode: 'HTML',
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [{ text: "🕵️‍♂️ Hire a PI", callback_data: "hirePrivateInvestigator" }],
-                                        [{ text: "📋 View Cases", callback_data: "viewPrivateInvestigatorCases" }],
-                                        [{ text: "📞 Contact PI", callback_data: "contactPrivateInvestigator" }]
-                                    ]
-                                }
-                            }
-                        }])
-                    ],
-                    ['customerSupportServices',
-                        // default (en)
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: 'Customer Support Services:',
-                                parse_mode: 'HTML',
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [{ text: "📞 Contact Support", callback_data: "contactSupport" }],
-                                        [{ text: "💬 Live Chat", callback_data: "liveChatSupport" }],
-                                        [{ text: "📚 FAQ", callback_data: "faqSupport" }]
-                                    ]
-                                }
-                            }
-                        }])
-                    ],
-                    ['callTaxi',
-                        // default (en)
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: 'Calling a taxi...',
-                                parse_mode: 'HTML'
-                            }
-                        }])
-                    ],
-                    ['trackOrder',
-                        // default (en)
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: 'Tracking your order...',
-                                parse_mode: 'HTML'
-                            }
-                        }])],
-                    ['store',
+                    ['/store',
                         // default (en)
                         JSON.stringify([{
                             method: 'sendPhoto',
@@ -2392,74 +2489,293 @@ EMD.Automation = {
                                 parse_mode: 'HTML',
                                 reply_markup: {
                                     inline_keyboard: [
-                                        [{ text: "Browse Products", callback_data: "browseProducts" }],
-                                        [{ text: "View Cart", callback_data: "viewCart" }],
-                                        [{ text: "Checkout", callback_data: "checkout" }],
-                                        [{ text: "BACK", callback_data: "action=start" }]
+                                        [{ text: "Category A", callback_data: "#categoryA" }],
+                                        [{ text: "Category B", callback_data: "#categoryB" }],
+                                        [{ text: "Category C", callback_data: "#categoryC" }],
+                                        [{ text: "Category D", callback_data: "#categoryD" }],
+                                        [{ text: "Category E", callback_data: "#categoryE" }],
+                                        [{ text: "Home", callback_data: "/home" }]
                                     ]
                                 }
                             }
                         }])],
-                    ['browseProducts',
+                    ['#categoryA',
+                        // default (en)
+                        JSON.stringify([
+                            {
+                                method: 'sendMessage',
+                                payload: {
+                                    text: 'Welcome to Category A! Here you can find a variety of products and services tailored to your needs.',
+                                    parse_mode: 'HTML'
+                                }
+                            },
+                            {
+                                method: 'sendInvoice',
+                                payload: {
+                                    title: 'Product #1',
+                                    description: 'An amazing product that you will love! \n\n'
+                                        + 'This product is made from high-quality materials and offers great value for money.\n\n',
+                                    photo_url: "https://www.gstatic.com/webp/gallery/1.jpg",
+                                    photo_width: 240,
+                                    currency: 'XTR',
+                                    payload: 'custom_payload_123', // Custom payload for your reference
+                                    prices: JSON.stringify([
+                                        { label: 'Total', amount: 550 } // Amount in smallest units (e.g., cents)
+                                    ]),
+                                }
+                            }, {
+                                method: 'sendInvoice',
+                                payload: {
+                                    title: 'Product #2',
+                                    description: 'An amazing product that you will love! \n\n'
+                                        + 'This product is made from high-quality materials and offers great value for money.\n\n'
+                                        + 'Available in multiple colors and sizes.',
+                                    photo_url: "https://www.gstatic.com/webp/gallery/2.jpg",
+                                    photo_width: 240,
+                                    currency: 'XTR',
+                                    payload: 'custom_payload_124', // Custom payload for your reference
+                                    prices: JSON.stringify([
+                                        { label: 'Total', amount: 980 } // Amount in smallest units (e.g., cents)
+
+                                    ]),
+                                }
+                            },
+                            {
+                                method: 'sendInvoice',
+                                payload: {
+                                    title: 'Product #3',
+                                    description: 'An amazing product that you will love! \n\n'
+                                        + 'This product is made from high-quality materials and offers great value for money.\n\n'
+                                        + 'Shipping included.',
+                                    photo_url: "https://www.gstatic.com/webp/gallery/3.jpg",
+                                    photo_width: 240,
+                                    currency: 'XTR',
+                                    payload: 'custom_payload_125', // Custom payload for your reference
+                                    prices: JSON.stringify([
+                                        { label: 'Total', amount: 1200 } // Amount in smallest units (e.g., cents)
+                                    ]),
+                                }
+                            }, { "next": "/store" }
+                        ])],
+                    ['#categoryB',
+                        // default (en)
+                        JSON.stringify([
+                            {
+                                method: 'sendMessage',
+                                payload: {
+                                    text: 'Welcome to Category B! Here you can find a variety of products and services tailored to your needs.',
+                                    parse_mode: 'HTML'
+                                }
+                            },
+                            {
+                                method: 'sendInvoice',
+                                payload: {
+                                    title: 'Product #10',
+                                    description: 'An amazing product that you will love! \n\n'
+                                        + 'This product is made from high-quality materials and offers great value for money.\n\n',
+                                    photo_url: "https://www.gstatic.com/webp/gallery/1.jpg",
+                                    photo_width: 240,
+                                    currency: 'XTR',
+                                    payload: 'custom_payload_130', // Custom payload for your reference
+                                    prices: JSON.stringify([
+                                        { label: 'Total', amount: 450 } // Amount in smallest units (e.g., cents)
+                                    ]),
+                                }
+                            }, {
+                                method: 'sendInvoice',
+                                payload: {
+                                    title: 'Product #20',
+                                    description: 'An amazing product that you will love! \n\n'
+                                        + 'This product is made from high-quality materials and offers great value for money.\n\n',
+                                    photo_url: "https://www.gstatic.com/webp/gallery/2.jpg",
+                                    photo_width: 240,
+                                    currency: 'XTR',
+                                    payload: 'custom_payload_124', // Custom payload for your reference
+                                    prices: JSON.stringify([
+                                        { label: 'Total', amount: 45 } // Amount in smallest units (e.g., cents)
+                                    ]),
+                                }
+                            },
+                            {
+                                method: 'sendInvoice',
+                                payload: {
+                                    title: 'Product #30',
+                                    description: 'An amazing product that you will love! \n\n'
+                                        + 'This product is made from high-quality materials and offers great value for money.\n\n',
+                                    photo_url: "https://www.gstatic.com/webp/gallery/3.jpg",
+                                    photo_width: 240,
+                                    currency: 'XTR',
+                                    payload: 'custom_payload_125', // Custom payload for your reference
+                                    prices: JSON.stringify([
+                                        { label: 'Total', amount: 300 } // Amount in smallest units (e.g., cents)
+                                    ]),
+                                }
+                            }, { "next": "/store" }
+                        ])],
+                    ['#categoryC',
+                        // default (en)
+                        JSON.stringify([
+                            {
+                                method: 'sendMessage',
+                                payload: {
+                                    text: 'Welcome to Category C! Here you can find a variety of products and services tailored to your needs.',
+                                    parse_mode: 'HTML'
+                                }
+                            },
+                            {
+                                method: 'sendInvoice',
+                                payload: {
+                                    title: 'Product # 100',
+                                    description: 'An amazing product that you will love! \n\n'
+                                        + 'This product is made from high-quality materials and offers great value for money.\n\n',
+                                    photo_url: "https://www.gstatic.com/webp/gallery/1.jpg",
+                                    photo_width: 240,
+                                    currency: 'XTR',
+                                    payload: 'custom_payload_130', // Custom payload for your reference
+                                    prices: JSON.stringify([
+                                        { label: 'Total', amount: 1250 } // Amount in smallest units (e.g., cents)
+                                    ]),
+                                }
+                            }, {
+                                method: 'sendInvoice',
+                                payload: {
+                                    title: 'Product # 122',
+                                    description: 'An amazing product that you will love! \n\n'
+                                        + 'This product is made from high-quality materials and offers great value for money.\n\n',
+                                    photo_url: "https://www.gstatic.com/webp/gallery/2.jpg",
+                                    photo_width: 240,
+                                    currency: 'XTR',
+                                    payload: 'custom_payload_124', // Custom payload for your reference
+                                    prices: JSON.stringify([
+                                        { label: 'Total', amount: 5580 } // Amount in smallest units (e.g., cents)
+                                    ]),
+                                }
+                            },
+                            {
+                                method: 'sendInvoice',
+                                payload: {
+                                    title: 'Product # 33',
+                                    description: 'An amazing product that you will love! \n\n'
+                                        + 'This product is made from high-quality materials and offers great value for money.\n\n',
+                                    photo_url: "https://www.gstatic.com/webp/gallery/3.jpg",
+                                    photo_width: 240,
+                                    currency: 'XTR',
+                                    payload: 'custom_payload_125', // Custom payload for your reference
+                                    prices: JSON.stringify([
+                                        { label: 'Total', amount: 1200 } // Amount in smallest units (e.g., cents)
+                                    ]),
+                                }
+                            }, { "next": "/store" }
+                        ])],
+                    ['#categoryD',
+                        // default (en)
+                        JSON.stringify([
+                            {
+                                method: 'sendMessage',
+                                payload: {
+                                    text: 'Welcome to Category D! Here you can find a variety of products and services tailored to your needs.',
+                                    parse_mode: 'HTML'
+                                }
+                            },
+                            {
+                                method: 'sendInvoice',
+                                payload: {
+                                    title: 'Product #11',
+                                    description: 'An amazing product that you will love! \n\n'
+                                        + 'This product is made from high-quality materials and offers great value for money.\n\n',
+                                    photo_url: "https://www.gstatic.com/webp/gallery/1.jpg",
+                                    photo_width: 240,
+                                    currency: 'XTR',
+                                    payload: 'custom_payload_130', // Custom payload for your reference
+                                    prices: JSON.stringify([
+                                        { label: 'Total', amount: 123 } // Amount in smallest units (e.g., cents)
+                                    ]),
+                                }
+                            }, {
+                                method: 'sendInvoice',
+                                payload: {
+                                    title: 'Product #12',
+                                    description: 'An amazing product that you will love! \n\n'
+                                        + 'This product is made from high-quality materials and offers great value for money.\n\n',
+                                    photo_url: "https://www.gstatic.com/webp/gallery/2.jpg",
+                                    photo_width: 240,
+                                    currency: 'XTR',
+                                    payload: 'custom_payload_124', // Custom payload for your reference
+                                    prices: JSON.stringify([
+                                        { label: 'Total', amount: 550 } // Amount in smallest units (e.g., cents)
+                                    ]),
+                                }
+                            },
+                            {
+                                method: 'sendInvoice',
+                                payload: {
+                                    title: 'Product #13',
+                                    description: 'An amazing product that you will love! \n\n'
+                                        + 'This product is made from high-quality materials and offers great value for money.\n\n',
+                                    photo_url: "https://www.gstatic.com/webp/gallery/3.jpg",
+                                    photo_width: 240,
+                                    currency: 'XTR',
+                                    payload: 'custom_payload_125', // Custom payload for your reference
+                                    prices: JSON.stringify([
+                                        { label: 'Total', amount: 1200 } // Amount in smallest units (e.g., cents)
+                                    ]),
+                                }
+                            }, { "next": "/store" }
+                        ])],
+                    ['#categoryE',
                         // default (en)
                         JSON.stringify([{
-                            method: 'sendPhoto',
+                            method: 'sendMessage',
                             payload: {
-                                caption: 'Product A: An amazing product that you will love! \n\n'
-                                    + '<b>Price:</b> $19.99\n'
-                                    + '<i>Description:</i> This product is made from high-quality materials and offers great value for money.\n\n'
-                                    + 'Click "Add to Cart" to purchase this product.',
-                                photo: "https://www.gstatic.com/webp/gallery/1.jpg",
-                                parse_mode: 'HTML',
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [{ text: "➕ Add to Cart", callback_data: "addToCart_productA" }],
-                                        [{ text: "👀 Watch price", callback_data: "watchPrice_productA" }]
-                                    ]
-                                }
+                                text: 'Welcome to Category E! Here you can find a variety of products and services tailored to your needs.',
+                                parse_mode: 'HTML'
                             }
                         }, {
-                            method: 'sendPhoto',
+                            // send paid media as sample after invoice
+                            method: 'sendPaidMedia',
                             payload: {
-                                caption: 'Product B: Another fantastic product that meets your needs! \n\n',
-                                photo: "https://www.gstatic.com/webp/gallery/2.jpg",
-                                parse_mode: 'HTML',
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [{ text: "➕ Add to Cart", callback_data: "addToCart_productB" }],
-                                        [{ text: "👀 Watch price", callback_data: "watchPrice_productB" }]
-                                    ]
-                                }
+                                protect_content: true,
+                                star_count: 1000,
+                                media: [
+                                    {
+                                        type: 'photo',
+                                        media: 'https://www.gstatic.com/webp/gallery/1.jpg',
+                                        caption: 'Thank you for your purchase! Here is your paid media content.'
+                                    }
+                                ]
                             }
-                        }, {
-                            method: 'sendPhoto',
+                        },
+                        {
+                            // send paid media as sample after invoice
+                            method: 'sendPaidMedia',
                             payload: {
-                                caption: 'Product C: A must-have item for everyone! \n\n',
-                                photo: "https://www.gstatic.com/webp/gallery/3.jpg",
-                                parse_mode: 'HTML',
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [{ text: "➕ Add to Cart", callback_data: "addToCart_productC" }],
-                                        [{ text: "👀 Watch price", callback_data: "watchPrice_productC" }]
-                                    ]
-                                }
+                                protect_content: true,
+                                star_count: 2400,
+                                media: [
+                                    {
+                                        type: 'photo',
+                                        media: 'https://www.gstatic.com/webp/gallery/3.jpg',
+                                        caption: 'Thank you for your purchase! Here is your paid media content.'
+                                    }
+                                ]
                             }
-                        }, {
-                            method: 'sendPhoto',
+                        },
+                        {
+                            // send paid media as sample after invoice
+                            method: 'sendPaidMedia',
                             payload: {
-                                caption: 'Product C: A must-have item for everyone! \n\n',
-                                photo: "https://www.gstatic.com/webp/gallery/3.jpg",
-                                parse_mode: 'HTML',
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [{ text: "➕ Add to Cart", callback_data: "addToCart_productC" }],
-                                        [{ text: "👀 Watch price", callback_data: "watchPrice_productC" }]
-                                    ]
-                                }
+                                protect_content: true,
+                                star_count: 1400,
+                                media: [
+                                    {
+                                        type: 'photo',
+                                        media: 'https://www.gstatic.com/webp/gallery/2.jpg',
+                                        caption: 'Thank you for your purchase! Here is your paid media content.'
+                                    }
+                                ]
                             }
-                        }
-                        ])],
-                    ['apiFeatures',
+                        }, { "next": "/store" }])],
+                    ['/apis',
                         // default (en)
                         JSON.stringify([{
                             method: 'sendMessage',
@@ -2473,16 +2789,18 @@ EMD.Automation = {
                                 parse_mode: 'HTML',
                                 reply_markup: {
                                     inline_keyboard: [
-                                        [{ text: "Message", callback_data: "sendMessage" }],
-                                        [{ text: "Photo", callback_data: "sendPhoto" }],
-                                        [{ text: "Media Group", callback_data: "sendMediaGroup" }],
-                                        [{ text: "Inline Keyboard", callback_data: "inlineKeyboard" }],
-                                        [{ text: "BACK", callback_data: "action=start" }]
+                                        [{ text: "Message", callback_data: "#sendMessage" }],
+                                        [{ text: "Photo", callback_data: "#sendPhoto" }],
+                                        [{ text: "Media Group", callback_data: "#sendMediaGroup" }],
+                                        [{ text: "Inline Keyboard", callback_data: "#inlineKeyboard" }],
+                                        [{ text: "Send Poll", callback_data: "#sendPoll" }],
+                                        [{ text: "Send Quiz", callback_data: "#sendQuiz" }],
+                                        [{ text: "Home", callback_data: "/home" }]
                                     ]
                                 }
                             }
                         }])],
-                    ['sendMessage',
+                    ['#sendMessage',
                         // default (en)
                         JSON.stringify([{
                             method: 'sendMessage',
@@ -2504,38 +2822,20 @@ EMD.Automation = {
                                     + 'This is a simple bot that demonstrates the basic functionality of a Telegram bot.'
                                     + 'It provides the following commands:\n\n'
                                     + '</blockquote>',
-                                parse_mode: 'HTML',
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [{ text: "Home", callback_data: "/home" }]
-                                    ]
-                                }
+                                parse_mode: 'HTML'
                             }
                         }])],
-                    ['sendPhoto',
+                    ['#sendPhoto',
                         // default (en)
                         JSON.stringify([{
                             method: 'sendPhoto',
                             payload: {
-                                caption: 'This is a sample photo. You can customize this caption as needed. \n\n'
-                                    + 'Feel free to explore and interact with the bot!'
-                                    + '\n\n'
-                                    + 'When "parse_mode" is set to HTML or Markdown, you can use the following formatting options:\n\n'
-                                    + '<b>Bold</b>, <strong>Bold</strong>\n'
-                                    + '<i>Italic</i>, <em>Italic</em>\n'
-                                    + '<u>Underline</u>\n'
-                                    + '<s>Strikethrough</s>\n'
-                                    + '<code>Code</code>\n',
+                                caption: 'Welcome! This is a sample photo with a caption. You can customize the caption as needed. \n\n',
                                 photo: "https://www.gstatic.com/webp/gallery/1.jpg",
-                                parse_mode: 'HTML',
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [{ text: "Home", callback_data: "/home" }]
-                                    ]
-                                }
+                                parse_mode: 'HTML'
                             }
                         }])],
-                    ['sendMediaGroup',
+                    ['#sendMediaGroup',
                         // default (en)
                         JSON.stringify([{
                             method: 'sendMediaGroup',
@@ -2557,15 +2857,10 @@ EMD.Automation = {
                                         caption: 'Photo 3 <b>Bold</b>, <strong>Bold</strong>\n<i>Italic</i>, <em>Italic</em>\n<u>Underline</u>\n<s>Strikethrough</s>\n<code>Code</code>'
                                     }
                                 ],
-                                parse_mode: 'HTML',
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [{ text: "Home", callback_data: "/home" }]
-                                    ]
-                                }
+                                parse_mode: 'HTML'
                             }
                         }])],
-                    ['inlineKeyboard',
+                    ['#inlineKeyboard',
                         // default (en)
                         JSON.stringify([{
                             method: 'sendMessage',
@@ -2597,7 +2892,89 @@ EMD.Automation = {
                                     one_time_keyboard: true
                                 }
                             }
-                        }])]
+                        }])],
+                    ['#sendPoll',
+                        // default (en)
+                        JSON.stringify([{
+                            method: 'sendPoll',
+                            payload: {
+                                question: 'Which feature do you like the most in this bot?',
+                                question_parse_mode: 'HTML',
+                                options: JSON.stringify([
+                                    'Text Messages with HTML formatting',
+                                    'Photos with captions and inline keyboards',
+                                    'Media Groups (albums) with multiple photos',
+                                    'Interactive Inline Keyboards'
+                                ]),
+                                protect_content: true,
+                                open_period: 7,
+                                is_anonymous: false,
+                                explanation: 'Your feedback helps us improve the bot and add more exciting features!',
+                                explanation_parse_mode: 'HTML',
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "🏠 Start", callback_data: "/home" }]
+                                    ]
+                                }
+                            }
+                        }])],
+                    ['#sendQuiz',
+                        // default (en)
+                        JSON.stringify([{
+                            method: 'sendPoll',
+                            payload: {
+                                question: 'What is the <b>main</b> advantage of using Interactive Inline Keyboards in Telegram bots? ✨',
+                                question_parse_mode: 'HTML',
+                                options: JSON.stringify([
+                                    'They allow sending larger files',
+                                    'They enable real-time user interaction',
+                                    'They improve message delivery speed',
+                                    'They support multimedia content'
+                                ]),
+                                protect_content: true,
+                                open_period: 7,
+                                is_anonymous: false,
+                                type: 'quiz',
+                                correct_option_id: 3,
+                                explanation: 'Interactive Inline Keyboards allow users to engage directly with the bot, making the experience more dynamic and user-friendly!',
+                                explanation_parse_mode: 'HTML',
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "🏠 Start", callback_data: "/home" }]
+                                    ]
+                                }
+                            }
+                        }])],
+                    ['/payments',
+                        // default (en)
+                        JSON.stringify([
+                            {
+                                method: 'sendInvoice',
+                                payload: {
+                                    title: 'Sample Product',
+                                    description: 'This is a sample product for demonstration purposes.',
+                                    payload: 'sample_product_payload',
+                                    currency: 'XTR',
+                                    prices: JSON.stringify([
+                                        { label: 'Total', amount: 100 } // amount in the smallest units of the currency (e.g., cents)
+                                    ])
+                                }
+                            }, {
+                                // send paid media as sample after invoice
+                                method: 'sendPaidMedia',
+                                payload: {
+                                    protect_content: true,
+                                    star_count: 100,
+                                    media: [
+                                        {
+                                            type: 'photo',
+                                            media: 'https://www.gstatic.com/webp/gallery/1.jpg',
+                                            caption: 'Thank you for your purchase! Here is your paid media content.'
+                                        }
+                                    ]
+                                }
+                            }])
+                    ]
                 ]
         }
     }

@@ -12,7 +12,7 @@ describe('AutomationHandler', () => {
     beforeEach(() => {
         SpreadsheetStubConfiguration.reset();
         // Set dummy bot token in user properties
-        PropertiesService.getUserProperties().setProperty(EnvironmentModel.InputMeta.BOT_API_TOKEN, dummyToken);
+        PropertiesService.getDocumentProperties().setProperty(EnvironmentModel.InputMeta.BOT_API_TOKEN, dummyToken);
         handler = AutomationHandler.create();
         SheetModel.create(SpreadsheetApp.getActiveSpreadsheet())
             .bindSheetSampleData(EMD.Automation.sheet({}));
@@ -24,6 +24,17 @@ describe('AutomationHandler', () => {
             chat_id: 12345,
             language_code: 'en'
         };
+
+        const sendMessgeUrl = `https://api.telegram.org/bot${dummyToken}/sendMessage`;
+
+        UrlFetchAppStubConfiguration.when(sendMessgeUrl)
+            .return(new HttpResponse()
+                .setContentText(JSON.stringify({
+                    result: {
+                        message_id: 1,
+                    }
+                })));
+
         let response = handler.handleAutomationRequest(content);
         const responseObj = JSON.parse(response);
         expect(responseObj.actions_executed).toBeGreaterThan(0);

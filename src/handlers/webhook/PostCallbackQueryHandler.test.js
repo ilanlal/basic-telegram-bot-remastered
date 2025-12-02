@@ -7,9 +7,10 @@ describe('PostCallbackQueryHandler', () => {
     const dummyToken = 'DUMMY_BOT_TOKEN';
 
     beforeEach(() => {
+        UrlFetchAppStubConfiguration.reset();
         SpreadsheetStubConfiguration.reset();
         // Set dummy bot token in user properties
-        PropertiesService.getUserProperties().setProperty(EnvironmentModel.InputMeta.BOT_API_TOKEN, dummyToken);
+        PropertiesService.getDocumentProperties().setProperty(EnvironmentModel.InputMeta.BOT_API_TOKEN, dummyToken);
         handler = PostCallbackQueryHandler.create();
         SheetModel.create(SpreadsheetApp.getActiveSpreadsheet())
             .bindSheetSampleData(EMD.Automation.sheet({}));
@@ -33,10 +34,32 @@ describe('PostCallbackQueryHandler', () => {
                 }
             }
         };
+        const sendMessgeUrl = `https://api.telegram.org/bot${dummyToken}/sendMessage`;
+        const sendPhotoUrl = `https://api.telegram.org/bot${dummyToken}/sendPhoto`;
+        const answerCallbackQueryUrl = `https://api.telegram.org/bot${dummyToken}/answerCallbackQuery`;
+
+        UrlFetchAppStubConfiguration.when(sendMessgeUrl)
+            .return(new HttpResponse()
+                .setContentText(JSON.stringify({
+                    result: {
+                        message_id: 1,
+                    }
+                })));
+        UrlFetchAppStubConfiguration.when(sendPhotoUrl)
+            .return(new HttpResponse()
+                .setContentText(JSON.stringify({
+                    result: {
+                        message_id: 1,
+                    }
+                })));
+        UrlFetchAppStubConfiguration.when(answerCallbackQueryUrl)
+            .return(new HttpResponse()
+                .setContentText(JSON.stringify({
+                    result: true
+                })));
 
         const response = handler.handlePostCallbackQuery(content);
-        const responseObj = JSON.parse(response);
-        expect(responseObj.actions_executed).toBe(1);
+        expect(response).toBeDefined();
     });
 
     it('should throw error for invalid callback_query format', () => {

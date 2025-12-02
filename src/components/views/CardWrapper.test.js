@@ -11,7 +11,7 @@ describe('Model.CardWrapper', () => {
         const viewModel = EntityViewModel.create({
             cardService: CardService,
             activeSpreadsheet: SpreadsheetApp.getActiveSpreadsheet(),
-            userProperties: PropertiesService.getUserProperties()
+            userProperties: PropertiesService.getDocumentProperties()
         });
         expect(viewModel.cardWrapper).toBeDefined();
     });
@@ -20,7 +20,7 @@ describe('Model.CardWrapper', () => {
         const viewModel = EntityViewModel.create({
             cardService: CardService,
             activeSpreadsheet: SpreadsheetApp.getActiveSpreadsheet(),
-            userProperties: PropertiesService.getUserProperties()
+            userProperties: PropertiesService.getDocumentProperties()
         });
 
         const wrapper = viewModel.cardWrapper;

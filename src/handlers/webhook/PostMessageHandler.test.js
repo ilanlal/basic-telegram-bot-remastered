@@ -11,11 +11,12 @@ describe('PostMessageHandler', () => {
     const dummyToken = 'DUMMY_BOT_TOKEN';
 
     beforeEach(() => {
+        UrlFetchAppStubConfiguration.reset();
         SpreadsheetStubConfiguration.reset();
         // Set dummy bot token in user properties
-        PropertiesService.getUserProperties().setProperty(EnvironmentModel.InputMeta.BOT_API_TOKEN, dummyToken);
+        PropertiesService.getDocumentProperties().setProperty(EnvironmentModel.InputMeta.BOT_API_TOKEN, dummyToken);
         handler = PostMessageHandler.create(
-            PropertiesService.getUserProperties(),
+            PropertiesService.getDocumentProperties(),
             SpreadsheetApp.getActiveSpreadsheet()
         );
         SheetModel.create(SpreadsheetApp.getActiveSpreadsheet())
@@ -59,6 +60,7 @@ describe('PostMessageHandler', () => {
 
     describe('handleBotCommand', () => {
         const commands = ['/start', '/whoami', '/me', '/whoru', '/whoareyou', '/botinfo', '/help', '/about'];
+
         commands.forEach(cmd => {
             test(`should handle ${cmd} command`, () => {
                 const content = {
@@ -70,13 +72,34 @@ describe('PostMessageHandler', () => {
                         from: { id: 12345, language_code: 'en', username: 'testuser', first_name: 'Test', last_name: 'User' }
                     }
                 };
+                const sendMessgeUrl = `https://api.telegram.org/bot${dummyToken}/sendMessage`;
+                const sendPhotoUrl = `https://api.telegram.org/bot${dummyToken}/sendPhoto`;
+
+                UrlFetchAppStubConfiguration.when(sendMessgeUrl)
+                    .return(new HttpResponse()
+                        .setContentText(JSON.stringify({
+                            result: {
+                                message_id: 1,
+                            }
+                        })));
+                UrlFetchAppStubConfiguration.when(sendPhotoUrl)
+                    .return(new HttpResponse()
+                        .setContentText(JSON.stringify({
+                            result: {
+                                message_id: 1,
+                            }
+                        })));
                 let response = handler.handleBotCommand(content.message.from.id, content.message);
-                expect(response).toBe(true);
+                expect(response).toBeDefined();
+                const responseObject = JSON.parse(response);
+                expect(responseObject.status).toBe('dynamic_reply_handled');
             });
         });
     });
 
     describe('handlePostMessage', () => {
+
+
         const commands = ['/start', '/whoami', '/me', '/whoru', '/whoareyou', '/botinfo', '/help', '/about'];
         commands.forEach(cmd => {
             test(`should handle ${cmd} message`, () => {
@@ -89,9 +112,25 @@ describe('PostMessageHandler', () => {
                         from: { id: 12345, language_code: 'en', username: 'testuser', first_name: 'Test', last_name: 'User' }
                     }
                 };
+                const sendMessgeUrl = `https://api.telegram.org/bot${dummyToken}/sendMessage`;
+                const sendPhotoUrl = `https://api.telegram.org/bot${dummyToken}/sendPhoto`;
+
+                UrlFetchAppStubConfiguration.when(sendMessgeUrl)
+                    .return(new HttpResponse()
+                        .setContentText(JSON.stringify({
+                            result: {
+                                message_id: 1,
+                            }
+                        })));
+                UrlFetchAppStubConfiguration.when(sendPhotoUrl)
+                    .return(new HttpResponse()
+                        .setContentText(JSON.stringify({
+                            result: {
+                                message_id: 1,
+                            }
+                        })));
                 let response = handler.handlePostMessage(content.message);
-                const responseObj = JSON.parse(response);
-                expect(responseObj.actions_executed).toBe(1);
+                expect(response).toBe(true);
             });
         });
     });

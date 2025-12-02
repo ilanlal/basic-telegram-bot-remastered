@@ -3,7 +3,7 @@ const { EntityController } = require('./EntityController');
 const { EMD } = require('../../config/EMD');
 
 describe('Entity Controller', () => {
-    const userProperties = PropertiesService.getUserProperties();
+    const userProperties = PropertiesService.getDocumentProperties();
     test('should create an instance using the static create method', () => {
         const entityController = EntityController.create();
         expect(entityController).toBeInstanceOf(EntityController);

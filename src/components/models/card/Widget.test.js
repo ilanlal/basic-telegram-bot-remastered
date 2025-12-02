@@ -22,7 +22,7 @@ describe('Widget', () => {
         const widgetModel = Widget
             .create(
                 widgetObject,
-                global.PropertiesService.getUserProperties()
+                global.PropertiesService.getDocumentProperties()
             );
         expect(widgetModel.id).toBe(widgetObject.id);
         expect(widgetModel.value).toBe(storedValue);
@@ -40,7 +40,7 @@ describe('Widget', () => {
             value: 'Should not be overridden'
         };
 
-        const widgetModel = Widget.create(widgetObject, global.PropertiesService.getUserProperties());
+        const widgetModel = Widget.create(widgetObject, global.PropertiesService.getDocumentProperties());
         expect(widgetModel.id).toBe(widgetObject.id);
         expect(widgetModel.value).toBe('Should not be overridden');
         expect(widgetModel.tabIndex).toBe(1);

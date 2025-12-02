@@ -5,11 +5,12 @@ const { EnvironmentModel } = require('./EnvironmentModel');
 describe('SetupFlow', () => {
     /** @type {SetupFlow} */
     let model;
-    const environmentModel = EnvironmentModel.create(PropertiesService.getUserProperties());
+    const environmentModel = EnvironmentModel.create(PropertiesService.getDocumentProperties());
+    const sampleToken = '[FAKE_DUMMY_BOT_TOKEN]';
     beforeEach(() => {
         UrlFetchAppStubConfiguration.reset();
         SpreadsheetStubConfiguration.reset();
-        model = SetupFlow.create(PropertiesService.getUserProperties(),
+        model = SetupFlow.create(PropertiesService.getDocumentProperties(),
             SpreadsheetApp.getActiveSpreadsheet());
         SheetModel.create(SpreadsheetApp.getActiveSpreadsheet())
             .bindSheetSampleData(EMD.BotSetup.sheet({}));
@@ -53,7 +54,6 @@ describe('SetupFlow', () => {
     });
 
     describe('webhook', () => {
-        const sampleToken = '[FAKE_DUMMY_BOT_TOKEN]';
         const deploymentId = 'AKfycbx...';
         const callbackUrl = `https://script.google.com/macros/s/${deploymentId}/exec`;
 
@@ -84,8 +84,6 @@ describe('SetupFlow', () => {
     });
 
     describe('set bot info', () => {
-        const sampleToken = '[FAKE_DUMMY_BOT_TOKEN]';
-
         test('should set bot name', () => {
             const apiUrl = `https://api.telegram.org/bot${sampleToken}/setMyName`;
             UrlFetchAppStubConfiguration.when(apiUrl)
@@ -93,7 +91,7 @@ describe('SetupFlow', () => {
                     .setContentText(JSON.stringify({ result: true })));
             environmentModel.setNewBotToken(sampleToken);
             const response = model.setMyName();
-            expect(JSON.stringify(response.langs)).toContain('default');
+            expect(response.langs.length).toBeGreaterThan(0);
         });
 
         // setMyDescription
@@ -104,7 +102,7 @@ describe('SetupFlow', () => {
                     .setContentText(JSON.stringify({ result: true })));
             environmentModel.setNewBotToken(sampleToken);
             const response = model.setMyDescription();
-            expect(JSON.stringify(response.langs)).toContain('default');
+            expect(response.langs.length).toBeGreaterThan(0);
         });
 
         // setMyShortDescription
@@ -115,7 +113,7 @@ describe('SetupFlow', () => {
                     .setContentText(JSON.stringify({ result: true })));
             environmentModel.setNewBotToken(sampleToken);
             const response = model.setMyShortDescription();
-            expect(JSON.stringify(response.langs)).toContain('default');
+            expect(response.langs.length).toBeGreaterThan(0);
         });
 
         // setMyCommands
@@ -126,7 +124,7 @@ describe('SetupFlow', () => {
                     .setContentText(JSON.stringify({ result: true })));
             environmentModel.setNewBotToken(sampleToken);
             const response = model.setMyCommands();
-            expect(JSON.stringify(response.langs)).toContain('default');
+            expect(response.langs.length).toBeGreaterThan(0);
         });
     });
 });

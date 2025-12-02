@@ -1,7 +1,7 @@
 class BotHandler {
     get userProperties() {
         if (!this._userProperties) {
-            this._userProperties = PropertiesService.getUserProperties();
+            this._userProperties = PropertiesService.getDocumentProperties();
         }
         return this._userProperties;
     }
@@ -101,7 +101,7 @@ BotHandler.AddonWrapper = class {
     handleWebhookToggleClick(e) {
         try {
             const action = e.parameters?.action || null;
-            const environment = e.parameters?.environment || 'test';
+            
             if (!action) {
                 throw new Error("'action' parameter is required for webhook management.");
             }
@@ -110,7 +110,7 @@ BotHandler.AddonWrapper = class {
                 .create(this._userProperties, this._activeSpreadsheet);
 
             if (action === 'setWebhook') {
-                controller.setWebhook(environment);
+                controller.setWebhook();
             } else if (action === 'deleteWebhook') {
                 controller.deleteWebhook();
             }
@@ -131,7 +131,7 @@ BotHandler.AddonWrapper = class {
             const response = controller.setMyName();
 
             return this.handleOperationSuccess("👍 Bot name set successfully."
-                + ` total: ${Object.keys(response.langs).length} languages.`)
+                + ` total: ${response.langs.length} languages.`)
                 .build();
         } catch (error) {
             return this.handleError(error)

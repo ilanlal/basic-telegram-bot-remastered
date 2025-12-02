@@ -3,7 +3,7 @@ class CustomerModel {
         return EMD.Customer.sheet({}).name;
     }
 
-    static create(userProperties = PropertiesService.getUserProperties(), activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet()) {
+    static create(userProperties = PropertiesService.getDocumentProperties(), activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet()) {
         return new CustomerModel(userProperties, activeSpreadsheet);
     }
 

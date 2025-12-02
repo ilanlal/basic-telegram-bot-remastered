@@ -1,7 +1,7 @@
 class EnvironmentHandler {
     get userProperties() {
         if (!this._userProperties) {
-            this._userProperties = PropertiesService.getUserProperties();
+            this._userProperties = PropertiesService.getDocumentProperties();
         }
         return this._userProperties;
     }

@@ -59,7 +59,7 @@ class BotModel {
 
         if (langColIndex === -1) {
             // throw new Error(`Language code "${language_code}" not found in Replies sheet.`);
-            langColIndex = 1; // Default to second column if language not found
+            langColIndex = 2; // Default to second column if language not found
         }
         for (let row = 1; row < values.length; row++) { // Skip header row
             if (values[row][0] === key) {

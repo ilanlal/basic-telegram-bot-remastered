@@ -1,5 +1,5 @@
 require('../tests');
-const { doGet, doPost } = require('./Code');
+const { doGet, doPost, scaffold_documentProperties, scaffold_scriptProperties } = require('./Code');
 
 describe('doGet', () => {
     it('should run doGet message handler', () => {
@@ -10,6 +10,13 @@ describe('doGet', () => {
 });
 
 describe('doPost', () => {
+    const dummyToken = 'DUMMY_BOT_TOKEN';
+
+    beforeEach(() => {
+        UrlFetchAppStubConfiguration.reset();
+        PropertiesService.getDocumentProperties().setProperty(EnvironmentModel.InputMeta.BOT_API_TOKEN, dummyToken);
+    });
+
     it('should run doPost message handler', () => {
         const event = {
             postData: {
@@ -26,11 +33,32 @@ describe('doPost', () => {
                 })
             }
         };
-        const dummyToken = 'DUMMY_BOT_TOKEN';
+        
+        UrlFetchAppStubConfiguration.when(`https://api.telegram.org/bot${dummyToken}/sendMessage`)
+            .return(new HttpResponse()
+                .setContentText(JSON.stringify({
+                    result: {
+                        message_id: 1,
+                    }
+                })));
 
         // Set dummy bot token in user properties
-        PropertiesService.getUserProperties().setProperty(EnvironmentModel.InputMeta.BOT_API_TOKEN, dummyToken);
+        PropertiesService.getDocumentProperties().setProperty(EnvironmentModel.InputMeta.BOT_API_TOKEN, dummyToken);
         const response = doPost(event);
         expect(response).toBeDefined();
+    });
+});
+
+describe('scaffold functions', () => {
+    it('should scaffold script properties without errors', () => {
+        expect(() => {
+            scaffold_scriptProperties();
+        }).not.toThrow();
+    });
+
+    it('should scaffold document properties without errors', () => {
+        expect(() => {
+            scaffold_documentProperties();
+        }).not.toThrow();
     });
 });

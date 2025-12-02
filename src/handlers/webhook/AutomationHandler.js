@@ -7,16 +7,18 @@ class AutomationHandler {
         }
         this._telegramBotProxy = TelegramBotProxy.create(token);
         this._languageCode = userProperties.getProperty(EnvironmentModel.InputMeta.LANGUAGE_CODE) || 'default';
+        this._userProperties = userProperties;
+        this._activeSpreadsheet = activeSpreadsheet;
     }
 
     static create(
-        userProperties = PropertiesService.getUserProperties(),
+        userProperties = PropertiesService.getDocumentProperties(),
         activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet()
     ) {
         return new AutomationHandler(userProperties, activeSpreadsheet);
     }
 
-    handleAutomationRequest({ language_code, chat_id, query, reply_to_message_id = null }) {
+    handleAutomationRequest({ language_code, chat_id, query, reply_to_message_id = null, callback_query_id = null }) {
         if (!chat_id || !query) {
             throw new Error('Invalid automation request format');
         }
@@ -29,33 +31,71 @@ class AutomationHandler {
         }
 
         const actions = JSON.parse(apiActionsToDoList);
+        let localReplyToMessageId = reply_to_message_id;
 
         // Execute the reply actions
         if (Array.isArray(actions)) {
-            actions.forEach(action => {
-                this.executeAction(chat_id, action, reply_to_message_id);
+            actions.forEach((action, index) => {
+                const lastActionResult = this.executeAction(chat_id, action, localReplyToMessageId, callback_query_id);
+                // Update localReplyToMessageId for chaining actions that depend on previous message
+                const actionContent = JSON.parse(lastActionResult);
+                localReplyToMessageId = actionContent.result?.message_id || localReplyToMessageId;
             });
         }
 
-        // For testing purposes, return a simple status
+        // For testing purposes, return a simple status        
         return JSON.stringify({ status: 'dynamic_reply_handled', chat_id, query, actions_executed: actions?.length || 0 });
     }
 
-    executeAction(chat_id, action, reply_to_message_id) {
+    executeAction(chat_id, action, reply_to_message_id, callback_query_id = null) {
+        LoggerModel.create(this._userProperties, this._activeSpreadsheet)
+            .logEvent({
+                dc: 'automation_action',
+                action: action.method || '_no_method_',
+                chat_id: chat_id || '0000',
+                content: JSON.stringify(action),
+                event: `reply_to_message_id: ${reply_to_message_id || 'none'} | callback_query_id: ${callback_query_id || 'none'}`
+            });
+
+        // Handle delay if specified
+        if (action.delay_ms && !isNaN(action.delay_ms)) {
+            Utilities?.sleep?.(action.delay_ms);
+        }
+
+        // Handle next action chaining
+        if (action.next) {
+            // Chain the next action after a delay
+            return this.handleAutomationRequest({
+                language_code: this._languageCode,
+                chat_id,
+                query: action.next,
+                reply_to_message_id,
+                callback_query_id
+            });
+        }
+
         let payload = action.payload || null;
-        if (chat_id) {
+        const method = action.method || '';
+
+        // If it's an answerCallbackQuery, add callback_query_id to payload
+        if (chat_id && !method.startsWith('answerCallbackQuery')) {
             payload = payload || {};
             payload.chat_id = chat_id;
         }
-        if (reply_to_message_id) {
+
+        // if action.method is starting with 'edit' or 'delete', add message_id to payload
+        if ((method.startsWith('edit') || method.startsWith('delete')) && reply_to_message_id) {
             payload = payload || {};
-            payload.reply_to_message_id = reply_to_message_id;
+            payload.message_id = reply_to_message_id;
         }
-        const uriAction = action.method;
+
+        // Add reply_to_message_id if provided
+
+        const uriAction = method;
         const response = this._telegramBotProxy.executeApiRequest(uriAction, payload);
 
-        if (response.getResponseCode() !== 200) {
-            throw new Error(`Failed to execute action ${uriAction}: ${response.getContentText()}`);
+        if (response?.getResponseCode() !== 200) {
+            throw new Error(`Failed to execute action ${uriAction}: ${response?.getContentText() || 'No response'}`);
         }
 
         return response.getContentText();

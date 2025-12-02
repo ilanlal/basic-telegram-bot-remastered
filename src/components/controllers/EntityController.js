@@ -3,7 +3,7 @@ class EntityController {
     static create(
         cardService = CardService,
         activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet(),
-        userProperties = PropertiesService.getUserProperties()
+        userProperties = PropertiesService.getDocumentProperties()
     ) {
         return new EntityController(cardService, activeSpreadsheet, userProperties);
     }
