@@ -13,7 +13,9 @@ A simple Telegram bot client for Google Apps Script.
 
 ## Crash Course
 
-Copy the contents of the `src/lib/TelegramBotClient.js` file into new file named `TelegramBotClient.gs` in your Google Apps Script project.
+Copy the contents of the `src/lib/TelegramBotProxy.js` file into new file named `TelegramBotProxy.gs` in your Google Apps Script project.
+
+> Note: the file extension should be `.gs` for Google Apps Script.
 
 Then, you can use the following code to send a message using your Telegram bot:
 
@@ -23,22 +25,22 @@ Then, you can use the following code to send a message using your Telegram bot:
 const chat_id = '[YOUR_CHAT_ID]';
 const token = '[YOUR_BOT_TOKEN]';
 
-// Create a new instance of the TelegramBotClient class
-const client = new TelegramBotClient(token);
+// Create a new instance of the TelegramBotProxy class
+const proxy = new TelegramBotProxy(token);
 
 // Send a message to the chat
-client.sendMessage({ chat_id, text: 'Hello, world!' })
-    .then(response => {
-        console.log('Message sent:', response);
-    })
-    .catch(error => {
-        console.error('Error sending message:', error);
-    });
+const response = proxy.executeApiRequest('sendMessage', { chat_id, text: 'Hello from Google Apps Script!' });
+
+if (response?.getResponseCode() !== 200) {
+    throw new Error(`Failed to execute action: ${response?.getContentText() || 'No response'}`);
+}
+
 ```
 
 ## Advanced Usage
 
-Setting webhook:
+First, copy the contents of the `src/lib/TelegramBotClient.js` file into a new file named `TelegramBotClient.gs` in your Google Apps Script project.
+Then, you can use the following code snippets to set up a webhook and handle incoming updates:
 
 ```javascript
 // Replace the placeholders with your bot token you generated from BotFather
@@ -54,7 +56,7 @@ client.setWebhook(webDeploymentUrl);
 Handling incoming updates:
 
 ```javascript
-// Handle incoming updates
+// Handle incoming inline updates from Telegram
 function doPost(e) {
     const update = JSON.parse(e.postData.contents);
     
@@ -64,9 +66,12 @@ function doPost(e) {
 
         // Echo the received message
         const token = '[YOUR_BOT_TOKEN]';
-        const client = new TelegramBotClient(token);
+        const proxy = new TelegramBotProxy(token);
 
-        client.sendMessage({ chat_id, text: `You said: ${text}` });
+        const response = proxy.executeApiRequest('sendMessage', { chat_id, text: `You said: ${text}` });
+        if (response?.getResponseCode() !== 200) {
+            throw new Error(`Failed to execute action: ${response?.getContentText() || 'No response'}`);
+        }
     }
 }
 ```
