@@ -1072,7 +1072,7 @@ EMD.Automation = {
                             }
                         ]
                     },
-                     { // Add Store Automation template section
+                    { // Add Store Automation template section
                         // header: 'Automation Management',
                         collapsible: false,
                         numUncollapsibleWidgets: 0,
@@ -3859,9 +3859,139 @@ EMD.BasicAutomation = {
                                 }
                             }
                         }])
+                    ],
+                    ['#remove_keyboard',
+                        // default (en)
+                        JSON.stringify([{
+                            method: 'editMessageReplyMarkup',
+                            payload: {
+                                reply_markup: { remove_keyboard: true }
+                            }
+                        }]),
+                    ],
+                    ['#send_about_git_message',
+                        // default (en)
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'You can find the source code of this bot on GitHub:\n\n'
+                                    + '<a href="https://github.com/ilanlal/basic-telegram-bot-remastered/blob/0b896f3f8c4d47073fb49672bea81eff771b5ee4/src/config/EMD.js#L1010">https://github.com/ilanlal/basic-telegram-bot-remastered</a>',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // es
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Puedes encontrar el código fuente de este bot en GitHub:\n\n'
+                                    + '<a href="https://github.com/ilanlal/basic-telegram-bot-remastered/blob/0b896f3f8c4d47073fb49672bea81eff771b5ee4/src/config/EMD.js#L1010">https://github.com/ilanlal/basic-telegram-bot-remastered</a>',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // fr
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Vous pouvez trouver le code source de ce bot sur GitHub:\n\n'
+                                    + '<a href="https://github.com/ilanlal/basic-telegram-bot-remastered/blob/0b896f3f8c4d47073fb49672bea81eff771b5ee4/src/config/EMD.js#L1010">https://github.com/ilanlal/basic-telegram-bot-remastered</a>',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ar
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'يمكنك العثور على الشفرة المصدرية لهذا البوت على GitHub:\n\n'
+                                    + '<a href="https://github.com/ilanlal/basic-telegram-bot-remastered/blob/0b896f3f8c4d47073fb49672bea81eff771b5ee4/src/config/EMD.js#L1010">https://github.com/ilanlal/basic-telegram-bot-remastered</a>',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // de
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Sie können den Quellcode dieses Bots auf GitHub finden:\n\n'
+                                    + '<a href="https://github.com/ilanlal/basic-telegram-bot-remastered/blob/0b896f3f8c4d47073fb49672bea81eff771b5ee4/src/config/EMD.js#L1010">https://github.com/ilanlal/basic-telegram-bot-remastered</a>',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // it
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Puoi trovare il codice sorgente di questo bot su GitHub:\n\n'
+                                    + '<a href="https://github.com/ilanlal/basic-telegram-bot-remastered/blob/0b896f3f8c4d47073fb49672bea81eff771b5ee4/src/config/EMD.js#L1010">https://github.com/ilanlal/basic-telegram-bot-remastered</a>',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // pt
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Você pode encontrar o código-fonte deste bot no GitHub:\n\n'
+                                    + '<a href="https://github.com/ilanlal/basic-telegram-bot-remastered/blob/0b896f3f8c4d47073fb49672bea81eff771b5ee4/src/config/EMD.js#L1010">https://github.com/ilanlal/basic-telegram-bot-remastered</a>',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ru
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Вы можете найти исходный код этого бота на GitHub:\n\n'
+                                    + '<a href="https://github.com/ilanlal/basic-telegram-bot-remastered/blob/0b896f3f8c4d47073fb49672bea81eff771b5ee4/src/config/EMD.js#L1010">https://github.com/ilanlal/basic-telegram-bot-remastered</a>',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // zh
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: '您可以在 GitHub 上找到此机器人的源代码：\n\n'
+                                    + '<a href="https://github.com/ilanlal/basic-telegram-bot-remastered/blob/0b896f3f8c4d47073fb49672bea81eff771b5ee4/src/config/EMD.js#L1010">https://github.com/ilanlal/basic-telegram-bot-remastered</a>',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ja
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'このボットのソースコードはGitHubで見つけることができます：\n\n'
+                                    + '<a href="https://github.com/ilanlal/basic-telegram-bot-remastered/blob/0b896f3f8c4d47073fb49672bea81eff771b5ee4/src/config/EMD.js#L1010">https://github.com/ilanlal/basic-telegram-bot-remastered</a>',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ko
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: '이 봇의 소스 코드는 GitHub에서 찾을 수 있습니다:\n\n'
+                                    + '<a href="https://github.com/ilanlal/basic-telegram-bot-remastered/blob/0b896f3f8c4d47073fb49672bea81eff771b5ee4/src/config/EMD.js#L1010">https://github.com/ilanlal/basic-telegram-bot-remastered</a>',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // he
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'אתה יכול למצוא את קוד המקור של הבוט הזה ב-GitHub:\n\n'
+                                    + '<a href="https://github.com/ilanlal/basic-telegram-bot-remastered/blob/0b896f3f8c4d47073fb49672bea81eff771b5ee4/src/config/EMD.js#L1010">https://github.com/ilanlal/basic-telegram-bot-remastered</a>',
+                                parse_mode: 'HTML'
+                            }
+                        }])],
+                    ['#send_secure_private_message',
+                        // default (en)
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'This is a secure private message. 🔒\n\n'
+                                    + 'Please ensure that you do not share this message with anyone else.',
+                                parse_mode: 'HTML'
+                            }
+                        }])
+                    
                     ]
                 ]
-        }
+        };
     }
 }
 
