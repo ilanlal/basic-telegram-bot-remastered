@@ -6,7 +6,7 @@ class AutomationHandler {
             throw new Error('Bot token is not set in user properties');
         }
         this._telegramBotProxy = TelegramBotProxy.create(token);
-        this._languageCode = userProperties.getProperty(EnvironmentModel.InputMeta.LANGUAGE_CODE) || 'default';
+        this._defaultLanguageCode = userProperties.getProperty(EnvironmentModel.InputMeta.LANGUAGE_CODE) || 'default';
         this._userProperties = userProperties;
         this._activeSpreadsheet = activeSpreadsheet;
     }
@@ -23,28 +23,24 @@ class AutomationHandler {
             throw new Error('Invalid automation request format');
         }
 
-        // array of actions like [{method: 'sendMessage', payload: {...}}] to execute (as string)
-        let apiActionsToDoList = this._automationModel.findData(query, language_code || this._languageCode);
-
-        if (!apiActionsToDoList) {
-            apiActionsToDoList = this._automationModel.findData('_action_not_found_', language_code || this._languageCode);
+        // Find actions for the query
+        const actions = this.findActionsForQuery(query, language_code);
+        if (actions.length === 0) {
+            return JSON.stringify({ status: 'no_actions_found', chat_id, query });
         }
-
-        const actions = JSON.parse(apiActionsToDoList);
         let localReplyToMessageId = reply_to_message_id;
+        let lastActionResult = null;
 
         // Execute the reply actions
-        if (Array.isArray(actions)) {
-            actions.forEach((action, index) => {
-                const lastActionResult = this.executeAction(chat_id, action, localReplyToMessageId, callback_query_id);
-                // Update localReplyToMessageId for chaining actions that depend on previous message
-                const actionContent = JSON.parse(lastActionResult);
-                localReplyToMessageId = actionContent.result?.message_id || localReplyToMessageId;
-            });
-        }
+        actions.forEach((action, index) => {
+            lastActionResult = this.executeAction(chat_id, action, localReplyToMessageId, callback_query_id);
+            // Update localReplyToMessageId for chaining actions that depend on previous message
+            const actionContent = JSON.parse(lastActionResult);
+            localReplyToMessageId = actionContent.result?.message_id || localReplyToMessageId;
+        });
 
         // For testing purposes, return a simple status        
-        return JSON.stringify({ status: 'dynamic_reply_handled', chat_id, query, actions_executed: actions?.length || 0 });
+        return JSON.stringify({ status: 'dynamic_reply_handled', chat_id, query, actions_executed: actions?.length || 0, last_action_result: lastActionResult });
     }
 
     executeAction(chat_id, action, reply_to_message_id, callback_query_id = null) {
@@ -65,13 +61,15 @@ class AutomationHandler {
         // Handle next action chaining
         if (action.next) {
             // Chain the next action after a delay
-            return this.handleAutomationRequest({
-                language_code: this._languageCode,
+            const summeryResponseText = this.handleAutomationRequest({
+                language_code: this._defaultLanguageCode,
                 chat_id,
                 query: action.next,
                 reply_to_message_id,
                 callback_query_id
             });
+
+            return JSON.parse(summeryResponseText)?.last_action_result || "{}";
         }
 
         let payload = action.payload || null;
@@ -99,6 +97,34 @@ class AutomationHandler {
         }
 
         return response.getContentText();
+    }
+
+    findActionsForQuery(query, language_code) {
+        // array of actions like [{method: 'sendMessage', payload: {...}}] to execute (as string)
+        // Try to find actions for the given language code
+        let apiActionsToDoList = this._automationModel.findData(query, language_code);
+
+        // Fallback to default language if not found
+        if (!apiActionsToDoList) {
+            apiActionsToDoList = this._automationModel.findData(query, this._defaultLanguageCode);
+        }
+
+        // Fallback to '_action_not_found_' key if still not found
+        if (!apiActionsToDoList) {
+            apiActionsToDoList = this._automationModel.findData('_action_not_found_', language_code);
+        }
+
+        // Fallback to default language '_action_not_found_' if still not found
+        if (!apiActionsToDoList) {
+            apiActionsToDoList = this._automationModel.findData('_action_not_found_', this._defaultLanguageCode);
+        }
+
+        if (!apiActionsToDoList) {
+            return [];
+        }
+
+        const actions = JSON.parse(apiActionsToDoList);
+        return actions;
     }
 }
 
