@@ -1,6 +1,6 @@
 {
   "name": "@ilanlal/telegram2gas",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A simple Telegram bot client for Google Apps Script.",
   "main": "./src/lib/index.js",
   "type": "commonjs",
@@ -50,7 +50,8 @@
       "<rootDir>/src/"
     ],
     "coverageDirectory": "./coverage/",
-    "collectCoverage": false
+    "collectCoverage": false,
+    "testEnvironment": "node"
   },
   "files": [
     "./dist/telegramClient.js",

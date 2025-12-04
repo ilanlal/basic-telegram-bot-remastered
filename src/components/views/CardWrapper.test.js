@@ -26,8 +26,8 @@ describe('Model.CardWrapper', () => {
         const wrapper = viewModel.cardWrapper;
         describe('widgets', () => {
             describe('TextButton', () => {
-                //newTextButton
-                it('should create a newTextButton widget with correct text', () => {
+                //newTextButton 
+                it('should create a newTextButton widget with correct text & onClick function', () => {
                     const textButtonMeta = {
                         text: 'Click Me',
                         onClick: {
@@ -45,7 +45,33 @@ describe('Model.CardWrapper', () => {
                     expect(data.textButton.onClick.action.actionMethodName).toBe(textButtonMeta.onClick.functionName);
                     expect(data.textButton.onClick.action.parameters).toEqual(textButtonMeta.onClick.parameters);
                 });
+
+                // openLink
+                it('should create a newTextButton widget with correct text & openLink', () => {
+                    const textButtonMeta = {
+                        text: 'Visit Website',
+                        openLink: {
+                            url: 'https://example.com'
+                        }
+                    };
+                    const textButton = wrapper.newTextButton(textButtonMeta);
+                    expect(textButton).toBeDefined();
+                    const data = textButton.getData();
+                    expect(data).toBeDefined();
+                    expect(data.textButton.text).toBe(textButtonMeta.text);
+                });
+
+                it('should throw an error if TextButton properties are missing', () => {
+                    const textButtonMeta = {
+                        // text is missing
+                    };
+                    expect(() => wrapper.newTextButton(textButtonMeta))
+                        .toThrowError(EntityViewModel.CardServiceWrapper.TEXT_BUTTON_MISSING_PROPERTIES_ERROR);
+                });
+
+
             });
+
 
             describe('TextParagraph', () => {
                 it('should create a newTextParagraph widget with correct text', () => {

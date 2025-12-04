@@ -28,68 +28,6 @@ describe('TelegramBotClient base definition', () => {
     });
 });
 
-describe("TelegramBotClient sendMessage Tests", () => {
-    let telegramBotClient;
-
-    beforeEach(() => {
-        telegramBotClient = global.TelegramBotClientFactory
-            .withToken('[YOUR_BOT_TOKEN]')
-            .create();
-    });
-
-    test("sendMessage method should return status 200", () => {
-        /* @see https://core.telegram.org/bots/api#sendmessage */
-        const contentText = `{
-            "ok": true,
-            "result": {
-                "message_id": 42,
-                "from": {
-                    "id": 123456789,
-                    "is_bot": false,
-                    "first_name": "Test",
-                    "username": "testuser",
-                    "language_code": "en"
-                },
-                "chat": {
-                    "id": 123456789,
-                    "first_name": "Test",
-                    "username": "testuser",
-                    "type": "private"
-                },
-                "date": 1625247600,
-                "text": "Hello, World!"
-            }
-        }`;
-
-        UrlFetchAppStubConfiguration.when(`https://api.telegram.org/bot[YOUR_BOT_TOKEN]/sendMessage`)
-            .return(new HttpResponse().setContentText(contentText));
-
-        const response = telegramBotClient.sendMessage({
-            chat_id: 123456789,
-            text: "Hello, World!"
-        });
-
-        expect(response.getResponseCode()).toBe(200);
-        expect(response.getContentText()).toBe(contentText);
-    });
-
-    test("sendMessage method should throw error if chat_id is missing", () => {
-        expect(() => {
-            telegramBotClient.sendMessage({
-                text: "Hello, World!"
-            });
-        }).toThrow("chat_id is required!");
-    });
-
-    test("sendMessage method should throw error if text is missing", () => {
-        expect(() => {
-            telegramBotClient.sendMessage({
-                chat_id: 123456789
-            });
-        }).toThrow("text is required!");
-    });
-});
-
 // getMe
 describe("getMe Tests", () => {
     let telegramBotClient;

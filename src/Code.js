@@ -2,6 +2,8 @@
  * @see https://developers.google.com/apps-script/guides/triggers
  */
 
+const Logger = require("@ilanlal/gasmocks/src/base/classes/Logger");
+
 function onInstall(e) {
     onOpen(e);
 }
@@ -20,7 +22,7 @@ function doPost(e) {
         // Handle the webhook event
         return WebhookHandler.handlePostUpdateRequest(contents);
     } catch (error) {
-        console.error('Error in doPost:', error);
+        Logger.log('Error in doPost: ' + error.message);
         throw error;
     }
 }
@@ -36,7 +38,7 @@ function scaffold_scriptProperties() {
         if (props.hasOwnProperty(key)) {
             const currentValue = scriptProperties.getProperty(props[key]);
             if (currentValue === null) {
-                scriptProperties.setProperty(props[key], 'default');
+                scriptProperties.setProperty(props[key], `[SET_${props[key]}_HERE]`);
             }
         }
     }
@@ -52,7 +54,7 @@ function scaffold_documentProperties() {
         if (props.hasOwnProperty(key)) {
             const currentValue = documentProperties.getProperty(props[key]);
             if (currentValue === null) {
-                documentProperties.setProperty(props[key], scriptProperties.getProperty(props[key]) || 'default');
+                documentProperties.setProperty(props[key], scriptProperties.getProperty(props[key]) || `[SET_${props[key]}_HERE]`);
             }
         }
     }

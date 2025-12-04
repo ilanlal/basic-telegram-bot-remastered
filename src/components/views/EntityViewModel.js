@@ -1,10 +1,4 @@
 class EntityViewModel {
-    static get INVALID_MODEL_ERROR() {
-        return "Invalid data model provided to ViewModel.create(meta.name), missing meta.name property.";
-    }
-    static get DEFAULT_IMAGE_URL() {
-        return 'https://raw.githubusercontent.com/ilanlal/basic-telegram-bot-remastered/refs/heads/vnext/assets/logo128.png';
-    }
     static create({
         cardService = CardService,
         activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet(),
@@ -28,23 +22,13 @@ class EntityViewModel {
 };
 
 EntityViewModel.CardServiceWrapper = class {
-    // Default Button Values
-    static get DEFAULT_BUTTON_LABEL() {
-        return 'New Button';
-    }
     static get DEFAULT_EVENT_CLICK_FUNCTION_NAME() {
         return 'EventHandler.Addon.onButtonClick';
     }
 
     // Default Card Header Values
     static get DEFAULT_IMAGE_URL() {
-        return EntityViewModel.DEFAULT_IMAGE_URL;
-    }
-    static get DEFAULT_IMAGE_STYLE() {
-        return CardService.ImageStyle.SQUARE;
-    }
-    static get DEFAULT_IMAGE_ALT_TEXT() {
-        return 'Card Image';
+        return 'https://raw.githubusercontent.com/ilanlal/basic-telegram-bot-remastered/refs/heads/vnext/assets/logo128.png';
     }
 
     // Error Messages
@@ -209,7 +193,7 @@ EntityViewModel.CardServiceWrapper = class {
     newTextParagraph(tpMeta = {}, value = '') {
         const newTextParagraph = CardService.newTextParagraph()
             .setText(tpMeta.text || value || '');
-        if (newTextParagraph.setMaxLines && tpMeta.maxLines) {
+        if (tpMeta.maxLines) {
             newTextParagraph.setMaxLines(tpMeta.maxLines);
         }
         return newTextParagraph;
@@ -220,16 +204,16 @@ EntityViewModel.CardServiceWrapper = class {
             throw new Error(EntityViewModel.CardServiceWrapper.TEXT_BUTTON_MISSING_PROPERTIES_ERROR);
         }
 
-        const _ = this._cardService.newTextButton()
+        const _textButton = this._cardService.newTextButton()
             .setText(textButtonMeta.text)
             .setDisabled(typeof disabled === 'boolean' ? disabled : !!textButtonMeta.disabled)
             .setTextButtonStyle(textButtonMeta.style || style);
 
         if (textButtonMeta.openLink) {
-            _.setOpenLink(this._cardService.newOpenLink().setUrl(textButtonMeta.openLink.url || ''));
+            _textButton.setOpenLink(this._cardService.newOpenLink().setUrl(textButtonMeta.openLink.url || ''));
         }
         else if (textButtonMeta.onClick) {
-            _.setOnClickAction(textButtonMeta.onClick.functionName ? this._cardService.newAction()
+            _textButton.setOnClickAction(textButtonMeta.onClick.functionName ? this._cardService.newAction()
                 .setFunctionName(textButtonMeta.onClick.functionName || EntityViewModel.CardServiceWrapper.DEFAULT_EVENT_CLICK_FUNCTION_NAME)
                 .setParameters(textButtonMeta.onClick.parameters || {}) : null
             );
@@ -237,7 +221,7 @@ EntityViewModel.CardServiceWrapper = class {
         else {
             throw new Error(EntityViewModel.CardServiceWrapper.TEXT_BUTTON_MISSING_PROPERTIES_ERROR);
         }
-        return _;
+        return _textButton;
     }
 };
 
