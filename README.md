@@ -86,6 +86,10 @@ function sendPaidPhoto(chat_id) {
 
     // Send a paid photo
     const photoResponse = proxy.executeApiRequest('sendPaidMedia', {
+                                chat_id,
+                                title: 'Paid Photo',
+                                description: 'This is a paid photo content.',
+                                payload: 'paid_photo_payload',
                                 protect_content: true,
                                 star_count: 1000,
                                 media: [
