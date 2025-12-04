@@ -1,9 +1,6 @@
 /** 
  * @see https://developers.google.com/apps-script/guides/triggers
  */
-
-const Logger = require("@ilanlal/gasmocks/src/base/classes/Logger");
-
 function onInstall(e) {
     onOpen(e);
 }
