@@ -17,7 +17,7 @@ class CustomerModel {
         const textFinder = range.createTextFinder(chat_id);
         const firstOccurrence = textFinder.findNext();
         if (firstOccurrence) {
-            return firstOccurrence.getCurrentMatch()?.getValues() || null;
+            return firstOccurrence.getValues();
         }
         return null;
     }

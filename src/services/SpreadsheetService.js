@@ -79,7 +79,7 @@ SpreadsheetService.Users = {
         const textDinder = range.createTextFinder(id);
         const firstOccurrence = textFinder.findNext();
         if (firstOccurrence) {
-            return firstOccurrence.getCurrentMatch().getValues();
+            return firstOccurrence.getValues();
         }
 
         return null;
