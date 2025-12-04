@@ -54,6 +54,8 @@ describe('doPost', () => {
 
     // Error handling test
     it('should handle errors in doPost gracefully', () => {
+        PropertiesService.getDocumentProperties().setProperty(EnvironmentModel.InputMeta.BOT_API_TOKEN, dummyToken);
+
         const event = {
             postData: { contents: 'invalid json' }
         };
