@@ -1,6 +1,7 @@
 require('../../../tests');
 
 const SpreadsheetStubConfiguration = require('@ilanlal/gasmocks/src/spreadsheetapp/classes/SpreadsheetStubConfiguration');
+const RangeStubConfiguration = require('@ilanlal/gasmocks/src/spreadsheetapp/classes/RangeStubConfiguration');
 const SpreadsheetApp = require('@ilanlal/gasmocks/src/spreadsheetapp/SpreadsheetApp');
 const { PostMessageHandler } = require('./PostMessageHandler');
 const { CustomerModel } = require('../../components/models/CustomerModel');
@@ -13,6 +14,7 @@ describe('PostMessageHandler', () => {
     beforeEach(() => {
         UrlFetchAppStubConfiguration.reset();
         SpreadsheetStubConfiguration.reset();
+        RangeStubConfiguration.reset();
         // Set dummy bot token in user properties
         PropertiesService.getDocumentProperties().setProperty(EnvironmentModel.InputMeta.BOT_API_TOKEN, dummyToken);
         handler = PostMessageHandler.create(
@@ -36,8 +38,8 @@ describe('PostMessageHandler', () => {
         };
         // first call to verifyPersone should add the user response is array of user data
         // [timestamp, chat_id, is_bot, first_name, last_name, username, language_code]
-        let customer = handler.verifyPersone(content.message);
-        expect(Array.isArray(customer)).toBe(true);
+        let response = handler.verifyPersone(content.message);
+        expect(Array.isArray(response)).toBe(true);
 
         // check if user is added to Users sheet
         const sheetName = CustomerModel.SHEET_NAME;
@@ -129,6 +131,7 @@ describe('PostMessageHandler', () => {
                                 message_id: 1,
                             }
                         })));
+
                 let response = handler.handlePostMessage(content.message);
                 expect(response).toBe(true);
             });

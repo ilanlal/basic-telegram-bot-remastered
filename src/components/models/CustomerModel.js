@@ -13,13 +13,11 @@ class CustomerModel {
     }
 
     getCustomerByChatId(chat_id) {
-        const range = this.sheet.getDataRange();
-        const values = range.getValues() || [];
-        
-        for (let row = 0; row < values.length; row++) { 
-            if (values[row][1] === chat_id) {
-                return values[row];
-            }
+        const range = this.sheet.getRange('B:B');
+        const textFinder = range.createTextFinder(chat_id);
+        const firstOccurrence = textFinder.findNext();
+        if (firstOccurrence) {
+            return firstOccurrence.getCurrentMatch()?.getValues() || null;
         }
         return null;
     }

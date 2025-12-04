@@ -150,6 +150,8 @@ function doPost(e) {
 
 ## Roadmap
 
+- Improve search functionality in sheet API methods. see: [findText](https://developers.google.com/apps-script/reference/spreadsheet/range#createtextfinderfindtext)
+- Improve error handling and logging mechanisms.
 - Create a comprehensive set of examples and documentation.
 
 ## Overview

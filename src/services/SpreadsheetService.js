@@ -75,13 +75,13 @@ SpreadsheetService.Users = {
         return user;
     },
     getUserById: (id) => {
-        const range = SpreadsheetService.Users.getUsersSheet().getDataRange();
-        const values = range.getValues();
-        for (var row = 0; row < values.length; row++) {
-            if (values[row][1] == id) { //chat_id
-                return values[row]; //user row
-            }
+        const range = SpreadsheetService.Users.getUsersSheet().getRange('B:B');
+        const textDinder = range.createTextFinder(id);
+        const firstOccurrence = textFinder.findNext();
+        if (firstOccurrence) {
+            return firstOccurrence.getCurrentMatch().getValues();
         }
+
         return null;
     },
     getUsersSheet: () => {

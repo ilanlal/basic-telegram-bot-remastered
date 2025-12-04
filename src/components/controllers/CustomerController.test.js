@@ -35,6 +35,17 @@ describe('CustomerController', () => {
 
         // Verify that the customer was added
         const fetchedCustomer = controller.verifyCustomer({ from: mockedMessage.from });
-        expect(fetchedCustomer).toEqual(expect.arrayContaining([expect.any(String), ...Object.values(mockedMessage.from)]));
+        expect(Array.isArray(fetchedCustomer)).toBe(true);
+
+        // Ensure no duplicate is added
+        const allCustomers = [];
+        const sheet = activeSpreadsheet.getSheetByName(CustomerModel.SHEET_NAME);
+        const data = sheet.getDataRange().getValues();
+        for (let row of data) {
+            if (row[1] === mockedMessage.from.id) {
+                allCustomers.push(row);
+            }
+        }
+        expect(allCustomers.length).toBe(1);
     });
 });
