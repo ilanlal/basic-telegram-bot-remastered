@@ -1,5 +1,13 @@
 require('../tests');
-const { doGet, doPost, scaffold_documentProperties, scaffold_scriptProperties } = require('./Code');
+const { doGet, doPost, onOpen, onInstall, scaffold_documentProperties, scaffold_scriptProperties } = require('./Code');
+
+beforeEach(() => {
+    UrlFetchAppStubConfiguration.reset();
+    // Clear document properties before each test
+    PropertiesService.getDocumentProperties().deleteAllProperties();
+    // Clear script properties before each test
+    PropertiesService.getScriptProperties().deleteAllProperties();
+});
 
 describe('doGet', () => {
     it('should run doGet message handler', () => {
@@ -12,10 +20,6 @@ describe('doGet', () => {
 describe('doPost', () => {
     const dummyToken = 'DUMMY_BOT_TOKEN';
 
-    beforeEach(() => {
-        UrlFetchAppStubConfiguration.reset();
-        PropertiesService.getDocumentProperties().setProperty(EnvironmentModel.InputMeta.BOT_API_TOKEN, dummyToken);
-    });
 
     it('should run doPost message handler', () => {
         const event = {
@@ -33,7 +37,7 @@ describe('doPost', () => {
                 })
             }
         };
-        
+
         UrlFetchAppStubConfiguration.when(`https://api.telegram.org/bot${dummyToken}/sendMessage`)
             .return(new HttpResponse()
                 .setContentText(JSON.stringify({
@@ -46,6 +50,32 @@ describe('doPost', () => {
         PropertiesService.getDocumentProperties().setProperty(EnvironmentModel.InputMeta.BOT_API_TOKEN, dummyToken);
         const response = doPost(event);
         expect(response).toBeDefined();
+    });
+
+    // Error handling test
+    it('should handle errors in doPost gracefully', () => {
+        const event = {
+            postData: { contents: 'invalid json' }
+        };
+        expect(() => {
+            doPost(event);
+        }).toThrow();
+
+    });
+
+    // onInstall and onOpen are needed for completeness
+    it('should run onInstall without errors', () => {
+        const event = {}; // Mock event object
+        expect(() => {
+            onInstall(event);
+        }).not.toThrow();
+    });
+
+    it('should run onOpen without errors', () => {
+        const event = {}; // Mock event object
+        expect(() => {
+            onOpen(event);
+        }).not.toThrow();
     });
 });
 

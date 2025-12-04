@@ -12,11 +12,13 @@ Each test file follows a similar structure, starting with necessary imports, set
 
 Make sure to configure Jest to recognize the Google Apps Script environment and the `@ilanlal/gasmocks` library.
 
-> Note: This package is not published on npm registry. So, you need to install it directly from the GitHub repository. Sorry for the inconvenience.
+> Note: This package is not published on npm registry. So, you need to install it directly from my GitHub repository. Sorry for the inconvenience.
 
 ```bash
 npm i https://github.com/ilanlal/gasmocks --save-dev
 ```
+
+> Use `npm uninstall @ilanlal/gasmocks` to remove the package.
 
 You can run the tests using the following command:
 

@@ -175,18 +175,6 @@ class SetupFlow {
     }
 
     // Getters
-    get trafficLight() {
-        const leds = '{0}{1}{2}';
-        const led0 = this.state.botTokenSet ? Lights.ON : Lights.OFF;
-        const led1 = this.state.deploymentIdSet ? Lights.ON : Lights.OFF;
-        const led2 = this.state.webhookSet ? Lights.ON : Lights.OFF;
-
-        return leds
-            .replace('{0}', led0)
-            .replace('{1}', led1)
-            .replace('{2}', led2);
-    }
-
     get state() {
         const token = this._userProperties.getProperty(EnvironmentModel.InputMeta.BOT_API_TOKEN);
         const deploymentId = this._userProperties.getProperty(EnvironmentModel.InputMeta.DEPLOYMENT_ID);
