@@ -42,7 +42,7 @@ if (response?.getResponseCode() !== 200) {
 
 ### Getting payments
 
-To handle payments using your Telegram bot, you can use one of the following code snippets.:
+To handle payments using your Telegram bot, you can use one of the following strategies:
 
 #### 1. Sending an Invoice
 
@@ -150,6 +150,8 @@ function doPost(e) {
 
 ## Roadmap
 
+- Improve search functionality in sheet API methods. see: [findText](https://developers.google.com/apps-script/reference/spreadsheet/range#createtextfinderfindtext)
+- Improve error handling and logging mechanisms.
 - Create a comprehensive set of examples and documentation.
 
 ## Overview
