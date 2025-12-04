@@ -29,17 +29,18 @@ class AutomationHandler {
             return JSON.stringify({ status: 'no_actions_found', chat_id, query });
         }
         let localReplyToMessageId = reply_to_message_id;
+        let lastActionResult = null;
 
         // Execute the reply actions
         actions.forEach((action, index) => {
-            const lastActionResult = this.executeAction(chat_id, action, localReplyToMessageId, callback_query_id);
+            lastActionResult = this.executeAction(chat_id, action, localReplyToMessageId, callback_query_id);
             // Update localReplyToMessageId for chaining actions that depend on previous message
             const actionContent = JSON.parse(lastActionResult);
             localReplyToMessageId = actionContent.result?.message_id || localReplyToMessageId;
         });
 
         // For testing purposes, return a simple status        
-        return JSON.stringify({ status: 'dynamic_reply_handled', chat_id, query, actions_executed: actions?.length || 0 });
+        return JSON.stringify({ status: 'dynamic_reply_handled', chat_id, query, actions_executed: actions?.length || 0, last_action_result: lastActionResult });
     }
 
     executeAction(chat_id, action, reply_to_message_id, callback_query_id = null) {
@@ -66,7 +67,7 @@ class AutomationHandler {
                 query: action.next,
                 reply_to_message_id,
                 callback_query_id
-            });
+            })?.last_action_result || "{}";
         }
 
         let payload = action.payload || null;
