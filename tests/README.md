@@ -10,10 +10,16 @@ Each test file follows a similar structure, starting with necessary imports, set
 
 ## Running Tests
 
-To run the tests, ensure you have Jest installed in your development environment. You can run the tests using the following command:
+Make sure to configure Jest to recognize the Google Apps Script environment and the `@ilanlal/gasmocks` library.
+
+> Note: This package is not published on npm registry. So, you need to install it directly from the GitHub repository. Sorry for the inconvenience.
+
+```bash
+npm i https://github.com/ilanlal/gasmocks --save-dev
+```
+
+You can run the tests using the following command:
 
 ```bash
 npm test
 ```
-
-Make sure to configure Jest to recognize the Google Apps Script environment and the `@ilanlal/gasmocks` library.
