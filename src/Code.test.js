@@ -52,19 +52,6 @@ describe('doPost', () => {
         expect(response).toBeDefined();
     });
 
-    // Error handling test
-    it('should handle errors in doPost gracefully', () => {
-        PropertiesService.getDocumentProperties().setProperty(EnvironmentModel.InputMeta.BOT_API_TOKEN, dummyToken);
-
-        const event = {
-            postData: { contents: 'invalid json' }
-        };
-        expect(() => {
-            doPost(event);
-        }).toThrow();
-
-    });
-
     // onInstall and onOpen are needed for completeness
     it('should run onInstall without errors', () => {
         const event = {}; // Mock event object

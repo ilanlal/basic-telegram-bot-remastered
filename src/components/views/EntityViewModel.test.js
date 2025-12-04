@@ -7,6 +7,7 @@ describe('EntityViewModel', () => {
     const tests = [
         [EMD.Home, { isActive: true }],
         [EMD.Automation, { isActive: true }],
+        [EMD.BasicAutomation, { isActive: true }],
         [EMD.BotSetup, { isActive: true }],
         [EMD.EnvironmentVariables, { isActive: true }],
         [EMD.Account, { isActive: true }],
