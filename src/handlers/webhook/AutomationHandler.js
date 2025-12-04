@@ -61,13 +61,15 @@ class AutomationHandler {
         // Handle next action chaining
         if (action.next) {
             // Chain the next action after a delay
-            return this.handleAutomationRequest({
+            const summeryResponseText = this.handleAutomationRequest({
                 language_code: this._defaultLanguageCode,
                 chat_id,
                 query: action.next,
                 reply_to_message_id,
                 callback_query_id
-            })?.last_action_result || "{}";
+            });
+
+            return JSON.parse(summeryResponseText)?.last_action_result || "{}";
         }
 
         let payload = action.payload || null;
