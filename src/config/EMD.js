@@ -3107,81 +3107,15 @@ EMD.BasicAutomation = {
                     ],
                     ['/start',
                         // default (en)
-                        JSON.stringify([{ "next": "#send_welcome_messages" }, { "next": "#append_main_menu_keyboard" }]),
-                        // es
-                        JSON.stringify([{ "next": "#send_welcome_messages" }, { "next": "#append_main_menu_keyboard" }]),
-                        // fr
-                        JSON.stringify([{ "next": "#send_welcome_messages" }, { "next": "#append_main_menu_keyboard" }]),
-                        // ar
-                        JSON.stringify([{ "next": "#send_welcome_messages" }, { "next": "#append_main_menu_keyboard" }]),
-                        // de
-                        JSON.stringify([{ "next": "#send_welcome_messages" }, { "next": "#append_main_menu_keyboard" }]),
-                        // it
-                        JSON.stringify([{ "next": "#send_welcome_messages" }, { "next": "#append_main_menu_keyboard" }]),
-                        // pt
-                        JSON.stringify([{ "next": "#send_welcome_messages" }, { "next": "#append_main_menu_keyboard" }]),
-                        // ru
-                        JSON.stringify([{ "next": "#send_welcome_messages" }, { "next": "#append_main_menu_keyboard" }]),
-                        // zh
-                        JSON.stringify([{ "next": "#send_welcome_messages" }, { "next": "#append_main_menu_keyboard" }]),
-                        // ja
-                        JSON.stringify([{ "next": "#send_welcome_messages" }, { "next": "#append_main_menu_keyboard" }]),
-                        // ko
-                        JSON.stringify([{ "next": "#send_welcome_messages" }, { "next": "#append_main_menu_keyboard" }]),
-                        // he
-                        JSON.stringify([{ "next": "#send_welcome_messages" }, { "next": "#append_main_menu_keyboard" }])
+                        JSON.stringify([{ "next": "#remove_keyboard" }, { "next": "#send_welcome_messages" }, { "next": "#append_main_menu_keyboard" }])
                     ],
                     ['/help',
                         // default (en)
-                        JSON.stringify([{ "next": "#send_help_message" }, { "next": "#append_back_to_start_keyboard" }]),
-                        // es
-                        JSON.stringify([{ "next": "#send_help_message" }, { "next": "#append_back_to_start_keyboard" }]),
-                        // fr
-                        JSON.stringify([{ "next": "#send_help_message" }, { "next": "#append_back_to_start_keyboard" }]),
-                        // ar
-                        JSON.stringify([{ "next": "#send_help_message" }, { "next": "#append_back_to_start_keyboard" }]),
-                        // de
-                        JSON.stringify([{ "next": "#send_help_message" }, { "next": "#append_back_to_start_keyboard" }]),
-                        // it
-                        JSON.stringify([{ "next": "#send_help_message" }, { "next": "#append_back_to_start_keyboard" }]),
-                        // pt
-                        JSON.stringify([{ "next": "#send_help_message" }, { "next": "#append_back_to_start_keyboard" }]),
-                        // ru
-                        JSON.stringify([{ "next": "#send_help_message" }, { "next": "#append_back_to_start_keyboard" }]),
-                        // zh
-                        JSON.stringify([{ "next": "#send_help_message" }, { "next": "#append_back_to_start_keyboard" }]),
-                        // ja
-                        JSON.stringify([{ "next": "#send_help_message" }, { "next": "#append_back_to_start_keyboard" }]),
-                        // ko
-                        JSON.stringify([{ "next": "#send_help_message" }, { "next": "#append_back_to_start_keyboard" }]),
-                        // he
-                        JSON.stringify([{ "next": "#send_help_message" }, { "next": "#append_back_to_start_keyboard" }])
+                        JSON.stringify([{ "next": "#remove_keyboard" }, { "next": "#send_help_message" }, { "next": "#append_back_to_start_keyboard" }])
                     ],
                     ['/about',
                         // default (en)
-                        JSON.stringify([{ "next": "#send_about_message" }, { "next": "#append_back_to_start_keyboard" }]),
-                        // es
-                        JSON.stringify([{ "next": "#send_about_message" }, { "next": "#append_back_to_start_keyboard" }]),
-                        // fr
-                        JSON.stringify([{ "next": "#send_about_message" }, { "next": "#append_back_to_start_keyboard" }]),
-                        // ar
-                        JSON.stringify([{ "next": "#send_about_message" }, { "next": "#append_back_to_start_keyboard" }]),
-                        // de
-                        JSON.stringify([{ "next": "#send_about_message" }, { "next": "#append_back_to_start_keyboard" }]),
-                        // it
-                        JSON.stringify([{ "next": "#send_about_message" }, { "next": "#append_back_to_start_keyboard" }]),
-                        // pt
-                        JSON.stringify([{ "next": "#send_about_message" }, { "next": "#append_back_to_start_keyboard" }]),
-                        // ru
-                        JSON.stringify([{ "next": "#send_about_message" }, { "next": "#append_back_to_start_keyboard" }]),
-                        // zh
-                        JSON.stringify([{ "next": "#send_about_message" }, { "next": "#append_back_to_start_keyboard" }]),
-                        // ja
-                        JSON.stringify([{ "next": "#send_about_message" }, { "next": "#append_back_to_start_keyboard" }]),
-                        // ko
-                        JSON.stringify([{ "next": "#send_about_message" }, { "next": "#append_back_to_start_keyboard" }]),
-                        // he
-                        JSON.stringify([{ "next": "#send_about_message" }, { "next": "#append_back_to_start_keyboard" }])
+                        JSON.stringify([{ "next": "#remove_keyboard" }, { "next": "#send_about_message" }, { "next": "#append_back_to_start_keyboard" }])
                     ],
                     ['#send_welcome_messages',
                         // default (en)
@@ -3985,9 +3919,11 @@ EMD.BasicAutomation = {
                         JSON.stringify([{
                             method: 'editMessageReplyMarkup',
                             payload: {
-                                reply_markup: { remove_keyboard: true }
+                                reply_markup: {
+                                    inline_keyboard: [[]]
+                                }
                             }
-                        }]),
+                        }])
                     ],
                     ['#send_about_git_message',
                         // default (en)
@@ -4097,7 +4033,8 @@ EMD.BasicAutomation = {
                                     + '<a href="https://github.com/ilanlal/basic-telegram-bot-remastered/blob/0b896f3f8c4d47073fb49672bea81eff771b5ee4/src/config/EMD.js#L3872">https://github.com/ilanlal/basic-telegram-bot-remastered</a>',
                                 parse_mode: 'HTML'
                             }
-                        }])],
+                        }])
+                    ],
                     ['#send_secure_private_message',
                         // default (en)
                         JSON.stringify([{

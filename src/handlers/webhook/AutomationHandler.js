@@ -81,6 +81,10 @@ class AutomationHandler {
             payload.chat_id = chat_id;
         }
 
+        if ((method.startsWith('edit') || method.startsWith('delete')) && !reply_to_message_id) {
+            return JSON.stringify({ status: 'skipped_action_missing_message_id', method, chat_id });
+        }
+
         // if action.method is starting with 'edit' or 'delete', add message_id to payload
         if ((method.startsWith('edit') || method.startsWith('delete')) && reply_to_message_id) {
             payload = payload || {};
