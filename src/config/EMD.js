@@ -3107,15 +3107,15 @@ EMD.BasicAutomation = {
                     ],
                     ['/start',
                         // default (en)
-                        JSON.stringify([{ "next": "#remove_keyboard" }, { "next": "#send_welcome_messages" }, { "next": "#append_main_menu_keyboard" }])
+                        JSON.stringify([{ "next": "#remove_keyboard" }, { "next": "#send_welcome_messages" }, { "next": "#append_main_menu_keyboard" }, { "next": "#answer_completed" }])
                     ],
                     ['/help',
                         // default (en)
-                        JSON.stringify([{ "next": "#remove_keyboard" }, { "next": "#send_help_message" }, { "next": "#append_back_to_start_keyboard" }])
+                        JSON.stringify([{ "next": "#remove_keyboard" }, { "next": "#send_help_message" }, { "next": "#append_back_to_start_keyboard" }, { "next": "#answer_completed" }])
                     ],
                     ['/about',
                         // default (en)
-                        JSON.stringify([{ "next": "#remove_keyboard" }, { "next": "#send_about_message" }, { "next": "#append_back_to_start_keyboard" }])
+                        JSON.stringify([{ "next": "#remove_keyboard" }, { "next": "#send_about_message" }, { "next": "#append_back_to_start_keyboard" }, { "next": "#answer_completed" }])
                     ],
                     ['#send_welcome_messages',
                         // default (en)
@@ -4046,6 +4046,104 @@ EMD.BasicAutomation = {
                             }
                         }])
 
+                    ],
+                    ['#answer_completed',
+                        // default (en)
+                        JSON.stringify([{
+                            method: 'answerCallbackQuery',
+                            payload: {
+                                text: 'Session completed successfully! ✅',
+                                show_alert: false
+                            }
+                        }]),
+                        // es
+                        JSON.stringify([{
+                            method: 'answerCallbackQuery',
+                            payload: {
+                                text: '¡Sesión completada con éxito! ✅',
+                                show_alert: false
+                            }
+                        }]),
+                        // fr
+                        JSON.stringify([{
+                            method: 'answerCallbackQuery',
+                            payload: {
+                                text: 'Session terminée avec succès ! ✅',
+                                show_alert: false
+                            }
+                        }]),
+                        // ar
+                        JSON.stringify([{
+                            method: 'answerCallbackQuery',
+                            payload: {
+                                text: 'تم إكمال الجلسة بنجاح! ✅',
+                                show_alert: false
+                            }
+                        }]),
+                        // de
+                        JSON.stringify([{
+                            method: 'answerCallbackQuery',
+                            payload: {
+                                text: 'Sitzung erfolgreich abgeschlossen! ✅',
+                                show_alert: false
+                            }
+                        }]),
+                        // it
+                        JSON.stringify([{
+                            method: 'answerCallbackQuery',
+                            payload: {
+                                text: 'Sessione completata con successo! ✅',
+                                show_alert: false
+                            }
+                        }]),
+                        // pt
+                        JSON.stringify([{
+                            method: 'answerCallbackQuery',
+                            payload: {
+                                text: 'Sessão concluída com sucesso! ✅',
+                                show_alert: false
+                            }
+                        }]),
+                        // ru
+                        JSON.stringify([{
+                            method: 'answerCallbackQuery',
+                            payload: {
+                                text: 'Сессия успешно завершена! ✅',
+                                show_alert: false
+                            }
+                        }]),
+                        // zh
+                        JSON.stringify([{
+                            method: 'answerCallbackQuery',
+                            payload: {
+                                text: '会话成功完成！ ✅',
+                                show_alert: false
+                            }
+                        }]),
+                        // ja
+                        JSON.stringify([{
+                            method: 'answerCallbackQuery',
+                            payload: {
+                                text: 'セッションが正常に完了しました！ ✅',
+                                show_alert: false
+                            }
+                        }]),
+                        // ko
+                        JSON.stringify([{
+                            method: 'answerCallbackQuery',
+                            payload: {
+                                text: '세션이 성공적으로 완료되었습니다! ✅',
+                                show_alert: false
+                            }
+                        }]),
+                        // he
+                        JSON.stringify([{
+                            method: 'answerCallbackQuery',
+                            payload: {
+                                text: 'הסשן הושלם בהצלחה! ✅',
+                                show_alert: false
+                            }
+                        }])
                     ]
                 ]
         };
