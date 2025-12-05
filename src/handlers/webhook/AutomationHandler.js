@@ -75,12 +75,25 @@ class AutomationHandler {
         let payload = action.payload || null;
         const method = action.method || '';
 
+        // Validate required parameters based on method
+        if (!callback_query_id && method.startsWith('answerCallbackQuery')) {
+            return JSON.stringify({ status: 'skipped_action_missing_callback_query_id', method, chat_id });
+        }
+
+        // If callback_query_id is provided and method is answerCallbackQuery, add it to payload
+        if (callback_query_id && method.startsWith('answerCallbackQuery')) {
+            payload = payload || {};
+            payload.callback_query_id = callback_query_id;
+        }
+
+
         // If it's an answerCallbackQuery, add callback_query_id to payload
         if (chat_id && !method.startsWith('answerCallbackQuery')) {
             payload = payload || {};
             payload.chat_id = chat_id;
         }
 
+        // Skip action if message_id is required but not provided
         if ((method.startsWith('edit') || method.startsWith('delete')) && !reply_to_message_id) {
             return JSON.stringify({ status: 'skipped_action_missing_message_id', method, chat_id });
         }
@@ -92,7 +105,6 @@ class AutomationHandler {
         }
 
         // Add reply_to_message_id if provided
-
         const uriAction = method;
         const response = this._telegramBotProxy.executeApiRequest(uriAction, payload);
 
