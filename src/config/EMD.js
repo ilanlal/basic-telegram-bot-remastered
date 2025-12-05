@@ -1098,6 +1098,32 @@ EMD.Automation = {
                             }
                         ]
                     },
+                    { // Add Survey Automation template section
+                        // header: 'Automation Management',
+                        collapsible: false,
+                        numUncollapsibleWidgets: 0,
+                        widgets: [
+                            {
+                                id: 'create_survey_automation_widget',
+                                DecoratedText: {
+                                    topLabel: '✨ Survey Automations',
+                                    text: 'Add survey automation templates to manage your survey-related tasks efficiently.',
+                                    bottomLabel: 'Bind survey template data to get started with survey automations',
+                                    wrapText: false,
+                                    textButton: {
+                                        text: '✨ Survey Template',
+                                        disabled: false,
+                                        onClick: {
+                                            functionName: 'EntityHandler.Addon.onBindSheetDataClick',
+                                            parameters: {
+                                                entityName: 'SurveyAutomation'
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        ]
+                    },
                     // Automation Management Section
                     {
                         // header: 'Automation Management',
@@ -2949,6 +2975,100 @@ EMD.Automation = {
     }
 }
 
+EMD.SurveyAutomation = {
+    entityName: 'SurveyAutomation',
+    sheet: (data = {}) => {
+        return {
+            name: '✨ Surveys',
+            columns: EMD.Automation.sheet(data).columns,
+            sample_data:
+                [
+                    ['/surveys',
+                        // default (en)
+                        JSON.stringify([{ "next": "#append_survey_options_keyboard" }])
+                    ],
+                    ['#sendPoll01',
+                        // default (en)
+                        JSON.stringify([{
+                            method: 'sendPoll',
+                            payload: {
+                                question: 'Which feature do you like the most in this bot?',
+                                question_parse_mode: 'HTML',
+                                options: JSON.stringify([
+                                    'Text Messages with HTML formatting',
+                                    'Photos with captions and inline keyboards',
+                                    'Media Groups (albums) with multiple photos',
+                                    'Interactive Inline Keyboards'
+                                ]),
+                                protect_content: true,
+                                open_period: 7,
+                                is_anonymous: false,
+                                explanation: 'Your feedback helps us improve the bot and add more exciting features!',
+                                explanation_parse_mode: 'HTML',
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "🏠 Start", callback_data: "/home" }]
+                                    ]
+                                }
+                            }
+                        }])],
+                    ['#sendQuiz01',
+                        // default (en)
+                        JSON.stringify([{
+                            method: 'sendPoll',
+                            payload: {
+                                question: 'What is the <b>main</b> advantage of using Interactive Inline Keyboards in Telegram bots? ✨',
+                                question_parse_mode: 'HTML',
+                                options: JSON.stringify([
+                                    'They allow sending larger files',
+                                    'They enable real-time user interaction',
+                                    'They improve message delivery speed',
+                                    'They support multimedia content'
+                                ]),
+                                protect_content: true,
+                                open_period: 7,
+                                is_anonymous: false,
+                                type: 'quiz',
+                                correct_option_id: 3,
+                                explanation: 'Interactive Inline Keyboards allow users to engage directly with the bot, making the experience more dynamic and user-friendly!',
+                                explanation_parse_mode: 'HTML',
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "🏠 Start", callback_data: "/home" }]
+                                    ]
+                                }
+                            }
+                        }])],
+                    ['#append_survey_options_keyboard',
+                        // default (en)
+                        JSON.stringify([{
+                            method: 'editMessageReplyMarkup',
+                            payload: {
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "Take Poll", callback_data: "#sendPoll" }],
+                                        [{ text: "Take Quiz", callback_data: "#sendQuiz" }]
+                                    ]
+                                }
+                            }
+                        }])
+                    ],
+                    ['#send_welcome_to_survey_center',
+                        // default (en)
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Welcome to the Survey Center! \n\n'
+                                    + 'Here you can participate in various polls and quizzes to share your opinions and test your knowledge.',
+                                parse_mode: 'HTML'
+                            }
+                        }])
+                    ]
+                ]
+        }
+    }
+}
+
 EMD.BasicAutomation = {
     entityName: 'BasicAutomation',
     displayName: 'Basic Automation',
@@ -3875,7 +3995,7 @@ EMD.BasicAutomation = {
                             method: 'sendMessage',
                             payload: {
                                 text: 'You can find the source code of this bot on GitHub:\n\n'
-                                    + '<a href="https://github.com/ilanlal/basic-telegram-bot-remastered/blob/0b896f3f8c4d47073fb49672bea81eff771b5ee4/src/config/EMD.js#L1010">https://github.com/ilanlal/basic-telegram-bot-remastered</a>',
+                                    + '<a href="https://github.com/ilanlal/basic-telegram-bot-remastered/blob/d1f736209b77088fa1ecda971d8d3b5c79080252/src/config/EMD.js#L3872">https://github.com/ilanlal/basic-telegram-bot-remastered</a>',
                                 parse_mode: 'HTML'
                             }
                         }]),
@@ -3884,7 +4004,7 @@ EMD.BasicAutomation = {
                             method: 'sendMessage',
                             payload: {
                                 text: 'Puedes encontrar el código fuente de este bot en GitHub:\n\n'
-                                    + '<a href="https://github.com/ilanlal/basic-telegram-bot-remastered/blob/0b896f3f8c4d47073fb49672bea81eff771b5ee4/src/config/EMD.js#L1010">https://github.com/ilanlal/basic-telegram-bot-remastered</a>',
+                                    + '<a href="https://github.com/ilanlal/basic-telegram-bot-remastered/blob/0b896f3f8c4d47073fb49672bea81eff771b5ee4/src/config/EMD.js#L3872">https://github.com/ilanlal/basic-telegram-bot-remastered</a>',
                                 parse_mode: 'HTML'
                             }
                         }]),
@@ -3893,7 +4013,7 @@ EMD.BasicAutomation = {
                             method: 'sendMessage',
                             payload: {
                                 text: 'Vous pouvez trouver le code source de ce bot sur GitHub:\n\n'
-                                    + '<a href="https://github.com/ilanlal/basic-telegram-bot-remastered/blob/0b896f3f8c4d47073fb49672bea81eff771b5ee4/src/config/EMD.js#L1010">https://github.com/ilanlal/basic-telegram-bot-remastered</a>',
+                                    + '<a href="https://github.com/ilanlal/basic-telegram-bot-remastered/blob/0b896f3f8c4d47073fb49672bea81eff771b5ee4/src/config/EMD.js#L3872">https://github.com/ilanlal/basic-telegram-bot-remastered</a>',
                                 parse_mode: 'HTML'
                             }
                         }]),
@@ -3902,7 +4022,7 @@ EMD.BasicAutomation = {
                             method: 'sendMessage',
                             payload: {
                                 text: 'يمكنك العثور على الشفرة المصدرية لهذا البوت على GitHub:\n\n'
-                                    + '<a href="https://github.com/ilanlal/basic-telegram-bot-remastered/blob/0b896f3f8c4d47073fb49672bea81eff771b5ee4/src/config/EMD.js#L1010">https://github.com/ilanlal/basic-telegram-bot-remastered</a>',
+                                    + '<a href="https://github.com/ilanlal/basic-telegram-bot-remastered/blob/0b896f3f8c4d47073fb49672bea81eff771b5ee4/src/config/EMD.js#L3872">https://github.com/ilanlal/basic-telegram-bot-remastered</a>',
                                 parse_mode: 'HTML'
                             }
                         }]),
@@ -3911,7 +4031,7 @@ EMD.BasicAutomation = {
                             method: 'sendMessage',
                             payload: {
                                 text: 'Sie können den Quellcode dieses Bots auf GitHub finden:\n\n'
-                                    + '<a href="https://github.com/ilanlal/basic-telegram-bot-remastered/blob/0b896f3f8c4d47073fb49672bea81eff771b5ee4/src/config/EMD.js#L1010">https://github.com/ilanlal/basic-telegram-bot-remastered</a>',
+                                    + '<a href="https://github.com/ilanlal/basic-telegram-bot-remastered/blob/0b896f3f8c4d47073fb49672bea81eff771b5ee4/src/config/EMD.js#L3872">https://github.com/ilanlal/basic-telegram-bot-remastered</a>',
                                 parse_mode: 'HTML'
                             }
                         }]),
@@ -3920,7 +4040,7 @@ EMD.BasicAutomation = {
                             method: 'sendMessage',
                             payload: {
                                 text: 'Puoi trovare il codice sorgente di questo bot su GitHub:\n\n'
-                                    + '<a href="https://github.com/ilanlal/basic-telegram-bot-remastered/blob/0b896f3f8c4d47073fb49672bea81eff771b5ee4/src/config/EMD.js#L1010">https://github.com/ilanlal/basic-telegram-bot-remastered</a>',
+                                    + '<a href="https://github.com/ilanlal/basic-telegram-bot-remastered/blob/0b896f3f8c4d47073fb49672bea81eff771b5ee4/src/config/EMD.js#L3872">https://github.com/ilanlal/basic-telegram-bot-remastered</a>',
                                 parse_mode: 'HTML'
                             }
                         }]),
@@ -3929,7 +4049,7 @@ EMD.BasicAutomation = {
                             method: 'sendMessage',
                             payload: {
                                 text: 'Você pode encontrar o código-fonte deste bot no GitHub:\n\n'
-                                    + '<a href="https://github.com/ilanlal/basic-telegram-bot-remastered/blob/0b896f3f8c4d47073fb49672bea81eff771b5ee4/src/config/EMD.js#L1010">https://github.com/ilanlal/basic-telegram-bot-remastered</a>',
+                                    + '<a href="https://github.com/ilanlal/basic-telegram-bot-remastered/blob/0b896f3f8c4d47073fb49672bea81eff771b5ee4/src/config/EMD.js#L3872">https://github.com/ilanlal/basic-telegram-bot-remastered</a>',
                                 parse_mode: 'HTML'
                             }
                         }]),
@@ -3938,7 +4058,7 @@ EMD.BasicAutomation = {
                             method: 'sendMessage',
                             payload: {
                                 text: 'Вы можете найти исходный код этого бота на GitHub:\n\n'
-                                    + '<a href="https://github.com/ilanlal/basic-telegram-bot-remastered/blob/0b896f3f8c4d47073fb49672bea81eff771b5ee4/src/config/EMD.js#L1010">https://github.com/ilanlal/basic-telegram-bot-remastered</a>',
+                                    + '<a href="https://github.com/ilanlal/basic-telegram-bot-remastered/blob/0b896f3f8c4d47073fb49672bea81eff771b5ee4/src/config/EMD.js#L3872">https://github.com/ilanlal/basic-telegram-bot-remastered</a>',
                                 parse_mode: 'HTML'
                             }
                         }]),
@@ -3947,7 +4067,7 @@ EMD.BasicAutomation = {
                             method: 'sendMessage',
                             payload: {
                                 text: '您可以在 GitHub 上找到此机器人的源代码：\n\n'
-                                    + '<a href="https://github.com/ilanlal/basic-telegram-bot-remastered/blob/0b896f3f8c4d47073fb49672bea81eff771b5ee4/src/config/EMD.js#L1010">https://github.com/ilanlal/basic-telegram-bot-remastered</a>',
+                                    + '<a href="https://github.com/ilanlal/basic-telegram-bot-remastered/blob/0b896f3f8c4d47073fb49672bea81eff771b5ee4/src/config/EMD.js#L3872">https://github.com/ilanlal/basic-telegram-bot-remastered</a>',
                                 parse_mode: 'HTML'
                             }
                         }]),
@@ -3956,7 +4076,7 @@ EMD.BasicAutomation = {
                             method: 'sendMessage',
                             payload: {
                                 text: 'このボットのソースコードはGitHubで見つけることができます：\n\n'
-                                    + '<a href="https://github.com/ilanlal/basic-telegram-bot-remastered/blob/0b896f3f8c4d47073fb49672bea81eff771b5ee4/src/config/EMD.js#L1010">https://github.com/ilanlal/basic-telegram-bot-remastered</a>',
+                                    + '<a href="https://github.com/ilanlal/basic-telegram-bot-remastered/blob/0b896f3f8c4d47073fb49672bea81eff771b5ee4/src/config/EMD.js#L3872">https://github.com/ilanlal/basic-telegram-bot-remastered</a>',
                                 parse_mode: 'HTML'
                             }
                         }]),
@@ -3965,7 +4085,7 @@ EMD.BasicAutomation = {
                             method: 'sendMessage',
                             payload: {
                                 text: '이 봇의 소스 코드는 GitHub에서 찾을 수 있습니다:\n\n'
-                                    + '<a href="https://github.com/ilanlal/basic-telegram-bot-remastered/blob/0b896f3f8c4d47073fb49672bea81eff771b5ee4/src/config/EMD.js#L1010">https://github.com/ilanlal/basic-telegram-bot-remastered</a>',
+                                    + '<a href="https://github.com/ilanlal/basic-telegram-bot-remastered/blob/0b896f3f8c4d47073fb49672bea81eff771b5ee4/src/config/EMD.js#L3872">https://github.com/ilanlal/basic-telegram-bot-remastered</a>',
                                 parse_mode: 'HTML'
                             }
                         }]),
@@ -3974,7 +4094,7 @@ EMD.BasicAutomation = {
                             method: 'sendMessage',
                             payload: {
                                 text: 'אתה יכול למצוא את קוד המקור של הבוט הזה ב-GitHub:\n\n'
-                                    + '<a href="https://github.com/ilanlal/basic-telegram-bot-remastered/blob/0b896f3f8c4d47073fb49672bea81eff771b5ee4/src/config/EMD.js#L1010">https://github.com/ilanlal/basic-telegram-bot-remastered</a>',
+                                    + '<a href="https://github.com/ilanlal/basic-telegram-bot-remastered/blob/0b896f3f8c4d47073fb49672bea81eff771b5ee4/src/config/EMD.js#L3872">https://github.com/ilanlal/basic-telegram-bot-remastered</a>',
                                 parse_mode: 'HTML'
                             }
                         }])],
@@ -3988,7 +4108,7 @@ EMD.BasicAutomation = {
                                 parse_mode: 'HTML'
                             }
                         }])
-                    
+
                     ]
                 ]
         };
