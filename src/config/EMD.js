@@ -5814,14 +5814,204 @@ EMD.SecurityChecksAutomation = {
                 ],
                 ['#send_privacy_checks',
                     // default (en)
+                    JSON.stringify([
+                        { "next": "#remove_keyboard" },
+                        {
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Privacy Checks: \n\n'
+                                    + '1. Review app permissions and revoke any unnecessary access.\n'
+                                    + '2. Use strong, unique passwords for your accounts.\n'
+                                    + '3. Enable two-factor authentication (2FA) wherever possible.\n'
+                                    + '4. Be cautious about sharing personal information online.\n',
+                                parse_mode: 'HTML'
+                            }
+                        },
+                        { "next": "#append_top_security_checks_keyboard" }
+                    ]),
+                    // es
+                    JSON.stringify([
+                        { "next": "#remove_keyboard" },
+                        {
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Comprobaciones de privacidad: \n\n'
+                                    + '1. Revisa los permisos de las aplicaciones y revoca cualquier acceso innecesario.\n'
+                                    + '2. Utiliza contraseñas fuertes y únicas para tus cuentas.\n'
+                                    + '3. Habilita la autenticación de dos factores (2FA) siempre que sea posible.\n'
+                                    + '4. Ten cuidado al compartir información personal en línea.\n',
+                                parse_mode: 'HTML'
+                            }
+                        },
+                        { "next": "#append_top_security_checks_keyboard" }
+                    ]),
+                    // fr
+                    JSON.stringify([
+                        { "next": "#remove_keyboard" },
+                        {
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Contrôles de confidentialité : \n\n'
+                                    + '1. Examinez les autorisations des applications et révoquez tout accès inutile.\n'
+                                    + '2. Utilisez des mots de passe forts et uniques pour vos comptes.\n'
+                                    + '3. Activez l\'authentification à deux facteurs (2FA) dans la mesure du possible.\n'
+                                    + '4. Soyez prudent lorsque vous partagez des informations personnelles en ligne.\n',
+                                parse_mode: 'HTML'
+                            }
+                        },
+                        { "next": "#append_top_security_checks_keyboard" }
+                    ]),
+                    // ar
+                    JSON.stringify([
+                        { "next": "#remove_keyboard" },
+                        {
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'فحوصات الخصوصية: \n\n'
+                                    + '1. راجع أذونات التطبيق وقم بإلغاء أي وصول غير ضروري.\n'
+                                    + '2. استخدم كلمات مرور قوية وفريدة لحساباتك.\n'
+                                    + '3. قم بتمكين المصادقة الثنائية (2FA) حيثما أمكن ذلك.\n'
+                                    + '4. كن حذرًا عند مشاركة المعلومات الشخصية عبر الإنترنت.\n',
+                                parse_mode: 'HTML'
+                            }
+                        },
+                        { "next": "#append_top_security_checks_keyboard" }
+                    ]),
+                    // de
+                    JSON.stringify([
+                        { "next": "#remove_keyboard" },
+                        {
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Datenschutzkontrollen: \n\n'
+                                    + '1. Überprüfen Sie App-Berechtigungen und widerrufen Sie unnötige Zugriffe.\n'
+                                    + '2. Verwenden Sie starke, eindeutige Passwörter für Ihre Konten.\n'
+                                    + '3. Aktivieren Sie die Zwei-Faktor-Authentifizierung (2FA), wo immer möglich.\n'
+                                    + '4. Seien Sie vorsichtig beim Teilen persönlicher Informationen online.\n',
+                                parse_mode: 'HTML'
+                            }
+                        },
+                        { "next": "#append_top_security_checks_keyboard" }
+                    ]),
+                    // it
+                    JSON.stringify([
+                        { "next": "#remove_keyboard" },
+                        {
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Controlli sulla privacy: \n\n'
+                                    + '1. Rivedi i permessi delle app e revoca l\'accesso non necessario.\n'
+                                    + '2. Usa password forti e uniche per i tuoi account.\n'
+                                    + '3. Abilita l\'autenticazione a due fattori (2FA) ovunque sia possibile.\n'
+                                    + '4. Sii cauto nel condividere informazioni personali online.\n',
+                                parse_mode: 'HTML'
+                            }
+                        },
+                        { "next": "#append_top_security_checks_keyboard" }
+                    ]),
+                    // pt
+                    JSON.stringify([
+                        { "next": "#remove_keyboard" },
+                        {
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Verificações de privacidade: \n\n'
+                                    + '1. Revise as permissões de aplicativos e revogue qualquer acesso desnecessário.\n'
+                                    + '2. Use senhas fortes e exclusivas para suas contas.\n'
+                                    + '3. Ative a autenticação de dois fatores (2FA) sempre que possível.\n'
+                                    + '4. Tenha cuidado ao compartilhar informações pessoais online.\n',
+                                parse_mode: 'HTML'
+                            }
+                        },
+                        { "next": "#append_top_security_checks_keyboard" }
+                    ]),
+                    // ru
+                    JSON.stringify([
+                        { "next": "#remove_keyboard" },
+                        {
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Проверки конфиденциальности: \n\n'
+                                    + '1. Проверяйте разрешения приложений и отзывайте ненужный доступ.\n'
+                                    + '2. Используйте надежные, уникальные пароли для своих учетных записей.\n'
+                                    + '3. Включите двухфакторную аутентификацию (2FA) везде, где это возможно.\n'
+                                    + '4. Будьте осторожны при обмене личной информацией в Интернете.\n',
+                                parse_mode: 'HTML'
+                            }
+                        },
+                        { "next": "#append_top_security_checks_keyboard" }
+                    ]),
+                    // zh
+                    JSON.stringify([
+                        { "next": "#remove_keyboard" },
+                        {
+                            method: 'sendMessage',
+                            payload: {
+                                text: '隐私检查： \n\n'
+                                    + '1. 审查应用程序权限并撤销任何不必要的访问权限。\n'
+                                    + '2. 为您的帐户使用强大、独特的密码。\n'
+                                    + '3. 尽可能启用两步验证（2FA）。\n'
+                                    + '4. 在线共享个人信息时要谨慎。\n',
+                                parse_mode: 'HTML'
+                            }
+                        },
+                        { "next": "#append_top_security_checks_keyboard" }
+                    ]),
+                    // ja
+                    JSON.stringify([
+                        { "next": "#remove_keyboard" },
+                        {
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'プライバシーチェック： \n\n'
+                                    + '1. アプリの権限を確認し、不要なアクセスをすべて取り消します。\n'
+                                    + '2. アカウントには強力でユニークなパスワードを使用してください。\n'
+                                    + '3. 可能な限り二要素認証（2FA）を有効にしてください。\n'
+                                    + '4. オンラインで個人情報を共有する際には注意してください。\n',
+                                parse_mode: 'HTML'
+                            }
+                        },
+                        { "next": "#append_top_security_checks_keyboard" }
+                    ]),
+                    // ko
+                    JSON.stringify([
+                        { "next": "#remove_keyboard" },
+                        {
+                            method: 'sendMessage',
+                            payload: {
+                                text: '개인정보 보호 확인: \n\n'
+                                    + '1. 앱 권한을 검토하고 불필요한 접근을 모두 취소하세요.\n'
+                                    + '2. 계정에 강력하고 고유한 비밀번호를 사용하세요.\n'
+                                    + '3. 가능하면 2단계 인증(2FA)을 활성화하세요.\n'
+                                    + '4. 온라인에서 개인 정보를 공유할 때 주의하세요.\n',
+                                parse_mode: 'HTML'
+                            }
+                        },
+                        { "next": "#append_top_security_checks_keyboard" }
+                    ]),
+                    // he
+                    JSON.stringify([
+                        { "next": "#remove_keyboard" },
+                        {
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'בדיקות פרטיות: \n\n'
+                                    + '1. סקור את הרשאות האפליקציה ובטל כל גישה מיותרת.\n'
+                                    + '2. השתמש בסיסמאות חזקות וייחודיות עבור החשבונות שלך.\n'
+                                    + '3. הפעל אימות דו-שלבי (2FA) בכל מקום אפשרי.\n'
+                                    + '4. היזהר משיתוף מידע אישי באינטרנט.\n',
+                                parse_mode: 'HTML'
+                            }
+                        },
+                        { "next": "#append_top_security_checks_keyboard" }
+                    ])
+                ],
+                ['#send_call_to_security_action_message',
+                    // default (en)
                     JSON.stringify([{
                         method: 'sendMessage',
                         payload: {
-                            text: 'Privacy Checks: \n\n'
-                                + '1. Review app permissions and revoke any unnecessary access.\n'
-                                + '2. Use strong, unique passwords for your accounts.\n'
-                                + '3. Enable two-factor authentication (2FA) wherever possible.\n'
-                                + '4. Be cautious about sharing personal information online.\n',
+                            text: 'For more security actions, visit our website or contact support.',
                             parse_mode: 'HTML'
                         }
                     }])
