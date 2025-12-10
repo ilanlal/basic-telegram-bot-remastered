@@ -3549,7 +3549,7 @@ EMD.SurveyAutomation = {
                                     'Interactive Inline Keyboards'
                                 ]),
                                 protect_content: true,
-                                open_period: 7,
+                                open_period: 300,
                                 is_anonymous: false,
                                 explanation: 'Your feedback helps us improve the bot and add more exciting features!',
                                 explanation_parse_mode: 'HTML',
@@ -3575,7 +3575,7 @@ EMD.SurveyAutomation = {
                                     'Live Streaming'
                                 ]),
                                 protect_content: true,
-                                open_period: 7,
+                                open_period: 300,
                                 is_anonymous: false,
                                 explanation: 'Your feedback helps us improve the bot and add more exciting features!',
                                 explanation_parse_mode: 'HTML',
@@ -3601,7 +3601,7 @@ EMD.SurveyAutomation = {
                                     'Rarely'
                                 ]),
                                 protect_content: true,
-                                open_period: 7,
+                                open_period: 300,
                                 is_anonymous: false,
                                 explanation: 'Your feedback helps us improve the bot and add more exciting features!',
                                 explanation_parse_mode: 'HTML',
@@ -3627,7 +3627,7 @@ EMD.SurveyAutomation = {
                                     'Other'
                                 ]),
                                 protect_content: true,
-                                open_period: 7,
+                                open_period: 300,
                                 is_anonymous: false,
                                 explanation: 'Your feedback helps us improve the bot and add more exciting features!',
                                 explanation_parse_mode: 'HTML',
@@ -3653,7 +3653,7 @@ EMD.SurveyAutomation = {
                                     'They support multimedia content'
                                 ]),
                                 protect_content: true,
-                                open_period: 7,
+                                open_period: 300,
                                 is_anonymous: false,
                                 type: 'quiz',
                                 correct_option_id: 3,
@@ -3679,7 +3679,7 @@ EMD.SurveyAutomation = {
                                     'Soportan contenido multimedia'
                                 ]),
                                 protect_content: true,
-                                open_period: 7,
+                                open_period: 300,
                                 is_anonymous: false,
                                 type: 'quiz',
                                 correct_option_id: 3,
@@ -3705,7 +3705,7 @@ EMD.SurveyAutomation = {
                                     'Ils prennent en charge le contenu multimédia'
                                 ]),
                                 protect_content: true,
-                                open_period: 7,
+                                open_period: 300,
                                 is_anonymous: false,
                                 type: 'quiz',
                                 correct_option_id: 3,
@@ -3731,7 +3731,7 @@ EMD.SurveyAutomation = {
                                     'تدعم المحتوى متعدد الوسائط'
                                 ]),
                                 protect_content: true,
-                                open_period: 7,
+                                open_period: 300,
                                 is_anonymous: false,
                                 type: 'quiz',
                                 correct_option_id: 3,
@@ -3757,7 +3757,7 @@ EMD.SurveyAutomation = {
                                     'Sie unterstützen Multimedia-Inhalte'
                                 ]),
                                 protect_content: true,
-                                open_period: 7,
+                                open_period: 300,
                                 is_anonymous: false,
                                 type: 'quiz',
                                 correct_option_id: 3,
@@ -3783,7 +3783,7 @@ EMD.SurveyAutomation = {
                                     'Supportano contenuti multimediali'
                                 ]),
                                 protect_content: true,
-                                open_period: 7,
+                                open_period: 300,
                                 is_anonymous: false,
                                 type: 'quiz',
                                 correct_option_id: 3,
@@ -3809,7 +3809,7 @@ EMD.SurveyAutomation = {
                                     'Eles suportam conteúdo multimídia'
                                 ]),
                                 protect_content: true,
-                                open_period: 7,
+                                open_period: 300,
                                 is_anonymous: false,
                                 type: 'quiz',
                                 correct_option_id: 3,
@@ -3835,7 +3835,7 @@ EMD.SurveyAutomation = {
                                     'Они поддерживают мультимедийный контент'
                                 ]),
                                 protect_content: true,
-                                open_period: 7,
+                                open_period: 300,
                                 is_anonymous: false,
                                 type: 'quiz',
                                 correct_option_id: 3,
@@ -3861,7 +3861,7 @@ EMD.SurveyAutomation = {
                                     '它们支持多媒体内容'
                                 ]),
                                 protect_content: true,
-                                open_period: 7,
+                                open_period: 300,
                                 is_anonymous: false,
                                 type: 'quiz',
                                 correct_option_id: 3,
@@ -3887,7 +3887,7 @@ EMD.SurveyAutomation = {
                                     'マルチメディアコンテンツをサポートする'
                                 ]),
                                 protect_content: true,
-                                open_period: 7,
+                                open_period: 300,
                                 is_anonymous: false,
                                 type: 'quiz',
                                 correct_option_id: 3,
@@ -3913,7 +3913,7 @@ EMD.SurveyAutomation = {
                                     '멀티미디어 콘텐츠를 지원한다'
                                 ]),
                                 protect_content: true,
-                                open_period: 7,
+                                open_period: 300,
                                 is_anonymous: false,
                                 type: 'quiz',
                                 correct_option_id: 3,
@@ -3939,7 +3939,7 @@ EMD.SurveyAutomation = {
                                     'הן תומכות בתוכן מולטימדיה'
                                 ]),
                                 protect_content: true,
-                                open_period: 7,
+                                open_period: 300,
                                 is_anonymous: false,
                                 type: 'quiz',
                                 correct_option_id: 3,
@@ -3967,7 +3967,7 @@ EMD.SurveyAutomation = {
                                     'By limiting user choices'
                                 ]),
                                 protect_content: true,
-                                open_period: 7,
+                                open_period: 300,
                                 is_anonymous: false,
                                 type: 'quiz',
                                 correct_option_id: 1,
@@ -3996,7 +3996,7 @@ EMD.SurveyAutomation = {
                                     'None of the above'
                                 ]),
                                 protect_content: true,
-                                open_period: 7,
+                                open_period: 300,
                                 is_anonymous: false,
                                 type: 'quiz',
                                 correct_option_id: 1,
@@ -4024,7 +4024,7 @@ EMD.SurveyAutomation = {
                                     'They support multimedia content'
                                 ]),
                                 protect_content: true,
-                                open_period: 7,
+                                open_period: 300,
                                 is_anonymous: false,
                                 type: 'quiz',
                                 correct_option_id: 3,
@@ -4050,7 +4050,7 @@ EMD.SurveyAutomation = {
                                     'Soportan contenido multimedia'
                                 ]),
                                 protect_content: true,
-                                open_period: 7,
+                                open_period: 300,
                                 is_anonymous: false,
                                 type: 'quiz',
                                 correct_option_id: 3,
@@ -4076,7 +4076,7 @@ EMD.SurveyAutomation = {
                                     'Ils prennent en charge le contenu multimédia'
                                 ]),
                                 protect_content: true,
-                                open_period: 7,
+                                open_period: 300,
                                 is_anonymous: false,
                                 type: 'quiz',
                                 correct_option_id: 3,
@@ -4102,7 +4102,7 @@ EMD.SurveyAutomation = {
                                     'تدعم المحتوى متعدد الوسائط'
                                 ]),
                                 protect_content: true,
-                                open_period: 7,
+                                open_period: 300,
                                 is_anonymous: false,
                                 type: 'quiz',
                                 correct_option_id: 3,
@@ -4128,7 +4128,7 @@ EMD.SurveyAutomation = {
                                     'Sie unterstützen Multimedia-Inhalte'
                                 ]),
                                 protect_content: true,
-                                open_period: 7,
+                                open_period: 300,
                                 is_anonymous: false,
                                 type: 'quiz',
                                 correct_option_id: 3,
@@ -4154,7 +4154,7 @@ EMD.SurveyAutomation = {
                                     'Supportano contenuti multimediali'
                                 ]),
                                 protect_content: true,
-                                open_period: 7,
+                                open_period: 300,
                                 is_anonymous: false,
                                 type: 'quiz',
                                 correct_option_id: 3,
@@ -4180,7 +4180,7 @@ EMD.SurveyAutomation = {
                                     'Eles suportam conteúdo multimídia'
                                 ]),
                                 protect_content: true,
-                                open_period: 7,
+                                open_period: 300,
                                 is_anonymous: false,
                                 type: 'quiz',
                                 correct_option_id: 3,
@@ -4206,7 +4206,7 @@ EMD.SurveyAutomation = {
                                     'Они поддерживают мультимедийный контент'
                                 ]),
                                 protect_content: true,
-                                open_period: 7,
+                                open_period: 300,
                                 is_anonymous: false,
                                 type: 'quiz',
                                 correct_option_id: 3,
@@ -4232,7 +4232,7 @@ EMD.SurveyAutomation = {
                                     '它们支持多媒体内容'
                                 ]),
                                 protect_content: true,
-                                open_period: 7,
+                                open_period: 300,
                                 is_anonymous: false,
                                 type: 'quiz',
                                 correct_option_id: 3,
@@ -4258,7 +4258,7 @@ EMD.SurveyAutomation = {
                                     'マルチメディアコンテンツをサポートする'
                                 ]),
                                 protect_content: true,
-                                open_period: 7,
+                                open_period: 300,
                                 is_anonymous: false,
                                 type: 'quiz',
                                 correct_option_id: 3,
@@ -4284,7 +4284,7 @@ EMD.SurveyAutomation = {
                                     '멀티미디어 콘텐츠를 지원한다'
                                 ]),
                                 protect_content: true,
-                                open_period: 7,
+                                open_period: 300,
                                 is_anonymous: false,
                                 type: 'quiz',
                                 correct_option_id: 3,
@@ -4310,7 +4310,7 @@ EMD.SurveyAutomation = {
                                     'הן תומכות בתוכן מולטימדיה'
                                 ]),
                                 protect_content: true,
-                                open_period: 7,
+                                open_period: 300,
                                 is_anonymous: false,
                                 type: 'quiz',
                                 correct_option_id: 3,

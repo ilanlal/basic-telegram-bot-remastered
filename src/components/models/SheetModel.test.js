@@ -53,5 +53,42 @@ describe('SheetModel', () => {
             expect(values[1]).toEqual(sheetMeta.sample_data[0]);
             expect(values[2]).toEqual(sheetMeta.sample_data[1]);
         });
+
+        // getSheetSimpleData
+        it('should get simple data from the sheet based on sheetMeta', () => {
+            const sheetMeta = {
+                name: 'Test Sheet',
+                columns: ['action', 'default', 'es', 'fr', 'ar', 'de', 'it', 'pt', 'ru', 'zh', 'ja', 'ko', 'he'],
+                sample_data: [
+                    ['action1', 'default1', 'es1', 'fr1', 'ar1', 'de1', 'it1', 'pt1', 'ru1', 'zh1', 'ja1', 'ko1', 'he1'],
+                    ['action2', 'default2', 'es2', 'fr2', 'ar2', 'de2', 'it2', 'pt2', 'ru2', 'zh2', 'ja2', 'ko2', 'he2'],
+                ]
+            };
+            model.bindSheetSampleData(sheetMeta);
+            const simpleData = model.getSheetSimpleData(sheetMeta);
+            expect(simpleData.length).toBe(2);
+            expect(simpleData[0]).toEqual(sheetMeta.sample_data[0]);
+            expect(simpleData[1]).toEqual(sheetMeta.sample_data[1]);
+        });
+
+        // appendRow
+        it('should append a row to the sheet based on sheetMeta', () => {
+            const sheetMeta = {
+                name: 'Test Sheet',
+                columns: ['action', 'default', 'es', 'fr', 'ar', 'de', 'it', 'pt', 'ru', 'zh', 'ja', 'ko', 'he'],
+                sample_data: [
+                    ['action1', 'default1', 'es1', 'fr1', 'ar1', 'de1', 'it1', 'pt1', 'ru1', 'zh1', 'ja1', 'ko1', 'he1'],
+                    ['action2', 'default2', 'es2', 'fr2', 'ar2', 'de2', 'it2', 'pt2', 'ru2', 'zh2', 'ja2', 'ko2', 'he2'],
+                ]
+            };
+            model.bindSheetSampleData(sheetMeta);
+            const newRow = ['action3', 'default3', 'es3', 'fr3', 'ar3', 'de3', 'it3', 'pt3', 'ru3', 'zh3', 'ja3', 'ko3', 'he3'];
+            model.appendRow(sheetMeta, newRow);
+            const activeSheet = model.getSheet(sheetMeta);
+            const dataRange = activeSheet.getDataRange();
+            const values = dataRange.getValues();
+            expect(values.length).toBeGreaterThanOrEqual(3);
+            expect(values[3]).toEqual(newRow);
+        });
     });
 });
