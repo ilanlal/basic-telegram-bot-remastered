@@ -22,7 +22,7 @@ describe('PostMessageHandler', () => {
             SpreadsheetApp.getActiveSpreadsheet()
         );
         SheetModel.create(SpreadsheetApp.getActiveSpreadsheet())
-            .bindSheetSampleData(EMD.Automation.sheet({}));
+            .bindSheetSampleData(EMD.BasicAutomation.sheet({}));
 
     });
 
@@ -76,6 +76,8 @@ describe('PostMessageHandler', () => {
                 };
                 const sendMessgeUrl = `https://api.telegram.org/bot${dummyToken}/sendMessage`;
                 const sendPhotoUrl = `https://api.telegram.org/bot${dummyToken}/sendPhoto`;
+                const sendInvoiceUrl = `https://api.telegram.org/bot${dummyToken}/sendInvoice`;
+                const editMessageReplyMarkupUrl = `https://api.telegram.org/bot${dummyToken}/editMessageReplyMarkup`;
 
                 UrlFetchAppStubConfiguration.when(sendMessgeUrl)
                     .return(new HttpResponse()
@@ -91,6 +93,23 @@ describe('PostMessageHandler', () => {
                                 message_id: 1,
                             }
                         })));
+
+                UrlFetchAppStubConfiguration.when(sendInvoiceUrl)
+                    .return(new HttpResponse()
+                        .setContentText(JSON.stringify({
+                            result: {
+                                message_id: 1,
+                            }
+                        })));
+
+                UrlFetchAppStubConfiguration.when(editMessageReplyMarkupUrl)
+                    .return(new HttpResponse()
+                        .setContentText(JSON.stringify({
+                            result: {
+                                message_id: 1,
+                            }
+                        })));
+                        
                 let response = handler.handleBotCommand(content.message.from.id, content.message);
                 expect(response).toBeDefined();
                 const responseObject = JSON.parse(response);
@@ -102,7 +121,7 @@ describe('PostMessageHandler', () => {
     describe('handlePostMessage', () => {
 
 
-        const commands = ['/start', '/whoami', '/me', '/whoru', '/whoareyou', '/botinfo', '/help', '/about'];
+        const commands = ['/start', '/help', '/about'];
         commands.forEach(cmd => {
             test(`should handle ${cmd} message`, () => {
                 const content = {
@@ -116,6 +135,8 @@ describe('PostMessageHandler', () => {
                 };
                 const sendMessgeUrl = `https://api.telegram.org/bot${dummyToken}/sendMessage`;
                 const sendPhotoUrl = `https://api.telegram.org/bot${dummyToken}/sendPhoto`;
+                const sendInvoiceUrl = `https://api.telegram.org/bot${dummyToken}/sendInvoice`;
+                const editMessageReplyMarkupUrl = `https://api.telegram.org/bot${dummyToken}/editMessageReplyMarkup`;
 
                 UrlFetchAppStubConfiguration.when(sendMessgeUrl)
                     .return(new HttpResponse()
@@ -125,6 +146,22 @@ describe('PostMessageHandler', () => {
                             }
                         })));
                 UrlFetchAppStubConfiguration.when(sendPhotoUrl)
+                    .return(new HttpResponse()
+                        .setContentText(JSON.stringify({
+                            result: {
+                                message_id: 1,
+                            }
+                        })));
+
+                UrlFetchAppStubConfiguration.when(sendInvoiceUrl)
+                    .return(new HttpResponse()
+                        .setContentText(JSON.stringify({
+                            result: {
+                                message_id: 1,
+                            }
+                        })));
+
+                UrlFetchAppStubConfiguration.when(editMessageReplyMarkupUrl)
                     .return(new HttpResponse()
                         .setContentText(JSON.stringify({
                             result: {
