@@ -11,7 +11,8 @@ class LoggerModel {
                 .getProperty(EnvironmentModel.InputMeta.LOG_ARCHIVE_SIZE), 10) || 1000;
         this.sheetModel = SheetModel.create(activeSpreadsheet);
         this.sheet = this.sheetModel.initializeSheet(EMD.Logger.sheet({}));
-        this.archiveLog();
+        // cause runtime error when archiveSize is invalid
+        // this.archiveLog();
     }
 
     logEvent({ dc, action, chat_id, content, event }) {

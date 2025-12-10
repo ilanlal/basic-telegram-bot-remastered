@@ -2864,11 +2864,23 @@ EMD.BasicAutomation = {
                     ],
                     ['/help',
                         // default (en)
-                        JSON.stringify([{ "next": "#remove_keyboard" }, { "next": "#send_help_message" }, { "next": "#append_back_to_start_keyboard" }, { "next": "#answer_completed" }])
+                        JSON.stringify([
+                            { "next": "#remove_keyboard" },
+                            { "next": "#send_help_message" },
+                            { "next": "#append_back_to_start_keyboard" },
+                            { "next": "#answer_completed" }])
                     ],
                     ['/about',
                         // default (en)
-                        JSON.stringify([{ "next": "#remove_keyboard" }, { "next": "#send_about_message" }, { "next": "#append_back_to_start_keyboard" }, { "next": "#answer_completed" }])
+                        JSON.stringify([
+                            { "next": "#remove_keyboard" },
+                            { "next": "#send_open_source_message" },
+                            { "next": "#send_donation_message" },
+                            { "next": "#send_show_me_love_invoice" },
+                            { "next": "#send_about_message" },
+                            { "next": "#append_back_to_start_keyboard" },
+                            { "next": "#answer_completed" }
+                        ])
                     ],
                     ['#send_welcome_messages',
                         // default (en)
@@ -3382,8 +3394,12 @@ EMD.BasicAutomation = {
                             payload: {
                                 reply_markup: {
                                     inline_keyboard: [
-                                        [{ text: "ℹ️ About", callback_data: "/about" }],
-                                        [{ text: "❓ Help", callback_data: "/help" }]
+                                        [
+                                            { text: "💖 Show Me Love", callback_data: "#send_show_me_love_invoice" }],
+                                        [
+                                            { text: "ℹ️ About", callback_data: "/about" },
+                                            { text: "❓ Help", callback_data: "/help" }
+                                        ]
                                     ]
                                 }
                             }
@@ -3394,8 +3410,12 @@ EMD.BasicAutomation = {
                             payload: {
                                 reply_markup: {
                                     inline_keyboard: [
-                                        [{ text: "ℹ️ Acerca de", callback_data: "/about" }],
-                                        [{ text: "❓ Ayuda", callback_data: "/help" }]
+                                        [
+                                            { text: "💖 Muéstrame amor", callback_data: "#send_show_me_love_invoice" }],
+                                        [
+                                            { text: "ℹ️ Acerca de", callback_data: "/about" },
+                                            { text: "❓ Ayuda", callback_data: "/help" }
+                                        ]
                                     ]
                                 }
                             }
@@ -3406,8 +3426,12 @@ EMD.BasicAutomation = {
                             payload: {
                                 reply_markup: {
                                     inline_keyboard: [
-                                        [{ text: "ℹ️ À propos", callback_data: "/about" }],
-                                        [{ text: "❓ Aide", callback_data: "/help" }]
+                                        [
+                                            { text: "💖 Montre-moi de l'amour", callback_data: "#send_show_me_love_invoice" }],
+                                        [
+                                            { text: "ℹ️ À propos", callback_data: "/about" },
+                                            { text: "❓ Aide", callback_data: "/help" }
+                                        ]
                                     ]
                                 }
                             }
@@ -3418,8 +3442,12 @@ EMD.BasicAutomation = {
                             payload: {
                                 reply_markup: {
                                     inline_keyboard: [
-                                        [{ text: "ℹ️ حول", callback_data: "/about" }],
-                                        [{ text: "❓ مساعدة", callback_data: "/help" }]
+                                        [
+                                            { text: "💖 أرني الحب", callback_data: "#send_show_me_love_invoice" }],
+                                        [
+                                            { text: "ℹ️ حول", callback_data: "/about" },
+                                            { text: "❓ مساعدة", callback_data: "/help" }
+                                        ]
                                     ]
                                 }
                             }
@@ -3430,8 +3458,12 @@ EMD.BasicAutomation = {
                             payload: {
                                 reply_markup: {
                                     inline_keyboard: [
-                                        [{ text: "ℹ️ Über", callback_data: "/about" }],
-                                        [{ text: "❓ Hilfe", callback_data: "/help" }]
+                                        [
+                                            { text: "💖 Zeig mir Liebe", callback_data: "#send_show_me_love_invoice" }],
+                                        [
+                                            { text: "ℹ️ Über", callback_data: "/about" },
+                                            { text: "❓ Hilfe", callback_data: "/help" }
+                                        ]
                                     ]
                                 }
                             }
@@ -3442,8 +3474,12 @@ EMD.BasicAutomation = {
                             payload: {
                                 reply_markup: {
                                     inline_keyboard: [
-                                        [{ text: "ℹ️ Informazioni", callback_data: "/about" }],
-                                        [{ text: "❓ Aiuto", callback_data: "/help" }]
+                                        [
+                                            { text: "💖 Mostrami amore", callback_data: "#send_show_me_love_invoice" }],
+                                        [
+                                            { text: "ℹ️ Informazioni", callback_data: "/about" },
+                                            { text: "❓ Aiuto", callback_data: "/help" }
+                                        ]
                                     ]
                                 }
                             }
@@ -3454,8 +3490,12 @@ EMD.BasicAutomation = {
                             payload: {
                                 reply_markup: {
                                     inline_keyboard: [
-                                        [{ text: "ℹ️ Sobre", callback_data: "/about" }],
-                                        [{ text: "❓ Ajuda", callback_data: "/help" }]
+                                        [
+                                            { text: "💖 Mostre-me amor", callback_data: "#send_show_me_love_invoice" }],
+                                        [
+                                            { text: "ℹ️ Sobre", callback_data: "/about" },
+                                            { text: "❓ Ajuda", callback_data: "/help" }
+                                        ]
                                     ]
                                 }
                             }
@@ -3466,8 +3506,12 @@ EMD.BasicAutomation = {
                             payload: {
                                 reply_markup: {
                                     inline_keyboard: [
-                                        [{ text: "ℹ️ О боте", callback_data: "/about" }],
-                                        [{ text: "❓ Помощь", callback_data: "/help" }]
+                                        [
+                                            { text: "💖 Покажи мне любовь", callback_data: "#send_show_me_love_invoice" }],
+                                        [
+                                            { text: "ℹ️ О боте", callback_data: "/about" },
+                                            { text: "❓ Помощь", callback_data: "/help" }
+                                        ]
                                     ]
                                 }
                             }
@@ -3478,8 +3522,12 @@ EMD.BasicAutomation = {
                             payload: {
                                 reply_markup: {
                                     inline_keyboard: [
-                                        [{ text: "ℹ️ 关于", callback_data: "/about" }],
-                                        [{ text: "❓ 帮助", callback_data: "/help" }]
+                                        [
+                                            { text: "💖 给我爱", callback_data: "#send_show_me_love_invoice" }],
+                                        [
+                                            { text: "ℹ️ 关于", callback_data: "/about" },
+                                            { text: "❓ 帮助", callback_data: "/help" }
+                                        ]
                                     ]
                                 }
                             }
@@ -3490,8 +3538,12 @@ EMD.BasicAutomation = {
                             payload: {
                                 reply_markup: {
                                     inline_keyboard: [
-                                        [{ text: "ℹ️ 約", callback_data: "/about" }],
-                                        [{ text: "❓ ヘルプ", callback_data: "/help" }]
+                                        [
+                                            { text: "💖 愛を見せて", callback_data: "#send_show_me_love_invoice" }],
+                                        [
+                                            { text: "ℹ️ 約", callback_data: "/about" },
+                                            { text: "❓ ヘルプ", callback_data: "/help" }
+                                        ]
                                     ]
                                 }
                             }
@@ -3502,8 +3554,12 @@ EMD.BasicAutomation = {
                             payload: {
                                 reply_markup: {
                                     inline_keyboard: [
-                                        [{ text: "ℹ️ 정보", callback_data: "/about" }],
-                                        [{ text: "❓ 도움말", callback_data: "/help" }]
+                                        [
+                                            { text: "💖 사랑을 보여줘", callback_data: "#send_show_me_love_invoice" }],
+                                        [
+                                            { text: "ℹ️ 정보", callback_data: "/about" },
+                                            { text: "❓ 도움말", callback_data: "/help" }
+                                        ]
                                     ]
                                 }
                             }
@@ -3514,13 +3570,19 @@ EMD.BasicAutomation = {
                             payload: {
                                 reply_markup: {
                                     inline_keyboard: [
-                                        [{ text: "ℹ️ אודות", callback_data: "/about" }],
-                                        [{ text: "❓ עזרה", callback_data: "/help" }]
+                                        [
+                                            { text: "💖 תראה לי אהבה", callback_data: "#send_show_me_love_invoice" }],
+                                        [
+                                            { text: "ℹ️ אודות", callback_data: "/about" },
+                                            { text: "❓ עזרה", callback_data: "/help" }
+                                        ]
                                     ]
                                 }
                             }
                         }])
                     ],
+
+
                     ['#append_back_to_start_keyboard',
                         // default (en)
                         JSON.stringify([{
@@ -4106,7 +4168,7 @@ EMD.BasicAutomation = {
                             }
                         }])
                     ],
-                    ['#send_please_dunate_message',
+                    ['#send_donation_message',
                         // default (en)
                         JSON.stringify([{
                             method: 'sendMessage',
@@ -4201,6 +4263,676 @@ EMD.BasicAutomation = {
                             payload: {
                                 text: 'אם אתה מוצא את הבוט הזה שימושי ורוצה לתמוך בפיתוחו, אנא שקול לעשות תרומה. 🙏\n\n',
                                 parse_mode: 'HTML'
+                            }
+                        }])
+                    ],
+                    ['#send_donation_invoice_a',
+                        // default (en)
+                        JSON.stringify([{
+                            method: 'sendInvoice',
+                            payload: {
+                                title: 'Support Development - Tier A',
+                                description: 'Support the ongoing development and maintenance of this bot with a Tier A donation. Your contribution helps us keep the bot running smoothly and add new features!',
+                                currency: 'XTR',
+                                payload: 'donation_tier_a_001',
+                                prices: JSON.stringify([
+                                    { label: 'Tier A Donation', amount: 100 } // Amount in smallest units (e.g., cents)
+                                ]),
+                            }
+                        }]),
+                        // es
+                        JSON.stringify([{
+                            method: 'sendInvoice',
+                            payload: {
+                                title: 'Apoyar el Desarrollo - Nivel A',
+                                description: 'Apoya el desarrollo y mantenimiento continuo de este bot con una donación de Nivel A. ¡Tu contribución nos ayuda a mantener el bot funcionando sin problemas y agregar nuevas funciones!',
+                                currency: 'XTR',
+                                payload: 'donation_tier_a_001',
+                                prices: JSON.stringify([
+                                    { label: 'Donación Nivel A', amount: 100 } // Amount in smallest units (e.g., cents)
+                                ]),
+                            }
+                        }]),
+                        // fr
+                        JSON.stringify([{
+                            method: 'sendInvoice',
+                            payload: {
+                                title: 'Soutenir le Développement - Niveau A',
+                                description: 'Soutenez le développement et la maintenance continus de ce bot avec un don de Niveau A. Votre contribution nous aide à maintenir le bon fonctionnement du bot et à ajouter de nouvelles fonctionnalités !',
+                                currency: 'XTR',
+                                payload: 'donation_tier_a_001',
+                                prices: JSON.stringify([
+                                    { label: 'Don de Niveau A', amount: 100 } // Amount in smallest units (e.g., cents)
+                                ]),
+                            }
+                        }]),
+                        // ar
+                        JSON.stringify([{
+                            method: 'sendInvoice',
+                            payload: {
+                                title: 'دعم التطوير - المستوى أ',
+                                description: 'ادعم التطوير والصيانة المستمرة لهذا البوت من خلال تبرع من المستوى أ. تساعدنا مساهمتك في الحفاظ على تشغيل البوت بسلاسة وإضافة ميزات جديدة!',
+                                currency: 'XTR',
+                                payload: 'donation_tier_a_001',
+                                prices: JSON.stringify([
+                                    { label: 'تبرع المستوى أ', amount: 100 } // Amount in smallest units (e.g., cents)
+                                ]),
+                            }
+                        }]),
+                        // de
+                        JSON.stringify([{
+                            method: 'sendInvoice',
+                            payload: {
+                                title: 'Unterstützen Sie die Entwicklung - Stufe A',
+                                description: 'Unterstützen Sie die laufende Entwicklung und Wartung dieses Bots mit einer Spende der Stufe A. Ihr Beitrag hilft uns, den Bot reibungslos am Laufen zu halten und neue Funktionen hinzuzufügen!',
+                                currency: 'XTR',
+                                payload: 'donation_tier_a_001',
+                                prices: JSON.stringify([
+                                    { label: 'Spende Stufe A', amount: 100 } // Amount in smallest units (e.g., cents)
+                                ]),
+                            }
+                        }]),
+                        // it
+                        JSON.stringify([{
+                            method: 'sendInvoice',
+                            payload: {
+                                title: 'Supporta lo Sviluppo - Livello A',
+                                description: 'Supporta lo sviluppo e la manutenzione continua di questo bot con una donazione di Livello A. Il tuo contributo ci aiuta a mantenere il bot funzionante senza problemi e ad aggiungere nuove funzionalità!',
+                                currency: 'XTR',
+                                payload: 'donation_tier_a_001',
+                                prices: JSON.stringify([
+                                    { label: 'Donazione Livello A', amount: 100 } // Amount in smallest units (e.g., cents)
+                                ]),
+                            }
+                        }]),
+                        // pt
+                        JSON.stringify([{
+                            method: 'sendInvoice',
+                            payload: {
+                                title: 'Apoie o Desenvolvimento - Nível A',
+                                description: 'Apoie o desenvolvimento e a manutenção contínua deste bot com uma doação de Nível A. Sua contribuição nos ajuda a manter o bot funcionando sem problemas e a adicionar novos recursos!',
+                                currency: 'XTR',
+                                payload: 'donation_tier_a_001',
+                                prices: JSON.stringify([
+                                    { label: 'Doação Nível A', amount: 100 } // Amount in smallest units (e.g., cents)
+                                ]),
+                            }
+                        }]),
+                        // ru
+                        JSON.stringify([{
+                            method: 'sendInvoice',
+                            payload: {
+                                title: 'Поддержите разработку - Уровень А',
+                                description: 'Поддержите текущую разработку и обслуживание этого бота пожертвованием уровня А. Ваш вклад помогает нам поддерживать работу бота и добавлять новые функции!',
+                                currency: 'XTR',
+                                payload: 'donation_tier_a_001',
+                                prices: JSON.stringify([
+                                    { label: 'Пожертвование Уровень А', amount: 100 } // Amount in smallest units (e.g., cents)
+                                ]),
+                            }
+                        }]),
+                        // zh
+                        JSON.stringify([{
+                            method: 'sendInvoice',
+                            payload: {
+                                title: '支持开发 - A级',
+                                description: '通过A级捐赠支持此机器人的持续开发和维护。您的贡献帮助我们保持机器人顺利运行并添加新功能！',
+                                currency: 'XTR',
+                                payload: 'donation_tier_a_001',
+                                prices: JSON.stringify([
+                                    { label: 'A级捐赠', amount: 100 } // Amount in smallest units (e.g., cents)
+                                ]),
+                            }
+                        }]),
+                        // ja
+                        JSON.stringify([{
+                            method: 'sendInvoice',
+                            payload: {
+                                title: '開発支援 - レベルA',
+                                description: 'レベルAの寄付でこのボットの継続的な開発とメンテナンスを支援してください。あなたの貢献は、ボットのスムーズな運用と新機能の追加に役立ちます！',
+                                currency: 'XTR',
+                                payload: 'donation_tier_a_001',
+                                prices: JSON.stringify([
+                                    { label: 'レベルAの寄付', amount: 100 } // Amount in smallest units (e.g., cents)
+                                ]),
+                            }
+                        }]),
+                        // ko
+                        JSON.stringify([{
+                            method: 'sendInvoice',
+                            payload: {
+                                title: '개발 지원 - 레벨 A',
+                                description: '레벨 A 기부로 이 봇의 지속적인 개발 및 유지 관리를 지원하세요. 귀하의 기여는 봇의 원활한 운영과 새로운 기능 추가에 도움이 됩니다!',
+                                currency: 'XTR',
+                                payload: 'donation_tier_a_001',
+                                prices: JSON.stringify([
+                                    { label: '레벨 A 기부', amount: 100 } // Amount in smallest units (e.g., cents)
+                                ]),
+                            }
+                        }]),
+                        // he
+                        JSON.stringify([{
+                            method: 'sendInvoice',
+                            payload: {
+                                title: 'תמיכה בפיתוח - רמה א',
+                                description: 'תמכו בפיתוח ובתחזוקה המתמשכת של הבוט הזה באמצעות תרומה ברמה א. התרומה שלכם עוזרת לנו לשמור על הבוט פועל בצורה חלקה ולהוסיף תכונות חדשות!',
+                                currency: 'XTR',
+                                payload: 'donation_tier_a_001',
+                                prices: JSON.stringify([
+                                    { label: 'תרומת רמה א', amount: 100 } // Amount in smallest units (e.g., cents)
+                                ]),
+                            }
+                        }])
+                    ],
+                    ['#send_please_support_message',
+                        // default (en)
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Your support means a lot to us! 🌟\n\nThank you for considering a donation to help us keep improving this bot.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // es
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: '¡Tu apoyo significa mucho para nosotros! 🌟\n\nGracias por considerar una donación para ayudarnos a seguir mejorando este bot.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // fr
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Votre soutien signifie beaucoup pour nous ! 🌟\n\nMerci de considérer un don pour nous aider à continuer d\'améliorer ce bot.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ar
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'دعمكم يعني الكثير لنا! 🌟\n\nشكرًا للنظر في التبرع لمساعدتنا في الاستمرار في تحسين هذا البوت.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // de
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Ihre Unterstützung bedeutet uns viel! 🌟\n\nVielen Dank, dass Sie eine Spende in Betracht ziehen, um uns zu helfen, diesen Bot weiter zu verbessern.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // it
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Il tuo supporto significa molto per noi! 🌟\n\nGrazie per aver considerato una donazione per aiutarci a continuare a migliorare questo bot.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // pt
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Seu apoio significa muito para nós! 🌟\n\nObrigado por considerar uma doação para nos ajudar a continuar melhorando este bot.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ru
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Ваша поддержка много для нас значит! 🌟\n\nСпасибо, что рассматриваете возможность пожертвования, чтобы помочь нам продолжать улучшать этого бота.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // zh
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: '您的支持对我们意义重大！ 🌟\n\n感谢您考虑捐赠以帮助我们不断改进这个机器人。',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ja
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'あなたのサポートは私たちにとって非常に重要です！ 🌟\n\nこのボットの改善を続けるために寄付を検討していただき、ありがとうございます。',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ko
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: '당신의 지원은 우리에게 큰 의미가 있습니다! 🌟\n\n이 봇을 계속 개선할 수 있도록 기부를 고려해 주셔서 감사합니다.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // he
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'התמיכה שלך משמעותית עבורנו! 🌟\n\nתודה ששקלת לתרום כדי לעזור לנו להמשיך ולשפר את הבוט הזה.',
+                                parse_mode: 'HTML'
+                            }
+                        }])
+                    ],
+                    ['#send_how_to_contribute_message',
+                        // default (en)
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Want to contribute to this project? 🤝\n\n'
+                                    + 'You can help by reporting issues, suggesting features, or submitting pull requests on our GitHub repository.\n\n'
+                                    + 'Visit: https://github.com/ilanlaz/basic-telegram-bot-remastered to get started!'
+                                    + '\n\nDo you want to be a part of our community?'
+                                    + '\n\nSelect one of the options below.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // es
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: '¿Quieres contribuir a este proyecto? 🤝\n\n'
+                                    + 'Puedes ayudar reportando problemas, sugiriendo características o enviando pull requests en nuestro repositorio de GitHub.\n\n'
+                                    + 'Visita: https://github.com/ilanlaz/basic-telegram-bot-remastered para comenzar!'
+                                    + '\n\n¿Quieres ser parte de nuestra comunidad?'
+                                    + '\n\nSelecciona una de las opciones a continuación.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // fr
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Vous souhaitez contribuer à ce projet ? 🤝\n\n'
+                                    + 'Vous pouvez aider en signalant des problèmes, en suggérant des fonctionnalités ou en soumettant des pull requests sur notre dépôt GitHub.\n\n'
+                                    + 'Visitez : https://github.com/ilanlaz/basic-telegram-bot-remastered pour commencer!'
+                                    + '\n\nVoulez-vous faire partie de notre communauté ?'
+                                    + '\n\nSélectionnez l\'une des options ci-dessous.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ar
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'هل ترغب في المساهمة في هذا المشروع؟ 🤝\n\n'
+                                    + 'يمكنك المساعدة عن طريق الإبلاغ عن المشكلات، اقتراح الميزات، أو تقديم طلبات سحب على مستودع GitHub الخاص بنا.\n\n'
+                                    + 'قم بزيارة: https://github.com/ilanlaz/basic-telegram-bot-remastered للبدء!'
+                                    + '\n\nهل تريد أن تكون جزءًا من مجتمعنا؟'
+                                    + '\n\nاختر أحد الخيارات أدناه.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // de
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Möchten Sie zu diesem Projekt beitragen? 🤝\n\n'
+                                    + 'Sie können helfen, indem Sie Probleme melden, Funktionen vorschlagen oder Pull-Anfragen in unserem GitHub-Repository einreichen.\n\n'
+                                    + 'Besuchen Sie: https://github.com/ilanlaz/basic-telegram-bot-remastered, um loszulegen!'
+                                    + '\n\nMöchten Sie Teil unserer Community sein?'
+                                    + '\n\nWählen Sie eine der untenstehenden Optionen.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // it
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Vuoi contribuire a questo progetto? 🤝\n\n'
+                                    + 'Puoi aiutare segnalando problemi, suggerendo funzionalità o inviando pull request nel nostro repository GitHub.\n\n'
+                                    + 'Visita: https://github.com/ilanlaz/basic-telegram-bot-remastered per iniziare!'
+                                    + '\n\nVuoi far parte della nostra comunità?'
+                                    + '\n\nSeleziona una delle opzioni qui sotto.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // pt
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Você deseja contribuir para este projeto? 🤝\n\n'
+                                    + 'Você pode ajudar relatando problemas, sugerindo recursos ou enviando pull requests em nosso repositório GitHub.\n\n'
+                                    + 'Visite: https://github.com/ilanlaz/basic-telegram-bot-remastered para começar!'
+                                    + '\n\nVocê quer fazer parte da nossa comunidade?'
+                                    + '\n\nSelecione uma das opções abaixo.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ru
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Вы хотите внести свой вклад в этот проект? 🤝\n\n'
+                                    + 'Вы можете помочь, сообщая о проблемах, предлагая функции или отправляя запросы на включение изменений в нашем репозитории GitHub.\n\n'
+                                    + 'Посетите: https://github.com/ilanlaz/basic-telegram-bot-remastered, чтобы начать!'
+                                    + '\n\nХотите стать частью нашего сообщества?'
+                                    + '\n\nВыберите один из вариантов ниже.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // zh
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: '您想为这个项目做出贡献吗？ 🤝\n\n'
+                                    + '您可以通过报告问题、建议功能或在我们的 GitHub 仓库中提交拉取请求来帮助我们。\n\n'
+                                    + '访问：https://github.com/ilanlaz/basic-telegram-bot-remastered 开始吧！'
+                                    + '\n\n您想成为我们社区的一员吗？'
+                                    + '\n\n请选择以下选项之一。',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ja
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'このプロジェクトに貢献したいですか？ 🤝\n\n'
+                                    + '問題を報告したり、機能を提案したり、プルリクエストを送信したりして、私たちのGitHubリポジトリで支援できます。\n\n'
+                                    + '訪問：https://github.com/ilanlaz/basic-telegram-bot-remastered から始めましょう！'
+                                    + '\n\n私たちのコミュニティの一員になりたいですか？'
+                                    + '\n\n以下のオプションのいずれかを選択してください。',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ko
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: '이 프로젝트에 기여하고 싶으신가요? 🤝\n\n'
+                                    + '문제를 보고하거나 기능을 제안하거나 GitHub 저장소에 풀 리퀘스트를 제출하여 도울 수 있습니다.\n\n'
+                                    + '시작하려면 방문하세요: https://github.com/ilanlaz/basic-telegram-bot-remastered'
+                                    + '\n\n우리 커뮤니티의 일원이 되고 싶으신가요?'
+                                    + '\n\n아래 옵션 중 하나를 선택하세요.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // he
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'האם ברצונך לתרום לפרויקט זה? 🤝\n\n'
+                                    + 'אתה יכול לעזור על ידי דיווח על בעיות, הצעת תכונות או שליחת בקשות משיכה במאגר ה-GitHub שלנו.\n\n'
+                                    + 'בקר בכתובת: https://github.com/ilanlaz/basic-telegram-bot-remastered כדי להתחיל!'
+                                    + '\n\nהאם ברצונך להיות חלק מהקהילה שלנו?'
+                                    + '\n\nבחר באחת מהאפשרויות למטה.',
+                                parse_mode: 'HTML'
+                            }
+                        }])
+                    ],
+                    ['#send_show_me_love_message',
+                        // default (en)
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'If you love this bot and want to show your appreciation, please consider starring our GitHub repository! ⭐️\n\n'
+                                    + 'Your support helps us reach more users and continue improving the bot.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // es
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Si amas este bot y quieres mostrar tu aprecio, ¡considera darle una estrella a nuestro repositorio de GitHub! ⭐️\n\n'
+                                    + 'Tu apoyo nos ayuda a llegar a más usuarios y continuar mejorando el bot.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // fr
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Si vous aimez ce bot et souhaitez montrer votre appréciation, veuillez envisager de mettre une étoile à notre dépôt GitHub ! ⭐️\n\n'
+                                    + 'Votre soutien nous aide à atteindre plus d\'utilisateurs et à continuer d\'améliorer le bot.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ar
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'إذا كنت تحب هذا البوت وترغب في إظهار تقديرك، يرجى التفكير في وضع نجمة على مستودع GitHub الخاص بنا! ⭐️\n\n'
+                                    + 'دعمك يساعدنا في الوصول إلى المزيد من المستخدمين ومواصلة تحسين البوت.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // de
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Wenn du diesen Bot liebst und deine Wertschätzung zeigen möchtest, erwäge bitte, unserem GitHub-Repository einen Stern zu geben! ⭐️\n\n'
+                                    + 'Deine Unterstützung hilft uns, mehr Nutzer zu erreichen und den Bot weiter zu verbessern.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // it
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Se ami questo bot e vuoi mostrare il tuo apprezzamento, considera di mettere una stella al nostro repository GitHub! ⭐️\n\n'
+                                    + 'Il tuo supporto ci aiuta a raggiungere più utenti e a continuare a migliorare il bot.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // pt
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Se você ama este bot e quer mostrar sua apreciação, considere dar uma estrela ao nosso repositório GitHub! ⭐️\n\n'
+                                    + 'Seu apoio nos ajuda a alcançar mais usuários e continuar melhorando o bot.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ru
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Если вам нравится этот бот и вы хотите выразить свою признательность, пожалуйста, рассмотрите возможность поставить звезду нашему репозиторию на GitHub! ⭐️\n\n'
+                                    + 'Ваша поддержка помогает нам достигать большего числа пользователей и продолжать улучшать бота.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // zh
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: '如果你喜欢这个机器人并想表达你的赞赏，请考虑给我们的GitHub仓库点个星！⭐️\n\n'
+                                    + '你的支持帮助我们接触更多用户，继续改进机器人。',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ja
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'このボットが気に入っていて感謝の気持ちを示したい場合は、ぜひ私たちのGitHubリポジトリにスターを付けてください！ ⭐️\n\n'
+                                    + 'あなたのサポートは、より多くのユーザーにリーチし、ボットを改善し続けるのに役立ちます。',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ko
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: '이 봇을 좋아하고 감사를 표시하고 싶다면, 저희 GitHub 저장소에 별을 달아주세요! ⭐️\n\n'
+                                    + '여러분의 지원은 더 많은 사용자에게 다가가고 봇을 계속 개선하는 데 도움이 됩니다.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // he
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'אם אתה אוהב את הבוט הזה ורוצה להראות את הערכתך, שקול לתת כוכב למאגר ה-GitHub שלנו! ⭐️\n\n'
+                                    + 'התמיכה שלך עוזרת לנו להגיע ליותר משתמשים ולהמשיך לשפר את הבוט.',
+                                parse_mode: 'HTML'
+                            }
+                        }])
+                    ],
+                    ['#send_show_me_love_invoice',
+                        // default (en)
+                        JSON.stringify([{
+                            method: 'sendInvoice',
+                            payload: {
+                                title: 'Show Some Love ❤️',
+                                description: 'If you enjoy using this bot and would like to support its development, consider making a small donation. Every bit helps us keep improving and adding new features!',
+                                currency: 'XTR',
+                                payload: 'show_me_love_001',
+                                prices: JSON.stringify([
+                                    { label: 'Support Donation', amount: 100 } // Amount in smallest units (e.g., cents)
+                                ])
+                            }
+                        }]),
+                        // es
+                        JSON.stringify([{
+                            method: 'sendInvoice',
+                            payload: {
+                                title: 'Muestra Algo de Amor ❤️',
+                                description: 'Si disfrutas usar este bot y te gustaría apoyar su desarrollo, considera hacer una pequeña donación. ¡Cada aporte nos ayuda a seguir mejorando y agregando nuevas funciones!',
+                                currency: 'XTR',
+                                payload: 'show_me_love_001',
+                                prices: JSON.stringify([
+                                    { label: 'Donación de Apoyo', amount: 100 } // Amount in smallest units (e.g., cents)
+                                ])
+                            }
+                        }]),
+                        // fr
+                        JSON.stringify([{
+                            method: 'sendInvoice',
+                            payload: {
+                                title: 'Montrez un Peu d\'Amour ❤️',
+                                description: 'Si vous appréciez l\'utilisation de ce bot et souhaitez soutenir son développement, envisagez de faire un petit don. Chaque contribution nous aide à continuer d\'améliorer et d\'ajouter de nouvelles fonctionnalités !',
+                                currency: 'XTR',
+                                payload: 'show_me_love_001',
+                                prices: JSON.stringify([
+                                    { label: 'Don de Soutien', amount: 100 } // Amount in smallest units (e.g., cents)
+                                ])
+                            }
+                        }]),
+                        // ar
+                        JSON.stringify([{
+                            method: 'sendInvoice',
+                            payload: {
+                                title: 'أظهر بعض الحب ❤️',
+                                description: 'إذا كنت تستمتع باستخدام هذا البوت وترغب في دعم تطويره، فكر في تقديم تبرع صغير. كل مساهمة تساعدنا في الاستمرار في التحسين وإضافة ميزات جديدة!',
+                                currency: 'XTR',
+                                payload: 'show_me_love_001',
+                                prices: JSON.stringify([
+                                    { label: 'تبرع دعم', amount: 100 } // Amount in smallest units (e.g., cents)
+                                ])
+                            }
+                        }]),
+                        // de
+                        JSON.stringify([{
+                            method: 'sendInvoice',
+                            payload: {
+                                title: 'Zeige etwas Liebe ❤️',
+                                description: 'Wenn du diesen Bot gerne benutzt und seine Entwicklung unterstützen möchtest, erwäge eine kleine Spende. Jeder Beitrag hilft uns, den Bot weiter zu verbessern und neue Funktionen hinzuzufügen!',
+                                currency: 'XTR',
+                                payload: 'show_me_love_001',
+                                prices: JSON.stringify([
+                                    { label: 'Unterstützungs-Spende', amount: 100 } // Amount in smallest units (e.g., cents)
+                                ])
+                            }
+                        }]),
+                        // it
+                        JSON.stringify([{
+                            method: 'sendInvoice',
+                            payload: {
+                                title: 'Mostra un po\' d\'amore ❤️',
+                                description: 'Se ti piace usare questo bot e vuoi supportarne lo sviluppo, considera di fare una piccola donazione. Ogni contributo ci aiuta a continuare a migliorare e aggiungere nuove funzionalità!',
+                                currency: 'XTR',
+                                payload: 'show_me_love_001',
+                                prices: JSON.stringify([
+                                    { label: 'Donazione di Supporto', amount: 100 } // Amount in smallest units (e.g., cents)
+                                ])
+                            }
+                        }]),
+                        // pt
+                        JSON.stringify([{
+                            method: 'sendInvoice',
+                            payload: {
+                                title: 'Mostra un po\' d\'amore ❤️',
+                                description: 'Se ti piace usare questo bot e vuoi supportarne lo sviluppo, considera di fare una piccola donazione. Ogni contributo ci aiuta a continuare a migliorare e aggiungere nuove funzionalità!',
+                                currency: 'XTR',
+                                payload: 'show_me_love_001',
+                                prices: JSON.stringify([
+                                    { label: 'Donazione di Supporto', amount: 100 } // Amount in smallest units (e.g., cents)
+                                ])
+                            }
+                        }]),
+                        // ru
+                        JSON.stringify([{
+                            method: 'sendInvoice',
+                            payload: {
+                                title: 'Покажи немного любви ❤️',
+                                description: 'Если вам нравится использовать этого бота и вы хотите поддержать его развитие, рассмотрите возможность сделать небольшой взнос. Каждый вклад помогает нам продолжать улучшать бота и добавлять новые функции!',
+                                currency: 'XTR',
+                                payload: 'show_me_love_001',
+                                prices: JSON.stringify([
+                                    { label: 'Пожертвование на поддержку', amount: 100 } // Amount in smallest units (e.g., cents)
+                                ])
+                            }
+                        }]),
+                        // zh
+                        JSON.stringify([{
+                            method: 'sendInvoice',
+                            payload: {
+                                title: '展示一点爱 ❤️',
+                                description: '如果你喜欢使用这个机器人并想支持它的发展，考虑做一个小额捐赠。每一份贡献都帮助我们继续改进机器人并添加新功能！',
+                                currency: 'XTR',
+                                payload: 'show_me_love_001',
+                                prices: JSON.stringify([
+                                    { label: '支持捐赠', amount: 100 } // Amount in smallest units (e.g., cents)
+                                ])
+                            }
+                        }]),
+                        // ja
+                        JSON.stringify([{
+                            method: 'sendInvoice',
+                            payload: {
+                                title: '少し愛を見せて ❤️',
+                                description: 'このボットの使用が気に入っていて、その開発をサポートしたい場合は、小額の寄付を検討してください。すべての寄付がボットの改善と新機能の追加に役立ちます！',
+                                currency: 'XTR',
+                                payload: 'show_me_love_001',
+                                prices: JSON.stringify([
+                                    { label: 'サポート寄付', amount: 100 } // Amount in smallest units (e.g., cents)
+                                ])
+                            }
+                        }]),
+                        // ko
+                        JSON.stringify([{
+                            method: 'sendInvoice',
+                            payload: {
+                                title: '조금의 사랑을 보여주세요 ❤️',
+                                description: '이 봇을 사용하는 것이 마음에 들고 개발을 지원하고 싶다면 작은 기부를 고려해 보세요. 모든 기부는 봇을 개선하고 새로운 기능을 추가하는 데 도움이 됩니다!',
+                                currency: 'XTR',
+                                payload: 'show_me_love_001',
+                                prices: JSON.stringify([
+                                    { label: '지원 기부', amount: 100 } // Amount in smallest units (e.g., cents)
+                                ])
+                            }
+                        }]),
+                        // he
+                        JSON.stringify([{
+                            method: 'sendInvoice',
+                            payload: {
+                                title: 'הראה קצת אהבה ❤️',
+                                description: 'אם אתה אוהב להשתמש בבוט הזה ורוצה לתמוך בפיתוח שלו, שקול לעשות תרומה קטנה. כל תרומה עוזרת לנו להמשיך לשפר את הבוט ולהוסיף תכונות חדשות!',
+                                currency: 'XTR',
+                                payload: 'show_me_love_001',
+                                prices: JSON.stringify([
+                                    { label: 'תרומת תמיכה', amount: 100 } // Amount in smallest units (e.g., cents)
+                                ])
                             }
                         }])
                     ]
