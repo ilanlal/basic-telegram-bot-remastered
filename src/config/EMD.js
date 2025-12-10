@@ -3995,6 +3995,214 @@ EMD.BasicAutomation = {
                                 show_alert: false
                             }
                         }])
+                    ],
+                    ['#send_about_opensource_message',
+                        // default (en)
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'This bot is open-source! 🎉\n\n'
+                                    + 'Feel free to explore the source code, contribute, or customize it for your own needs.\n\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // es
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: '¡Este bot es de código abierto! 🎉\n\n'
+                                    + 'No dudes en explorar el código fuente, contribuir o personalizarlo según tus propias necesidades.\n\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // fr
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Ce bot est open-source ! 🎉\n\n'
+                                    + 'N\'hésitez pas à explorer le code source, contribuer ou le personnaliser selon vos propres besoins.\n\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ar
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'هذا البوت مفتوح المصدر! 🎉\n\n'
+                                    + 'لا تتردد في استكشاف الكود المصدري، المساهمة، أو تخصيصه حسب احتياجاتك الخاصة.\n\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // de
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Dieser Bot ist Open-Source! 🎉\n\n'
+                                    + 'Fühlen Sie sich frei, den Quellcode zu erkunden, beizutragen oder ihn an Ihre eigenen Bedürfnisse anzupassen.\n\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // it
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Questo bot è open-source! 🎉\n\n'
+                                    + 'Sentiti libero di esplorare il codice sorgente, contribuire o personalizzarlo in base alle tue esigenze.\n\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // pt
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Este bot é de código aberto! 🎉\n\n'
+                                    + 'Sinta-se à vontade para explorar o código-fonte, contribuir ou personalizá-lo de acordo com suas necessidades.\n\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ru
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Этот бот с открытым исходным кодом! 🎉\n\n'
+                                    + 'Не стесняйтесь исследовать исходный код, вносить свой вклад или настраивать его в соответствии с вашими потребностями.\n\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // zh
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: '这个机器人是开源的！ 🎉\n\n'
+                                    + '欢迎探索源代码，贡献或根据您的需求进行定制。\n\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ja
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'このボットはオープンソースです！ 🎉\n\n'
+                                    + 'ソースコードを自由に探索し、貢献したり、自分のニーズに合わせてカスタマイズしたりしてください。\n\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ko
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: '이 봇은 오픈 소스입니다! 🎉\n\n'
+                                    + '소스 코드를 자유롭게 탐색하고, 기여하거나, 자신의 필요에 맞게 맞춤 설정하세요.\n\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // he
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'הבוט הזה הוא קוד פתוח! 🎉\n\n'
+                                    + 'אל תהססו לחקור את קוד המקור, לתרום או להתאים אותו לצרכים שלכם.\n\n',
+                                parse_mode: 'HTML'
+                            }
+                        }])
+                    ],
+                    ['#send_please_dunate_message',
+                        // default (en)
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'If you find this bot useful and would like to support its development, please consider making a donation. 🙏\n\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // es
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Si encuentras este bot útil y te gustaría apoyar su desarrollo, considera hacer una donación. 🙏\n\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // fr
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Si vous trouvez ce bot utile et souhaitez soutenir son développement, veuillez envisager de faire un don. 🙏\n\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ar
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'إذا وجدت هذا البوت مفيدًا وترغب في دعم تطويره، يرجى التفكير في التبرع. 🙏\n\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // de
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Wenn Sie diesen Bot nützlich finden und seine Entwicklung unterstützen möchten, ziehen Sie bitte eine Spende in Betracht. 🙏\n\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // it
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Se trovi questo bot utile e desideri supportarne lo sviluppo, considera la possibilità di fare una donazione. 🙏\n\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // pt
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Se você achar este bot útil e quiser apoiar seu desenvolvimento, considere fazer uma doação. 🙏\n\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ru
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Если вы считаете этого бота полезным и хотите поддержать его разработку, пожалуйста, рассмотрите возможность сделать пожертвование. 🙏\n\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // zh
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: '如果您觉得这个机器人有用，并希望支持其开发，请考虑捐赠。🙏\n\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ja
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'このボットが役に立った場合、その開発を支援するために寄付を検討してください。🙏\n\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ko
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: '이 봇이 유용하다고 생각되면 개발을 지원하기 위해 기부를 고려해 주세요. 🙏\n\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // he
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'אם אתה מוצא את הבוט הזה שימושי ורוצה לתמוך בפיתוחו, אנא שקול לעשות תרומה. 🙏\n\n',
+                                parse_mode: 'HTML'
+                            }
+                        }])
                     ]
                 ]
         }
