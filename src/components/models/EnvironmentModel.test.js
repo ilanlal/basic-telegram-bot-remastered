@@ -63,5 +63,12 @@ describe('EnvironmentModel Tests', () => {
             model.setNewTestDeploymentId(newTestDeploymentId);
             expect(model.state.testDeploymentId).toBe(newTestDeploymentId ? `${newTestDeploymentId.substring(0, 4)}****${newTestDeploymentId.substring(newTestDeploymentId.length - 4)}` : null);
         });
+
+        // setLogArchiveSize
+        test('should set log archive size', () => {
+            const newSize = 5000;
+            model.setLogArchiveSize(newSize);
+            expect(model._userProperties.getProperty(EnvironmentModel.InputMeta.LOG_ARCHIVE_SIZE)).toBe(newSize);
+        });
     });
 });

@@ -82,6 +82,13 @@ class EnvironmentModel {
         return this._userProperties.setProperty(EnvironmentModel.InputMeta.TEST_DEPLOYMENT_ID, safeId);
     }
 
+    setLogArchiveSize(size) {
+        if (isNaN(size) || size <= 0) {
+            throw new Error("Invalid log archive size");
+        }
+        return this._userProperties.setProperty(EnvironmentModel.InputMeta.LOG_ARCHIVE_SIZE, size);
+    }
+
     // Getters
     get state() {
         const token = this._userProperties.getProperty(EnvironmentModel.InputMeta.BOT_API_TOKEN);
@@ -120,7 +127,8 @@ EnvironmentModel.InputMeta = {
     ACTIVE_SPREADSHEET_ID: 'active_spreadsheet_id',
     ENVIRONMENT: 'environment',
     WEBHOOK_CALLBACK_URL: 'webhook_callback_url',
-    AUTOMATION_ENABLED: 'automation_enabled'
+    AUTOMATION_ENABLED: 'automation_enabled',
+    LOG_ARCHIVE_SIZE: 'log_archive_size'
 };
 
 if (typeof module !== 'undefined' && module.exports) {

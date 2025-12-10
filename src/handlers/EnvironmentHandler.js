@@ -203,14 +203,25 @@ EnvironmentHandler.AddonWrapper = class {
                 logEvents = formInputs['txt_log_events']?.stringInputs?.value[0] || null;
             }
 
+            let log_archive = e.parameters.txt_log_archive || null;
+            if (!log_archive) {
+                const formInputs = e.commonEventObject.formInputs || {};
+                log_archive = formInputs['txt_log_archive']?.stringInputs?.value[0] || null;
+            }
+
             if (!logEvents) {
                 logEvents = 'false';
+            }
+
+            if(!log_archive) {
+                log_archive = '1000';
             }
 
             const controller = BotSetupController
                 .create(this._userProperties, this._activeSpreadsheet);
 
             controller.setDebugMode(logEvents === 'true');
+            controller.setLogArchiveSize(parseInt(log_archive, 10));
 
             return this.handleOperationSuccess("👍 Log events setting saved successfully.")
                 .build();

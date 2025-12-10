@@ -26,6 +26,14 @@ class LoggerModel {
         this.sheet.appendRow([datestring, dc, action, chat_id, content, event]);
     }
 
+    archiveLog() {
+        const timestamp = Utilities.formatDate(new Date(), Session.getScriptTimeZone(), 'yyyyMMdd_HHmmss');
+        const archiveSheetName = `${EMD.Logger.sheet({}).name}_${timestamp}`;
+        this.sheetModel.copySheet(this.sheet, archiveSheetName);
+        this.sheet.clearContents();
+        this.sheet.appendRow([EMD.Logger.sheet({}).columns]);
+    }
+
 }
 
 if (typeof module !== 'undefined' && module.exports) {

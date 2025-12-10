@@ -273,10 +273,20 @@ EMD.EnvironmentVariables = {
                                 },
                                 propertyName: 'debug_mode_set'
                             },
+                            {   // Log Archive Widget
+                                id: 'log_archive_widget',
+                                TextInput: {
+                                    title: 'Max log lines to keep (Set to number, default 1000)',
+                                    fieldName: 'txt_log_archive',
+                                    hint: 'Enter a number to limit log lines',
+                                },
+                                value: '1000',
+                                propertyName: 'log_archive_size'
+                            },
                             {
                                 id: 'save_log_events_button',
                                 TextButton: {
-                                    text: '💾 Save Log Events',
+                                    text: '💾 Save',
                                     onClick: {
                                         functionName: 'EnvironmentHandler.Addon.onSaveLogEventsClick'
                                     }
@@ -621,11 +631,6 @@ EMD.BotSetup = {
                                 // Description of the command; 1-256 characters.
                                 description: 'Start the bot'
                             },
-                            { // '/home' command
-                                command: '/home',
-                                description: 'Go to the main menu'
-
-                            },
                             {   // '/help' command
                                 command: '/help',
                                 description: 'Get help on using the bot, or report an issue'
@@ -633,14 +638,6 @@ EMD.BotSetup = {
                             {   // '/about' command
                                 command: '/about',
                                 description: 'About the bot'
-                            },
-                            { // lang command
-                                command: '/lang',
-                                description: 'send "/lang es" to set Spanish as your language, or "/lang list" to get a list of available languages'
-                            },
-                            { // '/admin' command
-                                command: '/admin',
-                                description: 'Admin command for bot management'
                             }
                         ]),
                     // Spanish
@@ -650,10 +647,6 @@ EMD.BotSetup = {
                                 command: '/start',
                                 description: 'Iniciar el bot'
                             },
-                            {   // '/home' command
-                                command: '/home',
-                                description: 'Ir al menú principal'
-                            },
                             {   // '/help' command
                                 command: '/help',
                                 description: 'Obtener ayuda sobre el uso del bot o informar un problema'
@@ -661,14 +654,6 @@ EMD.BotSetup = {
                             {   // '/about' command
                                 command: '/about',
                                 description: 'Acerca del bot'
-                            },
-                            { // lang command
-                                command: '/lang',
-                                description: 'envía "/lang es" para establecer el español como tu idioma, o "/lang list" para obtener una lista de idiomas disponibles'
-                            },
-                            { // '/admin' command
-                                command: '/admin',
-                                description: 'Comando de administrador para la gestión del bot'
                             }
                         ]),
                     // French
@@ -678,10 +663,6 @@ EMD.BotSetup = {
                                 command: '/start',
                                 description: 'Démarrer le bot'
                             },
-                            {   // '/home' command
-                                command: '/home',
-                                description: 'Aller au menu principal'
-                            },
                             {   // '/help' command
                                 command: '/help',
                                 description: 'Obtenir de l\'aide sur l\'utilisation du bot ou signaler un problème'
@@ -689,14 +670,6 @@ EMD.BotSetup = {
                             {   // '/about' command
                                 command: '/about',
                                 description: 'À propos du bot'
-                            },
-                            { // lang command
-                                command: '/lang',
-                                description: 'envoyer "/lang fr" pour définir le français comme votre langue, ou "/lang list" pour obtenir une liste des langues disponibles'
-                            },
-                            { // '/admin' command
-                                command: '/admin',
-                                description: 'Commande d\'administration pour la gestion du bot'
                             }
                         ]),
                     // Arabic
@@ -706,10 +679,6 @@ EMD.BotSetup = {
                                 command: '/start',
                                 description: 'بدء تشغيل البوت'
                             },
-                            {   // '/home' command
-                                command: '/home',
-                                description: 'الذهاب إلى القائمة الرئيسية'
-                            },
                             {   // '/help' command
                                 command: '/help',
                                 description: 'الحصول على مساعدة حول استخدام البوت أو الإبلاغ عن مشكلة'
@@ -717,14 +686,6 @@ EMD.BotSetup = {
                             {   // '/about' command
                                 command: '/about',
                                 description: 'معلومات عن البوت'
-                            },
-                            { // lang command
-                                command: '/lang',
-                                description: 'أرسل "/lang ar" لتعيين العربية كلغتك، أو "/lang list" للحصول على قائمة باللغات المتاحة'
-                            },
-                            { // '/admin' command
-                                command: '/admin',
-                                description: 'أمر الإدارة لإدارة البوت'
                             }
                         ]),
                     // German
@@ -734,10 +695,6 @@ EMD.BotSetup = {
                                 command: '/start',
                                 description: 'Bot starten'
                             },
-                            {   // '/home' command
-                                command: '/home',
-                                description: 'Gehe zum Hauptmenü'
-                            },
                             {   // '/help' command
                                 command: '/help',
                                 description: 'Hilfe zur Verwendung des Bots oder zur Meldung eines Problems erhalten'
@@ -745,14 +702,6 @@ EMD.BotSetup = {
                             {   // '/about' command
                                 command: '/about',
                                 description: 'Über den Bot'
-                            },
-                            { // lang command
-                                command: '/lang',
-                                description: 'Senden Sie "/lang de", um Deutsch als Ihre Sprache festzulegen, oder "/lang list", um eine Liste der verfügbaren Sprachen zu erhalten'
-                            },
-                            { // '/admin' command
-                                command: '/admin',
-                                description: 'Admin-Befehl zur Verwaltung des Bots'
                             }
                         ]),
                     // Italian
@@ -762,10 +711,6 @@ EMD.BotSetup = {
                                 command: '/start',
                                 description: 'Avvia il bot'
                             },
-                            {   // '/home' command
-                                command: '/home',
-                                description: 'Vai al menu principale'
-                            },
                             {   // '/help' command
                                 command: '/help',
                                 description: 'Ottieni aiuto sull\'uso del bot o segnala un problema'
@@ -773,14 +718,6 @@ EMD.BotSetup = {
                             {   // '/about' command
                                 command: '/about',
                                 description: 'Informazioni sul bot'
-                            },
-                            { // lang command
-                                command: '/lang',
-                                description: 'Invia "/lang it" per impostare l\'italiano come lingua, oppure "/lang list" per ottenere un elenco delle lingue disponibili'
-                            },
-                            { // '/admin' command
-                                command: '/admin',
-                                description: 'Comando di amministrazione per gestire il bot'
                             }
                         ]),
                     // Portuguese
@@ -789,10 +726,6 @@ EMD.BotSetup = {
                             command: '/start',
                             description: 'Iniciar o bot'
                         },
-                        {   // '/home' command
-                            command: '/home',
-                            description: 'Ir para o menu principal'
-                        },
                         {   // '/help' command
                             command: '/help',
                             description: 'Obter ajuda sobre o uso do bot ou relatar um problema'
@@ -800,14 +733,6 @@ EMD.BotSetup = {
                         {   // '/about' command
                             command: '/about',
                             description: 'Informações sobre o bot'
-                        },
-                        { // lang command
-                            command: '/lang',
-                            description: 'Envie "/lang pt" para definir o português como seu idioma, ou "/lang list" para obter uma lista de idiomas disponíveis'
-                        },
-                        { // '/admin' command
-                            command: '/admin',
-                            description: 'Comando de administração para gerenciar o bot'
                         }
                     ]),
                     // Russian
@@ -816,10 +741,6 @@ EMD.BotSetup = {
                             command: '/start',
                             description: 'Запустить бота'
                         },
-                        {   // '/home' command
-                            command: '/home',
-                            description: 'Перейти в главное меню'
-                        },
                         {   // '/help' command
                             command: '/help',
                             description: 'Получить помощь по использованию бота или сообщить о проблеме'
@@ -827,14 +748,6 @@ EMD.BotSetup = {
                         {   // '/about' command
                             command: '/about',
                             description: 'Информация о боте'
-                        },
-                        { // lang command
-                            command: '/lang',
-                            description: 'Отправьте "/lang ru", чтобы установить русский в качестве вашего языка, или "/lang list", чтобы получить список доступных языков'
-                        },
-                        { // '/admin' command
-                            command: '/admin',
-                            description: 'Команда администратора для управления ботом'
                         }
                     ]),
                     // Chinese
@@ -843,10 +756,6 @@ EMD.BotSetup = {
                             command: '/start',
                             description: '启动机器人'
                         },
-                        {   // '/home' command
-                            command: '/home',
-                            description: '进入主菜单'
-                        },
                         {   // '/help' command
                             command: '/help',
                             description: '获取有关使用机器人的帮助或报告问题'
@@ -854,14 +763,6 @@ EMD.BotSetup = {
                         {   // '/about' command
                             command: '/about',
                             description: '有关机器人的信息'
-                        },
-                        { // lang command
-                            command: '/lang',
-                            description: '发送"/lang zh"将中文设置为您的语言，或"/lang list"以获取可用语言的列表'
-                        },
-                        { // '/admin' command
-                            command: '/admin',
-                            description: '用于管理机器人的管理员命令'
                         }
                     ]),
                     // Japanese
@@ -870,10 +771,6 @@ EMD.BotSetup = {
                             command: '/start',
                             description: 'ボットを開始します'
                         },
-                        {   // '/home' command
-                            command: '/home',
-                            description: 'メインメニューに移動します'
-                        },
                         {   // '/help' command
                             command: '/help',
                             description: 'ボットの使用に関するヘルプを取得するか、問題を報告します'
@@ -881,14 +778,6 @@ EMD.BotSetup = {
                         {   // '/about' command
                             command: '/about',
                             description: 'ボットに関する情報'
-                        },
-                        { // lang command
-                            command: '/lang',
-                            description: '"/lang ja"を送信して日本語をあなたの言語として設定するか、"/lang list"を送信して利用可能な言語のリストを取得します'
-                        },
-                        { // '/admin' command
-                            command: '/admin',
-                            description: 'ボットを管理するための管理者コマンド'
                         }
                     ]),
                     // Korean
@@ -897,10 +786,6 @@ EMD.BotSetup = {
                             command: '/start',
                             description: '봇을 시작합니다'
                         },
-                        {   // '/home' command
-                            command: '/home',
-                            description: '메인 메뉴로 이동합니다'
-                        },
                         {   // '/help' command
                             command: '/help',
                             description: '봇 사용에 대한 도움을 받거나 문제를 보고합니다'
@@ -908,14 +793,6 @@ EMD.BotSetup = {
                         {   // '/about' command
                             command: '/about',
                             description: '봇에 대한 정보'
-                        },
-                        { // lang command
-                            command: '/lang',
-                            description: '"/lang ko"를 보내어 한국어를 귀하의 언어로 설정하거나 "/lang list"를 보내어 사용 가능한 언어 목록을 가져옵니다'
-                        },
-                        { // '/admin' command
-                            command: '/admin',
-                            description: '봇을 관리하기 위한 관리자 명령'
                         }
                     ]),
                     // Hebrew
@@ -924,10 +801,6 @@ EMD.BotSetup = {
                             command: '/start',
                             description: 'הפעל את הבוט'
                         },
-                        {   // '/home' command
-                            command: '/home',
-                            description: 'עבור לתפריט הראשי'
-                        },
                         {   // '/help' command
                             command: '/help',
                             description: 'קבל עזרה בשימוש בבוט או דווח על בעיות'
@@ -935,14 +808,6 @@ EMD.BotSetup = {
                         {   // '/about' command
                             command: '/about',
                             description: 'מידע על הבוט'
-                        },
-                        { // lang command
-                            command: '/lang',
-                            description: 'שלח "/lang he" כדי להגדיר את העברית כשפה שלך, או "/lang list" כדי לקבל רשימה של שפות זמינות'
-                        },
-                        { // '/admin' command
-                            command: '/admin',
-                            description: 'פקודת מנהל עבור ניהול הבוט'
                         }
                     ])
                 ],
@@ -2975,135 +2840,23 @@ EMD.Automation = {
     }
 }
 
-EMD.SurveyAutomation = {
-    entityName: 'SurveyAutomation',
-    sheet: (data = {}) => {
-        return {
-            name: '✨ Surveys',
-            columns: EMD.Automation.sheet(data).columns,
-            sample_data:
-                [
-                    ['/surveys',
-                        // default (en)
-                        JSON.stringify([{ "next": "#append_survey_options_keyboard" }])
-                    ],
-                    ['#sendPoll01',
-                        // default (en)
-                        JSON.stringify([{
-                            method: 'sendPoll',
-                            payload: {
-                                question: 'Which feature do you like the most in this bot?',
-                                question_parse_mode: 'HTML',
-                                options: JSON.stringify([
-                                    'Text Messages with HTML formatting',
-                                    'Photos with captions and inline keyboards',
-                                    'Media Groups (albums) with multiple photos',
-                                    'Interactive Inline Keyboards'
-                                ]),
-                                protect_content: true,
-                                open_period: 7,
-                                is_anonymous: false,
-                                explanation: 'Your feedback helps us improve the bot and add more exciting features!',
-                                explanation_parse_mode: 'HTML',
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [{ text: "🏠 Start", callback_data: "/home" }]
-                                    ]
-                                }
-                            }
-                        }])],
-                    ['#sendQuiz01',
-                        // default (en)
-                        JSON.stringify([{
-                            method: 'sendPoll',
-                            payload: {
-                                question: 'What is the <b>main</b> advantage of using Interactive Inline Keyboards in Telegram bots? ✨',
-                                question_parse_mode: 'HTML',
-                                options: JSON.stringify([
-                                    'They allow sending larger files',
-                                    'They enable real-time user interaction',
-                                    'They improve message delivery speed',
-                                    'They support multimedia content'
-                                ]),
-                                protect_content: true,
-                                open_period: 7,
-                                is_anonymous: false,
-                                type: 'quiz',
-                                correct_option_id: 3,
-                                explanation: 'Interactive Inline Keyboards allow users to engage directly with the bot, making the experience more dynamic and user-friendly!',
-                                explanation_parse_mode: 'HTML',
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [{ text: "🏠 Start", callback_data: "/home" }]
-                                    ]
-                                }
-                            }
-                        }])],
-                    ['#append_survey_options_keyboard',
-                        // default (en)
-                        JSON.stringify([{
-                            method: 'editMessageReplyMarkup',
-                            payload: {
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [{ text: "Take Poll", callback_data: "#sendPoll" }],
-                                        [{ text: "Take Quiz", callback_data: "#sendQuiz" }]
-                                    ]
-                                }
-                            }
-                        }])
-                    ],
-                    ['#send_welcome_to_survey_center',
-                        // default (en)
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: 'Welcome to the Survey Center! \n\n'
-                                    + 'Here you can participate in various polls and quizzes to share your opinions and test your knowledge.',
-                                parse_mode: 'HTML'
-                            }
-                        }])
-                    ]
-                ]
-        }
-    }
-}
-
 EMD.BasicAutomation = {
     entityName: 'BasicAutomation',
     displayName: 'Basic Automation',
     pluralDisplayName: 'Basic Automations',
     sheet: (data = {}) => {
         return {
-            name: '✨ Basic',
+            name: EMD.Automation.sheet(data).name,
             columns: EMD.Automation.sheet(data).columns,
             sample_data:
                 [
+                    ['---- 📦 BASIC AUTOMATION SAMPLE DATA START ----',
+                        '---- 📦 BASIC AUTOMATION SAMPLE DATA START ----',
+                        '---- 📦 BASIC AUTOMATION SAMPLE DATA START ----',
+                        '---- 📦 BASIC AUTOMATION SAMPLE DATA START ----'],
                     ['_action_not_found_',
                         // default (en)
-                        JSON.stringify([{ "next": "#send_unknown_action_message" }, { "next": "#append_back_to_start_keyboard" }]),
-                        // es
-                        JSON.stringify([{ "next": "#send_unknown_action_message" }, { "next": "#append_back_to_start_keyboard" }]),
-                        // fr
-                        JSON.stringify([{ "next": "#send_unknown_action_message" }, { "next": "#append_back_to_start_keyboard" }]),
-                        // ar
-                        JSON.stringify([{ "next": "#send_unknown_action_message" }, { "next": "#append_back_to_start_keyboard" }]),
-                        // de
-                        JSON.stringify([{ "next": "#send_unknown_action_message" }, { "next": "#append_back_to_start_keyboard" }]),
-                        // it
-                        JSON.stringify([{ "next": "#send_unknown_action_message" }, { "next": "#append_back_to_start_keyboard" }]),
-                        // pt
-                        JSON.stringify([{ "next": "#send_unknown_action_message" }, { "next": "#append_back_to_start_keyboard" }]),
-                        // ru
-                        JSON.stringify([{ "next": "#send_unknown_action_message" }, { "next": "#append_back_to_start_keyboard" }]),
-                        // zh
-                        JSON.stringify([{ "next": "#send_unknown_action_message" }, { "next": "#append_back_to_start_keyboard" }]),
-                        // ja
-                        JSON.stringify([{ "next": "#send_unknown_action_message" }, { "next": "#append_back_to_start_keyboard" }]),
-                        // ko
-                        JSON.stringify([{ "next": "#send_unknown_action_message" }, { "next": "#append_back_to_start_keyboard" }]),
-                        // he
-                        JSON.stringify([{ "next": "#send_unknown_action_message" }, { "next": "#append_back_to_start_keyboard" }])
+                        JSON.stringify([{ "next": "#answer_unknown_action" }, { "next": "#send_unknown_action_message" }, { "next": "#append_back_to_start_keyboard" }])
                     ],
                     ['/start',
                         // default (en)
@@ -4144,9 +3897,202 @@ EMD.BasicAutomation = {
                                 show_alert: false
                             }
                         }])
+                    ],
+                    ['#answer_unknown_action',
+                        // default (en)
+                        JSON.stringify([{
+                            method: 'answerCallbackQuery',
+                            payload: {
+                                text: '🚧 Oops! We could not recognize this action. Please try again or use /help for assistance.',
+                                show_alert: false
+                            }
+                        }]),
+                        // es
+                        JSON.stringify([{
+                            method: 'answerCallbackQuery',
+                            payload: {
+                                text: '🚧 ¡Vaya! No pudimos reconocer esta acción. Por favor, inténtalo de nuevo o usa /help para obtener ayuda.',
+                                show_alert: false
+                            }
+                        }]),
+                        // fr
+                        JSON.stringify([{
+                            method: 'answerCallbackQuery',
+                            payload: {
+                                text: '🚧 Oups ! Nous n\'avons pas pu reconnaître cette action. Veuillez réessayer ou utiliser /help pour obtenir de l\'aide.',
+                                show_alert: false
+                            }
+                        }]),
+                        // ar
+                        JSON.stringify([{
+                            method: 'answerCallbackQuery',
+                            payload: {
+                                text: '🚧 عذرًا! لم نتمكن من التعرف على هذا الإجراء. يرجى المحاولة مرة أخرى أو استخدام /help للحصول على المساعدة.',
+                                show_alert: false
+                            }
+                        }]),
+                        // de
+                        JSON.stringify([{
+                            method: 'answerCallbackQuery',
+                            payload: {
+                                text: '🚧 Hoppla! Wir konnten diese Aktion nicht erkennen. Bitte versuchen Sie es erneut oder verwenden Sie /help für Unterstützung.',
+                                show_alert: false
+                            }
+                        }]),
+                        // it
+                        JSON.stringify([{
+                            method: 'answerCallbackQuery',
+                            payload: {
+                                text: '🚧 Ops! Non siamo riusciti a riconoscere questa azione. Per favore riprova o usa /help per assistenza.',
+                                show_alert: false
+                            }
+                        }]),
+                        // pt
+                        JSON.stringify([{
+                            method: 'answerCallbackQuery',
+                            payload: {
+                                text: '🚧 Ops! Não conseguimos reconhecer esta ação. Por favor, tente novamente ou use /help para obter assistência.',
+                                show_alert: false
+                            }
+                        }]),
+                        // ru
+                        JSON.stringify([{
+                            method: 'answerCallbackQuery',
+                            payload: {
+                                text: '🚧 Упс! Мы не смогли распознать это действие. Пожалуйста, попробуйте еще раз или используйте /help для получения помощи.',
+                                show_alert: false
+                            }
+                        }]),
+                        // zh
+                        JSON.stringify([{
+                            method: 'answerCallbackQuery',
+                            payload: {
+                                text: '🚧 哎呀！我们无法识别此操作。请重试或使用 /help 获取帮助。',
+                                show_alert: false
+                            }
+                        }]),
+                        // ja
+                        JSON.stringify([{
+                            method: 'answerCallbackQuery',
+                            payload: {
+                                text: '🚧 おっと！このアクションを認識できませんでした。もう一度お試しいただくか、/help を使用してヘルプを取得してください。',
+                                show_alert: false
+                            }
+                        }]),
+                        // ko
+                        JSON.stringify([{
+                            method: 'answerCallbackQuery',
+                            payload: {
+                                text: '🚧 죄송합니다! 이 작업을 인식할 수 없습니다. 다시 시도하거나 /help를 사용하여 도움을 받으세요.',
+                                show_alert: false
+                            }
+                        }]),
+                        // he
+                        JSON.stringify([{
+                            method: 'answerCallbackQuery',
+                            payload: {
+                                text: '🚧 מצטערים! לא הצלחנו לזהות את הפעולה הזו. אנא נסה שוב או השתמש ב-/help לקבלת עזרה.',
+                                show_alert: false
+                            }
+                        }])
                     ]
                 ]
-        };
+        }
+    }
+}
+
+EMD.SurveyAutomation = {
+    entityName: 'SurveyAutomation',
+    sheet: (data = {}) => {
+        return {
+            name: EMD.Automation.sheet(data).name,
+            columns: EMD.Automation.sheet(data).columns,
+            sample_data:
+                [
+                    ['---- 📋 SURVEY AUTOMATION SAMPLE DATA START ----',],
+                    ['/surveys',
+                        // default (en)
+                        JSON.stringify([{ "next": "#append_survey_options_keyboard" }])
+                    ],
+                    ['#sendPoll01',
+                        // default (en)
+                        JSON.stringify([{
+                            method: 'sendPoll',
+                            payload: {
+                                question: 'Which feature do you like the most in this bot?',
+                                question_parse_mode: 'HTML',
+                                options: JSON.stringify([
+                                    'Text Messages with HTML formatting',
+                                    'Photos with captions and inline keyboards',
+                                    'Media Groups (albums) with multiple photos',
+                                    'Interactive Inline Keyboards'
+                                ]),
+                                protect_content: true,
+                                open_period: 7,
+                                is_anonymous: false,
+                                explanation: 'Your feedback helps us improve the bot and add more exciting features!',
+                                explanation_parse_mode: 'HTML',
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "🏠 Start", callback_data: "/home" }]
+                                    ]
+                                }
+                            }
+                        }])],
+                    ['#sendQuiz01',
+                        // default (en)
+                        JSON.stringify([{
+                            method: 'sendPoll',
+                            payload: {
+                                question: 'What is the <b>main</b> advantage of using Interactive Inline Keyboards in Telegram bots? ✨',
+                                question_parse_mode: 'HTML',
+                                options: JSON.stringify([
+                                    'They allow sending larger files',
+                                    'They enable real-time user interaction',
+                                    'They improve message delivery speed',
+                                    'They support multimedia content'
+                                ]),
+                                protect_content: true,
+                                open_period: 7,
+                                is_anonymous: false,
+                                type: 'quiz',
+                                correct_option_id: 3,
+                                explanation: 'Interactive Inline Keyboards allow users to engage directly with the bot, making the experience more dynamic and user-friendly!',
+                                explanation_parse_mode: 'HTML',
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "🏠 Start", callback_data: "/home" }]
+                                    ]
+                                }
+                            }
+                        }])],
+                    ['#append_survey_options_keyboard',
+                        // default (en)
+                        JSON.stringify([{
+                            method: 'editMessageReplyMarkup',
+                            payload: {
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "Take Poll", callback_data: "#sendPoll" }],
+                                        [{ text: "Take Quiz", callback_data: "#sendQuiz" }]
+                                    ]
+                                }
+                            }
+                        }])
+                    ],
+                    ['#send_welcome_to_survey_center',
+                        // default (en)
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Welcome to the Survey Center! \n\n'
+                                    + 'Here you can participate in various polls and quizzes to share your opinions and test your knowledge.',
+                                parse_mode: 'HTML'
+                            }
+                        }])
+                    ]
+                ]
+        }
     }
 }
 
@@ -4156,30 +4102,31 @@ EMD.StoreAutomation = {
     pluralDisplayName: 'Store Automations',
     sheet: (data = {}) => {
         return {
-            name: '✨ Store',
-            columns: ['action', 'en', 'es', 'fr', 'ar', 'de', 'it', 'pt', 'ru', 'zh', 'ja', 'ko', 'he'],
+            name: EMD.Automation.sheet(data).name,
+            columns: EMD.Automation.sheet(data).columns,
             sample_data:
                 [
+                    ['---- ✨ STORE AUTOMATION SAMPLE DATA START ----']
                     ['/store',
-                        // default (en)
-                        JSON.stringify([{
-                            method: 'sendPhoto',
-                            payload: {
-                                caption: 'Welcome to the Store! Here you can find various products and services.',
-                                photo: "https://www.gstatic.com/webp/gallery/1.jpg",
-                                parse_mode: 'HTML',
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [{ text: "Category A", callback_data: "#categoryA" }],
-                                        [{ text: "Category B", callback_data: "#categoryB" }],
-                                        [{ text: "Category C", callback_data: "#categoryC" }],
-                                        [{ text: "Category D", callback_data: "#categoryD" }],
-                                        [{ text: "Category E", callback_data: "#categoryE" }],
-                                        [{ text: "Home", callback_data: "/home" }]
-                                    ]
-                                }
+                    // default (en)
+                    JSON.stringify([{
+                        method: 'sendPhoto',
+                        payload: {
+                            caption: 'Welcome to the Store! Here you can find various products and services.',
+                            photo: "https://www.gstatic.com/webp/gallery/1.jpg",
+                            parse_mode: 'HTML',
+                            reply_markup: {
+                                inline_keyboard: [
+                                    [{ text: "Category A", callback_data: "#categoryA" }],
+                                    [{ text: "Category B", callback_data: "#categoryB" }],
+                                    [{ text: "Category C", callback_data: "#categoryC" }],
+                                    [{ text: "Category D", callback_data: "#categoryD" }],
+                                    [{ text: "Category E", callback_data: "#categoryE" }],
+                                    [{ text: "Home", callback_data: "/home" }]
+                                ]
                             }
-                        }])],
+                        }
+                    }])],
                     ['#categoryA',
                         // default (en)
                         JSON.stringify([

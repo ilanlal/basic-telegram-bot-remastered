@@ -169,6 +169,18 @@ describe('BotSetupController Tests', () => {
                 expect(userProperties.getProperty(EnvironmentModel.InputMeta.TEST_DEPLOYMENT_ID)).toBe(testDeploymentId);
             });
 
+            // setLogArchiveSize method.
+            test("setLogArchiveSize should store the log archive size", () => {
+                const userProperties = PropertiesService.getDocumentProperties();
+                const testLogArchiveSize = 2000;
+                controller = BotSetupController.create(
+                    userProperties,
+                    SpreadsheetApp.getActiveSpreadsheet()
+                );
+                controller.setLogArchiveSize(testLogArchiveSize);
+                expect(userProperties.getProperty(EnvironmentModel.InputMeta.LOG_ARCHIVE_SIZE)).toBe(testLogArchiveSize);
+            });
+
             describe('Bot info methods', () => {
                 const sampleToken = '[FAKE_DUMMY_BOT_TOKEN]';
                 EnvironmentModel.create(

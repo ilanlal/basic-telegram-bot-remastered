@@ -107,6 +107,11 @@ class BotSetupController {
         return SetupFlow.create(this._userProperties, this._activeSpreadsheet)
             .setMyCommands();
     }
+
+    setLogArchiveSize(size) {
+        return EnvironmentModel.create(this._userProperties)
+            .setLogArchiveSize(size);
+    }
 }
 
 
