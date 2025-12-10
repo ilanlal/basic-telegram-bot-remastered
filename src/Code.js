@@ -19,7 +19,7 @@ function doPost(e) {
         // Handle the webhook event
         return WebhookHandler.handlePostUpdateRequest(contents);
     } catch (error) {
-        Logger.log('Error in doPost: ' + error.message);
+        
         throw error;
     }
 }

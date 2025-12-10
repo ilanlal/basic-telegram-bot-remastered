@@ -18,12 +18,6 @@ EventHandler.Addon = {
                 EventHandler.prototype.userProperties)
             .handleOpenHomeCard(e);
     },
-    onBindSheetDataClick: (e) => {
-        return new EventHandler
-            .AddonWrapper(
-                EventHandler.prototype.userProperties)
-            .handleBindSheetData(e);
-    },
     onOpenAccountCard: (e) => {
         return new EventHandler
             .AddonWrapper(
