@@ -26,7 +26,7 @@ describe('LoggerModel', () => {
                 content: 'TestContent',
                 event: 'TestEvent'
             };
-            EnvironmentModel.create().setDebugMode(true);
+            EnvironmentModel.create().setDebugMode('all');
             LoggerModel.create().logEvent(mockEvent);
             const sheet = SpreadsheetApp.getActiveSpreadsheet()
                 .getSheetByName(EMD.Logger.sheet({}).name);

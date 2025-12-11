@@ -1290,37 +1290,41 @@ EMD.BasicAutomation = {
                     ],
                     ['/start',
                         // default (en)
-                        JSON.stringify([{ "next": "#remove_keyboard" }, { "next": "#send_welcome_messages" },
-                        { "next": "#append_main_menu_keyboard" }, { "next": "#answer_completed" }])
+                        JSON.stringify([
+                            { "next": "#remove_keyboard" },
+                            { "next": "#send_welcome_messages" },
+                            { "next": "#append_main_menu_keyboard" }
+                        ])
                     ],
                     ['/help',
                         // default (en)
                         JSON.stringify([
                             { "next": "#remove_keyboard" },
                             { "next": "#send_help_message" },
-                            { "next": "#append_back_to_start_keyboard" },
-                            { "next": "#answer_completed" }])
+                            { "next": "#append_main_menu_keyboard" }
+                        ])
                     ],
                     ['/about',
+                        // default (en)
+                        JSON.stringify([
+                            { "next": "#remove_keyboard" },
+                            { "next": "#send_about_message" },
+                            { "next": "#send_about_opensource_message" },
+                            { "next": "#send_please_support_message" },
+                            { "next": "#send_privacy_security_message" },
+                            { "next": "#send_how_to_contribute_message" },
+                            { "next": "#append_main_menu_keyboard" }
+                        ])
+                    ],
+                    ['/show_me_love',
                         // default (en)
                         JSON.stringify([
                             { "next": "#remove_keyboard" },
                             { "next": "#send_about_opensource_message" },
                             { "next": "#send_donation_message" },
                             { "next": "#send_show_me_love_invoice" },
-                            { "next": "#send_about_message" },
-                            { "next": "#append_back_to_start_keyboard" },
-                            { "next": "#answer_completed" }
-                        ])
-                    ],
-                    ['/show_me_love',
-                        // default (en)
-                        JSON.stringify([
-                            { "next": "#send_please_support_message" },
-                            { "next": "#send_show_me_love_invoice" },
-                            { "next": "#send_donation_message" },
-                            { "next": "#append_back_to_start_keyboard" },
-                            { "next": "#answer_completed" }])
+                            { "next": "#send_show_me_love_message" },
+                            { "next": "#append_main_menu_keyboard" }])
                     ],
                     ['#send_welcome_messages',
                         // default (en)
@@ -1835,7 +1839,11 @@ EMD.BasicAutomation = {
                                 reply_markup: {
                                     inline_keyboard: [
                                         [
-                                            { text: "💖 Show Me Love", callback_data: "/show_me_love" }],
+                                            { text: "🪬 Run Security Checks", callback_data: "/security_checks" }
+                                        ],
+                                        [
+                                            { text: "💖 Show Me Love", callback_data: "/show_me_love" }
+                                        ],
                                         [
                                             { text: "ℹ️ About", callback_data: "/about" },
                                             { text: "❓ Help", callback_data: "/help" }
@@ -1850,6 +1858,9 @@ EMD.BasicAutomation = {
                             payload: {
                                 reply_markup: {
                                     inline_keyboard: [
+                                        [
+                                            { text: "🪬 Ejecutar comprobaciones de seguridad", callback_data: "/security_checks" }
+                                        ],
                                         [
                                             { text: "💖 Muéstrame amor", callback_data: "/show_me_love" }],
                                         [
@@ -1867,6 +1878,9 @@ EMD.BasicAutomation = {
                                 reply_markup: {
                                     inline_keyboard: [
                                         [
+                                            { text: "🪬 Exécuter les vérifications de sécurité", callback_data: "/security_checks" }
+                                        ],
+                                        [
                                             { text: "💖 Montre-moi de l'amour", callback_data: "/show_me_love" }],
                                         [
                                             { text: "ℹ️ À propos", callback_data: "/about" },
@@ -1882,6 +1896,9 @@ EMD.BasicAutomation = {
                             payload: {
                                 reply_markup: {
                                     inline_keyboard: [
+                                        [
+                                            { text: "🪬 تشغيل فحوصات الأمان", callback_data: "/security_checks" }
+                                        ],
                                         [
                                             { text: "💖 أرني الحب", callback_data: "/show_me_love" }],
                                         [
@@ -1899,6 +1916,9 @@ EMD.BasicAutomation = {
                                 reply_markup: {
                                     inline_keyboard: [
                                         [
+                                            { text: "🪬 Sicherheitsprüfungen durchführen", callback_data: "/security_checks" }
+                                        ],
+                                        [
                                             { text: "💖 Zeig mir Liebe", callback_data: "/show_me_love" }],
                                         [
                                             { text: "ℹ️ Über", callback_data: "/about" },
@@ -1914,6 +1934,9 @@ EMD.BasicAutomation = {
                             payload: {
                                 reply_markup: {
                                     inline_keyboard: [
+                                        [
+                                            { text: "🪬 Esegui controlli di sicurezza", callback_data: "/security_checks" }
+                                        ],
                                         [
                                             { text: "💖 Mostrami amore", callback_data: "/show_me_love" }],
                                         [
@@ -1931,6 +1954,9 @@ EMD.BasicAutomation = {
                                 reply_markup: {
                                     inline_keyboard: [
                                         [
+                                            { text: "🪬 Execute security checks", callback_data: "/security_checks" }
+                                        ],
+                                        [
                                             { text: "💖 Mostre-me amor", callback_data: "/show_me_love" }],
                                         [
                                             { text: "ℹ️ Sobre", callback_data: "/about" },
@@ -1946,6 +1972,9 @@ EMD.BasicAutomation = {
                             payload: {
                                 reply_markup: {
                                     inline_keyboard: [
+                                        [
+                                            { text: "🪬 Выполнить проверки безопасности", callback_data: "/security_checks" }
+                                        ],
                                         [
                                             { text: "💖 Покажи мне любовь", callback_data: "/show_me_love" }],
                                         [
@@ -1963,6 +1992,9 @@ EMD.BasicAutomation = {
                                 reply_markup: {
                                     inline_keyboard: [
                                         [
+                                            { text: "🪬 执行安全检查", callback_data: "/security_checks" }
+                                        ],
+                                        [
                                             { text: "💖 给我爱", callback_data: "/show_me_love" }],
                                         [
                                             { text: "ℹ️ 关于", callback_data: "/about" },
@@ -1978,6 +2010,9 @@ EMD.BasicAutomation = {
                             payload: {
                                 reply_markup: {
                                     inline_keyboard: [
+                                        [
+                                            { text: "🪬 セキュリティチェックを実行する", callback_data: "/security_checks" }
+                                        ],
                                         [
                                             { text: "💖 愛を見せて", callback_data: "/show_me_love" }],
                                         [
@@ -1995,6 +2030,9 @@ EMD.BasicAutomation = {
                                 reply_markup: {
                                     inline_keyboard: [
                                         [
+                                            { text: "🪬 보안 검사 실행", callback_data: "/security_checks" }
+                                        ],
+                                        [
                                             { text: "💖 사랑을 보여줘", callback_data: "/show_me_love" }],
                                         [
                                             { text: "ℹ️ 정보", callback_data: "/about" },
@@ -2010,6 +2048,9 @@ EMD.BasicAutomation = {
                             payload: {
                                 reply_markup: {
                                     inline_keyboard: [
+                                        [
+                                            { text: "🪬 הפעל בדיקות אבטחה", callback_data: "/security_checks" }
+                                        ],
                                         [
                                             { text: "💖 תראה לי אהבה", callback_data: "/show_me_love" }],
                                         [
@@ -2288,7 +2329,7 @@ EMD.BasicAutomation = {
                             }
                         }])
                     ],
-                    ['#send_secure_private_message',
+                    ['#send_privacy_security_message',
                         // default (en)
                         JSON.stringify([{
                             method: 'sendMessage',
@@ -3371,6 +3412,1048 @@ EMD.BasicAutomation = {
                                 prices: JSON.stringify([
                                     { label: 'תרומת תמיכה', amount: 100 } // Amount in smallest units (e.g., cents)
                                 ])
+                            }
+                        }])
+                    ],
+                    ['/security_checks',
+                        // default (en)
+                        JSON.stringify([
+                            { "next": "#remove_keyboard" },
+                            { "next": "#send_welcome_to_security_checks_message" },
+                            { "next": "#send_malware_protection_message" },
+                            { "next": "#send_check_your_device_now_message" },
+                            { "next": "#append_top_security_checks_keyboard" }
+                        ])
+                    ],
+                    ['#send_welcome_to_security_checks_message',
+                        // default (en)
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Welcome to Security Checks! \n\n'
+                                    + 'Here you can find recommendations to enhance the security of your device, account and data.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // es
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: '¡Bienvenido a las Verificaciones de Seguridad! \n\n'
+                                    + 'Aquí puedes encontrar recomendaciones para mejorar la seguridad de tu dispositivo, cuenta y datos.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // fr
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Bienvenue dans les Vérifications de Sécurité ! \n\n'
+                                    + 'Ici, vous pouvez trouver des recommandations pour améliorer la sécurité de votre appareil, compte et données.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ar
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'مرحبًا بك في فحوصات الأمان! \n\n'
+                                    + 'هنا يمكنك العثور على توصيات لتعزيز أمان جهازك وحسابك وبياناتك.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // de
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Willkommen bei den Sicherheitsprüfungen! \n\n'
+                                    + 'Hier finden Sie Empfehlungen zur Verbesserung der Sicherheit Ihres Geräts, Kontos und Ihrer Daten.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // it
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Benvenuto in Controlli di Sicurezza! \n\n'
+                                    + 'Qui puoi trovare raccomandazioni per migliorare la sicurezza del tuo dispositivo, account e dati.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // pt
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Bem-vindo às Verificações de Segurança! \n\n'
+                                    + 'Aqui você pode encontrar recomendações para melhorar a segurança do seu dispositivo, conta e dados.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ru
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Добро пожаловать в Проверки безопасности! \n\n'
+                                    + 'Здесь вы можете найти рекомендации по повышению безопасности вашего устройства, аккаунта и данных.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // zh
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: '欢迎使用安全检查！ \n\n'
+                                    + '在这里，您可以找到增强设备、帐户和数据安全性的建议。',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ja
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'セキュリティチェックへようこそ！ \n\n'
+                                    + 'ここでは、デバイス、アカウント、データのセキュリティを強化するための推奨事項を見つけることができます。',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ko
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: '보안 검사에 오신 것을 환영합니다! \n\n'
+                                    + '여기에서 장치, 계정 및 데이터의 보안을 강화하기 위한 권장 사항을 찾을 수 있습니다.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // he
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'ברוכים הבאים לבדיקות אבטחה! \n\n'
+                                    + 'כאן תוכלו למצוא המלצות לשיפור האבטחה של המכשיר, החשבון והנתונים שלכם.',
+                                parse_mode: 'HTML'
+                            }
+                        }])
+                    ],
+                    ['#send_malware_protection_message',
+                        // default (en)
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Malware Protection: \n\n'
+                                    + 'Ensure your device has up-to-date antivirus software installed to protect against malware threats.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // es
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Protección contra malware: \n\n'
+                                    + 'Asegúrate de que tu dispositivo tenga instalado un software antivirus actualizado para protegerte contra amenazas de malware.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // fr
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Protection contre les logiciels malveillants : \n\n'
+                                    + 'Assurez-vous que votre appareil dispose d\'un logiciel antivirus à jour pour vous protéger contre les menaces de logiciels malveillants.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ar
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'حماية من البرامج الضارة: \n\n'
+                                    + 'تأكد من أن جهازك يحتوي على برنامج مضاد فيروسات محدث لحمايتك من تهديدات البرامج الضارة.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // de
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Malware-Schutz: \n\n'
+                                    + 'Stellen Sie sicher, dass auf Ihrem Gerät eine aktuelle Antivirensoftware installiert ist, um sich vor Malware-Bedrohungen zu schützen.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // it
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Protezione da malware: \n\n'
+                                    + 'Assicurati che il tuo dispositivo abbia un software antivirus aggiornato per proteggerti dalle minacce di malware.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // pt
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Proteção contra malware: \n\n'
+                                    + 'Certifique-se de que seu dispositivo tenha um software antivírus atualizado para protegê-lo contra ameaças de malware.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ru
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Защита от вредоносных программ: \n\n'
+                                    + 'Убедитесь, что на вашем устройстве установлено обновленное антивирусное программное обеспечение для защиты от угроз вредоносных программ.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // zh
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: '恶意软件保护： \n\n'
+                                    + '确保您的设备安装了最新的防病毒软件，以保护您免受恶意软件的威胁。',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ja
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'マルウェア対策： \n\n'
+                                    + 'お使いのデバイスに最新のアンチウイルスソフトウェアがインストールされていることを確認して、マルウェアの脅威から保護してください。',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ko
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: '맬웨어 보호: \n\n'
+                                    + '장치에 최신 안티바이러스 소프트웨어가 설치되어 있어 맬웨어 위협으로부터 보호받을 수 있도록 하십시오.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // he
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'הגנה מפני תוכנות זדוניות: \n\n'
+                                    + 'ודא שהמכשיר שלך מותקן עם תוכנת אנטי-וירוס מעודכנת כדי להגן מפני איומי תוכנות זדוניות.',
+                                parse_mode: 'HTML'
+                            }
+                        }])
+                    ],
+                    ['#send_check_your_device_now_message',
+                        // default (en)
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Check Your Device Now! \n\n'
+                                    + 'Ensure your device is secure by following these steps:\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // es
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: '¡Revisa tu dispositivo ahora! \n\n'
+                                    + 'Asegúrate de que tu dispositivo esté seguro siguiendo estos pasos:\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // fr
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Vérifiez votre appareil maintenant ! \n\n'
+                                    + 'Assurez-vous que votre appareil est sécurisé en suivant ces étapes :\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ar
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'تحقق من جهازك الآن! \n\n'
+                                    + 'تأكد من أن جهازك آمن باتباع هذه الخطوات:\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // de
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Überprüfen Sie jetzt Ihr Gerät! \n\n'
+                                    + 'Stellen Sie sicher, dass Ihr Gerät sicher ist, indem Sie diese Schritte befolgen:\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // it
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Controlla il tuo dispositivo ora! \n\n'
+                                    + 'Assicurati che il tuo dispositivo sia sicuro seguendo questi passaggi:\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // pt
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Verifique seu dispositivo agora! \n\n'
+                                    + 'Certifique-se de que seu dispositivo está seguro seguindo estas etapas:\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ru
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Проверьте свое устройство сейчас! \n\n'
+                                    + 'Убедитесь, что ваше устройство защищено, выполнив следующие шаги:\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // zh
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: '立即检查您的设备！ \n\n'
+                                    + '按照以下步骤确保您的设备安全：\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ja
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: '今すぐデバイスを確認してください！ \n\n'
+                                    + '次の手順に従って、デバイスが安全であることを確認してください：\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ko
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: '지금 장치를 확인하세요! \n\n'
+                                    + '다음 단계를 따라 장치가 안전한지 확인하십시오:\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // he
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'בדוק את המכשיר שלך עכשיו! \n\n'
+                                    + 'ודא שהמכשיר שלך מאובטח על ידי ביצוע השלבים הבאים:\n',
+                                parse_mode: 'HTML'
+                            }
+                        }])
+                    ],
+                    ['#append_top_security_checks_keyboard',
+                        // default (en)
+                        JSON.stringify([{
+                            method: 'editMessageReplyMarkup',
+                            payload: {
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "Android Security Checks", callback_data: "/android_security_checks" }],
+                                        [{ text: "iOS Security Checks", callback_data: "/ios_security_checks" }],
+                                        [{ text: "Privacy Checks", callback_data: "/privacy_checks" }],
+                                        [{ text: "About 🛈", callback_data: "/about" }, { text: "❓ Help", callback_data: "/help" }],
+                                        [{ text: "🏠 Start", callback_data: "/start" }]
+                                    ]
+                                }
+                            }
+                        }]),
+                        // es
+                        JSON.stringify([{
+                            method: 'editMessageReplyMarkup',
+                            payload: {
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "Verificaciones de seguridad de Android", callback_data: "/android_security_checks" }],
+                                        [{ text: "Verificaciones de seguridad de iOS", callback_data: "/ios_security_checks" }],
+                                        [{ text: "Verificaciones de privacidad", callback_data: "/privacy_checks" }],
+                                        [{ text: "Acerca de 🛈", callback_data: "/about" }, { text: "❓ Ayuda", callback_data: "/help" }],
+                                        [{ text: "🏠 Inicio", callback_data: "/start" }]
+                                    ]
+                                }
+                            }
+                        }]),
+                        // fr
+                        JSON.stringify([{
+                            method: 'editMessageReplyMarkup',
+                            payload: {
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "Vérifications de sécurité Android", callback_data: "/android_security_checks" }],
+                                        [{ text: "Vérifications de sécurité iOS", callback_data: "/ios_security_checks" }],
+                                        [{ text: "Vérifications de confidentialité", callback_data: "/privacy_checks" }],
+                                        [{ text: "À propos 🛈", callback_data: "/about" }, { text: "❓ Aide", callback_data: "/help" }],
+                                        [{ text: "🏠 Accueil", callback_data: "/start" }]
+                                    ]
+                                }
+                            }
+                        }]),
+                        // ar
+                        JSON.stringify([{
+                            method: 'editMessageReplyMarkup',
+                            payload: {
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "فحوصات أمان Android", callback_data: "/android_security_checks" }],
+                                        [{ text: "فحوصات أمان iOS", callback_data: "/ios_security_checks" }],
+                                        [{ text: "فحوصات الخصوصية", callback_data: "/privacy_checks" }],
+                                        [{ text: "حول 🛈", callback_data: "/about" }, { text: "❓ مساعدة", callback_data: "/help" }],
+                                        [{ text: "🏠 البداية", callback_data: "/start" }]
+                                    ]
+                                }
+                            }
+                        }]),
+                        // de
+                        JSON.stringify([{
+                            method: 'editMessageReplyMarkup',
+                            payload: {
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "Android-Sicherheitsprüfungen", callback_data: "/android_security_checks" }],
+                                        [{ text: "iOS-Sicherheitsprüfungen", callback_data: "/ios_security_checks" }],
+                                        [{ text: "Datenschutzprüfungen", callback_data: "/privacy_checks" }],
+                                        [{ text: "Über 🛈", callback_data: "/about" }, { text: "❓ Hilfe", callback_data: "/help" }],
+                                        [{ text: "🏠 Startseite", callback_data: "/start" }]
+                                    ]
+                                }
+                            }
+                        }]),
+                        // it
+                        JSON.stringify([{
+                            method: 'editMessageReplyMarkup',
+                            payload: {
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "Controlli di sicurezza Android", callback_data: "/android_security_checks" }],
+                                        [{ text: "Controlli di sicurezza iOS", callback_data: "/ios_security_checks" }],
+                                        [{ text: "Controlli sulla privacy", callback_data: "/privacy_checks" }],
+                                        [{ text: "Informazioni 🛈", callback_data: "/about" }, { text: "❓ Aiuto", callback_data: "/help" }],
+                                        [{ text: "🏠 Home", callback_data: "/start" }]
+                                    ]
+                                }
+                            }
+                        }]),
+                        // pt
+                        JSON.stringify([{
+                            method: 'editMessageReplyMarkup',
+                            payload: {
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "Verificações de segurança do Android", callback_data: "/android_security_checks" }],
+                                        [{ text: "Verificações de segurança do iOS", callback_data: "/ios_security_checks" }],
+                                        [{ text: "Verificações de privacidade", callback_data: "/privacy_checks" }],
+                                        [{ text: "Sobre 🛈", callback_data: "/about" }, { text: "❓ Ajuda", callback_data: "/help" }],
+                                        [{ text: "🏠 Início", callback_data: "/start" }]
+                                    ]
+                                }
+                            }
+                        }]),
+                        // ru
+                        JSON.stringify([{
+                            method: 'editMessageReplyMarkup',
+                            payload: {
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "Проверки безопасности Android", callback_data: "/android_security_checks" }],
+                                        [{ text: "Проверки безопасности iOS", callback_data: "/ios_security_checks" }],
+                                        [{ text: "Проверки конфиденциальности", callback_data: "/privacy_checks" }],
+                                        [{ text: "О программе 🛈", callback_data: "/about" }, { text: "❓ Помощь", callback_data: "/help" }],
+                                        [{ text: "🏠 Главная", callback_data: "/start" }]
+                                    ]
+                                }
+                            }
+                        }]),
+                        // zh
+                        JSON.stringify([{
+                            method: 'editMessageReplyMarkup',
+                            payload: {
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "Android 安全检查", callback_data: "/android_security_checks" }],
+                                        [{ text: "iOS 安全检查", callback_data: "/ios_security_checks" }],
+                                        [{ text: "隐私检查", callback_data: "/privacy_checks" }],
+                                        [{ text: "关于 🛈", callback_data: "/about" }, { text: "❓ 帮助", callback_data: "/help" }],
+                                        [{ text: "🏠 主页", callback_data: "/start" }]
+                                    ]
+                                }
+                            }
+                        }]),
+                        // ja
+                        JSON.stringify([{
+                            method: 'editMessageReplyMarkup',
+                            payload: {
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "Android セキュリティチェック", callback_data: "/android_security_checks" }],
+                                        [{ text: "iOS セキュリティチェック", callback_data: "/ios_security_checks" }],
+                                        [{ text: "プライバシーチェック", callback_data: "/privacy_checks" }],
+                                        [{ text: "について 🛈", callback_data: "/about" }, { text: "❓ ヘルプ", callback_data: "/help" }],
+                                        [{ text: "🏠 ホーム", callback_data: "/start" }]
+                                    ]
+                                }
+                            }
+                        }]),
+                        // ko
+                        JSON.stringify([{
+                            method: 'editMessageReplyMarkup',
+                            payload: {
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "Android 보안 검사", callback_data: "/android_security_checks" }],
+                                        [{ text: "iOS 보안 검사", callback_data: "/ios_security_checks" }],
+                                        [{ text: "개인정보 보호 검사", callback_data: "/privacy_checks" }],
+                                        [{ text: "정보 🛈", callback_data: "/about" }, { text: "❓ 도움말", callback_data: "/help" }],
+                                        [{ text: "🏠 홈", callback_data: "/start" }]
+                                    ]
+                                }
+                            }
+                        }]),
+                        // he
+                        JSON.stringify([{
+                            method: 'editMessageReplyMarkup',
+                            payload: {
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "בדיקות אבטחת Android", callback_data: "/android_security_checks" }],
+                                        [{ text: "בדיקות אבטחת iOS", callback_data: "/ios_security_checks" }],
+                                        [{ text: "בדיקות פרטיות", callback_data: "/privacy_checks" }],
+                                        [{ text: "אודות 🛈", callback_data: "/about" }, { text: "❓ עזרה", callback_data: "/help" }],
+                                        [{ text: "🏠 בית", callback_data: "/start" }]
+                                    ]
+                                }
+                            }
+                        }])
+                    ],
+                    ['/android_security_checks',
+                        // default (en)
+                        JSON.stringify([
+                            { "next": "#remove_keyboard" },
+                            { "next": '#send_android_security_checks' },
+                            { "next": '#append_top_security_checks_keyboard' }
+                        ])
+                    ],
+                    ['/ios_security_checks',
+                        // default (en)
+                        JSON.stringify([
+                            { "next": "#remove_keyboard" },
+                            { "next": '#send_ios_security_checks' },
+                            { "next": '#append_top_security_checks_keyboard' }
+                        ])
+                    ],
+                    ['/privacy_checks',
+                        // default (en)
+                        JSON.stringify([
+                            { "next": "#remove_keyboard" },
+                            { "next": '#send_privacy_checks' },
+                            { "next": '#append_top_security_checks_keyboard' }
+                        ])
+                    ],
+                    ['#send_android_security_checks',
+                        // default (en)
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Android Security Checks: \n\n'
+                                    + '1. Keep your device updated with the latest security patches.\n'
+                                    + '2. Only install apps from trusted sources like Google Play Store.\n'
+                                    + '3. Use a strong screen lock and enable biometric authentication.\n'
+                                    + '4. Regularly back up your data to a secure location.\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // es
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Verificaciones de seguridad de Android: \n\n'
+                                    + '1. Mantén tu dispositivo actualizado con los últimos parches de seguridad.\n'
+                                    + '2. Solo instala aplicaciones de fuentes confiables como Google Play Store.\n'
+                                    + '3. Usa un bloqueo de pantalla fuerte y habilita la autenticación biométrica.\n'
+                                    + '4. Realiza copias de seguridad de tus datos regularmente en una ubicación segura.\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // fr
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Vérifications de sécurité Android : \n\n'
+                                    + '1. Gardez votre appareil à jour avec les derniers correctifs de sécurité.\n'
+                                    + '2. N\'installez des applications que depuis des sources fiables comme le Google Play Store.\n'
+                                    + '3. Utilisez un verrouillage d\'écran fort et activez l\'authentification biométrique.\n'
+                                    + '4. Sauvegardez régulièrement vos données dans un endroit sécurisé.\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ar
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'فحوصات أمان Android: \n\n'
+                                    + '1. حافظ على تحديث جهازك بأحدث تصحيحات الأمان.\n'
+                                    + '2. قم بتثبيت التطبيقات فقط من مصادر موثوقة مثل متجر Google Play.\n'
+                                    + '3. استخدم قفل شاشة قوي وقم بتمكين المصادقة البيومترية.\n'
+                                    + '4. قم بعمل نسخ احتياطية لبياناتك بانتظام إلى موقع آمن.\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // de
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Android-Sicherheitsprüfungen: \n\n'
+                                    + '1. Halten Sie Ihr Gerät mit den neuesten Sicherheitspatches auf dem neuesten Stand.\n'
+                                    + '2. Installieren Sie Apps nur aus vertrauenswürdigen Quellen wie dem Google Play Store.\n'
+                                    + '3. Verwenden Sie eine starke Bildschirmsperre und aktivieren Sie die biometrische Authentifizierung.\n'
+                                    + '4. Sichern Sie Ihre Daten regelmäßig an einem sicheren Ort.\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // it
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Controlli di sicurezza Android: \n\n'
+                                    + '1. Mantieni il tuo dispositivo aggiornato con le ultime patch di sicurezza.\n'
+                                    + '2. Installa app solo da fonti affidabili come il Google Play Store.\n'
+                                    + '3. Usa un blocco schermo forte e abilita l\'autenticazione biometrica.\n'
+                                    + '4. Esegui regolarmente il backup dei tuoi dati in una posizione sicura.\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // pt
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Verificações de segurança do Android: \n\n'
+                                    + '1. Mantenha seu dispositivo atualizado com os patches de segurança mais recentes.\n'
+                                    + '2. Instale aplicativos apenas de fontes confiáveis, como a Google Play Store.\n'
+                                    + '3. Use um bloqueio de tela forte e ative a autenticação biométrica.\n'
+                                    + '4. Faça backup dos seus dados regularmente em um local seguro.\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ru
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Проверки безопасности Android: \n\n'
+                                    + '1. Держите ваше устройство обновленным с последними патчами безопасности.\n'
+                                    + '2. Устанавливайте приложения только из надежных источников, таких как Google Play Store.\n'
+                                    + '3. Используйте надежную блокировку экрана и включайте биометрическую аутентификацию.\n'
+                                    + '4. Регулярно делайте резервные копии ваших данных в безопасном месте.\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // zh
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Android 安全检查：\n\n'
+                                    + '1. 保持您的设备更新最新的安全补丁。\n'
+                                    + '2. 仅从可信来源（如 Google Play 商店）安装应用程序。\n'
+                                    + '3. 使用强屏幕锁定并启用生物识别认证。\n'
+                                    + '4. 定期备份您的数据到安全位置。\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ja
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Androidのセキュリティチェック：\n\n'
+                                    + '1. デバイスを最新のセキュリティパッチで更新してください。\n'
+                                    + '2. Google Playストアなどの信頼できるソースからのみアプリをインストールしてください。\n'
+                                    + '3. 強力な画面ロックを使用し、生体認証を有効にしてください。\n'
+                                    + '4. 定期的にデータを安全な場所にバックアップしてください。\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ko
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Android 보안 점검: \n\n'
+                                    + '1. 최신 보안 패치로 기기를 업데이트하세요.\n'
+                                    + '2. Google Play 스토어와 같은 신뢰할 수 있는 출처에서만 앱을 설치하세요.\n'
+                                    + '3. 강력한 화면 잠금과 생체 인증을 사용하세요.\n'
+                                    + '4. 데이터를 정기적으로 안전한 장소에 백업하세요.\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // he
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'בדיקות אבטחה של Android: \n\n'
+                                    + '1. שמור על המכשיר שלך מעודכן עם תיקוני האבטחה האחרונים.\n'
+                                    + '2. התקן אפליקציות רק ממקורות מהימנים, כמו Google Play Store.\n'
+                                    + '3. השתמש בנעילת מסך חזקה והפעל אימות ביומטרי.\n'
+                                    + '4. גבה את הנתונים שלך באופן קבוע במקום בטוח.\n',
+                                parse_mode: 'HTML'
+                            }
+                        }])
+                    ],
+                    ['#send_ios_security_checks',
+                        // default (en)
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'iOS Security Checks: \n\n'
+                                    + '1. Keep your iOS device updated with the latest software updates.\n'
+                                    + '2. Only download apps from the official App Store.\n'
+                                    + '3. Use a strong passcode and enable Face ID or Touch ID.\n'
+                                    + '4. Regularly back up your data using iCloud or iTunes.\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // es
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Controles de seguridad de iOS: \n\n'
+                                    + '1. Mantenga su dispositivo iOS actualizado con las últimas actualizaciones de software.\n'
+                                    + '2. Descargue aplicaciones solo desde la App Store oficial.\n'
+                                    + '3. Use un código de acceso fuerte y habilite Face ID o Touch ID.\n'
+                                    + '4. Realice copias de seguridad de sus datos regularmente usando iCloud o iTunes.\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // fr
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Vérifications de sécurité iOS : \n\n'
+                                    + '1. Maintenez votre appareil iOS à jour avec les dernières mises à jour logicielles.\n'
+                                    + '2. Téléchargez uniquement des applications depuis l\'App Store officiel.\n'
+                                    + '3. Utilisez un code d\'accès fort et activez Face ID ou Touch ID.\n'
+                                    + '4. Sauvegardez régulièrement vos données en utilisant iCloud ou iTunes.\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ar
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'فحوصات أمان iOS: \n\n'
+                                    + '1. حافظ على تحديث جهاز iOS الخاص بك بأحدث تحديثات البرامج.\n'
+                                    + '2. قم بتنزيل التطبيقات فقط من متجر التطبيقات الرسمي.\n'
+                                    + '3. استخدم رمز مرور قوي وقم بتمكين Face ID أو Touch ID.\n'
+                                    + '4. قم بعمل نسخ احتياطية لبياناتك بانتظام باستخدام iCloud أو iTunes.\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // de
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'iOS-Sicherheitsprüfungen: \n\n'
+                                    + '1. Halten Sie Ihr iOS-Gerät mit den neuesten Software-Updates auf dem neuesten Stand.\n'
+                                    + '2. Laden Sie Apps nur aus dem offiziellen App Store herunter.\n'
+                                    + '3. Verwenden Sie einen starken Passcode und aktivieren Sie Face ID oder Touch ID.\n'
+                                    + '4. Sichern Sie Ihre Daten regelmäßig mit iCloud oder iTunes.\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // it
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Controlli di sicurezza iOS: \n\n'
+                                    + '1. Mantieni il tuo dispositivo iOS aggiornato con gli ultimi aggiornamenti software.\n'
+                                    + '2. Scarica le app solo dall\'App Store ufficiale.\n'
+                                    + '3. Usa un codice di accesso forte e abilita Face ID o Touch ID.\n'
+                                    + '4. Esegui regolarmente il backup dei tuoi dati utilizzando iCloud o iTunes.\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // pt
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Verificações de segurança do iOS: \n\n'
+                                    + '1. Mantenha seu dispositivo iOS atualizado com as últimas atualizações de software.\n'
+                                    + '2. Baixe aplicativos apenas da App Store oficial.\n'
+                                    + '3. Use um código de acesso forte e ative o Face ID ou Touch ID.\n'
+                                    + '4. Faça backup regularmente dos seus dados usando o iCloud ou iTunes.\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ru
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Проверки безопасности iOS: \n\n'
+                                    + '1. Держите ваше устройство iOS обновленным с последними обновлениями программного обеспечения.\n'
+                                    + '2. Загружайте приложения только из официального App Store.\n'
+                                    + '3. Используйте надежный пароль и включайте Face ID или Touch ID.\n'
+                                    + '4. Регулярно делайте резервные копии ваших данных с помощью iCloud или iTunes.\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // zh
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'iOS安全检查：\n\n'
+                                    + '1. 保持您的iOS设备更新到最新的软件版本。\n'
+                                    + '2. 仅从官方App Store下载应用程序。\n'
+                                    + '3. 使用强密码并启用Face ID或Touch ID。\n'
+                                    + '4. 定期使用iCloud或iTunes备份您的数据。\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ja
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'iOSのセキュリティチェック：\n\n'
+                                    + '1. iOSデバイスを最新のソフトウェアアップデートで常に最新の状態に保ちます。\n'
+                                    + '2. 公式のApp Storeからのみアプリをダウンロードします。\n'
+                                    + '3. 強力なパスコードを使用し、Face IDまたはTouch IDを有効にします。\n'
+                                    + '4. iCloudまたはiTunesを使用して定期的にデータをバックアップします。\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ko
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'iOS 보안 점검: \n\n'
+                                    + '1. iOS 기기를 최신 소프트웨어 업데이트로 유지하세요.\n'
+                                    + '2. 공식 App Store에서만 앱을 다운로드하세요.\n'
+                                    + '3. 강력한 암호를 사용하고 Face ID 또는 Touch ID를 활성화하세요.\n'
+                                    + '4. iCloud 또는 iTunes를 사용하여 데이터를 정기적으로 백업하세요.\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // he
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'בדיקות אבטחה של iOS: \n\n'
+                                    + '1. שמור על מכשיר ה-iOS שלך מעודכן עם עדכוני התוכנה האחרונים.\n'
+                                    + '2. הורד אפליקציות רק מחנות האפליקציות הרשמית.\n'
+                                    + '3. השתמש בקוד גישה חזק והפעל Face ID או Touch ID.\n'
+                                    + '4. גבה את הנתונים שלך באופן קבוע באמצעות iCloud או iTunes.\n',
+                                parse_mode: 'HTML'
+                            }
+                        }])
+                    ],
+                    ['#send_privacy_checks',
+                        // default (en)
+                        JSON.stringify([
+                            { "next": "#remove_keyboard" },
+                            {
+                                method: 'sendMessage',
+                                payload: {
+                                    text: 'Privacy Checks: \n\n'
+                                        + '1. Review app permissions and revoke any unnecessary access.\n'
+                                        + '2. Use strong, unique passwords for your accounts.\n'
+                                        + '3. Enable two-factor authentication (2FA) wherever possible.\n'
+                                        + '4. Be cautious about sharing personal information online.\n',
+                                    parse_mode: 'HTML'
+                                }
+                            },
+                            { "next": "#append_top_security_checks_keyboard" }
+                        ]),
+                        // es
+                        JSON.stringify([
+                            { "next": "#remove_keyboard" },
+                            {
+                                method: 'sendMessage',
+                                payload: {
+                                    text: 'Comprobaciones de privacidad: \n\n'
+                                        + '1. Revisa los permisos de las aplicaciones y revoca cualquier acceso innecesario.\n'
+                                        + '2. Utiliza contraseñas fuertes y únicas para tus cuentas.\n'
+                                        + '3. Habilita la autenticación de dos factores (2FA) siempre que sea posible.\n'
+                                        + '4. Ten cuidado al compartir información personal en línea.\n',
+                                    parse_mode: 'HTML'
+                                }
+                            },
+                            { "next": "#append_top_security_checks_keyboard" }
+                        ]),
+                        // fr
+                        JSON.stringify([
+                            { "next": "#remove_keyboard" },
+                            {
+                                method: 'sendMessage',
+                                payload: {
+                                    text: 'Contrôles de confidentialité : \n\n'
+                                        + '1. Examinez les autorisations des applications et révoquez tout accès inutile.\n'
+                                        + '2. Utilisez des mots de passe forts et uniques pour vos comptes.\n'
+                                        + '3. Activez l\'authentification à deux facteurs (2FA) dans la mesure du possible.\n'
+                                        + '4. Soyez prudent lorsque vous partagez des informations personnelles en ligne.\n',
+                                    parse_mode: 'HTML'
+                                }
+                            },
+                            { "next": "#append_top_security_checks_keyboard" }
+                        ]),
+                        // ar
+                        JSON.stringify([
+                            { "next": "#remove_keyboard" },
+                            {
+                                method: 'sendMessage',
+                                payload: {
+                                    text: 'فحوصات الخصوصية: \n\n'
+                                        + '1. راجع أذونات التطبيق وقم بإلغاء أي وصول غير ضروري.\n'
+                                        + '2. استخدم كلمات مرور قوية وفريدة لحساباتك.\n'
+                                        + '3. قم بتمكين المصادقة الثنائية (2FA) حيثما أمكن ذلك.\n'
+                                        + '4. كن حذرًا عند مشاركة المعلومات الشخصية عبر الإنترنت.\n',
+                                    parse_mode: 'HTML'
+                                }
+                            },
+                            { "next": "#append_top_security_checks_keyboard" }
+                        ]),
+                        // de
+                        JSON.stringify([
+                            { "next": "#remove_keyboard" },
+                            {
+                                method: 'sendMessage',
+                                payload: {
+                                    text: 'Datenschutzkontrollen: \n\n'
+                                        + '1. Überprüfen Sie App-Berechtigungen und widerrufen Sie unnötige Zugriffe.\n'
+                                        + '2. Verwenden Sie starke, eindeutige Passwörter für Ihre Konten.\n'
+                                        + '3. Aktivieren Sie die Zwei-Faktor-Authentifizierung (2FA), wo immer möglich.\n'
+                                        + '4. Seien Sie vorsichtig beim Teilen persönlicher Informationen online.\n',
+                                    parse_mode: 'HTML'
+                                }
+                            },
+                            { "next": "#append_top_security_checks_keyboard" }
+                        ]),
+                        // it
+                        JSON.stringify([
+                            { "next": "#remove_keyboard" },
+                            {
+                                method: 'sendMessage',
+                                payload: {
+                                    text: 'Controlli sulla privacy: \n\n'
+                                        + '1. Rivedi i permessi delle app e revoca l\'accesso non necessario.\n'
+                                        + '2. Usa password forti e uniche per i tuoi account.\n'
+                                        + '3. Abilita l\'autenticazione a due fattori (2FA) ovunque sia possibile.\n'
+                                        + '4. Sii cauto nel condividere informazioni personali online.\n',
+                                    parse_mode: 'HTML'
+                                }
+                            },
+                            { "next": "#append_top_security_checks_keyboard" }
+                        ]),
+                        // pt
+                        JSON.stringify([
+                            { "next": "#remove_keyboard" },
+                            {
+                                method: 'sendMessage',
+                                payload: {
+                                    text: 'Verificações de privacidade: \n\n'
+                                        + '1. Revise as permissões de aplicativos e revogue qualquer acesso desnecessário.\n'
+                                        + '2. Use senhas fortes e exclusivas para suas contas.\n'
+                                        + '3. Ative a autenticação de dois fatores (2FA) sempre que possível.\n'
+                                        + '4. Tenha cuidado ao compartilhar informações pessoais online.\n',
+                                    parse_mode: 'HTML'
+                                }
+                            },
+                            { "next": "#append_top_security_checks_keyboard" }
+                        ]),
+                        // ru
+                        JSON.stringify([
+                            { "next": "#remove_keyboard" },
+                            {
+                                method: 'sendMessage',
+                                payload: {
+                                    text: 'Проверки конфиденциальности: \n\n'
+                                        + '1. Проверяйте разрешения приложений и отзывайте ненужный доступ.\n'
+                                        + '2. Используйте надежные, уникальные пароли для своих учетных записей.\n'
+                                        + '3. Включите двухфакторную аутентификацию (2FA) везде, где это возможно.\n'
+                                        + '4. Будьте осторожны при обмене личной информацией в Интернете.\n',
+                                    parse_mode: 'HTML'
+                                }
+                            },
+                            { "next": "#append_top_security_checks_keyboard" }
+                        ]),
+                        // zh
+                        JSON.stringify([
+                            { "next": "#remove_keyboard" },
+                            {
+                                method: 'sendMessage',
+                                payload: {
+                                    text: '隐私检查： \n\n'
+                                        + '1. 审查应用程序权限并撤销任何不必要的访问权限。\n'
+                                        + '2. 为您的帐户使用强大、独特的密码。\n'
+                                        + '3. 尽可能启用两步验证（2FA）。\n'
+                                        + '4. 在线共享个人信息时要谨慎。\n',
+                                    parse_mode: 'HTML'
+                                }
+                            },
+                            { "next": "#append_top_security_checks_keyboard" }
+                        ]),
+                        // ja
+                        JSON.stringify([
+                            { "next": "#remove_keyboard" },
+                            {
+                                method: 'sendMessage',
+                                payload: {
+                                    text: 'プライバシーチェック： \n\n'
+                                        + '1. アプリの権限を確認し、不要なアクセスをすべて取り消します。\n'
+                                        + '2. アカウントには強力でユニークなパスワードを使用してください。\n'
+                                        + '3. 可能な限り二要素認証（2FA）を有効にしてください。\n'
+                                        + '4. オンラインで個人情報を共有する際には注意してください。\n',
+                                    parse_mode: 'HTML'
+                                }
+                            },
+                            { "next": "#append_top_security_checks_keyboard" }
+                        ]),
+                        // ko
+                        JSON.stringify([
+                            { "next": "#remove_keyboard" },
+                            {
+                                method: 'sendMessage',
+                                payload: {
+                                    text: '개인정보 보호 확인: \n\n'
+                                        + '1. 앱 권한을 검토하고 불필요한 접근을 모두 취소하세요.\n'
+                                        + '2. 계정에 강력하고 고유한 비밀번호를 사용하세요.\n'
+                                        + '3. 가능하면 2단계 인증(2FA)을 활성화하세요.\n'
+                                        + '4. 온라인에서 개인 정보를 공유할 때 주의하세요.\n',
+                                    parse_mode: 'HTML'
+                                }
+                            },
+                            { "next": "#append_top_security_checks_keyboard" }
+                        ]),
+                        // he
+                        JSON.stringify([
+                            { "next": "#remove_keyboard" },
+                            {
+                                method: 'sendMessage',
+                                payload: {
+                                    text: 'בדיקות פרטיות: \n\n'
+                                        + '1. סקור את הרשאות האפליקציה ובטל כל גישה מיותרת.\n'
+                                        + '2. השתמש בסיסמאות חזקות וייחודיות עבור החשבונות שלך.\n'
+                                        + '3. הפעל אימות דו-שלבי (2FA) בכל מקום אפשרי.\n'
+                                        + '4. היזהר משיתוף מידע אישי באינטרנט.\n',
+                                    parse_mode: 'HTML'
+                                }
+                            },
+                            { "next": "#append_top_security_checks_keyboard" }
+                        ])
+                    ],
+                    ['#send_call_to_security_action_message',
+                        // default (en)
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'For more security actions, visit our website or contact support.',
+                                parse_mode: 'HTML'
                             }
                         }])
                     ]
@@ -4810,7 +5893,8 @@ EMD.ApiFeaturesAutomation = {
                                         [{ text: "💬 Send Messages", callback_data: "/sendMessage" }],
                                         [{ text: "🖼️ Send Photos", callback_data: "/sendPhoto" }],
                                         // Open youTube as web app
-                                        [{ text: "▶️ EasyADM YouTube", web_app: { url: "https://youtube.com/@easyadm6040?si=s1RatCN_xDv0h01t" } }],
+                                        [{ text: "▶️ EasyADM YouTube Channel", web_app: { url: "https://youtube.com/@easyadm6040?si=s1RatCN_xDv0h01t" } }],
+                                        [{ text: "🌐 EasyADM Website", web_app: { url: "https://easyadm.com" } }],
                                         [{ text: "About 🛈", callback_data: "/about" }, { text: "❓ Help", callback_data: "/help" }],
                                         [{ text: "🏠 Start", callback_data: "/start" }]
                                     ]

@@ -220,7 +220,7 @@ EnvironmentHandler.AddonWrapper = class {
             const controller = BotSetupController
                 .create(this._userProperties, this._activeSpreadsheet);
 
-            controller.setDebugMode(logEvents === 'true');
+            controller.setDebugMode(logEvents);
             controller.setLogArchiveSize(parseInt(log_archive, 10));
 
             return this.handleOperationSuccess("👍 Log events setting saved successfully.")

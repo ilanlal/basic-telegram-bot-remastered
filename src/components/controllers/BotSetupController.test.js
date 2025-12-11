@@ -82,14 +82,14 @@ describe('BotSetupController Tests', () => {
                 expect(userProperties.getProperty("admin_chat_id")).toBe(testChatId.toString());
             });
             test("setDebugMode should store the debug mode", () => {
-                const userProperties = PropertiesService.getDocumentProperties();
+                const documentProperties = PropertiesService.getDocumentProperties();
                 controller = BotSetupController.create(
-                    userProperties
+                    documentProperties
                 );
-                controller.setDebugMode(true);
-                expect(userProperties.getProperty(EnvironmentModel.InputMeta.DEBUG_MODE)).toBe('true');
-                controller.setDebugMode(false);
-                expect(userProperties.getProperty(EnvironmentModel.InputMeta.DEBUG_MODE)).toBe('false');
+                controller.setDebugMode('true');
+                expect(documentProperties.getProperty(EnvironmentModel.InputMeta.DEBUG_MODE)).toBe('true');
+                controller.setDebugMode('false');
+                expect(documentProperties.getProperty(EnvironmentModel.InputMeta.DEBUG_MODE)).toBe('false');
             });
             // setWebhook method.
             test("setWebhook should call telegram client to set webhook", () => {
