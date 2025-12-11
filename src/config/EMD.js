@@ -1296,7 +1296,7 @@ EMD.BasicAutomation = {
                         // default (en)
                         JSON.stringify([
                             { "next": "#remove_keyboard" },
-                            { "next": "#send_welcome_messages" },
+                            { "next": "#send_welcome_photo" },
                             { "next": "#append_main_menu_keyboard" }
                         ])
                     ],
@@ -1329,6 +1329,24 @@ EMD.BasicAutomation = {
                             { "next": "#send_show_me_love_invoice" },
                             { "next": "#send_show_me_love_message" },
                             { "next": "#append_main_menu_keyboard" }])
+                    ],
+                    ['#send_welcome_photo',
+                        // default (en)
+                        JSON.stringify([{
+                            method: 'sendPhoto',
+                            payload: {
+                                caption: 'Hi..' + '\n\n'
+                                    + 'Thank you for starting me! You are in safe hands. \n\n'
+                                    + 'All our interactions are confidential and secure.\n\n'
+                                    + '<blockquote expandable> Read more About Me: 🤖 \n'
+                                    + 'I am here to assist you with various Telegram bot functionalities.\n\n'
+                                    + 'You can use me to learn about sending messages, photos, media groups, and more!\n\n'
+                                    + 'Just let me know what you would like to do!' + '\n\n'
+                                    + '</blockquote>',
+                                photo: EMD.DEFAULT_IMAGE_URL,
+                                parse_mode: 'HTML'
+                            }
+                        }])
                     ],
                     ['#send_welcome_messages',
                         // default (en)
@@ -2012,6 +2030,188 @@ EMD.BasicAutomation = {
                                 reply_markup: {
                                     inline_keyboard: [
                                         [{ text: "⬅️ חזרה להתחלה", callback_data: "/start" }]
+                                    ]
+                                }
+                            }
+                        }])
+                    ],
+                    ['#append_top_security_checks_keyboard',
+                        // default (en)
+                        JSON.stringify([{
+                            method: 'editMessageReplyMarkup',
+                            payload: {
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "Android Security Checks", callback_data: "/android_security_checks" }],
+                                        [{ text: "iOS Security Checks", callback_data: "/ios_security_checks" }],
+                                        [{ text: "Privacy Checks", callback_data: "/privacy_checks" }],
+                                        [{ text: "About 🛈", callback_data: "/about" }, { text: "❓ Help", callback_data: "/help" }],
+                                        [{ text: "🏠 Start", callback_data: "/start" }]
+                                    ]
+                                }
+                            }
+                        }]),
+                        // es
+                        JSON.stringify([{
+                            method: 'editMessageReplyMarkup',
+                            payload: {
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "Verificaciones de seguridad de Android", callback_data: "/android_security_checks" }],
+                                        [{ text: "Verificaciones de seguridad de iOS", callback_data: "/ios_security_checks" }],
+                                        [{ text: "Verificaciones de privacidad", callback_data: "/privacy_checks" }],
+                                        [{ text: "Acerca de 🛈", callback_data: "/about" }, { text: "❓ Ayuda", callback_data: "/help" }],
+                                        [{ text: "🏠 Inicio", callback_data: "/start" }]
+                                    ]
+                                }
+                            }
+                        }]),
+                        // fr
+                        JSON.stringify([{
+                            method: 'editMessageReplyMarkup',
+                            payload: {
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "Vérifications de sécurité Android", callback_data: "/android_security_checks" }],
+                                        [{ text: "Vérifications de sécurité iOS", callback_data: "/ios_security_checks" }],
+                                        [{ text: "Vérifications de confidentialité", callback_data: "/privacy_checks" }],
+                                        [{ text: "À propos 🛈", callback_data: "/about" }, { text: "❓ Aide", callback_data: "/help" }],
+                                        [{ text: "🏠 Accueil", callback_data: "/start" }]
+                                    ]
+                                }
+                            }
+                        }]),
+                        // ar
+                        JSON.stringify([{
+                            method: 'editMessageReplyMarkup',
+                            payload: {
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "فحوصات أمان Android", callback_data: "/android_security_checks" }],
+                                        [{ text: "فحوصات أمان iOS", callback_data: "/ios_security_checks" }],
+                                        [{ text: "فحوصات الخصوصية", callback_data: "/privacy_checks" }],
+                                        [{ text: "حول 🛈", callback_data: "/about" }, { text: "❓ مساعدة", callback_data: "/help" }],
+                                        [{ text: "🏠 البداية", callback_data: "/start" }]
+                                    ]
+                                }
+                            }
+                        }]),
+                        // de
+                        JSON.stringify([{
+                            method: 'editMessageReplyMarkup',
+                            payload: {
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "Android-Sicherheitsprüfungen", callback_data: "/android_security_checks" }],
+                                        [{ text: "iOS-Sicherheitsprüfungen", callback_data: "/ios_security_checks" }],
+                                        [{ text: "Datenschutzprüfungen", callback_data: "/privacy_checks" }],
+                                        [{ text: "Über 🛈", callback_data: "/about" }, { text: "❓ Hilfe", callback_data: "/help" }],
+                                        [{ text: "🏠 Startseite", callback_data: "/start" }]
+                                    ]
+                                }
+                            }
+                        }]),
+                        // it
+                        JSON.stringify([{
+                            method: 'editMessageReplyMarkup',
+                            payload: {
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "Controlli di sicurezza Android", callback_data: "/android_security_checks" }],
+                                        [{ text: "Controlli di sicurezza iOS", callback_data: "/ios_security_checks" }],
+                                        [{ text: "Controlli sulla privacy", callback_data: "/privacy_checks" }],
+                                        [{ text: "Informazioni 🛈", callback_data: "/about" }, { text: "❓ Aiuto", callback_data: "/help" }],
+                                        [{ text: "🏠 Home", callback_data: "/start" }]
+                                    ]
+                                }
+                            }
+                        }]),
+                        // pt
+                        JSON.stringify([{
+                            method: 'editMessageReplyMarkup',
+                            payload: {
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "Verificações de segurança do Android", callback_data: "/android_security_checks" }],
+                                        [{ text: "Verificações de segurança do iOS", callback_data: "/ios_security_checks" }],
+                                        [{ text: "Verificações de privacidade", callback_data: "/privacy_checks" }],
+                                        [{ text: "Sobre 🛈", callback_data: "/about" }, { text: "❓ Ajuda", callback_data: "/help" }],
+                                        [{ text: "🏠 Início", callback_data: "/start" }]
+                                    ]
+                                }
+                            }
+                        }]),
+                        // ru
+                        JSON.stringify([{
+                            method: 'editMessageReplyMarkup',
+                            payload: {
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "Проверки безопасности Android", callback_data: "/android_security_checks" }],
+                                        [{ text: "Проверки безопасности iOS", callback_data: "/ios_security_checks" }],
+                                        [{ text: "Проверки конфиденциальности", callback_data: "/privacy_checks" }],
+                                        [{ text: "О программе 🛈", callback_data: "/about" }, { text: "❓ Помощь", callback_data: "/help" }],
+                                        [{ text: "🏠 Главная", callback_data: "/start" }]
+                                    ]
+                                }
+                            }
+                        }]),
+                        // zh
+                        JSON.stringify([{
+                            method: 'editMessageReplyMarkup',
+                            payload: {
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "Android 安全检查", callback_data: "/android_security_checks" }],
+                                        [{ text: "iOS 安全检查", callback_data: "/ios_security_checks" }],
+                                        [{ text: "隐私检查", callback_data: "/privacy_checks" }],
+                                        [{ text: "关于 🛈", callback_data: "/about" }, { text: "❓ 帮助", callback_data: "/help" }],
+                                        [{ text: "🏠 主页", callback_data: "/start" }]
+                                    ]
+                                }
+                            }
+                        }]),
+                        // ja
+                        JSON.stringify([{
+                            method: 'editMessageReplyMarkup',
+                            payload: {
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "Android セキュリティチェック", callback_data: "/android_security_checks" }],
+                                        [{ text: "iOS セキュリティチェック", callback_data: "/ios_security_checks" }],
+                                        [{ text: "プライバシーチェック", callback_data: "/privacy_checks" }],
+                                        [{ text: "について 🛈", callback_data: "/about" }, { text: "❓ ヘルプ", callback_data: "/help" }],
+                                        [{ text: "🏠 ホーム", callback_data: "/start" }]
+                                    ]
+                                }
+                            }
+                        }]),
+                        // ko
+                        JSON.stringify([{
+                            method: 'editMessageReplyMarkup',
+                            payload: {
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "Android 보안 검사", callback_data: "/android_security_checks" }],
+                                        [{ text: "iOS 보안 검사", callback_data: "/ios_security_checks" }],
+                                        [{ text: "개인정보 보호 검사", callback_data: "/privacy_checks" }],
+                                        [{ text: "정보 🛈", callback_data: "/about" }, { text: "❓ 도움말", callback_data: "/help" }],
+                                        [{ text: "🏠 홈", callback_data: "/start" }]
+                                    ]
+                                }
+                            }
+                        }]),
+                        // he
+                        JSON.stringify([{
+                            method: 'editMessageReplyMarkup',
+                            payload: {
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "בדיקות אבטחת Android", callback_data: "/android_security_checks" }],
+                                        [{ text: "בדיקות אבטחת iOS", callback_data: "/ios_security_checks" }],
+                                        [{ text: "בדיקות פרטיות", callback_data: "/privacy_checks" }],
+                                        [{ text: "אודות 🛈", callback_data: "/about" }, { text: "❓ עזרה", callback_data: "/help" }],
+                                        [{ text: "🏠 בית", callback_data: "/start" }]
                                     ]
                                 }
                             }
@@ -3561,188 +3761,6 @@ EMD.BasicAutomation = {
                                 text: 'בדוק את המכשיר שלך עכשיו! \n\n'
                                     + 'ודא שהמכשיר שלך מאובטח על ידי ביצוע השלבים הבאים:\n',
                                 parse_mode: 'HTML'
-                            }
-                        }])
-                    ],
-                    ['#append_top_security_checks_keyboard',
-                        // default (en)
-                        JSON.stringify([{
-                            method: 'editMessageReplyMarkup',
-                            payload: {
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [{ text: "Android Security Checks", callback_data: "/android_security_checks" }],
-                                        [{ text: "iOS Security Checks", callback_data: "/ios_security_checks" }],
-                                        [{ text: "Privacy Checks", callback_data: "/privacy_checks" }],
-                                        [{ text: "About 🛈", callback_data: "/about" }, { text: "❓ Help", callback_data: "/help" }],
-                                        [{ text: "🏠 Start", callback_data: "/start" }]
-                                    ]
-                                }
-                            }
-                        }]),
-                        // es
-                        JSON.stringify([{
-                            method: 'editMessageReplyMarkup',
-                            payload: {
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [{ text: "Verificaciones de seguridad de Android", callback_data: "/android_security_checks" }],
-                                        [{ text: "Verificaciones de seguridad de iOS", callback_data: "/ios_security_checks" }],
-                                        [{ text: "Verificaciones de privacidad", callback_data: "/privacy_checks" }],
-                                        [{ text: "Acerca de 🛈", callback_data: "/about" }, { text: "❓ Ayuda", callback_data: "/help" }],
-                                        [{ text: "🏠 Inicio", callback_data: "/start" }]
-                                    ]
-                                }
-                            }
-                        }]),
-                        // fr
-                        JSON.stringify([{
-                            method: 'editMessageReplyMarkup',
-                            payload: {
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [{ text: "Vérifications de sécurité Android", callback_data: "/android_security_checks" }],
-                                        [{ text: "Vérifications de sécurité iOS", callback_data: "/ios_security_checks" }],
-                                        [{ text: "Vérifications de confidentialité", callback_data: "/privacy_checks" }],
-                                        [{ text: "À propos 🛈", callback_data: "/about" }, { text: "❓ Aide", callback_data: "/help" }],
-                                        [{ text: "🏠 Accueil", callback_data: "/start" }]
-                                    ]
-                                }
-                            }
-                        }]),
-                        // ar
-                        JSON.stringify([{
-                            method: 'editMessageReplyMarkup',
-                            payload: {
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [{ text: "فحوصات أمان Android", callback_data: "/android_security_checks" }],
-                                        [{ text: "فحوصات أمان iOS", callback_data: "/ios_security_checks" }],
-                                        [{ text: "فحوصات الخصوصية", callback_data: "/privacy_checks" }],
-                                        [{ text: "حول 🛈", callback_data: "/about" }, { text: "❓ مساعدة", callback_data: "/help" }],
-                                        [{ text: "🏠 البداية", callback_data: "/start" }]
-                                    ]
-                                }
-                            }
-                        }]),
-                        // de
-                        JSON.stringify([{
-                            method: 'editMessageReplyMarkup',
-                            payload: {
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [{ text: "Android-Sicherheitsprüfungen", callback_data: "/android_security_checks" }],
-                                        [{ text: "iOS-Sicherheitsprüfungen", callback_data: "/ios_security_checks" }],
-                                        [{ text: "Datenschutzprüfungen", callback_data: "/privacy_checks" }],
-                                        [{ text: "Über 🛈", callback_data: "/about" }, { text: "❓ Hilfe", callback_data: "/help" }],
-                                        [{ text: "🏠 Startseite", callback_data: "/start" }]
-                                    ]
-                                }
-                            }
-                        }]),
-                        // it
-                        JSON.stringify([{
-                            method: 'editMessageReplyMarkup',
-                            payload: {
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [{ text: "Controlli di sicurezza Android", callback_data: "/android_security_checks" }],
-                                        [{ text: "Controlli di sicurezza iOS", callback_data: "/ios_security_checks" }],
-                                        [{ text: "Controlli sulla privacy", callback_data: "/privacy_checks" }],
-                                        [{ text: "Informazioni 🛈", callback_data: "/about" }, { text: "❓ Aiuto", callback_data: "/help" }],
-                                        [{ text: "🏠 Home", callback_data: "/start" }]
-                                    ]
-                                }
-                            }
-                        }]),
-                        // pt
-                        JSON.stringify([{
-                            method: 'editMessageReplyMarkup',
-                            payload: {
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [{ text: "Verificações de segurança do Android", callback_data: "/android_security_checks" }],
-                                        [{ text: "Verificações de segurança do iOS", callback_data: "/ios_security_checks" }],
-                                        [{ text: "Verificações de privacidade", callback_data: "/privacy_checks" }],
-                                        [{ text: "Sobre 🛈", callback_data: "/about" }, { text: "❓ Ajuda", callback_data: "/help" }],
-                                        [{ text: "🏠 Início", callback_data: "/start" }]
-                                    ]
-                                }
-                            }
-                        }]),
-                        // ru
-                        JSON.stringify([{
-                            method: 'editMessageReplyMarkup',
-                            payload: {
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [{ text: "Проверки безопасности Android", callback_data: "/android_security_checks" }],
-                                        [{ text: "Проверки безопасности iOS", callback_data: "/ios_security_checks" }],
-                                        [{ text: "Проверки конфиденциальности", callback_data: "/privacy_checks" }],
-                                        [{ text: "О программе 🛈", callback_data: "/about" }, { text: "❓ Помощь", callback_data: "/help" }],
-                                        [{ text: "🏠 Главная", callback_data: "/start" }]
-                                    ]
-                                }
-                            }
-                        }]),
-                        // zh
-                        JSON.stringify([{
-                            method: 'editMessageReplyMarkup',
-                            payload: {
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [{ text: "Android 安全检查", callback_data: "/android_security_checks" }],
-                                        [{ text: "iOS 安全检查", callback_data: "/ios_security_checks" }],
-                                        [{ text: "隐私检查", callback_data: "/privacy_checks" }],
-                                        [{ text: "关于 🛈", callback_data: "/about" }, { text: "❓ 帮助", callback_data: "/help" }],
-                                        [{ text: "🏠 主页", callback_data: "/start" }]
-                                    ]
-                                }
-                            }
-                        }]),
-                        // ja
-                        JSON.stringify([{
-                            method: 'editMessageReplyMarkup',
-                            payload: {
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [{ text: "Android セキュリティチェック", callback_data: "/android_security_checks" }],
-                                        [{ text: "iOS セキュリティチェック", callback_data: "/ios_security_checks" }],
-                                        [{ text: "プライバシーチェック", callback_data: "/privacy_checks" }],
-                                        [{ text: "について 🛈", callback_data: "/about" }, { text: "❓ ヘルプ", callback_data: "/help" }],
-                                        [{ text: "🏠 ホーム", callback_data: "/start" }]
-                                    ]
-                                }
-                            }
-                        }]),
-                        // ko
-                        JSON.stringify([{
-                            method: 'editMessageReplyMarkup',
-                            payload: {
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [{ text: "Android 보안 검사", callback_data: "/android_security_checks" }],
-                                        [{ text: "iOS 보안 검사", callback_data: "/ios_security_checks" }],
-                                        [{ text: "개인정보 보호 검사", callback_data: "/privacy_checks" }],
-                                        [{ text: "정보 🛈", callback_data: "/about" }, { text: "❓ 도움말", callback_data: "/help" }],
-                                        [{ text: "🏠 홈", callback_data: "/start" }]
-                                    ]
-                                }
-                            }
-                        }]),
-                        // he
-                        JSON.stringify([{
-                            method: 'editMessageReplyMarkup',
-                            payload: {
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [{ text: "בדיקות אבטחת Android", callback_data: "/android_security_checks" }],
-                                        [{ text: "בדיקות אבטחת iOS", callback_data: "/ios_security_checks" }],
-                                        [{ text: "בדיקות פרטיות", callback_data: "/privacy_checks" }],
-                                        [{ text: "אודות 🛈", callback_data: "/about" }, { text: "❓ עזרה", callback_data: "/help" }],
-                                        [{ text: "🏠 בית", callback_data: "/start" }]
-                                    ]
-                                }
                             }
                         }])
                     ],
