@@ -8,6 +8,11 @@ class EMD {
 EMD.DEFAULT_IMAGE_URL = 'https://raw.githubusercontent.com/ilanlal/basic-telegram-bot-remastered/main/assets/bitmoji-20190109115905.webp';
 EMD.HELP_IMG_URL = 'https://raw.githubusercontent.com/ilanlal/basic-telegram-bot-remastered/main/assets/bitmoji-20190109115939.webp';
 EMD.ABOUT_IMG_URL = 'https://raw.githubusercontent.com/ilanlal/basic-telegram-bot-remastered/main/assets/bitmoji-20190109115604.webp';
+EMD.SUPPORT_IMG_URL = 'https://raw.githubusercontent.com/ilanlal/basic-telegram-bot-remastered/main/assets/bitmoji-20190109120015.webp';
+EMD.THANK_YOU_IMG_URL = 'https://raw.githubusercontent.com/ilanlal/basic-telegram-bot-remastered/main/assets/bitmoji-20190109115743.webp';
+EMD.YOU_GOT_IT_IMG_URL = 'https://raw.githubusercontent.com/ilanlal/basic-telegram-bot-remastered/main/assets/bitmoji-20190528070739.webp';
+EMD.BIG_TIME_IMG_URL = 'https://raw.githubusercontent.com/ilanlal/basic-telegram-bot-remastered/main/assets/bitmoji-20190528070720.webp';
+EMD.PEACH_IMG_URL = 'https://raw.githubusercontent.com/ilanlal/basic-telegram-bot-remastered/main/assets/bitmoji-20190109115654.webp';
 EMD.GIT_REPO_URL = 'https://github.com/ilanlal/basic-telegram-bot-remastered';
 
 EMD.Home = {
@@ -1298,7 +1303,7 @@ EMD.BasicAutomation = {
                         // default (en)
                         JSON.stringify([
                             { "next": "#remove_keyboard" },
-                            { "next": "#send_welcome_photo" },
+                            { "next": "#send_welcome_messages" },
                             { "next": "#append_main_menu_keyboard" }
                         ])
                     ],
@@ -1332,233 +1337,59 @@ EMD.BasicAutomation = {
                             { "next": "#send_show_me_love_message" },
                             { "next": "#append_main_menu_keyboard" }])
                     ],
-                    ['#send_welcome_photo',
+                    ['#send_welcome_messages',
                         // default (en)
                         JSON.stringify([{
                             method: 'sendPhoto',
                             payload: {
                                 caption: 'Hi..' + '\n\n'
-                                    + 'Thank you for starting me! You are in safe hands. \n\n'
-                                    + 'All our interactions are confidential and secure.\n\n'
-                                    + '<blockquote expandable> Read more About Me: 🤖 \n'
+                                    + 'Thank you for starting me! \n\n'
+                                    + '<blockquote expandable>Privacy Policy: 🔏 \n\n'
+                                    + '<b>All our interactions are confidential and secure.</b> You are in safe hands.\n\n'
+                                    + '</blockquote>\n\n'
+                                    + '<blockquote expandable>About Me: 🤖 \n\n'
                                     + 'I am here to assist you with various Telegram bot functionalities.\n\n'
                                     + 'You can use me to learn about sending messages, photos, media groups, and more!\n\n'
                                     + 'Just let me know what you would like to do!' + '\n\n'
                                     + '</blockquote>',
                                 photo: EMD.DEFAULT_IMAGE_URL,
-                                parse_mode: 'HTML'
+                                parse_mode: 'HTML',
+                                protect_content: true,
+                                has_spoiler: false,
+                                show_caption_above_media: false
                             }
                         }])
-                    ],
-                    ['#send_welcome_messages',
-                        // default (en)
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: 'Hi..' + '\n\n'
-                                    + 'Thank you for starting me! You are in safe hands. \n\n'
-                                    + 'All our interactions are confidential and secure.\n\n'
-                                    + '<blockquote expandable> Read more About Me: 🤖 \n'
-                                    + 'I am here to assist you with various Telegram bot functionalities.\n\n'
-                                    + 'You can use me to learn about sending messages, photos, media groups, and more!\n\n'
-                                    + 'Just let me know what you would like to do!' + '\n\n'
-                                    + '</blockquote>',
-                                parse_mode: 'HTML'
-                            }
-                        }]),
-                        // es
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: 'Hola..' + '\n\n'
-                                    + '¡Gracias por iniciarme! Estás en buenas manos. \n\n'
-                                    + 'Todas nuestras interacciones son confidenciales y seguras.\n\n'
-                                    + '<blockquote expandable> Leer más Sobre mí: 🤖 \n'
-                                    + 'Estoy aquí para ayudarte con varias funcionalidades de bots de Telegram.\n\n'
-                                    + '¡Puedes usarme para aprender sobre el envío de mensajes, fotos, grupos multimedia y más!\n\n'
-                                    + '¡Solo dime qué te gustaría hacer!' + '\n\n'
-                                    + '</blockquote>',
-                                parse_mode: 'HTML',
-                            }
-                        }]),
-                        // fr
-                        JSON.stringify([
-                            {
-                                method: 'sendMessage',
-                                payload: {
-                                    text: 'Salut..' + '\n\n'
-                                        + 'Merci de m\'avoir démarré ! Vous êtes entre de bonnes mains. \n\n'
-                                        + 'Toutes nos interactions sont confidentielles et sécurisées.\n\n'
-                                        + '<blockquote expandable> En savoir plus À propos de moi : 🤖 \n'
-                                        + 'Je suis ici pour vous aider avec diverses fonctionnalités de bot Telegram.\n\n'
-                                        + 'Vous pouvez m\'utiliser pour apprendre à envoyer des messages, des photos, des groupes multimédias, et plus encore !\n\n'
-                                        + 'Faites-moi savoir ce que vous aimeriez faire !' + '\n\n'
-                                        + '</blockquote>',
-                                    parse_mode: 'HTML',
-                                }
-                            }]),
-                        // ar
-                        JSON.stringify([
-                            {
-                                method: 'sendMessage',
-                                payload: {
-                                    text: 'مرحبًا..' + '\n\n'
-                                        + 'شكرًا لبدء تشغيلّي! أنت في أيدٍ أمينة. \n\n'
-                                        + 'جميع تفاعلاتنا سرية وآمنة.\n\n'
-                                        + '<blockquote expandable> اقرأ المزيد عني: 🤖 \n'
-                                        + 'أنا هنا لمساعدتك في مختلف وظائف بوت تيليجرام.\n\n'
-                                        + 'يمكنك استخدامي لتعلم كيفية إرسال الرسائل، الصور، المجموعات الإعلامية، والمزيد!\n\n'
-                                        + 'فقط أخبرني بما ترغب في القيام به!' + '\n\n'
-                                        + '</blockquote>',
-                                    parse_mode: 'HTML',
-                                }
-                            }
-                        ]),
-                        // de
-                        JSON.stringify([
-                            {
-                                method: 'sendMessage',
-                                payload: {
-                                    text: 'Hallo..' + '\n\n'
-                                        + 'Danke, dass du mich gestartet hast! Du bist in sicheren Händen. \n\n'
-                                        + 'Alle unsere Interaktionen sind vertraulich und sicher.\n\n'
-                                        + '<blockquote expandable> Mehr über mich lesen: 🤖 \n'
-                                        + 'Ich bin hier, um dir bei verschiedenen Telegram-Bot-Funktionen zu helfen.\n\n'
-                                        + 'Du kannst mich nutzen, um zu lernen, wie man Nachrichten, Fotos, Mediengruppen und mehr sendet!\n\n'
-                                        + 'Lass mich einfach wissen, was du tun möchtest!' + '\n\n'
-                                        + '</blockquote>',
-                                    parse_mode: 'HTML',
-                                }
-                            }
-                        ]),
-                        // it
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: 'Ciao..' + '\n\n'
-                                    + 'Grazie per avermi avviato! Sei in buone mani. \n\n'
-                                    + 'Tutte le nostre interazioni sono confidenziali e sicure.\n\n'
-                                    + '<blockquote expandable> Per saperne di più Su di me: 🤖 \n'
-                                    + 'Sono qui per aiutarti con varie funzionalità del bot di Telegram.\n\n'
-                                    + 'Puoi utilizzarmi per imparare a inviare messaggi, foto, gruppi multimediali e altro ancora!\n\n'
-                                    + 'Fammi sapere cosa vorresti fare!' + '\n\n'
-                                    + '</blockquote>',
-                                parse_mode: 'HTML',
-                            }
-                        }]),
-                        // pt
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: 'Oi..' + '\n\n'
-                                    + 'Obrigado por me iniciar! Você está em boas mãos. \n\n'
-                                    + 'Todas as nossas interações são confidenciais e seguras.\n\n'
-                                    + '<blockquote expandable> Leia mais Sobre mim: 🤖 \n'
-                                    + 'Estou aqui para ajudar você com várias funcionalidades do bot do Telegram.\n\n'
-                                    + 'Você pode me usar para aprender a enviar mensagens, fotos, grupos de mídia e muito mais!\n\n'
-                                    + 'Basta me dizer o que você gostaria de fazer!' + '\n\n'
-                                    + '</blockquote>',
-                                parse_mode: 'HTML',
-                            }
-                        }]),
-                        // ru
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: 'Привет..' + '\n\n'
-                                    + 'Спасибо, что запустили меня! Вы в надежных руках. \n\n'
-                                    + 'Все наши взаимодействия конфиденциальны и безопасны.\n\n'
-                                    + '<blockquote expandable> Узнать больше обо мне: 🤖 \n'
-                                    + 'Я здесь, чтобы помочь вам с различными функциями бота Telegram.\n\n'
-                                    + 'Вы можете использовать меня, чтобы научиться отправлять сообщения, фотографии, медиагруппы и многое другое!\n\n'
-                                    + 'Просто скажите, что вы хотите сделать!' + '\n\n'
-                                    + '</blockquote>',
-                                parse_mode: 'HTML',
-                            }
-                        }]),
-                        // zh
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: '嗨..' + '\n\n'
-                                    + '感谢启动我！你处于安全的环境中。\n\n'
-                                    + '我们所有的互动都是保密和安全的。\n\n'
-                                    + '<blockquote expandable> 了解更多关于我: 🤖 \n'
-                                    + '我在这里帮助你了解Telegram机器人的各种功能。\n\n'
-                                    + '你可以使用我来学习发送消息、照片、多媒体组等更多内容！\n\n'
-                                    + '只需告诉我你想做什么！' + '\n\n'
-                                    + '</blockquote>',
-                                parse_mode: 'HTML',
-                            }
-                        }]),
-                        // ja
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: 'こんにちは..' + '\n\n'
-                                    + '起動してくれてありがとう！あなたは安全な手にあります。\n\n'
-                                    + '私たちのすべてのやり取りは機密で安全です。\n\n'
-                                    + '<blockquote expandable> 私についてもっと知る: 🤖 \n'
-                                    + '私はTelegramボットのさまざまな機能を紹介するシンプルなボットです。\n\n'
-                                    + 'メッセージ、写真、メディアグループなどの送信方法を学ぶために私を使うことができます！\n\n'
-                                    + 'やりたいことを教えてください！' + '\n\n'
-                                    + '</blockquote>',
-                                parse_mode: 'HTML',
-                            }
-                        }]),
-                        // ko
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: '안녕하세요..' + '\n\n'
-                                    + '시작해 주셔서 감사합니다! 당신은 안전한 손에 있습니다.\n\n'
-                                    + '우리의 모든 상호작용은 기밀이며 안전합니다.\n\n'
-                                    + '<blockquote expandable> 나에 대해 더 알아보기: 🤖 \n'
-                                    + '나는 텔레그램 봇의 다양한 기능을 보여주는 간단한 봇입니다.\n\n'
-                                    + '메시지, 사진, 미디어 그룹 등을 보내는 방법을 배우기 위해 나를 사용할 수 있습니다!\n\n'
-                                    + '하고 싶은 것을 말해 주세요!' + '\n\n'
-                                    + '</blockquote>',
-                                parse_mode: 'HTML',
-                            }
-                        }]),
-                        // he
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: 'היי..' + '\n\n'
-                                    + 'תודה שהפעלת אותי! אתה בידיים בטוחות. \n\n'
-                                    + 'כל האינטראקציות שלנו הן חסויות ובטוחות.\n\n'
-                                    + '<blockquote expandable> קרא עוד עליי: 🤖 \n'
-                                    + 'אני כאן כדי לעזור לך עם פונקציות שונות של בוט טלגרם.\n\n'
-                                    + 'אתה יכול להשתמש בי כדי ללמוד על שליחת הודעות, תמונות, קבוצות מדיה ועוד!\n\n'
-                                    + 'רק תן לי לדעת מה היית רוצה לעשות!' + '\n\n'
-                                    + '</blockquote>',
-                                parse_mode: 'HTML',
-                            }
-                        }]),
                     ],
                     ['#send_help_message',
                         // default (en)
                         JSON.stringify([{
-                            method: 'sendMessage',
+                            method: 'sendPhoto',
                             payload: {
-                                text: 'Welcome to <b>Help & Support</b> ⁉️ \n\n'
+                                caption: 'Welcome to <b>Help & Support</b> ⁉️ \n\n'
                                     + 'Here are some resources to assist you:\n\n'
                                     + 'To get started, simply use the /start command. For assistance, use /help to access helpful resources and support options.\n\n'
                                     + 'Feel free to explore and customize the bot to suit your needs!\n\n',
-                                parse_mode: 'HTML'
+                                photo: EMD.HELP_IMG_URL,
+                                parse_mode: 'HTML',
+                                protect_content: true,
+                                has_spoiler: true,
+                                show_caption_above_media: false
                             }
                         }])
                     ],
                     ['#send_about_message',
                         // default (en)
                         JSON.stringify([{
-                            method: 'sendMessage',
+                            method: 'sendPhoto',
                             payload: {
-                                text: 'Welcome to <b>About</b>!\n\n'
+                                caption: 'Welcome to <b>About</b>!\n\n'
                                     + 'I am a simple yet powerful Telegram bot built with Google Apps Script. \n\n'
                                     + 'I showcase various features of the Telegram Bot API, allowing you to send messages, photos, media groups, and interactive inline keyboards with ease.\n\n',
-                                parse_mode: 'HTML'
+                                photo: EMD.ABOUT_IMG_URL,
+                                parse_mode: 'HTML',
+                                protect_content: true,
+                                has_spoiler: false,
+                                show_caption_above_media: true
                             }
                         }]),
                     ],
@@ -3279,7 +3110,10 @@ EMD.BasicAutomation = {
                                 payload: 'show_me_love_001',
                                 prices: JSON.stringify([
                                     { label: 'Support Donation', amount: 100 } // Amount in smallest units (e.g., cents)
-                                ])
+                                ]),
+                                photo_url: EMD.SUPPORT_IMG_URL,
+                                photo_width: 480,
+                                protect_content: true
                             }
                         }]),
                         // es
