@@ -41,17 +41,29 @@ class SheetModel {
         return this._sheet = this.initializeSheet(sheetMeta);
     }
 
-    bindSheetSampleData(sheetMeta = {}) {
+    getSheetSimpleData(sheetMeta = {}) {
         const sheet = this.getSheet(sheetMeta);
         const sampleData = sheetMeta.sample_data || [];
+        return sampleData;
+    }
+
+    bindSheetSampleData(sheetMeta = {}) {
+        const sampleData = this.getSheetSimpleData(sheetMeta);
         if (sampleData.length === 0) {
             return;
         }
+
+        const sheet = this.getSheet(sheetMeta);
         sampleData.forEach(row => {
             sheet.appendRow(row);
         });
 
         return sheet;
+    }
+
+    appendRow(sheetMeta = {}, rowData = []) {
+        const sheet = this.getSheet(sheetMeta);
+        sheet.appendRow(rowData);
     }
 
     get columns() {

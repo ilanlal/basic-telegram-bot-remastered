@@ -15,7 +15,7 @@ describe('AutomationHandler', () => {
         PropertiesService.getDocumentProperties().setProperty(EnvironmentModel.InputMeta.BOT_API_TOKEN, dummyToken);
         handler = AutomationHandler.create();
         SheetModel.create(SpreadsheetApp.getActiveSpreadsheet())
-            .bindSheetSampleData(EMD.Automation.sheet({}));
+            .bindSheetSampleData(EMD.BasicAutomation.sheet({}));
     });
 
     test('should handle automation request', () => {
@@ -26,6 +26,8 @@ describe('AutomationHandler', () => {
         };
 
         const sendMessgeUrl = `https://api.telegram.org/bot${dummyToken}/sendMessage`;
+        const editMessageReplyMarkupUrl = `https://api.telegram.org/bot${dummyToken}/editMessageReplyMarkup`;
+
 
         UrlFetchAppStubConfiguration.when(sendMessgeUrl)
             .return(new HttpResponse()
@@ -33,6 +35,12 @@ describe('AutomationHandler', () => {
                     result: {
                         message_id: 1,
                     }
+                })));
+
+        UrlFetchAppStubConfiguration.when(editMessageReplyMarkupUrl)
+            .return(new HttpResponse()
+                .setContentText(JSON.stringify({
+                    result: true
                 })));
 
         let response = handler.handleAutomationRequest(content);

@@ -82,14 +82,14 @@ describe('BotSetupController Tests', () => {
                 expect(userProperties.getProperty("admin_chat_id")).toBe(testChatId.toString());
             });
             test("setDebugMode should store the debug mode", () => {
-                const userProperties = PropertiesService.getDocumentProperties();
+                const documentProperties = PropertiesService.getDocumentProperties();
                 controller = BotSetupController.create(
-                    userProperties
+                    documentProperties
                 );
-                controller.setDebugMode(true);
-                expect(userProperties.getProperty(EnvironmentModel.InputMeta.DEBUG_MODE)).toBe('true');
-                controller.setDebugMode(false);
-                expect(userProperties.getProperty(EnvironmentModel.InputMeta.DEBUG_MODE)).toBe('false');
+                controller.setDebugMode('true');
+                expect(documentProperties.getProperty(EnvironmentModel.InputMeta.DEBUG_MODE)).toBe('true');
+                controller.setDebugMode('false');
+                expect(documentProperties.getProperty(EnvironmentModel.InputMeta.DEBUG_MODE)).toBe('false');
             });
             // setWebhook method.
             test("setWebhook should call telegram client to set webhook", () => {
@@ -167,6 +167,18 @@ describe('BotSetupController Tests', () => {
                 );
                 controller.setNewTestDeploymentId(testDeploymentId);
                 expect(userProperties.getProperty(EnvironmentModel.InputMeta.TEST_DEPLOYMENT_ID)).toBe(testDeploymentId);
+            });
+
+            // setLogArchiveSize method.
+            test("setLogArchiveSize should store the log archive size", () => {
+                const userProperties = PropertiesService.getDocumentProperties();
+                const testLogArchiveSize = 2000;
+                controller = BotSetupController.create(
+                    userProperties,
+                    SpreadsheetApp.getActiveSpreadsheet()
+                );
+                controller.setLogArchiveSize(testLogArchiveSize);
+                expect(userProperties.getProperty(EnvironmentModel.InputMeta.LOG_ARCHIVE_SIZE)).toBe(testLogArchiveSize);
             });
 
             describe('Bot info methods', () => {

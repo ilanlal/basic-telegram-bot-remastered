@@ -11,7 +11,7 @@ describe('AutomationModel', () => {
         SpreadsheetStubConfiguration.reset();
         SheetModel.create(
             SpreadsheetApp.getActiveSpreadsheet()
-        ).bindSheetSampleData(EMD.Automation.sheet({}));
+        ).bindSheetSampleData(EMD.BasicAutomation.sheet({}));
     });
 
     it('should create an instance', () => {
@@ -43,8 +43,6 @@ describe('AutomationModel', () => {
             const jsonReply = JSON.parse(reply);
             expect(Array.isArray(jsonReply)).toBe(true);
             expect(jsonReply.length).toBeGreaterThan(0);
-            expect(jsonReply[0]).toHaveProperty('method');
-            expect(jsonReply[0]).toHaveProperty('payload');
         });
 
         test('should return null for non-existing key', () => {

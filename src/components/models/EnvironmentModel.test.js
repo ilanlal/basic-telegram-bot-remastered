@@ -44,10 +44,11 @@ describe('EnvironmentModel Tests', () => {
 
         // setDebugMode
         test('should set debug mode', () => {
-            model.setDebugMode(true);
+            model.setDebugMode('errors');
+            expect(model.state.debugMode).toBe('errors');
             expect(model.state.debugModeSet).toBe(true);
-            model.setDebugMode(false);
-            expect(model.state.debugModeSet).toBe(false);
+            model.setDebugMode('all');
+            expect(model.state.debugMode).toBe('all');
         });
 
         // setNewActiveSpreadsheetId
@@ -62,6 +63,13 @@ describe('EnvironmentModel Tests', () => {
             const newTestDeploymentId = 'test_deployment_id_123';
             model.setNewTestDeploymentId(newTestDeploymentId);
             expect(model.state.testDeploymentId).toBe(newTestDeploymentId ? `${newTestDeploymentId.substring(0, 4)}****${newTestDeploymentId.substring(newTestDeploymentId.length - 4)}` : null);
+        });
+
+        // setLogArchiveSize
+        test('should set log archive size', () => {
+            const newSize = 5000;
+            model.setLogArchiveSize(newSize);
+            expect(model._documentProperties.getProperty(EnvironmentModel.InputMeta.LOG_ARCHIVE_SIZE)).toBe(newSize);
         });
     });
 });

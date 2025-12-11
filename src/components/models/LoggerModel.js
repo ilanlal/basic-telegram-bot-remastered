@@ -1,13 +1,18 @@
 class LoggerModel {
-    static create(userProperties = PropertiesService.getDocumentProperties(), activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet()) {
-        return new LoggerModel(userProperties, activeSpreadsheet);
+    static create(scriptProperties = PropertiesService.getScriptProperties(), activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet()) {
+        return new LoggerModel(scriptProperties, activeSpreadsheet);
     }
 
-    constructor(userProperties, activeSpreadsheet) {
-        this.debugMode = PropertiesService.getScriptProperties()
+    constructor(scriptProperties, activeSpreadsheet) {
+        this.debugMode = scriptProperties
             .getProperty(EnvironmentModel.InputMeta.DEBUG_MODE);
+        this.archiveSize = parseInt(
+            scriptProperties
+                .getProperty(EnvironmentModel.InputMeta.LOG_ARCHIVE_SIZE), 10) || 1000;
         this.sheetModel = SheetModel.create(activeSpreadsheet);
         this.sheet = this.sheetModel.initializeSheet(EMD.Logger.sheet({}));
+        // cause runtime error when archiveSize is invalid
+        // this.archiveLog();
     }
 
     logEvent({ dc, action, chat_id, content, event }) {
@@ -24,6 +29,16 @@ class LoggerModel {
         }
         const datestring = new Date().toISOString();
         this.sheet.appendRow([datestring, dc, action, chat_id, content, event]);
+    }
+
+    archiveLog() {
+        if (this.sheet.getLastRow() > this.archiveSize) {
+            const timestamp = Utilities.formatDate(new Date(), Session.getScriptTimeZone(), 'yyyyMMdd_HHmmss');
+            const archiveSheetName = `${EMD.Logger.sheet({}).name}_${timestamp}`;
+            this.sheetModel.copySheet(this.sheet, archiveSheetName);
+            this.sheet.clearContents();
+            this.sheet.appendRow([EMD.Logger.sheet({}).columns]);
+        }
     }
 
 }

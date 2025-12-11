@@ -6,6 +6,7 @@ class EMD {
 }
 
 EMD.DEFAULT_IMAGE_URL = 'https://raw.githubusercontent.com/ilanlal/basic-telegram-bot-remastered/main/assets/logo480.png';
+EMD.GIT_REPO_URL = 'https://github.com/ilanlal/basic-telegram-bot-remastered';
 
 EMD.Home = {
     entityName: 'Home',
@@ -273,10 +274,20 @@ EMD.EnvironmentVariables = {
                                 },
                                 propertyName: 'debug_mode_set'
                             },
+                            {   // Log Archive Widget
+                                id: 'log_archive_widget',
+                                TextInput: {
+                                    title: 'Max log lines to keep (Set to number, default 1000)',
+                                    fieldName: 'txt_log_archive',
+                                    hint: 'Enter a number to limit log lines',
+                                },
+                                value: '1000',
+                                propertyName: 'log_archive_size'
+                            },
                             {
                                 id: 'save_log_events_button',
                                 TextButton: {
-                                    text: '💾 Save Log Events',
+                                    text: '💾 Save',
                                     onClick: {
                                         functionName: 'EnvironmentHandler.Addon.onSaveLogEventsClick'
                                     }
@@ -621,11 +632,6 @@ EMD.BotSetup = {
                                 // Description of the command; 1-256 characters.
                                 description: 'Start the bot'
                             },
-                            { // '/home' command
-                                command: '/home',
-                                description: 'Go to the main menu'
-
-                            },
                             {   // '/help' command
                                 command: '/help',
                                 description: 'Get help on using the bot, or report an issue'
@@ -633,14 +639,6 @@ EMD.BotSetup = {
                             {   // '/about' command
                                 command: '/about',
                                 description: 'About the bot'
-                            },
-                            { // lang command
-                                command: '/lang',
-                                description: 'send "/lang es" to set Spanish as your language, or "/lang list" to get a list of available languages'
-                            },
-                            { // '/admin' command
-                                command: '/admin',
-                                description: 'Admin command for bot management'
                             }
                         ]),
                     // Spanish
@@ -650,10 +648,6 @@ EMD.BotSetup = {
                                 command: '/start',
                                 description: 'Iniciar el bot'
                             },
-                            {   // '/home' command
-                                command: '/home',
-                                description: 'Ir al menú principal'
-                            },
                             {   // '/help' command
                                 command: '/help',
                                 description: 'Obtener ayuda sobre el uso del bot o informar un problema'
@@ -661,14 +655,6 @@ EMD.BotSetup = {
                             {   // '/about' command
                                 command: '/about',
                                 description: 'Acerca del bot'
-                            },
-                            { // lang command
-                                command: '/lang',
-                                description: 'envía "/lang es" para establecer el español como tu idioma, o "/lang list" para obtener una lista de idiomas disponibles'
-                            },
-                            { // '/admin' command
-                                command: '/admin',
-                                description: 'Comando de administrador para la gestión del bot'
                             }
                         ]),
                     // French
@@ -678,10 +664,6 @@ EMD.BotSetup = {
                                 command: '/start',
                                 description: 'Démarrer le bot'
                             },
-                            {   // '/home' command
-                                command: '/home',
-                                description: 'Aller au menu principal'
-                            },
                             {   // '/help' command
                                 command: '/help',
                                 description: 'Obtenir de l\'aide sur l\'utilisation du bot ou signaler un problème'
@@ -689,14 +671,6 @@ EMD.BotSetup = {
                             {   // '/about' command
                                 command: '/about',
                                 description: 'À propos du bot'
-                            },
-                            { // lang command
-                                command: '/lang',
-                                description: 'envoyer "/lang fr" pour définir le français comme votre langue, ou "/lang list" pour obtenir une liste des langues disponibles'
-                            },
-                            { // '/admin' command
-                                command: '/admin',
-                                description: 'Commande d\'administration pour la gestion du bot'
                             }
                         ]),
                     // Arabic
@@ -706,10 +680,6 @@ EMD.BotSetup = {
                                 command: '/start',
                                 description: 'بدء تشغيل البوت'
                             },
-                            {   // '/home' command
-                                command: '/home',
-                                description: 'الذهاب إلى القائمة الرئيسية'
-                            },
                             {   // '/help' command
                                 command: '/help',
                                 description: 'الحصول على مساعدة حول استخدام البوت أو الإبلاغ عن مشكلة'
@@ -717,14 +687,6 @@ EMD.BotSetup = {
                             {   // '/about' command
                                 command: '/about',
                                 description: 'معلومات عن البوت'
-                            },
-                            { // lang command
-                                command: '/lang',
-                                description: 'أرسل "/lang ar" لتعيين العربية كلغتك، أو "/lang list" للحصول على قائمة باللغات المتاحة'
-                            },
-                            { // '/admin' command
-                                command: '/admin',
-                                description: 'أمر الإدارة لإدارة البوت'
                             }
                         ]),
                     // German
@@ -734,10 +696,6 @@ EMD.BotSetup = {
                                 command: '/start',
                                 description: 'Bot starten'
                             },
-                            {   // '/home' command
-                                command: '/home',
-                                description: 'Gehe zum Hauptmenü'
-                            },
                             {   // '/help' command
                                 command: '/help',
                                 description: 'Hilfe zur Verwendung des Bots oder zur Meldung eines Problems erhalten'
@@ -745,14 +703,6 @@ EMD.BotSetup = {
                             {   // '/about' command
                                 command: '/about',
                                 description: 'Über den Bot'
-                            },
-                            { // lang command
-                                command: '/lang',
-                                description: 'Senden Sie "/lang de", um Deutsch als Ihre Sprache festzulegen, oder "/lang list", um eine Liste der verfügbaren Sprachen zu erhalten'
-                            },
-                            { // '/admin' command
-                                command: '/admin',
-                                description: 'Admin-Befehl zur Verwaltung des Bots'
                             }
                         ]),
                     // Italian
@@ -762,10 +712,6 @@ EMD.BotSetup = {
                                 command: '/start',
                                 description: 'Avvia il bot'
                             },
-                            {   // '/home' command
-                                command: '/home',
-                                description: 'Vai al menu principale'
-                            },
                             {   // '/help' command
                                 command: '/help',
                                 description: 'Ottieni aiuto sull\'uso del bot o segnala un problema'
@@ -773,14 +719,6 @@ EMD.BotSetup = {
                             {   // '/about' command
                                 command: '/about',
                                 description: 'Informazioni sul bot'
-                            },
-                            { // lang command
-                                command: '/lang',
-                                description: 'Invia "/lang it" per impostare l\'italiano come lingua, oppure "/lang list" per ottenere un elenco delle lingue disponibili'
-                            },
-                            { // '/admin' command
-                                command: '/admin',
-                                description: 'Comando di amministrazione per gestire il bot'
                             }
                         ]),
                     // Portuguese
@@ -789,10 +727,6 @@ EMD.BotSetup = {
                             command: '/start',
                             description: 'Iniciar o bot'
                         },
-                        {   // '/home' command
-                            command: '/home',
-                            description: 'Ir para o menu principal'
-                        },
                         {   // '/help' command
                             command: '/help',
                             description: 'Obter ajuda sobre o uso do bot ou relatar um problema'
@@ -800,14 +734,6 @@ EMD.BotSetup = {
                         {   // '/about' command
                             command: '/about',
                             description: 'Informações sobre o bot'
-                        },
-                        { // lang command
-                            command: '/lang',
-                            description: 'Envie "/lang pt" para definir o português como seu idioma, ou "/lang list" para obter uma lista de idiomas disponíveis'
-                        },
-                        { // '/admin' command
-                            command: '/admin',
-                            description: 'Comando de administração para gerenciar o bot'
                         }
                     ]),
                     // Russian
@@ -816,10 +742,6 @@ EMD.BotSetup = {
                             command: '/start',
                             description: 'Запустить бота'
                         },
-                        {   // '/home' command
-                            command: '/home',
-                            description: 'Перейти в главное меню'
-                        },
                         {   // '/help' command
                             command: '/help',
                             description: 'Получить помощь по использованию бота или сообщить о проблеме'
@@ -827,14 +749,6 @@ EMD.BotSetup = {
                         {   // '/about' command
                             command: '/about',
                             description: 'Информация о боте'
-                        },
-                        { // lang command
-                            command: '/lang',
-                            description: 'Отправьте "/lang ru", чтобы установить русский в качестве вашего языка, или "/lang list", чтобы получить список доступных языков'
-                        },
-                        { // '/admin' command
-                            command: '/admin',
-                            description: 'Команда администратора для управления ботом'
                         }
                     ]),
                     // Chinese
@@ -843,10 +757,6 @@ EMD.BotSetup = {
                             command: '/start',
                             description: '启动机器人'
                         },
-                        {   // '/home' command
-                            command: '/home',
-                            description: '进入主菜单'
-                        },
                         {   // '/help' command
                             command: '/help',
                             description: '获取有关使用机器人的帮助或报告问题'
@@ -854,14 +764,6 @@ EMD.BotSetup = {
                         {   // '/about' command
                             command: '/about',
                             description: '有关机器人的信息'
-                        },
-                        { // lang command
-                            command: '/lang',
-                            description: '发送"/lang zh"将中文设置为您的语言，或"/lang list"以获取可用语言的列表'
-                        },
-                        { // '/admin' command
-                            command: '/admin',
-                            description: '用于管理机器人的管理员命令'
                         }
                     ]),
                     // Japanese
@@ -870,10 +772,6 @@ EMD.BotSetup = {
                             command: '/start',
                             description: 'ボットを開始します'
                         },
-                        {   // '/home' command
-                            command: '/home',
-                            description: 'メインメニューに移動します'
-                        },
                         {   // '/help' command
                             command: '/help',
                             description: 'ボットの使用に関するヘルプを取得するか、問題を報告します'
@@ -881,14 +779,6 @@ EMD.BotSetup = {
                         {   // '/about' command
                             command: '/about',
                             description: 'ボットに関する情報'
-                        },
-                        { // lang command
-                            command: '/lang',
-                            description: '"/lang ja"を送信して日本語をあなたの言語として設定するか、"/lang list"を送信して利用可能な言語のリストを取得します'
-                        },
-                        { // '/admin' command
-                            command: '/admin',
-                            description: 'ボットを管理するための管理者コマンド'
                         }
                     ]),
                     // Korean
@@ -897,10 +787,6 @@ EMD.BotSetup = {
                             command: '/start',
                             description: '봇을 시작합니다'
                         },
-                        {   // '/home' command
-                            command: '/home',
-                            description: '메인 메뉴로 이동합니다'
-                        },
                         {   // '/help' command
                             command: '/help',
                             description: '봇 사용에 대한 도움을 받거나 문제를 보고합니다'
@@ -908,14 +794,6 @@ EMD.BotSetup = {
                         {   // '/about' command
                             command: '/about',
                             description: '봇에 대한 정보'
-                        },
-                        { // lang command
-                            command: '/lang',
-                            description: '"/lang ko"를 보내어 한국어를 귀하의 언어로 설정하거나 "/lang list"를 보내어 사용 가능한 언어 목록을 가져옵니다'
-                        },
-                        { // '/admin' command
-                            command: '/admin',
-                            description: '봇을 관리하기 위한 관리자 명령'
                         }
                     ]),
                     // Hebrew
@@ -924,10 +802,6 @@ EMD.BotSetup = {
                             command: '/start',
                             description: 'הפעל את הבוט'
                         },
-                        {   // '/home' command
-                            command: '/home',
-                            description: 'עבור לתפריט הראשי'
-                        },
                         {   // '/help' command
                             command: '/help',
                             description: 'קבל עזרה בשימוש בבוט או דווח על בעיות'
@@ -935,14 +809,6 @@ EMD.BotSetup = {
                         {   // '/about' command
                             command: '/about',
                             description: 'מידע על הבוט'
-                        },
-                        { // lang command
-                            command: '/lang',
-                            description: 'שלח "/lang he" כדי להגדיר את העברית כשפה שלך, או "/lang list" כדי לקבל רשימה של שפות זמינות'
-                        },
-                        { // '/admin' command
-                            command: '/admin',
-                            description: 'פקודת מנהל עבור ניהול הבוט'
                         }
                     ])
                 ],
@@ -1054,12 +920,12 @@ EMD.Automation = {
                             {
                                 id: 'create_basic_automation_widget',
                                 DecoratedText: {
-                                    topLabel: '✨ Basic Automations',
+                                    topLabel: '✨ Base',
                                     text: 'Create basic automations from predefined templates to get started quickly.',
                                     bottomLabel: 'Bind basic template data to get started with basic automations',
                                     wrapText: false,
                                     textButton: {
-                                        text: '✨ Basic Template',
+                                        text: '✨ Base Template',
                                         disabled: false,
                                         onClick: {
                                             functionName: 'EntityHandler.Addon.onBindSheetDataClick',
@@ -1080,12 +946,12 @@ EMD.Automation = {
                             {
                                 id: 'create_store_automation_widget',
                                 DecoratedText: {
-                                    topLabel: '✨ Store Automations',
+                                    topLabel: '💰 Store',
                                     text: 'Add store automation templates to manage your store-related tasks efficiently.',
                                     bottomLabel: 'Bind store template data to get started with store automations',
                                     wrapText: false,
                                     textButton: {
-                                        text: '✨ Store Template',
+                                        text: '💰 Store Template',
                                         disabled: false,
                                         onClick: {
                                             functionName: 'EntityHandler.Addon.onBindSheetDataClick',
@@ -1098,8 +964,85 @@ EMD.Automation = {
                             }
                         ]
                     },
-                    // Automation Management Section
-                    {
+                    { // Add Survey Automation template section
+                        // header: 'Automation Management',
+                        collapsible: false,
+                        numUncollapsibleWidgets: 0,
+                        widgets: [
+                            {
+                                id: 'create_survey_automation_widget',
+                                DecoratedText: {
+                                    topLabel: '📋 Survey',
+                                    text: 'Add survey automation templates to manage your survey-related tasks efficiently.',
+                                    bottomLabel: 'Bind survey template data to get started with survey automations',
+                                    wrapText: false,
+                                    textButton: {
+                                        text: '📋 Survey Template',
+                                        disabled: false,
+                                        onClick: {
+                                            functionName: 'EntityHandler.Addon.onBindSheetDataClick',
+                                            parameters: {
+                                                entityName: 'SurveyAutomation'
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    { // Add Api Automation template section
+                        // header: 'Automation Management',
+                        collapsible: false,
+                        numUncollapsibleWidgets: 0,
+                        widgets: [
+                            {
+                                id: 'create_api_automation_widget',
+                                DecoratedText: {
+                                    topLabel: '🤖 API',
+                                    text: 'Add API automation templates to manage your API-related tasks efficiently.',
+                                    bottomLabel: 'Bind API template data to get started with API automations',
+                                    wrapText: false,
+                                    textButton: {
+                                        text: '🤖 API Template',
+                                        disabled: false,
+                                        onClick: {
+                                            functionName: 'EntityHandler.Addon.onBindSheetDataClick',
+                                            parameters: {
+                                                entityName: 'ApiFeatures'
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    { // Security Checks Section
+                        // header: 'Automation Management',
+                        collapsible: false,
+                        numUncollapsibleWidgets: 0,
+                        widgets: [
+                            {
+                                id: 'create_security_automation_widget',
+                                DecoratedText: {
+                                    topLabel: '🔒 Security',
+                                    text: 'Create security-focused automations to protect your bot and users.',
+                                    bottomLabel: 'Bind security template data to get started',
+                                    wrapText: false,
+                                    textButton: {
+                                        text: '🔒 Security Template',
+                                        disabled: false,
+                                        onClick: {
+                                            functionName: 'EntityHandler.Addon.onBindSheetDataClick',
+                                            parameters: {
+                                                entityName: 'SecurityChecks'
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    { // Automation Management Section
                         // header: 'Automation Management',
                         collapsible: false,
                         numUncollapsibleWidgets: 0,
@@ -1107,12 +1050,12 @@ EMD.Automation = {
                             {
                                 id: 'create_automation_widget',
                                 DecoratedText: {
-                                    topLabel: '⚡ Template-based Automations',
+                                    topLabel: '⚡ Master',
                                     text: 'Create automations from predefined templates to get started quickly.',
                                     bottomLabel: 'Bind template data to get started',
                                     wrapText: false,
                                     textButton: {
-                                        text: '⚡ Bind Template Data',
+                                        text: '⚡ Master Template',
                                         disabled: false,
                                         onClick: {
                                             functionName: 'EntityHandler.Addon.onBindSheetDataClick',
@@ -1173,7 +1116,7 @@ EMD.Automation = {
                                             { text: "About", callback_data: "/about" }
                                         ],
                                         [
-                                            { text: "Home", callback_data: "/home" }
+                                            { text: "Home", callback_data: "/start" }
                                         ]
                                     ]
                                 }
@@ -1187,7 +1130,7 @@ EMD.Automation = {
                                 parse_mode: 'HTML',
                                 reply_markup: {
                                     inline_keyboard: [
-                                        [{ text: "Inicio", callback_data: "/home" }]
+                                        [{ text: "Inicio", callback_data: "/start" }]
                                     ]
                                 }
                             }
@@ -1200,7 +1143,7 @@ EMD.Automation = {
                                 parse_mode: 'HTML',
                                 reply_markup: {
                                     inline_keyboard: [
-                                        [{ text: "L'accueil", callback_data: "/home" }]
+                                        [{ text: "L'accueil", callback_data: "/start" }]
                                     ]
                                 }
                             }
@@ -1213,7 +1156,7 @@ EMD.Automation = {
                                 parse_mode: 'HTML',
                                 reply_markup: {
                                     inline_keyboard: [
-                                        [{ text: "الصفحة الرئيسية", callback_data: "/home" }]
+                                        [{ text: "الصفحة الرئيسية", callback_data: "/start" }]
                                     ]
                                 }
                             }
@@ -1226,7 +1169,7 @@ EMD.Automation = {
                                 parse_mode: 'HTML',
                                 reply_markup: {
                                     inline_keyboard: [
-                                        [{ text: "Home", callback_data: "/home" }]
+                                        [{ text: "Home", callback_data: "/start" }]
                                     ]
                                 }
                             }
@@ -1239,7 +1182,7 @@ EMD.Automation = {
                                 parse_mode: 'HTML',
                                 reply_markup: {
                                     inline_keyboard: [
-                                        [{ text: "Inizio", callback_data: "/home" }]
+                                        [{ text: "Inizio", callback_data: "/start" }]
                                     ]
                                 }
                             }
@@ -1252,7 +1195,7 @@ EMD.Automation = {
                                 parse_mode: 'HTML',
                                 reply_markup: {
                                     inline_keyboard: [
-                                        [{ text: "Início", callback_data: "/home" }]
+                                        [{ text: "Início", callback_data: "/start" }]
                                     ]
                                 }
                             }
@@ -1265,7 +1208,7 @@ EMD.Automation = {
                                 parse_mode: 'HTML',
                                 reply_markup: {
                                     inline_keyboard: [
-                                        [{ text: "Главная", callback_data: "/home" }]
+                                        [{ text: "Главная", callback_data: "/start" }]
                                     ]
                                 }
                             }
@@ -1278,7 +1221,7 @@ EMD.Automation = {
                                 parse_mode: 'HTML',
                                 reply_markup: {
                                     inline_keyboard: [
-                                        [{ text: "主页", callback_data: "/home" }]
+                                        [{ text: "主页", callback_data: "/start" }]
                                     ]
                                 }
                             }
@@ -1291,7 +1234,7 @@ EMD.Automation = {
                                 parse_mode: 'HTML',
                                 reply_markup: {
                                     inline_keyboard: [
-                                        [{ text: "ホーム", callback_data: "/home" }]
+                                        [{ text: "ホーム", callback_data: "/start" }]
                                     ]
                                 }
                             }
@@ -1304,7 +1247,7 @@ EMD.Automation = {
                                 parse_mode: 'HTML',
                                 reply_markup: {
                                     inline_keyboard: [
-                                        [{ text: "홈", callback_data: "/home" }]
+                                        [{ text: "홈", callback_data: "/start" }]
                                     ]
                                 }
                             }
@@ -1321,1629 +1264,7 @@ EMD.Automation = {
                                     ]
                                 }
                             }
-                        }])],
-                    ['_action_not_found_',
-                        // default (en)
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: '🚧 Oops! We\'re sorry, but we couldn\'t recognize that action. Please try again or use /help for assistance.',
-                                parse_mode: 'HTML',
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [
-                                            { text: "🆘 Help", callback_data: "help" },
-                                            { text: "ℹ️ About", callback_data: "about" }
-                                        ],
-                                        [
-                                            { text: "🏠 Home", callback_data: "/home" }
-                                        ]
-                                    ]
-                                }
-                            }
-                        }]),
-                        // es
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: '🚧 ¡Vaya! Lo sentimos, pero no pudimos reconocer esa acción. Por favor, inténtalo de nuevo o utiliza /help para obtener ayuda.',
-                                parse_mode: 'HTML',
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [
-                                            { text: "🆘 Ayuda", callback_data: "/help" },
-                                            { text: "ℹ️ Acerca de", callback_data: "/about" }
-                                        ],
-                                        [
-                                            { text: "🏠 Inicio", callback_data: "/home" }
-                                        ]
-                                    ]
-                                }
-                            }
-                        }]),
-                        // fr
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: '🚧 Désolé, mais nous n\'avons pas pu reconnaître cette action. Veuillez réessayer ou utiliser /help pour obtenir de l\'aide.',
-                                parse_mode: 'HTML',
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [
-                                            { text: "🆘 Aide", callback_data: "/help" },
-                                            { text: "ℹ️ À propos", callback_data: "/about" }
-                                        ],
-                                        [
-                                            { text: "🏠 Accueil", callback_data: "/home" }
-                                        ]
-                                    ]
-                                }
-                            }
-                        }]),
-                        // ar
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: '🚧 عذرًا، لم نتمكن من التعرف على هذا الإجراء. يرجى المحاولة مرة أخرى أو استخدام /help للحصول على المساعدة.',
-                                parse_mode: 'HTML',
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [
-                                            { text: "🆘 مساعدة", callback_data: "/help" },
-                                            { text: "ℹ️ حول", callback_data: "/about" }
-                                        ],
-                                        [
-                                            { text: "🏠 الرئيسية", callback_data: "/home" }
-                                        ]
-                                    ]
-                                }
-                            }
-                        }]),
-                        // de
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: '🚧 Hoppla! Wir konnten diese Aktion nicht erkennen. Bitte versuchen Sie es erneut oder verwenden Sie /help, um Hilfe zu erhalten.',
-                                parse_mode: 'HTML',
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [
-                                            { text: "🆘 Hilfe", callback_data: "/help" },
-                                            { text: "ℹ️ Über", callback_data: "/about" }
-                                        ],
-                                        [
-                                            { text: "🏠 Home", callback_data: "/home" }
-                                        ]
-                                    ]
-                                }
-                            }
-                        }]),
-                        // it
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: '🚧 Ci scusiamo, ma non siamo riusciti a riconoscere questa azione. Per favore riprova o usa /help per ricevere assistenza.',
-                                parse_mode: 'HTML',
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [
-                                            { text: "🆘 Aiuto", callback_data: "/help" },
-                                            { text: "ℹ️ Informazioni", callback_data: "/about" }
-                                        ],
-                                        [
-                                            { text: "🏠 Home", callback_data: "/home" }
-                                        ]
-                                    ]
-                                }
-                            }
-                        }]),
-                        // pt
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: '🚧 Desculpe, não conseguimos reconhecer esta ação. Por favor, tente novamente ou use /help para obter assistência.',
-                                parse_mode: 'HTML',
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [
-                                            { text: "🆘 Ajuda", callback_data: "/help" },
-                                            { text: "ℹ️ Sobre", callback_data: "/about" }
-                                        ],
-                                        [
-                                            { text: "🏠 Início", callback_data: "/home" }
-                                        ]
-                                    ]
-                                }
-                            }
-                        }]),
-                        // ru
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: '🚧 Извините, мы не смогли распознать это действие. Пожалуйста, попробуйте еще раз или используйте /help для получения помощи.',
-                                parse_mode: 'HTML',
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [
-                                            { text: "🆘 Помощь", callback_data: "/help" },
-                                            { text: "ℹ️ О нас", callback_data: "/about" }
-                                        ],
-                                        [
-                                            { text: "🏠 Главная", callback_data: "/home" }
-                                        ]
-                                    ]
-                                }
-                            }
-                        }]),
-                        // zh
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: '🚧 抱歉，我们无法识别此操作。请重试或使用 /help 获取帮助。',
-                                parse_mode: 'HTML',
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [
-                                            { text: "🆘 帮助", callback_data: "/help" },
-                                            { text: "ℹ️ 关于", callback_data: "/about" }
-                                        ],
-                                        [
-                                            { text: "🏠 首页", callback_data: "/home" }
-                                        ]
-                                    ]
-                                }
-                            }
-                        }]),
-                        // ja
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: '🚧 申し訳ありませんが、このアクションを認識できませんでした。もう一度お試しいただくか、/help を使用してサポートを受けてください。',
-                                parse_mode: 'HTML',
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [
-                                            { text: "🆘 ヘルプ", callback_data: "/help" },
-                                            { text: "ℹ️ 私たちについて", callback_data: "/about" }
-                                        ],
-                                        [
-                                            { text: "🏠 ホーム", callback_data: "/home" }
-                                        ]
-                                    ]
-                                }
-                            }
-                        }]),
-                        // ko
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: '🚧 죄송합니다. 이 작업을 인식할 수 없습니다. 다시 시도하거나 /help를 사용하여 도움을 받으십시오.',
-                                parse_mode: 'HTML',
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [
-                                            { text: "🆘 도움", callback_data: "/help" },
-                                            { text: "ℹ️ 정보", callback_data: "/about" }
-                                        ],
-                                        [
-                                            { text: "🏠 홈", callback_data: "/home" }
-                                        ]
-                                    ]
-                                }
-                            }
-                        }]),
-                        // he
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: '🚧 סליחה, לא הצלחנו לזהות את הפעולה הזו. אנא נסה שוב או השתמש ב-/help לקבלת עזרה.',
-                                parse_mode: 'HTML',
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [
-                                            { text: "🆘 עזרה", callback_data: "/help" },
-                                            { text: "ℹ️ עלינו", callback_data: "/about" }
-                                        ],
-                                        [
-                                            { text: "🏠 בית", callback_data: "/home" }
-                                        ]
-                                    ]
-                                }
-                            }
-                        }]),
-                    ],
-                    ['_unauthorized_',
-                        // default (en)
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: '🚫 Oops! You are not authorized to perform this action. Please contact the administrator if you believe this is an error.',
-                                parse_mode: 'HTML',
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [
-                                            { text: "🆘 Help", callback_data: "help" },
-                                            { text: "ℹ️ About", callback_data: "about" }
-                                        ],
-                                        [
-                                            { text: "🏠 Home", callback_data: "/home" }
-                                        ]
-                                    ]
-                                }
-                            }
-                        }]),
-                        // es
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: '🚫 ¡Ups! No estás autorizado para realizar esta acción. Por favor, contacta al administrador si crees que esto es un error.',
-                                parse_mode: 'HTML',
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [
-                                            { text: "🆘 Ayuda", callback_data: "help" },
-                                            { text: "ℹ️ Acerca de", callback_data: "about" }
-                                        ],
-                                        [
-                                            { text: "🏠 Inicio", callback_data: "/home" }
-                                        ]
-                                    ]
-                                }
-                            }
-                        }]),
-                        // fr
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: '🚫 Désolé, vous n\'êtes pas autorisé à effectuer cette action. Veuillez contacter l\'administrateur si vous pensez qu\'il s\'agit d\'une erreur.',
-                                parse_mode: 'HTML',
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [
-                                            { text: "🆘 Aide", callback_data: "help" },
-                                            { text: "ℹ️ À propos", callback_data: "about" }
-                                        ],
-                                        [
-                                            { text: "🏠 Accueil", callback_data: "/home" }
-                                        ]
-                                    ]
-                                }
-                            }
-                        }]),
-                        // ar
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: '🚫 عذرًا، أنت غير مصرح لك بتنفيذ هذا الإجراء. يرجى الاتصال بالمسؤول إذا كنت تعتقد أن هذه خطأ.',
-                                parse_mode: 'HTML',
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [
-                                            { text: "🆘 مساعدة", callback_data: "help" },
-                                            { text: "ℹ️ حول", callback_data: "about" }
-                                        ],
-                                        [
-                                            { text: "🏠 الرئيسية", callback_data: "/home" }
-                                        ]
-                                    ]
-                                }
-                            }
-                        }]),
-                        // de
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: '🚫 Entschuldigung, Sie sind nicht berechtigt, diese Aktion auszuführen. Bitte kontaktieren Sie den Administrator, wenn Sie denken, dass dies ein Fehler ist.',
-                                parse_mode: 'HTML',
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [
-                                            { text: "🆘 Hilfe", callback_data: "help" },
-                                            { text: "ℹ️ Über", callback_data: "about" }
-                                        ],
-                                        [
-                                            { text: "🏠 Startseite", callback_data: "/home" }
-                                        ]
-                                    ]
-                                }
-                            }
-                        }]),
-                        // it
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: '🚫 Ci scusiamo, non sei autorizzato a eseguire questa azione. Contatta l\'amministratore se pensi che si tratti di un errore.',
-                                parse_mode: 'HTML',
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [
-                                            { text: "🆘 Aiuto", callback_data: "help" },
-                                            { text: "ℹ️ Informazioni", callback_data: "about" }
-                                        ],
-                                        [
-                                            { text: "🏠 Home", callback_data: "/home" }
-                                        ]
-                                    ]
-                                }
-                            }
-                        }]),
-                        // pt
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: '🚫 Desculpe, você não tem permissão para executar esta ação. Entre em contato com o administrador se achar que isso é um erro.',
-                                parse_mode: 'HTML',
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [
-                                            { text: "🆘 Ajuda", callback_data: "help" },
-                                            { text: "ℹ️ Sobre", callback_data: "about" }
-                                        ],
-                                        [
-                                            { text: "🏠 Início", callback_data: "/home" }
-                                        ]
-                                    ]
-                                }
-                            }
-                        }]),
-                        // ru
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: '🚫 Извините, у вас нет разрешения на выполнение этого действия. Пожалуйста, свяжитесь с администратором, если вы считаете, что это ошибка.',
-                                parse_mode: 'HTML',
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [
-                                            { text: "🆘 Помощь", callback_data: "help" },
-                                            { text: "ℹ️ Информация", callback_data: "about" }
-                                        ],
-                                        [
-                                            { text: "🏠 Главная", callback_data: "/home" }
-                                        ]
-                                    ]
-                                }
-                            }
-                        }]),
-                        // zh
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: '🚫 对不起，您没有权限执行此操作。如果您认为这是一个错误，请联系管理员。',
-                                parse_mode: 'HTML',
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [
-                                            { text: "🆘 帮助", callback_data: "help" },
-                                            { text: "ℹ️ 信息", callback_data: "about" }
-                                        ],
-                                        [
-                                            { text: "🏠 首页", callback_data: "/home" }
-                                        ]
-                                    ]
-                                }
-                            }
-                        }]),
-                        // ja
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: '🚫 申し訳ありませんが、この操作を実行する権限がありません。これがエラーだと思われる場合は、管理者に連絡してください。',
-                                parse_mode: 'HTML',
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [
-                                            { text: "🆘 ヘルプ", callback_data: "help" },
-                                            { text: "ℹ️ 情報", callback_data: "about" }
-                                        ],
-                                        [
-                                            { text: "🏠 ホーム", callback_data: "/home" }
-                                        ]
-                                    ]
-                                }
-                            }
-                        }]),
-                        // ko
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: '🚫 죄송하지만 이 작업을 수행할 권한이 없습니다. 이것이 오류라고 생각되면 관리자에게 문의하십시오.',
-                                parse_mode: 'HTML',
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [
-                                            { text: "🆘 도움말", callback_data: "help" },
-                                            { text: "ℹ️ 정보", callback_data: "about" }
-                                        ],
-                                        [
-                                            { text: "🏠 홈", callback_data: "/home" }
-                                        ]
-                                    ]
-                                }
-                            }
-                        }]),
-                        // he
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: '🚫 מצטער, אבל אין לך הרשאה לבצע פעולה זו. אם אתה חושב שזה שגיאה, אנא פנה למנהל.',
-                                parse_mode: 'HTML',
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [
-                                            { text: "🆘 עזרה", callback_data: "help" },
-                                            { text: "ℹ️ מידע", callback_data: "about" }
-                                        ],
-                                        [
-                                            { text: "🏠 בית", callback_data: "/home" }
-                                        ]
-                                    ]
-                                }
-                            }
-                        }])
-                    ],
-                    ['/start',
-                        // default (en)
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: '🐣/> Hi..' + '\n\n'
-                                    + '<blockquote expandable>About me: I\'m a <b>Bot Hub</b> 🐣\n\n'
-                                    + 'I\'m a <b>Bot Hub</b> 🐣\n\n'
-                                    + 'I can help you explore various features and functionalities of Telegram bots.\n\n'
-                                    + 'You can use me to learn about sending messages, photos, media groups, and more!\n\n'
-                                    + 'Just let me know what you want to do!' + '\n\n'
-                                    + '</blockquote>'
-                                    + 'Click the "🐣 Accept" in the "inline keyboard" below to get started.' + '\n',
-                                parse_mode: 'HTML',
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [
-                                            { text: "🐣 Accept", callback_data: "/home" }
-                                        ]
-                                    ]
-                                }
-                            }
-                        }]),
-                        // es
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: '🐣/> Hola..' + '\n\n'
-                                    + '<blockquote expandable>Sobre mí: Soy un <b>Bot Hub</b> 🐣\n\n'
-                                    + 'Soy un <b>Bot Hub</b> 🐣\n\n'
-                                    + 'Puedo ayudarte a explorar varias funciones y características de los bots de Telegram.\n\n'
-                                    + 'Puedes usarme para aprender sobre el envío de mensajes, fotos, grupos de medios y más!\n\n'
-                                    + 'Solo házmelo saber lo que quieres hacer!' + '\n\n'
-                                    + '</blockquote>'
-                                    + 'Haz clic en "🐣 Aceptar" en el "teclado en línea" a continuación para comenzar.' + '\n',
-                                parse_mode: 'HTML',
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [
-                                            { text: "🐣 Aceptar", callback_data: "/home" }
-                                        ]
-                                    ]
-                                }
-                            }
-                        }]),
-                        // fr
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: '🐣/> Bonjour..' + '\n\n'
-                                    + '<blockquote expandable>À propos de moi: Je suis un <b>Bot Hub</b> 🐣\n\n'
-                                    + 'Je suis un <b>Bot Hub</b> 🐣\n\n'
-                                    + 'Je peux vous aider à explorer diverses fonctionnalités et caractéristiques des bots Telegram.\n\n'
-                                    + 'Vous pouvez m\'utiliser pour en savoir plus sur l\'envoi de messages, de photos, de groupes de médias, et plus encore!\n\n'
-                                    + 'Faites-moi savoir ce que vous voulez faire!' + '\n\n'
-                                    + '</blockquote>'
-                                    + 'Cliquez sur "🐣 Accepter" dans le "clavier en ligne" ci-dessous pour commencer.' + '\n',
-                                parse_mode: 'HTML',
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [
-                                            { text: "🐣 Accepter", callback_data: "/home" }
-                                        ]
-                                    ]
-                                }
-                            }
-                        }]),
-                        // ar
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: '🐣/> مرحبا..' + '\n\n'
-                                    + '<blockquote expandable>معلومات عني: أنا <b>بوت هاب</b> 🐣\n\n'
-                                    + 'أنا <b>بوت هاب</b> 🐣\n\n'
-                                    + 'يمكنني مساعدتك في استكشاف ميزات ووظائف مختلفة لروبوتات تيليجرام.\n\n'
-                                    + 'يمكنك استخدامي لمعرفة المزيد عن إرسال الرسائل والصور ومجموعات الوسائط والمزيد!\n\n'
-                                    + 'فقط أخبرني بما تريد القيام به!' + '\n\n'
-                                    + '</blockquote>'
-                                    + 'انقر على "🐣 قبول" في "لوحة المفاتيح المدمجة" أدناه للبدء.' + '\n',
-                                parse_mode: 'HTML',
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [
-                                            { text: "🐣 قبول", callback_data: "/home" }
-                                        ]
-                                    ]
-                                }
-                            }
-                        }]),
-                        // de
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: '🐣/> Hallo..' + '\n\n'
-                                    + '<blockquote expandable>Über mich: Ich bin ein <b>Bot Hub</b> 🐣\n\n'
-                                    + 'Ich bin ein <b>Bot Hub</b> 🐣\n\n'
-                                    + 'Ich kann Ihnen helfen, verschiedene Funktionen und Merkmale von Telegram-Bots zu erkunden.\n\n'
-                                    + 'Sie können mich verwenden, um mehr über das Senden von Nachrichten, Fotos, Mediengruppen und mehr zu erfahren!\n\n'
-                                    + 'Lassen Sie mich wissen, was Sie tun möchten!' + '\n\n'
-                                    + '</blockquote>'
-                                    + 'Klicken Sie auf "🐣 Akzeptieren" in der untenstehenden "Inline-Tastatur", um zu beginnen.' + '\n',
-                                parse_mode: 'HTML',
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [
-                                            { text: "🐣 Akzeptieren", callback_data: "/home" }
-                                        ]
-                                    ]
-                                }
-                            }
-                        }]),
-                        // it
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: '🐣/> Ciao..' + '\n\n'
-                                    + '<blockquote expandable>Informazioni su di me: Sono un <b>Bot Hub</b> 🐣\n\n'
-                                    + 'Sono un <b>Bot Hub</b> 🐣\n\n'
-                                    + 'Posso aiutarti a esplorare diverse funzionalità e caratteristiche dei bot di Telegram.\n\n'
-                                    + 'Puoi usarmi per saperne di più sull\'invio di messaggi, foto, gruppi multimediali e altro ancora!\n\n'
-                                    + 'Fammi sapere cosa vuoi fare!' + '\n\n'
-                                    + '</blockquote>'
-                                    + 'Fai clic su "🐣 Accetta" nella "tastiera inline" qui sotto per iniziare.' + '\n',
-                                parse_mode: 'HTML',
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [
-                                            { text: "🐣 Accetta", callback_data: "/home" }
-                                        ]
-                                    ]
-                                }
-                            }
-                        }]),
-                        // pt
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: '🐣/> Olá..' + '\n\n'
-                                    + '<blockquote expandable>Sobre mim: Eu sou um <b>Bot Hub</b> 🐣\n\n'
-                                    + 'Eu sou um <b>Bot Hub</b> 🐣\n\n'
-                                    + 'Posso ajudá-lo a explorar várias funcionalidades e recursos dos bots do Telegram.\n\n'
-                                    + 'Você pode me usar para saber mais sobre o envio de mensagens, fotos, grupos de mídia e muito mais!\n\n'
-                                    + 'Deixe-me saber o que você gostaria de fazer!' + '\n\n'
-                                    + '</blockquote>'
-                                    + 'Clique em "🐣 Aceitar" no "teclado inline" abaixo para começar.' + '\n',
-                                parse_mode: 'HTML',
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [
-                                            { text: "🐣 Aceitar", callback_data: "/home" }
-                                        ]
-                                    ]
-                                }
-                            }
-                        }]),
-                        // ru
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: '🐣/> Привет..' + '\n\n'
-                                    + '<blockquote expandable>Информация обо мне: Я <b>Bot Hub</b> 🐣\n\n'
-                                    + 'Я <b>Bot Hub</b> 🐣\n\n'
-                                    + 'Я могу помочь вам исследовать различные функции и возможности ботов Telegram.\n\n'
-                                    + 'Вы можете использовать меня, чтобы узнать больше о отправке сообщений, фотографий, медиа-группах и многом другом!\n\n'
-                                    + 'Дайте мне знать, что вы хотите сделать!' + '\n\n'
-                                    + '</blockquote>'
-                                    + 'Нажмите "🐣 Принять" на "инлайн-клавиатуре" ниже, чтобы начать.' + '\n',
-                                parse_mode: 'HTML',
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [
-                                            { text: "🐣 Принять", callback_data: "/home" }
-                                        ]
-                                    ]
-                                }
-                            }
-                        }]),
-                        // zh
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: '🐣/> 你好..' + '\n\n'
-                                    + '<blockquote expandable>关于我: 我是一个 <b>Bot Hub</b> 🐣\n\n'
-                                    + '我是一個 <b>Bot Hub</b> 🐣\n\n'
-                                    + '我可以帮助您探索 Telegram 机器人的各种功能和特性。\n\n'
-                                    + '您可以使用我来了解有关发送消息、照片、多媒体组等更多信息！\n\n'
-                                    + '请告诉我您想做什么！' + '\n\n'
-                                    + '</blockquote>'
-                                    + '点击下面的 "🐣 接受" 在 "内联键盘" 开始。' + '\n',
-                                parse_mode: 'HTML',
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [
-                                            { text: "🐣 接受", callback_data: "/home" }
-                                        ]
-                                    ]
-                                }
-                            }
-                        }]),
-                        // ja
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: '🐣/> こんにちは..' + '\n\n'
-                                    + '<blockquote expandable>私について: 私は <b>Bot Hub</b> 🐣 です。\n\n'
-                                    + '私は <b>Bot Hub</b> 🐣 です。\n\n'
-                                    + '私は Telegram ボットのさまざまな機能や特性を探索するお手伝いができます。\n\n'
-                                    + 'メッセージ、写真、メディアグループなどの送信についてもっと知りたい場合は、私を利用できます！\n\n'
-                                    + '何をしたいか教えてください！' + '\n\n'
-                                    + '</blockquote>'
-                                    + '下の "🐣 受け入れる" をクリックして "インラインキーボード" を開始してください。' + '\n',
-                                parse_mode: 'HTML',
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [
-                                            { text: "🐣 受け入れる", callback_data: "/home" }
-                                        ]
-                                    ]
-                                }
-                            }
-                        }]),
-                        // ko
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: '🐣/> 안녕하세요..' + '\n\n'
-                                    + '<blockquote expandable>저에 대해: 저는 <b>Bot Hub</b> 🐣 입니다.\n\n'
-                                    + '저는 <b>Bot Hub</b> 🐣 입니다.\n\n'
-                                    + '저는 Telegram 봇의 다양한 기능과 특성을 탐색하는 데 도움을 드릴 수 있습니다.\n\n'
-                                    + '메시지, 사진, 미디어 그룹 등을 보내는 방법에 대해 더 알고 싶다면 저를 이용해 보세요!\n\n'
-                                    + '무엇을 하고 싶으신지 말씀해 주세요!' + '\n\n'
-                                    + '</blockquote>'
-                                    + '아래의 "🐣 수락"을 클릭하여 "인라인 키보드"를 시작하세요.' + '\n',
-                                parse_mode: 'HTML',
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [
-                                            { text: "🐣 수락", callback_data: "/home" }
-                                        ]
-                                    ]
-                                }
-                            }
-                        }]),
-                        // he
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: '🐣/> שלום..' + '\n\n'
-                                    + '<blockquote expandable>עליי: אני <b>Bot Hub</b> 🐣 .\n\n'
-                                    + 'אני <b>Bot Hub</b> 🐣 .\n\n'
-                                    + 'אני יכול לעזור לך לחקור את התכונות והמאפיינים השונים של בוט טלגרם.\n\n'
-                                    + 'אם אתה רוצה לדעת יותר על שליחת הודעות, תמונות, קבוצות מדיה וכו\', אתה יכול להשתמש בי!\n\n'
-                                    + 'מה תרצה לעשות?' + '\n\n'
-                                    + '</blockquote>'
-                                    + 'לחץ על "🐣 קבל" למטה כדי להתחיל את "מקלדת אינליין".' + '\n',
-                                parse_mode: 'HTML',
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [
-                                            { text: "🐣 קבל", callback_data: "/home" }
-                                        ]
-                                    ]
-                                }
-                            }
-                        }]),
-                    ],
-                    ['/home',
-                        // default (en)
-                        JSON.stringify([
-                            {
-                                method: 'sendPhoto',
-                                payload: {
-                                    caption: 'Welcome.\n\n'
-                                        + 'I am a simple Telegram bot that showcases various features and functionalities.\n\n'
-                                        + 'Feel free to interact with me and discover what I can do!\n\n'
-                                        + 'I hope you enjoy your experience! 😊\n\n'
-                                        + '<blockquote expandable>Feedback: \n'
-                                        + 'We appreciate your feedback to improve this bot.\n'
-                                        + 'Please let us know your thoughts!\n\n'
-                                        + '</blockquote>',
-                                    photo: "https://www.gstatic.com/webp/gallery/1.jpg",
-                                    parse_mode: 'HTML',
-                                    reply_markup: {
-                                        inline_keyboard: [
-                                            [
-                                                { text: 'API Features', callback_data: "/apis" }
-                                            ],
-                                            [
-                                                { text: 'Store', callback_data: "/store" }
-                                            ],
-                                            [
-                                                { text: '❓ Help', callback_data: "/help" }
-                                            ]
-                                        ]
-                                    }
-                                }
-                            }
-                        ])
-                    ],
-                    ['/admin',
-                        // default (en)
-                        JSON.stringify([{
-                            method: 'sendPhoto',
-                            payload: {
-                                caption: '<b>Admin Panel</b>\n\n' +
-                                    'Welcome to the Admin Panel. Here you can manage various aspects of the bot and its functionalities.\n\n' +
-                                    'Use the buttons below to navigate through the admin features.',
-                                parse_mode: 'HTML',
-                                photo: "https://www.gstatic.com/webp/gallery/2.jpg",
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [{ text: "User Management", callback_data: "adminUserManagement" }],
-                                        [{ text: "Bot Settings", callback_data: "adminBotSettings" }],
-                                        [{ text: "Analytics", callback_data: "adminAnalytics" }],
-                                        [{ text: "System Logs", callback_data: "adminSystemLogs" }],
-                                        [{ text: "Home", callback_data: "/home" }]
-                                    ]
-                                }
-                            }
-                        }]),
-                        // es
-                        JSON.stringify([{
-                            method: 'sendPhoto',
-                            payload: {
-                                caption: '<b>Panel de Administración</b>\n\n' +
-                                    'Bienvenido al Panel de Administración. Aquí puedes gestionar varios aspectos del bot y sus funcionalidades.\n\n' +
-                                    'Utiliza los botones de abajo para navegar por las funciones de administración.',
-                                parse_mode: 'HTML',
-                                photo: "https://www.gstatic.com/webp/gallery/2.jpg",
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [{ text: "Gestión de Usuarios", callback_data: "adminUserManagement" }],
-                                        [{ text: "Configuración del Bot", callback_data: "adminBotSettings" }],
-                                        [{ text: "Analítica", callback_data: "adminAnalytics" }],
-                                        [{ text: "Registros del Sistema", callback_data: "adminSystemLogs" }],
-                                        [{ text: "Inicio", callback_data: "/home" }]
-                                    ]
-                                }
-                            }
-                        }]),
-                        // french (fr)
-                        JSON.stringify([{
-                            method: 'sendPhoto',
-                            payload: {
-                                caption: '<b>Panneau d\'Administration</b>\n\n' +
-                                    'Bienvenue dans le Panneau d\'Administration. Ici, vous pouvez gérer divers aspects du bot et de ses fonctionnalités.\n\n' +
-                                    'Utilisez les boutons ci-dessous pour naviguer dans les fonctionnalités d\'administration.',
-                                parse_mode: 'HTML',
-                                photo: "https://www.gstatic.com/webp/gallery/2.jpg",
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [{ text: "Gestion des Utilisateurs", callback_data: "adminUserManagement" }],
-                                        [{ text: "Paramètres du Bot", callback_data: "adminBotSettings" }],
-                                        [{ text: "Analytique", callback_data: "adminAnalytics" }],
-                                        [{ text: "Journaux du Système", callback_data: "adminSystemLogs" }],
-                                        [{ text: "Accueil", callback_data: "/home" }]
-                                    ]
-                                }
-                            }
-                        }]),
-                        // AR
-                        JSON.stringify([{
-                            method: 'sendPhoto',
-                            payload: {
-                                caption: '<b>لوحة التحكم</b>\n\n' +
-                                    'مرحبًا بك في لوحة التحكم. هنا يمكنك إدارة جوانب مختلفة من الروبوت وميزاته.\n\n' +
-                                    'استخدم الأزرار أدناه للتنقل بين ميزات الإدارة.',
-                                parse_mode: 'HTML',
-                                photo: "https://www.gstatic.com/webp/gallery/2.jpg",
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [{ text: "إدارة المستخدمين", callback_data: "adminUserManagement" }],
-                                        [{ text: "إعدادات الروبوت", callback_data: "adminBotSettings" }],
-                                        [{ text: "تحليلات", callback_data: "adminAnalytics" }],
-                                        [{ text: "سجلات النظام", callback_data: "adminSystemLogs" }],
-                                        [{ text: "الصفحة الرئيسية", callback_data: "/home" }]
-                                    ]
-                                }
-                            }
-                        }]),
-                        // DE
-                        JSON.stringify([{
-                            method: 'sendPhoto',
-                            payload: {
-                                caption: '<b>Administrationsbereich</b>\n\n' +
-                                    'Willkommen im Administrationsbereich. Hier können Sie verschiedene Aspekte des Bots und seiner Funktionen verwalten.\n\n' +
-                                    'Verwenden Sie die Schaltflächen unten, um durch die Verwaltungsfunktionen zu navigieren.',
-                                parse_mode: 'HTML',
-                                photo: "https://www.gstatic.com/webp/gallery/2.jpg",
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [{ text: "Benutzerverwaltung", callback_data: "adminUserManagement" }],
-                                        [{ text: "Bot-Einstellungen", callback_data: "adminBotSettings" }],
-                                        [{ text: "Analytik", callback_data: "adminAnalytics" }],
-                                        [{ text: "Systemprotokolle", callback_data: "adminSystemLogs" }],
-                                        [{ text: "Startseite", callback_data: "/home" }]
-                                    ]
-                                }
-                            }
-                        }]),
-                        // IT
-                        JSON.stringify([{
-                            method: 'sendPhoto',
-                            payload: {
-                                caption: '<b>Area di Amministrazione</b>\n\n' +
-                                    'Benvenuto nell\'area di amministrazione. Qui puoi gestire vari aspetti del bot e delle sue funzionalità.\n\n' +
-                                    'Utilizza i pulsanti qui sotto per navigare tra le funzioni di amministrazione.',
-                                parse_mode: 'HTML',
-                                photo: "https://www.gstatic.com/webp/gallery/2.jpg",
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [{ text: "Gestione Utenti", callback_data: "adminUserManagement" }],
-                                        [{ text: "Impostazioni Bot", callback_data: "adminBotSettings" }],
-                                        [{ text: "Analitica", callback_data: "adminAnalytics" }],
-                                        [{ text: "Log di Sistema", callback_data: "adminSystemLogs" }],
-                                        [{ text: "Home", callback_data: "/home" }]
-                                    ]
-                                }
-                            }
-                        }]),
-                        // PT
-                        JSON.stringify([{
-                            method: 'sendPhoto',
-                            payload: {
-                                caption: '<b>Área de Administração</b>\n\n' +
-                                    'Bem-vindo à área de administração. Aqui você pode gerenciar vários aspectos do bot e suas funcionalidades.\n\n' +
-                                    'Use os botões abaixo para navegar pelas funções de administração.',
-                                parse_mode: 'HTML',
-                                photo: "https://www.gstatic.com/webp/gallery/2.jpg",
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [{ text: "Gerenciamento de Usuários", callback_data: "adminUserManagement" }],
-                                        [{ text: "Configurações do Bot", callback_data: "adminBotSettings" }],
-                                        [{ text: "Análise", callback_data: "adminAnalytics" }],
-                                        [{ text: "Logs do Sistema", callback_data: "adminSystemLogs" }],
-                                        [{ text: "Início", callback_data: "/home" }]
-                                    ]
-                                }
-                            }
-                        }]),
-                        // RU
-                        JSON.stringify([{
-                            method: 'sendPhoto',
-                            payload: {
-                                caption: '<b>Административная зона</b>\n\n' +
-                                    'Добро пожаловать в административную зону. Здесь вы можете управлять различными аспектами бота и его функциональностью.\n\n' +
-                                    'Используйте кнопки ниже, чтобы перейти к функциям администрирования.',
-                                parse_mode: 'HTML',
-                                photo: "https://www.gstatic.com/webp/gallery/2.jpg",
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [{ text: "Управление пользователями", callback_data: "adminUserManagement" }],
-                                        [{ text: "Настройки бота", callback_data: "adminBotSettings" }],
-                                        [{ text: "Аналитика", callback_data: "adminAnalytics" }],
-                                        [{ text: "Журнал системы", callback_data: "adminSystemLogs" }],
-                                        [{ text: "Главная", callback_data: "/home" }]
-                                    ]
-                                }
-                            }
-                        }]),
-                        // ZH
-                        JSON.stringify([{
-                            method: 'sendPhoto',
-                            payload: {
-                                caption: '<b>管理区域</b>\n\n' +
-                                    '欢迎来到管理区域。在这里，您可以管理机器人的各个方面及其功能。\n\n' +
-                                    '请使用下面的按钮浏览管理功能。',
-                                parse_mode: 'HTML',
-                                photo: "https://www.gstatic.com/webp/gallery/2.jpg",
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [{ text: "用户管理", callback_data: "adminUserManagement" }],
-                                        [{ text: "机器人设置", callback_data: "adminBotSettings" }],
-                                        [{ text: "分析", callback_data: "adminAnalytics" }],
-                                        [{ text: "系统日志", callback_data: "adminSystemLogs" }],
-                                        [{ text: "首页", callback_data: "/home" }]
-                                    ]
-                                }
-                            }
-                        }]),
-                        // JA
-                        JSON.stringify([{
-                            method: 'sendPhoto',
-                            payload: {
-                                caption: '<b>管理エリア</b>\n\n' +
-                                    '管理エリアへようこそ。ここでは、ボットのさまざまな側面と機能を管理できます。\n\n' +
-                                    '管理機能に移動するには、以下のボタンを使用してください。',
-                                parse_mode: 'HTML',
-                                photo: "https://www.gstatic.com/webp/gallery/2.jpg",
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [{ text: "ユーザー管理", callback_data: "adminUserManagement" }],
-                                        [{ text: "ボット設定", callback_data: "adminBotSettings" }],
-                                        [{ text: "分析", callback_data: "adminAnalytics" }],
-                                        [{ text: "システムログ", callback_data: "adminSystemLogs" }],
-                                        [{ text: "ホーム", callback_data: "/home" }]
-                                    ]
-                                }
-                            }
-                        }]),
-                        // KO
-                        JSON.stringify([{
-                            method: 'sendPhoto',
-                            payload: {
-                                caption: '<b>관리 영역</b>\n\n' +
-                                    '관리 영역에 오신 것을 환영합니다. 여기에서 봇의 다양한 측면과 기능을 관리할 수 있습니다.\n\n' +
-                                    '관리 기능으로 이동하려면 아래 버튼을 사용하세요.',
-                                parse_mode: 'HTML',
-                                photo: "https://www.gstatic.com/webp/gallery/2.jpg",
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [{ text: "사용자 관리", callback_data: "adminUserManagement" }],
-                                        [{ text: "봇 설정", callback_data: "adminBotSettings" }],
-                                        [{ text: "분석", callback_data: "adminAnalytics" }],
-                                        [{ text: "시스템 로그", callback_data: "adminSystemLogs" }],
-                                        [{ text: "홈", callback_data: "/home" }]
-                                    ]
-                                }
-                            }
-                        }]),
-                        // HE
-                        JSON.stringify([{
-                            method: 'sendPhoto',
-                            payload: {
-                                caption: '<b>אזור ניהול</b>\n\n' +
-                                    'ברוכים הבאים לאזור הניהול. כאן תוכלו לנהל את ההיבטים והפונקציות השונות של הבוט.\n\n' +
-                                    'כדי לעבור לפונקציות הניהול, השתמשו בכפתורים למטה.',
-                                parse_mode: 'HTML',
-                                photo: "https://www.gstatic.com/webp/gallery/2.jpg",
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [{ text: "ניהול משתמשים", callback_data: "adminUserManagement" }],
-                                        [{ text: "הגדרות בוט", callback_data: "adminBotSettings" }],
-                                        [{ text: "אנליטיקה", callback_data: "adminAnalytics" }],
-                                        [{ text: "יומני מערכת", callback_data: "adminSystemLogs" }],
-                                        [{ text: "בית", callback_data: "/home" }]
-                                    ]
-                                }
-                            }
-                        }])],
-                    ['/about_me',
-                        // default (en)
-                        JSON.stringify([
-                            {
-                                method: 'sendMessage',
-                                payload: {
-                                    text: '✨ About Me ✨\n\n',
-                                    parse_mode: 'HTML'
-                                }
-                            },
-                            {
-                                method: 'editMessageText',
-                                delay_ms: 500,
-                                payload: {
-                                    text: '✨ About Me ✨\n\n <blockquote>This bot is developed to showcase the capabilities of the Telegram Bot API. \n\n'
-                                        + 'It demonstrates how to send messages, photos, media groups, and interactive inline keyboards. \n\n'
-                                        + 'I\'m going to update this message with more details shortly... \n\n</blockquote>',
-                                    parse_mode: 'HTML'
-                                }
-                            },
-                            {
-                                method: 'editMessageMedia',
-                                delay_ms: 2000,
-                                payload: {
-                                    caption: '✨ About Me ✨\n\n <blockquote>This bot is developed to showcase the capabilities of the Telegram Bot API. \n\n'
-                                        + 'It demonstrates how to send messages, photos, media groups, and interactive inline keyboards. \n\n'
-                                        + 'I\'m going to update this message with more details shortly... \n\n</blockquote>'
-                                        + '<b>Here is an image to make it more interesting!</b>',
-                                    media: { type: 'photo', media: 'https://www.gstatic.com/webp/gallery/2.jpg' },
-                                    parse_mode: 'HTML'
-                                }
-                            },
-                            { "next": "#main_menu" }
-                        ])
-                    ],
-                    ['#main_menu',
-                        // default (en)
-                        JSON.stringify([{
-                            method: 'editMessageReplyMarkup',
-                            payload: {
-                                text: 'Main Menu:',
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [{ text: "🏠 Home", callback_data: "/home" }],
-                                        [{ text: "ℹ️ About", callback_data: "/about" }],
-                                        [{ text: "❓ Help", callback_data: "/help" }]
-                                    ]
-                                }
-                            }
-                        }])
-                    ],
-                    ['/help',
-                        // default (en)
-                        JSON.stringify([{
-                            method: 'sendPhoto',
-                            payload: {
-                                caption: '<b>Help & Support</b>\n\n' +
-                                    'Need assistance? Here are some resources to help you get started:\n\n' +
-                                    '1. <b>Getting Started Guide:</b> Learn how to use the bot effectively.\n' +
-                                    '2. <b>FAQ:</b> Find answers to common questions.\n' +
-                                    '3. <b>Contact Support:</b> Reach out to our support team for personalized help.\n\n' +
-                                    '4. <b>Report an Issue:</b> If you encounter any problems, please let us know so we can improve your experience.\n\n' +
-                                    'If you need assistance, feel free to reach out!\n\n',
-                                parse_mode: 'HTML',
-                                photo: "https://www.gstatic.com/webp/gallery/2.jpg",
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [{ text: "Getting Started", web_app: { url: "https://github.com/ilanlal/basic-telegram-bot-remastered#readme" } }],
-                                        [{ text: "Report an Issue", web_app: { url: "https://github.com/ilanlal/basic-telegram-bot-remastered/issues" } }],
-                                        [{ text: "Home", callback_data: "/home" }]
-                                    ]
-                                }
-                            }
-                        }])],
-                    ['/about',
-                        // default (en)
-                        JSON.stringify([{
-                            method: 'sendPhoto',
-                            payload: {
-                                caption: ' About This Bot\n\n'
-                                    + 'This bot is a demonstration of Telegram Bot API features including sending messages, photos, media groups, and inline keyboards.\n\n'
-                                    + 'It is designed to be a simple and easy-to-use bot for users to interact with.\n\n'
-                                    + 'Features include:\n\n'
-                                    + '1. Sending text messages with HTML formatting.\n'
-                                    + '2. Sending photos with captions and inline keyboards.\n'
-                                    + '3. Sending media groups (multiple photos) in a single message.\n'
-                                    + '4. Interactive inline keyboards for user engagement.\n\n'
-                                    + 'Feel free to explore and interact with the bot!',
-                                parse_mode: 'HTML',
-                                photo: "https://www.gstatic.com/webp/gallery/3.jpg",
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [{ text: "GitHub", web_app: { url: "https://github.com/ilanlal/basic-telegram-bot-remastered#readme" } }],
-                                        [{ text: "Home", callback_data: "start" }]
-                                    ]
-                                }
-                            }
-                        }])],
-                    ['/lang',
-                        // default (en)
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: 'I\'m a multilingual bot:'
-                                    + '\n\nSelect your preferred language / Seleccione su idioma preferido / Sélectionnez votre langue préférée / اختر لغتك المفضلة / Wählen Sie Ihre bevorzugte Sprache / Seleziona la tua lingua preferita / Escolha seu idioma preferido / Выберите предпочитаемый язык / 选择您喜欢的语言 / お好みの言語を選択してください / 선호하는 언어를 선택하세요 / בחר את השפה המועדפת עליך',
-                                parse_mode: 'HTML',
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [
-                                            { text: "English", callback_data: "/lang en" },
-                                            { text: "Español", callback_data: "/lang es" },
-                                            { text: "Français", callback_data: "/lang fr" },
-                                            { text: "العربية", callback_data: "/lang ar" },
-                                            { text: "Deutsch", callback_data: "/lang de" },
-                                            { text: "Italiano", callback_data: "/lang it" },
-                                            { text: "Português", callback_data: "/lang pt" },
-                                            { text: "Русский", callback_data: "/lang ru" },
-                                            { text: "中文", callback_data: "/lang zh" },
-                                            { text: "日本語", callback_data: "/lang ja" },
-                                            { text: "한국어", callback_data: "/lang ko" },
-                                            { text: "עברית", callback_data: "/lang he" }
-                                        ]
-                                    ]
-                                }
-                            }
-                        }])],
-                    ['/store',
-                        // default (en)
-                        JSON.stringify([{
-                            method: 'sendPhoto',
-                            payload: {
-                                caption: 'Welcome to the Store! Here you can find various products and services.',
-                                photo: "https://www.gstatic.com/webp/gallery/1.jpg",
-                                parse_mode: 'HTML',
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [{ text: "Category A", callback_data: "#categoryA" }],
-                                        [{ text: "Category B", callback_data: "#categoryB" }],
-                                        [{ text: "Category C", callback_data: "#categoryC" }],
-                                        [{ text: "Category D", callback_data: "#categoryD" }],
-                                        [{ text: "Category E", callback_data: "#categoryE" }],
-                                        [{ text: "Home", callback_data: "/home" }]
-                                    ]
-                                }
-                            }
-                        }])],
-                    ['#categoryA',
-                        // default (en)
-                        JSON.stringify([
-                            {
-                                method: 'sendMessage',
-                                payload: {
-                                    text: 'Welcome to Category A! Here you can find a variety of products and services tailored to your needs.',
-                                    parse_mode: 'HTML'
-                                }
-                            },
-                            {
-                                method: 'sendInvoice',
-                                payload: {
-                                    title: 'Product #1',
-                                    description: 'An amazing product that you will love! \n\n'
-                                        + 'This product is made from high-quality materials and offers great value for money.\n\n',
-                                    photo_url: "https://www.gstatic.com/webp/gallery/1.jpg",
-                                    photo_width: 240,
-                                    currency: 'XTR',
-                                    payload: 'custom_payload_123', // Custom payload for your reference
-                                    prices: JSON.stringify([
-                                        { label: 'Total', amount: 550 } // Amount in smallest units (e.g., cents)
-                                    ]),
-                                }
-                            }, {
-                                method: 'sendInvoice',
-                                payload: {
-                                    title: 'Product #2',
-                                    description: 'An amazing product that you will love! \n\n'
-                                        + 'This product is made from high-quality materials and offers great value for money.\n\n'
-                                        + 'Available in multiple colors and sizes.',
-                                    photo_url: "https://www.gstatic.com/webp/gallery/2.jpg",
-                                    photo_width: 240,
-                                    currency: 'XTR',
-                                    payload: 'custom_payload_124', // Custom payload for your reference
-                                    prices: JSON.stringify([
-                                        { label: 'Total', amount: 980 } // Amount in smallest units (e.g., cents)
-
-                                    ]),
-                                }
-                            },
-                            {
-                                method: 'sendInvoice',
-                                payload: {
-                                    title: 'Product #3',
-                                    description: 'An amazing product that you will love! \n\n'
-                                        + 'This product is made from high-quality materials and offers great value for money.\n\n'
-                                        + 'Shipping included.',
-                                    photo_url: "https://www.gstatic.com/webp/gallery/3.jpg",
-                                    photo_width: 240,
-                                    currency: 'XTR',
-                                    payload: 'custom_payload_125', // Custom payload for your reference
-                                    prices: JSON.stringify([
-                                        { label: 'Total', amount: 1200 } // Amount in smallest units (e.g., cents)
-                                    ]),
-                                }
-                            }, { "next": "/store" }
-                        ])],
-                    ['#categoryB',
-                        // default (en)
-                        JSON.stringify([
-                            {
-                                method: 'sendMessage',
-                                payload: {
-                                    text: 'Welcome to Category B! Here you can find a variety of products and services tailored to your needs.',
-                                    parse_mode: 'HTML'
-                                }
-                            },
-                            {
-                                method: 'sendInvoice',
-                                payload: {
-                                    title: 'Product #10',
-                                    description: 'An amazing product that you will love! \n\n'
-                                        + 'This product is made from high-quality materials and offers great value for money.\n\n',
-                                    photo_url: "https://www.gstatic.com/webp/gallery/1.jpg",
-                                    photo_width: 240,
-                                    currency: 'XTR',
-                                    payload: 'custom_payload_130', // Custom payload for your reference
-                                    prices: JSON.stringify([
-                                        { label: 'Total', amount: 450 } // Amount in smallest units (e.g., cents)
-                                    ]),
-                                }
-                            }, {
-                                method: 'sendInvoice',
-                                payload: {
-                                    title: 'Product #20',
-                                    description: 'An amazing product that you will love! \n\n'
-                                        + 'This product is made from high-quality materials and offers great value for money.\n\n',
-                                    photo_url: "https://www.gstatic.com/webp/gallery/2.jpg",
-                                    photo_width: 240,
-                                    currency: 'XTR',
-                                    payload: 'custom_payload_124', // Custom payload for your reference
-                                    prices: JSON.stringify([
-                                        { label: 'Total', amount: 45 } // Amount in smallest units (e.g., cents)
-                                    ]),
-                                }
-                            },
-                            {
-                                method: 'sendInvoice',
-                                payload: {
-                                    title: 'Product #30',
-                                    description: 'An amazing product that you will love! \n\n'
-                                        + 'This product is made from high-quality materials and offers great value for money.\n\n',
-                                    photo_url: "https://www.gstatic.com/webp/gallery/3.jpg",
-                                    photo_width: 240,
-                                    currency: 'XTR',
-                                    payload: 'custom_payload_125', // Custom payload for your reference
-                                    prices: JSON.stringify([
-                                        { label: 'Total', amount: 300 } // Amount in smallest units (e.g., cents)
-                                    ]),
-                                }
-                            }, { "next": "/store" }
-                        ])],
-                    ['#categoryC',
-                        // default (en)
-                        JSON.stringify([
-                            {
-                                method: 'sendMessage',
-                                payload: {
-                                    text: 'Welcome to Category C! Here you can find a variety of products and services tailored to your needs.',
-                                    parse_mode: 'HTML'
-                                }
-                            },
-                            {
-                                method: 'sendInvoice',
-                                payload: {
-                                    title: 'Product # 100',
-                                    description: 'An amazing product that you will love! \n\n'
-                                        + 'This product is made from high-quality materials and offers great value for money.\n\n',
-                                    photo_url: "https://www.gstatic.com/webp/gallery/1.jpg",
-                                    photo_width: 240,
-                                    currency: 'XTR',
-                                    payload: 'custom_payload_130', // Custom payload for your reference
-                                    prices: JSON.stringify([
-                                        { label: 'Total', amount: 1250 } // Amount in smallest units (e.g., cents)
-                                    ]),
-                                }
-                            }, {
-                                method: 'sendInvoice',
-                                payload: {
-                                    title: 'Product # 122',
-                                    description: 'An amazing product that you will love! \n\n'
-                                        + 'This product is made from high-quality materials and offers great value for money.\n\n',
-                                    photo_url: "https://www.gstatic.com/webp/gallery/2.jpg",
-                                    photo_width: 240,
-                                    currency: 'XTR',
-                                    payload: 'custom_payload_124', // Custom payload for your reference
-                                    prices: JSON.stringify([
-                                        { label: 'Total', amount: 5580 } // Amount in smallest units (e.g., cents)
-                                    ]),
-                                }
-                            },
-                            {
-                                method: 'sendInvoice',
-                                payload: {
-                                    title: 'Product # 33',
-                                    description: 'An amazing product that you will love! \n\n'
-                                        + 'This product is made from high-quality materials and offers great value for money.\n\n',
-                                    photo_url: "https://www.gstatic.com/webp/gallery/3.jpg",
-                                    photo_width: 240,
-                                    currency: 'XTR',
-                                    payload: 'custom_payload_125', // Custom payload for your reference
-                                    prices: JSON.stringify([
-                                        { label: 'Total', amount: 1200 } // Amount in smallest units (e.g., cents)
-                                    ]),
-                                }
-                            }, { "next": "/store" }
-                        ])],
-                    ['#categoryD',
-                        // default (en)
-                        JSON.stringify([
-                            {
-                                method: 'sendMessage',
-                                payload: {
-                                    text: 'Welcome to Category D! Here you can find a variety of products and services tailored to your needs.',
-                                    parse_mode: 'HTML'
-                                }
-                            },
-                            {
-                                method: 'sendInvoice',
-                                payload: {
-                                    title: 'Product #11',
-                                    description: 'An amazing product that you will love! \n\n'
-                                        + 'This product is made from high-quality materials and offers great value for money.\n\n',
-                                    photo_url: "https://www.gstatic.com/webp/gallery/1.jpg",
-                                    photo_width: 240,
-                                    currency: 'XTR',
-                                    payload: 'custom_payload_130', // Custom payload for your reference
-                                    prices: JSON.stringify([
-                                        { label: 'Total', amount: 123 } // Amount in smallest units (e.g., cents)
-                                    ]),
-                                }
-                            }, {
-                                method: 'sendInvoice',
-                                payload: {
-                                    title: 'Product #12',
-                                    description: 'An amazing product that you will love! \n\n'
-                                        + 'This product is made from high-quality materials and offers great value for money.\n\n',
-                                    photo_url: "https://www.gstatic.com/webp/gallery/2.jpg",
-                                    photo_width: 240,
-                                    currency: 'XTR',
-                                    payload: 'custom_payload_124', // Custom payload for your reference
-                                    prices: JSON.stringify([
-                                        { label: 'Total', amount: 550 } // Amount in smallest units (e.g., cents)
-                                    ]),
-                                }
-                            },
-                            {
-                                method: 'sendInvoice',
-                                payload: {
-                                    title: 'Product #13',
-                                    description: 'An amazing product that you will love! \n\n'
-                                        + 'This product is made from high-quality materials and offers great value for money.\n\n',
-                                    photo_url: "https://www.gstatic.com/webp/gallery/3.jpg",
-                                    photo_width: 240,
-                                    currency: 'XTR',
-                                    payload: 'custom_payload_125', // Custom payload for your reference
-                                    prices: JSON.stringify([
-                                        { label: 'Total', amount: 1200 } // Amount in smallest units (e.g., cents)
-                                    ]),
-                                }
-                            }, { "next": "/store" }
-                        ])],
-                    ['#categoryE',
-                        // default (en)
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: 'Welcome to Category E! Here you can find a variety of products and services tailored to your needs.',
-                                parse_mode: 'HTML'
-                            }
-                        }, {
-                            // send paid media as sample after invoice
-                            method: 'sendPaidMedia',
-                            payload: {
-                                protect_content: true,
-                                star_count: 1000,
-                                media: [
-                                    {
-                                        type: 'photo',
-                                        media: 'https://www.gstatic.com/webp/gallery/1.jpg',
-                                        caption: 'Thank you for your purchase! Here is your paid media content.'
-                                    }
-                                ]
-                            }
-                        },
-                        {
-                            // send paid media as sample after invoice
-                            method: 'sendPaidMedia',
-                            payload: {
-                                protect_content: true,
-                                star_count: 2400,
-                                media: [
-                                    {
-                                        type: 'photo',
-                                        media: 'https://www.gstatic.com/webp/gallery/3.jpg',
-                                        caption: 'Thank you for your purchase! Here is your paid media content.'
-                                    }
-                                ]
-                            }
-                        },
-                        {
-                            // send paid media as sample after invoice
-                            method: 'sendPaidMedia',
-                            payload: {
-                                protect_content: true,
-                                star_count: 1400,
-                                media: [
-                                    {
-                                        type: 'photo',
-                                        media: 'https://www.gstatic.com/webp/gallery/2.jpg',
-                                        caption: 'Thank you for your purchase! Here is your paid media content.'
-                                    }
-                                ]
-                            }
-                        }, { "next": "/store" }])],
-                    ['/apis',
-                        // default (en)
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: 'Here are some API features you can use:\n\n'
-                                    + '1. Send Messages\n'
-                                    + '2. Send Photos\n'
-                                    + '3. Send Media Groups\n'
-                                    + '4. Inline Keyboards\n\n'
-                                    + 'Feel free to explore and interact with the bot!',
-                                parse_mode: 'HTML',
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [{ text: "Message", callback_data: "#sendMessage" }],
-                                        [{ text: "Photo", callback_data: "#sendPhoto" }],
-                                        [{ text: "Media Group", callback_data: "#sendMediaGroup" }],
-                                        [{ text: "Inline Keyboard", callback_data: "#inlineKeyboard" }],
-                                        [{ text: "Send Poll", callback_data: "#sendPoll" }],
-                                        [{ text: "Send Quiz", callback_data: "#sendQuiz" }],
-                                        [{ text: "Home", callback_data: "/home" }]
-                                    ]
-                                }
-                            }
-                        }])],
-                    ['#sendMessage',
-                        // default (en)
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: 'Hello! This is a sample message. You can customize this message as needed. \n\n'
-                                    + 'Feel free to explore and interact with the bot!'
-                                    + '\n\n'
-                                    + 'When "parse_mode" is set to HTML or Markdown, you can use the following formatting options:\n\n'
-                                    + '<b>Bold</b>, <strong>Bold</strong>\n'
-                                    + '<i>Italic</i>, <em>Italic</em>\n'
-                                    + '<u>Underline</u>\n'
-                                    + '<s>Strikethrough</s>\n'
-                                    + '<code>Code</code>\n'
-                                    + '<blockquote> Sample Blockquote: \n'
-                                    + 'This is a simple bot that demonstrates the basic functionality of a Telegram bot.'
-                                    + 'It provides the following commands:\n\n'
-                                    + '</blockquote>'
-                                    + '<blockquote expandable> Sample Expandable Block: \n'
-                                    + 'This is a simple bot that demonstrates the basic functionality of a Telegram bot.'
-                                    + 'It provides the following commands:\n\n'
-                                    + '</blockquote>',
-                                parse_mode: 'HTML'
-                            }
-                        }])],
-                    ['#sendPhoto',
-                        // default (en)
-                        JSON.stringify([{
-                            method: 'sendPhoto',
-                            payload: {
-                                caption: 'Welcome! This is a sample photo with a caption. You can customize the caption as needed. \n\n',
-                                photo: "https://www.gstatic.com/webp/gallery/1.jpg",
-                                parse_mode: 'HTML'
-                            }
-                        }])],
-                    ['#sendMediaGroup',
-                        // default (en)
-                        JSON.stringify([{
-                            method: 'sendMediaGroup',
-                            payload: {
-                                media: [
-                                    {
-                                        type: 'photo',
-                                        media: 'https://www.gstatic.com/webp/gallery/1.jpg',
-                                        caption: 'Photo 1 <b>Bold</b>, <strong>Bold</strong>\n<i>Italic</i>, <em>Italic</em>\n<u>Underline</u>\n<s>Strikethrough</s>\n<code>Code</code>'
-                                    },
-                                    {
-                                        type: 'photo',
-                                        media: 'https://www.gstatic.com/webp/gallery/2.jpg',
-                                        caption: 'Photo 2 <b>Bold</b>, <strong>Bold</strong>\n<i>Italic</i>, <em>Italic</em>\n<u>Underline</u>\n<s>Strikethrough</s>\n<code>Code</code>'
-                                    },
-                                    {
-                                        type: 'photo',
-                                        media: 'https://www.gstatic.com/webp/gallery/3.jpg',
-                                        caption: 'Photo 3 <b>Bold</b>, <strong>Bold</strong>\n<i>Italic</i>, <em>Italic</em>\n<u>Underline</u>\n<s>Strikethrough</s>\n<code>Code</code>'
-                                    }
-                                ],
-                                parse_mode: 'HTML'
-                            }
-                        }])],
-                    ['#inlineKeyboard',
-                        // default (en)
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                chat_id: 'user_chat_id',
-                                text: 'Here are some sample inline keyboards you can use:',
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [
-                                            { text: "1x1 YouTube™", web_app: { url: "https://www.youtube.com" } }
-                                        ],
-                                        [
-                                            { text: "1x2", callback_data: "sample_keypad_1" },
-                                            { text: "1x2", callback_data: "sample_keypad_2" }
-                                        ],
-                                        [
-                                            { text: "1x3", callback_data: "sample_keypad_4" },
-                                            { text: "1x3", callback_data: "sample_keypad_5" },
-                                            { text: "1x3", callback_data: "sample_keypad_6" }
-                                        ],
-                                        [
-                                            { text: "1x4", callback_data: "sample_keypad_7" },
-                                            { text: "1x4", callback_data: "sample_keypad_8" },
-                                            { text: "1x4", callback_data: "sample_keypad_9" },
-                                            { text: "1x4", callback_data: "sample_keypad_10" }
-                                        ]
-                                    ],
-                                    resize_keyboard: true,
-                                    one_time_keyboard: true
-                                }
-                            }
-                        }])],
-                    ['#sendPoll',
-                        // default (en)
-                        JSON.stringify([{
-                            method: 'sendPoll',
-                            payload: {
-                                question: 'Which feature do you like the most in this bot?',
-                                question_parse_mode: 'HTML',
-                                options: JSON.stringify([
-                                    'Text Messages with HTML formatting',
-                                    'Photos with captions and inline keyboards',
-                                    'Media Groups (albums) with multiple photos',
-                                    'Interactive Inline Keyboards'
-                                ]),
-                                protect_content: true,
-                                open_period: 7,
-                                is_anonymous: false,
-                                explanation: 'Your feedback helps us improve the bot and add more exciting features!',
-                                explanation_parse_mode: 'HTML',
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [{ text: "🏠 Start", callback_data: "/home" }]
-                                    ]
-                                }
-                            }
-                        }])],
-                    ['#sendQuiz',
-                        // default (en)
-                        JSON.stringify([{
-                            method: 'sendPoll',
-                            payload: {
-                                question: 'What is the <b>main</b> advantage of using Interactive Inline Keyboards in Telegram bots? ✨',
-                                question_parse_mode: 'HTML',
-                                options: JSON.stringify([
-                                    'They allow sending larger files',
-                                    'They enable real-time user interaction',
-                                    'They improve message delivery speed',
-                                    'They support multimedia content'
-                                ]),
-                                protect_content: true,
-                                open_period: 7,
-                                is_anonymous: false,
-                                type: 'quiz',
-                                correct_option_id: 3,
-                                explanation: 'Interactive Inline Keyboards allow users to engage directly with the bot, making the experience more dynamic and user-friendly!',
-                                explanation_parse_mode: 'HTML',
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [{ text: "🏠 Start", callback_data: "/home" }]
-                                    ]
-                                }
-                            }
-                        }])],
-                    ['/payments',
-                        // default (en)
-                        JSON.stringify([
-                            {
-                                method: 'sendInvoice',
-                                payload: {
-                                    title: 'Sample Product',
-                                    description: 'This is a sample product for demonstration purposes.',
-                                    payload: 'sample_product_payload',
-                                    currency: 'XTR',
-                                    prices: JSON.stringify([
-                                        { label: 'Total', amount: 100 } // amount in the smallest units of the currency (e.g., cents)
-                                    ])
-                                }
-                            }, {
-                                // send paid media as sample after invoice
-                                method: 'sendPaidMedia',
-                                payload: {
-                                    protect_content: true,
-                                    star_count: 100,
-                                    media: [
-                                        {
-                                            type: 'photo',
-                                            media: 'https://www.gstatic.com/webp/gallery/1.jpg',
-                                            caption: 'Thank you for your purchase! Here is your paid media content.'
-                                        }
-                                    ]
-                                }
-                            }])
-                    ]
+                        }])]
                 ]
         }
     }
@@ -2955,113 +1276,59 @@ EMD.BasicAutomation = {
     pluralDisplayName: 'Basic Automations',
     sheet: (data = {}) => {
         return {
-            name: '✨ Basic',
+            name: EMD.Automation.sheet(data).name,
             columns: EMD.Automation.sheet(data).columns,
             sample_data:
                 [
+                    ['---- 📦 BASIC AUTOMATION SAMPLE DATA START ----',
+                        '---- 📦 BASIC AUTOMATION SAMPLE DATA START ----',
+                        '---- 📦 BASIC AUTOMATION SAMPLE DATA START ----',
+                        '---- 📦 BASIC AUTOMATION SAMPLE DATA START ----'],
                     ['_action_not_found_',
                         // default (en)
-                        JSON.stringify([{ "next": "#send_unknown_action_message" }, { "next": "#append_back_to_start_keyboard" }]),
-                        // es
-                        JSON.stringify([{ "next": "#send_unknown_action_message" }, { "next": "#append_back_to_start_keyboard" }]),
-                        // fr
-                        JSON.stringify([{ "next": "#send_unknown_action_message" }, { "next": "#append_back_to_start_keyboard" }]),
-                        // ar
-                        JSON.stringify([{ "next": "#send_unknown_action_message" }, { "next": "#append_back_to_start_keyboard" }]),
-                        // de
-                        JSON.stringify([{ "next": "#send_unknown_action_message" }, { "next": "#append_back_to_start_keyboard" }]),
-                        // it
-                        JSON.stringify([{ "next": "#send_unknown_action_message" }, { "next": "#append_back_to_start_keyboard" }]),
-                        // pt
-                        JSON.stringify([{ "next": "#send_unknown_action_message" }, { "next": "#append_back_to_start_keyboard" }]),
-                        // ru
-                        JSON.stringify([{ "next": "#send_unknown_action_message" }, { "next": "#append_back_to_start_keyboard" }]),
-                        // zh
-                        JSON.stringify([{ "next": "#send_unknown_action_message" }, { "next": "#append_back_to_start_keyboard" }]),
-                        // ja
-                        JSON.stringify([{ "next": "#send_unknown_action_message" }, { "next": "#append_back_to_start_keyboard" }]),
-                        // ko
-                        JSON.stringify([{ "next": "#send_unknown_action_message" }, { "next": "#append_back_to_start_keyboard" }]),
-                        // he
-                        JSON.stringify([{ "next": "#send_unknown_action_message" }, { "next": "#append_back_to_start_keyboard" }])
+                        JSON.stringify([
+                            { "next": "#remove_keyboard" },
+                            { "next": "#send_unknown_action_message" },
+                            { "next": "#append_main_menu_keyboard" }
+                        ])
                     ],
                     ['/start',
                         // default (en)
-                        JSON.stringify([{ "next": "#send_welcome_messages" }, { "next": "#append_main_menu_keyboard" }]),
-                        // es
-                        JSON.stringify([{ "next": "#send_welcome_messages" }, { "next": "#append_main_menu_keyboard" }]),
-                        // fr
-                        JSON.stringify([{ "next": "#send_welcome_messages" }, { "next": "#append_main_menu_keyboard" }]),
-                        // ar
-                        JSON.stringify([{ "next": "#send_welcome_messages" }, { "next": "#append_main_menu_keyboard" }]),
-                        // de
-                        JSON.stringify([{ "next": "#send_welcome_messages" }, { "next": "#append_main_menu_keyboard" }]),
-                        // it
-                        JSON.stringify([{ "next": "#send_welcome_messages" }, { "next": "#append_main_menu_keyboard" }]),
-                        // pt
-                        JSON.stringify([{ "next": "#send_welcome_messages" }, { "next": "#append_main_menu_keyboard" }]),
-                        // ru
-                        JSON.stringify([{ "next": "#send_welcome_messages" }, { "next": "#append_main_menu_keyboard" }]),
-                        // zh
-                        JSON.stringify([{ "next": "#send_welcome_messages" }, { "next": "#append_main_menu_keyboard" }]),
-                        // ja
-                        JSON.stringify([{ "next": "#send_welcome_messages" }, { "next": "#append_main_menu_keyboard" }]),
-                        // ko
-                        JSON.stringify([{ "next": "#send_welcome_messages" }, { "next": "#append_main_menu_keyboard" }]),
-                        // he
-                        JSON.stringify([{ "next": "#send_welcome_messages" }, { "next": "#append_main_menu_keyboard" }])
+                        JSON.stringify([
+                            { "next": "#remove_keyboard" },
+                            { "next": "#send_welcome_messages" },
+                            { "next": "#append_main_menu_keyboard" }
+                        ])
                     ],
                     ['/help',
                         // default (en)
-                        JSON.stringify([{ "next": "#send_help_message" }, { "next": "#append_back_to_start_keyboard" }]),
-                        // es
-                        JSON.stringify([{ "next": "#send_help_message" }, { "next": "#append_back_to_start_keyboard" }]),
-                        // fr
-                        JSON.stringify([{ "next": "#send_help_message" }, { "next": "#append_back_to_start_keyboard" }]),
-                        // ar
-                        JSON.stringify([{ "next": "#send_help_message" }, { "next": "#append_back_to_start_keyboard" }]),
-                        // de
-                        JSON.stringify([{ "next": "#send_help_message" }, { "next": "#append_back_to_start_keyboard" }]),
-                        // it
-                        JSON.stringify([{ "next": "#send_help_message" }, { "next": "#append_back_to_start_keyboard" }]),
-                        // pt
-                        JSON.stringify([{ "next": "#send_help_message" }, { "next": "#append_back_to_start_keyboard" }]),
-                        // ru
-                        JSON.stringify([{ "next": "#send_help_message" }, { "next": "#append_back_to_start_keyboard" }]),
-                        // zh
-                        JSON.stringify([{ "next": "#send_help_message" }, { "next": "#append_back_to_start_keyboard" }]),
-                        // ja
-                        JSON.stringify([{ "next": "#send_help_message" }, { "next": "#append_back_to_start_keyboard" }]),
-                        // ko
-                        JSON.stringify([{ "next": "#send_help_message" }, { "next": "#append_back_to_start_keyboard" }]),
-                        // he
-                        JSON.stringify([{ "next": "#send_help_message" }, { "next": "#append_back_to_start_keyboard" }])
+                        JSON.stringify([
+                            { "next": "#remove_keyboard" },
+                            { "next": "#send_help_message" },
+                            { "next": "#send_about_git_message" },
+                            { "next": "#append_main_menu_keyboard" }
+                        ])
                     ],
                     ['/about',
                         // default (en)
-                        JSON.stringify([{ "next": "#send_about_message" }, { "next": "#append_back_to_start_keyboard" }]),
-                        // es
-                        JSON.stringify([{ "next": "#send_about_message" }, { "next": "#append_back_to_start_keyboard" }]),
-                        // fr
-                        JSON.stringify([{ "next": "#send_about_message" }, { "next": "#append_back_to_start_keyboard" }]),
-                        // ar
-                        JSON.stringify([{ "next": "#send_about_message" }, { "next": "#append_back_to_start_keyboard" }]),
-                        // de
-                        JSON.stringify([{ "next": "#send_about_message" }, { "next": "#append_back_to_start_keyboard" }]),
-                        // it
-                        JSON.stringify([{ "next": "#send_about_message" }, { "next": "#append_back_to_start_keyboard" }]),
-                        // pt
-                        JSON.stringify([{ "next": "#send_about_message" }, { "next": "#append_back_to_start_keyboard" }]),
-                        // ru
-                        JSON.stringify([{ "next": "#send_about_message" }, { "next": "#append_back_to_start_keyboard" }]),
-                        // zh
-                        JSON.stringify([{ "next": "#send_about_message" }, { "next": "#append_back_to_start_keyboard" }]),
-                        // ja
-                        JSON.stringify([{ "next": "#send_about_message" }, { "next": "#append_back_to_start_keyboard" }]),
-                        // ko
-                        JSON.stringify([{ "next": "#send_about_message" }, { "next": "#append_back_to_start_keyboard" }]),
-                        // he
-                        JSON.stringify([{ "next": "#send_about_message" }, { "next": "#append_back_to_start_keyboard" }])
+                        JSON.stringify([
+                            { "next": "#remove_keyboard" },
+                            { "next": "#send_about_message" },
+                            { "next": "#send_about_opensource_message" },
+                            { "next": "#send_privacy_security_message" },
+                            { "next": "#send_how_to_contribute_message" },
+                            { "next": "#append_main_menu_keyboard" }
+                        ])
+                    ],
+                    ['/show_me_love',
+                        // default (en)
+                        JSON.stringify([
+                            { "next": "#remove_keyboard" },
+                            { "next": "#send_about_opensource_message" },
+                            { "next": "#send_donation_message" },
+                            { "next": "#send_show_me_love_invoice" },
+                            { "next": "#send_show_me_love_message" },
+                            { "next": "#append_main_menu_keyboard" }])
                     ],
                     ['#send_welcome_messages',
                         // default (en)
@@ -3255,220 +1522,25 @@ EMD.BasicAutomation = {
                         JSON.stringify([{
                             method: 'sendMessage',
                             payload: {
-                                text: '🤖 <b>Basic Telegram Bot Remastered</b> is a simple yet powerful Telegram bot built using Google Apps Script. It showcases various features of the Telegram Bot API, allowing you to send messages, photos, media groups, and interactive inline keyboards with ease.\n\n'
+                                text: 'Welcome to <b>Help & Support</b> ⁉️ \n\n'
+                                    + 'Here are some resources to assist you:\n\n'
                                     + 'To get started, simply use the /start command. For assistance, use /help to access helpful resources and support options.\n\n'
                                     + 'Feel free to explore and customize the bot to suit your needs!\n\n',
                                 parse_mode: 'HTML'
                             }
-                        }]),
-                        // es
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: '🤖 <b>Basic Telegram Bot Remastered</b> es un bot de Telegram simple pero potente construido con Google Apps Script. Muestra varias características de la API de Bot de Telegram, lo que te permite enviar mensajes, fotos, grupos multimedia y teclados en línea interactivos con facilidad.\n\n'
-                                    + 'Para comenzar, simplemente usa el comando /start. Para obtener ayuda, usa /help para acceder a recursos útiles y opciones de soporte.\n\n'
-                                    + '¡Siéntete libre de explorar y personalizar el bot para adaptarlo a tus necesidades!\n\n',
-                                parse_mode: 'HTML'
-                            }
-                        }]),
-                        // fr
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: '🤖 <b>Basic Telegram Bot Remastered</b> est un bot Telegram simple mais puissant construit avec Google Apps Script. Il présente diverses fonctionnalités de l\'API Bot de Telegram, vous permettant d\'envoyer des messages, des photos, des groupes multimédias et des claviers en ligne interactifs en toute simplicité.\n\n'
-                                    + 'Pour commencer, utilisez simplement la commande /start. Pour obtenir de l\'aide, utilisez /help pour accéder à des ressources utiles et des options de support.\n\n'
-                                    + 'N\'hésitez pas à explorer et à personnaliser le bot selon vos besoins !\n\n',
-                                parse_mode: 'HTML'
-                            }
-                        }]),
-                        // ar
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: '🤖 <b>Basic Telegram Bot Remastered</b> هو بوت تيليجرام بسيط ولكنه قوي تم بناؤه باستخدام Google Apps Script. إنه يعرض ميزات مختلفة من واجهة برمجة تطبيقات بوت تيليجرام، مما يتيح لك إرسال الرسائل، الصور، المجموعات الإعلامية، ولوحات المفاتيح المضمنة التفاعلية بسهولة.\n\n'
-                                    + 'لبدء الاستخدام، ما عليك سوى استخدام الأمر /start. للحصول على المساعدة، استخدم /help للوصول إلى الموارد المفيدة وخيارات الدعم.\n\n'
-                                    + 'لا تتردد في استكشاف البوت وتخصيصه ليناسب احتياجاتك!\n\n',
-                                parse_mode: 'HTML'
-                            }
-                        }]),
-                        // de
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: '🤖 <b>Basic Telegram Bot Remastered</b> ist ein einfacher, aber leistungsstarker Telegram-Bot, der mit Google Apps Script erstellt wurde. Er zeigt verschiedene Funktionen der Telegram Bot API und ermöglicht es dir, Nachrichten, Fotos, Mediengruppen und interaktive Inline-Tastaturen mühelos zu senden.\n\n'
-                                    + 'Um loszulegen, verwende einfach den Befehl /start. Für Unterstützung verwende /help, um auf hilfreiche Ressourcen und Support-Optionen zuzugreifen.\n\n'
-                                    + 'Fühle dich frei, den Bot zu erkunden und anzupassen, um deinen Bedürfnissen gerecht zu werden!\n\n',
-                                parse_mode: 'HTML'
-                            }
-                        }]),
-                        // it
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: '🤖 <b>Basic Telegram Bot Remastered</b> è un bot di Telegram semplice ma potente costruito con Google Apps Script. Mostra varie funzionalità dell\'API Bot di Telegram, permettendoti di inviare messaggi, foto, gruppi multimediali e tastiere inline interattive con facilità.\n\n'
-                                    + 'Per iniziare, usa semplicemente il comando /start. Per assistenza, usa /help per accedere a risorse utili e opzioni di supporto.\n\n'
-                                    + 'Sentiti libero di esplorare e personalizzare il bot in base alle tue esigenze!\n\n',
-                                parse_mode: 'HTML'
-                            }
-                        }]),
-                        // pt
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: '🤖 <b>Basic Telegram Bot Remastered</b> é um bot de Telegram simples, mas poderoso, construído com Google Apps Script. Ele exibe várias funcionalidades da API do Bot do Telegram, permitindo que você envie mensagens, fotos, grupos de mídia e teclados inline interativos com facilidade.\n\n'
-                                    + 'Para começar, basta usar o comando /start. Para obter ajuda, use /help para acessar recursos úteis e opções de suporte.\n\n'
-                                    + 'Sinta-se à vontade para explorar e personalizar o bot de acordo com suas necessidades!\n\n',
-                                parse_mode: 'HTML'
-                            }
-                        }]),
-                        // ru
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: '🤖 <b>Basic Telegram Bot Remastered</b> — это простой, но мощный бот Telegram, созданный с помощью Google Apps Script. Он демонстрирует различные функции API бота Telegram, позволяя вам легко отправлять сообщения, фотографии, медиагруппы и интерактивные встроенные клавиатуры.\n\n'
-                                    + 'Чтобы начать, просто используйте команду /start. Для получения помощи используйте /help, чтобы получить доступ к полезным ресурсам и вариантам поддержки.\n\n'
-                                    + 'Не стесняйтесь исследовать и настраивать бота в соответствии с вашими потребностями!\n\n',
-                                parse_mode: 'HTML'
-                            }
-                        }]),
-                        // zh
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: '🤖 <b>Basic Telegram Bot Remastered</b> 是一个简单而强大的 Telegram 机器人，使用 Google Apps Script 构建。它展示了 Telegram 机器人 API 的各种功能，使您能够轻松发送消息、照片、媒体组和交互式内联键盘。\n\n'
-                                    + '要开始使用，只需使用 /start 命令。需要帮助时，请使用 /help 访问有用的资源和支持选项。\n\n'
-                                    + '欢迎随时探索并根据您的需求自定义机器人！\n\n',
-                                parse_mode: 'HTML'
-                            }
-                        }]),
-                        // ja
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: '🤖 <b>Basic Telegram Bot Remastered</b> は、Google Apps Script を使用して構築されたシンプルで強力な Telegram ボットです。Telegram ボット API のさまざまな機能を紹介し、メッセージ、写真、メディアグループ、インタラクティブなインラインキーボードを簡単に送信できるようにします。\n\n'
-                                    + '始めるには、/start コマンドを使用してください。サポートが必要な場合は、/help を使用して役立つリソースとサポートオプションにアクセスしてください。\n\n'
-                                    + 'ご自由にボットを探索し、ニーズに応じてカスタマイズしてください！\n\n',
-                                parse_mode: 'HTML'
-                            }
-                        }]),
-                        // ko
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: '🤖 <b>Basic Telegram Bot Remastered</b>는 Google Apps Script를 사용하여 구축된 간단하면서도 강력한 Telegram 봇입니다. Telegram 봇 API의 다양한 기능을 보여주며 메시지, 사진, 미디어 그룹 및 대화형 인라인 키보드를 쉽게 보낼 수 있습니다.\n\n'
-                                    + '시작하려면 /start 명령을 사용하세요. 도움이 필요하면 /help를 사용하여 유용한 리소스와 지원 옵션에 액세스하세요.\n\n'
-                                    + '자유롭게 봇을 탐색하고 필요에 따라 맞춤 설정하세요!\n\n',
-                                parse_mode: 'HTML'
-                            }
-                        }]),
-                        // he
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: '🤖 <b>Basic Telegram Bot Remastered</b> הוא בוט טלגרם פשוט אך עוצמתי שנבנה עם Google Apps Script. הוא מציג פונקציות שונות של API הבוט של טלגרם, ומאפשר לך לשלוח הודעות, תמונות, קבוצות מדיה ומקלדות אינליין אינטראקטיביות בקלות.\n\n'
-                                    + 'כדי להתחיל, פשוט השתמש בפקודה /start. לקבלת עזרה, השתמש ב-/help כדי לגשת למשאבים מועילים ואפשרויות תמיכה.\n\n'
-                                    + 'אתה מוזמן לחקור ולהתאים אישית את הבוט לפי הצרכים שלך!\n\n',
-                                parse_mode: 'HTML'
-                            }
-                        }]),
+                        }])
                     ],
                     ['#send_about_message',
                         // default (en)
                         JSON.stringify([{
                             method: 'sendMessage',
                             payload: {
-                                text: 'This is a sample Telegram bot built using Google Apps Script. It demonstrates various features of the Telegram Bot API including sending messages, photos, media groups, and inline keyboards.',
+                                text: 'Welcome to <b>About</b>!\n\n'
+                                    + 'I am a simple yet powerful Telegram bot built with Google Apps Script. \n\n'
+                                    + 'I showcase various features of the Telegram Bot API, allowing you to send messages, photos, media groups, and interactive inline keyboards with ease.\n\n',
                                 parse_mode: 'HTML'
                             }
                         }]),
-                        // es
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: 'Este es un bot de Telegram de ejemplo construido con Google Apps Script. Demuestra varias características de la API de Bot de Telegram, incluyendo el envío de mensajes, fotos, grupos multimedia y teclados en línea.',
-                                parse_mode: 'HTML'
-                            }
-                        }]),
-                        // fr
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: 'Ceci est un bot Telegram d\'exemple construit avec Google Apps Script. Il démontre diverses fonctionnalités de l\'API Bot de Telegram, y compris l\'envoi de messages, de photos, de groupes multimédias et de claviers en ligne.',
-                                parse_mode: 'HTML'
-                            }
-                        }]),
-                        // ar
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: 'هذا بوت تيليجرام تجريبي تم بناؤه باستخدام Google Apps Script. إنه يوضح ميزات مختلفة من واجهة برمجة تطبيقات بوت تيليجرام بما في ذلك إرسال الرسائل، الصور، المجموعات الإعلامية، ولوحات المفاتيح المضمنة.',
-                                parse_mode: 'HTML'
-                            }
-                        }]),
-                        // de
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: 'Dies ist ein Beispiel für einen Telegram-Bot, der mit Google Apps Script erstellt wurde. Er demonstriert verschiedene Funktionen der Telegram Bot API, einschließlich dem Senden von Nachrichten, Fotos, Mediengruppen und Inline-Tastaturen.',
-                                parse_mode: 'HTML'
-                            }
-                        }]),
-                        // it
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: 'Questo è un bot di Telegram di esempio costruito con Google Apps Script. Dimostra varie funzionalità dell\'API Bot di Telegram, inclusi l\'invio di messaggi, foto, gruppi multimediali e tastiere inline.',
-                                parse_mode: 'HTML'
-                            }
-                        }]),
-                        // pt
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: 'Este é um bot de Telegram de exemplo construído com Google Apps Script. Ele demonstra várias funcionalidades da API do Bot do Telegram, incluindo o envio de mensagens, fotos, grupos de mídia e teclados inline.',
-                                parse_mode: 'HTML'
-                            }
-                        }]),
-                        // ru
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: 'Это пример бота Telegram, созданного с помощью Google Apps Script. Он демонстрирует различные функции API бота Telegram, включая отправку сообщений, фотографий, медиагрупп и встроенных клавиатур.',
-                                parse_mode: 'HTML'
-                            }
-                        }]),
-                        // zh
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: '这是一个使用 Google Apps Script 构建的 Telegram 机器人示例。它演示了 Telegram 机器人 API 的各种功能，包括发送消息、照片、媒体组和内联键盘。',
-                                parse_mode: 'HTML'
-                            }
-                        }]),
-                        // ja
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: 'これは Google Apps Script を使用して構築された Telegram ボットの例です。メッセージ、写真、メディアグループ、インラインキーボードの送信など、Telegram ボット API のさまざまな機能を示しています。',
-                                parse_mode: 'HTML'
-                            }
-                        }]),
-                        // ko
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: '이것은 Google Apps Script를 사용하여 구축된 Telegram 봇의 예입니다. 메시지, 사진, 미디어 그룹 및 인라인 키보드 전송을 포함하여 Telegram 봇 API의 다양한 기능을 보여줍니다.',
-                                parse_mode: 'HTML'
-                            }
-                        }]),
-                        // he
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: 'זהו דוגמה לבוט טלגרם שנבנה עם Google Apps Script. הוא מדגים פונקציות שונות של API הבוט של טלגרם, כולל שליחת הודעות, תמונות, קבוצות מדיה ומקלדות אינליין.',
-                                parse_mode: 'HTML'
-                            }
-                        }])
                     ],
                     ['#send_unknown_action_message',
                         // default (en)
@@ -3575,8 +1647,16 @@ EMD.BasicAutomation = {
                             payload: {
                                 reply_markup: {
                                     inline_keyboard: [
-                                        [{ text: "ℹ️ About", callback_data: "/about" }],
-                                        [{ text: "❓ Help", callback_data: "/help" }]
+                                        [
+                                            { text: "🪬 Run Security Checks", callback_data: "/security_checks" }
+                                        ],
+                                        [
+                                            { text: "💖 Show Me Love", callback_data: "/show_me_love" }
+                                        ],
+                                        [
+                                            { text: "ℹ️ About", callback_data: "/about" },
+                                            { text: "❓ Help", callback_data: "/help" }
+                                        ]
                                     ]
                                 }
                             }
@@ -3587,8 +1667,15 @@ EMD.BasicAutomation = {
                             payload: {
                                 reply_markup: {
                                     inline_keyboard: [
-                                        [{ text: "ℹ️ Acerca de", callback_data: "/about" }],
-                                        [{ text: "❓ Ayuda", callback_data: "/help" }]
+                                        [
+                                            { text: "🪬 Ejecutar comprobaciones de seguridad", callback_data: "/security_checks" }
+                                        ],
+                                        [
+                                            { text: "💖 Muéstrame amor", callback_data: "/show_me_love" }],
+                                        [
+                                            { text: "ℹ️ Acerca de", callback_data: "/about" },
+                                            { text: "❓ Ayuda", callback_data: "/help" }
+                                        ]
                                     ]
                                 }
                             }
@@ -3599,8 +1686,15 @@ EMD.BasicAutomation = {
                             payload: {
                                 reply_markup: {
                                     inline_keyboard: [
-                                        [{ text: "ℹ️ À propos", callback_data: "/about" }],
-                                        [{ text: "❓ Aide", callback_data: "/help" }]
+                                        [
+                                            { text: "🪬 Exécuter les vérifications de sécurité", callback_data: "/security_checks" }
+                                        ],
+                                        [
+                                            { text: "💖 Montre-moi de l'amour", callback_data: "/show_me_love" }],
+                                        [
+                                            { text: "ℹ️ À propos", callback_data: "/about" },
+                                            { text: "❓ Aide", callback_data: "/help" }
+                                        ]
                                     ]
                                 }
                             }
@@ -3611,8 +1705,15 @@ EMD.BasicAutomation = {
                             payload: {
                                 reply_markup: {
                                     inline_keyboard: [
-                                        [{ text: "ℹ️ حول", callback_data: "/about" }],
-                                        [{ text: "❓ مساعدة", callback_data: "/help" }]
+                                        [
+                                            { text: "🪬 تشغيل فحوصات الأمان", callback_data: "/security_checks" }
+                                        ],
+                                        [
+                                            { text: "💖 أرني الحب", callback_data: "/show_me_love" }],
+                                        [
+                                            { text: "ℹ️ حول", callback_data: "/about" },
+                                            { text: "❓ مساعدة", callback_data: "/help" }
+                                        ]
                                     ]
                                 }
                             }
@@ -3623,8 +1724,15 @@ EMD.BasicAutomation = {
                             payload: {
                                 reply_markup: {
                                     inline_keyboard: [
-                                        [{ text: "ℹ️ Über", callback_data: "/about" }],
-                                        [{ text: "❓ Hilfe", callback_data: "/help" }]
+                                        [
+                                            { text: "🪬 Sicherheitsprüfungen durchführen", callback_data: "/security_checks" }
+                                        ],
+                                        [
+                                            { text: "💖 Zeig mir Liebe", callback_data: "/show_me_love" }],
+                                        [
+                                            { text: "ℹ️ Über", callback_data: "/about" },
+                                            { text: "❓ Hilfe", callback_data: "/help" }
+                                        ]
                                     ]
                                 }
                             }
@@ -3635,8 +1743,15 @@ EMD.BasicAutomation = {
                             payload: {
                                 reply_markup: {
                                     inline_keyboard: [
-                                        [{ text: "ℹ️ Informazioni", callback_data: "/about" }],
-                                        [{ text: "❓ Aiuto", callback_data: "/help" }]
+                                        [
+                                            { text: "🪬 Esegui controlli di sicurezza", callback_data: "/security_checks" }
+                                        ],
+                                        [
+                                            { text: "💖 Mostrami amore", callback_data: "/show_me_love" }],
+                                        [
+                                            { text: "ℹ️ Informazioni", callback_data: "/about" },
+                                            { text: "❓ Aiuto", callback_data: "/help" }
+                                        ]
                                     ]
                                 }
                             }
@@ -3647,8 +1762,15 @@ EMD.BasicAutomation = {
                             payload: {
                                 reply_markup: {
                                     inline_keyboard: [
-                                        [{ text: "ℹ️ Sobre", callback_data: "/about" }],
-                                        [{ text: "❓ Ajuda", callback_data: "/help" }]
+                                        [
+                                            { text: "🪬 Execute security checks", callback_data: "/security_checks" }
+                                        ],
+                                        [
+                                            { text: "💖 Mostre-me amor", callback_data: "/show_me_love" }],
+                                        [
+                                            { text: "ℹ️ Sobre", callback_data: "/about" },
+                                            { text: "❓ Ajuda", callback_data: "/help" }
+                                        ]
                                     ]
                                 }
                             }
@@ -3659,8 +1781,15 @@ EMD.BasicAutomation = {
                             payload: {
                                 reply_markup: {
                                     inline_keyboard: [
-                                        [{ text: "ℹ️ О боте", callback_data: "/about" }],
-                                        [{ text: "❓ Помощь", callback_data: "/help" }]
+                                        [
+                                            { text: "🪬 Выполнить проверки безопасности", callback_data: "/security_checks" }
+                                        ],
+                                        [
+                                            { text: "💖 Покажи мне любовь", callback_data: "/show_me_love" }],
+                                        [
+                                            { text: "ℹ️ О боте", callback_data: "/about" },
+                                            { text: "❓ Помощь", callback_data: "/help" }
+                                        ]
                                     ]
                                 }
                             }
@@ -3671,8 +1800,15 @@ EMD.BasicAutomation = {
                             payload: {
                                 reply_markup: {
                                     inline_keyboard: [
-                                        [{ text: "ℹ️ 关于", callback_data: "/about" }],
-                                        [{ text: "❓ 帮助", callback_data: "/help" }]
+                                        [
+                                            { text: "🪬 执行安全检查", callback_data: "/security_checks" }
+                                        ],
+                                        [
+                                            { text: "💖 给我爱", callback_data: "/show_me_love" }],
+                                        [
+                                            { text: "ℹ️ 关于", callback_data: "/about" },
+                                            { text: "❓ 帮助", callback_data: "/help" }
+                                        ]
                                     ]
                                 }
                             }
@@ -3683,8 +1819,15 @@ EMD.BasicAutomation = {
                             payload: {
                                 reply_markup: {
                                     inline_keyboard: [
-                                        [{ text: "ℹ️ 約", callback_data: "/about" }],
-                                        [{ text: "❓ ヘルプ", callback_data: "/help" }]
+                                        [
+                                            { text: "🪬 セキュリティチェックを実行する", callback_data: "/security_checks" }
+                                        ],
+                                        [
+                                            { text: "💖 愛を見せて", callback_data: "/show_me_love" }],
+                                        [
+                                            { text: "ℹ️ 約", callback_data: "/about" },
+                                            { text: "❓ ヘルプ", callback_data: "/help" }
+                                        ]
                                     ]
                                 }
                             }
@@ -3695,8 +1838,15 @@ EMD.BasicAutomation = {
                             payload: {
                                 reply_markup: {
                                     inline_keyboard: [
-                                        [{ text: "ℹ️ 정보", callback_data: "/about" }],
-                                        [{ text: "❓ 도움말", callback_data: "/help" }]
+                                        [
+                                            { text: "🪬 보안 검사 실행", callback_data: "/security_checks" }
+                                        ],
+                                        [
+                                            { text: "💖 사랑을 보여줘", callback_data: "/show_me_love" }],
+                                        [
+                                            { text: "ℹ️ 정보", callback_data: "/about" },
+                                            { text: "❓ 도움말", callback_data: "/help" }
+                                        ]
                                     ]
                                 }
                             }
@@ -3707,8 +1857,15 @@ EMD.BasicAutomation = {
                             payload: {
                                 reply_markup: {
                                     inline_keyboard: [
-                                        [{ text: "ℹ️ אודות", callback_data: "/about" }],
-                                        [{ text: "❓ עזרה", callback_data: "/help" }]
+                                        [
+                                            { text: "🪬 הפעל בדיקות אבטחה", callback_data: "/security_checks" }
+                                        ],
+                                        [
+                                            { text: "💖 תראה לי אהבה", callback_data: "/show_me_love" }],
+                                        [
+                                            { text: "ℹ️ אודות", callback_data: "/about" },
+                                            { text: "❓ עזרה", callback_data: "/help" }
+                                        ]
                                     ]
                                 }
                             }
@@ -3865,9 +2022,11 @@ EMD.BasicAutomation = {
                         JSON.stringify([{
                             method: 'editMessageReplyMarkup',
                             payload: {
-                                reply_markup: { remove_keyboard: true }
+                                reply_markup: {
+                                    inline_keyboard: [[]]
+                                }
                             }
-                        }]),
+                        }])
                     ],
                     ['#send_about_git_message',
                         // default (en)
@@ -3875,7 +2034,7 @@ EMD.BasicAutomation = {
                             method: 'sendMessage',
                             payload: {
                                 text: 'You can find the source code of this bot on GitHub:\n\n'
-                                    + '<a href="https://github.com/ilanlal/basic-telegram-bot-remastered/blob/0b896f3f8c4d47073fb49672bea81eff771b5ee4/src/config/EMD.js#L1010">https://github.com/ilanlal/basic-telegram-bot-remastered</a>',
+                                    + '<a href="' + EMD.GIT_REPO_URL + '#L3872">' + EMD.GIT_REPO_URL + '</a>',
                                 parse_mode: 'HTML'
                             }
                         }]),
@@ -3884,7 +2043,7 @@ EMD.BasicAutomation = {
                             method: 'sendMessage',
                             payload: {
                                 text: 'Puedes encontrar el código fuente de este bot en GitHub:\n\n'
-                                    + '<a href="https://github.com/ilanlal/basic-telegram-bot-remastered/blob/0b896f3f8c4d47073fb49672bea81eff771b5ee4/src/config/EMD.js#L1010">https://github.com/ilanlal/basic-telegram-bot-remastered</a>',
+                                    + '<a href="' + EMD.GIT_REPO_URL + '#L3872">' + EMD.GIT_REPO_URL + '</a>',
                                 parse_mode: 'HTML'
                             }
                         }]),
@@ -3893,7 +2052,7 @@ EMD.BasicAutomation = {
                             method: 'sendMessage',
                             payload: {
                                 text: 'Vous pouvez trouver le code source de ce bot sur GitHub:\n\n'
-                                    + '<a href="https://github.com/ilanlal/basic-telegram-bot-remastered/blob/0b896f3f8c4d47073fb49672bea81eff771b5ee4/src/config/EMD.js#L1010">https://github.com/ilanlal/basic-telegram-bot-remastered</a>',
+                                    + '<a href="' + EMD.GIT_REPO_URL + '#L3872">' + EMD.GIT_REPO_URL + '</a>',
                                 parse_mode: 'HTML'
                             }
                         }]),
@@ -3902,7 +2061,7 @@ EMD.BasicAutomation = {
                             method: 'sendMessage',
                             payload: {
                                 text: 'يمكنك العثور على الشفرة المصدرية لهذا البوت على GitHub:\n\n'
-                                    + '<a href="https://github.com/ilanlal/basic-telegram-bot-remastered/blob/0b896f3f8c4d47073fb49672bea81eff771b5ee4/src/config/EMD.js#L1010">https://github.com/ilanlal/basic-telegram-bot-remastered</a>',
+                                    + '<a href="' + EMD.GIT_REPO_URL + '#L3872">' + EMD.GIT_REPO_URL + '</a>',
                                 parse_mode: 'HTML'
                             }
                         }]),
@@ -3911,7 +2070,7 @@ EMD.BasicAutomation = {
                             method: 'sendMessage',
                             payload: {
                                 text: 'Sie können den Quellcode dieses Bots auf GitHub finden:\n\n'
-                                    + '<a href="https://github.com/ilanlal/basic-telegram-bot-remastered/blob/0b896f3f8c4d47073fb49672bea81eff771b5ee4/src/config/EMD.js#L1010">https://github.com/ilanlal/basic-telegram-bot-remastered</a>',
+                                    + '<a href="' + EMD.GIT_REPO_URL + '#L3872">' + EMD.GIT_REPO_URL + '</a>',
                                 parse_mode: 'HTML'
                             }
                         }]),
@@ -3920,7 +2079,7 @@ EMD.BasicAutomation = {
                             method: 'sendMessage',
                             payload: {
                                 text: 'Puoi trovare il codice sorgente di questo bot su GitHub:\n\n'
-                                    + '<a href="https://github.com/ilanlal/basic-telegram-bot-remastered/blob/0b896f3f8c4d47073fb49672bea81eff771b5ee4/src/config/EMD.js#L1010">https://github.com/ilanlal/basic-telegram-bot-remastered</a>',
+                                    + '<a href="' + EMD.GIT_REPO_URL + '#L3872">' + EMD.GIT_REPO_URL + '</a>',
                                 parse_mode: 'HTML'
                             }
                         }]),
@@ -3929,7 +2088,7 @@ EMD.BasicAutomation = {
                             method: 'sendMessage',
                             payload: {
                                 text: 'Você pode encontrar o código-fonte deste bot no GitHub:\n\n'
-                                    + '<a href="https://github.com/ilanlal/basic-telegram-bot-remastered/blob/0b896f3f8c4d47073fb49672bea81eff771b5ee4/src/config/EMD.js#L1010">https://github.com/ilanlal/basic-telegram-bot-remastered</a>',
+                                    + '<a href="' + EMD.GIT_REPO_URL + '#L3872">' + EMD.GIT_REPO_URL + '</a>',
                                 parse_mode: 'HTML'
                             }
                         }]),
@@ -3938,7 +2097,7 @@ EMD.BasicAutomation = {
                             method: 'sendMessage',
                             payload: {
                                 text: 'Вы можете найти исходный код этого бота на GitHub:\n\n'
-                                    + '<a href="https://github.com/ilanlal/basic-telegram-bot-remastered/blob/0b896f3f8c4d47073fb49672bea81eff771b5ee4/src/config/EMD.js#L1010">https://github.com/ilanlal/basic-telegram-bot-remastered</a>',
+                                    + '<a href="' + EMD.GIT_REPO_URL + '#L3872">' + EMD.GIT_REPO_URL + '</a>',
                                 parse_mode: 'HTML'
                             }
                         }]),
@@ -3947,7 +2106,7 @@ EMD.BasicAutomation = {
                             method: 'sendMessage',
                             payload: {
                                 text: '您可以在 GitHub 上找到此机器人的源代码：\n\n'
-                                    + '<a href="https://github.com/ilanlal/basic-telegram-bot-remastered/blob/0b896f3f8c4d47073fb49672bea81eff771b5ee4/src/config/EMD.js#L1010">https://github.com/ilanlal/basic-telegram-bot-remastered</a>',
+                                    + '<a href="' + EMD.GIT_REPO_URL + '#L3872">' + EMD.GIT_REPO_URL + '</a>',
                                 parse_mode: 'HTML'
                             }
                         }]),
@@ -3956,7 +2115,7 @@ EMD.BasicAutomation = {
                             method: 'sendMessage',
                             payload: {
                                 text: 'このボットのソースコードはGitHubで見つけることができます：\n\n'
-                                    + '<a href="https://github.com/ilanlal/basic-telegram-bot-remastered/blob/0b896f3f8c4d47073fb49672bea81eff771b5ee4/src/config/EMD.js#L1010">https://github.com/ilanlal/basic-telegram-bot-remastered</a>',
+                                    + '<a href="' + EMD.GIT_REPO_URL + '#L3872">' + EMD.GIT_REPO_URL + '</a>',
                                 parse_mode: 'HTML'
                             }
                         }]),
@@ -3965,7 +2124,7 @@ EMD.BasicAutomation = {
                             method: 'sendMessage',
                             payload: {
                                 text: '이 봇의 소스 코드는 GitHub에서 찾을 수 있습니다:\n\n'
-                                    + '<a href="https://github.com/ilanlal/basic-telegram-bot-remastered/blob/0b896f3f8c4d47073fb49672bea81eff771b5ee4/src/config/EMD.js#L1010">https://github.com/ilanlal/basic-telegram-bot-remastered</a>',
+                                    + '<a href="' + EMD.GIT_REPO_URL + '#L3872">' + EMD.GIT_REPO_URL + '</a>',
                                 parse_mode: 'HTML'
                             }
                         }]),
@@ -3974,11 +2133,12 @@ EMD.BasicAutomation = {
                             method: 'sendMessage',
                             payload: {
                                 text: 'אתה יכול למצוא את קוד המקור של הבוט הזה ב-GitHub:\n\n'
-                                    + '<a href="https://github.com/ilanlal/basic-telegram-bot-remastered/blob/0b896f3f8c4d47073fb49672bea81eff771b5ee4/src/config/EMD.js#L1010">https://github.com/ilanlal/basic-telegram-bot-remastered</a>',
+                                    + '<a href="' + EMD.GIT_REPO_URL + '#L3872">' + EMD.GIT_REPO_URL + '</a>',
                                 parse_mode: 'HTML'
                             }
-                        }])],
-                    ['#send_secure_private_message',
+                        }])
+                    ],
+                    ['#send_privacy_security_message',
                         // default (en)
                         JSON.stringify([{
                             method: 'sendMessage',
@@ -3988,10 +2148,2898 @@ EMD.BasicAutomation = {
                                 parse_mode: 'HTML'
                             }
                         }])
-                    
+
+                    ],
+                    ['#answer_completed',
+                        // default (en)
+                        JSON.stringify([{
+                            method: 'answerCallbackQuery',
+                            payload: {
+                                text: 'Session completed successfully! ✅',
+                                show_alert: false
+                            }
+                        }]),
+                        // es
+                        JSON.stringify([{
+                            method: 'answerCallbackQuery',
+                            payload: {
+                                text: '¡Sesión completada con éxito! ✅',
+                                show_alert: false
+                            }
+                        }]),
+                        // fr
+                        JSON.stringify([{
+                            method: 'answerCallbackQuery',
+                            payload: {
+                                text: 'Session terminée avec succès ! ✅',
+                                show_alert: false
+                            }
+                        }]),
+                        // ar
+                        JSON.stringify([{
+                            method: 'answerCallbackQuery',
+                            payload: {
+                                text: 'تم إكمال الجلسة بنجاح! ✅',
+                                show_alert: false
+                            }
+                        }]),
+                        // de
+                        JSON.stringify([{
+                            method: 'answerCallbackQuery',
+                            payload: {
+                                text: 'Sitzung erfolgreich abgeschlossen! ✅',
+                                show_alert: false
+                            }
+                        }]),
+                        // it
+                        JSON.stringify([{
+                            method: 'answerCallbackQuery',
+                            payload: {
+                                text: 'Sessione completata con successo! ✅',
+                                show_alert: false
+                            }
+                        }]),
+                        // pt
+                        JSON.stringify([{
+                            method: 'answerCallbackQuery',
+                            payload: {
+                                text: 'Sessão concluída com sucesso! ✅',
+                                show_alert: false
+                            }
+                        }]),
+                        // ru
+                        JSON.stringify([{
+                            method: 'answerCallbackQuery',
+                            payload: {
+                                text: 'Сессия успешно завершена! ✅',
+                                show_alert: false
+                            }
+                        }]),
+                        // zh
+                        JSON.stringify([{
+                            method: 'answerCallbackQuery',
+                            payload: {
+                                text: '会话成功完成！ ✅',
+                                show_alert: false
+                            }
+                        }]),
+                        // ja
+                        JSON.stringify([{
+                            method: 'answerCallbackQuery',
+                            payload: {
+                                text: 'セッションが正常に完了しました！ ✅',
+                                show_alert: false
+                            }
+                        }]),
+                        // ko
+                        JSON.stringify([{
+                            method: 'answerCallbackQuery',
+                            payload: {
+                                text: '세션이 성공적으로 완료되었습니다! ✅',
+                                show_alert: false
+                            }
+                        }]),
+                        // he
+                        JSON.stringify([{
+                            method: 'answerCallbackQuery',
+                            payload: {
+                                text: 'הסשן הושלם בהצלחה! ✅',
+                                show_alert: false
+                            }
+                        }])
+                    ],
+                    ['#answer_unknown_action',
+                        // default (en)
+                        JSON.stringify([{
+                            method: 'answerCallbackQuery',
+                            payload: {
+                                text: '🚧 Oops! We could not recognize this action. Please try again or use /help for assistance.',
+                                show_alert: false
+                            }
+                        }]),
+                        // es
+                        JSON.stringify([{
+                            method: 'answerCallbackQuery',
+                            payload: {
+                                text: '🚧 ¡Vaya! No pudimos reconocer esta acción. Por favor, inténtalo de nuevo o usa /help para obtener ayuda.',
+                                show_alert: false
+                            }
+                        }]),
+                        // fr
+                        JSON.stringify([{
+                            method: 'answerCallbackQuery',
+                            payload: {
+                                text: '🚧 Oups ! Nous n\'avons pas pu reconnaître cette action. Veuillez réessayer ou utiliser /help pour obtenir de l\'aide.',
+                                show_alert: false
+                            }
+                        }]),
+                        // ar
+                        JSON.stringify([{
+                            method: 'answerCallbackQuery',
+                            payload: {
+                                text: '🚧 عذرًا! لم نتمكن من التعرف على هذا الإجراء. يرجى المحاولة مرة أخرى أو استخدام /help للحصول على المساعدة.',
+                                show_alert: false
+                            }
+                        }]),
+                        // de
+                        JSON.stringify([{
+                            method: 'answerCallbackQuery',
+                            payload: {
+                                text: '🚧 Hoppla! Wir konnten diese Aktion nicht erkennen. Bitte versuchen Sie es erneut oder verwenden Sie /help für Unterstützung.',
+                                show_alert: false
+                            }
+                        }]),
+                        // it
+                        JSON.stringify([{
+                            method: 'answerCallbackQuery',
+                            payload: {
+                                text: '🚧 Ops! Non siamo riusciti a riconoscere questa azione. Per favore riprova o usa /help per assistenza.',
+                                show_alert: false
+                            }
+                        }]),
+                        // pt
+                        JSON.stringify([{
+                            method: 'answerCallbackQuery',
+                            payload: {
+                                text: '🚧 Ops! Não conseguimos reconhecer esta ação. Por favor, tente novamente ou use /help para obter assistência.',
+                                show_alert: false
+                            }
+                        }]),
+                        // ru
+                        JSON.stringify([{
+                            method: 'answerCallbackQuery',
+                            payload: {
+                                text: '🚧 Упс! Мы не смогли распознать это действие. Пожалуйста, попробуйте еще раз или используйте /help для получения помощи.',
+                                show_alert: false
+                            }
+                        }]),
+                        // zh
+                        JSON.stringify([{
+                            method: 'answerCallbackQuery',
+                            payload: {
+                                text: '🚧 哎呀！我们无法识别此操作。请重试或使用 /help 获取帮助。',
+                                show_alert: false
+                            }
+                        }]),
+                        // ja
+                        JSON.stringify([{
+                            method: 'answerCallbackQuery',
+                            payload: {
+                                text: '🚧 おっと！このアクションを認識できませんでした。もう一度お試しいただくか、/help を使用してヘルプを取得してください。',
+                                show_alert: false
+                            }
+                        }]),
+                        // ko
+                        JSON.stringify([{
+                            method: 'answerCallbackQuery',
+                            payload: {
+                                text: '🚧 죄송합니다! 이 작업을 인식할 수 없습니다. 다시 시도하거나 /help를 사용하여 도움을 받으세요.',
+                                show_alert: false
+                            }
+                        }]),
+                        // he
+                        JSON.stringify([{
+                            method: 'answerCallbackQuery',
+                            payload: {
+                                text: '🚧 מצטערים! לא הצלחנו לזהות את הפעולה הזו. אנא נסה שוב או השתמש ב-/help לקבלת עזרה.',
+                                show_alert: false
+                            }
+                        }])
+                    ],
+                    ['#send_about_opensource_message',
+                        // default (en)
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'This bot is open-source! 🎉\n\n'
+                                    + 'Feel free to explore the source code, contribute, or customize it for your own needs.\n\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // es
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: '¡Este bot es de código abierto! 🎉\n\n'
+                                    + 'No dudes en explorar el código fuente, contribuir o personalizarlo según tus propias necesidades.\n\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // fr
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Ce bot est open-source ! 🎉\n\n'
+                                    + 'N\'hésitez pas à explorer le code source, contribuer ou le personnaliser selon vos propres besoins.\n\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ar
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'هذا البوت مفتوح المصدر! 🎉\n\n'
+                                    + 'لا تتردد في استكشاف الكود المصدري، المساهمة، أو تخصيصه حسب احتياجاتك الخاصة.\n\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // de
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Dieser Bot ist Open-Source! 🎉\n\n'
+                                    + 'Fühlen Sie sich frei, den Quellcode zu erkunden, beizutragen oder ihn an Ihre eigenen Bedürfnisse anzupassen.\n\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // it
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Questo bot è open-source! 🎉\n\n'
+                                    + 'Sentiti libero di esplorare il codice sorgente, contribuire o personalizzarlo in base alle tue esigenze.\n\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // pt
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Este bot é de código aberto! 🎉\n\n'
+                                    + 'Sinta-se à vontade para explorar o código-fonte, contribuir ou personalizá-lo de acordo com suas necessidades.\n\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ru
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Этот бот с открытым исходным кодом! 🎉\n\n'
+                                    + 'Не стесняйтесь исследовать исходный код, вносить свой вклад или настраивать его в соответствии с вашими потребностями.\n\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // zh
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: '这个机器人是开源的！ 🎉\n\n'
+                                    + '欢迎探索源代码，贡献或根据您的需求进行定制。\n\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ja
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'このボットはオープンソースです！ 🎉\n\n'
+                                    + 'ソースコードを自由に探索し、貢献したり、自分のニーズに合わせてカスタマイズしたりしてください。\n\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ko
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: '이 봇은 오픈 소스입니다! 🎉\n\n'
+                                    + '소스 코드를 자유롭게 탐색하고, 기여하거나, 자신의 필요에 맞게 맞춤 설정하세요.\n\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // he
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'הבוט הזה הוא קוד פתוח! 🎉\n\n'
+                                    + 'אל תהססו לחקור את קוד המקור, לתרום או להתאים אותו לצרכים שלכם.\n\n',
+                                parse_mode: 'HTML'
+                            }
+                        }])
+                    ],
+                    ['#send_donation_message',
+                        // default (en)
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'If you find this bot useful and would like to support its development, please consider making a donation. 🙏\n\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // es
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Si encuentras este bot útil y te gustaría apoyar su desarrollo, considera hacer una donación. 🙏\n\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // fr
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Si vous trouvez ce bot utile et souhaitez soutenir son développement, veuillez envisager de faire un don. 🙏\n\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ar
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'إذا وجدت هذا البوت مفيدًا وترغب في دعم تطويره، يرجى التفكير في التبرع. 🙏\n\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // de
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Wenn Sie diesen Bot nützlich finden und seine Entwicklung unterstützen möchten, ziehen Sie bitte eine Spende in Betracht. 🙏\n\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // it
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Se trovi questo bot utile e desideri supportarne lo sviluppo, considera la possibilità di fare una donazione. 🙏\n\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // pt
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Se você achar este bot útil e quiser apoiar seu desenvolvimento, considere fazer uma doação. 🙏\n\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ru
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Если вы считаете этого бота полезным и хотите поддержать его разработку, пожалуйста, рассмотрите возможность сделать пожертвование. 🙏\n\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // zh
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: '如果您觉得这个机器人有用，并希望支持其开发，请考虑捐赠。🙏\n\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ja
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'このボットが役に立った場合、その開発を支援するために寄付を検討してください。🙏\n\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ko
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: '이 봇이 유용하다고 생각되면 개발을 지원하기 위해 기부를 고려해 주세요. 🙏\n\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // he
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'אם אתה מוצא את הבוט הזה שימושי ורוצה לתמוך בפיתוחו, אנא שקול לעשות תרומה. 🙏\n\n',
+                                parse_mode: 'HTML'
+                            }
+                        }])
+                    ],
+                    ['#send_donation_invoice_a',
+                        // default (en)
+                        JSON.stringify([{
+                            method: 'sendInvoice',
+                            payload: {
+                                title: 'Support Development - Tier A',
+                                description: 'Support the ongoing development and maintenance of this bot with a Tier A donation. Your contribution helps us keep the bot running smoothly and add new features!',
+                                currency: 'XTR',
+                                payload: 'donation_tier_a_001',
+                                prices: JSON.stringify([
+                                    { label: 'Tier A Donation', amount: 100 } // Amount in smallest units (e.g., cents)
+                                ]),
+                            }
+                        }]),
+                        // es
+                        JSON.stringify([{
+                            method: 'sendInvoice',
+                            payload: {
+                                title: 'Apoyar el Desarrollo - Nivel A',
+                                description: 'Apoya el desarrollo y mantenimiento continuo de este bot con una donación de Nivel A. ¡Tu contribución nos ayuda a mantener el bot funcionando sin problemas y agregar nuevas funciones!',
+                                currency: 'XTR',
+                                payload: 'donation_tier_a_001',
+                                prices: JSON.stringify([
+                                    { label: 'Donación Nivel A', amount: 100 } // Amount in smallest units (e.g., cents)
+                                ]),
+                            }
+                        }]),
+                        // fr
+                        JSON.stringify([{
+                            method: 'sendInvoice',
+                            payload: {
+                                title: 'Soutenir le Développement - Niveau A',
+                                description: 'Soutenez le développement et la maintenance continus de ce bot avec un don de Niveau A. Votre contribution nous aide à maintenir le bon fonctionnement du bot et à ajouter de nouvelles fonctionnalités !',
+                                currency: 'XTR',
+                                payload: 'donation_tier_a_001',
+                                prices: JSON.stringify([
+                                    { label: 'Don de Niveau A', amount: 100 } // Amount in smallest units (e.g., cents)
+                                ]),
+                            }
+                        }]),
+                        // ar
+                        JSON.stringify([{
+                            method: 'sendInvoice',
+                            payload: {
+                                title: 'دعم التطوير - المستوى أ',
+                                description: 'ادعم التطوير والصيانة المستمرة لهذا البوت من خلال تبرع من المستوى أ. تساعدنا مساهمتك في الحفاظ على تشغيل البوت بسلاسة وإضافة ميزات جديدة!',
+                                currency: 'XTR',
+                                payload: 'donation_tier_a_001',
+                                prices: JSON.stringify([
+                                    { label: 'تبرع المستوى أ', amount: 100 } // Amount in smallest units (e.g., cents)
+                                ]),
+                            }
+                        }]),
+                        // de
+                        JSON.stringify([{
+                            method: 'sendInvoice',
+                            payload: {
+                                title: 'Unterstützen Sie die Entwicklung - Stufe A',
+                                description: 'Unterstützen Sie die laufende Entwicklung und Wartung dieses Bots mit einer Spende der Stufe A. Ihr Beitrag hilft uns, den Bot reibungslos am Laufen zu halten und neue Funktionen hinzuzufügen!',
+                                currency: 'XTR',
+                                payload: 'donation_tier_a_001',
+                                prices: JSON.stringify([
+                                    { label: 'Spende Stufe A', amount: 100 } // Amount in smallest units (e.g., cents)
+                                ]),
+                            }
+                        }]),
+                        // it
+                        JSON.stringify([{
+                            method: 'sendInvoice',
+                            payload: {
+                                title: 'Supporta lo Sviluppo - Livello A',
+                                description: 'Supporta lo sviluppo e la manutenzione continua di questo bot con una donazione di Livello A. Il tuo contributo ci aiuta a mantenere il bot funzionante senza problemi e ad aggiungere nuove funzionalità!',
+                                currency: 'XTR',
+                                payload: 'donation_tier_a_001',
+                                prices: JSON.stringify([
+                                    { label: 'Donazione Livello A', amount: 100 } // Amount in smallest units (e.g., cents)
+                                ]),
+                            }
+                        }]),
+                        // pt
+                        JSON.stringify([{
+                            method: 'sendInvoice',
+                            payload: {
+                                title: 'Apoie o Desenvolvimento - Nível A',
+                                description: 'Apoie o desenvolvimento e a manutenção contínua deste bot com uma doação de Nível A. Sua contribuição nos ajuda a manter o bot funcionando sem problemas e a adicionar novos recursos!',
+                                currency: 'XTR',
+                                payload: 'donation_tier_a_001',
+                                prices: JSON.stringify([
+                                    { label: 'Doação Nível A', amount: 100 } // Amount in smallest units (e.g., cents)
+                                ]),
+                            }
+                        }]),
+                        // ru
+                        JSON.stringify([{
+                            method: 'sendInvoice',
+                            payload: {
+                                title: 'Поддержите разработку - Уровень А',
+                                description: 'Поддержите текущую разработку и обслуживание этого бота пожертвованием уровня А. Ваш вклад помогает нам поддерживать работу бота и добавлять новые функции!',
+                                currency: 'XTR',
+                                payload: 'donation_tier_a_001',
+                                prices: JSON.stringify([
+                                    { label: 'Пожертвование Уровень А', amount: 100 } // Amount in smallest units (e.g., cents)
+                                ]),
+                            }
+                        }]),
+                        // zh
+                        JSON.stringify([{
+                            method: 'sendInvoice',
+                            payload: {
+                                title: '支持开发 - A级',
+                                description: '通过A级捐赠支持此机器人的持续开发和维护。您的贡献帮助我们保持机器人顺利运行并添加新功能！',
+                                currency: 'XTR',
+                                payload: 'donation_tier_a_001',
+                                prices: JSON.stringify([
+                                    { label: 'A级捐赠', amount: 100 } // Amount in smallest units (e.g., cents)
+                                ]),
+                            }
+                        }]),
+                        // ja
+                        JSON.stringify([{
+                            method: 'sendInvoice',
+                            payload: {
+                                title: '開発支援 - レベルA',
+                                description: 'レベルAの寄付でこのボットの継続的な開発とメンテナンスを支援してください。あなたの貢献は、ボットのスムーズな運用と新機能の追加に役立ちます！',
+                                currency: 'XTR',
+                                payload: 'donation_tier_a_001',
+                                prices: JSON.stringify([
+                                    { label: 'レベルAの寄付', amount: 100 } // Amount in smallest units (e.g., cents)
+                                ]),
+                            }
+                        }]),
+                        // ko
+                        JSON.stringify([{
+                            method: 'sendInvoice',
+                            payload: {
+                                title: '개발 지원 - 레벨 A',
+                                description: '레벨 A 기부로 이 봇의 지속적인 개발 및 유지 관리를 지원하세요. 귀하의 기여는 봇의 원활한 운영과 새로운 기능 추가에 도움이 됩니다!',
+                                currency: 'XTR',
+                                payload: 'donation_tier_a_001',
+                                prices: JSON.stringify([
+                                    { label: '레벨 A 기부', amount: 100 } // Amount in smallest units (e.g., cents)
+                                ]),
+                            }
+                        }]),
+                        // he
+                        JSON.stringify([{
+                            method: 'sendInvoice',
+                            payload: {
+                                title: 'תמיכה בפיתוח - רמה א',
+                                description: 'תמכו בפיתוח ובתחזוקה המתמשכת של הבוט הזה באמצעות תרומה ברמה א. התרומה שלכם עוזרת לנו לשמור על הבוט פועל בצורה חלקה ולהוסיף תכונות חדשות!',
+                                currency: 'XTR',
+                                payload: 'donation_tier_a_001',
+                                prices: JSON.stringify([
+                                    { label: 'תרומת רמה א', amount: 100 } // Amount in smallest units (e.g., cents)
+                                ]),
+                            }
+                        }])
+                    ],
+                    ['#send_please_support_message',
+                        // default (en)
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Your support means a lot to us! 🌟\n\nThank you for considering a donation to help us keep improving this bot.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // es
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: '¡Tu apoyo significa mucho para nosotros! 🌟\n\nGracias por considerar una donación para ayudarnos a seguir mejorando este bot.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // fr
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Votre soutien signifie beaucoup pour nous ! 🌟\n\nMerci de considérer un don pour nous aider à continuer d\'améliorer ce bot.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ar
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'دعمكم يعني الكثير لنا! 🌟\n\nشكرًا للنظر في التبرع لمساعدتنا في الاستمرار في تحسين هذا البوت.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // de
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Ihre Unterstützung bedeutet uns viel! 🌟\n\nVielen Dank, dass Sie eine Spende in Betracht ziehen, um uns zu helfen, diesen Bot weiter zu verbessern.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // it
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Il tuo supporto significa molto per noi! 🌟\n\nGrazie per aver considerato una donazione per aiutarci a continuare a migliorare questo bot.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // pt
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Seu apoio significa muito para nós! 🌟\n\nObrigado por considerar uma doação para nos ajudar a continuar melhorando este bot.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ru
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Ваша поддержка много для нас значит! 🌟\n\nСпасибо, что рассматриваете возможность пожертвования, чтобы помочь нам продолжать улучшать этого бота.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // zh
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: '您的支持对我们意义重大！ 🌟\n\n感谢您考虑捐赠以帮助我们不断改进这个机器人。',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ja
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'あなたのサポートは私たちにとって非常に重要です！ 🌟\n\nこのボットの改善を続けるために寄付を検討していただき、ありがとうございます。',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ko
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: '당신의 지원은 우리에게 큰 의미가 있습니다! 🌟\n\n이 봇을 계속 개선할 수 있도록 기부를 고려해 주셔서 감사합니다.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // he
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'התמיכה שלך משמעותית עבורנו! 🌟\n\nתודה ששקלת לתרום כדי לעזור לנו להמשיך ולשפר את הבוט הזה.',
+                                parse_mode: 'HTML'
+                            }
+                        }])
+                    ],
+                    ['#send_how_to_contribute_message',
+                        // default (en)
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Want to contribute to this project? 🤝\n\n'
+                                    + 'You can help by reporting issues, suggesting features, or submitting pull requests on our GitHub repository.\n\n'
+                                    + 'Visit: <a href="' + EMD.GIT_REPO_URL + '">' + EMD.GIT_REPO_URL + '</a> to get started!'
+                                    + '\n\nDo you want to be a part of our community?'
+                                    + '\n\nSelect one of the options below.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // es
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: '¿Quieres contribuir a este proyecto? 🤝\n\n'
+                                    + 'Puedes ayudar reportando problemas, sugiriendo características o enviando pull requests en nuestro repositorio de GitHub.\n\n'
+                                    + 'Visita: <a href="' + EMD.GIT_REPO_URL + '">' + EMD.GIT_REPO_URL + '</a> para comenzar!'
+                                    + '\n\n¿Quieres ser parte de nuestra comunidad?'
+                                    + '\n\nSelecciona una de las opciones a continuación.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // fr
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Vous souhaitez contribuer à ce projet ? 🤝\n\n'
+                                    + 'Vous pouvez aider en signalant des problèmes, en suggérant des fonctionnalités ou en soumettant des pull requests sur notre dépôt GitHub.\n\n'
+                                    + 'Visitez : <a href="' + EMD.GIT_REPO_URL + '">' + EMD.GIT_REPO_URL + '</a> pour commencer!'
+                                    + '\n\nVoulez-vous faire partie de notre communauté ?'
+                                    + '\n\nSélectionnez l\'une des options ci-dessous.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ar
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'هل ترغب في المساهمة في هذا المشروع؟ 🤝\n\n'
+                                    + 'يمكنك المساعدة عن طريق الإبلاغ عن المشكلات، اقتراح الميزات، أو تقديم طلبات سحب على مستودع GitHub الخاص بنا.\n\n'
+                                    + 'قم بزيارة: <a href="' + EMD.GIT_REPO_URL + '">' + EMD.GIT_REPO_URL + '</a> للبدء!'
+                                    + '\n\nهل تريد أن تكون جزءًا من مجتمعنا؟'
+                                    + '\n\nاختر أحد الخيارات أدناه.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // de
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Möchten Sie zu diesem Projekt beitragen? 🤝\n\n'
+                                    + 'Sie können helfen, indem Sie Probleme melden, Funktionen vorschlagen oder Pull-Anfragen in unserem GitHub-Repository einreichen.\n\n'
+                                    + 'Besuchen Sie: <a href="' + EMD.GIT_REPO_URL + '">' + EMD.GIT_REPO_URL + '</a>, um loszulegen!'
+                                    + '\n\nMöchten Sie Teil unserer Community sein?'
+                                    + '\n\nWählen Sie eine der untenstehenden Optionen.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // it
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Vuoi contribuire a questo progetto? 🤝\n\n'
+                                    + 'Puoi aiutare segnalando problemi, suggerendo funzionalità o inviando pull request nel nostro repository GitHub.\n\n'
+                                    + 'Visita: <a href="' + EMD.GIT_REPO_URL + '">' + EMD.GIT_REPO_URL + '</a> per iniziare!'
+                                    + '\n\nVuoi far parte della nostra comunità?'
+                                    + '\n\nSeleziona una delle opzioni qui sotto.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // pt
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Você deseja contribuir para este projeto? 🤝\n\n'
+                                    + 'Você pode ajudar relatando problemas, sugerindo recursos ou enviando pull requests em nosso repositório GitHub.\n\n'
+                                    + 'Visite: <a href="' + EMD.GIT_REPO_URL + '">' + EMD.GIT_REPO_URL + '</a> para começar!'
+                                    + '\n\nVocê quer fazer parte da nossa comunidade?'
+                                    + '\n\nSelecione uma das opções abaixo.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ru
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Вы хотите внести свой вклад в этот проект? 🤝\n\n'
+                                    + 'Вы можете помочь, сообщая о проблемах, предлагая функции или отправляя запросы на включение изменений в нашем репозитории GitHub.\n\n'
+                                    + 'Посетите: <a href="' + EMD.GIT_REPO_URL + '">' + EMD.GIT_REPO_URL + '</a>, чтобы начать!'
+                                    + '\n\nХотите стать частью нашего сообщества?'
+                                    + '\n\nВыберите один из вариантов ниже.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // zh
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: '您想为这个项目做出贡献吗？ 🤝\n\n'
+                                    + '您可以通过报告问题、建议功能或在我们的 GitHub 仓库中提交拉取请求来帮助我们。\n\n'
+                                    + '访问：<a href="' + EMD.GIT_REPO_URL + '">' + EMD.GIT_REPO_URL + '</a> 开始吧！'
+                                    + '\n\n您想成为我们社区的一员吗？'
+                                    + '\n\n请选择以下选项之一。',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ja
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'このプロジェクトに貢献したいですか？ 🤝\n\n'
+                                    + '問題を報告したり、機能を提案したり、プルリクエストを送信したりして、私たちのGitHubリポジトリで支援できます。\n\n'
+                                    + '訪問：<a href="' + EMD.GIT_REPO_URL + '">' + EMD.GIT_REPO_URL + '</a> から始めましょう！'
+                                    + '\n\n私たちのコミュニティの一員になりたいですか？'
+                                    + '\n\n以下のオプションのいずれかを選択してください。',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ko
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: '이 프로젝트에 기여하고 싶으신가요? 🤝\n\n'
+                                    + '문제를 보고하거나 기능을 제안하거나 GitHub 저장소에 풀 리퀘스트를 제출하여 도울 수 있습니다.\n\n'
+                                    + '시작하려면 방문하세요: <a href="' + EMD.GIT_REPO_URL + '">' + EMD.GIT_REPO_URL + '</a>'
+                                    + '\n\n우리 커뮤니티의 일원이 되고 싶으신가요?'
+                                    + '\n\n아래 옵션 중 하나를 선택하세요.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // he
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'האם ברצונך לתרום לפרויקט זה? 🤝\n\n'
+                                    + 'אתה יכול לעזור על ידי דיווח על בעיות, הצעת תכונות או שליחת בקשות משיכה במאגר ה-GitHub שלנו.\n\n'
+                                    + 'בקר בכתובת: <a href="' + EMD.GIT_REPO_URL + '">' + EMD.GIT_REPO_URL + '</a> כדי להתחיל!'
+                                    + '\n\nהאם ברצונך להיות חלק מהקהילה שלנו?'
+                                    + '\n\nבחר באחת מהאפשרויות למטה.',
+                                parse_mode: 'HTML'
+                            }
+                        }])
+                    ],
+                    ['#send_show_me_love_message',
+                        // default (en)
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'If you love this bot and want to show your appreciation, please consider starring our GitHub repository! ⭐️\n\n'
+                                    + 'Your support helps us reach more users and continue improving the bot.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // es
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Si amas este bot y quieres mostrar tu aprecio, ¡considera darle una estrella a nuestro repositorio de GitHub! ⭐️\n\n'
+                                    + 'Tu apoyo nos ayuda a llegar a más usuarios y continuar mejorando el bot.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // fr
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Si vous aimez ce bot et souhaitez montrer votre appréciation, veuillez envisager de mettre une étoile à notre dépôt GitHub ! ⭐️\n\n'
+                                    + 'Votre soutien nous aide à atteindre plus d\'utilisateurs et à continuer d\'améliorer le bot.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ar
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'إذا كنت تحب هذا البوت وترغب في إظهار تقديرك، يرجى التفكير في وضع نجمة على مستودع GitHub الخاص بنا! ⭐️\n\n'
+                                    + 'دعمك يساعدنا في الوصول إلى المزيد من المستخدمين ومواصلة تحسين البوت.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // de
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Wenn du diesen Bot liebst und deine Wertschätzung zeigen möchtest, erwäge bitte, unserem GitHub-Repository einen Stern zu geben! ⭐️\n\n'
+                                    + 'Deine Unterstützung hilft uns, mehr Nutzer zu erreichen und den Bot weiter zu verbessern.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // it
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Se ami questo bot e vuoi mostrare il tuo apprezzamento, considera di mettere una stella al nostro repository GitHub! ⭐️\n\n'
+                                    + 'Il tuo supporto ci aiuta a raggiungere più utenti e a continuare a migliorare il bot.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // pt
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Se você ama este bot e quer mostrar sua apreciação, considere dar uma estrela ao nosso repositório GitHub! ⭐️\n\n'
+                                    + 'Seu apoio nos ajuda a alcançar mais usuários e continuar melhorando o bot.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ru
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Если вам нравится этот бот и вы хотите выразить свою признательность, пожалуйста, рассмотрите возможность поставить звезду нашему репозиторию на GitHub! ⭐️\n\n'
+                                    + 'Ваша поддержка помогает нам достигать большего числа пользователей и продолжать улучшать бота.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // zh
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: '如果你喜欢这个机器人并想表达你的赞赏，请考虑给我们的GitHub仓库点个星！⭐️\n\n'
+                                    + '你的支持帮助我们接触更多用户，继续改进机器人。',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ja
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'このボットが気に入っていて感謝の気持ちを示したい場合は、ぜひ私たちのGitHubリポジトリにスターを付けてください！ ⭐️\n\n'
+                                    + 'あなたのサポートは、より多くのユーザーにリーチし、ボットを改善し続けるのに役立ちます。',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ko
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: '이 봇을 좋아하고 감사를 표시하고 싶다면, 저희 GitHub 저장소에 별을 달아주세요! ⭐️\n\n'
+                                    + '여러분의 지원은 더 많은 사용자에게 다가가고 봇을 계속 개선하는 데 도움이 됩니다.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // he
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'אם אתה אוהב את הבוט הזה ורוצה להראות את הערכתך, שקול לתת כוכב למאגר ה-GitHub שלנו! ⭐️\n\n'
+                                    + 'התמיכה שלך עוזרת לנו להגיע ליותר משתמשים ולהמשיך לשפר את הבוט.',
+                                parse_mode: 'HTML'
+                            }
+                        }])
+                    ],
+                    ['#send_show_me_love_invoice',
+                        // default (en)
+                        JSON.stringify([{
+                            method: 'sendInvoice',
+                            payload: {
+                                title: 'Show Some Love ❤️',
+                                description: 'If you enjoy using this bot and would like to support its development, consider making a small donation. Every bit helps us keep improving and adding new features!',
+                                currency: 'XTR',
+                                payload: 'show_me_love_001',
+                                prices: JSON.stringify([
+                                    { label: 'Support Donation', amount: 100 } // Amount in smallest units (e.g., cents)
+                                ])
+                            }
+                        }]),
+                        // es
+                        JSON.stringify([{
+                            method: 'sendInvoice',
+                            payload: {
+                                title: 'Muestra Algo de Amor ❤️',
+                                description: 'Si disfrutas usar este bot y te gustaría apoyar su desarrollo, considera hacer una pequeña donación. ¡Cada aporte nos ayuda a seguir mejorando y agregando nuevas funciones!',
+                                currency: 'XTR',
+                                payload: 'show_me_love_001',
+                                prices: JSON.stringify([
+                                    { label: 'Donación de Apoyo', amount: 100 } // Amount in smallest units (e.g., cents)
+                                ])
+                            }
+                        }]),
+                        // fr
+                        JSON.stringify([{
+                            method: 'sendInvoice',
+                            payload: {
+                                title: 'Montrez un Peu d\'Amour ❤️',
+                                description: 'Si vous appréciez l\'utilisation de ce bot et souhaitez soutenir son développement, envisagez de faire un petit don. Chaque contribution nous aide à continuer d\'améliorer et d\'ajouter de nouvelles fonctionnalités !',
+                                currency: 'XTR',
+                                payload: 'show_me_love_001',
+                                prices: JSON.stringify([
+                                    { label: 'Don de Soutien', amount: 100 } // Amount in smallest units (e.g., cents)
+                                ])
+                            }
+                        }]),
+                        // ar
+                        JSON.stringify([{
+                            method: 'sendInvoice',
+                            payload: {
+                                title: 'أظهر بعض الحب ❤️',
+                                description: 'إذا كنت تستمتع باستخدام هذا البوت وترغب في دعم تطويره، فكر في تقديم تبرع صغير. كل مساهمة تساعدنا في الاستمرار في التحسين وإضافة ميزات جديدة!',
+                                currency: 'XTR',
+                                payload: 'show_me_love_001',
+                                prices: JSON.stringify([
+                                    { label: 'تبرع دعم', amount: 100 } // Amount in smallest units (e.g., cents)
+                                ])
+                            }
+                        }]),
+                        // de
+                        JSON.stringify([{
+                            method: 'sendInvoice',
+                            payload: {
+                                title: 'Zeige etwas Liebe ❤️',
+                                description: 'Wenn du diesen Bot gerne benutzt und seine Entwicklung unterstützen möchtest, erwäge eine kleine Spende. Jeder Beitrag hilft uns, den Bot weiter zu verbessern und neue Funktionen hinzuzufügen!',
+                                currency: 'XTR',
+                                payload: 'show_me_love_001',
+                                prices: JSON.stringify([
+                                    { label: 'Unterstützungs-Spende', amount: 100 } // Amount in smallest units (e.g., cents)
+                                ])
+                            }
+                        }]),
+                        // it
+                        JSON.stringify([{
+                            method: 'sendInvoice',
+                            payload: {
+                                title: 'Mostra un po\' d\'amore ❤️',
+                                description: 'Se ti piace usare questo bot e vuoi supportarne lo sviluppo, considera di fare una piccola donazione. Ogni contributo ci aiuta a continuare a migliorare e aggiungere nuove funzionalità!',
+                                currency: 'XTR',
+                                payload: 'show_me_love_001',
+                                prices: JSON.stringify([
+                                    { label: 'Donazione di Supporto', amount: 100 } // Amount in smallest units (e.g., cents)
+                                ])
+                            }
+                        }]),
+                        // pt
+                        JSON.stringify([{
+                            method: 'sendInvoice',
+                            payload: {
+                                title: 'Mostra un po\' d\'amore ❤️',
+                                description: 'Se ti piace usare questo bot e vuoi supportarne lo sviluppo, considera di fare una piccola donazione. Ogni contributo ci aiuta a continuare a migliorare e aggiungere nuove funzionalità!',
+                                currency: 'XTR',
+                                payload: 'show_me_love_001',
+                                prices: JSON.stringify([
+                                    { label: 'Donazione di Supporto', amount: 100 } // Amount in smallest units (e.g., cents)
+                                ])
+                            }
+                        }]),
+                        // ru
+                        JSON.stringify([{
+                            method: 'sendInvoice',
+                            payload: {
+                                title: 'Покажи немного любви ❤️',
+                                description: 'Если вам нравится использовать этого бота и вы хотите поддержать его развитие, рассмотрите возможность сделать небольшой взнос. Каждый вклад помогает нам продолжать улучшать бота и добавлять новые функции!',
+                                currency: 'XTR',
+                                payload: 'show_me_love_001',
+                                prices: JSON.stringify([
+                                    { label: 'Пожертвование на поддержку', amount: 100 } // Amount in smallest units (e.g., cents)
+                                ])
+                            }
+                        }]),
+                        // zh
+                        JSON.stringify([{
+                            method: 'sendInvoice',
+                            payload: {
+                                title: '展示一点爱 ❤️',
+                                description: '如果你喜欢使用这个机器人并想支持它的发展，考虑做一个小额捐赠。每一份贡献都帮助我们继续改进机器人并添加新功能！',
+                                currency: 'XTR',
+                                payload: 'show_me_love_001',
+                                prices: JSON.stringify([
+                                    { label: '支持捐赠', amount: 100 } // Amount in smallest units (e.g., cents)
+                                ])
+                            }
+                        }]),
+                        // ja
+                        JSON.stringify([{
+                            method: 'sendInvoice',
+                            payload: {
+                                title: '少し愛を見せて ❤️',
+                                description: 'このボットの使用が気に入っていて、その開発をサポートしたい場合は、小額の寄付を検討してください。すべての寄付がボットの改善と新機能の追加に役立ちます！',
+                                currency: 'XTR',
+                                payload: 'show_me_love_001',
+                                prices: JSON.stringify([
+                                    { label: 'サポート寄付', amount: 100 } // Amount in smallest units (e.g., cents)
+                                ])
+                            }
+                        }]),
+                        // ko
+                        JSON.stringify([{
+                            method: 'sendInvoice',
+                            payload: {
+                                title: '조금의 사랑을 보여주세요 ❤️',
+                                description: '이 봇을 사용하는 것이 마음에 들고 개발을 지원하고 싶다면 작은 기부를 고려해 보세요. 모든 기부는 봇을 개선하고 새로운 기능을 추가하는 데 도움이 됩니다!',
+                                currency: 'XTR',
+                                payload: 'show_me_love_001',
+                                prices: JSON.stringify([
+                                    { label: '지원 기부', amount: 100 } // Amount in smallest units (e.g., cents)
+                                ])
+                            }
+                        }]),
+                        // he
+                        JSON.stringify([{
+                            method: 'sendInvoice',
+                            payload: {
+                                title: 'הראה קצת אהבה ❤️',
+                                description: 'אם אתה אוהב להשתמש בבוט הזה ורוצה לתמוך בפיתוח שלו, שקול לעשות תרומה קטנה. כל תרומה עוזרת לנו להמשיך לשפר את הבוט ולהוסיף תכונות חדשות!',
+                                currency: 'XTR',
+                                payload: 'show_me_love_001',
+                                prices: JSON.stringify([
+                                    { label: 'תרומת תמיכה', amount: 100 } // Amount in smallest units (e.g., cents)
+                                ])
+                            }
+                        }])
+                    ],
+                    ['/security_checks',
+                        // default (en)
+                        JSON.stringify([
+                            { "next": "#remove_keyboard" },
+                            { "next": "#send_welcome_to_security_checks_message" },
+                            { "next": "#send_malware_protection_message" },
+                            { "next": "#send_check_your_device_now_message" },
+                            { "next": "#append_top_security_checks_keyboard" }
+                        ])
+                    ],
+                    ['#send_welcome_to_security_checks_message',
+                        // default (en)
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Welcome to Security Checks! \n\n'
+                                    + 'Here you can find recommendations to enhance the security of your device, account and data.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // es
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: '¡Bienvenido a las Verificaciones de Seguridad! \n\n'
+                                    + 'Aquí puedes encontrar recomendaciones para mejorar la seguridad de tu dispositivo, cuenta y datos.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // fr
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Bienvenue dans les Vérifications de Sécurité ! \n\n'
+                                    + 'Ici, vous pouvez trouver des recommandations pour améliorer la sécurité de votre appareil, compte et données.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ar
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'مرحبًا بك في فحوصات الأمان! \n\n'
+                                    + 'هنا يمكنك العثور على توصيات لتعزيز أمان جهازك وحسابك وبياناتك.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // de
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Willkommen bei den Sicherheitsprüfungen! \n\n'
+                                    + 'Hier finden Sie Empfehlungen zur Verbesserung der Sicherheit Ihres Geräts, Kontos und Ihrer Daten.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // it
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Benvenuto in Controlli di Sicurezza! \n\n'
+                                    + 'Qui puoi trovare raccomandazioni per migliorare la sicurezza del tuo dispositivo, account e dati.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // pt
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Bem-vindo às Verificações de Segurança! \n\n'
+                                    + 'Aqui você pode encontrar recomendações para melhorar a segurança do seu dispositivo, conta e dados.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ru
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Добро пожаловать в Проверки безопасности! \n\n'
+                                    + 'Здесь вы можете найти рекомендации по повышению безопасности вашего устройства, аккаунта и данных.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // zh
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: '欢迎使用安全检查！ \n\n'
+                                    + '在这里，您可以找到增强设备、帐户和数据安全性的建议。',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ja
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'セキュリティチェックへようこそ！ \n\n'
+                                    + 'ここでは、デバイス、アカウント、データのセキュリティを強化するための推奨事項を見つけることができます。',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ko
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: '보안 검사에 오신 것을 환영합니다! \n\n'
+                                    + '여기에서 장치, 계정 및 데이터의 보안을 강화하기 위한 권장 사항을 찾을 수 있습니다.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // he
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'ברוכים הבאים לבדיקות אבטחה! \n\n'
+                                    + 'כאן תוכלו למצוא המלצות לשיפור האבטחה של המכשיר, החשבון והנתונים שלכם.',
+                                parse_mode: 'HTML'
+                            }
+                        }])
+                    ],
+                    ['#send_malware_protection_message',
+                        // default (en)
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Malware Protection: \n\n'
+                                    + 'Ensure your device has up-to-date antivirus software installed to protect against malware threats.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // es
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Protección contra malware: \n\n'
+                                    + 'Asegúrate de que tu dispositivo tenga instalado un software antivirus actualizado para protegerte contra amenazas de malware.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // fr
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Protection contre les logiciels malveillants : \n\n'
+                                    + 'Assurez-vous que votre appareil dispose d\'un logiciel antivirus à jour pour vous protéger contre les menaces de logiciels malveillants.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ar
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'حماية من البرامج الضارة: \n\n'
+                                    + 'تأكد من أن جهازك يحتوي على برنامج مضاد فيروسات محدث لحمايتك من تهديدات البرامج الضارة.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // de
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Malware-Schutz: \n\n'
+                                    + 'Stellen Sie sicher, dass auf Ihrem Gerät eine aktuelle Antivirensoftware installiert ist, um sich vor Malware-Bedrohungen zu schützen.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // it
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Protezione da malware: \n\n'
+                                    + 'Assicurati che il tuo dispositivo abbia un software antivirus aggiornato per proteggerti dalle minacce di malware.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // pt
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Proteção contra malware: \n\n'
+                                    + 'Certifique-se de que seu dispositivo tenha um software antivírus atualizado para protegê-lo contra ameaças de malware.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ru
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Защита от вредоносных программ: \n\n'
+                                    + 'Убедитесь, что на вашем устройстве установлено обновленное антивирусное программное обеспечение для защиты от угроз вредоносных программ.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // zh
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: '恶意软件保护： \n\n'
+                                    + '确保您的设备安装了最新的防病毒软件，以保护您免受恶意软件的威胁。',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ja
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'マルウェア対策： \n\n'
+                                    + 'お使いのデバイスに最新のアンチウイルスソフトウェアがインストールされていることを確認して、マルウェアの脅威から保護してください。',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ko
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: '맬웨어 보호: \n\n'
+                                    + '장치에 최신 안티바이러스 소프트웨어가 설치되어 있어 맬웨어 위협으로부터 보호받을 수 있도록 하십시오.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // he
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'הגנה מפני תוכנות זדוניות: \n\n'
+                                    + 'ודא שהמכשיר שלך מותקן עם תוכנת אנטי-וירוס מעודכנת כדי להגן מפני איומי תוכנות זדוניות.',
+                                parse_mode: 'HTML'
+                            }
+                        }])
+                    ],
+                    ['#send_check_your_device_now_message',
+                        // default (en)
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Check Your Device Now! \n\n'
+                                    + 'Ensure your device is secure by following these steps:\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // es
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: '¡Revisa tu dispositivo ahora! \n\n'
+                                    + 'Asegúrate de que tu dispositivo esté seguro siguiendo estos pasos:\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // fr
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Vérifiez votre appareil maintenant ! \n\n'
+                                    + 'Assurez-vous que votre appareil est sécurisé en suivant ces étapes :\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ar
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'تحقق من جهازك الآن! \n\n'
+                                    + 'تأكد من أن جهازك آمن باتباع هذه الخطوات:\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // de
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Überprüfen Sie jetzt Ihr Gerät! \n\n'
+                                    + 'Stellen Sie sicher, dass Ihr Gerät sicher ist, indem Sie diese Schritte befolgen:\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // it
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Controlla il tuo dispositivo ora! \n\n'
+                                    + 'Assicurati che il tuo dispositivo sia sicuro seguendo questi passaggi:\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // pt
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Verifique seu dispositivo agora! \n\n'
+                                    + 'Certifique-se de que seu dispositivo está seguro seguindo estas etapas:\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ru
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Проверьте свое устройство сейчас! \n\n'
+                                    + 'Убедитесь, что ваше устройство защищено, выполнив следующие шаги:\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // zh
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: '立即检查您的设备！ \n\n'
+                                    + '按照以下步骤确保您的设备安全：\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ja
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: '今すぐデバイスを確認してください！ \n\n'
+                                    + '次の手順に従って、デバイスが安全であることを確認してください：\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ko
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: '지금 장치를 확인하세요! \n\n'
+                                    + '다음 단계를 따라 장치가 안전한지 확인하십시오:\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // he
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'בדוק את המכשיר שלך עכשיו! \n\n'
+                                    + 'ודא שהמכשיר שלך מאובטח על ידי ביצוע השלבים הבאים:\n',
+                                parse_mode: 'HTML'
+                            }
+                        }])
+                    ],
+                    ['#append_top_security_checks_keyboard',
+                        // default (en)
+                        JSON.stringify([{
+                            method: 'editMessageReplyMarkup',
+                            payload: {
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "Android Security Checks", callback_data: "/android_security_checks" }],
+                                        [{ text: "iOS Security Checks", callback_data: "/ios_security_checks" }],
+                                        [{ text: "Privacy Checks", callback_data: "/privacy_checks" }],
+                                        [{ text: "About 🛈", callback_data: "/about" }, { text: "❓ Help", callback_data: "/help" }],
+                                        [{ text: "🏠 Start", callback_data: "/start" }]
+                                    ]
+                                }
+                            }
+                        }]),
+                        // es
+                        JSON.stringify([{
+                            method: 'editMessageReplyMarkup',
+                            payload: {
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "Verificaciones de seguridad de Android", callback_data: "/android_security_checks" }],
+                                        [{ text: "Verificaciones de seguridad de iOS", callback_data: "/ios_security_checks" }],
+                                        [{ text: "Verificaciones de privacidad", callback_data: "/privacy_checks" }],
+                                        [{ text: "Acerca de 🛈", callback_data: "/about" }, { text: "❓ Ayuda", callback_data: "/help" }],
+                                        [{ text: "🏠 Inicio", callback_data: "/start" }]
+                                    ]
+                                }
+                            }
+                        }]),
+                        // fr
+                        JSON.stringify([{
+                            method: 'editMessageReplyMarkup',
+                            payload: {
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "Vérifications de sécurité Android", callback_data: "/android_security_checks" }],
+                                        [{ text: "Vérifications de sécurité iOS", callback_data: "/ios_security_checks" }],
+                                        [{ text: "Vérifications de confidentialité", callback_data: "/privacy_checks" }],
+                                        [{ text: "À propos 🛈", callback_data: "/about" }, { text: "❓ Aide", callback_data: "/help" }],
+                                        [{ text: "🏠 Accueil", callback_data: "/start" }]
+                                    ]
+                                }
+                            }
+                        }]),
+                        // ar
+                        JSON.stringify([{
+                            method: 'editMessageReplyMarkup',
+                            payload: {
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "فحوصات أمان Android", callback_data: "/android_security_checks" }],
+                                        [{ text: "فحوصات أمان iOS", callback_data: "/ios_security_checks" }],
+                                        [{ text: "فحوصات الخصوصية", callback_data: "/privacy_checks" }],
+                                        [{ text: "حول 🛈", callback_data: "/about" }, { text: "❓ مساعدة", callback_data: "/help" }],
+                                        [{ text: "🏠 البداية", callback_data: "/start" }]
+                                    ]
+                                }
+                            }
+                        }]),
+                        // de
+                        JSON.stringify([{
+                            method: 'editMessageReplyMarkup',
+                            payload: {
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "Android-Sicherheitsprüfungen", callback_data: "/android_security_checks" }],
+                                        [{ text: "iOS-Sicherheitsprüfungen", callback_data: "/ios_security_checks" }],
+                                        [{ text: "Datenschutzprüfungen", callback_data: "/privacy_checks" }],
+                                        [{ text: "Über 🛈", callback_data: "/about" }, { text: "❓ Hilfe", callback_data: "/help" }],
+                                        [{ text: "🏠 Startseite", callback_data: "/start" }]
+                                    ]
+                                }
+                            }
+                        }]),
+                        // it
+                        JSON.stringify([{
+                            method: 'editMessageReplyMarkup',
+                            payload: {
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "Controlli di sicurezza Android", callback_data: "/android_security_checks" }],
+                                        [{ text: "Controlli di sicurezza iOS", callback_data: "/ios_security_checks" }],
+                                        [{ text: "Controlli sulla privacy", callback_data: "/privacy_checks" }],
+                                        [{ text: "Informazioni 🛈", callback_data: "/about" }, { text: "❓ Aiuto", callback_data: "/help" }],
+                                        [{ text: "🏠 Home", callback_data: "/start" }]
+                                    ]
+                                }
+                            }
+                        }]),
+                        // pt
+                        JSON.stringify([{
+                            method: 'editMessageReplyMarkup',
+                            payload: {
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "Verificações de segurança do Android", callback_data: "/android_security_checks" }],
+                                        [{ text: "Verificações de segurança do iOS", callback_data: "/ios_security_checks" }],
+                                        [{ text: "Verificações de privacidade", callback_data: "/privacy_checks" }],
+                                        [{ text: "Sobre 🛈", callback_data: "/about" }, { text: "❓ Ajuda", callback_data: "/help" }],
+                                        [{ text: "🏠 Início", callback_data: "/start" }]
+                                    ]
+                                }
+                            }
+                        }]),
+                        // ru
+                        JSON.stringify([{
+                            method: 'editMessageReplyMarkup',
+                            payload: {
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "Проверки безопасности Android", callback_data: "/android_security_checks" }],
+                                        [{ text: "Проверки безопасности iOS", callback_data: "/ios_security_checks" }],
+                                        [{ text: "Проверки конфиденциальности", callback_data: "/privacy_checks" }],
+                                        [{ text: "О программе 🛈", callback_data: "/about" }, { text: "❓ Помощь", callback_data: "/help" }],
+                                        [{ text: "🏠 Главная", callback_data: "/start" }]
+                                    ]
+                                }
+                            }
+                        }]),
+                        // zh
+                        JSON.stringify([{
+                            method: 'editMessageReplyMarkup',
+                            payload: {
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "Android 安全检查", callback_data: "/android_security_checks" }],
+                                        [{ text: "iOS 安全检查", callback_data: "/ios_security_checks" }],
+                                        [{ text: "隐私检查", callback_data: "/privacy_checks" }],
+                                        [{ text: "关于 🛈", callback_data: "/about" }, { text: "❓ 帮助", callback_data: "/help" }],
+                                        [{ text: "🏠 主页", callback_data: "/start" }]
+                                    ]
+                                }
+                            }
+                        }]),
+                        // ja
+                        JSON.stringify([{
+                            method: 'editMessageReplyMarkup',
+                            payload: {
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "Android セキュリティチェック", callback_data: "/android_security_checks" }],
+                                        [{ text: "iOS セキュリティチェック", callback_data: "/ios_security_checks" }],
+                                        [{ text: "プライバシーチェック", callback_data: "/privacy_checks" }],
+                                        [{ text: "について 🛈", callback_data: "/about" }, { text: "❓ ヘルプ", callback_data: "/help" }],
+                                        [{ text: "🏠 ホーム", callback_data: "/start" }]
+                                    ]
+                                }
+                            }
+                        }]),
+                        // ko
+                        JSON.stringify([{
+                            method: 'editMessageReplyMarkup',
+                            payload: {
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "Android 보안 검사", callback_data: "/android_security_checks" }],
+                                        [{ text: "iOS 보안 검사", callback_data: "/ios_security_checks" }],
+                                        [{ text: "개인정보 보호 검사", callback_data: "/privacy_checks" }],
+                                        [{ text: "정보 🛈", callback_data: "/about" }, { text: "❓ 도움말", callback_data: "/help" }],
+                                        [{ text: "🏠 홈", callback_data: "/start" }]
+                                    ]
+                                }
+                            }
+                        }]),
+                        // he
+                        JSON.stringify([{
+                            method: 'editMessageReplyMarkup',
+                            payload: {
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "בדיקות אבטחת Android", callback_data: "/android_security_checks" }],
+                                        [{ text: "בדיקות אבטחת iOS", callback_data: "/ios_security_checks" }],
+                                        [{ text: "בדיקות פרטיות", callback_data: "/privacy_checks" }],
+                                        [{ text: "אודות 🛈", callback_data: "/about" }, { text: "❓ עזרה", callback_data: "/help" }],
+                                        [{ text: "🏠 בית", callback_data: "/start" }]
+                                    ]
+                                }
+                            }
+                        }])
+                    ],
+                    ['/android_security_checks',
+                        // default (en)
+                        JSON.stringify([
+                            { "next": "#remove_keyboard" },
+                            { "next": '#send_android_security_checks' },
+                            { "next": '#append_top_security_checks_keyboard' }
+                        ])
+                    ],
+                    ['/ios_security_checks',
+                        // default (en)
+                        JSON.stringify([
+                            { "next": "#remove_keyboard" },
+                            { "next": '#send_ios_security_checks' },
+                            { "next": '#append_top_security_checks_keyboard' }
+                        ])
+                    ],
+                    ['/privacy_checks',
+                        // default (en)
+                        JSON.stringify([
+                            { "next": "#remove_keyboard" },
+                            { "next": '#send_privacy_checks' },
+                            { "next": '#append_top_security_checks_keyboard' }
+                        ])
+                    ],
+                    ['#send_android_security_checks',
+                        // default (en)
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Android Security Checks: \n\n'
+                                    + '1. Keep your device updated with the latest security patches.\n'
+                                    + '2. Only install apps from trusted sources like Google Play Store.\n'
+                                    + '3. Use a strong screen lock and enable biometric authentication.\n'
+                                    + '4. Regularly back up your data to a secure location.\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // es
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Verificaciones de seguridad de Android: \n\n'
+                                    + '1. Mantén tu dispositivo actualizado con los últimos parches de seguridad.\n'
+                                    + '2. Solo instala aplicaciones de fuentes confiables como Google Play Store.\n'
+                                    + '3. Usa un bloqueo de pantalla fuerte y habilita la autenticación biométrica.\n'
+                                    + '4. Realiza copias de seguridad de tus datos regularmente en una ubicación segura.\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // fr
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Vérifications de sécurité Android : \n\n'
+                                    + '1. Gardez votre appareil à jour avec les derniers correctifs de sécurité.\n'
+                                    + '2. N\'installez des applications que depuis des sources fiables comme le Google Play Store.\n'
+                                    + '3. Utilisez un verrouillage d\'écran fort et activez l\'authentification biométrique.\n'
+                                    + '4. Sauvegardez régulièrement vos données dans un endroit sécurisé.\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ar
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'فحوصات أمان Android: \n\n'
+                                    + '1. حافظ على تحديث جهازك بأحدث تصحيحات الأمان.\n'
+                                    + '2. قم بتثبيت التطبيقات فقط من مصادر موثوقة مثل متجر Google Play.\n'
+                                    + '3. استخدم قفل شاشة قوي وقم بتمكين المصادقة البيومترية.\n'
+                                    + '4. قم بعمل نسخ احتياطية لبياناتك بانتظام إلى موقع آمن.\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // de
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Android-Sicherheitsprüfungen: \n\n'
+                                    + '1. Halten Sie Ihr Gerät mit den neuesten Sicherheitspatches auf dem neuesten Stand.\n'
+                                    + '2. Installieren Sie Apps nur aus vertrauenswürdigen Quellen wie dem Google Play Store.\n'
+                                    + '3. Verwenden Sie eine starke Bildschirmsperre und aktivieren Sie die biometrische Authentifizierung.\n'
+                                    + '4. Sichern Sie Ihre Daten regelmäßig an einem sicheren Ort.\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // it
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Controlli di sicurezza Android: \n\n'
+                                    + '1. Mantieni il tuo dispositivo aggiornato con le ultime patch di sicurezza.\n'
+                                    + '2. Installa app solo da fonti affidabili come il Google Play Store.\n'
+                                    + '3. Usa un blocco schermo forte e abilita l\'autenticazione biometrica.\n'
+                                    + '4. Esegui regolarmente il backup dei tuoi dati in una posizione sicura.\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // pt
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Verificações de segurança do Android: \n\n'
+                                    + '1. Mantenha seu dispositivo atualizado com os patches de segurança mais recentes.\n'
+                                    + '2. Instale aplicativos apenas de fontes confiáveis, como a Google Play Store.\n'
+                                    + '3. Use um bloqueio de tela forte e ative a autenticação biométrica.\n'
+                                    + '4. Faça backup dos seus dados regularmente em um local seguro.\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ru
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Проверки безопасности Android: \n\n'
+                                    + '1. Держите ваше устройство обновленным с последними патчами безопасности.\n'
+                                    + '2. Устанавливайте приложения только из надежных источников, таких как Google Play Store.\n'
+                                    + '3. Используйте надежную блокировку экрана и включайте биометрическую аутентификацию.\n'
+                                    + '4. Регулярно делайте резервные копии ваших данных в безопасном месте.\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // zh
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Android 安全检查：\n\n'
+                                    + '1. 保持您的设备更新最新的安全补丁。\n'
+                                    + '2. 仅从可信来源（如 Google Play 商店）安装应用程序。\n'
+                                    + '3. 使用强屏幕锁定并启用生物识别认证。\n'
+                                    + '4. 定期备份您的数据到安全位置。\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ja
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Androidのセキュリティチェック：\n\n'
+                                    + '1. デバイスを最新のセキュリティパッチで更新してください。\n'
+                                    + '2. Google Playストアなどの信頼できるソースからのみアプリをインストールしてください。\n'
+                                    + '3. 強力な画面ロックを使用し、生体認証を有効にしてください。\n'
+                                    + '4. 定期的にデータを安全な場所にバックアップしてください。\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ko
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Android 보안 점검: \n\n'
+                                    + '1. 최신 보안 패치로 기기를 업데이트하세요.\n'
+                                    + '2. Google Play 스토어와 같은 신뢰할 수 있는 출처에서만 앱을 설치하세요.\n'
+                                    + '3. 강력한 화면 잠금과 생체 인증을 사용하세요.\n'
+                                    + '4. 데이터를 정기적으로 안전한 장소에 백업하세요.\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // he
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'בדיקות אבטחה של Android: \n\n'
+                                    + '1. שמור על המכשיר שלך מעודכן עם תיקוני האבטחה האחרונים.\n'
+                                    + '2. התקן אפליקציות רק ממקורות מהימנים, כמו Google Play Store.\n'
+                                    + '3. השתמש בנעילת מסך חזקה והפעל אימות ביומטרי.\n'
+                                    + '4. גבה את הנתונים שלך באופן קבוע במקום בטוח.\n',
+                                parse_mode: 'HTML'
+                            }
+                        }])
+                    ],
+                    ['#send_ios_security_checks',
+                        // default (en)
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'iOS Security Checks: \n\n'
+                                    + '1. Keep your iOS device updated with the latest software updates.\n'
+                                    + '2. Only download apps from the official App Store.\n'
+                                    + '3. Use a strong passcode and enable Face ID or Touch ID.\n'
+                                    + '4. Regularly back up your data using iCloud or iTunes.\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // es
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Controles de seguridad de iOS: \n\n'
+                                    + '1. Mantenga su dispositivo iOS actualizado con las últimas actualizaciones de software.\n'
+                                    + '2. Descargue aplicaciones solo desde la App Store oficial.\n'
+                                    + '3. Use un código de acceso fuerte y habilite Face ID o Touch ID.\n'
+                                    + '4. Realice copias de seguridad de sus datos regularmente usando iCloud o iTunes.\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // fr
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Vérifications de sécurité iOS : \n\n'
+                                    + '1. Maintenez votre appareil iOS à jour avec les dernières mises à jour logicielles.\n'
+                                    + '2. Téléchargez uniquement des applications depuis l\'App Store officiel.\n'
+                                    + '3. Utilisez un code d\'accès fort et activez Face ID ou Touch ID.\n'
+                                    + '4. Sauvegardez régulièrement vos données en utilisant iCloud ou iTunes.\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ar
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'فحوصات أمان iOS: \n\n'
+                                    + '1. حافظ على تحديث جهاز iOS الخاص بك بأحدث تحديثات البرامج.\n'
+                                    + '2. قم بتنزيل التطبيقات فقط من متجر التطبيقات الرسمي.\n'
+                                    + '3. استخدم رمز مرور قوي وقم بتمكين Face ID أو Touch ID.\n'
+                                    + '4. قم بعمل نسخ احتياطية لبياناتك بانتظام باستخدام iCloud أو iTunes.\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // de
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'iOS-Sicherheitsprüfungen: \n\n'
+                                    + '1. Halten Sie Ihr iOS-Gerät mit den neuesten Software-Updates auf dem neuesten Stand.\n'
+                                    + '2. Laden Sie Apps nur aus dem offiziellen App Store herunter.\n'
+                                    + '3. Verwenden Sie einen starken Passcode und aktivieren Sie Face ID oder Touch ID.\n'
+                                    + '4. Sichern Sie Ihre Daten regelmäßig mit iCloud oder iTunes.\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // it
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Controlli di sicurezza iOS: \n\n'
+                                    + '1. Mantieni il tuo dispositivo iOS aggiornato con gli ultimi aggiornamenti software.\n'
+                                    + '2. Scarica le app solo dall\'App Store ufficiale.\n'
+                                    + '3. Usa un codice di accesso forte e abilita Face ID o Touch ID.\n'
+                                    + '4. Esegui regolarmente il backup dei tuoi dati utilizzando iCloud o iTunes.\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // pt
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Verificações de segurança do iOS: \n\n'
+                                    + '1. Mantenha seu dispositivo iOS atualizado com as últimas atualizações de software.\n'
+                                    + '2. Baixe aplicativos apenas da App Store oficial.\n'
+                                    + '3. Use um código de acesso forte e ative o Face ID ou Touch ID.\n'
+                                    + '4. Faça backup regularmente dos seus dados usando o iCloud ou iTunes.\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ru
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Проверки безопасности iOS: \n\n'
+                                    + '1. Держите ваше устройство iOS обновленным с последними обновлениями программного обеспечения.\n'
+                                    + '2. Загружайте приложения только из официального App Store.\n'
+                                    + '3. Используйте надежный пароль и включайте Face ID или Touch ID.\n'
+                                    + '4. Регулярно делайте резервные копии ваших данных с помощью iCloud или iTunes.\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // zh
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'iOS安全检查：\n\n'
+                                    + '1. 保持您的iOS设备更新到最新的软件版本。\n'
+                                    + '2. 仅从官方App Store下载应用程序。\n'
+                                    + '3. 使用强密码并启用Face ID或Touch ID。\n'
+                                    + '4. 定期使用iCloud或iTunes备份您的数据。\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ja
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'iOSのセキュリティチェック：\n\n'
+                                    + '1. iOSデバイスを最新のソフトウェアアップデートで常に最新の状態に保ちます。\n'
+                                    + '2. 公式のApp Storeからのみアプリをダウンロードします。\n'
+                                    + '3. 強力なパスコードを使用し、Face IDまたはTouch IDを有効にします。\n'
+                                    + '4. iCloudまたはiTunesを使用して定期的にデータをバックアップします。\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ko
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'iOS 보안 점검: \n\n'
+                                    + '1. iOS 기기를 최신 소프트웨어 업데이트로 유지하세요.\n'
+                                    + '2. 공식 App Store에서만 앱을 다운로드하세요.\n'
+                                    + '3. 강력한 암호를 사용하고 Face ID 또는 Touch ID를 활성화하세요.\n'
+                                    + '4. iCloud 또는 iTunes를 사용하여 데이터를 정기적으로 백업하세요.\n',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // he
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'בדיקות אבטחה של iOS: \n\n'
+                                    + '1. שמור על מכשיר ה-iOS שלך מעודכן עם עדכוני התוכנה האחרונים.\n'
+                                    + '2. הורד אפליקציות רק מחנות האפליקציות הרשמית.\n'
+                                    + '3. השתמש בקוד גישה חזק והפעל Face ID או Touch ID.\n'
+                                    + '4. גבה את הנתונים שלך באופן קבוע באמצעות iCloud או iTunes.\n',
+                                parse_mode: 'HTML'
+                            }
+                        }])
+                    ],
+                    ['#send_privacy_checks',
+                        // default (en)
+                        JSON.stringify([
+                            {
+                                method: 'sendMessage',
+                                payload: {
+                                    text: 'Privacy Checks: \n\n'
+                                        + '1. Review app permissions and revoke any unnecessary access.\n'
+                                        + '2. Use strong, unique passwords for your accounts.\n'
+                                        + '3. Enable two-factor authentication (2FA) wherever possible.\n'
+                                        + '4. Be cautious about sharing personal information online.\n',
+                                    parse_mode: 'HTML'
+                                }
+                            }
+                        ])
+                    ],
+                    ['#send_call_to_security_action_message',
+                        // default (en)
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'For more security actions, visit our website or contact support.',
+                                parse_mode: 'HTML'
+                            }
+                        }])
                     ]
                 ]
-        };
+        }
+    }
+}
+
+EMD.SurveyAutomation = {
+    entityName: 'SurveyAutomation',
+    sheet: (data = {}) => {
+        return {
+            name: EMD.Automation.sheet(data).name,
+            columns: EMD.Automation.sheet(data).columns,
+            sample_data:
+                [
+                    ['---- 📋 SURVEY AUTOMATION SAMPLE DATA START ----',],
+                    ['/surveys',
+                        // default (en)
+                        JSON.stringify([
+                            { "next": "#remove_keyboard" },
+                            { "next": "#send_welcome_to_survey_center" },
+                            { "next": "#append_survey_options_keyboard" },
+                            { "next": "#answer_completed" }
+                        ])
+                    ],
+                    ['#append_survey_options_keyboard',
+                        // default (en)
+                        JSON.stringify([{
+                            method: 'editMessageReplyMarkup',
+                            payload: {
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [
+                                            { text: "Poll 1", callback_data: "#sendPoll01" },
+                                            { text: "Poll 2", callback_data: "#sendPoll02" }
+                                        ],
+                                        [
+                                            { text: "Poll 3", callback_data: "#sendPoll03" },
+                                            { text: "Poll 4", callback_data: "#sendPoll04" }
+                                        ],
+                                        [
+                                            { text: "Quiz 1", callback_data: "#sendQuiz01" },
+                                            { text: "Quiz 2", callback_data: "#sendQuiz02" }
+                                        ],
+                                        [
+                                            { text: "Quiz 3", callback_data: "#sendQuiz03" },
+                                            { text: "Quiz 4", callback_data: "#sendQuiz04" }
+                                        ]
+                                    ]
+                                }
+                            }
+                        }])
+                    ],
+                    ['#send_welcome_to_survey_center',
+                        // default (en)
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Welcome to the Survey Center! \n\n'
+                                    + 'Here you can participate in various polls and quizzes to share your opinions and test your knowledge.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // es
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: '¡Bienvenido al Centro de Encuestas! \n\n'
+                                    + 'Aquí puedes participar en varias encuestas y cuestionarios para compartir tus opiniones y poner a prueba tus conocimientos.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // fr
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Bienvenue au Centre de Sondages ! \n\n'
+                                    + 'Ici, vous pouvez participer à divers sondages et quiz pour partager vos opinions et tester vos connaissances.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ar
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'مرحبًا بك في مركز الاستطلاعات! \n\n'
+                                    + 'هنا يمكنك المشاركة في استطلاعات واختبارات مختلفة لمشاركة آرائك واختبار معرفتك.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // de
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Willkommen im Umfragezentrum! \n\n'
+                                    + 'Hier können Sie an verschiedenen Umfragen und Quizzen teilnehmen, um Ihre Meinungen zu teilen und Ihr Wissen zu testen.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // it
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Benvenuto nel Centro Sondaggi! \n\n'
+                                    + 'Qui puoi partecipare a vari sondaggi e quiz per condividere le tue opinioni e mettere alla prova le tue conoscenze.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // pt
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Bem-vindo ao Centro de Pesquisas! \n\n'
+                                    + 'Aqui você pode participar de várias pesquisas e questionários para compartilhar suas opiniões e testar seus conhecimentos.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ru
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Добро пожаловать в Центр Опросов! \n\n'
+                                    + 'Здесь вы можете участвовать в различных опросах и викторинах, чтобы поделиться своим мнением и проверить свои знания.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // zh
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: '欢迎来到调查中心！ \n\n'
+                                    + '在这里，您可以参与各种调查和测验，分享您的意见并测试您的知识。',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ja
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'アンケートセンターへようこそ！ \n\n'
+                                    + 'ここでは、さまざまなアンケートやクイズに参加して、意見を共有し、知識を試すことができます。',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ko
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: '설문 조사 센터에 오신 것을 환영합니다! \n\n'
+                                    + '여기에서 다양한 설문 조사와 퀴즈에 참여하여 의견을 공유하고 지식을 테스트할 수 있습니다.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // he
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'ברוכים הבאים למרכז הסקרים! \n\n'
+                                    + 'כאן תוכלו להשתתף בסקרים ובחידונים שונים כדי לשתף את דעתכם ולבדוק את הידע שלכם.',
+                                parse_mode: 'HTML'
+                            }
+                        }])
+                    ],
+                    ['#sendPoll01',
+                        // default (en)
+                        JSON.stringify([{
+                            method: 'sendPoll',
+                            payload: {
+                                question: 'Which feature do you like the most in this bot?',
+                                question_parse_mode: 'HTML',
+                                options: JSON.stringify([
+                                    'Text Messages with HTML formatting',
+                                    'Photos with captions and inline keyboards',
+                                    'Media Groups (albums) with multiple photos',
+                                    'Interactive Inline Keyboards'
+                                ]),
+                                protect_content: true,
+                                open_period: 300,
+                                is_anonymous: false,
+                                explanation: 'Your feedback helps us improve the bot and add more exciting features!',
+                                explanation_parse_mode: 'HTML',
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "🏠 Start", callback_data: "/start" }]
+                                    ]
+                                }
+                            }
+                        }])
+                    ],
+                    ['#sendPoll02',
+                        // default (en)
+                        JSON.stringify([{
+                            method: 'sendPoll',
+                            payload: {
+                                question: 'What feature would you like to see added next?',
+                                question_parse_mode: 'HTML',
+                                options: JSON.stringify([
+                                    'Voice Messages',
+                                    'Video Sharing',
+                                    'File Attachments',
+                                    'Live Streaming'
+                                ]),
+                                protect_content: true,
+                                open_period: 300,
+                                is_anonymous: false,
+                                explanation: 'Your feedback helps us improve the bot and add more exciting features!',
+                                explanation_parse_mode: 'HTML',
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "🏠 Start", callback_data: "/start" }]
+                                    ]
+                                }
+                            }
+                        }])
+                    ],
+                    ['#sendPoll03',
+                        // default (en)
+                        JSON.stringify([{
+                            method: 'sendPoll',
+                            payload: {
+                                question: 'How often do you use this bot?',
+                                question_parse_mode: 'HTML',
+                                options: JSON.stringify([
+                                    'Daily',
+                                    'Weekly',
+                                    'Monthly',
+                                    'Rarely'
+                                ]),
+                                protect_content: true,
+                                open_period: 300,
+                                is_anonymous: false,
+                                explanation: 'Your feedback helps us improve the bot and add more exciting features!',
+                                explanation_parse_mode: 'HTML',
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "🏠 Start", callback_data: "/start" }]
+                                    ]
+                                }
+                            }
+                        }])
+                    ],
+                    ['#sendPoll04',
+                        // default (en)
+                        JSON.stringify([{
+                            method: 'sendPoll',
+                            payload: {
+                                question: 'What type of content do you prefer?',
+                                question_parse_mode: 'HTML',
+                                options: JSON.stringify([
+                                    'Educational',
+                                    'Entertainment',
+                                    'News',
+                                    'Other'
+                                ]),
+                                protect_content: true,
+                                open_period: 300,
+                                is_anonymous: false,
+                                explanation: 'Your feedback helps us improve the bot and add more exciting features!',
+                                explanation_parse_mode: 'HTML',
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "🏠 Start", callback_data: "/start" }]
+                                    ]
+                                }
+                            }
+                        }])
+                    ],
+                    ['#sendQuiz01',
+                        // default (en)
+                        JSON.stringify([{
+                            method: 'sendPoll',
+                            payload: {
+                                question: 'What is the <b>main</b> advantage of using Interactive Inline Keyboards in Telegram bots? ✨',
+                                question_parse_mode: 'HTML',
+                                options: JSON.stringify([
+                                    'They allow sending larger files',
+                                    'They enable real-time user interaction',
+                                    'They improve message delivery speed',
+                                    'They support multimedia content'
+                                ]),
+                                protect_content: true,
+                                open_period: 300,
+                                is_anonymous: false,
+                                type: 'quiz',
+                                correct_option_id: 3,
+                                explanation: 'Interactive Inline Keyboards allow users to engage directly with the bot, making the experience more dynamic and user-friendly!',
+                                explanation_parse_mode: 'HTML',
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "🏠 Start", callback_data: "/start" }]
+                                    ]
+                                }
+                            }
+                        }]),
+                        // es
+                        JSON.stringify([{
+                            method: 'sendPoll',
+                            payload: {
+                                question: '¿Cuál es la <b>principal</b> ventaja de usar teclados en línea interactivos en los bots de Telegram? ✨',
+                                question_parse_mode: 'HTML',
+                                options: JSON.stringify([
+                                    'Permiten enviar archivos más grandes',
+                                    'Permiten la interacción en tiempo real con el usuario',
+                                    'Mejoran la velocidad de entrega de mensajes',
+                                    'Soportan contenido multimedia'
+                                ]),
+                                protect_content: true,
+                                open_period: 300,
+                                is_anonymous: false,
+                                type: 'quiz',
+                                correct_option_id: 3,
+                                explanation: '¡Los teclados en línea interactivos permiten a los usuarios interactuar directamente con el bot, haciendo la experiencia más dinámica y amigable!',
+                                explanation_parse_mode: 'HTML',
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "🏠 Inicio", callback_data: "/start" }]
+                                    ]
+                                }
+                            }
+                        }]),
+                        // fr
+                        JSON.stringify([{
+                            method: 'sendPoll',
+                            payload: {
+                                question: 'Quel est le <b>principal</b> avantage d\'utiliser des claviers en ligne interactifs dans les bots Telegram ? ✨',
+                                question_parse_mode: 'HTML',
+                                options: JSON.stringify([
+                                    'Ils permettent d\'envoyer des fichiers plus volumineux',
+                                    'Ils permettent une interaction en temps réel avec l\'utilisateur',
+                                    'Ils améliorent la vitesse de livraison des messages',
+                                    'Ils prennent en charge le contenu multimédia'
+                                ]),
+                                protect_content: true,
+                                open_period: 300,
+                                is_anonymous: false,
+                                type: 'quiz',
+                                correct_option_id: 3,
+                                explanation: 'Les claviers en ligne interactifs permettent aux utilisateurs d\'interagir directement avec le bot, rendant l\'expérience plus dynamique et conviviale !',
+                                explanation_parse_mode: 'HTML',
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "🏠 Accueil", callback_data: "/start" }]
+                                    ]
+                                }
+                            }
+                        }]),
+                        // ar
+                        JSON.stringify([{
+                            method: 'sendPoll',
+                            payload: {
+                                question: 'ما هي <b>الميزة الرئيسية</b> لاستخدام لوحات المفاتيح التفاعلية في بوتات تيليجرام؟ ✨',
+                                question_parse_mode: 'HTML',
+                                options: JSON.stringify([
+                                    'تسمح بإرسال ملفات أكبر',
+                                    'تمكن من التفاعل في الوقت الحقيقي مع المستخدم',
+                                    'تحسن سرعة تسليم الرسائل',
+                                    'تدعم المحتوى متعدد الوسائط'
+                                ]),
+                                protect_content: true,
+                                open_period: 300,
+                                is_anonymous: false,
+                                type: 'quiz',
+                                correct_option_id: 3,
+                                explanation: 'لوحات المفاتيح التفاعلية تتيح للمستخدمين التفاعل مباشرة مع البوت، مما يجعل التجربة أكثر ديناميكية وودية!',
+                                explanation_parse_mode: 'HTML',
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "🏠 الرئيسية", callback_data: "/start" }]
+                                    ]
+                                }
+                            }
+                        }]),
+                        // de
+                        JSON.stringify([{
+                            method: 'sendPoll',
+                            payload: {
+                                question: 'Was ist der <b>Haupt</b>vorteil der Verwendung von interaktiven Inline-Tastaturen in Telegram-Bots? ✨',
+                                question_parse_mode: 'HTML',
+                                options: JSON.stringify([
+                                    'Sie ermöglichen das Senden größerer Dateien',
+                                    'Sie ermöglichen die Echtzeit-Interaktion mit dem Benutzer',
+                                    'Sie verbessern die Nachrichtenzustellungsgeschwindigkeit',
+                                    'Sie unterstützen Multimedia-Inhalte'
+                                ]),
+                                protect_content: true,
+                                open_period: 300,
+                                is_anonymous: false,
+                                type: 'quiz',
+                                correct_option_id: 3,
+                                explanation: 'Interaktive Inline-Tastaturen ermöglichen es den Benutzern, direkt mit dem Bot zu interagieren, was das Erlebnis dynamischer und benutzerfreundlicher macht!',
+                                explanation_parse_mode: 'HTML',
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "🏠 Startseite", callback_data: "/start" }]
+                                    ]
+                                }
+                            }
+                        }]),
+                        // it
+                        JSON.stringify([{
+                            method: 'sendPoll',
+                            payload: {
+                                question: 'Qual è il <b>principale</b> vantaggio di utilizzare le tastiere inline interattive nei bot di Telegram? ✨',
+                                question_parse_mode: 'HTML',
+                                options: JSON.stringify([
+                                    'Consentono di inviare file più grandi',
+                                    'Consentono l\'interazione in tempo reale con l\'utente',
+                                    'Migliorano la velocità di consegna dei messaggi',
+                                    'Supportano contenuti multimediali'
+                                ]),
+                                protect_content: true,
+                                open_period: 300,
+                                is_anonymous: false,
+                                type: 'quiz',
+                                correct_option_id: 3,
+                                explanation: 'Le tastiere inline interattive consentono agli utenti di interagire direttamente con il bot, rendendo l\'esperienza più dinamica e user-friendly!',
+                                explanation_parse_mode: 'HTML',
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "🏠 Home", callback_data: "/start" }]
+                                    ]
+                                }
+                            }
+                        }]),
+                        // pt
+                        JSON.stringify([{
+                            method: 'sendPoll',
+                            payload: {
+                                question: 'Qual é a <b>principal</b> vantagem de usar teclados inline interativos em bots do Telegram? ✨',
+                                question_parse_mode: 'HTML',
+                                options: JSON.stringify([
+                                    'Eles permitem o envio de arquivos maiores',
+                                    'Eles possibilitam a interação em tempo real com o usuário',
+                                    'Eles melhoram a velocidade de entrega de mensagens',
+                                    'Eles suportam conteúdo multimídia'
+                                ]),
+                                protect_content: true,
+                                open_period: 300,
+                                is_anonymous: false,
+                                type: 'quiz',
+                                correct_option_id: 3,
+                                explanation: 'As teclas inline interativas permitem que os usuários interajam diretamente com o bot, tornando a experiência mais dinâmica e amigável!',
+                                explanation_parse_mode: 'HTML',
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "🏠 Início", callback_data: "/start" }]
+                                    ]
+                                }
+                            }
+                        }]),
+                        // ru
+                        JSON.stringify([{
+                            method: 'sendPoll',
+                            payload: {
+                                question: 'Какое <b>основное</b> преимущество использования интерактивных встроенных клавиатур в ботах Telegram? ✨',
+                                question_parse_mode: 'HTML',
+                                options: JSON.stringify([
+                                    'Они позволяют отправлять большие файлы',
+                                    'Они обеспечивают взаимодействие с пользователем в реальном времени',
+                                    'Они улучшают скорость доставки сообщений',
+                                    'Они поддерживают мультимедийный контент'
+                                ]),
+                                protect_content: true,
+                                open_period: 300,
+                                is_anonymous: false,
+                                type: 'quiz',
+                                correct_option_id: 3,
+                                explanation: 'Интерактивные встроенные клавиатуры позволяют пользователям напрямую взаимодействовать с ботом, делая опыт более динамичным и удобным!',
+                                explanation_parse_mode: 'HTML',
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "🏠 Главная", callback_data: "/start" }]
+                                    ]
+                                }
+                            }
+                        }]),
+                        // zh
+                        JSON.stringify([{
+                            method: 'sendPoll',
+                            payload: {
+                                question: '在Telegram机器人中使用交互式内联键盘的<b>主要</b>优势是什么？✨',
+                                question_parse_mode: 'HTML',
+                                options: JSON.stringify([
+                                    '它们允许发送更大的文件',
+                                    '它们实现了与用户的实时互动',
+                                    '它们提高了消息传递速度',
+                                    '它们支持多媒体内容'
+                                ]),
+                                protect_content: true,
+                                open_period: 300,
+                                is_anonymous: false,
+                                type: 'quiz',
+                                correct_option_id: 3,
+                                explanation: '交互式内联键盘允许用户直接与机器人互动，使体验更加动态和用户友好！',
+                                explanation_parse_mode: 'HTML',
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "🏠 主页", callback_data: "/start" }]
+                                    ]
+                                }
+                            }
+                        }]),
+                        // ja
+                        JSON.stringify([{
+                            method: 'sendPoll',
+                            payload: {
+                                question: 'Telegramボットでインタラクティブなインラインキーボードを使用する<b>主な</b>利点は何ですか？✨',
+                                question_parse_mode: 'HTML',
+                                options: JSON.stringify([
+                                    'より大きなファイルの送信が可能',
+                                    'ユーザーとのリアルタイムの対話を可能にする',
+                                    'メッセージ配信速度を向上させる',
+                                    'マルチメディアコンテンツをサポートする'
+                                ]),
+                                protect_content: true,
+                                open_period: 300,
+                                is_anonymous: false,
+                                type: 'quiz',
+                                correct_option_id: 3,
+                                explanation: 'インタラクティブなインラインキーボードにより、ユーザーはボットと直接対話でき、体験がよりダイナミックでユーザーフレンドリーになります！',
+                                explanation_parse_mode: 'HTML',
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "🏠 ホーム", callback_data: "/start" }]
+                                    ]
+                                }
+                            }
+                        }]),
+                        // ko
+                        JSON.stringify([{
+                            method: 'sendPoll',
+                            payload: {
+                                question: 'Telegram 봇에서 대화형 인라인 키보드를 사용하는 <b>주요</b> 이점은 무엇인가요? ✨',
+                                question_parse_mode: 'HTML',
+                                options: JSON.stringify([
+                                    '더 큰 파일 전송이 가능하다',
+                                    '사용자와의 실시간 상호작용을 가능하게 한다',
+                                    '메시지 전달 속도를 향상시킨다',
+                                    '멀티미디어 콘텐츠를 지원한다'
+                                ]),
+                                protect_content: true,
+                                open_period: 300,
+                                is_anonymous: false,
+                                type: 'quiz',
+                                correct_option_id: 3,
+                                explanation: '대화형 인라인 키보드를 통해 사용자는 봇과 직접 상호작용할 수 있어 경험이 더욱 역동적이고 사용자 친화적입니다!',
+                                explanation_parse_mode: 'HTML',
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "🏠 홈", callback_data: "/start" }]
+                                    ]
+                                }
+                            }
+                        }]),
+                        // he
+                        JSON.stringify([{
+                            method: 'sendPoll',
+                            payload: {
+                                question: 'מהו היתרון ה<b>עיקרי</b> בשימוש במקלדות אינטראקטיביות מקוונות בבוטים של טלגרם? ✨',
+                                question_parse_mode: 'HTML',
+                                options: JSON.stringify([
+                                    'הן מאפשרות שליחת קבצים גדולים יותר',
+                                    'הן מאפשרות אינטראקציה בזמן אמת עם המשתמש',
+                                    'הן משפרות את מהירות מסירת ההודעות',
+                                    'הן תומכות בתוכן מולטימדיה'
+                                ]),
+                                protect_content: true,
+                                open_period: 300,
+                                is_anonymous: false,
+                                type: 'quiz',
+                                correct_option_id: 3,
+                                explanation: 'מקלדות אינטראקטיביות מקוונות מאפשרות למשתמשים אינטראקציה ישירה עם הבוט, מה שהופך את החוויה לדינמית וידידותית יותר למשתמש!',
+                                explanation_parse_mode: 'HTML',
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "🏠 בית", callback_data: "/start" }]
+                                    ]
+                                }
+                            }
+                        }])
+                    ],
+                    ['#sendQuiz02',
+                        // default (en)
+                        JSON.stringify([{
+                            method: 'sendPoll',
+                            payload: {
+                                question: 'How can Interactive Inline Keyboards enhance user engagement in Telegram bots? 🤖',
+                                question_parse_mode: 'HTML',
+                                options: JSON.stringify([
+                                    'By providing static information',
+                                    'By enabling real-time interactions and responses',
+                                    'By sending automated messages only',
+                                    'By limiting user choices'
+                                ]),
+                                protect_content: true,
+                                open_period: 300,
+                                is_anonymous: false,
+                                type: 'quiz',
+                                correct_option_id: 1,
+                                explanation: 'Interactive Inline Keyboards allow users to engage directly with the bot, making the experience more dynamic and user-friendly!',
+                                explanation_parse_mode: 'HTML',
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "🏠 Start", callback_data: "/start" }]
+                                    ]
+                                }
+                            }
+                        }])
+
+                    ],
+                    ['#sendQuiz03',
+                        // default (en)
+                        JSON.stringify([{
+                            method: 'sendPoll',
+                            payload: {
+                                question: 'What type of content can be delivered using Interactive Inline Keyboards in Telegram bots? 📱',
+                                question_parse_mode: 'HTML',
+                                options: JSON.stringify([
+                                    'Only text messages',
+                                    'Multimedia content including photos and videos',
+                                    'Only audio files',
+                                    'None of the above'
+                                ]),
+                                protect_content: true,
+                                open_period: 300,
+                                is_anonymous: false,
+                                type: 'quiz',
+                                correct_option_id: 1,
+                                explanation: 'Interactive Inline Keyboards allow users to engage directly with the bot, making the experience more dynamic and user-friendly!',
+                                explanation_parse_mode: 'HTML',
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "🏠 Start", callback_data: "/start" }]
+                                    ]
+                                }
+                            }
+                        }])
+                    ],
+                    ['#sendQuiz04',
+                        // default (en)
+                        JSON.stringify([{
+                            method: 'sendPoll',
+                            payload: {
+                                question: 'What is the <b>main</b> advantage of using Interactive Inline Keyboards in Telegram bots? ✨',
+                                question_parse_mode: 'HTML',
+                                options: JSON.stringify([
+                                    'They allow sending larger files',
+                                    'They enable real-time user interaction',
+                                    'They improve message delivery speed',
+                                    'They support multimedia content'
+                                ]),
+                                protect_content: true,
+                                open_period: 300,
+                                is_anonymous: false,
+                                type: 'quiz',
+                                correct_option_id: 3,
+                                explanation: 'Interactive Inline Keyboards allow users to engage directly with the bot, making the experience more dynamic and user-friendly!',
+                                explanation_parse_mode: 'HTML',
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "🏠 Start", callback_data: "/start" }]
+                                    ]
+                                }
+                            }
+                        }]),
+                        // es
+                        JSON.stringify([{
+                            method: 'sendPoll',
+                            payload: {
+                                question: '¿Cuál es la <b>principal</b> ventaja de usar teclados en línea interactivos en los bots de Telegram? ✨',
+                                question_parse_mode: 'HTML',
+                                options: JSON.stringify([
+                                    'Permiten enviar archivos más grandes',
+                                    'Permiten la interacción en tiempo real con el usuario',
+                                    'Mejoran la velocidad de entrega de mensajes',
+                                    'Soportan contenido multimedia'
+                                ]),
+                                protect_content: true,
+                                open_period: 300,
+                                is_anonymous: false,
+                                type: 'quiz',
+                                correct_option_id: 3,
+                                explanation: '¡Los teclados en línea interactivos permiten a los usuarios interactuar directamente con el bot, haciendo la experiencia más dinámica y amigable!',
+                                explanation_parse_mode: 'HTML',
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "🏠 Inicio", callback_data: "/start" }]
+                                    ]
+                                }
+                            }
+                        }]),
+                        // fr
+                        JSON.stringify([{
+                            method: 'sendPoll',
+                            payload: {
+                                question: 'Quel est le <b>principal</b> avantage d\'utiliser des claviers en ligne interactifs dans les bots Telegram ? ✨',
+                                question_parse_mode: 'HTML',
+                                options: JSON.stringify([
+                                    'Ils permettent d\'envoyer des fichiers plus volumineux',
+                                    'Ils permettent une interaction en temps réel avec l\'utilisateur',
+                                    'Ils améliorent la vitesse de livraison des messages',
+                                    'Ils prennent en charge le contenu multimédia'
+                                ]),
+                                protect_content: true,
+                                open_period: 300,
+                                is_anonymous: false,
+                                type: 'quiz',
+                                correct_option_id: 3,
+                                explanation: 'Les claviers en ligne interactifs permettent aux utilisateurs d\'interagir directement avec le bot, rendant l\'expérience plus dynamique et conviviale !',
+                                explanation_parse_mode: 'HTML',
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "🏠 Accueil", callback_data: "/start" }]
+                                    ]
+                                }
+                            }
+                        }]),
+                        // ar
+                        JSON.stringify([{
+                            method: 'sendPoll',
+                            payload: {
+                                question: 'ما هي <b>الميزة الرئيسية</b> لاستخدام لوحات المفاتيح التفاعلية في بوتات تيليجرام؟ ✨',
+                                question_parse_mode: 'HTML',
+                                options: JSON.stringify([
+                                    'تسمح بإرسال ملفات أكبر',
+                                    'تمكن من التفاعل في الوقت الحقيقي مع المستخدم',
+                                    'تحسن سرعة تسليم الرسائل',
+                                    'تدعم المحتوى متعدد الوسائط'
+                                ]),
+                                protect_content: true,
+                                open_period: 300,
+                                is_anonymous: false,
+                                type: 'quiz',
+                                correct_option_id: 3,
+                                explanation: 'لوحات المفاتيح التفاعلية تتيح للمستخدمين التفاعل مباشرة مع البوت، مما يجعل التجربة أكثر ديناميكية وودية!',
+                                explanation_parse_mode: 'HTML',
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "🏠 الرئيسية", callback_data: "/start" }]
+                                    ]
+                                }
+                            }
+                        }]),
+                        // de
+                        JSON.stringify([{
+                            method: 'sendPoll',
+                            payload: {
+                                question: 'Was ist der <b>Haupt</b>vorteil der Verwendung von interaktiven Inline-Tastaturen in Telegram-Bots? ✨',
+                                question_parse_mode: 'HTML',
+                                options: JSON.stringify([
+                                    'Sie ermöglichen das Senden größerer Dateien',
+                                    'Sie ermöglichen die Echtzeit-Interaktion mit dem Benutzer',
+                                    'Sie verbessern die Nachrichtenzustellungsgeschwindigkeit',
+                                    'Sie unterstützen Multimedia-Inhalte'
+                                ]),
+                                protect_content: true,
+                                open_period: 300,
+                                is_anonymous: false,
+                                type: 'quiz',
+                                correct_option_id: 3,
+                                explanation: 'Interaktive Inline-Tastaturen ermöglichen es den Benutzern, direkt mit dem Bot zu interagieren, was das Erlebnis dynamischer und benutzerfreundlicher macht!',
+                                explanation_parse_mode: 'HTML',
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "🏠 Startseite", callback_data: "/start" }]
+                                    ]
+                                }
+                            }
+                        }]),
+                        // it
+                        JSON.stringify([{
+                            method: 'sendPoll',
+                            payload: {
+                                question: 'Qual è il <b>principale</b> vantaggio di utilizzare le tastiere inline interattive nei bot di Telegram? ✨',
+                                question_parse_mode: 'HTML',
+                                options: JSON.stringify([
+                                    'Consentono di inviare file più grandi',
+                                    'Consentono l\'interazione in tempo reale con l\'utente',
+                                    'Migliorano la velocità di consegna dei messaggi',
+                                    'Supportano contenuti multimediali'
+                                ]),
+                                protect_content: true,
+                                open_period: 300,
+                                is_anonymous: false,
+                                type: 'quiz',
+                                correct_option_id: 3,
+                                explanation: 'Le tastiere inline interattive consentono agli utenti di interagire direttamente con il bot, rendendo l\'esperienza più dinamica e user-friendly!',
+                                explanation_parse_mode: 'HTML',
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "🏠 Home", callback_data: "/start" }]
+                                    ]
+                                }
+                            }
+                        }]),
+                        // pt
+                        JSON.stringify([{
+                            method: 'sendPoll',
+                            payload: {
+                                question: 'Qual é a <b>principal</b> vantagem de usar teclados inline interativos em bots do Telegram? ✨',
+                                question_parse_mode: 'HTML',
+                                options: JSON.stringify([
+                                    'Eles permitem o envio de arquivos maiores',
+                                    'Eles possibilitam a interação em tempo real com o usuário',
+                                    'Eles melhoram a velocidade de entrega de mensagens',
+                                    'Eles suportam conteúdo multimídia'
+                                ]),
+                                protect_content: true,
+                                open_period: 300,
+                                is_anonymous: false,
+                                type: 'quiz',
+                                correct_option_id: 3,
+                                explanation: 'As teclas inline interativas permitem que os usuários interajam diretamente com o bot, tornando a experiência mais dinâmica e amigável!',
+                                explanation_parse_mode: 'HTML',
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "🏠 Início", callback_data: "/start" }]
+                                    ]
+                                }
+                            }
+                        }]),
+                        // ru
+                        JSON.stringify([{
+                            method: 'sendPoll',
+                            payload: {
+                                question: 'Какое <b>основное</b> преимущество использования интерактивных встроенных клавиатур в ботах Telegram? ✨',
+                                question_parse_mode: 'HTML',
+                                options: JSON.stringify([
+                                    'Они позволяют отправлять большие файлы',
+                                    'Они обеспечивают взаимодействие с пользователем в реальном времени',
+                                    'Они улучшают скорость доставки сообщений',
+                                    'Они поддерживают мультимедийный контент'
+                                ]),
+                                protect_content: true,
+                                open_period: 300,
+                                is_anonymous: false,
+                                type: 'quiz',
+                                correct_option_id: 3,
+                                explanation: 'Интерактивные встроенные клавиатуры позволяют пользователям напрямую взаимодействовать с ботом, делая опыт более динамичным и удобным!',
+                                explanation_parse_mode: 'HTML',
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "🏠 Главная", callback_data: "/start" }]
+                                    ]
+                                }
+                            }
+                        }]),
+                        // zh
+                        JSON.stringify([{
+                            method: 'sendPoll',
+                            payload: {
+                                question: '在Telegram机器人中使用交互式内联键盘的<b>主要</b>优势是什么？✨',
+                                question_parse_mode: 'HTML',
+                                options: JSON.stringify([
+                                    '它们允许发送更大的文件',
+                                    '它们实现了与用户的实时互动',
+                                    '它们提高了消息传递速度',
+                                    '它们支持多媒体内容'
+                                ]),
+                                protect_content: true,
+                                open_period: 300,
+                                is_anonymous: false,
+                                type: 'quiz',
+                                correct_option_id: 3,
+                                explanation: '交互式内联键盘允许用户直接与机器人互动，使体验更加动态和用户友好！',
+                                explanation_parse_mode: 'HTML',
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "🏠 主页", callback_data: "/start" }]
+                                    ]
+                                }
+                            }
+                        }]),
+                        // ja
+                        JSON.stringify([{
+                            method: 'sendPoll',
+                            payload: {
+                                question: 'Telegramボットでインタラクティブなインラインキーボードを使用する<b>主な</b>利点は何ですか？✨',
+                                question_parse_mode: 'HTML',
+                                options: JSON.stringify([
+                                    'より大きなファイルの送信が可能',
+                                    'ユーザーとのリアルタイムの対話を可能にする',
+                                    'メッセージ配信速度を向上させる',
+                                    'マルチメディアコンテンツをサポートする'
+                                ]),
+                                protect_content: true,
+                                open_period: 300,
+                                is_anonymous: false,
+                                type: 'quiz',
+                                correct_option_id: 3,
+                                explanation: 'インタラクティブなインラインキーボードにより、ユーザーはボットと直接対話でき、体験がよりダイナミックでユーザーフレンドリーになります！',
+                                explanation_parse_mode: 'HTML',
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "🏠 ホーム", callback_data: "/start" }]
+                                    ]
+                                }
+                            }
+                        }]),
+                        // ko
+                        JSON.stringify([{
+                            method: 'sendPoll',
+                            payload: {
+                                question: 'Telegram 봇에서 대화형 인라인 키보드를 사용하는 <b>주요</b> 이점은 무엇인가요? ✨',
+                                question_parse_mode: 'HTML',
+                                options: JSON.stringify([
+                                    '더 큰 파일 전송이 가능하다',
+                                    '사용자와의 실시간 상호작용을 가능하게 한다',
+                                    '메시지 전달 속도를 향상시킨다',
+                                    '멀티미디어 콘텐츠를 지원한다'
+                                ]),
+                                protect_content: true,
+                                open_period: 300,
+                                is_anonymous: false,
+                                type: 'quiz',
+                                correct_option_id: 3,
+                                explanation: '대화형 인라인 키보드를 통해 사용자는 봇과 직접 상호작용할 수 있어 경험이 더욱 역동적이고 사용자 친화적입니다!',
+                                explanation_parse_mode: 'HTML',
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "🏠 홈", callback_data: "/start" }]
+                                    ]
+                                }
+                            }
+                        }]),
+                        // he
+                        JSON.stringify([{
+                            method: 'sendPoll',
+                            payload: {
+                                question: 'מהו היתרון ה<b>עיקרי</b> בשימוש במקלדות אינטראקטיביות מקוונות בבוטים של טלגרם? ✨',
+                                question_parse_mode: 'HTML',
+                                options: JSON.stringify([
+                                    'הן מאפשרות שליחת קבצים גדולים יותר',
+                                    'הן מאפשרות אינטראקציה בזמן אמת עם המשתמש',
+                                    'הן משפרות את מהירות מסירת ההודעות',
+                                    'הן תומכות בתוכן מולטימדיה'
+                                ]),
+                                protect_content: true,
+                                open_period: 300,
+                                is_anonymous: false,
+                                type: 'quiz',
+                                correct_option_id: 3,
+                                explanation: 'מקלדות אינטראקטיביות מקוונות מאפשרות למשתמשים אינטראקציה ישירה עם הבוט, מה שהופך את החוויה לדינמית וידידותית יותר למשתמש!',
+                                explanation_parse_mode: 'HTML',
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "🏠 בית", callback_data: "/start" }]
+                                    ]
+                                }
+                            }
+                        }])
+                    ]
+                ]
+        }
     }
 }
 
@@ -4001,30 +5049,31 @@ EMD.StoreAutomation = {
     pluralDisplayName: 'Store Automations',
     sheet: (data = {}) => {
         return {
-            name: '✨ Store',
-            columns: ['action', 'en', 'es', 'fr', 'ar', 'de', 'it', 'pt', 'ru', 'zh', 'ja', 'ko', 'he'],
+            name: EMD.Automation.sheet(data).name,
+            columns: EMD.Automation.sheet(data).columns,
             sample_data:
                 [
+                    ['---- ✨ STORE AUTOMATION SAMPLE DATA START ----']
                     ['/store',
-                        // default (en)
-                        JSON.stringify([{
-                            method: 'sendPhoto',
-                            payload: {
-                                caption: 'Welcome to the Store! Here you can find various products and services.',
-                                photo: "https://www.gstatic.com/webp/gallery/1.jpg",
-                                parse_mode: 'HTML',
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [{ text: "Category A", callback_data: "#categoryA" }],
-                                        [{ text: "Category B", callback_data: "#categoryB" }],
-                                        [{ text: "Category C", callback_data: "#categoryC" }],
-                                        [{ text: "Category D", callback_data: "#categoryD" }],
-                                        [{ text: "Category E", callback_data: "#categoryE" }],
-                                        [{ text: "Home", callback_data: "/home" }]
-                                    ]
-                                }
+                    // default (en)
+                    JSON.stringify([{
+                        method: 'sendPhoto',
+                        payload: {
+                            caption: 'Welcome to the Store! Here you can find various products and services.',
+                            photo: "https://www.gstatic.com/webp/gallery/1.jpg",
+                            parse_mode: 'HTML',
+                            reply_markup: {
+                                inline_keyboard: [
+                                    [{ text: "Category A", callback_data: "#categoryA" }],
+                                    [{ text: "Category B", callback_data: "#categoryB" }],
+                                    [{ text: "Category C", callback_data: "#categoryC" }],
+                                    [{ text: "Category D", callback_data: "#categoryD" }],
+                                    [{ text: "Category E", callback_data: "#categoryE" }],
+                                    [{ text: "Home", callback_data: "/start" }]
+                                ]
                             }
-                        }])],
+                        }
+                    }])],
                     ['#categoryA',
                         // default (en)
                         JSON.stringify([
@@ -4336,6 +5385,1357 @@ EMD.StoreAutomation = {
     }
 }
 
+EMD.ApiFeaturesAutomation = {
+    entityName: 'ApiFeatures',
+    displayName: 'API Features',
+    sheet: (data = {}) => {
+        return {
+            name: EMD.Automation.sheet(data).name,
+            columns: EMD.Automation.sheet(data).columns,
+            sample_data:
+                [
+                    ['---- 🤖 API FEATURES SAMPLE DATA ----'],
+                    ['/api_features',
+                        // default (en)
+                        JSON.stringify([
+                            { "next": "#remove_keyboard" },
+                            { "next": "#send_api_features_message" },
+                            { "next": "#append_api_features_keyboard" },
+                            { "next": "#answer_completed" }
+                        ])
+                    ],
+                    ['#send_api_features_message',
+                        // default (en)
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Explore the Store API Features! \n\n'
+                                    + 'Discover how to integrate and utilize various API features to enhance your store experience.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // es
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: '¡Explora las Funciones de la API de la Tienda! \n\n'
+                                    + 'Descubre cómo integrar y utilizar varias funciones de la API para mejorar la experiencia de tu tienda.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // fr
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Explorez les fonctionnalités de l\'API Store ! \n\n'
+                                    + 'Découvrez comment intégrer et utiliser diverses fonctionnalités de l\'API pour améliorer l\'expérience de votre boutique.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ar
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'استكشف ميزات واجهة برمجة تطبيقات المتجر! \n\n'
+                                    + 'اكتشف كيفية دمج واستخدام ميزات API المختلفة لتعزيز تجربة متجرك.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // de
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Entdecken Sie die Funktionen der Store-API! \n\n'
+                                    + 'Erfahren Sie, wie Sie verschiedene API-Funktionen integrieren und nutzen können, um Ihr Store-Erlebnis zu verbessern.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // it
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Esplora le funzionalità dell\'API Store! \n\n'
+                                    + 'Scopri come integrare e utilizzare varie funzionalità API per migliorare l\'esperienza del tuo negozio.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // pt
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Explore os Recursos da API da Loja! \n\n'
+                                    + 'Descubra como integrar e utilizar vários recursos da API para melhorar a experiência da sua loja.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ru
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Изучите функции API магазина! \n\n'
+                                    + 'Узнайте, как интегрировать и использовать различные функции API для улучшения работы вашего магазина.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // zh
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: '探索商店API的功能！ \n\n'
+                                    + '了解如何集成和使用各种API功能，以提升您的商店体验。',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ja
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'ストアAPIの機能を探る！ \n\n'
+                                    + 'さまざまなAPI機能を統合および活用して、ストアの体験を向上させる方法を学びましょう。',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // ko
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: '스토어 API 기능을 탐색하세요! \n\n'
+                                    + '스토어 경험을 향상시키기 위해 다양한 API 기능을 통합하고 활용하는 방법을 알아보세요.',
+                                parse_mode: 'HTML'
+                            }
+                        }]),
+                        // he
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'חקור את פונקציות ה-API של החנות! \n\n'
+                                    + 'גלה כיצד לשלב ולהשתמש בפונקציות API שונות כדי לשפר את חוויית החנות שלך.',
+                                parse_mode: 'HTML'
+                            }
+                        }])
+                    ],
+                    ['#append_api_features_keyboard',
+                        // default (en)
+                        JSON.stringify([{
+                            method: 'editMessageReplyMarkup',
+                            payload: {
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "💬 Send Messages", callback_data: "/sendMessage" }],
+                                        [{ text: "🖼️ Send Photos", callback_data: "/sendPhoto" }],
+                                        // Open youTube as web app
+                                        [{ text: "▶️ EasyADM YouTube Channel", web_app: { url: "https://youtube.com/@easyadm6040?si=s1RatCN_xDv0h01t" } }],
+                                        [{ text: "🌐 EasyADM Website", web_app: { url: "https://easyadm.com" } }],
+                                        [{ text: "About 🛈", callback_data: "/about" }, { text: "❓ Help", callback_data: "/help" }],
+                                        [{ text: "🏠 Start", callback_data: "/start" }]
+                                    ]
+                                }
+                            }
+                        }])
+                    ],
+                    ['/sendMessage',
+                        // default (en)
+                        JSON.stringify([
+                            { "next": "#remove_keyboard" },
+                            { "next": "#send_sample_sendMessage" },
+                            { "next": "#append_api_features_keyboard" },
+                        ])
+                    ],
+                    ['/sendPhoto',
+                        // default (en)
+                        JSON.stringify([
+                            { "next": "#remove_keyboard" },
+                            { "next": "#send_sample_sendPhoto" },
+                            { "next": "#append_api_features_keyboard" },
+                        ])
+                    ],
+                    ['#send_sample_sendMessage',
+                        // default (en)
+                        JSON.stringify([
+                            {
+                                method: 'sendMessage',
+                                payload: {
+                                    text: 'This is a sample message sent using the Send Message API feature.',
+                                    parse_mode: 'HTML'
+                                }
+                            },
+                            {
+                                method: 'sendMessage',
+                                payload: {
+                                    text: 'This is another sample message to demonstrate the Send Message API feature.',
+                                    parse_mode: 'HTML'
+                                }
+                            },
+                            {
+                                method: 'sendMessage',
+                                payload: {
+                                    text: 'I can customize the content and format of any the messages as needed.',
+                                    parse_mode: 'HTML'
+                                }
+                            },
+                            {
+                                delay_ms: 3000,
+                                method: 'editMessageText',
+                                payload: {
+                                    text: 'I can customize the content and format of any the messages as needed.\n\n'
+                                        + 'This message has been edited using the Edit Message Text API feature.',
+                                    parse_mode: 'HTML'
+                                }
+                            },
+                            {
+                                method: 'sendMessage',
+                                payload: {
+                                    text: 'I can use delay between actions to control the flow of messages.\n\n',
+                                    parse_mode: 'HTML'
+                                }
+                            },
+                            {
+                                delay_ms: 3000,
+                                method: 'editMessageText',
+                                payload: {
+                                    text: 'I can use delay between actions to control the flow of messages.\n\n'
+                                        + 'This message has been edited after a delay (3000 ms) to demonstrate timing control.',
+                                    parse_mode: 'HTML'
+                                }
+                            },
+                            {
+                                delay_ms: 3000,
+                                method: 'editMessageText',
+                                payload: {
+                                    text: 'I can use delay between actions to control the flow of messages.\n\n'
+                                        + 'This message has been edited after a delay (3000 ms) to demonstrate timing control. \n\n'
+                                        + 'This is the final edited message in this sample sequence.\n\n'
+                                        + 'Thank you for exploring the Send Message API feature!',
+                                    parse_mode: 'HTML'
+                                }
+                            },
+                            {
+                                delay_ms: 1000,
+                                method: 'sendMessage',
+                                payload: {
+                                    text: 'This concludes the sample messages demonstrating the Send Message API feature.',
+                                    parse_mode: 'HTML'
+                                }
+                            },
+                            {
+                                delay_ms: 1000,
+                                method: 'editMessageText',
+                                payload: {
+                                    text: 'This concludes the sample messages demonstrating the Send Message API feature. \n\n'
+                                        + '1. I can send multiple messages in sequence.\n',
+                                    parse_mode: 'HTML'
+                                }
+                            },
+                            {
+                                delay_ms: 1000,
+                                method: 'editMessageText',
+                                payload: {
+                                    text: 'This concludes the sample messages demonstrating the Send Message API feature. \n\n'
+                                        + '1. I can send multiple messages in sequence.\n'
+                                        + '2. I can edit messages after sending them.\n',
+                                    parse_mode: 'HTML'
+                                }
+                            },
+                            {
+                                delay_ms: 1000,
+                                method: 'editMessageText',
+                                payload: {
+                                    text: 'This concludes the sample messages demonstrating the Send Message API feature. \n\n'
+                                        + '1. I can send multiple messages in sequence.\n'
+                                        + '2. I can edit messages after sending them.\n'
+                                        + '3. I can introduce delays between actions.\n',
+                                    parse_mode: 'HTML'
+                                }
+                            },
+                            {
+                                delay_ms: 1000,
+                                method: 'editMessageText',
+                                payload: {
+                                    text: 'This concludes the sample messages demonstrating the Send Message API feature. \n\n'
+                                        + '1. I can send multiple messages in sequence.\n'
+                                        + '2. I can edit messages after sending them.\n'
+                                        + '3. I can introduce delays between actions.\n'
+                                        + 'Thank you for exploring this feature with me!',
+                                    parse_mode: 'HTML'
+                                }
+                            }
+                        ])
+                    ],
+                    ['#send_sample_sendPhoto',
+                        // default (en)
+                        JSON.stringify([
+                            {
+                                method: 'sendPhoto',
+                                payload: {
+                                    caption: 'This is a sample photo sent using the Send Photo API feature.',
+                                    photo: "https://www.gstatic.com/webp/gallery/1.jpg",
+                                    parse_mode: 'HTML'
+                                }
+                            }
+                        ])
+                    ]
+                ]
+        };
+    }
+}
+
+EMD.SecurityChecksAutomation = {
+    entityName: 'SecurityChecks',
+    displayName: 'Security Checks',
+    sheet: (data = {}) => {
+        return {
+            name: EMD.Automation.sheet(data).name,
+            columns: EMD.Automation.sheet(data).columns,
+            sample_data: [
+                ['---- 🔐 SECURITY CHECKS SAMPLE AUTOMATION DATA BELOW ----'],
+                ['/security_checks',
+                    // default (en)
+                    JSON.stringify([
+                        { "next": "#remove_keyboard" },
+                        { "next": "#send_welcome_to_security_checks_message" },
+                        { "next": "#send_malware_protection_message" },
+                        { "next": "#send_check_your_device_now_message" },
+                        { "next": "#append_top_security_checks_keyboard" },
+                        { "next": "#answer_completed" }
+                    ])
+                ],
+                ['#send_welcome_to_security_checks_message',
+                    // default (en)
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: 'Welcome to Security Checks! \n\n'
+                                + 'Here you can find recommendations to enhance the security of your device, account and data.',
+                            parse_mode: 'HTML'
+                        }
+                    }]),
+                    // es
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: '¡Bienvenido a las Verificaciones de Seguridad! \n\n'
+                                + 'Aquí puedes encontrar recomendaciones para mejorar la seguridad de tu dispositivo, cuenta y datos.',
+                            parse_mode: 'HTML'
+                        }
+                    }]),
+                    // fr
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: 'Bienvenue dans les Vérifications de Sécurité ! \n\n'
+                                + 'Ici, vous pouvez trouver des recommandations pour améliorer la sécurité de votre appareil, compte et données.',
+                            parse_mode: 'HTML'
+                        }
+                    }]),
+                    // ar
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: 'مرحبًا بك في فحوصات الأمان! \n\n'
+                                + 'هنا يمكنك العثور على توصيات لتعزيز أمان جهازك وحسابك وبياناتك.',
+                            parse_mode: 'HTML'
+                        }
+                    }]),
+                    // de
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: 'Willkommen bei den Sicherheitsprüfungen! \n\n'
+                                + 'Hier finden Sie Empfehlungen zur Verbesserung der Sicherheit Ihres Geräts, Kontos und Ihrer Daten.',
+                            parse_mode: 'HTML'
+                        }
+                    }]),
+                    // it
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: 'Benvenuto in Controlli di Sicurezza! \n\n'
+                                + 'Qui puoi trovare raccomandazioni per migliorare la sicurezza del tuo dispositivo, account e dati.',
+                            parse_mode: 'HTML'
+                        }
+                    }]),
+                    // pt
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: 'Bem-vindo às Verificações de Segurança! \n\n'
+                                + 'Aqui você pode encontrar recomendações para melhorar a segurança do seu dispositivo, conta e dados.',
+                            parse_mode: 'HTML'
+                        }
+                    }]),
+                    // ru
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: 'Добро пожаловать в Проверки безопасности! \n\n'
+                                + 'Здесь вы можете найти рекомендации по повышению безопасности вашего устройства, аккаунта и данных.',
+                            parse_mode: 'HTML'
+                        }
+                    }]),
+                    // zh
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: '欢迎使用安全检查！ \n\n'
+                                + '在这里，您可以找到增强设备、帐户和数据安全性的建议。',
+                            parse_mode: 'HTML'
+                        }
+                    }]),
+                    // ja
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: 'セキュリティチェックへようこそ！ \n\n'
+                                + 'ここでは、デバイス、アカウント、データのセキュリティを強化するための推奨事項を見つけることができます。',
+                            parse_mode: 'HTML'
+                        }
+                    }]),
+                    // ko
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: '보안 검사에 오신 것을 환영합니다! \n\n'
+                                + '여기에서 장치, 계정 및 데이터의 보안을 강화하기 위한 권장 사항을 찾을 수 있습니다.',
+                            parse_mode: 'HTML'
+                        }
+                    }]),
+                    // he
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: 'ברוכים הבאים לבדיקות אבטחה! \n\n'
+                                + 'כאן תוכלו למצוא המלצות לשיפור האבטחה של המכשיר, החשבון והנתונים שלכם.',
+                            parse_mode: 'HTML'
+                        }
+                    }])
+                ],
+                ['#send_malware_protection_message',
+                    // default (en)
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: 'Malware Protection: \n\n'
+                                + 'Ensure your device has up-to-date antivirus software installed to protect against malware threats.',
+                            parse_mode: 'HTML'
+                        }
+                    }]),
+                    // es
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: 'Protección contra malware: \n\n'
+                                + 'Asegúrate de que tu dispositivo tenga instalado un software antivirus actualizado para protegerte contra amenazas de malware.',
+                            parse_mode: 'HTML'
+                        }
+                    }]),
+                    // fr
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: 'Protection contre les logiciels malveillants : \n\n'
+                                + 'Assurez-vous que votre appareil dispose d\'un logiciel antivirus à jour pour vous protéger contre les menaces de logiciels malveillants.',
+                            parse_mode: 'HTML'
+                        }
+                    }]),
+                    // ar
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: 'حماية من البرامج الضارة: \n\n'
+                                + 'تأكد من أن جهازك يحتوي على برنامج مضاد فيروسات محدث لحمايتك من تهديدات البرامج الضارة.',
+                            parse_mode: 'HTML'
+                        }
+                    }]),
+                    // de
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: 'Malware-Schutz: \n\n'
+                                + 'Stellen Sie sicher, dass auf Ihrem Gerät eine aktuelle Antivirensoftware installiert ist, um sich vor Malware-Bedrohungen zu schützen.',
+                            parse_mode: 'HTML'
+                        }
+                    }]),
+                    // it
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: 'Protezione da malware: \n\n'
+                                + 'Assicurati che il tuo dispositivo abbia un software antivirus aggiornato per proteggerti dalle minacce di malware.',
+                            parse_mode: 'HTML'
+                        }
+                    }]),
+                    // pt
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: 'Proteção contra malware: \n\n'
+                                + 'Certifique-se de que seu dispositivo tenha um software antivírus atualizado para protegê-lo contra ameaças de malware.',
+                            parse_mode: 'HTML'
+                        }
+                    }]),
+                    // ru
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: 'Защита от вредоносных программ: \n\n'
+                                + 'Убедитесь, что на вашем устройстве установлено обновленное антивирусное программное обеспечение для защиты от угроз вредоносных программ.',
+                            parse_mode: 'HTML'
+                        }
+                    }]),
+                    // zh
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: '恶意软件保护： \n\n'
+                                + '确保您的设备安装了最新的防病毒软件，以保护您免受恶意软件的威胁。',
+                            parse_mode: 'HTML'
+                        }
+                    }]),
+                    // ja
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: 'マルウェア対策： \n\n'
+                                + 'お使いのデバイスに最新のアンチウイルスソフトウェアがインストールされていることを確認して、マルウェアの脅威から保護してください。',
+                            parse_mode: 'HTML'
+                        }
+                    }]),
+                    // ko
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: '맬웨어 보호: \n\n'
+                                + '장치에 최신 안티바이러스 소프트웨어가 설치되어 있어 맬웨어 위협으로부터 보호받을 수 있도록 하십시오.',
+                            parse_mode: 'HTML'
+                        }
+                    }]),
+                    // he
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: 'הגנה מפני תוכנות זדוניות: \n\n'
+                                + 'ודא שהמכשיר שלך מותקן עם תוכנת אנטי-וירוס מעודכנת כדי להגן מפני איומי תוכנות זדוניות.',
+                            parse_mode: 'HTML'
+                        }
+                    }])
+                ],
+                ['#send_check_your_device_now_message',
+                    // default (en)
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: 'Check Your Device Now! \n\n'
+                                + 'Ensure your device is secure by following these steps:\n',
+                            parse_mode: 'HTML'
+                        }
+                    }]),
+                    // es
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: '¡Revisa tu dispositivo ahora! \n\n'
+                                + 'Asegúrate de que tu dispositivo esté seguro siguiendo estos pasos:\n',
+                            parse_mode: 'HTML'
+                        }
+                    }]),
+                    // fr
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: 'Vérifiez votre appareil maintenant ! \n\n'
+                                + 'Assurez-vous que votre appareil est sécurisé en suivant ces étapes :\n',
+                            parse_mode: 'HTML'
+                        }
+                    }]),
+                    // ar
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: 'تحقق من جهازك الآن! \n\n'
+                                + 'تأكد من أن جهازك آمن باتباع هذه الخطوات:\n',
+                            parse_mode: 'HTML'
+                        }
+                    }]),
+                    // de
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: 'Überprüfen Sie jetzt Ihr Gerät! \n\n'
+                                + 'Stellen Sie sicher, dass Ihr Gerät sicher ist, indem Sie diese Schritte befolgen:\n',
+                            parse_mode: 'HTML'
+                        }
+                    }]),
+                    // it
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: 'Controlla il tuo dispositivo ora! \n\n'
+                                + 'Assicurati che il tuo dispositivo sia sicuro seguendo questi passaggi:\n',
+                            parse_mode: 'HTML'
+                        }
+                    }]),
+                    // pt
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: 'Verifique seu dispositivo agora! \n\n'
+                                + 'Certifique-se de que seu dispositivo está seguro seguindo estas etapas:\n',
+                            parse_mode: 'HTML'
+                        }
+                    }]),
+                    // ru
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: 'Проверьте свое устройство сейчас! \n\n'
+                                + 'Убедитесь, что ваше устройство защищено, выполнив следующие шаги:\n',
+                            parse_mode: 'HTML'
+                        }
+                    }]),
+                    // zh
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: '立即检查您的设备！ \n\n'
+                                + '按照以下步骤确保您的设备安全：\n',
+                            parse_mode: 'HTML'
+                        }
+                    }]),
+                    // ja
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: '今すぐデバイスを確認してください！ \n\n'
+                                + '次の手順に従って、デバイスが安全であることを確認してください：\n',
+                            parse_mode: 'HTML'
+                        }
+                    }]),
+                    // ko
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: '지금 장치를 확인하세요! \n\n'
+                                + '다음 단계를 따라 장치가 안전한지 확인하십시오:\n',
+                            parse_mode: 'HTML'
+                        }
+                    }]),
+                    // he
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: 'בדוק את המכשיר שלך עכשיו! \n\n'
+                                + 'ודא שהמכשיר שלך מאובטח על ידי ביצוע השלבים הבאים:\n',
+                            parse_mode: 'HTML'
+                        }
+                    }])
+                ],
+                ['#append_top_security_checks_keyboard',
+                    // default (en)
+                    JSON.stringify([{
+                        method: 'editMessageReplyMarkup',
+                        payload: {
+                            reply_markup: {
+                                inline_keyboard: [
+                                    [{ text: "Android Security Checks", callback_data: "/android_security_checks" }],
+                                    [{ text: "iOS Security Checks", callback_data: "/ios_security_checks" }],
+                                    [{ text: "Privacy Checks", callback_data: "/privacy_checks" }],
+                                    [{ text: "About 🛈", callback_data: "/about" }, { text: "❓ Help", callback_data: "/help" }],
+                                    [{ text: "🏠 Start", callback_data: "/start" }]
+                                ]
+                            }
+                        }
+                    }]),
+                    // es
+                    JSON.stringify([{
+                        method: 'editMessageReplyMarkup',
+                        payload: {
+                            reply_markup: {
+                                inline_keyboard: [
+                                    [{ text: "Verificaciones de seguridad de Android", callback_data: "/android_security_checks" }],
+                                    [{ text: "Verificaciones de seguridad de iOS", callback_data: "/ios_security_checks" }],
+                                    [{ text: "Verificaciones de privacidad", callback_data: "/privacy_checks" }],
+                                    [{ text: "Acerca de 🛈", callback_data: "/about" }, { text: "❓ Ayuda", callback_data: "/help" }],
+                                    [{ text: "🏠 Inicio", callback_data: "/start" }]
+                                ]
+                            }
+                        }
+                    }]),
+                    // fr
+                    JSON.stringify([{
+                        method: 'editMessageReplyMarkup',
+                        payload: {
+                            reply_markup: {
+                                inline_keyboard: [
+                                    [{ text: "Vérifications de sécurité Android", callback_data: "/android_security_checks" }],
+                                    [{ text: "Vérifications de sécurité iOS", callback_data: "/ios_security_checks" }],
+                                    [{ text: "Vérifications de confidentialité", callback_data: "/privacy_checks" }],
+                                    [{ text: "À propos 🛈", callback_data: "/about" }, { text: "❓ Aide", callback_data: "/help" }],
+                                    [{ text: "🏠 Accueil", callback_data: "/start" }]
+                                ]
+                            }
+                        }
+                    }]),
+                    // ar
+                    JSON.stringify([{
+                        method: 'editMessageReplyMarkup',
+                        payload: {
+                            reply_markup: {
+                                inline_keyboard: [
+                                    [{ text: "فحوصات أمان Android", callback_data: "/android_security_checks" }],
+                                    [{ text: "فحوصات أمان iOS", callback_data: "/ios_security_checks" }],
+                                    [{ text: "فحوصات الخصوصية", callback_data: "/privacy_checks" }],
+                                    [{ text: "حول 🛈", callback_data: "/about" }, { text: "❓ مساعدة", callback_data: "/help" }],
+                                    [{ text: "🏠 البداية", callback_data: "/start" }]
+                                ]
+                            }
+                        }
+                    }]),
+                    // de
+                    JSON.stringify([{
+                        method: 'editMessageReplyMarkup',
+                        payload: {
+                            reply_markup: {
+                                inline_keyboard: [
+                                    [{ text: "Android-Sicherheitsprüfungen", callback_data: "/android_security_checks" }],
+                                    [{ text: "iOS-Sicherheitsprüfungen", callback_data: "/ios_security_checks" }],
+                                    [{ text: "Datenschutzprüfungen", callback_data: "/privacy_checks" }],
+                                    [{ text: "Über 🛈", callback_data: "/about" }, { text: "❓ Hilfe", callback_data: "/help" }],
+                                    [{ text: "🏠 Startseite", callback_data: "/start" }]
+                                ]
+                            }
+                        }
+                    }]),
+                    // it
+                    JSON.stringify([{
+                        method: 'editMessageReplyMarkup',
+                        payload: {
+                            reply_markup: {
+                                inline_keyboard: [
+                                    [{ text: "Controlli di sicurezza Android", callback_data: "/android_security_checks" }],
+                                    [{ text: "Controlli di sicurezza iOS", callback_data: "/ios_security_checks" }],
+                                    [{ text: "Controlli sulla privacy", callback_data: "/privacy_checks" }],
+                                    [{ text: "Informazioni 🛈", callback_data: "/about" }, { text: "❓ Aiuto", callback_data: "/help" }],
+                                    [{ text: "🏠 Home", callback_data: "/start" }]
+                                ]
+                            }
+                        }
+                    }]),
+                    // pt
+                    JSON.stringify([{
+                        method: 'editMessageReplyMarkup',
+                        payload: {
+                            reply_markup: {
+                                inline_keyboard: [
+                                    [{ text: "Verificações de segurança do Android", callback_data: "/android_security_checks" }],
+                                    [{ text: "Verificações de segurança do iOS", callback_data: "/ios_security_checks" }],
+                                    [{ text: "Verificações de privacidade", callback_data: "/privacy_checks" }],
+                                    [{ text: "Sobre 🛈", callback_data: "/about" }, { text: "❓ Ajuda", callback_data: "/help" }],
+                                    [{ text: "🏠 Início", callback_data: "/start" }]
+                                ]
+                            }
+                        }
+                    }]),
+                    // ru
+                    JSON.stringify([{
+                        method: 'editMessageReplyMarkup',
+                        payload: {
+                            reply_markup: {
+                                inline_keyboard: [
+                                    [{ text: "Проверки безопасности Android", callback_data: "/android_security_checks" }],
+                                    [{ text: "Проверки безопасности iOS", callback_data: "/ios_security_checks" }],
+                                    [{ text: "Проверки конфиденциальности", callback_data: "/privacy_checks" }],
+                                    [{ text: "О программе 🛈", callback_data: "/about" }, { text: "❓ Помощь", callback_data: "/help" }],
+                                    [{ text: "🏠 Главная", callback_data: "/start" }]
+                                ]
+                            }
+                        }
+                    }]),
+                    // zh
+                    JSON.stringify([{
+                        method: 'editMessageReplyMarkup',
+                        payload: {
+                            reply_markup: {
+                                inline_keyboard: [
+                                    [{ text: "Android 安全检查", callback_data: "/android_security_checks" }],
+                                    [{ text: "iOS 安全检查", callback_data: "/ios_security_checks" }],
+                                    [{ text: "隐私检查", callback_data: "/privacy_checks" }],
+                                    [{ text: "关于 🛈", callback_data: "/about" }, { text: "❓ 帮助", callback_data: "/help" }],
+                                    [{ text: "🏠 主页", callback_data: "/start" }]
+                                ]
+                            }
+                        }
+                    }]),
+                    // ja
+                    JSON.stringify([{
+                        method: 'editMessageReplyMarkup',
+                        payload: {
+                            reply_markup: {
+                                inline_keyboard: [
+                                    [{ text: "Android セキュリティチェック", callback_data: "/android_security_checks" }],
+                                    [{ text: "iOS セキュリティチェック", callback_data: "/ios_security_checks" }],
+                                    [{ text: "プライバシーチェック", callback_data: "/privacy_checks" }],
+                                    [{ text: "について 🛈", callback_data: "/about" }, { text: "❓ ヘルプ", callback_data: "/help" }],
+                                    [{ text: "🏠 ホーム", callback_data: "/start" }]
+                                ]
+                            }
+                        }
+                    }]),
+                    // ko
+                    JSON.stringify([{
+                        method: 'editMessageReplyMarkup',
+                        payload: {
+                            reply_markup: {
+                                inline_keyboard: [
+                                    [{ text: "Android 보안 검사", callback_data: "/android_security_checks" }],
+                                    [{ text: "iOS 보안 검사", callback_data: "/ios_security_checks" }],
+                                    [{ text: "개인정보 보호 검사", callback_data: "/privacy_checks" }],
+                                    [{ text: "정보 🛈", callback_data: "/about" }, { text: "❓ 도움말", callback_data: "/help" }],
+                                    [{ text: "🏠 홈", callback_data: "/start" }]
+                                ]
+                            }
+                        }
+                    }]),
+                    // he
+                    JSON.stringify([{
+                        method: 'editMessageReplyMarkup',
+                        payload: {
+                            reply_markup: {
+                                inline_keyboard: [
+                                    [{ text: "בדיקות אבטחת Android", callback_data: "/android_security_checks" }],
+                                    [{ text: "בדיקות אבטחת iOS", callback_data: "/ios_security_checks" }],
+                                    [{ text: "בדיקות פרטיות", callback_data: "/privacy_checks" }],
+                                    [{ text: "אודות 🛈", callback_data: "/about" }, { text: "❓ עזרה", callback_data: "/help" }],
+                                    [{ text: "🏠 בית", callback_data: "/start" }]
+                                ]
+                            }
+                        }
+                    }])
+                ],
+                ['/android_security_checks',
+                    // default (en)
+                    JSON.stringify([
+                        { "next": "#remove_keyboard" },
+                        { "next": '#send_android_security_checks' },
+                        { "next": '#append_top_security_checks_keyboard' }
+                    ])
+                ],
+                ['/ios_security_checks',
+                    // default (en)
+                    JSON.stringify([
+                        { "next": "#remove_keyboard" },
+                        { next: '#send_ios_security_checks' },
+                        { next: '#append_top_security_checks_keyboard' }
+                    ])
+                ],
+                ['/privacy_checks',
+                    // default (en)
+                    JSON.stringify([
+                        { "next": "#remove_keyboard" },
+                        { next: '#send_privacy_checks' },
+                        { next: '#append_top_security_checks_keyboard' }
+                    ])
+                ],
+                ['#send_android_security_checks',
+                    // default (en)
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: 'Android Security Checks: \n\n'
+                                + '1. Keep your device updated with the latest security patches.\n'
+                                + '2. Only install apps from trusted sources like Google Play Store.\n'
+                                + '3. Use a strong screen lock and enable biometric authentication.\n'
+                                + '4. Regularly back up your data to a secure location.\n',
+                            parse_mode: 'HTML'
+                        }
+                    }]),
+                    // es
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: 'Verificaciones de seguridad de Android: \n\n'
+                                + '1. Mantén tu dispositivo actualizado con los últimos parches de seguridad.\n'
+                                + '2. Solo instala aplicaciones de fuentes confiables como Google Play Store.\n'
+                                + '3. Usa un bloqueo de pantalla fuerte y habilita la autenticación biométrica.\n'
+                                + '4. Realiza copias de seguridad de tus datos regularmente en una ubicación segura.\n',
+                            parse_mode: 'HTML'
+                        }
+                    }]),
+                    // fr
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: 'Vérifications de sécurité Android : \n\n'
+                                + '1. Gardez votre appareil à jour avec les derniers correctifs de sécurité.\n'
+                                + '2. N\'installez des applications que depuis des sources fiables comme le Google Play Store.\n'
+                                + '3. Utilisez un verrouillage d\'écran fort et activez l\'authentification biométrique.\n'
+                                + '4. Sauvegardez régulièrement vos données dans un endroit sécurisé.\n',
+                            parse_mode: 'HTML'
+                        }
+                    }]),
+                    // ar
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: 'فحوصات أمان Android: \n\n'
+                                + '1. حافظ على تحديث جهازك بأحدث تصحيحات الأمان.\n'
+                                + '2. قم بتثبيت التطبيقات فقط من مصادر موثوقة مثل متجر Google Play.\n'
+                                + '3. استخدم قفل شاشة قوي وقم بتمكين المصادقة البيومترية.\n'
+                                + '4. قم بعمل نسخ احتياطية لبياناتك بانتظام إلى موقع آمن.\n',
+                            parse_mode: 'HTML'
+                        }
+                    }]),
+                    // de
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: 'Android-Sicherheitsprüfungen: \n\n'
+                                + '1. Halten Sie Ihr Gerät mit den neuesten Sicherheitspatches auf dem neuesten Stand.\n'
+                                + '2. Installieren Sie Apps nur aus vertrauenswürdigen Quellen wie dem Google Play Store.\n'
+                                + '3. Verwenden Sie eine starke Bildschirmsperre und aktivieren Sie die biometrische Authentifizierung.\n'
+                                + '4. Sichern Sie Ihre Daten regelmäßig an einem sicheren Ort.\n',
+                            parse_mode: 'HTML'
+                        }
+                    }]),
+                    // it
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: 'Controlli di sicurezza Android: \n\n'
+                                + '1. Mantieni il tuo dispositivo aggiornato con le ultime patch di sicurezza.\n'
+                                + '2. Installa app solo da fonti affidabili come il Google Play Store.\n'
+                                + '3. Usa un blocco schermo forte e abilita l\'autenticazione biometrica.\n'
+                                + '4. Esegui regolarmente il backup dei tuoi dati in una posizione sicura.\n',
+                            parse_mode: 'HTML'
+                        }
+                    }]),
+                    // pt
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: 'Verificações de segurança do Android: \n\n'
+                                + '1. Mantenha seu dispositivo atualizado com os patches de segurança mais recentes.\n'
+                                + '2. Instale aplicativos apenas de fontes confiáveis, como a Google Play Store.\n'
+                                + '3. Use um bloqueio de tela forte e ative a autenticação biométrica.\n'
+                                + '4. Faça backup dos seus dados regularmente em um local seguro.\n',
+                            parse_mode: 'HTML'
+                        }
+                    }]),
+                    // ru
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: 'Проверки безопасности Android: \n\n'
+                                + '1. Держите ваше устройство обновленным с последними патчами безопасности.\n'
+                                + '2. Устанавливайте приложения только из надежных источников, таких как Google Play Store.\n'
+                                + '3. Используйте надежную блокировку экрана и включайте биометрическую аутентификацию.\n'
+                                + '4. Регулярно делайте резервные копии ваших данных в безопасном месте.\n',
+                            parse_mode: 'HTML'
+                        }
+                    }]),
+                    // zh
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: 'Android 安全检查：\n\n'
+                                + '1. 保持您的设备更新最新的安全补丁。\n'
+                                + '2. 仅从可信来源（如 Google Play 商店）安装应用程序。\n'
+                                + '3. 使用强屏幕锁定并启用生物识别认证。\n'
+                                + '4. 定期备份您的数据到安全位置。\n',
+                            parse_mode: 'HTML'
+                        }
+                    }]),
+                    // ja
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: 'Androidのセキュリティチェック：\n\n'
+                                + '1. デバイスを最新のセキュリティパッチで更新してください。\n'
+                                + '2. Google Playストアなどの信頼できるソースからのみアプリをインストールしてください。\n'
+                                + '3. 強力な画面ロックを使用し、生体認証を有効にしてください。\n'
+                                + '4. 定期的にデータを安全な場所にバックアップしてください。\n',
+                            parse_mode: 'HTML'
+                        }
+                    }]),
+                    // ko
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: 'Android 보안 점검: \n\n'
+                                + '1. 최신 보안 패치로 기기를 업데이트하세요.\n'
+                                + '2. Google Play 스토어와 같은 신뢰할 수 있는 출처에서만 앱을 설치하세요.\n'
+                                + '3. 강력한 화면 잠금과 생체 인증을 사용하세요.\n'
+                                + '4. 데이터를 정기적으로 안전한 장소에 백업하세요.\n',
+                            parse_mode: 'HTML'
+                        }
+                    }]),
+                    // he
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: 'בדיקות אבטחה של Android: \n\n'
+                                + '1. שמור על המכשיר שלך מעודכן עם תיקוני האבטחה האחרונים.\n'
+                                + '2. התקן אפליקציות רק ממקורות מהימנים, כמו Google Play Store.\n'
+                                + '3. השתמש בנעילת מסך חזקה והפעל אימות ביומטרי.\n'
+                                + '4. גבה את הנתונים שלך באופן קבוע במקום בטוח.\n',
+                            parse_mode: 'HTML'
+                        }
+                    }])
+                ],
+                ['#send_ios_security_checks',
+                    // default (en)
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: 'iOS Security Checks: \n\n'
+                                + '1. Keep your iOS device updated with the latest software updates.\n'
+                                + '2. Only download apps from the official App Store.\n'
+                                + '3. Use a strong passcode and enable Face ID or Touch ID.\n'
+                                + '4. Regularly back up your data using iCloud or iTunes.\n',
+                            parse_mode: 'HTML'
+                        }
+                    }]),
+                    // es
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: 'Controles de seguridad de iOS: \n\n'
+                                + '1. Mantenga su dispositivo iOS actualizado con las últimas actualizaciones de software.\n'
+                                + '2. Descargue aplicaciones solo desde la App Store oficial.\n'
+                                + '3. Use un código de acceso fuerte y habilite Face ID o Touch ID.\n'
+                                + '4. Realice copias de seguridad de sus datos regularmente usando iCloud o iTunes.\n',
+                            parse_mode: 'HTML'
+                        }
+                    }]),
+                    // fr
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: 'Vérifications de sécurité iOS : \n\n'
+                                + '1. Maintenez votre appareil iOS à jour avec les dernières mises à jour logicielles.\n'
+                                + '2. Téléchargez uniquement des applications depuis l\'App Store officiel.\n'
+                                + '3. Utilisez un code d\'accès fort et activez Face ID ou Touch ID.\n'
+                                + '4. Sauvegardez régulièrement vos données en utilisant iCloud ou iTunes.\n',
+                            parse_mode: 'HTML'
+                        }
+                    }]),
+                    // ar
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: 'فحوصات أمان iOS: \n\n'
+                                + '1. حافظ على تحديث جهاز iOS الخاص بك بأحدث تحديثات البرامج.\n'
+                                + '2. قم بتنزيل التطبيقات فقط من متجر التطبيقات الرسمي.\n'
+                                + '3. استخدم رمز مرور قوي وقم بتمكين Face ID أو Touch ID.\n'
+                                + '4. قم بعمل نسخ احتياطية لبياناتك بانتظام باستخدام iCloud أو iTunes.\n',
+                            parse_mode: 'HTML'
+                        }
+                    }]),
+                    // de
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: 'iOS-Sicherheitsprüfungen: \n\n'
+                                + '1. Halten Sie Ihr iOS-Gerät mit den neuesten Software-Updates auf dem neuesten Stand.\n'
+                                + '2. Laden Sie Apps nur aus dem offiziellen App Store herunter.\n'
+                                + '3. Verwenden Sie einen starken Passcode und aktivieren Sie Face ID oder Touch ID.\n'
+                                + '4. Sichern Sie Ihre Daten regelmäßig mit iCloud oder iTunes.\n',
+                            parse_mode: 'HTML'
+                        }
+                    }]),
+                    // it
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: 'Controlli di sicurezza iOS: \n\n'
+                                + '1. Mantieni il tuo dispositivo iOS aggiornato con gli ultimi aggiornamenti software.\n'
+                                + '2. Scarica le app solo dall\'App Store ufficiale.\n'
+                                + '3. Usa un codice di accesso forte e abilita Face ID o Touch ID.\n'
+                                + '4. Esegui regolarmente il backup dei tuoi dati utilizzando iCloud o iTunes.\n',
+                            parse_mode: 'HTML'
+                        }
+                    }]),
+                    // pt
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: 'Verificações de segurança do iOS: \n\n'
+                                + '1. Mantenha seu dispositivo iOS atualizado com as últimas atualizações de software.\n'
+                                + '2. Baixe aplicativos apenas da App Store oficial.\n'
+                                + '3. Use um código de acesso forte e ative o Face ID ou Touch ID.\n'
+                                + '4. Faça backup regularmente dos seus dados usando o iCloud ou iTunes.\n',
+                            parse_mode: 'HTML'
+                        }
+                    }]),
+                    // ru
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: 'Проверки безопасности iOS: \n\n'
+                                + '1. Держите ваше устройство iOS обновленным с последними обновлениями программного обеспечения.\n'
+                                + '2. Загружайте приложения только из официального App Store.\n'
+                                + '3. Используйте надежный пароль и включайте Face ID или Touch ID.\n'
+                                + '4. Регулярно делайте резервные копии ваших данных с помощью iCloud или iTunes.\n',
+                            parse_mode: 'HTML'
+                        }
+                    }]),
+                    // zh
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: 'iOS安全检查：\n\n'
+                                + '1. 保持您的iOS设备更新到最新的软件版本。\n'
+                                + '2. 仅从官方App Store下载应用程序。\n'
+                                + '3. 使用强密码并启用Face ID或Touch ID。\n'
+                                + '4. 定期使用iCloud或iTunes备份您的数据。\n',
+                            parse_mode: 'HTML'
+                        }
+                    }]),
+                    // ja
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: 'iOSのセキュリティチェック：\n\n'
+                                + '1. iOSデバイスを最新のソフトウェアアップデートで常に最新の状態に保ちます。\n'
+                                + '2. 公式のApp Storeからのみアプリをダウンロードします。\n'
+                                + '3. 強力なパスコードを使用し、Face IDまたはTouch IDを有効にします。\n'
+                                + '4. iCloudまたはiTunesを使用して定期的にデータをバックアップします。\n',
+                            parse_mode: 'HTML'
+                        }
+                    }]),
+                    // ko
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: 'iOS 보안 점검: \n\n'
+                                + '1. iOS 기기를 최신 소프트웨어 업데이트로 유지하세요.\n'
+                                + '2. 공식 App Store에서만 앱을 다운로드하세요.\n'
+                                + '3. 강력한 암호를 사용하고 Face ID 또는 Touch ID를 활성화하세요.\n'
+                                + '4. iCloud 또는 iTunes를 사용하여 데이터를 정기적으로 백업하세요.\n',
+                            parse_mode: 'HTML'
+                        }
+                    }]),
+                    // he
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: 'בדיקות אבטחה של iOS: \n\n'
+                                + '1. שמור על מכשיר ה-iOS שלך מעודכן עם עדכוני התוכנה האחרונים.\n'
+                                + '2. הורד אפליקציות רק מחנות האפליקציות הרשמית.\n'
+                                + '3. השתמש בקוד גישה חזק והפעל Face ID או Touch ID.\n'
+                                + '4. גבה את הנתונים שלך באופן קבוע באמצעות iCloud או iTunes.\n',
+                            parse_mode: 'HTML'
+                        }
+                    }])
+                ],
+                ['#send_privacy_checks',
+                    // default (en)
+                    JSON.stringify([
+                        { "next": "#remove_keyboard" },
+                        {
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Privacy Checks: \n\n'
+                                    + '1. Review app permissions and revoke any unnecessary access.\n'
+                                    + '2. Use strong, unique passwords for your accounts.\n'
+                                    + '3. Enable two-factor authentication (2FA) wherever possible.\n'
+                                    + '4. Be cautious about sharing personal information online.\n',
+                                parse_mode: 'HTML'
+                            }
+                        },
+                        { "next": "#append_top_security_checks_keyboard" }
+                    ]),
+                    // es
+                    JSON.stringify([
+                        { "next": "#remove_keyboard" },
+                        {
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Comprobaciones de privacidad: \n\n'
+                                    + '1. Revisa los permisos de las aplicaciones y revoca cualquier acceso innecesario.\n'
+                                    + '2. Utiliza contraseñas fuertes y únicas para tus cuentas.\n'
+                                    + '3. Habilita la autenticación de dos factores (2FA) siempre que sea posible.\n'
+                                    + '4. Ten cuidado al compartir información personal en línea.\n',
+                                parse_mode: 'HTML'
+                            }
+                        },
+                        { "next": "#append_top_security_checks_keyboard" }
+                    ]),
+                    // fr
+                    JSON.stringify([
+                        { "next": "#remove_keyboard" },
+                        {
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Contrôles de confidentialité : \n\n'
+                                    + '1. Examinez les autorisations des applications et révoquez tout accès inutile.\n'
+                                    + '2. Utilisez des mots de passe forts et uniques pour vos comptes.\n'
+                                    + '3. Activez l\'authentification à deux facteurs (2FA) dans la mesure du possible.\n'
+                                    + '4. Soyez prudent lorsque vous partagez des informations personnelles en ligne.\n',
+                                parse_mode: 'HTML'
+                            }
+                        },
+                        { "next": "#append_top_security_checks_keyboard" }
+                    ]),
+                    // ar
+                    JSON.stringify([
+                        { "next": "#remove_keyboard" },
+                        {
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'فحوصات الخصوصية: \n\n'
+                                    + '1. راجع أذونات التطبيق وقم بإلغاء أي وصول غير ضروري.\n'
+                                    + '2. استخدم كلمات مرور قوية وفريدة لحساباتك.\n'
+                                    + '3. قم بتمكين المصادقة الثنائية (2FA) حيثما أمكن ذلك.\n'
+                                    + '4. كن حذرًا عند مشاركة المعلومات الشخصية عبر الإنترنت.\n',
+                                parse_mode: 'HTML'
+                            }
+                        },
+                        { "next": "#append_top_security_checks_keyboard" }
+                    ]),
+                    // de
+                    JSON.stringify([
+                        { "next": "#remove_keyboard" },
+                        {
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Datenschutzkontrollen: \n\n'
+                                    + '1. Überprüfen Sie App-Berechtigungen und widerrufen Sie unnötige Zugriffe.\n'
+                                    + '2. Verwenden Sie starke, eindeutige Passwörter für Ihre Konten.\n'
+                                    + '3. Aktivieren Sie die Zwei-Faktor-Authentifizierung (2FA), wo immer möglich.\n'
+                                    + '4. Seien Sie vorsichtig beim Teilen persönlicher Informationen online.\n',
+                                parse_mode: 'HTML'
+                            }
+                        },
+                        { "next": "#append_top_security_checks_keyboard" }
+                    ]),
+                    // it
+                    JSON.stringify([
+                        { "next": "#remove_keyboard" },
+                        {
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Controlli sulla privacy: \n\n'
+                                    + '1. Rivedi i permessi delle app e revoca l\'accesso non necessario.\n'
+                                    + '2. Usa password forti e uniche per i tuoi account.\n'
+                                    + '3. Abilita l\'autenticazione a due fattori (2FA) ovunque sia possibile.\n'
+                                    + '4. Sii cauto nel condividere informazioni personali online.\n',
+                                parse_mode: 'HTML'
+                            }
+                        },
+                        { "next": "#append_top_security_checks_keyboard" }
+                    ]),
+                    // pt
+                    JSON.stringify([
+                        { "next": "#remove_keyboard" },
+                        {
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Verificações de privacidade: \n\n'
+                                    + '1. Revise as permissões de aplicativos e revogue qualquer acesso desnecessário.\n'
+                                    + '2. Use senhas fortes e exclusivas para suas contas.\n'
+                                    + '3. Ative a autenticação de dois fatores (2FA) sempre que possível.\n'
+                                    + '4. Tenha cuidado ao compartilhar informações pessoais online.\n',
+                                parse_mode: 'HTML'
+                            }
+                        },
+                        { "next": "#append_top_security_checks_keyboard" }
+                    ]),
+                    // ru
+                    JSON.stringify([
+                        { "next": "#remove_keyboard" },
+                        {
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Проверки конфиденциальности: \n\n'
+                                    + '1. Проверяйте разрешения приложений и отзывайте ненужный доступ.\n'
+                                    + '2. Используйте надежные, уникальные пароли для своих учетных записей.\n'
+                                    + '3. Включите двухфакторную аутентификацию (2FA) везде, где это возможно.\n'
+                                    + '4. Будьте осторожны при обмене личной информацией в Интернете.\n',
+                                parse_mode: 'HTML'
+                            }
+                        },
+                        { "next": "#append_top_security_checks_keyboard" }
+                    ]),
+                    // zh
+                    JSON.stringify([
+                        { "next": "#remove_keyboard" },
+                        {
+                            method: 'sendMessage',
+                            payload: {
+                                text: '隐私检查： \n\n'
+                                    + '1. 审查应用程序权限并撤销任何不必要的访问权限。\n'
+                                    + '2. 为您的帐户使用强大、独特的密码。\n'
+                                    + '3. 尽可能启用两步验证（2FA）。\n'
+                                    + '4. 在线共享个人信息时要谨慎。\n',
+                                parse_mode: 'HTML'
+                            }
+                        },
+                        { "next": "#append_top_security_checks_keyboard" }
+                    ]),
+                    // ja
+                    JSON.stringify([
+                        { "next": "#remove_keyboard" },
+                        {
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'プライバシーチェック： \n\n'
+                                    + '1. アプリの権限を確認し、不要なアクセスをすべて取り消します。\n'
+                                    + '2. アカウントには強力でユニークなパスワードを使用してください。\n'
+                                    + '3. 可能な限り二要素認証（2FA）を有効にしてください。\n'
+                                    + '4. オンラインで個人情報を共有する際には注意してください。\n',
+                                parse_mode: 'HTML'
+                            }
+                        },
+                        { "next": "#append_top_security_checks_keyboard" }
+                    ]),
+                    // ko
+                    JSON.stringify([
+                        { "next": "#remove_keyboard" },
+                        {
+                            method: 'sendMessage',
+                            payload: {
+                                text: '개인정보 보호 확인: \n\n'
+                                    + '1. 앱 권한을 검토하고 불필요한 접근을 모두 취소하세요.\n'
+                                    + '2. 계정에 강력하고 고유한 비밀번호를 사용하세요.\n'
+                                    + '3. 가능하면 2단계 인증(2FA)을 활성화하세요.\n'
+                                    + '4. 온라인에서 개인 정보를 공유할 때 주의하세요.\n',
+                                parse_mode: 'HTML'
+                            }
+                        },
+                        { "next": "#append_top_security_checks_keyboard" }
+                    ]),
+                    // he
+                    JSON.stringify([
+                        { "next": "#remove_keyboard" },
+                        {
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'בדיקות פרטיות: \n\n'
+                                    + '1. סקור את הרשאות האפליקציה ובטל כל גישה מיותרת.\n'
+                                    + '2. השתמש בסיסמאות חזקות וייחודיות עבור החשבונות שלך.\n'
+                                    + '3. הפעל אימות דו-שלבי (2FA) בכל מקום אפשרי.\n'
+                                    + '4. היזהר משיתוף מידע אישי באינטרנט.\n',
+                                parse_mode: 'HTML'
+                            }
+                        },
+                        { "next": "#append_top_security_checks_keyboard" }
+                    ])
+                ],
+                ['#send_call_to_security_action_message',
+                    // default (en)
+                    JSON.stringify([{
+                        method: 'sendMessage',
+                        payload: {
+                            text: 'For more security actions, visit our website or contact support.',
+                            parse_mode: 'HTML'
+                        }
+                    }])
+                ]
+            ]
+        };
+    }
+}
+
 EMD.About = {
     entityName: 'About',
     card: (data = {}) => {
@@ -4441,74 +6841,6 @@ EMD.Logger = {
             name: '📜 Event Log',
             columns: ['Created On', 'DC', 'Action', 'chat_id', 'content', 'event'],
             sample_data: []
-        };
-    }
-}
-
-EMD.Test = {
-    entityName: 'testEntity',
-    card: (data = {}) => {
-        return {
-            name: 'webhook_Card',
-            header: {
-                title: 'Webhook Management',
-                subTitle: 'Manage your bot webhooks here.',
-                imageUrl: EMD.DEFAULT_IMAGE_URL,
-                imageStyle: CardService.ImageStyle.SQUARE,
-                imageAltText: 'Webhook Image'
-            },
-            sections:
-                [   // Webhook Management Section
-                    {
-                        header: 'Webhook Management',
-                        collapsible: false,
-                        numUncollapsibleWidgets: 0,
-                        widgets: [
-                            {
-                                id: 'set_webhook_widget',
-                                DecoratedText: {
-                                    topLabel: '📡',
-                                    text: 'api/setWebhook',
-                                    bottomLabel: 'Set webhook for the bot',
-                                    wrapText: false,
-                                    textButton: {
-                                        text: '📡 Set',
-                                        disabled: false,
-                                        onClick: {
-                                            functionName: 'EventHandler.Addon.setWebhook',
-                                            parameters: {
-                                                api: 'setWebhook'
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        ]
-                    }
-                ],
-            fixedFooter: {
-                primaryButton: {
-                    textButton: {
-                        text: '💫 Bind row data',
-                        onClick: {
-                            functionName: 'EventHandler.Addon.onBindData',
-                            parameters: {
-                                action: 'bindData'
-                            }
-                        }
-                    }
-                }
-            }
-        };
-    },
-    sheet: (data = {}) => {
-        return {
-            name: '🐢 Test Sheet',
-            columns: ['action', 'default', 'es', 'fr', 'ar', 'de', 'it', 'pt', 'ru', 'zh', 'ja', 'ko', 'he'],
-            sample_data: [
-                ['start', 'Start', 'Comenzar', 'Commencer', 'ابدأ', 'Starten', 'Inizia', 'Começar', 'Начать', '开始', 'スタート', '시작', 'התחל'],
-                ['help', 'Help', 'Ayuda', 'Aide', 'مساعدة', 'Hilfe', 'Aiuto', 'Ajuda', 'Помощь', '帮助', 'ヘルプ', '도움말', 'עזרה'],
-            ]
         };
     }
 }

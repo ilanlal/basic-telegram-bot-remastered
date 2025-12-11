@@ -150,6 +150,7 @@ function doPost(e) {
 
 ## Roadmap
 
+- Define "Addon" framework for building Telegram bots with Google Apps Script.
 - Integrate Google Chat API support.
 - Improve error handling and logging mechanisms.
 - Create a comprehensive set of examples and documentation.
