@@ -1315,7 +1315,7 @@ EMD.BasicAutomation = {
                             { "next": "#remove_keyboard" },
                             { "next": "#send_about_message" },
                             { "next": "#send_about_opensource_message" },
-                            { "next": "#send_privacy_security_message" },
+                            { "next": "#send_privacy_policy_message" },
                             { "next": "#send_how_to_contribute_message" },
                             { "next": "#append_main_menu_keyboard" }
                         ])
@@ -2138,7 +2138,7 @@ EMD.BasicAutomation = {
                             }
                         }])
                     ],
-                    ['#send_privacy_security_message',
+                    ['#send_privacy_policy_message',
                         // default (en)
                         JSON.stringify([{
                             method: 'sendMessage',
@@ -4078,13 +4078,65 @@ EMD.BasicAutomation = {
                             }
                         ])
                     ],
-                    ['#send_call_to_security_action_message',
+                    ['#2_lines_keyboard',
                         // default (en)
                         JSON.stringify([{
                             method: 'sendMessage',
                             payload: {
-                                text: 'For more security actions, visit our website or contact support.',
-                                parse_mode: 'HTML'
+                                text: 'Choose your Religion:',
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [
+                                            { text: "✡️ Jewish", web_app: { url: "https://example.com/1" } },
+                                            { text: "☪️ Muslim", web_app: { url: "https://example.com/2" } }
+                                        ],
+                                        [
+                                            { text: "✝️ Christian", web_app: { url: "https://example.com/3" } },
+                                            { text: "🕉️ Hindu", web_app: { url: "https://example.com/4" } }
+                                        ],
+                                        [
+                                            { text: "☸️ Buddhist", web_app: { url: "https://example.com/5" } },
+                                            { text: "☯️ Atheist", web_app: { url: "https://example.com/6" } }
+                                        ],
+                                        [
+                                            { text: "🛐 Other", web_app: { url: "https://example.com/7" } }
+                                        ]
+                                    ]
+                                }
+                            }
+                        }])
+                    ],
+                    ['#3_lines_keyboard_3x4',
+                        // default (en)
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: 'Choose your Zodiac Sign:',
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [
+                                            { text: "♈ Aries", web_app: { url: "https://example.com/1" } },
+                                            { text: "♉ Taurus", web_app: { url: "https://example.com/2" } },
+                                            { text: "♊ Gemini", web_app: { url: "https://example.com/3" } }
+                                        ],
+                                        [
+                                            { text: "♋ Cancer", web_app: { url: "https://example.com/4" } },
+                                            { text: "♌ Leo", web_app: { url: "https://example.com/5" } },
+                                            { text: "♍ Virgo", web_app: { url: "https://example.com/6" } }
+                                        ],
+                                        [
+                                            { text: "♎ Libra", web_app: { url: "https://example.com/7" } },
+                                            { text: "♏ Scorpio", web_app: { url: "https://example.com/8" } },
+                                            { text: "♐ Sagittarius", web_app: { url: "https://example.com/9" } }
+                                        ],
+                                        [
+                                            { text: "♑ Capricorn", web_app: { url: "https://example.com/10" } },
+                                            { text: "♒ Aquarius", web_app: { url: "https://example.com/11" } },
+                                            { text: "♓ Pisces", web_app: { url: "https://example.com/12" } }
+                                        ]
+
+                                    ]
+                                }
                             }
                         }])
                     ]
