@@ -3926,7 +3926,7 @@ EMD.BasicAutomation = {
                         JSON.stringify([{
                             method: 'sendMessage',
                             payload: {
-                                text: ' ',
+                                text: '- ⌨️',
                                 parse_mode: 'HTML'
                             }
                         }])
@@ -4684,8 +4684,7 @@ EMD.SurveyAutomation = {
                         JSON.stringify([
                             { "next": "#remove_keyboard" },
                             { "next": "#send_welcome_to_survey_center" },
-                            { "next": "#append_survey_options_keyboard" },
-                            { "next": "#answer_completed" }
+                            { "next": "#append_survey_options_keyboard" }
                         ])
                     ],
                     ['#append_survey_options_keyboard',
@@ -4696,20 +4695,20 @@ EMD.SurveyAutomation = {
                                 reply_markup: {
                                     inline_keyboard: [
                                         [
-                                            { text: "Poll 1", callback_data: "#sendPoll01" },
-                                            { text: "Poll 2", callback_data: "#sendPoll02" }
+                                            { text: "Random Color", callback_data: "#sendPoll01" },
+                                            { text: "Horoscope Signs", callback_data: "#sendPoll02" }
                                         ],
                                         [
-                                            { text: "Poll 3", callback_data: "#sendPoll03" },
-                                            { text: "Poll 4", callback_data: "#sendPoll04" }
+                                            { text: "Religion", callback_data: "#sendPoll03" },
+                                            { text: "Geo Location", callback_data: "#sendPoll04" }
                                         ],
                                         [
-                                            { text: "Quiz 1", callback_data: "#sendQuiz01" },
-                                            { text: "Quiz 2", callback_data: "#sendQuiz02" }
+                                            { text: "Group of Age", callback_data: "#sendQuiz01" },
+                                            { text: "Gender", callback_data: "#sendQuiz02" }
                                         ],
                                         [
-                                            { text: "Quiz 3", callback_data: "#sendQuiz03" },
-                                            { text: "Quiz 4", callback_data: "#sendQuiz04" }
+                                            { text: "Education", callback_data: "#sendQuiz03" },
+                                            { text: "Employment", callback_data: "#sendQuiz04" }
                                         ]
                                     ]
                                 }
@@ -4721,160 +4720,52 @@ EMD.SurveyAutomation = {
                         JSON.stringify([{
                             method: 'sendMessage',
                             payload: {
-                                text: 'Welcome to the Survey Center! \n\n'
+                                text: 'Welcome to the <b>Poll Center!</b> \n\n'
                                     + 'Here you can participate in various polls and quizzes to share your opinions and test your knowledge.',
-                                parse_mode: 'HTML'
-                            }
-                        }]),
-                        // es
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: '¡Bienvenido al Centro de Encuestas! \n\n'
-                                    + 'Aquí puedes participar en varias encuestas y cuestionarios para compartir tus opiniones y poner a prueba tus conocimientos.',
-                                parse_mode: 'HTML'
-                            }
-                        }]),
-                        // fr
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: 'Bienvenue au Centre de Sondages ! \n\n'
-                                    + 'Ici, vous pouvez participer à divers sondages et quiz pour partager vos opinions et tester vos connaissances.',
-                                parse_mode: 'HTML'
-                            }
-                        }]),
-                        // ar
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: 'مرحبًا بك في مركز الاستطلاعات! \n\n'
-                                    + 'هنا يمكنك المشاركة في استطلاعات واختبارات مختلفة لمشاركة آرائك واختبار معرفتك.',
-                                parse_mode: 'HTML'
-                            }
-                        }]),
-                        // de
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: 'Willkommen im Umfragezentrum! \n\n'
-                                    + 'Hier können Sie an verschiedenen Umfragen und Quizzen teilnehmen, um Ihre Meinungen zu teilen und Ihr Wissen zu testen.',
-                                parse_mode: 'HTML'
-                            }
-                        }]),
-                        // it
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: 'Benvenuto nel Centro Sondaggi! \n\n'
-                                    + 'Qui puoi partecipare a vari sondaggi e quiz per condividere le tue opinioni e mettere alla prova le tue conoscenze.',
-                                parse_mode: 'HTML'
-                            }
-                        }]),
-                        // pt
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: 'Bem-vindo ao Centro de Pesquisas! \n\n'
-                                    + 'Aqui você pode participar de várias pesquisas e questionários para compartilhar suas opiniões e testar seus conhecimentos.',
-                                parse_mode: 'HTML'
-                            }
-                        }]),
-                        // ru
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: 'Добро пожаловать в Центр Опросов! \n\n'
-                                    + 'Здесь вы можете участвовать в различных опросах и викторинах, чтобы поделиться своим мнением и проверить свои знания.',
-                                parse_mode: 'HTML'
-                            }
-                        }]),
-                        // zh
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: '欢迎来到调查中心！ \n\n'
-                                    + '在这里，您可以参与各种调查和测验，分享您的意见并测试您的知识。',
-                                parse_mode: 'HTML'
-                            }
-                        }]),
-                        // ja
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: 'アンケートセンターへようこそ！ \n\n'
-                                    + 'ここでは、さまざまなアンケートやクイズに参加して、意見を共有し、知識を試すことができます。',
-                                parse_mode: 'HTML'
-                            }
-                        }]),
-                        // ko
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: '설문 조사 센터에 오신 것을 환영합니다! \n\n'
-                                    + '여기에서 다양한 설문 조사와 퀴즈에 참여하여 의견을 공유하고 지식을 테스트할 수 있습니다.',
-                                parse_mode: 'HTML'
-                            }
-                        }]),
-                        // he
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: 'ברוכים הבאים למרכז הסקרים! \n\n'
-                                    + 'כאן תוכלו להשתתף בסקרים ובחידונים שונים כדי לשתף את דעתכם ולבדוק את הידע שלכם.',
                                 parse_mode: 'HTML'
                             }
                         }])
                     ],
+                    // Random Color Poll
                     ['#sendPoll01',
                         // default (en)
                         JSON.stringify([{
                             method: 'sendPoll',
                             payload: {
-                                question: 'Which feature do you like the most in this bot?',
+                                question: 'Select random color from the list:',
                                 question_parse_mode: 'HTML',
                                 options: JSON.stringify([
-                                    'Text Messages with HTML formatting',
-                                    'Photos with captions and inline keyboards',
-                                    'Media Groups (albums) with multiple photos',
-                                    'Interactive Inline Keyboards'
+                                    '🟥 Red',
+                                    '🟩 Green',
+                                    '🟦 Blue'
                                 ]),
                                 protect_content: true,
                                 open_period: 300,
-                                is_anonymous: false,
-                                explanation: 'Your feedback helps us improve the bot and add more exciting features!',
-                                explanation_parse_mode: 'HTML',
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [{ text: "🏠 Start", callback_data: "/start" }]
-                                    ]
-                                }
+                                is_anonymous: true,
+                                explanation: 'We appreciate your participation in our poll! \n\n Your feedback helps us improve the bot and add more exciting features!',
+                                explanation_parse_mode: 'HTML'
                             }
                         }])
                     ],
+                    // Horoscope Signs Poll
                     ['#sendPoll02',
                         // default (en)
                         JSON.stringify([{
                             method: 'sendPoll',
                             payload: {
-                                question: 'What feature would you like to see added next?',
+                                question: 'Select your Horoscope Sign:',
                                 question_parse_mode: 'HTML',
                                 options: JSON.stringify([
-                                    'Voice Messages',
-                                    'Video Sharing',
-                                    'File Attachments',
-                                    'Live Streaming'
+                                    '♈ Aries', '♉ Taurus', '♊ Gemini',
+                                    '♋ Cancer', '♌ Leo', '♍ Virgo',
+                                    '♎ Libra', '♏ Scorpio', '♐ Sagittarius',
+                                    '♑ Capricorn', '♒ Aquarius', '♓ Pisces'
                                 ]),
                                 protect_content: true,
                                 open_period: 300,
                                 is_anonymous: false,
                                 explanation: 'Your feedback helps us improve the bot and add more exciting features!',
-                                explanation_parse_mode: 'HTML',
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [{ text: "🏠 Start", callback_data: "/start" }]
-                                    ]
-                                }
+                                explanation_parse_mode: 'HTML'
                             }
                         }])
                     ],
