@@ -3923,7 +3923,7 @@ EMD.BasicAutomation = {
                     ],
                     ['#send_end_of_session_message',
                         // default (en)
-                        , JSON.stringify([{
+                        JSON.stringify([{
                             method: 'sendMessage',
                             payload: {
                                 text: ' ',
@@ -6318,10 +6318,18 @@ EMD.ApiFeaturesAutomation = {
                                     }
                                 }
                             },
-                            {   // editMessageReplyMarkup
+                            {   // editMessageText
                                 delay_ms: 3000,
-                                method: 'editMessageReplyMarkup',
+                                method: 'editMessageText',
                                 payload: {
+                                    text: 'This is a sample message with custom reply markup (keyboard). \n\n'
+                                        + 'You can interact with the buttons below to see how reply markups work in Telegram Bots.\n\n'
+                                        + '<blockquote expandable>About InlineKeyboardMarkup:\n\n'
+                                        + 'This object represents an inline keyboard that appears right next to the message it belongs to.\n\n</blockquote>\n\n'
+                                        + '1. In this example, I have added an inline keyboard with a button that echoes when pressed.\n\n'
+                                        + '2. I have added more keys to the keyboard below.\n\n'
+                                        + '3. Continuing with sample, in about 3 seconds, I will edit this message to add more keys to the keyboard below.\n\n',
+                                    parse_mode: 'HTML',
                                     reply_markup: {
                                         inline_keyboard: [
                                             [
@@ -6359,6 +6367,7 @@ EMD.ApiFeaturesAutomation = {
                                 }
                             },
                             {   // editMessageText
+                                delay_ms: 3000,
                                 method: 'editMessageText',
                                 payload: {
                                     text: 'This is a sample message with custom reply markup (keyboard). \n\n'
@@ -6367,14 +6376,8 @@ EMD.ApiFeaturesAutomation = {
                                         + 'This object represents an inline keyboard that appears right next to the message it belongs to.\n\n</blockquote>\n\n'
                                         + '1. In this example, I have added an inline keyboard with a button that echoes when pressed.\n\n'
                                         + '2. I have added more keys to the keyboard below.\n\n'
-                                        + '3. Continuing with sample, in about 3 seconds, I will edit this message to add more keys to the keyboard below.\n\n',
-                                    parse_mode: 'HTML'
-                                }
-                            },
-                            {   // editMessageReplyMarkup
-                                delay_ms: 3000,
-                                method: 'editMessageReplyMarkup',
-                                payload: {
+                                        + '3. I have added even more keys to the keyboard below.\n\n',
+                                    parse_mode: 'HTML',
                                     reply_markup: {
                                         inline_keyboard: [
                                             [
@@ -6407,19 +6410,6 @@ EMD.ApiFeaturesAutomation = {
                                             ]
                                         ]
                                     }
-                                }
-                            },
-                            {   // editMessageText
-                                method: 'editMessageText',
-                                payload: {
-                                    text: 'This is a sample message with custom reply markup (keyboard). \n\n'
-                                        + 'You can interact with the buttons below to see how reply markups work in Telegram Bots.\n\n'
-                                        + '<blockquote expandable>About InlineKeyboardMarkup:\n\n'
-                                        + 'This object represents an inline keyboard that appears right next to the message it belongs to.\n\n</blockquote>\n\n'
-                                        + '1. In this example, I have added an inline keyboard with a button that echoes when pressed.\n\n'
-                                        + '2. I have added more keys to the keyboard below.\n\n'
-                                        + '3. I have added even more keys to the keyboard below.\n\n',
-                                    parse_mode: 'HTML'
                                 }
                             }
                         ])
