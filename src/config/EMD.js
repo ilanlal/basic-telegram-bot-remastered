@@ -7486,19 +7486,47 @@ EMD.SecurityChecksAutomation = {
     }
 }
 
-EMD.SurveyResults = {
-    entityName: 'SurveyResults',
-    sheet: (data = {}) => {
-        return {
-            name: '📊 Survey Results',
-            columns: ['Timestamp', 'Chat ID', 'Response Content', 'Param 1', 'Param 2', 'Param 3'],
-            sample_data: []
-        };
-    }
-}
-
 EMD.InvoiceLinks = {
     entityName: 'InvoiceLinks',
+    card: (data = {}) => {
+        return {
+            name: 'invoiceLinks_Card',
+            header: {
+                title: 'Invoice Links',
+                subTitle: 'Manage your invoice links here.',
+                imageUrl: EMD.DEFAULT_IMAGE_URL,
+                imageStyle: CardService.ImageStyle.SQUARE,
+                imageAltText: 'Invoice Links Image'
+            },
+            sections: [
+                {
+                    // header: 'Invoice Links Management',
+                    widgets: [
+                        {
+                            id: 'invoice_links_text_paragraph',
+                            TextParagraph: {
+                                text: 'Create and manage your invoice links for payments and subscriptions.'
+                            }
+                        }
+                    ]
+                },
+                {   // Data view
+                    header: 'Data View',
+                    collapsible: true,
+                    numUncollapsibleWidgets: 0,
+                    widgets: [
+                        {   // Data View widget
+                            id: 'data_view_widget',
+                            TextParagraph: {
+                                text: `Data: ${JSON.stringify(data, null, 2)}`,
+                                maxLines: 35
+                            }
+                        }
+                    ]
+                }
+            ]
+        };
+    },
     sheet: (data = {}) => {
         return {
             name: '🧾 Invoice Links',
