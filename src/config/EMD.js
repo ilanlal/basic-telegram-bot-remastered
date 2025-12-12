@@ -5,15 +5,24 @@ class EMD {
     }
 }
 
-EMD.DEFAULT_IMAGE_URL = 'https://raw.githubusercontent.com/ilanlal/basic-telegram-bot-remastered/main/assets/bitmoji-20190109115905.webp';
+EMD.DEFAULT_IMAGE_URL = 'https://raw.githubusercontent.com/ilanlal/basic-telegram-bot-remastered/main/assets/logo480.png';
 EMD.WELCOME_IMG_URL = 'https://raw.githubusercontent.com/ilanlal/basic-telegram-bot-remastered/main/assets/bitmoji-20190109115847.webp';
 EMD.HELP_IMG_URL = 'https://raw.githubusercontent.com/ilanlal/basic-telegram-bot-remastered/main/assets/bitmoji-20190109115939.webp';
-EMD.ABOUT_IMG_URL = 'https://raw.githubusercontent.com/ilanlal/basic-telegram-bot-remastered/main/assets/bitmoji-20190109115604.webp';
+EMD.ABOUT_IMG_URL = 'https://raw.githubusercontent.com/ilanlal/basic-telegram-bot-remastered/main/assets/bitmoji-20190528070537.webp';
+EMD.MATH_IMG_URL = 'https://raw.githubusercontent.com/ilanlal/basic-telegram-bot-remastered/main/assets/bitmoji-20190109115604.webp';
 EMD.SUPPORT_IMG_URL = 'https://raw.githubusercontent.com/ilanlal/basic-telegram-bot-remastered/main/assets/bitmoji-20190109120015.webp';
 EMD.THANK_YOU_IMG_URL = 'https://raw.githubusercontent.com/ilanlal/basic-telegram-bot-remastered/main/assets/bitmoji-20190109115743.webp';
 EMD.YOU_GOT_IT_IMG_URL = 'https://raw.githubusercontent.com/ilanlal/basic-telegram-bot-remastered/main/assets/bitmoji-20190528070739.webp';
 EMD.BIG_TIME_IMG_URL = 'https://raw.githubusercontent.com/ilanlal/basic-telegram-bot-remastered/main/assets/bitmoji-20190528070720.webp';
 EMD.PEACH_IMG_URL = 'https://raw.githubusercontent.com/ilanlal/basic-telegram-bot-remastered/main/assets/bitmoji-20190109115654.webp';
+EMD.HAVE_A_NICE_DAY_IMG_URL = 'https://raw.githubusercontent.com/ilanlal/basic-telegram-bot-remastered/main/assets/bitmoji-20190528070956.webp';
+EMD.I_AM_THINKING_IMG_URL = 'https://raw.githubusercontent.com/ilanlal/basic-telegram-bot-remastered/main/assets/bitmoji-20190109115627.webp';
+EMD.WHAIT_FOR_IT_IMG_URL = 'https://raw.githubusercontent.com/ilanlal/basic-telegram-bot-remastered/main/assets/bitmoji-20190528070537.webp';
+EMD.YES_IMG_URL = 'https://raw.githubusercontent.com/ilanlal/basic-telegram-bot-remastered/main/assets/bitmoji-20190528070629.webp';
+EMD.PAY_ATTENTION_IMG_URL = 'https://raw.githubusercontent.com/ilanlal/basic-telegram-bot-remastered/main/assets/bitmoji-20190528070905.webp';
+EMD.KISS_IMG_URL = 'https://raw.githubusercontent.com/ilanlal/basic-telegram-bot-remastered/main/assets/bitmoji-20190109115813.webp';
+EMD.CHEERS_IMG_URL = 'https://raw.githubusercontent.com/ilanlal/basic-telegram-bot-remastered/main/assets/bitmoji-20190109115847.webp';
+EMD.BLINK_IMG_URL = 'https://raw.githubusercontent.com/ilanlal/basic-telegram-bot-remastered/main/assets/bitmoji-20190109115905.webp';
 EMD.LOGO_PNG_URL = 'https://raw.githubusercontent.com/ilanlal/basic-telegram-bot-remastered/main/assets/logo480.png';
 EMD.GIT_REPO_URL = 'https://github.com/ilanlal/basic-telegram-bot-remastered';
 
@@ -3912,6 +3921,16 @@ EMD.BasicAutomation = {
                             }
                         }])
                     ],
+                    ['#send_end_of_session_message',
+                        // default (en)
+                        , JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: ' ',
+                                parse_mode: 'HTML'
+                            }
+                        }])
+                    ],
                     ['/security_checks',
                         // default (en)
                         JSON.stringify([
@@ -5958,117 +5977,21 @@ EMD.ApiFeaturesAutomation = {
                         JSON.stringify([
                             { "next": "#remove_keyboard" },
                             { "next": "#send_api_features_message" },
-                            { "next": "#append_api_features_keyboard" },
-                            { "next": "#answer_completed" }
+                            { "next": "#append_api_features_keyboard" }
                         ])
                     ],
                     ['#send_api_features_message',
                         // default (en)
                         JSON.stringify([{
-                            method: 'sendMessage',
+                            method: 'sendPhoto',
                             payload: {
-                                text: 'Explore the Store API Features! \n\n'
-                                    + 'Discover how to integrate and utilize various API features to enhance your store experience.',
-                                parse_mode: 'HTML'
-                            }
-                        }]),
-                        // es
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: '¡Explora las Funciones de la API de la Tienda! \n\n'
-                                    + 'Descubre cómo integrar y utilizar varias funciones de la API para mejorar la experiencia de tu tienda.',
-                                parse_mode: 'HTML'
-                            }
-                        }]),
-                        // fr
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: 'Explorez les fonctionnalités de l\'API Store ! \n\n'
-                                    + 'Découvrez comment intégrer et utiliser diverses fonctionnalités de l\'API pour améliorer l\'expérience de votre boutique.',
-                                parse_mode: 'HTML'
-                            }
-                        }]),
-                        // ar
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: 'استكشف ميزات واجهة برمجة تطبيقات المتجر! \n\n'
-                                    + 'اكتشف كيفية دمج واستخدام ميزات API المختلفة لتعزيز تجربة متجرك.',
-                                parse_mode: 'HTML'
-                            }
-                        }]),
-                        // de
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: 'Entdecken Sie die Funktionen der Store-API! \n\n'
-                                    + 'Erfahren Sie, wie Sie verschiedene API-Funktionen integrieren und nutzen können, um Ihr Store-Erlebnis zu verbessern.',
-                                parse_mode: 'HTML'
-                            }
-                        }]),
-                        // it
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: 'Esplora le funzionalità dell\'API Store! \n\n'
-                                    + 'Scopri come integrare e utilizzare varie funzionalità API per migliorare l\'esperienza del tuo negozio.',
-                                parse_mode: 'HTML'
-                            }
-                        }]),
-                        // pt
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: 'Explore os Recursos da API da Loja! \n\n'
-                                    + 'Descubra como integrar e utilizar vários recursos da API para melhorar a experiência da sua loja.',
-                                parse_mode: 'HTML'
-                            }
-                        }]),
-                        // ru
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: 'Изучите функции API магазина! \n\n'
-                                    + 'Узнайте, как интегрировать и использовать различные функции API для улучшения работы вашего магазина.',
-                                parse_mode: 'HTML'
-                            }
-                        }]),
-                        // zh
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: '探索商店API的功能！ \n\n'
-                                    + '了解如何集成和使用各种API功能，以提升您的商店体验。',
-                                parse_mode: 'HTML'
-                            }
-                        }]),
-                        // ja
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: 'ストアAPIの機能を探る！ \n\n'
-                                    + 'さまざまなAPI機能を統合および活用して、ストアの体験を向上させる方法を学びましょう。',
-                                parse_mode: 'HTML'
-                            }
-                        }]),
-                        // ko
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: '스토어 API 기능을 탐색하세요! \n\n'
-                                    + '스토어 경험을 향상시키기 위해 다양한 API 기능을 통합하고 활용하는 방법을 알아보세요.',
-                                parse_mode: 'HTML'
-                            }
-                        }]),
-                        // he
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: 'חקור את פונקציות ה-API של החנות! \n\n'
-                                    + 'גלה כיצד לשלב ולהשתמש בפונקציות API שונות כדי לשפר את חוויית החנות שלך.',
-                                parse_mode: 'HTML'
+                                caption: 'Welcome to the API Features Showcase! \n\n'
+                                    + 'Discover how to integrate and utilize various API features to enhance your Telegram Bot experience.',
+                                photo: EMD.MATH_IMG_URL,
+                                protect_content: true,
+                                has_spoiler: false,
+                                parse_mode: 'HTML',
+                                disable_notification: false
                             }
                         }])
                     ],
@@ -6079,13 +6002,34 @@ EMD.ApiFeaturesAutomation = {
                             payload: {
                                 reply_markup: {
                                     inline_keyboard: [
-                                        [{ text: "💬 Send Messages", callback_data: "/sendMessage" }],
-                                        [{ text: "🖼️ Send Photos", callback_data: "/sendPhoto" }],
+                                        [
+                                            { text: "💬 Messages", callback_data: "/sendMessage" },
+                                            { text: "🖼️ Photos", callback_data: "/sendPhoto" },
+                                            { text: "🖼️ Media Groups", callback_data: "/sendMediaGroup" }
+                                        ],
+                                        [
+                                            { text: "🎛️ Reply Markup (Keyboard, Keypad)", callback_data: "/sendReplyMarkup" }
+                                        ],
                                         // Open youTube as web app
-                                        [{ text: "▶️ EasyADM YouTube Channel", web_app: { url: "https://youtube.com/@easyadm6040?si=s1RatCN_xDv0h01t" } }],
-                                        [{ text: "🌐 EasyADM Website", web_app: { url: "https://easyadm.com" } }],
-                                        [{ text: "About 🛈", callback_data: "/about" }, { text: "❓ Help", callback_data: "/help" }],
-                                        [{ text: "🏠 Start", callback_data: "/start" }]
+                                        [
+                                            {
+                                                text: "▶️ EasyADM YouTube Channel",
+                                                web_app: {
+                                                    url: "https://youtube.com/@easyadm6040"
+                                                }
+                                            }
+                                        ],
+                                        [
+                                            {
+                                                text: "🌐 EasyADM Website",
+                                                web_app: {
+                                                    url: "https://easyadm.com"
+                                                }
+                                            }
+                                        ],
+                                        [
+                                            { text: "🏠 Start", callback_data: "/start" }
+                                        ]
                                     ]
                                 }
                             }
@@ -6095,7 +6039,7 @@ EMD.ApiFeaturesAutomation = {
                         // default (en)
                         JSON.stringify([
                             { "next": "#remove_keyboard" },
-                            { "next": "#send_sample_sendMessage" },
+                            { "next": "#send_sample_message" },
                             { "next": "#append_api_features_keyboard" },
                         ])
                     ],
@@ -6103,11 +6047,28 @@ EMD.ApiFeaturesAutomation = {
                         // default (en)
                         JSON.stringify([
                             { "next": "#remove_keyboard" },
-                            { "next": "#send_sample_sendPhoto" },
+                            { "next": "#send_sample_photo" },
                             { "next": "#append_api_features_keyboard" },
                         ])
                     ],
-                    ['#send_sample_sendMessage',
+                    ['/sendMediaGroup',
+                        // default (en)
+                        JSON.stringify([
+                            { "next": "#remove_keyboard" },
+                            { "next": "#send_sample_media_group" },
+                            { "next": "#append_api_features_keyboard" },
+                        ])
+                    ],
+                    ['/sendReplyMarkup',
+                        // default (en)
+                        JSON.stringify([
+                            { "next": "#remove_keyboard" },
+                            { "next": "#send_sample_reply_markup" },
+                            { "next": "#send_end_of_session_message" },
+                            { "next": "#append_api_features_keyboard" }
+                        ])
+                    ],
+                    ['#send_sample_message',
                         // default (en)
                         JSON.stringify([
                             {
@@ -6219,14 +6180,245 @@ EMD.ApiFeaturesAutomation = {
                             }
                         ])
                     ],
-                    ['#send_sample_sendPhoto',
+                    ['#send_sample_photo',
                         // default (en)
                         JSON.stringify([
                             {
                                 method: 'sendPhoto',
                                 payload: {
-                                    caption: 'This is a sample photo sent using the Send Photo API feature.',
-                                    photo: "https://www.gstatic.com/webp/gallery/1.jpg",
+                                    caption: 'This is a sample photo sent using the Send Photo API feature. \n\n'
+                                        + 'In about 3 seconds, I will edit the caption to demonstrate the Edit Message Caption API feature. \n\n',
+                                    photo: EMD.WHAIT_FOR_IT_IMG_URL,
+                                    parse_mode: 'HTML',
+                                    has_spoiler: false,
+                                    protect_content: true,
+                                    disable_notification: true
+                                }
+                            },
+                            {
+                                delay_ms: 3000,
+                                method: 'editMessageCaption',
+                                payload: {
+                                    caption: 'This is a sample photo sent using the Send Photo API feature. \n\n'
+                                        + 'The caption has been edited after a 3 second delay to demonstrate the Edit Message Caption API feature.\n\n'
+                                        + 'Now, In about 3 seconds, I will edit the photo to demonstrate the Edit Message Media API feature.',
+                                    parse_mode: 'HTML',
+                                    has_spoiler: false,
+                                    protect_content: true,
+                                    disable_notification: true
+                                }
+                            },
+                            {
+                                delay_ms: 3000,
+                                method: 'editMessageMedia',
+                                payload: {
+                                    media: {
+                                        type: 'photo',
+                                        media: EMD.MATH_IMG_URL,
+                                        caption: 'This is a sample photo sent using the Send Photo API feature. \n\n'
+                                            + 'The caption has been edited after a 3 second delay to demonstrate the Edit Message Caption API feature.\n\n'
+                                            + 'The photo has also been edited after a 3 second delay to demonstrate the Edit Message Media API feature.',
+                                        parse_mode: 'HTML',
+                                        has_spoiler: false,
+                                        protect_content: true,
+                                        disable_notification: true
+                                    }
+                                }
+                            }
+                        ])
+                    ],
+                    ['#send_sample_media_group',
+                        // default (en)
+                        JSON.stringify([{
+                            method: 'sendMediaGroup',
+                            payload: {
+                                media: [
+                                    {
+                                        type: 'photo',
+                                        media: EMD.PEACH_IMG_URL,
+                                        caption: 'Peach Photo 1',
+                                        parse_mode: 'HTML',
+                                        has_spoiler: false,
+                                        show_caption_above_media: true
+                                    },
+                                    {
+                                        type: 'photo',
+                                        media: EMD.KISS_IMG_URL,
+                                        caption: 'Kiss Photo 2',
+                                        parse_mode: 'HTML',
+                                        has_spoiler: false,
+                                        show_caption_above_media: false
+                                    },
+                                    {
+                                        type: 'photo',
+                                        media: EMD.ABOUT_IMG_URL,
+                                        caption: 'About Photo 3',
+                                        parse_mode: 'HTML',
+                                        has_spoiler: false,
+                                        show_caption_above_media: false
+                                    },
+                                    {
+                                        type: 'photo',
+                                        media: EMD.HELP_IMG_URL,
+                                        caption: 'Help Photo 4',
+                                        parse_mode: 'HTML',
+                                        has_spoiler: false,
+                                        show_caption_above_media: false
+                                    },
+                                    {
+                                        type: 'photo',
+                                        media: EMD.BLINK_IMG_URL,
+                                        caption: 'Blink Photo 5',
+                                        parse_mode: 'HTML',
+                                        has_spoiler: false,
+                                        show_caption_above_media: false
+                                    },
+                                    {
+                                        type: 'photo',
+                                        media: EMD.CHEERS_IMG_URL,
+                                        caption: 'Cheers Photo 6',
+                                        parse_mode: 'HTML',
+                                        has_spoiler: true,
+                                        show_caption_above_media: false
+                                    },
+                                    {
+                                        type: 'photo',
+                                        media: EMD.I_AM_THINKING_IMG_URL,
+                                        caption: 'I Am Thinking Photo 7',
+                                        parse_mode: 'HTML',
+                                        has_spoiler: true,
+                                        show_caption_above_media: true
+                                    }
+                                ],
+                                protect_content: true,
+                                disable_notification: true
+                            }
+                        }])
+                    ],
+                    ['#send_sample_reply_markup',
+                        // default (en)
+                        JSON.stringify([
+                            {   // sendMessage
+                                method: 'sendMessage',
+                                payload: {
+                                    text: 'This is a sample message with custom reply markup (keyboard). \n\n'
+                                        + 'You can interact with the buttons below to see how reply markups work in Telegram Bots.\n\n'
+                                        + '<blockquote expandable>About InlineKeyboardMarkup:\n\n'
+                                        + 'This object represents an inline keyboard that appears right next to the message it belongs to.\n\n</blockquote>\n\n'
+                                        + '1. In this example, I have added an inline keyboard with a button that echoes when pressed.\n\n'
+                                        + '2. In about 3 seconds, I will edit this message to add more keys to the keyboard below.\n\n'
+                                        + '3. Continuing with sample, in about 3 seconds, I will edit this message to add even more keys to the keyboard below.\n\n',
+                                    parse_mode: 'HTML',
+                                    reply_markup: {
+                                        inline_keyboard: [
+                                            [
+                                                { text: "🔴🟢🔵", callback_data: "/echo 🔴🟢🔵" }
+                                            ]
+                                        ]
+                                    }
+                                }
+                            },
+                            {   // editMessageReplyMarkup
+                                delay_ms: 3000,
+                                method: 'editMessageReplyMarkup',
+                                payload: {
+                                    reply_markup: {
+                                        inline_keyboard: [
+                                            [
+                                                { text: "🟥🟦", callback_data: "/echo 🟥🟦" },
+                                                { text: "🟦🟩", callback_data: "/echo 🟦🟩" },
+                                                { text: "🟩🟨", callback_data: "/echo 🟩🟨" },
+                                            ],
+                                            [
+                                                { text: "🟨🟥", callback_data: "/echo 🟨🟥" },
+                                                { text: "🟥🟩", callback_data: "/echo 🟥🟩" },
+                                                { text: "🟩🟦", callback_data: "/echo 🟩🟦" }
+                                            ],
+                                            [
+                                                { text: "🟦🟨", callback_data: "/echo 🟦🟨" },
+                                                { text: "🟨🟥", callback_data: "/echo 🟨🟥" },
+                                                { text: "🟥🟦", callback_data: "/echo 🟥🟦" }
+                                            ],
+                                            [
+                                                { text: "🟥🟩🟦🟨", callback_data: "/echo 🟥🟩🟦🟨" },
+                                                { text: "🟨🟦🟩🟥", callback_data: "/echo 🟨🟦🟩🟥" }
+                                            ],
+                                            [
+                                                { text: "🟦🟥🟨🟩", callback_data: "/echo 🟦🟥🟨🟩" },
+                                                { text: "🟩🟨🟥🟦", callback_data: "/echo 🟩🟨🟥🟦" }
+                                            ],
+                                            [
+                                                { text: "☢️", callback_data: "/echo ☢️" },
+                                                { text: "☣️", callback_data: "/echo ☣️" },
+                                                { text: "⚛️", callback_data: "/echo ⚛️" },
+                                                { text: "🛑", callback_data: "/echo 🛑" },
+                                                { text: "🚷", callback_data: "/echo 🚷" }
+                                            ]
+                                        ]
+                                    }
+                                }
+                            },
+                            {   // editMessageText
+                                method: 'editMessageText',
+                                payload: {
+                                    text: 'This is a sample message with custom reply markup (keyboard). \n\n'
+                                        + 'You can interact with the buttons below to see how reply markups work in Telegram Bots.\n\n'
+                                        + '<blockquote expandable>About InlineKeyboardMarkup:\n\n'
+                                        + 'This object represents an inline keyboard that appears right next to the message it belongs to.\n\n</blockquote>\n\n'
+                                        + '1. In this example, I have added an inline keyboard with a button that echoes when pressed.\n\n'
+                                        + '2. I have added more keys to the keyboard below.\n\n'
+                                        + '3. Continuing with sample, in about 3 seconds, I will edit this message to add more keys to the keyboard below.\n\n',
+                                    parse_mode: 'HTML'
+                                }
+                            },
+                            {   // editMessageReplyMarkup
+                                delay_ms: 3000,
+                                method: 'editMessageReplyMarkup',
+                                payload: {
+                                    reply_markup: {
+                                        inline_keyboard: [
+                                            [
+                                                { text: "1️⃣", callback_data: "/echo 1️⃣" },
+                                                { text: "2️⃣", callback_data: "/echo 2️⃣" },
+                                                { text: "3️⃣", callback_data: "/echo 3️⃣" }
+                                            ],
+                                            [
+
+                                                { text: "4️⃣", callback_data: "/echo 4️⃣" },
+                                                { text: "5️⃣", callback_data: "/echo 5️⃣" },
+                                                { text: "6️⃣", callback_data: "/echo 6️⃣" }
+                                            ],
+                                            [
+                                                { text: "7️⃣", callback_data: "/echo 7️⃣" },
+                                                { text: "8️⃣", callback_data: "/echo 8️⃣" },
+                                                { text: "9️⃣", callback_data: "/echo 9️⃣" }
+                                            ],
+                                            [
+                                                { text: "#️⃣", callback_data: "/echo #️⃣" },
+                                                { text: "0️⃣", callback_data: "/echo 0️⃣" },
+                                                { text: "*️⃣", callback_data: "/echo *️⃣" }
+                                            ],
+                                            [
+                                                { text: "☢️", callback_data: "/echo ☢️" },
+                                                { text: "☣️", callback_data: "/echo ☣️" },
+                                                { text: "⚛️", callback_data: "/echo ⚛️" },
+                                                { text: "🛑", callback_data: "/echo 🛑" },
+                                                { text: "🚷", callback_data: "/echo 🚷" }
+                                            ]
+                                        ]
+                                    }
+                                }
+                            },
+                            {   // editMessageText
+                                method: 'editMessageText',
+                                payload: {
+                                    text: 'This is a sample message with custom reply markup (keyboard). \n\n'
+                                        + 'You can interact with the buttons below to see how reply markups work in Telegram Bots.\n\n'
+                                        + '<blockquote expandable>About InlineKeyboardMarkup:\n\n'
+                                        + 'This object represents an inline keyboard that appears right next to the message it belongs to.\n\n</blockquote>\n\n'
+                                        + '1. In this example, I have added an inline keyboard with a button that echoes when pressed.\n\n'
+                                        + '2. I have added more keys to the keyboard below.\n\n'
+                                        + '3. I have added even more keys to the keyboard below.\n\n',
                                     parse_mode: 'HTML'
                                 }
                             }
@@ -7288,6 +7480,92 @@ EMD.SecurityChecksAutomation = {
                             parse_mode: 'HTML'
                         }
                     }])
+                ]
+            ]
+        };
+    }
+}
+
+EMD.SurveyResults = {
+    entityName: 'SurveyResults',
+    sheet: (data = {}) => {
+        return {
+            name: '📊 Survey Results',
+            columns: ['Timestamp', 'Chat ID', 'Response Content', 'Param 1', 'Param 2', 'Param 3'],
+            sample_data: []
+        };
+    }
+}
+
+EMD.InvoiceLinks = {
+    entityName: 'InvoiceLinks',
+    sheet: (data = {}) => {
+        return {
+            name: '🧾 Invoice Links',
+            columns: ['Title', 'Payload', 'Link', 'Created On', 'Status'],
+            sample_data: [
+                ['Show me love',
+                    // createInvoiceLink payload
+                    JSON.stringify({
+                        title: 'Support the Project',
+                        description: 'Buy me a kiss to support the development of this project.',
+                        currency: 'XTR',
+                        prices: [{ label: 'Kiss', amount: 500 }], // $5.00
+                        payload: 'support_project_001',
+                        need_name: false,
+                        need_email: false,
+                        need_phone_number: false,
+                        need_shipping_address: false,
+                        photo_url: EMD.KISS_IMG_URL,
+                        photo_size: 512,
+                        photo_width: 512,
+                        photo_height: 512,
+                    }),
+                    '[Invoice Link Here]',
+                    '[Created On Here]',
+                    '[Status Here]'
+                ],
+                ['Subscribe to Basic',
+                    // createInvoiceLink payload
+                    JSON.stringify({
+                        title: 'Basic Subscription',
+                        description: 'Subscribe to the basic plan for essential features.',
+                        currency: 'XTR',
+                        prices: [{ label: 'Monthly Subscription', amount: 499 }], // $4.99
+                        payload: 'basic_subscription_001',
+                        need_name: false,
+                        need_email: false,
+                        need_phone_number: false,
+                        photo_url: EMD.DEFAULT_IMAGE_URL,
+                        photo_size: 512,
+                        photo_width: 512,
+                        photo_height: 512,
+                        subscription_period: 2592000 // 30 days in seconds
+                    }),
+                    '[Invoice Link Here]',
+                    '[Created On Here]',
+                    '[Status Here]'
+                ],
+                ['Subscribe to Premium',
+                    // createInvoiceLink payload
+                    JSON.stringify({
+                        title: 'Premium Subscription',
+                        description: 'Subscribe to the premium plan for additional features.',
+                        currency: 'XTR',
+                        prices: [{ label: 'Monthly Subscription', amount: 999 }], // $9.99
+                        payload: 'premium_subscription_001',
+                        need_name: false,
+                        need_email: false,
+                        need_phone_number: false,
+                        photo_url: EMD.DEFAULT_IMAGE_URL,
+                        photo_size: 512,
+                        photo_width: 512,
+                        photo_height: 512,
+                        subscription_period: 2592000 // 30 days in seconds
+                    }),
+                    '[Invoice Link Here]',
+                    '[Created On Here]',
+                    '[Status Here]'
                 ]
             ]
         };
