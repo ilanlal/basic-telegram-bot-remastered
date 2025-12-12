@@ -6239,7 +6239,7 @@ EMD.ApiFeaturesAutomation = {
                                         caption: 'Peach Photo 1',
                                         parse_mode: 'HTML',
                                         has_spoiler: false,
-                                        show_caption_above_media: true
+                                        show_caption_above_media: false
                                     },
                                     {
                                         type: 'photo',
@@ -6287,7 +6287,7 @@ EMD.ApiFeaturesAutomation = {
                                         caption: 'I Am Thinking Photo 7',
                                         parse_mode: 'HTML',
                                         has_spoiler: true,
-                                        show_caption_above_media: true
+                                        show_caption_above_media: false
                                     }
                                 ],
                                 protect_content: true,
