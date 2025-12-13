@@ -5877,9 +5877,16 @@ EMD.DonationCampaign = {
                         // default (en)
                         JSON.stringify([
                             { "next": "#remove_keyboard" },
-                            { "next": "#send_1st_engagement_sample" }
+                            { "next": "/1st_engagement" }
                         ])
 
+                    ],
+                    ['/1st_engagement',
+                        // default (en)
+                        JSON.stringify([
+                            { "next": "#remove_keyboard" },
+                            { "next": "#send_1st_engagement_sample" }
+                        ])
                     ],
                     ['#send_1st_engagement_sample',
                         // default (en)
@@ -5896,12 +5903,19 @@ EMD.DonationCampaign = {
                                 reply_markup: {
                                     inline_keyboard: [
                                         [
-                                            { text: "🐾 Learn More", callback_data: "#send_2nd_engagement_sample" }
+                                            { text: "🐾 Learn More", callback_data: "/2nd_engagement" }
                                         ]
                                     ]
                                 }
                             }
                         }])
+                    ],
+                    ['/2nd_engagement',
+                        // default (en)
+                        JSON.stringify([
+                            { "next": "#remove_keyboard" },
+                            { "next": "#send_2nd_engagement_sample" }
+                        ])
                     ],
                     ['#send_2nd_engagement_sample',
                         // default (en)
@@ -5920,8 +5934,8 @@ EMD.DonationCampaign = {
                                 parse_mode: 'HTML',
                                 reply_markup: {
                                     inline_keyboard: [
-                                        [{ text: "💝 Donate Now", callback_data: "#send_3rd_engagement_sample" }],
-                                        [{ text: "👥 Join Our Community", callback_data: "#send_join_community_sample" }],
+                                        [{ text: "💝 Donate Now", callback_data: "/3rd_engagement" }],
+                                        [{ text: "👥 Join Our Community", callback_data: "/join_our_community" }],
                                         [
                                             { text: "ℹ️ About Us", callback_data: "/about" },
                                             { text: "🏠 Start", callback_data: "/start" }
@@ -5930,6 +5944,13 @@ EMD.DonationCampaign = {
                                 }
                             }
                         }])
+                    ],
+                    ['/3rd_engagement',
+                        // default (en)
+                        JSON.stringify([
+                            { "next": "#remove_keyboard" },
+                            { "next": "#send_3rd_engagement_sample" }
+                        ])
                     ],
                     ['#send_3rd_engagement_sample',
                         // default (en)
@@ -5955,6 +5976,13 @@ EMD.DonationCampaign = {
                                     allow_paid_broadcast: false
                                 }
                             }
+                        ])
+                    ],
+                    ['/join_our_community',
+                        // default (en)
+                        JSON.stringify([
+                            { "next": "#remove_keyboard" },
+                            { "next": "#send_join_community_sample" }
                         ])
                     ],
                     ['#send_join_community_sample',
