@@ -5873,13 +5873,146 @@ EMD.DonationCampaign = {
             sample_data:
                 [
                     ['---- 🐱❤️ Support Our Feline Friends! ❤️🐱 ----'],
+                    ['_invoice_link_result_',
+                        // default (en)
+                        JSON.stringify([
+                            {
+                                method: 'sendMessage',
+                                payload: {
+                                    text: 'Success! 🥳 Your dedicated donation link is ready. Share it widely to help us find Cat Guardians globally and fund critical care for stray cats. Every share is a life saved! 🐾\n\n'
+                                        + 'Invoice Link: {{invoice_link}}\n\n',
+                                    parse_mode: 'HTML'
+                                }
+                            }
+                        ]),
+                        // es
+                        JSON.stringify([
+                            {
+                                method: 'sendMessage',
+                                payload: {
+                                    text: '¡Éxito! 🥳 Tu enlace de donación dedicado está listo. Compártelo ampliamente para ayudarnos a encontrar Guardianes Felinos a nivel mundial y financiar la atención crítica para gatos callejeros. ¡Cada vez que compartes, es una vida salvada! 🐾\n\n'
+                                        + 'Enlace de Factura: {{invoice_link}}\n\n',
+                                    parse_mode: 'HTML'
+                                }
+                            }
+                        ]),
+                        // fr
+                        JSON.stringify([
+                            {
+                                method: 'sendMessage',
+                                payload: {
+                                    text: 'Succès ! 🥳 Votre lien de don dédié est prêt. Partagez-le largement pour nous aider à trouver des Gardiens de Chats dans le monde entier et à financer les soins essentiels pour les chats errants. Chaque partage est une vie sauvée ! 🐾\n\n'
+                                        + 'Lien de Facture: {{invoice_link}}\n\n',
+                                    parse_mode: 'HTML'
+                                }
+                            }
+                        ]),
+                        // ar
+                        JSON.stringify([
+                            {
+                                method: 'sendMessage',
+                                payload: {
+                                    text: 'نجاح! 🥳 رابط التبرع المخصص لك جاهز. شاركه على نطاق واسع لمساعدتنا في العثور على حراس القطط عالميًا وتمويل الرعاية الحرجة للقطط الضالة. كل مشاركة هي حياة تم إنقاذها! 🐾\n\n'
+                                        + 'رابط الفاتورة: {{invoice_link}}\n\n',
+                                    parse_mode: 'HTML'
+                                }
+                            }
+                        ]),
+                        // de
+                        JSON.stringify([
+                            {
+                                method: 'sendMessage',
+                                payload: {
+                                    text: 'Erfolg! 🥳 Ihr dedizierter Spenden-Link ist bereit. Teilen Sie ihn weitläufig, um uns zu helfen, weltweit Katzenwächter zu finden und kritische Versorgung für streunende Katzen zu finanzieren. Jede Teilung ist ein gerettetes Leben! 🐾\n\n'
+                                        + 'Rechnungslink: {{invoice_link}}\n\n',
+                                    parse_mode: 'HTML'
+                                }
+                            }
+                        ]),
+                        // it
+                        JSON.stringify([
+                            {
+                                method: 'sendMessage',
+                                payload: {
+                                    text: 'Successo! 🥳 Il tuo link di donazione dedicato è pronto. Condividilo ampiamente per aiutarci a trovare Guardiani dei Gatti a livello globale e finanziare le cure critiche per i gatti randagi. Ogni condivisione è una vita salvata! 🐾\n\n'
+                                        + 'Link Fattura: {{invoice_link}}\n\n',
+                                    parse_mode: 'HTML'
+                                }
+                            }
+                        ]),
+                        // pt
+                        JSON.stringify([
+                            {
+                                method: 'sendMessage',
+                                payload: {
+                                    text: 'Sucesso! 🥳 Seu link de doação dedicado está pronto. Compartilhe-o amplamente para nos ajudar a encontrar Guardiões de Gatos globalmente e financiar cuidados críticos para gatos de rua. Cada compartilhamento é uma vida salva! 🐾\n\n'
+                                        + 'Link da Fatura: {{invoice_link}}\n\n',
+                                    parse_mode: 'HTML'
+                                }
+                            }
+                        ]),
+                        // ru
+                        JSON.stringify([
+                            {
+                                method: 'sendMessage',
+                                payload: {
+                                    text: 'Успех! 🥳 Ваша специальная ссылка для пожертвований готова. Поделитесь ею, чтобы помочь нам найти Хранителей Кошек по всему миру и профинансировать жизненно важный уход за бездомными кошками. Каждый репост — это спасенная жизнь! 🐾\n\n'
+                                        + 'Ссылка на счет: {{invoice_link}}\n\n',
+                                    parse_mode: 'HTML'
+                                }
+                            }
+                        ]),
+                        // zh
+                        JSON.stringify([
+                            {
+                                method: 'sendMessage',
+                                payload: {
+                                    text: '成功！🥳 您的专属捐款链接已准备就绪。广泛分享它，帮助我们在全球寻找猫咪守护者，并为流浪猫提供关键护理。每一次分享都是拯救一个生命！🐾\n\n'
+                                        + '发票链接: {{invoice_link}}\n\n',
+                                    parse_mode: 'HTML'
+                                }
+                            }
+                        ]),
+                        // ja
+                        JSON.stringify([
+                            {
+                                method: 'sendMessage',
+                                payload: {
+                                    text: '成功です！🥳 あなた専用の寄付リンクが準備できました。広く共有して、世界中で猫の守護者を見つけ、野良猫に重要なケアを提供する資金を調達するのを助けてください。シェアするたびに命が救われます！🐾\n\n'
+                                        + '請求書リンク: {{invoice_link}}\n\n',
+                                    parse_mode: 'HTML'
+                                }
+                            }
+                        ]),
+                        // ko
+                        JSON.stringify([
+                            {
+                                method: 'sendMessage',
+                                payload: {
+                                    text: '성공! 🥳 당신의 전용 기부 링크가 준비되었습니다. 널리 공유하여 전 세계적으로 고양이 수호자를 찾고 길고양이들에게 중요한 관리를 제공할 수 있도록 도와주세요. 공유할 때마다 생명을 구할 수 있습니다! 🐾\n\n'
+                                        + '인보이스 링크: {{invoice_link}}\n\n',
+                                    parse_mode: 'HTML'
+                                }
+                            }
+                        ]),
+                        // he
+                        JSON.stringify([
+                            {
+                                method: 'sendMessage',
+                                payload: {
+                                    text: 'הצלחה! 🥳 קישור התרומה הייעודי שלך מוכן. שתף אותו באופן נרחב כדי לעזור לנו למצוא שומרי חתולים גלובליים ולממן טיפול קריטי לחתולי רחוב. כל שיתוף הוא חיים שניצלו! 🐾\n\n'
+                                        + 'קישור חשבונית: {{invoice_link}}\n\n',
+                                    parse_mode: 'HTML'
+                                }
+                            }
+                        ])
+                    ],
                     ['/cats',
                         // default (en)
                         JSON.stringify([
                             { "next": "#remove_keyboard" },
                             { "next": "/1st_engagement" }
                         ])
-
                     ],
                     ['/1st_engagement',
                         // default (en)
@@ -5890,25 +6023,269 @@ EMD.DonationCampaign = {
                     ],
                     ['#send_1st_engagement_sample',
                         // default (en)
-                        JSON.stringify([{
-                            method: 'sendPhoto',
-                            payload: {
-                                caption: 'Dear Cat Lovers,\n\n'
-                                    + 'We hope this message finds you well. As fellow enthusiasts of our feline companions, we are reaching out to share an exciting initiative that aims to make a positive impact on the lives of stray and abandoned cats.\n\n'
-                                    + 'We are excited to announce our Cat Donation Campaign, aimed at helping stray and abandoned cats find loving homes and receive the care they deserve.\n\n'
-                                    + 'Join us in making a difference in the lives of stray and abandoned cats. Your generous donation will help provide food, shelter, and medical care to these deserving animals.\n\n'
-                                    + 'Thank you for your support and compassion towards our feline friends! 🐾🐱❤️',
-                                photo: EMD.YOU_GOT_IT_IMG_URL,
-                                parse_mode: 'HTML',
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [
-                                            { text: "🐾 Learn More", callback_data: "/2nd_engagement" }
+                        JSON.stringify([
+                            {
+                                method: 'sendPhoto',
+                                payload: {
+                                    caption: '🚨 URGENT CALL for Cat Lovers! 🐾❤️\n\n'
+                                        + 'Look at these sweet faces! Thousands of stray and abandoned cats are waiting for a hero like you to step in. They need food, medical care, and a safe, warm place to nap.\n\n'
+                                        + 'Your small act of kindness can change a life today. Every donation helps us rescue, treat, and find forever homes for these deserving feline friends.\n\n'
+                                        + 'Will you be their light? Choose how you want to make a difference: Donate, Volunteer, or simply Learn More about our mission!\n\n'
+                                        + 'Thank you for your purr-fect compassion! 🐱🌟',
+                                    photo: EMD.YOU_GOT_IT_IMG_URL,
+                                    parse_mode: 'HTML',
+                                    reply_markup: {
+                                        inline_keyboard: [
+                                            [
+                                                { text: "🎖️ Learn More", callback_data: "/2nd_engagement" }
+                                            ]
                                         ]
-                                    ]
+                                    }
                                 }
                             }
-                        }])
+                        ]),
+                        // es
+                        JSON.stringify([
+                            {
+                                method: 'sendPhoto',
+                                payload: {
+                                    caption: '🚨 LLAMADA URGENTE para Amantes de los Gatos! 🐾❤️\n\n'
+                                        + '¡Mira estas caritas dulces! Miles de gatos callejeros y abandonados están esperando que un héroe como tú intervenga. Necesitan comida, atención médica y un lugar seguro y cálido para echar una siesta.\n\n'
+                                        + 'Tu pequeño acto de bondad puede cambiar una vida hoy. Cada donación nos ayuda a rescatar, tratar y encontrar hogares permanentes para estos merecedores amigos felinos.\n\n'
+                                        + '¿Serás su luz? Elige cómo quieres marcar la diferencia: ¡Dona, Colabora (Voluntario), o simplemente Aprende Más sobre nuestra misión!\n\n'
+                                        + '¡Gracias por tu perfecta compasión felina! 🐱🌟',
+                                    photo: EMD.YOU_GOT_IT_IMG_URL,
+                                    parse_mode: 'HTML',
+                                    reply_markup: {
+                                        inline_keyboard: [
+                                            [
+                                                { text: "🎖️ Aprender Más", callback_data: "/2nd_engagement" }
+                                            ]
+                                        ]
+                                    }
+                                }
+                            }
+                        ]),
+                        // fr
+                        JSON.stringify([
+                            {
+                                method: 'sendPhoto',
+                                payload: {
+                                    caption: '🚨 APPEL URGENT aux Amoureux des Chats! 🐾❤️\n\n'
+                                        + 'Regardez ces doux visages! Des milliers de chats errants et abandonnés attendent un héros comme vous. Ils ont besoin de nourriture, de soins médicaux et d\'un endroit sûr et chaud pour faire la sieste.\n\n'
+                                        + 'Votre petit acte de gentillesse peut changer une vie aujourd\'hui. Chaque don nous aide à sauver, soigner et trouver des foyers éternels pour ces amis félins méritants.\n\n'
+                                        + 'Serez-vous leur lumière? Choisissez comment vous voulez faire la différence: Faites un Don, Collaborez (Volontariat), ou simplement Apprenez-en Davantage sur notre mission!\n\n'
+                                        + 'Merci pour votre compassion ronronnante! 🐱🌟',
+                                    photo: EMD.YOU_GOT_IT_IMG_URL,
+                                    parse_mode: 'HTML',
+                                    reply_markup: {
+                                        inline_keyboard: [
+                                            [
+                                                { text: "🎖️ En savoir plus", callback_data: "/2nd_engagement" }
+                                            ]
+                                        ]
+                                    }
+                                }
+                            }
+                        ]),
+                        // ar
+                        JSON.stringify([
+                            {
+                                method: 'sendPhoto',
+                                payload: {
+                                    caption: '🚨 نداء عاجل لمحبي القطط! 🐾❤️\n\n'
+                                        + 'انظر إلى هذه الوجوه الجميلة! الآلاف من القطط الضالة والمهجورة تنتظر بطلاً مثلك للتدخل. إنهم بحاجة إلى طعام، رعاية طبية، ومكان آمن ودافئ للقيلولة.\n\n'
+                                        + 'عملك الصغير من اللطف يمكن أن يغير حياة اليوم. كل تبرع يساعدنا على إنقاذ وعلاج وإيجاد منازل أبدية لهؤلاء الأصدقاء القطط المستحقين.\n\n'
+                                        + 'هل ستكون نورهم؟ اختر كيف تريد أن تحدث فرقًا: تبرع، تطوع، أو ببساطة تعرّف على المزيد حول مهمتنا!\n\n'
+                                        + 'شكراً لتعاطفك الرائع! 🐱🌟',
+                                    photo: EMD.YOU_GOT_IT_IMG_URL,
+                                    parse_mode: 'HTML',
+                                    reply_markup: {
+                                        inline_keyboard: [
+                                            [
+                                                { text: "🎖️ تعرّف على المزيد", callback_data: "/2nd_engagement" }
+                                            ]
+                                        ]
+                                    }
+                                }
+                            }
+                        ]),
+                        // de
+                        JSON.stringify([
+                            {
+                                method: 'sendPhoto',
+                                payload: {
+                                    caption: '🚨 DRINGENDER AUFRUF an Katzenliebhaber! 🐾❤️\n\n'
+                                        + 'Sehen Sie diese süßen Gesichter! Tausende streunende und ausgesetzte Katzen warten auf einen Helden wie Sie. Sie brauchen Futter, medizinische Versorgung und einen sicheren, warmen Ort zum Nickerchen.\n\n'
+                                        + 'Ihre kleine Geste der Freundlichkeit kann heute ein Leben verändern. Jede Spende hilft uns, diese verdienten Samtpfoten zu retten, zu behandeln und ein Zuhause für immer zu finden.\n\n'
+                                        + 'Werden Sie ihr Licht sein? Wählen Sie, wie Sie etwas bewirken möchten: Spenden, Zusammenarbeiten (als Freiwilliger) oder einfach mehr über unsere Mission erfahren!\n\n'
+                                        + 'Vielen Dank für Ihr schnurriges Mitgefühl! 🐱🌟',
+                                    photo: EMD.YOU_GOT_IT_IMG_URL,
+                                    parse_mode: 'HTML',
+                                    reply_markup: {
+                                        inline_keyboard: [
+                                            [
+                                                { text: "🎖️ Mehr erfahren", callback_data: "/2nd_engagement" }
+                                            ]
+                                        ]
+                                    }
+                                }
+                            }
+                        ]),
+                        // it
+                        JSON.stringify([
+                            {
+                                method: 'sendPhoto',
+                                payload: {
+                                    caption: '🚨 APPELLO URGENTE per Amanti dei Gatti! 🐾❤️\n\n'
+                                        + 'Guarda questi dolci musi! Migliaia di gatti randagi e abbandonati stanno aspettando un eroe come te. Hanno bisogno di cibo, cure mediche e un posto sicuro e caldo per fare un pisolino.\n\n'
+                                        + 'Il tuo piccolo atto di gentilezza può cambiare una vita oggi. Ogni donazione ci aiuta a salvare, curare e trovare case per sempre per questi meritevoli amici felini.\n\n'
+                                        + 'Sarai la loro luce? Scegli come vuoi fare la differenza: Dona, Collabora (Volontariato), o semplicemente Scopri di più sulla nostra missione!\n\n'
+                                        + 'Grazie per la tua perfetta compassione felina! 🐱🌟',
+                                    photo: EMD.YOU_GOT_IT_IMG_URL,
+                                    parse_mode: 'HTML',
+                                    reply_markup: {
+                                        inline_keyboard: [
+                                            [
+                                                { text: "🎖️ Scopri di più", callback_data: "/2nd_engagement" }
+                                            ]
+                                        ]
+                                    }
+                                }
+                            }
+                        ]),
+                        // pt
+                        JSON.stringify([
+                            {
+                                method: 'sendPhoto',
+                                payload: {
+                                    caption: '🚨 CHAMADA URGENTE para Amantes de Gatos! 🐾❤️\n\n'
+                                        + 'Olhe para estes rostinhos doces! Milhares de gatos vadios e abandonados estão esperando por um herói como você para intervir. Eles precisam de comida, cuidados médicos e um lugar seguro e quente para tirar uma soneca.\n\n'
+                                        + 'Seu pequeno ato de bondade pode mudar uma vida hoje. Cada doação nos ajuda a resgatar, tratar e encontrar lares permanentes para estes merecedores amigos felinos.\n\n'
+                                        + 'Você será a luz deles? Escolha como você quer fazer a diferença: Doe, Colabore (Voluntariado) ou simplesmente Saiba Mais sobre nossa missão!\n\n'
+                                        + 'Obrigado pela sua compaixão ronronante! 🐱🌟',
+                                    photo: EMD.YOU_GOT_IT_IMG_URL,
+                                    parse_mode: 'HTML',
+                                    reply_markup: {
+                                        inline_keyboard: [
+                                            [
+                                                { text: "🎖️ Saiba Mais", callback_data: "/2nd_engagement" }
+                                            ]
+                                        ]
+                                    }
+                                }
+                            }
+                        ]),
+                        // ru
+                        JSON.stringify([
+                            {
+                                method: 'sendPhoto',
+                                payload: {
+                                    caption: '🚨 СРОЧНЫЙ ПРИЗЫВ для любителей кошек! 🐾❤️\n\n'
+                                        + 'Посмотрите на эти милые мордашки! Тысячи бездомных и брошенных кошек ждут такого героя, как вы. Им нужна еда, медицинская помощь и безопасное, теплое место для сна.\n\n'
+                                        + 'Ваш небольшой акт доброты может изменить жизнь сегодня. Каждое пожертвование помогает нам спасать, лечить и находить постоянные дома для этих достойных пушистых друзей.\n\n'
+                                        + 'Станете ли вы их светом? Выберите, как вы хотите помочь: Сделайте пожертвование, Станьте волонтером (Сотрудничайте) или просто Узнайте больше о нашей миссии!\n\n'
+                                        + 'Спасибо за ваше идеальное кошачье сострадание! 🐱🌟',
+                                    photo: EMD.YOU_GOT_IT_IMG_URL,
+                                    parse_mode: 'HTML',
+                                    reply_markup: {
+                                        inline_keyboard: [
+                                            [
+                                                { text: "🎖️ Узнать больше", callback_data: "/2nd_engagement" }
+                                            ]
+                                        ]
+                                    }
+                                }
+                            }
+                        ]),
+                        // zh
+                        JSON.stringify([
+                            {
+                                method: 'sendPhoto',
+                                payload: {
+                                    caption: '🚨 猫咪爱好者的紧急呼吁! 🐾❤️\n\n'
+                                        + '看看这些甜美的面孔！成千上万的流浪猫和被遗弃的猫正在等待像您这样的英雄伸出援手。它们需要食物、医疗护理和一个安全、温暖的小憩之所。\n\n'
+                                        + '您的小小善举可以改变今天的生活。每一笔捐款都帮助我们拯救、治疗并为这些值得的猫科动物朋友找到永久的家。\n\n'
+                                        + '您愿意成为它们的光芒吗？选择您想如何发挥作用：捐款、合作（志愿服务），或只是了解更多关于我们的使命！\n\n'
+                                        + '感谢您的完美猫式同情心！🐱🌟',
+                                    photo: EMD.YOU_GOT_IT_IMG_URL,
+                                    parse_mode: 'HTML',
+                                    reply_markup: {
+                                        inline_keyboard: [
+                                            [
+                                                { text: "🎖️ 了解更多", callback_data: "/2nd_engagement" }
+                                            ]
+                                        ]
+                                    }
+                                }
+                            }
+                        ]),
+                        // ja
+                        JSON.stringify([
+                            {
+                                method: 'sendPhoto',
+                                payload: {
+                                    caption: '🚨 猫好きへの緊急呼びかけ！ 🐾❤️\n\n'
+                                        + 'この愛らしい顔を見てください！何千匹もの野良猫や捨てられた猫が、あなたのようなヒーローが介入するのを待っています。彼らは食べ物、医療、そして安全で暖かい昼寝場所を必要としています。\n\n'
+                                        + 'あなたの小さな親切な行動が今日、命を変えることができます。すべての寄付は、これらの価値ある猫の友を救助し、治療し、永遠の家を見つけるのに役立ちます。\n\n'
+                                        + 'あなたは彼らの光になりますか？どのように貢献したいかを選択してください：寄付する、協力する（ボランティア）、または単に私たちの使命について詳しく知る！\n\n'
+                                        + 'あなたの完璧な猫への思いやりに感謝します！ 🐱🌟',
+                                    photo: EMD.YOU_GOT_IT_IMG_URL,
+                                    parse_mode: 'HTML',
+                                    reply_markup: {
+                                        inline_keyboard: [
+                                            [
+                                                { text: "🎖️ 詳細はこちら", callback_data: "/2nd_engagement" }
+                                            ]
+                                        ]
+                                    }
+                                }
+                            }
+                        ]),
+                        // ko
+                        JSON.stringify([
+                            {
+                                method: 'sendPhoto',
+                                payload: {
+                                    caption: '🚨 고양이 애호가를 위한 긴급 요청! 🐾❤️\n\n'
+                                        + '이 사랑스러운 얼굴들을 보세요! 수천 마리의 길 잃은 고양이와 버려진 고양이들이 당신과 같은 영웅이 나서기를 기다리고 있습니다. 그들은 음식, 의료 지원, 그리고 안전하고 따뜻한 낮잠 장소가 필요합니다.\n\n'
+                                        + '당신의 작은 친절이 오늘 한 생명을 바꿀 수 있습니다. 모든 기부는 이 소중한 고양이 친구들을 구조하고 치료하며 영원한 집을 찾는 데 도움이 됩니다.\n\n'
+                                        + '당신은 그들의 빛이 되어줄 수 있나요? 기부, 협력(자원 봉사), 또는 단순히 우리의 임무에 대해 자세히 알아보는 등 어떻게 기여하고 싶은지 선택하세요!\n\n'
+                                        + '당신의 완벽한 고양이 애정에 감사드립니다! 🐱🌟',
+                                    photo: EMD.YOU_GOT_IT_IMG_URL,
+                                    parse_mode: 'HTML',
+                                    reply_markup: {
+                                        inline_keyboard: [
+                                            [
+                                                { text: "🎖️ 자세히 알아보기", callback_data: "/2nd_engagement" }
+                                            ]
+                                        ]
+                                    }
+                                }
+                            }
+                        ]),
+                        // he
+                        JSON.stringify([
+                            {
+                                method: 'sendPhoto',
+                                payload: {
+                                    caption: '🚨 קריאה דחופה לאוהבי חתולים! 🐾❤️\n\n'
+                                        + 'תסתכלו על הפרצופים המתוקים האלה! אלפי חתולי רחוב וחתולים נטושים מחכים לגיבור כמוך שיכנס לתמונה. הם זקוקים למזון, טיפול רפואי ומקום בטוח וחם לנמנם בו.\n\n'
+                                        + 'מעשה החסד הקטן שלך יכול לשנות חיים היום. כל תרומה עוזרת לנו להציל, לטפל ולמצוא בתים לנצח לחברים החתוליים הראויים האלה.\n\n'
+                                        + 'האם תהיה האור שלהם? בחר כיצד תרצה לעשות שינוי: תרום, שתף פעולה (התנדב), או פשוט למד עוד על המשימה שלנו!\n\n'
+                                        + 'תודה על החמלה המושלמת שלך! 🐱🌟',
+                                    photo: EMD.YOU_GOT_IT_IMG_URL,
+                                    parse_mode: 'HTML',
+                                    reply_markup: {
+                                        inline_keyboard: [
+                                            [
+                                                { text: "🎖️ למידע נוסף", callback_data: "/2nd_engagement" }
+                                            ]
+                                        ]
+                                    }
+                                }
+                            }
+                        ])
                     ],
                     ['/2nd_engagement',
                         // default (en)
@@ -5919,31 +6296,293 @@ EMD.DonationCampaign = {
                     ],
                     ['#send_2nd_engagement_sample',
                         // default (en)
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: '🐾 About Our Cat Donation Campaign 🐾\n\n'
-                                    + 'Our mission is to provide care and support for stray and abandoned cats in our community. With your help, we can make a significant impact on their lives.\n\n'
-                                    + 'Funds raised through this campaign will be used for:\n'
-                                    + '1. Providing nutritious food and clean water.\n'
-                                    + '2. Offering medical care and vaccinations.\n'
-                                    + '3. Creating safe shelters for stray cats.\n\n'
-                                    + 'Global Reach: Our campaign extends beyond local communities, aiming to support stray cats worldwide.\n\n'
-                                    + '🌍 🇪🇸 🇾🇹 🇯🇴 🇮🇱 🇮🇶 🇵🇸 🇫🇷 🇯🇵 🇲🇷 🇷🇺 🇪🇨 🇧🇴 🇧🇩 🇪🇨 🇧🇪 🇭🇰 🇮🇲 🇰🇬 🇲🇹 🇲🇩 🇲🇰 🇳🇱 🇷🇪 🇬🇧 🇵🇹 🇮🇹 🇲🇪 🇰🇬 🇲🇦 🇬🇱 🇦🇴 \n\n'
-                                    + 'Every contribution, big or small, makes a difference. Thank you for your support! 🐱❤️',
-                                parse_mode: 'HTML',
-                                reply_markup: {
-                                    inline_keyboard: [
-                                        [{ text: "💝 Donate Now", callback_data: "/3rd_engagement" }],
-                                        [{ text: "👥 Join Our Community", callback_data: "/join_our_community" }],
-                                        [
-                                            { text: "ℹ️ About Us", callback_data: "/about" },
-                                            { text: "🏠 Start", callback_data: "/start" }
+                        JSON.stringify([
+                            {
+                                method: 'sendMessage',
+                                payload: {
+                                    text: '🐈 Why Your Support Matters (The Details) 🐈\n\n'
+                                        + 'Every cat deserves a chance at a loving life. Our mission is clear: rescue, rehabilitate, and rehome the most vulnerable felines in our community and beyond.\n\n'
+                                        + 'Your contribution directly funds the essentials for their survival and happiness:\n'
+                                        + '1. 🏥 **Life-Saving Medical Care:** Emergency surgeries, vaccinations, and spay/neuter programs.\n'
+                                        + '2. 🥘 **Nourishing Food & Shelter:** High-quality meals and safe, cozy temporary homes.\n'
+                                        + '3. 🤝 **Adoption & Outreach:** Finding their perfect human match and raising awareness.\n\n'
+                                        + 'Global Impact: Our commitment spans the globe, touching the lives of stray cats wherever they need us. \n\n'
+                                        + '🌍 🇪🇸 🇾🇹 🇯🇴 🇮🇱 🇮🇶 🇵🇸 🇫🇷 🇯🇵 🇲🇷 🇷🇺 🇪🇨 🇧🇴 🇧🇩 🇪🇨 🇧🇪 🇭🇰 🇮🇲 🇰🇬 🇲🇹 🇲🇩 🇲🇰 🇳🇱 🇷🇪 🇬🇧 🇵🇹 🇮🇹 🇲🇪 🇰🇬 🇲🇦 🇬🇱 🇦🇴 \n\n'
+                                        + 'Ready to be a Cat Guardian? Donate to save a life, or join us to collaborate as a volunteer! 🌟',
+                                    parse_mode: 'HTML',
+                                    reply_markup: {
+                                        inline_keyboard: [
+                                            [{ text: "💝 Donate Now", callback_data: "/3rd_engagement" }],
+                                            [{ text: "👥 Join Our Community", callback_data: "/join_our_community" }]
                                         ]
-                                    ]
+                                    }
                                 }
                             }
-                        }])
+                        ]),
+                        // es
+                        JSON.stringify([
+                            {
+                                method: 'sendMessage',
+                                payload: {
+                                    text: '🐈 Por qué tu Apoyo es Importante (Los Detalles) 🐈\n\n'
+                                        + 'Todo gato merece una oportunidad de una vida amorosa. Nuestra misión es clara: rescatar, rehabilitar y reubicar a los felinos más vulnerables en nuestra comunidad y más allá.\n\n'
+                                        + 'Tu contribución financia directamente lo esencial para su supervivencia y felicidad:\n'
+                                        + '1. 🏥 **Atención Médica Vital:** Cirugías de emergencia, vacunas y programas de esterilización/castración.\n'
+                                        + '2. 🥘 **Alimento Nutritivo y Refugio:** Comidas de alta calidad y hogares temporales seguros y acogedores.\n'
+                                        + '3. 🤝 **Adopción y Difusión:** Encontrar su pareja humana perfecta y crear conciencia.\n\n'
+                                        + 'Impacto Global: Nuestro compromiso se extiende por todo el mundo, tocando las vidas de los gatos callejeros dondequiera que nos necesiten. \n\n'
+                                        + '🌍 🇪🇸 🇾🇹 🇯🇴 🇮🇱 🇮🇶 🇵🇸 🇫🇷 🇯🇵 🇲🇷 🇷🇺 🇪🇨 🇧🇴 🇧🇩 🇪🇨 🇧🇪 🇭🇰 🇮🇲 🇰🇬 🇲🇹 🇲🇩 🇲🇰 🇳🇱 🇷🇪 🇬🇧 🇵🇹 🇮🇹 🇲🇪 🇰🇬 🇲🇦 🇬🇱 🇦🇴 \n\n'
+                                        + '¿Listo para ser un Guardián Felino? ¡Dona para salvar una vida o únete a nosotros para colaborar como voluntario! 🌟',
+                                    parse_mode: 'HTML',
+                                    reply_markup: {
+                                        inline_keyboard: [
+                                            [{ text: "💝 Donar Ahora", callback_data: "/3rd_engagement" }],
+                                            [{ text: "👥 Únete a Nuestra Comunidad", callback_data: "/join_our_community" }]
+                                        ]
+                                    }
+                                }
+                            }
+                        ]),
+                        // fr
+                        JSON.stringify([
+                            {
+                                method: 'sendMessage',
+                                payload: {
+                                    text: '🐈 Pourquoi Votre Soutien Compte (Les Détails) 🐈\n\n'
+                                        + 'Chaque chat mérite une chance d\'avoir une vie pleine d\'amour. Notre mission est claire: sauver, réhabiliter et reloger les félins les plus vulnérables de notre communauté et au-delà.\n\n'
+                                        + 'Votre contribution finance directement les éléments essentiels à leur survie et à leur bonheur:\n'
+                                        + '1. 🏥 **Soins Médicaux Vitaux:** Chirurgies d\'urgence, vaccinations et programmes de stérilisation/castration.\n'
+                                        + '2. 🥘 **Nourriture et Abri:** Repas de haute qualité et foyers temporaires sûrs et douillets.\n'
+                                        + '3. 🤝 **Adoption et Sensibilisation:** Trouver leur partenaire humain idéal et sensibiliser le public.\n\n'
+                                        + 'Impact Mondial: Notre engagement s\'étend au-delà de la communauté locale, touchant la vie des chats errants partout où ils ont besoin de nous. \n\n'
+                                        + '🌍 🇪🇸 🇾🇹 🇯🇴 🇮🇱 🇮🇶 🇵🇸 🇫🇷 🇯🇵 🇲🇷 🇷🇺 🇪🇨 🇧🇴 🇧🇩 🇪🇨 🇧🇪 🇭🇰 🇮🇲 🇰🇬 🇲🇹 🇲🇩 🇲🇰 🇳🇱 🇷🇪 🇬🇧 🇵🇹 🇮🇹 🇲🇪 🇰🇬 🇲🇦 🇬🇱 🇦🇴 \n\n'
+                                        + 'Prêt à devenir un Gardien de Chat? Faites un don pour sauver une vie, ou rejoignez-nous pour collaborer en tant que bénévole! 🌟',
+                                    parse_mode: 'HTML',
+                                    reply_markup: {
+                                        inline_keyboard: [
+                                            [{ text: "💝 Faire un Don Maintenant", callback_data: "/3rd_engagement" }],
+                                            [{ text: "👥 Rejoignez Notre Communauté", callback_data: "/join_our_community" }]
+                                        ]
+                                    }
+                                }
+                            }
+                        ]),
+                        // ar
+                        JSON.stringify([
+                            {
+                                method: 'sendMessage',
+                                payload: {
+                                    text: '🐈 لماذا دعمك مهم (التفاصيل) 🐈\n\n'
+                                        + 'كل قط يستحق فرصة لحياة مليئة بالحب. مهمتنا واضحة: إنقاذ، تأهيل، وإعادة توطين القطط الأكثر ضعفاً في مجتمعنا وما وراءه.\n\n'
+                                        + 'مساهمتك تمول مباشرة الأساسيات لبقائهم وسعادتهم:\n'
+                                        + '1. 🏥 **رعاية طبية منقذة للحياة:** عمليات جراحية طارئة، لقاحات، وبرامج تعقيم/إخصاء.\n'
+                                        + '2. 🥘 **طعام مغذٍ ومأوى:** وجبات عالية الجودة ومنازل مؤقتة آمنة ومريحة.\n'
+                                        + '3. 🤝 **تبني وتوعية:** إيجاد الشريك البشري المثالي لهم وزيادة الوعي.\n\n'
+                                        + 'تأثير عالمي: التزامنا يمتد ليشمل العالم، ويلامس حياة القطط الضالة أينما كانوا بحاجة إلينا. \n\n'
+                                        + '🌍 🇪🇸 🇾🇹 🇯🇴 🇮🇱 🇮🇶 🇵🇸 🇫🇷 🇯🇵 🇲🇷 🇷🇺 🇪🇨 🇧🇴 🇧🇩 🇪🇨 🇧🇪 🇭🇰 🇮🇲 🇰🇬 🇲🇹 🇲🇩 🇲🇰 🇳🇱 🇷🇪 🇬🇧 🇵🇹 🇮🇹 🇲🇪 🇰🇬 🇲🇦 🇬🇱 🇦🇴 \n\n'
+                                        + 'هل أنت مستعد لتكون وصياً للقطط؟ تبرع لإنقاذ حياة، أو انضم إلينا للتعاون كمتطوع! 🌟',
+                                    parse_mode: 'HTML',
+                                    reply_markup: {
+                                        inline_keyboard: [
+                                            [{ text: "💝 تبرع الآن", callback_data: "/3rd_engagement" }],
+                                            [{ text: "👥 انضم إلى مجتمعنا", callback_data: "/join_our_community" }]
+                                        ]
+                                    }
+                                }
+                            }
+                        ]),
+                        // de
+                        JSON.stringify([
+                            {
+                                method: 'sendMessage',
+                                payload: {
+                                    text: '🐈 Warum Ihre Unterstützung zählt (Die Details) 🐈\n\n'
+                                        + 'Jede Katze verdient die Chance auf ein liebevolles Leben. Unsere Mission ist klar: Rettung, Rehabilitation und Vermittlung der am stärksten gefährdeten Katzen in unserer Gemeinschaft und darüber hinaus.\n\n'
+                                        + 'Ihre Spende finanziert direkt das Wesentliche für ihr Überleben und Glück:\n'
+                                        + '1. 🏥 **Lebensrettende medizinische Versorgung:** Notoperationen, Impfungen und Kastrations-/Sterilisationsprogramme.\n'
+                                        + '2. 🥘 **Nahrhaftes Futter & Unterkunft:** Hochwertige Mahlzeiten und sichere, gemütliche temporäre Unterkünfte.\n'
+                                        + '3. 🤝 **Adoption & Öffentlichkeitsarbeit:** Finden ihres perfekten menschlichen Partners und Sensibilisierung.\n\n'
+                                        + 'Globaler Einfluss: Unser Engagement erstreckt sich weltweit und berührt das Leben von streunenden Katzen, wo immer sie uns brauchen. \n\n'
+                                        + '🌍 🇪🇸 🇾🇹 🇯🇴 🇮🇱 🇮🇶 🇵🇸 🇫🇷 🇯🇵 🇲🇷 🇷🇺 🇪🇨 🇧🇴 🇧🇩 🇪🇨 🇧🇪 🇭🇰 🇮🇲 🇰🇬 🇲🇹 🇲🇩 🇲🇰 🇳🇱 🇷🇪 🇬🇧 🇵🇹 🇮🇹 🇲🇪 🇰🇬 🇲🇦 🇬🇱 🇦🇴 \n\n'
+                                        + 'Bereit, ein Katzenwächter zu sein? Spenden Sie, um ein Leben zu retten, oder schließen Sie sich uns an, um als Freiwilliger mitzuarbeiten! 🌟',
+                                    parse_mode: 'HTML',
+                                    reply_markup: {
+                                        inline_keyboard: [
+                                            [{ text: "💝 Jetzt spenden", callback_data: "/3rd_engagement" }],
+                                            [{ text: "👥 Treten Sie unserer Gemeinschaft bei", callback_data: "/join_our_community" }]
+                                        ]
+                                    }
+                                }
+                            }
+                        ]),
+                        // it
+                        JSON.stringify([
+                            {
+                                method: 'sendMessage',
+                                payload: {
+                                    text: '🐈 Perché il tuo Supporto è Importante (I Dettagli) 🐈\n\n'
+                                        + 'Ogni gatto merita una possibilità di una vita amorevole. La nostra missione è chiara: salvare, riabilitare e trovare casa ai felini più vulnerabili nella nostra comunità e oltre.\n\n'
+                                        + 'Il tuo contributo finanzia direttamente l\'essenziale per la loro sopravvivenza e felicità:\n'
+                                        + '1. 🏥 **Cure Mediche Salvavita:** Interventi chirurgici d\'emergenza, vaccinazioni e programmi di sterilizzazione/castrazione.\n'
+                                        + '2. 🥘 **Cibo Nutriente e Rifugio:** Pasti di alta qualità e rifugi temporanei sicuri e accoglienti.\n'
+                                        + '3. 🤝 **Adozione e Sensibilizzazione:** Trovare il loro partner umano perfetto e sensibilizzare.\n\n'
+                                        + 'Impatto Globale: Il nostro impegno si estende a livello globale, toccando la vita dei gatti randagi ovunque abbiano bisogno di noi. \n\n'
+                                        + '🌍 🇪🇸 🇾🇹 🇯🇴 🇮🇱 🇮🇶 🇵🇸 🇫🇷 🇯🇵 🇲🇷 🇷🇺 🇪🇨 🇧🇴 🇧🇩 🇪🇨 🇧🇪 🇭🇰 🇮🇲 🇰🇬 🇲🇹 🇲🇩 🇲🇰 🇳🇱 🇷🇪 🇬🇧 🇵🇹 🇮🇹 🇲🇪 🇰🇬 🇲🇦 🇬🇱 🇦🇴 \n\n'
+                                        + 'Pronto per essere un Guardiano di Gatti? Dona per salvare una vita o unisciti a noi per collaborare come volontario! 🌟',
+                                    parse_mode: 'HTML',
+                                    reply_markup: {
+                                        inline_keyboard: [
+                                            [{ text: "💝 Dona Ora", callback_data: "/3rd_engagement" }],
+                                            [{ text: "👥 Unisciti alla Nostra Comunità", callback_data: "/join_our_community" }]
+                                        ]
+                                    }
+                                }
+                            }
+                        ]),
+                        // pt
+                        JSON.stringify([
+                            {
+                                method: 'sendMessage',
+                                payload: {
+                                    text: '🐈 Por que o Seu Apoio é Importante (Os Detalhes) 🐈\n\n'
+                                        + 'Todo gato merece uma chance de uma vida amorosa. Nossa missão é clara: resgatar, reabilitar e realojar os felinos mais vulneráveis em nossa comunidade e além.\n\n'
+                                        + 'Sua contribuição financia diretamente os elementos essenciais para sua sobrevivência e felicidade:\n'
+                                        + '1. 🏥 **Cuidados Médicos Vitais:** Cirurgias de emergência, vacinas e programas de esterilização/castração.\n'
+                                        + '2. 🥘 **Alimento Nutritivo e Abrigo:** Refeições de alta qualidade e lares temporários seguros e aconchegantes.\n'
+                                        + '3. 🤝 **Adoção e Divulgação:** Encontrar seu par humano perfeito e aumentar a conscientização.\n\n'
+                                        + 'Impacto Global: Nosso compromisso se estende globalmente, tocando a vida de gatos vadios onde quer que eles precisem de nós. \n\n'
+                                        + '🌍 🇪🇸 🇾🇹 🇯🇴 🇮🇱 🇮🇶 🇵🇸 🇫🇷 🇯🇵 🇲🇷 🇷🇺 🇪🇨 🇧🇴 🇧🇩 🇪🇨 🇧🇪 🇭🇰 🇮🇲 🇰🇬 🇲🇹 🇲🇩 🇲🇰 🇳🇱 🇷🇪 🇬🇧 🇵🇹 🇮🇹 🇲🇪 🇰🇬 🇲🇦 🇬🇱 🇦🇴 \n\n'
+                                        + 'Pronto para ser um Guardião de Gatos? Doe para salvar uma vida ou junte-se a nós para colaborar como voluntário! 🌟',
+                                    parse_mode: 'HTML',
+                                    reply_markup: {
+                                        inline_keyboard: [
+                                            [{ text: "💝 Doar Agora", callback_data: "/3rd_engagement" }],
+                                            [{ text: "👥 Junte-se à Nossa Comunidade", callback_data: "/join_our_community" }]
+                                        ]
+                                    }
+                                }
+                            }
+                        ]),
+                        // ru
+                        JSON.stringify([
+                            {
+                                method: 'sendMessage',
+                                payload: {
+                                    text: '🐈 Почему Ваша Поддержка Важна (Подробности) 🐈\n\n'
+                                        + 'Каждая кошка заслуживает шанса на любящую жизнь. Наша миссия ясна: спасти, реабилитировать и найти дом самым уязвимым кошкам в нашем сообществе и за его пределами.\n\n'
+                                        + 'Ваш вклад напрямую финансирует необходимое для их выживания и счастья:\n'
+                                        + '1. 🏥 **Жизненно важная медицинская помощь:** Экстренные операции, вакцинация и программы стерилизации/кастрации.\n'
+                                        + '2. 🥘 **Питательный корм и приют:** Высококачественное питание и безопасные, уютные временные дома.\n'
+                                        + '3. 🤝 **Усыновление и Просвещение:** Поиск идеального человеческого партнера и повышение осведомленности.\n\n'
+                                        + 'Глобальное воздействие: Наше обязательство распространяется по всему миру, касаясь жизней бездомных кошек везде, где мы нужны. \n\n'
+                                        + '🌍 🇪🇸 🇾🇹 🇯🇴 🇮🇱 🇮🇶 🇵🇸 🇫🇷 🇯🇵 🇲🇷 🇷🇺 🇪🇨 🇧🇴 🇧🇩 🇪🇨 🇧🇪 🇭🇰 🇮🇲 🇰🇬 🇲🇹 🇲🇩 🇲🇰 🇳🇱 🇷🇪 🇬🇧 🇵🇹 🇮🇹 🇲🇪 🇰🇬 🇲🇦 🇬🇱 🇦🇴 \n\n'
+                                        + 'Готовы стать Кошачьим Хранителем? Пожертвуйте, чтобы спасти жизнь, или присоединяйтесь к нам, чтобы сотрудничать в качестве волонтера! 🌟',
+                                    parse_mode: 'HTML',
+                                    reply_markup: {
+                                        inline_keyboard: [
+                                            [{ text: "💝 Пожертвовать сейчас", callback_data: "/3rd_engagement" }],
+                                            [{ text: "👥 Присоединяйтесь к нашему сообществу", callback_data: "/join_our_community" }]
+                                        ]
+                                    }
+                                }
+                            }
+                        ]),
+                        // zh
+                        JSON.stringify([
+                            {
+                                method: 'sendMessage',
+                                payload: {
+                                    text: '🐈 为什么您的支持至关重要（详情） 🐈\n\n'
+                                        + '每只猫都应该有机会过上充满爱的生活。我们的使命很明确：拯救、康复并为我们社区及其他地区最脆弱的猫科动物找到新家。\n\n'
+                                        + '您的捐款直接资助了它们生存和幸福的必需品：\n'
+                                        + '1. 🏥 **救命医疗护理：** 紧急手术、疫苗接种和绝育/去势计划。\n'
+                                        + '2. 🥘 **营养食物和住所：** 高质量的餐食和安全、舒适的临时住所。\n'
+                                        + '3. 🤝 **领养与宣传：** 找到它们完美的人类伴侣并提高公众意识。\n\n'
+                                        + '全球影响：我们的承诺遍及全球，无论流浪猫在哪里需要我们，我们都会伸出援手。 \n\n'
+                                        + '🌍 🇪🇸 🇾🇹 🇯🇴 🇮🇱 🇮🇶 🇵🇸 🇫🇷 🇯🇵 🇲🇷 🇷🇺 🇪🇨 🇧🇴 🇧🇩 🇪🇨 🇧🇪 🇭🇰 🇮🇲 🇰🇬 🇲🇹 🇲🇩 🇲🇰 🇳🇱 🇷🇪 🇬🇧 🇵🇹 🇮🇹 🇲🇪 🇰🇬 🇲🇦 🇬🇱 🇦🇴 \n\n'
+                                        + '准备好成为一名猫咪守护者了吗？捐款以拯救生命，或加入我们以志愿者身份合作！🌟',
+                                    parse_mode: 'HTML',
+                                    reply_markup: {
+                                        inline_keyboard: [
+                                            [{ text: "💝 立即捐款", callback_data: "/3rd_engagement" }],
+                                            [{ text: "👥 加入我们的社区", callback_data: "/join_our_community" }]
+                                        ]
+                                    }
+                                }
+                            }
+                        ]),
+                        // ja
+                        JSON.stringify([
+                            {
+                                method: 'sendMessage',
+                                payload: {
+                                    text: '🐈 なぜあなたの支援が重要なのか（詳細） 🐈\n\n'
+                                        + 'すべての猫は愛情に満ちた生活を送るチャンスに値します。私たちの使命は明確です。私たちのコミュニティやその他の地域で最も弱い立場にある猫を救助し、リハビリし、新しい家を見つけることです。\n\n'
+                                        + 'あなたの貢献は、彼らの生存と幸福に不可欠なものに直接資金を提供します：\n'
+                                        + '1. 🏥 **救命医療：** 緊急手術、ワクチン接種、避妊・去勢プログラム。\n'
+                                        + '2. 🥘 **栄養のある食べ物とシェルター：** 高品質の食事と安全で居心地の良い一時的な家。\n'
+                                        + '3. 🤝 **里親探しとアウトリーチ：** 彼らの完璧な人間のパートナーを見つけ、意識を高めること。\n\n'
+                                        + '世界的な影響：私たちの取り組みは世界中に広がり、私たちを必要としている場所ならどこでも野良猫の生活に触れています。 \n\n'
+                                        + '🌍 🇪🇸 🇾🇹 🇯🇴 🇮🇱 🇮🇶 🇵🇸 🇫🇷 🇯🇵 🇲🇷 🇷🇺 🇪🇨 🇧🇴 🇧🇩 🇪🇨 🇧🇪 🇭🇰 🇮🇲 🇰🇬 🇲🇹 🇲🇩 🇲🇰 🇳🇱 🇷🇪 🇬🇧 🇵🇹 🇮🇹 🇲🇪 🇰🇬 🇲🇦 🇬🇱 🇦🇴 \n\n'
+                                        + '猫の守護者になる準備はできていますか？命を救うために寄付をするか、ボランティアとして私たちに参加し、協力してください！🌟',
+                                    parse_mode: 'HTML',
+                                    reply_markup: {
+                                        inline_keyboard: [
+                                            [{ text: "💝 今すぐ寄付", callback_data: "/3rd_engagement" }],
+                                            [{ text: "👥 コミュニティに参加", callback_data: "/join_our_community" }]
+                                        ]
+                                    }
+                                }
+                            }
+                        ]),
+                        // ko
+                        JSON.stringify([
+                            {
+                                method: 'sendMessage',
+                                payload: {
+                                    text: '🐈 당신의 지원이 중요한 이유 (세부 사항) 🐈\n\n'
+                                        + '모든 고양이는 사랑스러운 삶을 누릴 기회를 가질 자격이 있습니다. 우리의 임무는 분명합니다. 우리 지역 사회와 그 너머에서 가장 취약한 고양이들을 구조하고, 재활시키고, 새 보금자리를 찾아주는 것입니다.\n\n'
+                                        + '당신의 기여는 그들의 생존과 행복에 필수적인 요소에 직접적으로 자금을 지원합니다:\n'
+                                        + '1. 🏥 **생명을 구하는 의료:** 응급 수술, 예방 접종 및 중성화/불임 수술 프로그램.\n'
+                                        + '2. 🥘 **영양가 있는 음식 및 쉼터:** 고품질 식사와 안전하고 아늑한 임시 보호소.\n'
+                                        + '3. 🤝 **입양 및 홍보:** 그들의 완벽한 인간 파트너를 찾고 인식을 높이는 것.\n\n'
+                                        + '글로벌 영향: 우리의 약속은 전 세계적으로 뻗어 있으며, 도움이 필요한 곳이라면 어디든 길고양이들의 삶에 영향을 미치고 있습니다. \n\n'
+                                        + '🌍 🇪🇸 🇾🇹 🇯🇴 🇮🇱 🇮🇶 🇵🇸 🇫🇷 🇯🇵 🇲🇷 🇷🇺 🇪🇨 🇧🇴 🇧🇩 🇪🇨 🇧🇪 🇭🇰 🇮🇲 🇰🇬 🇲🇹 🇲🇩 🇲🇰 🇳🇱 🇷🇪 🇬🇧 🇵🇹 🇮🇹 🇲🇪 🇰🇬 🇲🇦 🇬🇱 🇦🇴 \n\n'
+                                        + '고양이 수호자가 될 준비가 되셨습니까? 생명을 구하기 위해 기부하거나, 자원 봉사자로 협력하기 위해 우리와 함께하세요! 🌟',
+                                    parse_mode: 'HTML',
+                                    reply_markup: {
+                                        inline_keyboard: [
+                                            [{ text: "💝 지금 기부하기", callback_data: "/3rd_engagement" }],
+                                            [{ text: "👥 우리 커뮤니티에 참여하세요", callback_data: "/join_our_community" }]
+                                        ]
+                                    }
+                                }
+                            }
+                        ]),
+                        // he
+                        JSON.stringify([
+                            {
+                                method: 'sendMessage',
+                                payload: {
+                                    text: '🐈 למה התמיכה שלך חשובה (הפרטים) 🐈\n\n'
+                                        + 'לכל חתול מגיעה הזדמנות לחיים אוהבים. המשימה שלנו ברורה: להציל, לשקם ולמצוא בתים לחתולים הפגיעים ביותר בקהילה שלנו ומחוצה לה.\n\n'
+                                        + 'התרומה שלך מממנת ישירות את הדברים החיוניים להישרדותם ואושרם:\n'
+                                        + '1. 🏥 **טיפול רפואי מציל חיים:** ניתוחי חירום, חיסונים ותוכניות עיקור/סירוס.\n'
+                                        + '2. 🥘 **מזון מזין ומחסה:** ארוחות איכותיות ומקלטים זמניים בטוחים ונוחים.\n'
+                                        + '3. 🤝 **אימוץ והסברה:** מציאת בן הזוג האנושי המושלם עבורם והגברת המודעות.\n\n'
+                                        + 'השפעה גלובלית: המחויבות שלנו משתרעת ברחבי העולם, ונוגעת לחייהם של חתולי רחוב בכל מקום שהם זקוקים לנו. \n\n'
+                                        + '🌍 🇪🇸 🇾🇹 🇯🇴 🇮🇱 🇮🇶 🇵🇸 🇫🇷 🇯🇵 🇲🇷 🇷🇺 🇪🇨 🇧🇴 🇧🇩 🇪🇨 🇧🇪 🇭🇰 🇮🇲 🇰🇬 🇲🇹 🇲🇩 🇲🇰 🇳🇱 🇷🇪 🇬🇧 🇵🇹 🇮🇹 🇲🇪 🇰🇬 🇲🇦 🇬🇱 🇦🇴 \n\n'
+                                        + 'מוכן להיות שומר חתולים? תרום כדי להציל חיים, או הצטרף אלינו כדי לשתף פעולה כמתנדב! 🌟',
+                                    parse_mode: 'HTML',
+                                    reply_markup: {
+                                        inline_keyboard: [
+                                            [{ text: "💝 תרום עכשיו", callback_data: "/3rd_engagement" }],
+                                            [{ text: "👥 הצטרף לקהילה שלנו", callback_data: "/join_our_community" }]
+                                        ]
+                                    }
+                                }
+                            }
+                        ])
                     ],
                     ['/3rd_engagement',
                         // default (en)
@@ -5955,25 +6594,351 @@ EMD.DonationCampaign = {
                     ['#send_3rd_engagement_sample',
                         // default (en)
                         JSON.stringify([
-                            {   // send ask for donation message
+                            {   // send ask for donation message
                                 method: 'sendInvoice',
                                 payload: {
                                     // Product name, 1-32 characters
-                                    title: '🥉 Bronze Supporter',
+                                    title: 'Save a Stray Cat\'s Life Today 🐾',
                                     // Product description, 1-255 characters
-                                    description: '🙏 Thank You for Considering a Bronze Supporter! 🙏\n\n'
-                                        + 'Your generosity will directly impact the lives of stray and abandoned cats, providing them with the care and support they need to thrive.\n\n',
+                                    description: 'You are a Cat Hero! Your XTR donation will provide emergency medical care, food, and safe shelter for a vulnerable cat. Every coin counts towards a \'purr-fect\' happy ending. Thank you for your kindness! 🐱❤️',
                                     payload: 'bronze_supporter', // Custom payload for your reference
                                     currency: 'XTR',
                                     prices: JSON.stringify([
-                                        { label: 'Donate 100 XTR', amount: 100 }
+                                        { label: 'Donate XTR to Save a Cat', amount: 1000 }
                                     ]),
                                     photo_url: EMD.LOGO_PNG_URL,
                                     photo_width: 240,
                                     protect_content: false,
-                                    // Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. 
-                                    // The relevant Stars will be withdrawn from the bot's balance.
-                                    allow_paid_broadcast: false
+                                    allow_paid_broadcast: false,
+                                    reply_markup: {
+                                        inline_keyboard: [
+                                            [
+                                                { text: "👥 Join Our Community", callback_data: "/join_our_community" }
+                                            ],
+                                            [
+                                                { text: "🎖️ Learn More", callback_data: "/2nd_engagement" }
+                                            ]
+                                        ]
+                                    }
+                                }
+                            }
+                        ]),
+                        // es
+                        JSON.stringify([
+                            {
+                                method: 'sendInvoice',
+                                payload: {
+                                    title: 'Salva la Vida de un Gato Callejero Hoy 🐾',
+                                    description: '¡Eres un Héroe Felino! Tu donación en XTR proporcionará atención médica de emergencia, comida y refugio seguro a un gato vulnerable. Cada moneda cuenta para un final feliz "perfecto". ¡Gracias por tu bondad! 🐱❤️',
+                                    payload: 'bronze_supporter',
+                                    currency: 'XTR',
+                                    prices: JSON.stringify([
+                                        { label: 'Donar XTR para Salvar un Gato', amount: 1000 }
+                                    ]),
+                                    photo_url: EMD.LOGO_PNG_URL,
+                                    photo_width: 240,
+                                    protect_content: false,
+                                    allow_paid_broadcast: false,
+                                    reply_markup: {
+                                        inline_keyboard: [
+                                            [
+                                                { text: "👥 Únete a Nuestra Comunidad", callback_data: "/join_our_community" }
+                                            ],
+                                            [
+                                                { text: "🎖️ Aprender Más", callback_data: "/2nd_engagement" }
+                                            ]
+                                        ]
+                                    }
+                                }
+                            }
+                        ]),
+                        // fr
+                        JSON.stringify([
+                            {
+                                method: 'sendInvoice',
+                                payload: {
+                                    title: 'Sauvez la Vie d\'un Chat Errant Aujourd\'hui 🐾',
+                                    description: 'Vous êtes un Héros Félin! Votre don en XTR fournira des soins médicaux d\'urgence, de la nourriture et un abri sûr à un chat vulnérable. Chaque pièce compte pour une fin heureuse "ronronnante". Merci pour votre gentillesse! 🐱❤️',
+                                    payload: 'bronze_supporter',
+                                    currency: 'XTR',
+                                    prices: JSON.stringify([
+                                        { label: 'Donner XTR pour Sauver un Chat', amount: 1000 }
+                                    ]),
+                                    photo_url: EMD.LOGO_PNG_URL,
+                                    photo_width: 240,
+                                    protect_content: false,
+                                    allow_paid_broadcast: false,
+                                    reply_markup: {
+                                        inline_keyboard: [
+                                            [
+                                                { text: "👥 Rejoignez Notre Communauté", callback_data: "/join_our_community" }
+                                            ],
+                                            [
+                                                { text: "🎖️ En savoir plus", callback_data: "/2nd_engagement" }
+                                            ]
+                                        ]
+                                    }
+                                }
+                            }
+                        ]),
+                        // ar
+                        JSON.stringify([
+                            {
+                                method: 'sendInvoice',
+                                payload: {
+                                    title: 'أنقذ حياة قطة ضالة اليوم 🐾',
+                                    description: 'أنت بطل القطط! تبرعك بـ XTR سيوفر رعاية طبية طارئة، طعامًا، ومأوى آمنًا لقطة ضعيفة. كل عملة مهمة لتحقيق نهاية سعيدة "مُرضية". شكراً لك على لطفك! 🐱❤️',
+                                    payload: 'bronze_supporter',
+                                    currency: 'XTR',
+                                    prices: JSON.stringify([
+                                        { label: 'تبرع بـ XTR لإنقاذ قطة', amount: 1000 }
+                                    ]),
+                                    photo_url: EMD.LOGO_PNG_URL,
+                                    photo_width: 240,
+                                    protect_content: false,
+                                    allow_paid_broadcast: false,
+                                    reply_markup: {
+                                        inline_keyboard: [
+                                            [
+                                                { text: "👥 انضم إلى مجتمعنا", callback_data: "/join_our_community" }
+                                            ],
+                                            [
+                                                { text: "🎖️ تعرّف على المزيد", callback_data: "/2nd_engagement" }
+                                            ]
+                                        ]
+                                    }
+                                }
+                            }
+                        ]),
+                        // de
+                        JSON.stringify([
+                            {
+                                method: 'sendInvoice',
+                                payload: {
+                                    title: 'Retten Sie heute ein streunendes Katzenleben 🐾',
+                                    description: 'Sie sind ein Katzenheld! Ihre XTR-Spende bietet Notfallversorgung, Futter und sicheren Unterschlupf für eine schutzbedürftige Katze. Jede Münze zählt für ein "schnurr-fekt" glückliches Ende. Vielen Dank für Ihre Freundlichkeit! 🐱❤️',
+                                    payload: 'bronze_supporter',
+                                    currency: 'XTR',
+                                    prices: JSON.stringify([
+                                        { label: 'Spenden Sie XTR, um eine Katze zu retten', amount: 1000 }
+                                    ]),
+                                    photo_url: EMD.LOGO_PNG_URL,
+                                    photo_width: 240,
+                                    protect_content: false,
+                                    allow_paid_broadcast: false,
+                                    reply_markup: {
+                                        inline_keyboard: [
+                                            [
+                                                { text: "👥 Treten Sie unserer Gemeinschaft bei", callback_data: "/join_our_community" }
+                                            ],
+                                            [
+                                                { text: "🎖️ Mehr erfahren", callback_data: "/2nd_engagement" }
+                                            ]
+                                        ]
+                                    }
+                                }
+                            }
+                        ]),
+                        // it
+                        JSON.stringify([
+                            {
+                                method: 'sendInvoice',
+                                payload: {
+                                    title: 'Salva la Vita di un Gatto Randagio Oggi 🐾',
+                                    description: 'Sei un Eroe Felino! La tua donazione in XTR fornirà cure mediche d\'emergenza, cibo e un rifugio sicuro a un gatto vulnerabile. Ogni moneta conta per un lieto fine "perfetto". Grazie per la tua gentilezza! 🐱❤️',
+                                    payload: 'bronze_supporter',
+                                    currency: 'XTR',
+                                    prices: JSON.stringify([
+                                        { label: 'Dona XTR per Salvare un Gatto', amount: 1000 }
+                                    ]),
+                                    photo_url: EMD.LOGO_PNG_URL,
+                                    photo_width: 240,
+                                    protect_content: false,
+                                    allow_paid_broadcast: false,
+                                    reply_markup: {
+                                        inline_keyboard: [
+                                            [
+                                                { text: "👥 Unisciti alla Nostra Comunità", callback_data: "/join_our_community" }
+                                            ],
+                                            [
+                                                { text: "🎖️ Scopri di più", callback_data: "/2nd_engagement" }
+                                            ]
+                                        ]
+                                    }
+                                }
+                            }
+                        ]),
+                        // pt
+                        JSON.stringify([
+                            {
+                                method: 'sendInvoice',
+                                payload: {
+                                    title: 'Salve a Vida de um Gato de Rua Hoje 🐾',
+                                    description: 'Você é um Herói Felino! Sua doação em XTR fornecerá cuidados médicos de emergência, comida e abrigo seguro para um gato vulnerável. Cada moeda conta para um final feliz "perfeito". Obrigado pela sua bondade! 🐱❤️',
+                                    payload: 'bronze_supporter',
+                                    currency: 'XTR',
+                                    prices: JSON.stringify([
+                                        { label: 'Doar XTR para Salvar um Gato', amount: 1000 }
+                                    ]),
+                                    photo_url: EMD.LOGO_PNG_URL,
+                                    photo_width: 240,
+                                    protect_content: false,
+                                    allow_paid_broadcast: false,
+                                    reply_markup: {
+                                        inline_keyboard: [
+                                            [
+                                                { text: "👥 Junte-se à Nossa Comunidade", callback_data: "/join_our_community" }
+                                            ],
+                                            [
+                                                { text: "🎖️ Saiba Mais", callback_data: "/2nd_engagement" }
+                                            ]
+                                        ]
+                                    }
+                                }
+                            }
+                        ]),
+                        // ru
+                        JSON.stringify([
+                            {
+                                method: 'sendInvoice',
+                                payload: {
+                                    title: 'Спасите жизнь бездомной кошки сегодня 🐾',
+                                    description: 'Вы - Кошачий Герой! Ваше пожертвование в XTR обеспечит неотложную медицинскую помощь, еду и безопасное убежище для уязвимой кошки. Каждая монета важна для "мур-фектного" счастливого конца. Спасибо за вашу доброту! 🐱❤️',
+                                    payload: 'bronze_supporter',
+                                    currency: 'XTR',
+                                    prices: JSON.stringify([
+                                        { label: 'Пожертвовать XTR, чтобы спасти кошку', amount: 1000 }
+                                    ]),
+                                    photo_url: EMD.LOGO_PNG_URL,
+                                    photo_width: 240,
+                                    protect_content: false,
+                                    allow_paid_broadcast: false,
+                                    reply_markup: {
+                                        inline_keyboard: [
+                                            [
+                                                { text: "👥 Присоединяйтесь к нашему сообществу", callback_data: "/join_our_community" }
+                                            ],
+                                            [
+                                                { text: "🎖️ Узнать больше", callback_data: "/2nd_engagement" }
+                                            ]
+                                        ]
+                                    }
+                                }
+                            }
+                        ]),
+                        // zh
+                        JSON.stringify([
+                            {
+                                method: 'sendInvoice',
+                                payload: {
+                                    title: '今天就拯救流浪猫的生命吧 🐾',
+                                    description: '您是猫咪英雄！您的 XTR 捐款将为一只脆弱的猫咪提供紧急医疗护理、食物和安全的住所。每一分钱都为实现一个"喵"不可言的幸福结局而努力。感谢您的善良！ 🐱❤️',
+                                    payload: 'bronze_supporter',
+                                    currency: 'XTR',
+                                    prices: JSON.stringify([
+                                        { label: '捐赠 XTR 以拯救一只猫', amount: 1000 }
+                                    ]),
+                                    photo_url: EMD.LOGO_PNG_URL,
+                                    photo_width: 240,
+                                    protect_content: false,
+                                    allow_paid_broadcast: false,
+                                    reply_markup: {
+                                        inline_keyboard: [
+                                            [
+                                                { text: "👥 加入我们的社区", callback_data: "/join_our_community" }
+                                            ],
+                                            [
+                                                { text: "🎖️ 了解更多", callback_data: "/2nd_engagement" }
+                                            ]
+                                        ]
+                                    }
+                                }
+                            }
+                        ]),
+                        // ja
+                        JSON.stringify([
+                            {
+                                method: 'sendInvoice',
+                                payload: {
+                                    title: '今日、野良猫の命を救おう 🐾',
+                                    description: 'あなたは猫のヒーローです！あなたのXTR寄付は、弱い立場の猫に緊急医療、食べ物、そして安全なシェルターを提供します。すべてのお金が「完璧」なハッピーエンドにつながります。あなたの優しさに感謝します！ 🐱❤️',
+                                    payload: 'bronze_supporter',
+                                    currency: 'XTR',
+                                    prices: JSON.stringify([
+                                        { label: '猫を救うためにXTRを寄付', amount: 1000 }
+                                    ]),
+                                    photo_url: EMD.LOGO_PNG_URL,
+                                    photo_width: 240,
+                                    protect_content: false,
+                                    allow_paid_broadcast: false,
+                                    reply_markup: {
+                                        inline_keyboard: [
+                                            [
+                                                { text: "👥 コミュニティに参加", callback_data: "/join_our_community" }
+                                            ],
+                                            [
+                                                { text: "🎖️ 詳細はこちら", callback_data: "/2nd_engagement" }
+                                            ]
+                                        ]
+                                    }
+                                }
+                            }
+                        ]),
+                        // ko
+                        JSON.stringify([
+                            {
+                                method: 'sendInvoice',
+                                payload: {
+                                    title: '오늘 길고양이의 생명을 구하세요 🐾',
+                                    description: '당신은 고양이 영웅입니다! 당신의 XTR 기부는 취약한 고양이에게 긴급 의료, 음식 및 안전한 쉼터를 제공할 것입니다. 모든 동전은 "완벽한" 해피 엔딩을 위해 중요합니다. 당신의 친절에 감사드립니다! 🐱❤️',
+                                    payload: 'bronze_supporter',
+                                    currency: 'XTR',
+                                    prices: JSON.stringify([
+                                        { label: '고양이 구호를 위해 XTR 기부', amount: 1000 }
+                                    ]),
+                                    photo_url: EMD.LOGO_PNG_URL,
+                                    photo_width: 240,
+                                    protect_content: false,
+                                    allow_paid_broadcast: false,
+                                    reply_markup: {
+                                        inline_keyboard: [
+                                            [
+                                                { text: "👥 우리 커뮤니티에 참여하세요", callback_data: "/join_our_community" }
+                                            ],
+                                            [
+                                                { text: "🎖️ 자세히 알아보기", callback_data: "/2nd_engagement" }
+                                            ]
+                                        ]
+                                    }
+                                }
+                            }
+                        ]),
+                        // he
+                        JSON.stringify([
+                            {
+                                method: 'sendInvoice',
+                                payload: {
+                                    title: 'הצל חיים של חתול רחוב היום 🐾',
+                                    description: 'אתה גיבור חתולים! תרומת ה-XTR שלך תספק טיפול רפואי חירום, מזון ומחסה בטוח לחתול פגיע. כל מטבע חשוב עבור סוף טוב "מושלם". תודה על טוב לבך! 🐱❤️',
+                                    payload: 'bronze_supporter',
+                                    currency: 'XTR',
+                                    prices: JSON.stringify([
+                                        { label: 'תרום XTR להצלת חתול', amount: 1000 }
+                                    ]),
+                                    photo_url: EMD.LOGO_PNG_URL,
+                                    photo_width: 240,
+                                    protect_content: false,
+                                    allow_paid_broadcast: false,
+                                    reply_markup: {
+                                        inline_keyboard: [
+                                            [
+                                                { text: "👥 הצטרף לקהילה שלנו", callback_data: "/join_our_community" }
+                                            ],
+                                            [
+                                                { text: "🎖️ למידע נוסף", callback_data: "/2nd_engagement" }
+                                            ]
+                                        ]
+                                    }
                                 }
                             }
                         ])
@@ -5991,11 +6956,13 @@ EMD.DonationCampaign = {
                             {
                                 method: 'sendMessage',
                                 payload: {
-                                    text: '🌟 Thank You for Joining Our Cat Lovers Community! 🌟\n\n'
-                                        + 'Connect with fellow cat enthusiasts, share stories, and stay updated on our Cat Donation Campaign.\n'
-                                        + 'Together, we can make a difference in the lives of stray and abandoned cats!\n\n'
-                                        + 'Join us on Telegram: https://t.me/easyadm_cats_community\n\n'
-                                        + 'We look forward to welcoming you to our community of cat lovers! 🐱❤️',
+                                    text: '🐈 Welcome to the Cat Guardian Movement! 🐾\n\n'
+                                        + 'This is more than a community; it’s a global network of dedicated cat lovers working together to save lives.\n\n'
+                                        + '**How to Collaborate & Connect:**\n'
+                                        + '1. 🗣️ **Join our Group** to discuss cat care, share rescue stories, and find local collaboration opportunities.\n'
+                                        + '2. 📢 **Join our Channel** for official updates, success stories, and donation impact reports.\n'
+                                        + '3. 🤝 **Volunteer:** Ask in the group how you can help with fostering, transport, or fundraising!\n\n'
+                                        + 'Click below to jump in and start making a difference! 🐱❤️',
                                     parse_mode: 'HTML',
                                     reply_markup: {
                                         inline_keyboard: [
@@ -6006,6 +6973,350 @@ EMD.DonationCampaign = {
                                             [
                                                 { text: "Report an Issue", url: "https://t.me/easyadm_support_bot" },
                                                 { text: "Social Media", url: "https://easyadm.com/socials" }
+                                            ],
+                                            [
+                                                { text: "💝 Support Us (Donate)", callback_data: "/2nd_engagement" }
+                                            ]
+                                        ]
+                                    }
+                                }
+                            }
+                        ]),
+                        // es
+                        JSON.stringify([
+                            {
+                                method: 'sendMessage',
+                                payload: {
+                                    text: '🐈 ¡Bienvenido al Movimiento Guardián Felino! 🐾\n\n'
+                                        + 'Esto es más que una comunidad; es una red global de amantes de los gatos dedicados que trabajan juntos para salvar vidas.\n\n'
+                                        + '**Cómo Colaborar y Conectar:**\n'
+                                        + '1. 🗣️ **Únete a nuestro Grupo** para discutir el cuidado de los gatos, compartir historias de rescate y encontrar oportunidades de colaboración local.\n'
+                                        + '2. 📢 **Únete a nuestro Canal** para recibir actualizaciones oficiales, historias de éxito e informes de impacto de las donaciones.\n'
+                                        + '3. 🤝 **Voluntariado:** ¡Pregunta en el grupo cómo puedes ayudar con el acogimiento temporal, el transporte o la recaudación de fondos!\n\n'
+                                        + '¡Haz clic abajo para unirte y comenzar a marcar la diferencia! 🐱❤️',
+                                    parse_mode: 'HTML',
+                                    reply_markup: {
+                                        inline_keyboard: [
+                                            [
+                                                { text: "⛱️ Únete a nuestro Grupo", url: "https://t.me/easyadm_cats_community" },
+                                                { text: "📢 Únete a nuestro Canal", url: "https://t.me/easyadm_cats_channel" }
+                                            ],
+                                            [
+                                                { text: "Reportar un Problema", url: "https://t.me/easyadm_support_bot" },
+                                                { text: "Redes Sociales", url: "https://easyadm.com/socials" }
+                                            ],
+                                            [
+                                                { text: "💝 Apóyanos (Donar)", callback_data: "/2nd_engagement" }
+                                            ]
+                                        ]
+                                    }
+                                }
+                            }
+                        ]),
+                        // fr
+                        JSON.stringify([
+                            {
+                                method: 'sendMessage',
+                                payload: {
+                                    text: '🐈 Bienvenue dans le Mouvement des Gardiens de Chats ! 🐾\n\n'
+                                        + 'C\'est plus qu\'une communauté; c\'est un réseau mondial d\'amoureux des chats dévoués qui travaillent ensemble pour sauver des vies.\n\n'
+                                        + '**Comment Collaborer et Se Connecter :**\n'
+                                        + '1. 🗣️ **Rejoignez notre Groupe** pour discuter des soins aux chats, partager des histoires de sauvetage et trouver des opportunités de collaboration locale.\n'
+                                        + '2. 📢 **Rejoignez notre Chaîne** pour des mises à jour officielles, des histoires de succès et des rapports d\'impact des dons.\n'
+                                        + '3. 🤝 **Bénévolat :** Demandez dans le groupe comment vous pouvez aider avec l\'accueil temporaire, le transport ou la collecte de fonds !\n\n'
+                                        + 'Cliquez ci-dessous pour vous joindre à nous et commencer à faire la différence ! 🐱❤️',
+                                    parse_mode: 'HTML',
+                                    reply_markup: {
+                                        inline_keyboard: [
+                                            [
+                                                { text: "⛱️ Rejoindre notre Groupe", url: "https://t.me/easyadm_cats_community" },
+                                                { text: "📢 Rejoindre notre Chaîne", url: "https://t.me/easyadm_cats_channel" }
+                                            ],
+                                            [
+                                                { text: "Signaler un Problème", url: "https://t.me/easyadm_support_bot" },
+                                                { text: "Médias Sociaux", url: "https://easyadm.com/socials" }
+                                            ],
+                                            [
+                                                { text: "💝 Soutenez-nous (Donner)", callback_data: "/2nd_engagement" }
+                                            ]
+                                        ]
+                                    }
+                                }
+                            }
+                        ]),
+                        // ar
+                        JSON.stringify([
+                            {
+                                method: 'sendMessage',
+                                payload: {
+                                    text: '🐈 مرحبًا بك في حركة حراس القطط! 🐾\n\n'
+                                        + 'هذا أكثر من مجرد مجتمع؛ إنها شبكة عالمية من محبي القطط المتفانين يعملون معًا لإنقاذ الأرواح.\n\n'
+                                        + '**كيف تتعاون وتتواصل:**\n'
+                                        + '1. 🗣️ **انضم إلى مجموعتنا** لمناقشة رعاية القطط، ومشاركة قصص الإنقاذ، والعثور على فرص تعاون محلية.\n'
+                                        + '2. 📢 **انضم إلى قناتنا** للحصول على التحديثات الرسمية، قصص النجاح، وتقارير تأثير التبرعات.\n'
+                                        + '3. 🤝 **تطوع:** اسأل في المجموعة كيف يمكنك المساعدة في الاحتضان المؤقت، النقل، أو جمع التبرعات!\n\n'
+                                        + 'انقر أدناه للانضمام والبدء في إحداث فرق! 🐱❤️',
+                                    parse_mode: 'HTML',
+                                    reply_markup: {
+                                        inline_keyboard: [
+                                            [
+                                                { text: "⛱️ انضم إلى مجموعتنا", url: "https://t.me/easyadm_cats_community" },
+                                                { text: "📢 انضم إلى قناتنا", url: "https://t.me/easyadm_cats_channel" }
+                                            ],
+                                            [
+                                                { text: "الإبلاغ عن مشكلة", url: "https://t.me/easyadm_support_bot" },
+                                                { text: "وسائل التواصل الاجتماعي", url: "https://easyadm.com/socials" }
+                                            ],
+                                            [
+                                                { text: "💝 ادعمنا (تبرع)", callback_data: "/2nd_engagement" }
+                                            ]
+                                        ]
+                                    }
+                                }
+                            }
+                        ]),
+                        // de
+                        JSON.stringify([
+                            {
+                                method: 'sendMessage',
+                                payload: {
+                                    text: '🐈 Willkommen bei der Katzenwächter-Bewegung! 🐾\n\n'
+                                        + 'Dies ist mehr als eine Gemeinschaft; es ist ein globales Netzwerk engagierter Katzenliebhaber, die zusammenarbeiten, um Leben zu retten.\n\n'
+                                        + '**Wie Sie Zusammenarbeiten & Sich Verbinden:**\n'
+                                        + '1. 🗣️ **Treten Sie unserer Gruppe bei**, um über Katzenpflege zu diskutieren, Rettungsgeschichten zu teilen und lokale Kooperationsmöglichkeiten zu finden.\n'
+                                        + '2. 📢 **Abonnieren Sie unseren Kanal** für offizielle Updates, Erfolgsgeschichten und Berichte über die Wirkung von Spenden.\n'
+                                        + '3. 🤝 **Ehrenamtliche Hilfe:** Fragen Sie in der Gruppe, wie Sie bei der Pflege, dem Transport oder der Spendensammlung helfen können!\n\n'
+                                        + 'Klicken Sie unten, um einzusteigen und einen Unterschied zu machen! 🐱❤️',
+                                    parse_mode: 'HTML',
+                                    reply_markup: {
+                                        inline_keyboard: [
+                                            [
+                                                { text: "⛱️ Treten Sie unserer Gruppe bei", url: "https://t.me/easyadm_cats_community" },
+                                                { text: "📢 Abonnieren Sie unseren Kanal", url: "https://t.me/easyadm_cats_channel" }
+                                            ],
+                                            [
+                                                { text: "Ein Problem melden", url: "https://t.me/easyadm_support_bot" },
+                                                { text: "Soziale Medien", url: "https://easyadm.com/socials" }
+                                            ],
+                                            [
+                                                { text: "💝 Unterstützen Sie uns (Spenden)", callback_data: "/2nd_engagement" }
+                                            ]
+                                        ]
+                                    }
+                                }
+                            }
+                        ]),
+                        // it
+                        JSON.stringify([
+                            {
+                                method: 'sendMessage',
+                                payload: {
+                                    text: '🐈 Benvenuti nel Movimento dei Guardiani dei Gatti! 🐾\n\n'
+                                        + 'Questa è più di una comunità; è una rete globale di amanti dei gatti dedicati che lavorano insieme per salvare vite.\n\n'
+                                        + '**Come Collaborare e Connettersi:**\n'
+                                        + '1. 🗣️ **Unisciti al nostro Gruppo** per discutere di cura dei gatti, condividere storie di salvataggio e trovare opportunità di collaborazione locale.\n'
+                                        + '2. 📢 **Unisciti al nostro Canale** per aggiornamenti ufficiali, storie di successo e rapporti sull\'impatto delle donazioni.\n'
+                                        + '3. 🤝 **Volontariato:** Chiedi nel gruppo come puoi aiutare con l\'affido temporaneo, il trasporto o la raccolta fondi!\n\n'
+                                        + 'Clicca qui sotto per unirti e iniziare a fare la differenza! 🐱❤️',
+                                    parse_mode: 'HTML',
+                                    reply_markup: {
+                                        inline_keyboard: [
+                                            [
+                                                { text: "⛱️ Unisciti al nostro Gruppo", url: "https://t.me/easyadm_cats_community" },
+                                                { text: "📢 Unisciti al nostro Canale", url: "https://t.me/easyadm_cats_channel" }
+                                            ],
+                                            [
+                                                { text: "Segnala un Problema", url: "https://t.me/easyadm_support_bot" },
+                                                { text: "Social Media", url: "https://easyadm.com/socials" }
+                                            ],
+                                            [
+                                                { text: "💝 Sostienici (Dona)", callback_data: "/2nd_engagement" }
+                                            ]
+                                        ]
+                                    }
+                                }
+                            }
+                        ]),
+                        // pt
+                        JSON.stringify([
+                            {
+                                method: 'sendMessage',
+                                payload: {
+                                    text: '🐈 Bem-vindo ao Movimento Guardião de Gatos! 🐾\n\n'
+                                        + 'Isto é mais do que uma comunidade; é uma rede global de amantes de gatos dedicados que trabalham juntos para salvar vidas.\n\n'
+                                        + '**Como Colaborar e Conectar:**\n'
+                                        + '1. 🗣️ **Junte-se ao nosso Grupo** para discutir cuidados com gatos, compartilhar histórias de resgate e encontrar oportunidades de colaboração local.\n'
+                                        + '2. 📢 **Junte-se ao nosso Canal** para atualizações oficiais, histórias de sucesso e relatórios de impacto de doações.\n'
+                                        + '3. 🤝 **Voluntariado:** Pergunte no grupo como você pode ajudar com acolhimento temporário, transporte ou angariação de fundos!\n\n'
+                                        + 'Clique abaixo para entrar e começar a fazer a diferença! 🐱❤️',
+                                    parse_mode: 'HTML',
+                                    reply_markup: {
+                                        inline_keyboard: [
+                                            [
+                                                { text: "⛱️ Junte-se ao nosso Grupo", url: "https://t.me/easyadm_cats_community" },
+                                                { text: "📢 Junte-se ao nosso Canal", url: "https://t.me/easyadm_cats_channel" }
+                                            ],
+                                            [
+                                                { text: "Reportar um Problema", url: "https://t.me/easyadm_support_bot" },
+                                                { text: "Redes Sociais", url: "https://easyadm.com/socials" }
+                                            ],
+                                            [
+                                                { text: "💝 Apoie-nos (Doar)", callback_data: "/2nd_engagement" }
+                                            ]
+                                        ]
+                                    }
+                                }
+                            }
+                        ]),
+                        // ru
+                        JSON.stringify([
+                            {
+                                method: 'sendMessage',
+                                payload: {
+                                    text: '🐈 Добро пожаловать в Движение Хранителей Кошек! 🐾\n\n'
+                                        + 'Это больше, чем просто сообщество; это глобальная сеть преданных любителей кошек, работающих вместе, чтобы спасать жизни.\n\n'
+                                        + '**Как сотрудничать и подключаться:**\n'
+                                        + '1. 🗣️ **Присоединяйтесь к нашей Группе**, чтобы обсуждать уход за кошками, делиться историями спасения и находить возможности для местного сотрудничества.\n'
+                                        + '2. 📢 **Присоединяйтесь к нашему Каналу** для получения официальных обновлений, историй успеха и отчетов о влиянии пожертвований.\n'
+                                        + '3. 🤝 **Волонтерство:** Спросите в группе, как вы можете помочь с временным приютом, транспортировкой или сбором средств!\n\n'
+                                        + 'Нажмите ниже, чтобы присоединиться и начать менять ситуацию к лучшему! 🐱❤️',
+                                    parse_mode: 'HTML',
+                                    reply_markup: {
+                                        inline_keyboard: [
+                                            [
+                                                { text: "⛱️ Присоединиться к нашей Группе", url: "https://t.me/easyadm_cats_community" },
+                                                { text: "📢 Присоединиться к нашему Каналу", url: "https://t.me/easyadm_cats_channel" }
+                                            ],
+                                            [
+                                                { text: "Сообщить о проблеме", url: "https://t.me/easyadm_support_bot" },
+                                                { text: "Социальные сети", url: "https://easyadm.com/socials" }
+                                            ],
+                                            [
+                                                { text: "💝 Поддержите нас (Пожертвовать)", callback_data: "/2nd_engagement" }
+                                            ]
+                                        ]
+                                    }
+                                }
+                            }
+                        ]),
+                        // zh
+                        JSON.stringify([
+                            {
+                                method: 'sendMessage',
+                                payload: {
+                                    text: '🐈 欢迎加入猫咪守护者行动！🐾\n\n'
+                                        + '这不仅仅是一个社区；它是一个由热心的猫咪爱好者组成的全球网络，共同努力拯救生命。\n\n'
+                                        + '**如何合作和联系：**\n'
+                                        + '1. 🗣️ **加入我们的群组**，讨论猫咪护理，分享救援故事，并寻找本地合作机会。\n'
+                                        + '2. 📢 **加入我们的频道**，获取官方更新、成功案例和捐款影响报告。\n'
+                                        + '3. 🤝 **志愿服务：** 在群组中询问如何帮助寄养、运输或筹款！\n\n'
+                                        + '点击下方加入我们，开始做出改变！ 🐱❤️',
+                                    parse_mode: 'HTML',
+                                    reply_markup: {
+                                        inline_keyboard: [
+                                            [
+                                                { text: "⛱️ 加入我们的群组", url: "https://t.me/easyadm_cats_community" },
+                                                { text: "📢 加入我们的频道", url: "https://t.me/easyadm_cats_channel" }
+                                            ],
+                                            [
+                                                { text: "报告问题", url: "https://t.me/easyadm_support_bot" },
+                                                { text: "社交媒体", url: "https://easyadm.com/socials" }
+                                            ],
+                                            [
+                                                { text: "💝 支持我们 (捐款)", callback_data: "/2nd_engagement" }
+                                            ]
+                                        ]
+                                    }
+                                }
+                            }
+                        ]),
+                        // ja
+                        JSON.stringify([
+                            {
+                                method: 'sendMessage',
+                                payload: {
+                                    text: '🐈 猫の守護者運動へようこそ！🐾\n\n'
+                                        + 'これは単なるコミュニティではありません。命を救うために協力する献身的な猫愛好家のグローバルネットワークです。\n\n'
+                                        + '**協力と接続の方法：**\n'
+                                        + '1. 🗣️ **私たちのグループに参加**して、猫の世話について話し合ったり、救助の話を共有したり、地元の協力の機会を見つけたりしましょう。\n'
+                                        + '2. 📢 **私たちのチャンネルに参加**して、公式の最新情報、成功事例、寄付の影響レポートを入手してください。\n'
+                                        + '3. 🤝 **ボランティア：** 一時預かり、輸送、資金調達でどのように支援できるかグループで尋ねてください！\n\n'
+                                        + '下のボタンをクリックして参加し、変化をもたらし始めましょう！ 🐱❤️',
+                                    parse_mode: 'HTML',
+                                    reply_markup: {
+                                        inline_keyboard: [
+                                            [
+                                                { text: "⛱️ グループに参加", url: "https://t.me/easyadm_cats_community" },
+                                                { text: "📢 チャンネルに参加", url: "https://t.me/easyadm_cats_channel" }
+                                            ],
+                                            [
+                                                { text: "問題を報告", url: "https://t.me/easyadm_support_bot" },
+                                                { text: "ソーシャルメディア", url: "https://easyadm.com/socials" }
+                                            ],
+                                            [
+                                                { text: "💝 私たちを支援 (寄付)", callback_data: "/2nd_engagement" }
+                                            ]
+                                        ]
+                                    }
+                                }
+                            }
+                        ]),
+                        // ko
+                        JSON.stringify([
+                            {
+                                method: 'sendMessage',
+                                payload: {
+                                    text: '🐈 고양이 수호자 운동에 오신 것을 환영합니다! 🐾\n\n'
+                                        + '이것은 단순한 커뮤니티 이상입니다. 생명을 구하기 위해 함께 노력하는 헌신적인 고양이 애호가들의 글로벌 네트워크입니다.\n\n'
+                                        + '**협력하고 연결하는 방법:**\n'
+                                        + '1. 🗣️ **저희 그룹에 가입**하여 고양이 돌보기에 대해 토론하고, 구조 이야기를 공유하고, 지역 협력 기회를 찾아보세요.\n'
+                                        + '2. 📢 **저희 채널에 가입**하여 공식 업데이트, 성공 사례 및 기부 영향 보고서를 확인하세요.\n'
+                                        + '3. 🤝 **자원 봉사:** 그룹에서 임시 보호, 운송 또는 모금 활동에 어떻게 도움을 줄 수 있는지 문의하세요!\n\n'
+                                        + '아래를 클릭하여 참여하고 변화를 만들기 시작하세요! 🐱❤️',
+                                    parse_mode: 'HTML',
+                                    reply_markup: {
+                                        inline_keyboard: [
+                                            [
+                                                { text: "⛱️ 저희 그룹에 가입하세요", url: "https://t.me/easyadm_cats_community" },
+                                                { text: "📢 저희 채널에 가입하세요", url: "https://t.me/easyadm_cats_channel" }
+                                            ],
+                                            [
+                                                { text: "문제 보고", url: "https://t.me/easyadm_support_bot" },
+                                                { text: "소셜 미디어", url: "https://easyadm.com/socials" }
+                                            ],
+                                            [
+                                                { text: "💝 저희를 지원하세요 (기부)", callback_data: "/2nd_engagement" }
+                                            ]
+                                        ]
+                                    }
+                                }
+                            }
+                        ]),
+                        // he
+                        JSON.stringify([
+                            {
+                                method: 'sendMessage',
+                                payload: {
+                                    text: '🐈 ברוכים הבאים לתנועת שומרי החתולים! 🐾\n\n'
+                                        + 'זה יותר מקהילה; זו רשת גלובלית של אוהבי חתולים מסורים הפועלים יחד להציל חיים.\n\n'
+                                        + '**כיצד לשתף פעולה ולהתחבר:**\n'
+                                        + '1. 🗣️ **הצטרף לקבוצה שלנו** כדי לדון בטיפול בחתולים, לשתף סיפורי הצלה ולמצוא הזדמנויות לשיתוף פעולה מקומי.\n'
+                                        + '2. 📢 **הצטרף לערוץ שלנו** לקבלת עדכונים רשמיים, סיפורי הצלחה ודוחות השפעה של תרומות.\n'
+                                        + '3. 🤝 **התנדבות:** שאל בקבוצה כיצד תוכל לעזור עם אומנה, הובלה או גיוס כספים!\n\n'
+                                        + 'לחץ למטה כדי להצטרף ולהתחיל לעשות שינוי! 🐱❤️',
+                                    parse_mode: 'HTML',
+                                    reply_markup: {
+                                        inline_keyboard: [
+                                            [
+                                                { text: "⛱️ הצטרף לקבוצה שלנו", url: "https://t.me/easyadm_cats_community" },
+                                                { text: "📢 הצטרף לערוץ שלנו", url: "https://t.me/easyadm_cats_channel" }
+                                            ],
+                                            [
+                                                { text: "דווח על בעיה", url: "https://t.me/easyadm_support_bot" },
+                                                { text: "מדיה חברתית", url: "https://easyadm.com/socials" }
+                                            ],
+                                            [
+                                                { text: "💝 תמכו בנו (תרומה)", callback_data: "/2nd_engagement" }
                                             ]
                                         ]
                                     }
@@ -6016,18 +7327,18 @@ EMD.DonationCampaign = {
                     ['/send_invoice_donation_sample',
                         // default (en)
                         JSON.stringify([
-                            {   // send ask for donation message
+                            {   // send donation invoice sample
                                 method: 'sendInvoice',
                                 payload: {
                                     // Product name, 1-32 characters
-                                    title: '🥉 Bronze Supporter',
+                                    title: 'Donate to Support Stray Cats',
                                     // Product description, 1-255 characters
-                                    description: '🙏 Thank You for Considering a Bronze Supporter! 🙏\n\n'
+                                    description: '🙏 Thank you for considering a Donation! 🙏\n\n'
                                         + 'Your generosity will directly impact the lives of stray and abandoned cats, providing them with the care and support they need to thrive.\n\n',
                                     payload: 'bronze_supporter', // Custom payload for your reference
                                     currency: 'XTR',
                                     prices: JSON.stringify([
-                                        { label: 'Donate 100 XTR', amount: 100 }
+                                        { label: 'Donate 10000 XTR', amount: 10000 }
                                     ]),
                                     photo_url: EMD.LOGO_PNG_URL,
                                     photo_width: 240,
@@ -6042,18 +7353,18 @@ EMD.DonationCampaign = {
                     ['/create_invoice_link',
                         // default (en)
                         JSON.stringify([
-                            {   // create invoice link for 30 day bronze cat care subscription
+                            {   // create invoice link for 30 day bronze cat care subscription
                                 method: 'createInvoiceLink',
                                 payload: {
                                     // Product name, 1-32 characters
-                                    title: '🥉 - Bronze Cat Care - 30 Day',
-                                    description: '🐱🥉 Thank You for Considering a Bronze Cat Care Subscription! 🥉🐱\n\n'
-                                        + 'By subscribing, you are committing to ongoing support for stray and abandoned cats, ensuring they receive the care and attention they deserve on a regular basis.\n\n',
+                                    title: '30-Day Cat Care Subscription 😻',
+                                    // Product description, 1-255 characters
+                                    description: 'Become a monthly \'Cat Guardian\' and ensure a stray cat receives 30 days of continuous, life-saving support! Your recurring XTR subscription covers daily meals, vet check-ups, and a warm place to rest. Join the cause! 🐾',
                                     currency: 'XTR',
                                     // Bot-defined invoice payload, 1-128 bytes. This will not be displayed to the user, use it for your internal processes.
                                     payload: '30day_bronze_cat_care_subscription',
                                     prices: JSON.stringify([
-                                        { label: 'Donate 100 XTR', amount: 100 }
+                                        { label: 'Subscribe to Care (1000 XTR/Month)', amount: 1000 }
                                     ]),
                                     photo_url: EMD.LOGO_PNG_URL,
                                     photo_width: 240,
@@ -6064,20 +7375,228 @@ EMD.DonationCampaign = {
                                     subscription_periods: 2592000 // 30 days in seconds
                                 }
                             }
-                        ])
-                    ],
-                    ['_invoice_link_result_',
-                        // default (en)
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: 'Your invoice link has been created successfully! You can share this link with others to facilitate donations for our Cat Donation Campaign. 🐱❤️\n\n'
-                                    + 'Invoice Link: {{invoice_link}}\n\n',
-                                parse_mode: 'HTML'
+                        ]),
+                        // es
+                        JSON.stringify([
+                            {
+                                method: 'createInvoiceLink',
+                                payload: {
+                                    title: 'Suscripción de Cuidado Felino 30 Días 😻',
+                                    description: '¡Conviértete en un \'Guardián Felino\' mensual y asegura 30 días de apoyo continuo y vital a un gato callejero! Tu suscripción recurrente en XTR cubre comidas diarias, chequeos veterinarios y un lugar cálido para descansar. ¡Únete a la causa! 🐾',
+                                    currency: 'XTR',
+                                    payload: '30day_bronze_cat_care_subscription',
+                                    prices: JSON.stringify([
+                                        { label: 'Suscribirse para Cuidar (1000 XTR/Mes)', amount: 1000 }
+                                    ]),
+                                    photo_url: EMD.LOGO_PNG_URL,
+                                    photo_width: 240,
+                                    protect_content: false,
+                                    allow_paid_broadcast: false,
+                                    subscription_periods: 2592000
+                                }
                             }
-                        }])
-                    ],
-                    ['---- 🛍️ STORE AUTOMATION SAMPLE DATA END ----']
+                        ]),
+                        // fr
+                        JSON.stringify([
+                            {
+                                method: 'createInvoiceLink',
+                                payload: {
+                                    title: 'Abonnement Soins Chat 30 Jours 😻',
+                                    description: 'Devenez un \'Gardien de Chat\' mensuel et assurez 30 jours de soutien continu et vital à un chat errant! Votre abonnement XTR récurrent couvre les repas quotidiens, les visites vétérinaires et un endroit chaud pour se reposer. Rejoignez la cause ! 🐾',
+                                    currency: 'XTR',
+                                    payload: '30day_bronze_cat_care_subscription',
+                                    prices: JSON.stringify([
+                                        { label: 'S\'abonner aux Soins (1000 XTR/Mois)', amount: 1000 }
+                                    ]),
+                                    photo_url: EMD.LOGO_PNG_URL,
+                                    photo_width: 240,
+                                    protect_content: false,
+                                    allow_paid_broadcast: false,
+                                    subscription_periods: 2592000
+                                }
+                            }
+                        ]),
+                        // ar
+                        JSON.stringify([
+                            {
+                                method: 'createInvoiceLink',
+                                payload: {
+                                    title: 'اشتراك رعاية القطط 30 يومًا 😻',
+                                    description: 'كن \'حارس قطط\' شهريًا واضمن لقطة ضالة 30 يومًا من الدعم المستمر والمنقذ للحياة! يغطي اشتراك XTR المتكرر وجبات يومية وفحوصات بيطرية ومكانًا دافئًا للراحة. انضم للقضية! 🐾',
+                                    currency: 'XTR',
+                                    payload: '30day_bronze_cat_care_subscription',
+                                    prices: JSON.stringify([
+                                        { label: 'الاشتراك في الرعاية (1000 XTR/شهر)', amount: 1000 }
+                                    ]),
+                                    photo_url: EMD.LOGO_PNG_URL,
+                                    photo_width: 240,
+                                    protect_content: false,
+                                    allow_paid_broadcast: false,
+                                    subscription_periods: 2592000
+                                }
+                            }
+                        ]),
+                        // de
+                        JSON.stringify([
+                            {
+                                method: 'createInvoiceLink',
+                                payload: {
+                                    title: '30-Tage Katzenpflege-Abo 😻',
+                                    description: 'Werden Sie ein monatlicher \'Katzenwächter\' und sichern Sie einer streunenden Katze 30 Tage lang kontinuierliche, lebensrettende Unterstützung! Ihr wiederkehrendes XTR-Abo deckt tägliche Mahlzeiten, Tierarztchecks und einen warmen Ruheplatz ab. Machen Sie mit! 🐾',
+                                    currency: 'XTR',
+                                    payload: '30day_bronze_cat_care_subscription',
+                                    prices: JSON.stringify([
+                                        { label: 'Abonnieren Sie die Pflege (1000 XTR/Monat)', amount: 1000 }
+                                    ]),
+                                    photo_url: EMD.LOGO_PNG_URL,
+                                    photo_width: 240,
+                                    protect_content: false,
+                                    allow_paid_broadcast: false,
+                                    subscription_periods: 2592000
+                                }
+                            }
+                        ]),
+                        // it
+                        JSON.stringify([
+                            {
+                                method: 'createInvoiceLink',
+                                payload: {
+                                    title: 'Abbonamento Cura Gatto 30 Giorni 😻',
+                                    description: 'Diventa un \'Guardiano dei Gatti\' mensile e assicurati 30 giorni di supporto continuo e vitale per un gatto randagio! Il tuo abbonamento XTR ricorrente copre pasti giornalieri, controlli veterinari e un posto caldo dove riposare. Unisciti alla causa! 🐾',
+                                    currency: 'XTR',
+                                    payload: '30day_bronze_cat_care_subscription',
+                                    prices: JSON.stringify([
+                                        { label: 'Abbonati alla Cura (1000 XTR/Mese)', amount: 1000 }
+                                    ]),
+                                    photo_url: EMD.LOGO_PNG_URL,
+                                    photo_width: 240,
+                                    protect_content: false,
+                                    allow_paid_broadcast: false,
+                                    subscription_periods: 2592000
+                                }
+                            }
+                        ]),
+                        // pt
+                        JSON.stringify([
+                            {
+                                method: 'createInvoiceLink',
+                                payload: {
+                                    title: 'Assinatura Cuidado Gato 30 Dias 😻',
+                                    description: 'Torne-se um \'Guardião de Gatos\' mensal e garanta 30 dias de apoio contínuo e vital a um gato de rua! Sua assinatura XTR recorrente cobre refeições diárias, check-ups veterinários e um lugar quente para descansar. Junte-se à causa! 🐾',
+                                    currency: 'XTR',
+                                    payload: '30day_bronze_cat_care_subscription',
+                                    prices: JSON.stringify([
+                                        { label: 'Assinar para Cuidar (1000 XTR/Mês)', amount: 1000 }
+                                    ]),
+                                    photo_url: EMD.LOGO_PNG_URL,
+                                    photo_width: 240,
+                                    protect_content: false,
+                                    allow_paid_broadcast: false,
+                                    subscription_periods: 2592000
+                                }
+                            }
+                        ]),
+                        // ru
+                        JSON.stringify([
+                            {
+                                method: 'createInvoiceLink',
+                                payload: {
+                                    title: 'Подписка на 30 дней ухода за кошкой 😻',
+                                    description: 'Станьте ежемесячным «Хранителем кошек» и обеспечьте бездомной кошке 30 дней непрерывной, жизненно важной поддержки! Ваша регулярная подписка XTR покрывает ежедневное питание, ветеринарные осмотры и теплое место для отдыха. Присоединяйтесь к делу! 🐾',
+                                    currency: 'XTR',
+                                    payload: '30day_bronze_cat_care_subscription',
+                                    prices: JSON.stringify([
+                                        { label: 'Подписаться на Уход (1000 XTR/Месяц)', amount: 1000 }
+                                    ]),
+                                    photo_url: EMD.LOGO_PNG_URL,
+                                    photo_width: 240,
+                                    protect_content: false,
+                                    allow_paid_broadcast: false,
+                                    subscription_periods: 2592000
+                                }
+                            }
+                        ]),
+                        // zh
+                        JSON.stringify([
+                            {
+                                method: 'createInvoiceLink',
+                                payload: {
+                                    title: '30天猫咪护理订阅 😻',
+                                    description: '成为每月的“猫咪守护者”，确保一只流浪猫获得30天持续、救命的支持！您的定期 XTR 订阅涵盖每日餐食、兽医检查和温暖的休息场所。加入我们吧！🐾',
+                                    currency: 'XTR',
+                                    payload: '30day_bronze_cat_care_subscription',
+                                    prices: JSON.stringify([
+                                        { label: '订阅护理 (1000 XTR/月)', amount: 1000 }
+                                    ]),
+                                    photo_url: EMD.LOGO_PNG_URL,
+                                    photo_width: 240,
+                                    protect_content: false,
+                                    allow_paid_broadcast: false,
+                                    subscription_periods: 2592000
+                                }
+                            }
+                        ]),
+                        // ja
+                        JSON.stringify([
+                            {
+                                method: 'createInvoiceLink',
+                                payload: {
+                                    title: '30日間の猫ケア定期購読 😻',
+                                    description: '毎月の「猫の守護者」になり、野良猫に30日間の継続的な救命支援を保証してください！定期的なXTR購読は、毎日の食事、獣医の診察、暖かい休息場所をカバーします。この活動に参加しましょう！🐾',
+                                    currency: 'XTR',
+                                    payload: '30day_bronze_cat_care_subscription',
+                                    prices: JSON.stringify([
+                                        { label: 'ケアを購読 (1000 XTR/月)', amount: 1000 }
+                                    ]),
+                                    photo_url: EMD.LOGO_PNG_URL,
+                                    photo_width: 240,
+                                    protect_content: false,
+                                    allow_paid_broadcast: false,
+                                    subscription_periods: 2592000
+                                }
+                            }
+                        ]),
+                        // ko
+                        JSON.stringify([
+                            {
+                                method: 'createInvoiceLink',
+                                payload: {
+                                    title: '30일 고양이 관리 구독 😻',
+                                    description: '매월 \'고양이 수호자\'가 되어 길고양이에게 30일 동안 지속적이고 생명을 구하는 지원을 보장하세요! 귀하의 정기적인 XTR 구독은 매일 식사, 수의사 검진, 따뜻한 쉴 곳을 제공합니다. 캠페인에 참여하세요! 🐾',
+                                    currency: 'XTR',
+                                    payload: '30day_bronze_cat_care_subscription',
+                                    prices: JSON.stringify([
+                                        { label: '관리를 구독 (1000 XTR/월)', amount: 1000 }
+                                    ]),
+                                    photo_url: EMD.LOGO_PNG_URL,
+                                    photo_width: 240,
+                                    protect_content: false,
+                                    allow_paid_broadcast: false,
+                                    subscription_periods: 2592000
+                                }
+                            }
+                        ]),
+                        // he
+                        JSON.stringify([
+                            {
+                                method: 'createInvoiceLink',
+                                payload: {
+                                    title: 'מנוי לטיפול בחתול 30 יום 😻',
+                                    description: 'הפוך ל\'שומר חתולים\' חודשי והבטח לחתול רחוב 30 ימי תמיכה מתמשכת ומצילת חיים! מנוי XTR החוזר שלך מכסה ארוחות יומיות, בדיקות וטרינר ומקום חם למנוחה. הצטרף למטרה! 🐾',
+                                    currency: 'XTR',
+                                    payload: '30day_bronze_cat_care_subscription',
+                                    prices: JSON.stringify([
+                                        { label: 'הירשם לטיפול (1000 XTR/חודש)', amount: 1000 }
+                                    ]),
+                                    photo_url: EMD.LOGO_PNG_URL,
+                                    photo_width: 240,
+                                    protect_content: false,
+                                    allow_paid_broadcast: false,
+                                    subscription_periods: 2592000
+                                }
+                            }
+                        ])
+                    ]
                 ]
         }
     }
