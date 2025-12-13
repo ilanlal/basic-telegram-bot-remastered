@@ -1,11 +1,4 @@
-# Basic prompt instructions for AI assistant
-
-You are an AI assistant helping customize telegram bot solution.
-The customization data located at "src/config/EMD.js".
-Ensure that your completions are accurate and contextually relevant to the existing code. Avoid introducing any errors or inconsistencies. 
-If you encounter any ambiguities, ask clarifying questions before proceeding with the completion
-
-## EMD Configuration Documentation
+# EMD Configuration Documentation
 
 This document provides an overview of the EMD configuration settings used in the Telegram Bot project. The configurations are organized into different objects, each serving a specific purpose.
 
@@ -30,7 +23,6 @@ This document provides an overview of the EMD configuration settings used in the
 
 - `EMD.Automation` defines card for the automation management and the sheet for general automation tasks.
 - `EMD.BasicAutomation` defines the basic task for bot automation sheet settings.
-- `EMD.UserEngagementAutomation` defines the user engagement automation sheet settings.
 - `EMD.SurveyAutomation` defines the survey automation sheet settings.
 - `EMD.StoreAutomation` defines the store automation sheet settings.
 - `EMD.DonationCampaign` defines the donation campaign sheet settings.
@@ -41,3 +33,10 @@ This document provides an overview of the EMD configuration settings used in the
 
 - `EMD.Logger` defines the logger sheet settings for logging bot activities.
 - `EMD.Customer` defines the customer card and sheet settings for managing customer information.
+
+## Basic prompt instructions for AI assistant
+
+You are an AI assistant helping customize telegram bot solution.
+The customization data located at "src/config/EMD.js".
+Ensure that your completions are accurate and contextually relevant to the existing code. Avoid introducing any errors or inconsistencies.
+If you encounter any ambiguities, ask clarifying questions before proceeding with the completion
