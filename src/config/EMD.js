@@ -569,10 +569,13 @@ EMD.BotSetup = {
     },
     sheet: (data = {}) => {
         return {
+            // Sheet name for Bot Setup
             name: '🤖 Bot',
+            // Columns for the Bot Setup sheet (in multiple languages, including default). The first column is the key.
             columns: ['key', 'default', 'en', 'es', 'fr', 'ar', 'de', 'it', 'pt', 'ru', 'zh', 'ja', 'ko', 'he'],
+            // Sample data for the Bot settings (setMyName, setMyDescription, setMyShortDescription, setMyCommands), in multiple languages;
             sample_data: [
-                // Bot name; 0-64 characters. Pass an empty string to remove the dedicated name for the given language.
+                // setMyName; 0-64 characters.
                 ['name',
                     // default (en)
                     '🤖 Bot Hub, Private, Secure, Easy to use',
@@ -600,7 +603,7 @@ EMD.BotSetup = {
                     '🤖 봇 허브, 개인용, 안전함, 사용하기 쉬움',
                     // he
                     '🤖 מרכז בוטים, פרטי, מאובטח, קל לשימוש'],
-                // Short description of the bot; 0-120 characters. Pass an empty string to remove the dedicated short description for the given language.
+                // setMyShortDescription; 0-120 characters.
                 ['short_description',
                     // default (en)
                     'What bot can do? Take a journey with this bot, explore its features!',
@@ -628,7 +631,7 @@ EMD.BotSetup = {
                     '봇은 무엇을 할 수 있나요? 이 봇과 함께 여행을 떠나 그 기능을 탐험해보세요!',
                     // he
                     'מה הבוט יכול לעשות? צא למסע עם הבוט הזה, חקור את התכונות שלו!'],
-                // Description of the bot; 0-512 characters. Pass an empty string to remove the dedicated description for the given language.
+                // setMyDescription; 0-512 characters.
                 ['description',
                     // default (en)
                     'Telegram Bots are secure and private channels ideal marketing tools within customer relationship management (CRM) systems. \n\n'
@@ -681,10 +684,8 @@ EMD.BotSetup = {
                     // he
                     'בוטים של טלגרם הם ערוצים מאובטחים ופרטיים, כלים שיווקיים אידיאליים בתוך מערכות ניהול קשרי לקוחות (CRM). \n\n'
                     + 'קדם את הסחורות והשירותים שלך, שלח התראות, ערוך סקרים ועוד!\n\n'
-                    + 'קבץ את הלקוחות שלך, צור ערוצי תקשורת ממוקדים ואינטראקציה עם הקהל שלך כמו שמעולם לא היה לפני כן!\n\n']
-                ,
-                // A JSON-serialized list of bot commands to be set as the list of the bot's commands.
-                // At most 100 commands can be specified.
+                    + 'קבץ את הלקוחות שלך, צור ערוצי תקשורת ממוקדים ואינטראקציה עם הקהל שלך כמו שמעולם לא היה לפני כן!\n\n'],
+                // setMyCommands; Each command is represented by an object with 'command' and 'description' fields.
                 ['commands',
                     // default (en)
                     JSON.stringify(
