@@ -38,11 +38,11 @@ describe('BotModel', () => {
         test('should find value by key', () => {
             // reply is array of actions like {method: 'sendMessage', payload: {...}}
             const text = model.getValue('name', 'es');
-            expect(text).toBe(EMD.BotSetup.sheet({}).sample_data[0][2]);
+            expect(text).toBe(EMD.BotSetup.sheet({}).sample_data[0][3]); // Spanish name
         });
 
         test('should return null for non-existing key', () => {
-            const reply = model.getValue('[NON_EXISTING_KEY]', 'default');
+            const reply = model.getValue('[NON_EXISTING_KEY]', 'en');
             expect(reply).toBeNull();
         });
     });

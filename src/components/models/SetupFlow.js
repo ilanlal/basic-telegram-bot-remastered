@@ -93,8 +93,14 @@ class SetupFlow {
                 throw new Error(`Name for language "${language_code}" is empty`);
             }
 
-            // set bot name
-            const response = this.telegramBotClient.setMyName({ name: text, language_code });
+            let response = null;
+            if (language_code === 'default' || language_code === '') {
+                // set default name
+                response = this.telegramBotClient.setMyName({ name: text });
+            } else {
+                // set bot name for specific language
+                response = this.telegramBotClient.setMyName({ name: text, language_code });
+            }
 
             // check response
             if (response.getResponseCode() !== 200) {
@@ -116,8 +122,13 @@ class SetupFlow {
                 throw new Error(`Description for language "${language_code}" is empty`);
             }
 
+            let response = null;
             // set bot name
-            const response = this.telegramBotClient.setMyDescription({ description: text, language_code });
+            if (language_code === 'default' || language_code === '') {
+                response = this.telegramBotClient.setMyDescription({ description: text });
+            } else {
+                response = this.telegramBotClient.setMyDescription({ description: text, language_code });
+            }
 
             // check response
             if (response.getResponseCode() !== 200) {
@@ -139,8 +150,13 @@ class SetupFlow {
                 throw new Error(`Short description for language "${language_code}" is empty`);
             }
 
+            let response = null;
             // set bot short description
-            const response = this.telegramBotClient.setMyShortDescription({ short_description: text, language_code });
+            if (language_code === 'default' || language_code === '') {
+                response = this.telegramBotClient.setMyShortDescription({ short_description: text });
+            } else {
+                response = this.telegramBotClient.setMyShortDescription({ short_description: text, language_code });
+            }
 
             // check response
             if (response.getResponseCode() !== 200) {
@@ -164,8 +180,12 @@ class SetupFlow {
 
             // set bot commands
             const parsedCommands = JSON.parse(text);
-            const response = this.telegramBotClient.setMyCommands({ commands: parsedCommands, language_code });
-
+            let response = null;
+            if (language_code === 'default' || language_code === '') {
+                response = this.telegramBotClient.setMyCommands({ commands: parsedCommands });
+            } else {
+                response = this.telegramBotClient.setMyCommands({ commands: parsedCommands, language_code });
+            }
             // check response
             if (response.getResponseCode() !== 200) {
                 throw new Error("Failed to set bot commands");
