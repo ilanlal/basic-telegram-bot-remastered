@@ -17,7 +17,7 @@ EMD.BIG_TIME_IMG_URL = 'https://raw.githubusercontent.com/ilanlal/basic-telegram
 EMD.PEACH_IMG_URL = 'https://raw.githubusercontent.com/ilanlal/basic-telegram-bot-remastered/main/assets/bitmoji-20190109115654.webp';
 EMD.HAVE_A_NICE_DAY_IMG_URL = 'https://raw.githubusercontent.com/ilanlal/basic-telegram-bot-remastered/main/assets/bitmoji-20190528070956.webp';
 EMD.I_AM_THINKING_IMG_URL = 'https://raw.githubusercontent.com/ilanlal/basic-telegram-bot-remastered/main/assets/bitmoji-20190109115627.webp';
-EMD.WHAIT_FOR_IT_IMG_URL = 'https://raw.githubusercontent.com/ilanlal/basic-telegram-bot-remastered/main/assets/bitmoji-20190528070537.webp';
+EMD.WAIT_FOR_IT_IMG_URL = 'https://raw.githubusercontent.com/ilanlal/basic-telegram-bot-remastered/main/assets/bitmoji-20190528070537.webp';
 EMD.YES_IMG_URL = 'https://raw.githubusercontent.com/ilanlal/basic-telegram-bot-remastered/main/assets/bitmoji-20190528070629.webp';
 EMD.PAY_ATTENTION_IMG_URL = 'https://raw.githubusercontent.com/ilanlal/basic-telegram-bot-remastered/main/assets/bitmoji-20190528070905.webp';
 EMD.KISS_IMG_URL = 'https://raw.githubusercontent.com/ilanlal/basic-telegram-bot-remastered/main/assets/bitmoji-20190109115813.webp';
@@ -5947,6 +5947,7 @@ EMD.ApiFeaturesAutomation = {
                         JSON.stringify([
                             { "next": "#remove_keyboard" },
                             { "next": "#send_sample_media_group" },
+                            { "next": "#send_end_of_session_message" },
                             { "next": "#append_api_features_keyboard" },
                         ])
                     ],
@@ -6074,43 +6075,45 @@ EMD.ApiFeaturesAutomation = {
                     ['#send_sample_photo',
                         // default (en)
                         JSON.stringify([
-                            {
+                            {   // sendPhoto
                                 method: 'sendPhoto',
                                 payload: {
-                                    caption: 'This is a sample photo sent using the Send Photo API feature. \n\n'
-                                        + 'In about 3 seconds, I will edit the caption to demonstrate the Edit Message Caption API feature. \n\n',
-                                    photo: EMD.WHAIT_FOR_IT_IMG_URL,
+                                    caption: 'Welcome to the sample photo demonstration! \n\n'
+                                        + 'This is a sample photo sent using the Send Photo API feature. \n\n'
+                                        + 'In about 3 seconds, I will edit the caption to demonstrate the Edit Message Caption API feature.\n\n',
+                                    photo: EMD.PEACH_IMG_URL,
                                     parse_mode: 'HTML',
                                     has_spoiler: false,
                                     protect_content: true,
                                     disable_notification: true
                                 }
                             },
-                            {
+                            {  // editMessageMedia after delay
                                 delay_ms: 3000,
-                                method: 'editMessageCaption',
+                                method: 'editMessageMedia',
                                 payload: {
                                     caption: 'This is a sample photo sent using the Send Photo API feature. \n\n'
                                         + 'The caption has been edited after a 3 second delay to demonstrate the Edit Message Caption API feature.\n\n'
                                         + 'Now, In about 3 seconds, I will edit the photo to demonstrate the Edit Message Media API feature.',
                                     parse_mode: 'HTML',
+                                    media: EMD.WAIT_FOR_IT_IMG_URL,
                                     has_spoiler: false,
                                     protect_content: true,
                                     disable_notification: true
                                 }
                             },
-                            {
+                            {   // editMessageMedia after delay
                                 delay_ms: 3000,
                                 method: 'editMessageMedia',
                                 payload: {
                                     media: {
                                         type: 'photo',
-                                        media: EMD.MATH_IMG_URL,
+                                        media: EMD.YOU_GOT_IT_IMG_URL,
                                         caption: 'This is a sample photo sent using the Send Photo API feature. \n\n'
                                             + 'The caption has been edited after a 3 second delay to demonstrate the Edit Message Caption API feature.\n\n'
                                             + 'The photo has also been edited after a 3 second delay to demonstrate the Edit Message Media API feature.',
                                         parse_mode: 'HTML',
-                                        has_spoiler: false,
+                                        has_spoiler: true,
                                         protect_content: true,
                                         disable_notification: true
                                     }
@@ -6126,32 +6129,32 @@ EMD.ApiFeaturesAutomation = {
                                 media: [
                                     {
                                         type: 'photo',
-                                        media: EMD.PEACH_IMG_URL,
-                                        caption: 'Peach Photo 1',
+                                        media: EMD.I_AM_THINKING_IMG_URL,
+                                        caption: 'I Am Thinking Photo 1',
                                         parse_mode: 'HTML',
                                         has_spoiler: false,
                                         show_caption_above_media: false
                                     },
                                     {
                                         type: 'photo',
-                                        media: EMD.KISS_IMG_URL,
-                                        caption: 'Kiss Photo 2',
+                                        media: EMD.HAVE_A_NICE_DAY_IMG_URL,
+                                        caption: 'Have a Nice Day Photo 2',
                                         parse_mode: 'HTML',
                                         has_spoiler: false,
                                         show_caption_above_media: false
                                     },
                                     {
                                         type: 'photo',
-                                        media: EMD.ABOUT_IMG_URL,
-                                        caption: 'About Photo 3',
+                                        media: EMD.BIG_TIME_IMG_URL,
+                                        caption: 'Big Time Photo 3',
                                         parse_mode: 'HTML',
                                         has_spoiler: false,
                                         show_caption_above_media: false
                                     },
                                     {
                                         type: 'photo',
-                                        media: EMD.HELP_IMG_URL,
-                                        caption: 'Help Photo 4',
+                                        media: EMD.YOU_GOT_IT_IMG_URL,
+                                        caption: 'You Got It Photo 4',
                                         parse_mode: 'HTML',
                                         has_spoiler: false,
                                         show_caption_above_media: false
@@ -6174,8 +6177,16 @@ EMD.ApiFeaturesAutomation = {
                                     },
                                     {
                                         type: 'photo',
-                                        media: EMD.I_AM_THINKING_IMG_URL,
-                                        caption: 'I Am Thinking Photo 7',
+                                        media: EMD.PAY_ATTENTION_IMG_URL,
+                                        caption: 'Pay Attention Photo 7',
+                                        parse_mode: 'HTML',
+                                        has_spoiler: true,
+                                        show_caption_above_media: false
+                                    },
+                                    {
+                                        type: 'photo',
+                                        media: EMD.THANK_YOU_IMG_URL,
+                                        caption: 'Thank You Photo 8',
                                         parse_mode: 'HTML',
                                         has_spoiler: true,
                                         show_caption_above_media: false
@@ -6196,30 +6207,31 @@ EMD.ApiFeaturesAutomation = {
                                         + 'You can interact with the buttons below to see how reply markups work in Telegram Bots.\n\n'
                                         + '<blockquote expandable>About InlineKeyboardMarkup:\n\n'
                                         + 'This object represents an inline keyboard that appears right next to the message it belongs to.\n\n</blockquote>\n\n'
-                                        + '1. In this example, I have added an inline keyboard with a button that echoes when pressed.\n\n'
-                                        + '2. In about 3 seconds, I will edit this message to add more keys to the keyboard below.\n\n'
-                                        + '3. Continuing with sample, in about 3 seconds, I will edit this message to add even more keys to the keyboard below.\n\n',
+                                        + '1. In this example, I have added an inline keyboard with various color combination buttons.\n'
+                                        + '2. You can explore different combinations by clicking the buttons below.\n',
                                     parse_mode: 'HTML',
                                     reply_markup: {
                                         inline_keyboard: [
                                             [
                                                 { text: "🔴🟢🔵", callback_data: "/echo 🔴🟢🔵" }
+                                            ],
+                                            [
+                                                { text: "🔴", callback_data: "/echo 🔴" },
+                                                { text: "🟢", callback_data: "/echo 🟢" },
+                                                { text: "🔵", callback_data: "/echo 🔵" }
                                             ]
                                         ]
                                     }
                                 }
                             },
-                            {   // editMessageText
+                            {   // sendMessage
                                 delay_ms: 3000,
-                                method: 'editMessageText',
+                                method: 'sendMessage',
                                 payload: {
-                                    text: 'This is a sample message with custom reply markup (keyboard). \n\n'
+                                    text: 'This is another message with custom reply markup (keyboard). \n\n'
                                         + 'You can interact with the buttons below to see how reply markups work in Telegram Bots.\n\n'
-                                        + '<blockquote expandable>About InlineKeyboardMarkup:\n\n'
-                                        + 'This object represents an inline keyboard that appears right next to the message it belongs to.\n\n</blockquote>\n\n'
-                                        + '1. In this example, I have added an inline keyboard with a button that echoes when pressed.\n\n'
-                                        + '2. I have added more keys to the keyboard below.\n\n'
-                                        + '3. Continuing with sample, in about 3 seconds, I will edit this message to add more keys to the keyboard below.\n\n',
+                                        + '1. In this example, I have added an inline keyboard with various color combination buttons.\n'
+                                        + '2. In about 3 seconds, I will send a new message to add even more keys to the keyboard below.\n',
                                     parse_mode: 'HTML',
                                     reply_markup: {
                                         inline_keyboard: [
@@ -6229,22 +6241,15 @@ EMD.ApiFeaturesAutomation = {
                                                 { text: "🟩🟨", callback_data: "/echo 🟩🟨" },
                                             ],
                                             [
-                                                { text: "🟨🟥", callback_data: "/echo 🟨🟥" },
-                                                { text: "🟥🟩", callback_data: "/echo 🟥🟩" },
-                                                { text: "🟩🟦", callback_data: "/echo 🟩🟦" }
-                                            ],
-                                            [
-                                                { text: "🟦🟨", callback_data: "/echo 🟦🟨" },
-                                                { text: "🟨🟥", callback_data: "/echo 🟨🟥" },
-                                                { text: "🟥🟦", callback_data: "/echo 🟥🟦" }
-                                            ],
-                                            [
                                                 { text: "🟥🟩🟦🟨", callback_data: "/echo 🟥🟩🟦🟨" },
                                                 { text: "🟨🟦🟩🟥", callback_data: "/echo 🟨🟦🟩🟥" }
                                             ],
                                             [
-                                                { text: "🟦🟥🟨🟩", callback_data: "/echo 🟦🟥🟨🟩" },
-                                                { text: "🟩🟨🟥🟦", callback_data: "/echo 🟩🟨🟥🟦" }
+                                                { text: "🟨🟥", callback_data: "/echo 🟨🟥" },
+                                                { text: "🟥🟩", callback_data: "/echo 🟥🟩" }
+                                            ],
+                                            [
+                                                { text: "🟦🟥🟨🟩", callback_data: "/echo 🟦🟥🟨🟩" }
                                             ],
                                             [
                                                 { text: "☢️", callback_data: "/echo ☢️" },
@@ -6257,47 +6262,24 @@ EMD.ApiFeaturesAutomation = {
                                     }
                                 }
                             },
-                            {   // editMessageText
+                            {   // sendMessage
                                 delay_ms: 3000,
-                                method: 'editMessageText',
+                                method: 'sendMessage',
                                 payload: {
-                                    text: 'This is a sample message with custom reply markup (keyboard). \n\n'
+                                    text: 'This is new sample message with custom reply markup (keyboard). \n\n'
                                         + 'You can interact with the buttons below to see how reply markups work in Telegram Bots.\n\n'
-                                        + '<blockquote expandable>About InlineKeyboardMarkup:\n\n'
-                                        + 'This object represents an inline keyboard that appears right next to the message it belongs to.\n\n</blockquote>\n\n'
-                                        + '1. In this example, I have added an inline keyboard with a button that echoes when pressed.\n\n'
-                                        + '2. I have added more keys to the keyboard below.\n\n'
-                                        + '3. I have added even more keys to the keyboard below.\n\n',
+                                        + '1. In this example, I have added an inline keyboard with various types of buttons.\n'
+                                        + '2. You can explore different button functionalities by clicking the buttons below.\n',
                                     parse_mode: 'HTML',
                                     reply_markup: {
                                         inline_keyboard: [
                                             [
-                                                { text: "1️⃣", callback_data: "/echo 1️⃣" },
-                                                { text: "2️⃣", callback_data: "/echo 2️⃣" },
-                                                { text: "3️⃣", callback_data: "/echo 3️⃣" }
+                                                { text: "Copy to clipboard", copy_text: { text: "This text has been copied to clipboard!" } }
                                             ],
                                             [
 
-                                                { text: "4️⃣", callback_data: "/echo 4️⃣" },
-                                                { text: "5️⃣", callback_data: "/echo 5️⃣" },
-                                                { text: "6️⃣", callback_data: "/echo 6️⃣" }
-                                            ],
-                                            [
-                                                { text: "7️⃣", callback_data: "/echo 7️⃣" },
-                                                { text: "8️⃣", callback_data: "/echo 8️⃣" },
-                                                { text: "9️⃣", callback_data: "/echo 9️⃣" }
-                                            ],
-                                            [
-                                                { text: "#️⃣", callback_data: "/echo #️⃣" },
-                                                { text: "0️⃣", callback_data: "/echo 0️⃣" },
-                                                { text: "*️⃣", callback_data: "/echo *️⃣" }
-                                            ],
-                                            [
-                                                { text: "☢️", callback_data: "/echo ☢️" },
-                                                { text: "☣️", callback_data: "/echo ☣️" },
-                                                { text: "⚛️", callback_data: "/echo ⚛️" },
-                                                { text: "🛑", callback_data: "/echo 🛑" },
-                                                { text: "🚷", callback_data: "/echo 🚷" }
+                                                { text: "Web app", web_app: { url: "https://easyadm.com" } },
+                                                { text: "Url", url: "https://telegram.org" }
                                             ]
                                         ]
                                     }
