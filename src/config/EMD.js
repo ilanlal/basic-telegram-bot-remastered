@@ -5886,16 +5886,18 @@ EMD.DonationCampaign = {
                         JSON.stringify([{
                             method: 'sendPhoto',
                             payload: {
-                                caption: '🐱❤️ Support Our Feline Friends! ❤️🐱\n\n'
-                                    + 'Dear Cat Lovers,\n\n'
+                                caption: 'Dear Cat Lovers,\n\n'
                                     + 'We hope this message finds you well. As fellow enthusiasts of our feline companions, we are reaching out to share an exciting initiative that aims to make a positive impact on the lives of stray and abandoned cats.\n\n'
                                     + 'We are excited to announce our Cat Donation Campaign, aimed at helping stray and abandoned cats find loving homes and receive the care they deserve.\n\n'
-                                    + 'Join us in making a difference in the lives of stray and abandoned cats. Your generous donation will help provide food, shelter, and medical care to these deserving animals.\n\n',
+                                    + 'Join us in making a difference in the lives of stray and abandoned cats. Your generous donation will help provide food, shelter, and medical care to these deserving animals.\n\n'
+                                    + 'Thank you for your support and compassion towards our feline friends! 🐾🐱❤️',
                                 photo: EMD.YOU_GOT_IT_IMG_URL,
                                 parse_mode: 'HTML',
                                 reply_markup: {
                                     inline_keyboard: [
-                                        [{ text: "💌 Learn More About Our Campaign", callback_data: "#send_2nd_engagement_sample" }],
+                                        [
+                                            { text: "🐾 Learn More", callback_data: "#send_2nd_engagement_sample" }
+                                        ]
                                     ]
                                 }
                             }
@@ -5919,7 +5921,11 @@ EMD.DonationCampaign = {
                                 reply_markup: {
                                     inline_keyboard: [
                                         [{ text: "💝 Donate Now", callback_data: "#send_3rd_engagement_sample" }],
-                                        [{ text: "🏆 Be Active Supporter", callback_data: "#send_3rd_engagement_sample" }]
+                                        [{ text: "👥 Join Our Community", callback_data: "#send_join_community_sample" }],
+                                        [
+                                            { text: "ℹ️ About Us", callback_data: "/about" },
+                                            { text: "🏠 Start", callback_data: "/start" }
+                                        ]
                                     ]
                                 }
                             }
@@ -5939,24 +5945,68 @@ EMD.DonationCampaign = {
                                     payload: 'bronze_supporter', // Custom payload for your reference
                                     currency: 'XTR',
                                     prices: JSON.stringify([
-                                        { label: 'Donate 150 XTR', amount: 150 }
+                                        { label: 'Donate 100 XTR', amount: 100 }
                                     ]),
                                     photo_url: EMD.LOGO_PNG_URL,
-                                    photo_width: 500,
-                                    protect_content: true,
+                                    photo_width: 240,
+                                    protect_content: false,
                                     // Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. 
                                     // The relevant Stars will be withdrawn from the bot's balance.
-                                    allow_paid_broadcast: false,
+                                    allow_paid_broadcast: false
+                                }
+                            }
+                        ])
+                    ],
+                    ['#send_join_community_sample',
+                        // default (en)
+                        JSON.stringify([
+                            {
+                                method: 'sendMessage',
+                                payload: {
+                                    text: '🌟 Thank You for Joining Our Cat Lovers Community! 🌟\n\n'
+                                        + 'Connect with fellow cat enthusiasts, share stories, and stay updated on our Cat Donation Campaign.\n'
+                                        + 'Together, we can make a difference in the lives of stray and abandoned cats!\n\n'
+                                        + 'Join us on Telegram: https://t.me/easyadm_cats_community\n\n'
+                                        + 'We look forward to welcoming you to our community of cat lovers! 🐱❤️',
+                                    parse_mode: 'HTML',
                                     reply_markup: {
                                         inline_keyboard: [
-                                            //[{ text: "🥉 Promote to Bronze Supporter", callback_data: "" }],
-                                            //[{ text: "🥈 Promote to Silver Supporter", callback_data: "/donate" }],
-                                            //[{ text: "🥇 Promote to Gold Supporter", callback_data: "/donate" }],
-                                            [{ text: "🥉 Promote to Platinum Supporter", callback_data: "/donate" }],
-                                            //[{ text: "💎 Promote to Diamond Supporter 100000", callback_data: "/donate" }],
-                                            [{ text: "💝 Donate Now", callback_data: "/donate" }]
+                                            [
+                                                { text: "⛱️ Join our Group", url: "https://t.me/easyadm_cats_community" },
+                                                { text: "📢 Join our Channel", url: "https://t.me/easyadm_cats_channel" }
+                                            ],
+                                            [
+                                                { text: "Report an Issue", url: "https://t.me/easyadm_support_bot" },
+                                                { text: "Social Media", url: "https://easyadm.com/socials" }
+                                            ]
                                         ]
                                     }
+                                }
+                            }
+                        ])
+                    ],
+                    ['/send_invoice_donation_sample',
+                        // default (en)
+                        JSON.stringify([
+                            {   // send ask for donation message
+                                method: 'sendInvoice',
+                                payload: {
+                                    // Product name, 1-32 characters
+                                    title: '🥉 Bronze Supporter',
+                                    // Product description, 1-255 characters
+                                    description: '🙏 Thank You for Considering a Bronze Supporter! 🙏\n\n'
+                                        + 'Your generosity will directly impact the lives of stray and abandoned cats, providing them with the care and support they need to thrive.\n\n',
+                                    payload: 'bronze_supporter', // Custom payload for your reference
+                                    currency: 'XTR',
+                                    prices: JSON.stringify([
+                                        { label: 'Donate 100 XTR', amount: 100 }
+                                    ]),
+                                    photo_url: EMD.LOGO_PNG_URL,
+                                    photo_width: 240,
+                                    protect_content: false,
+                                    // Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. 
+                                    // The relevant Stars will be withdrawn from the bot's balance.
+                                    allow_paid_broadcast: false
                                 }
                             }
                         ])
@@ -5968,19 +6018,18 @@ EMD.DonationCampaign = {
                                 method: 'createInvoiceLink',
                                 payload: {
                                     // Product name, 1-32 characters
-                                    title: '🐾 30 Day | 🥉 Bronze Cat Care 🐾',
+                                    title: '🥉 - Bronze Cat Care - 30 Day',
                                     description: '🐱🥉 Thank You for Considering a Bronze Cat Care Subscription! 🥉🐱\n\n'
                                         + 'By subscribing, you are committing to ongoing support for stray and abandoned cats, ensuring they receive the care and attention they deserve on a regular basis.\n\n',
                                     currency: 'XTR',
                                     // Bot-defined invoice payload, 1-128 bytes. This will not be displayed to the user, use it for your internal processes.
                                     payload: '30day_bronze_cat_care_subscription',
                                     prices: JSON.stringify([
-                                        { label: 'Donate 500 XTR', amount: 500 }
+                                        { label: 'Donate 100 XTR', amount: 100 }
                                     ]),
                                     photo_url: EMD.LOGO_PNG_URL,
-                                    photo_width: 480,
-                                    photo_height: 480,
-                                    protect_content: true,
+                                    photo_width: 240,
+                                    protect_content: false,
                                     allow_paid_broadcast: false,
                                     // The number of seconds the subscription will be active for before the next payment. 
                                     // The currency must be set to “XTR” (Telegram Stars) if the parameter is used. Currently, it must always be 2592000 (30 days) if specified.
