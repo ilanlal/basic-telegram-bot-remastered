@@ -6300,15 +6300,14 @@ EMD.DonationCampaign = {
                             {
                                 method: 'sendMessage',
                                 payload: {
-                                    text: '🐈 Why Your Support Matters (The Details) 🐈\n\n'
-                                        + 'Every cat deserves a chance at a loving life. Our mission is clear: rescue, rehabilitate, and rehome the most vulnerable felines in our community and beyond.\n\n'
-                                        + 'Your contribution directly funds the essentials for their survival and happiness:\n'
-                                        + '1. 🏥 **Life-Saving Medical Care:** Emergency surgeries, vaccinations, and spay/neuter programs.\n'
-                                        + '2. 🥘 **Nourishing Food & Shelter:** High-quality meals and safe, cozy temporary homes.\n'
-                                        + '3. 🤝 **Adoption & Outreach:** Finding their perfect human match and raising awareness.\n\n'
-                                        + 'Global Impact: Our commitment spans the globe, touching the lives of stray cats wherever they need us. \n\n'
-                                        + '🌍 🇪🇸 🇾🇹 🇯🇴 🇮🇱 🇮🇶 🇵🇸 🇫🇷 🇯🇵 🇲🇷 🇷🇺 🇪🇨 🇧🇴 🇧🇩 🇪🇨 🇧🇪 🇭🇰 🇮🇲 🇰🇬 🇲🇹 🇲🇩 🇲🇰 🇳🇱 🇷🇪 🇬🇧 🇵🇹 🇮🇹 🇲🇪 🇰🇬 🇲🇦 🇬🇱 🇦🇴 \n\n'
-                                        + 'Ready to be a Cat Guardian? Donate to save a life, or join us to collaborate as a volunteer! 🌟',
+                                    text: '🐈 The Cat Guardian Pledge: Why We Need You 🐾\n\n'
+                                        + 'We believe every cat deserves a safe, loving life. Our mission is to rescue, rehabilitate, and rehome the most vulnerable felines in need, turning fear into purrs.\n\n'
+                                        + 'Your support directly powers three core pillars of our life-saving work:\n'
+                                        + '1. 🏥 <b>Emergency Care:</b> Funding critical surgeries, vaccinations, and essential spay/neuter programs.\n'
+                                        + '2. 🍲 <b>Nourishment & Shelter:</b> Providing high-quality food, cozy temporary homes, and safety.\n'
+                                        + '3. 🤝 <b>Adoption & Collaboration:</b> Matching cats with their forever homes and mobilizing local volunteers.\n\n'
+                                        + 'We are committed to a global impact, touching the lives of stray cats wherever they need a hand.\n\n'
+                                        + 'Ready to be a Cat Guardian? Choose your role below: Donate to fund a rescue, or Join our Community to collaborate! 🌟',
                                     parse_mode: 'HTML',
                                     reply_markup: {
                                         inline_keyboard: [
@@ -6324,15 +6323,14 @@ EMD.DonationCampaign = {
                             {
                                 method: 'sendMessage',
                                 payload: {
-                                    text: '🐈 Por qué tu Apoyo es Importante (Los Detalles) 🐈\n\n'
-                                        + 'Todo gato merece una oportunidad de una vida amorosa. Nuestra misión es clara: rescatar, rehabilitar y reubicar a los felinos más vulnerables en nuestra comunidad y más allá.\n\n'
-                                        + 'Tu contribución financia directamente lo esencial para su supervivencia y felicidad:\n'
-                                        + '1. 🏥 **Atención Médica Vital:** Cirugías de emergencia, vacunas y programas de esterilización/castración.\n'
-                                        + '2. 🥘 **Alimento Nutritivo y Refugio:** Comidas de alta calidad y hogares temporales seguros y acogedores.\n'
-                                        + '3. 🤝 **Adopción y Difusión:** Encontrar su pareja humana perfecta y crear conciencia.\n\n'
-                                        + 'Impacto Global: Nuestro compromiso se extiende por todo el mundo, tocando las vidas de los gatos callejeros dondequiera que nos necesiten. \n\n'
-                                        + '🌍 🇪🇸 🇾🇹 🇯🇴 🇮🇱 🇮🇶 🇵🇸 🇫🇷 🇯🇵 🇲🇷 🇷🇺 🇪🇨 🇧🇴 🇧🇩 🇪🇨 🇧🇪 🇭🇰 🇮🇲 🇰🇬 🇲🇹 🇲🇩 🇲🇰 🇳🇱 🇷🇪 🇬🇧 🇵🇹 🇮🇹 🇲🇪 🇰🇬 🇲🇦 🇬🇱 🇦🇴 \n\n'
-                                        + '¿Listo para ser un Guardián Felino? ¡Dona para salvar una vida o únete a nosotros para colaborar como voluntario! 🌟',
+                                    text: '🐈 El Compromiso del Guardián Felino: Por Qué Te Necesitamos 🐾\n\n'
+                                        + 'Creemos que cada gato merece una vida segura y amorosa. Nuestra misión es rescatar, rehabilitar y reubicar a los felinos más vulnerables que lo necesiten, transformando el miedo en ronroneos.\n\n'
+                                        + 'Tu apoyo impulsa directamente tres pilares fundamentales de nuestro trabajo para salvar vidas:\n'
+                                        + '1. 🏥 <b>Atención de Emergencia:</b> Financiando cirugías críticas, vacunas y programas esenciales de esterilización/castración.\n'
+                                        + '2. 🍲 <b>Nutrición y Refugio:</b> Proporcionando alimentos de alta calidad, hogares temporales acogedores y seguridad.\n'
+                                        + '3. 🤝 <b>Adopción y Colaboración:</b> Encontrando el hogar perfecto para los gatos y movilizando voluntarios locales.\n\n'
+                                        + 'Estamos comprometidos con un impacto global, ayudando a los gatos callejeros dondequiera que necesiten una mano.\n\n'
+                                        + '¿Listo para ser un Guardián Felino? Elige tu rol a continuación: Dona para financiar un rescate, o Únete a nuestra Comunidad para colaborar! 🌟',
                                     parse_mode: 'HTML',
                                     reply_markup: {
                                         inline_keyboard: [
@@ -6348,20 +6346,19 @@ EMD.DonationCampaign = {
                             {
                                 method: 'sendMessage',
                                 payload: {
-                                    text: '🐈 Pourquoi Votre Soutien Compte (Les Détails) 🐈\n\n'
-                                        + 'Chaque chat mérite une chance d\'avoir une vie pleine d\'amour. Notre mission est claire: sauver, réhabiliter et reloger les félins les plus vulnérables de notre communauté et au-delà.\n\n'
-                                        + 'Votre contribution finance directement les éléments essentiels à leur survie et à leur bonheur:\n'
-                                        + '1. 🏥 **Soins Médicaux Vitaux:** Chirurgies d\'urgence, vaccinations et programmes de stérilisation/castration.\n'
-                                        + '2. 🥘 **Nourriture et Abri:** Repas de haute qualité et foyers temporaires sûrs et douillets.\n'
-                                        + '3. 🤝 **Adoption et Sensibilisation:** Trouver leur partenaire humain idéal et sensibiliser le public.\n\n'
-                                        + 'Impact Mondial: Notre engagement s\'étend au-delà de la communauté locale, touchant la vie des chats errants partout où ils ont besoin de nous. \n\n'
-                                        + '🌍 🇪🇸 🇾🇹 🇯🇴 🇮🇱 🇮🇶 🇵🇸 🇫🇷 🇯🇵 🇲🇷 🇷🇺 🇪🇨 🇧🇴 🇧🇩 🇪🇨 🇧🇪 🇭🇰 🇮🇲 🇰🇬 🇲🇹 🇲🇩 🇲🇰 🇳🇱 🇷🇪 🇬🇧 🇵🇹 🇮🇹 🇲🇪 🇰🇬 🇲🇦 🇬🇱 🇦🇴 \n\n'
-                                        + 'Prêt à devenir un Gardien de Chat? Faites un don pour sauver une vie, ou rejoignez-nous pour collaborer en tant que bénévole! 🌟',
+                                    text: '🐈 L\'Engagement du Gardien de Chat : Pourquoi Nous Avons Besoin de Vous 🐾\n\n'
+                                        + 'Nous croyons que chaque chat mérite une vie sûre et aimante. Notre mission est de secourir, réhabiliter et reloger les félins les plus vulnérables dans le besoin, transformant la peur en ronronnements.\n\n'
+                                        + 'Votre soutien alimente directement trois piliers essentiels de notre travail pour sauver des vies:\n'
+                                        + '1. 🏥 <b>Soins d\'Urgence :</b> Financement des chirurgies critiques, des vaccinations et des programmes essentiels de stérilisation/castration.\n'
+                                        + '2. 🍲 <b>Nourriture & Abri :</b> Fournir des aliments de haute qualité, des foyers temporaires douillets et la sécurité.\n'
+                                        + '3. 🤝 <b>Adoption & Collaboration :</b> Trouver le foyer parfait pour les chats et mobiliser les bénévoles locaux.\n\n'
+                                        + 'Nous nous engageons à avoir un impact mondial, aidant les chats errants partout où ils ont besoin d\'aide.\n\n'
+                                        + 'Prêt à être un Gardien de Chat ? Choisissez votre rôle ci-dessous : Faites un don pour financer un sauvetage, ou Rejoignez notre Communauté pour collaborer ! 🌟',
                                     parse_mode: 'HTML',
                                     reply_markup: {
                                         inline_keyboard: [
                                             [{ text: "💝 Faire un Don Maintenant", callback_data: "/3rd_engagement" }],
-                                            [{ text: "👥 Rejoignez Notre Communauté", callback_data: "/join_our_community" }]
+                                            [{ text: "👥 Rejoindre Notre Communauté", callback_data: "/join_our_community" }]
                                         ]
                                     }
                                 }
@@ -6372,15 +6369,14 @@ EMD.DonationCampaign = {
                             {
                                 method: 'sendMessage',
                                 payload: {
-                                    text: '🐈 لماذا دعمك مهم (التفاصيل) 🐈\n\n'
-                                        + 'كل قط يستحق فرصة لحياة مليئة بالحب. مهمتنا واضحة: إنقاذ، تأهيل، وإعادة توطين القطط الأكثر ضعفاً في مجتمعنا وما وراءه.\n\n'
-                                        + 'مساهمتك تمول مباشرة الأساسيات لبقائهم وسعادتهم:\n'
-                                        + '1. 🏥 **رعاية طبية منقذة للحياة:** عمليات جراحية طارئة، لقاحات، وبرامج تعقيم/إخصاء.\n'
-                                        + '2. 🥘 **طعام مغذٍ ومأوى:** وجبات عالية الجودة ومنازل مؤقتة آمنة ومريحة.\n'
-                                        + '3. 🤝 **تبني وتوعية:** إيجاد الشريك البشري المثالي لهم وزيادة الوعي.\n\n'
-                                        + 'تأثير عالمي: التزامنا يمتد ليشمل العالم، ويلامس حياة القطط الضالة أينما كانوا بحاجة إلينا. \n\n'
-                                        + '🌍 🇪🇸 🇾🇹 🇯🇴 🇮🇱 🇮🇶 🇵🇸 🇫🇷 🇯🇵 🇲🇷 🇷🇺 🇪🇨 🇧🇴 🇧🇩 🇪🇨 🇧🇪 🇭🇰 🇮🇲 🇰🇬 🇲🇹 🇲🇩 🇲🇰 🇳🇱 🇷🇪 🇬🇧 🇵🇹 🇮🇹 🇲🇪 🇰🇬 🇲🇦 🇬🇱 🇦🇴 \n\n'
-                                        + 'هل أنت مستعد لتكون وصياً للقطط؟ تبرع لإنقاذ حياة، أو انضم إلينا للتعاون كمتطوع! 🌟',
+                                    text: '🐈 تعهد حارس القطط: لماذا نحتاج إليك 🐾\n\n'
+                                        + 'نؤمن بأن كل قطة تستحق حياة آمنة ومحبة. مهمتنا هي إنقاذ، تأهيل، وإعادة توطين القطط الأكثر ضعفاً التي تحتاج للمساعدة، وتحويل الخوف إلى مواءات مريحة.\n\n'
+                                        + 'دعمك يغذي مباشرة ثلاثة أعمدة أساسية لعملنا المنقذ للحياة:\n'
+                                        + '1. 🏥 <b>رعاية طارئة:</b> تمويل العمليات الجراحية الحيوية، اللقاحات، وبرامج التعقيم/الخصي الأساسية.\n'
+                                        + '2. 🍲 <b>تغذية ومأوى:</b> توفير طعام عالي الجودة، ومنازل مؤقتة دافئة وآمنة.\n'
+                                        + '3. 🤝 <b>تبني وتعاون:</b> مطابقة القطط مع منازلها الأبدية وتعبئة المتطوعين المحليين.\n\n'
+                                        + 'نحن ملتزمون بتأثير عالمي، نلامس حياة القطط الضالة أينما احتاجت إلى مساعدة.\n\n'
+                                        + 'هل أنت مستعد لتكون حارس قطط؟ اختر دورك أدناه: تبرع لتمويل عملية إنقاذ، أو انضم إلى مجتمعنا للتعاون! 🌟',
                                     parse_mode: 'HTML',
                                     reply_markup: {
                                         inline_keyboard: [
@@ -6396,15 +6392,14 @@ EMD.DonationCampaign = {
                             {
                                 method: 'sendMessage',
                                 payload: {
-                                    text: '🐈 Warum Ihre Unterstützung zählt (Die Details) 🐈\n\n'
-                                        + 'Jede Katze verdient die Chance auf ein liebevolles Leben. Unsere Mission ist klar: Rettung, Rehabilitation und Vermittlung der am stärksten gefährdeten Katzen in unserer Gemeinschaft und darüber hinaus.\n\n'
-                                        + 'Ihre Spende finanziert direkt das Wesentliche für ihr Überleben und Glück:\n'
-                                        + '1. 🏥 **Lebensrettende medizinische Versorgung:** Notoperationen, Impfungen und Kastrations-/Sterilisationsprogramme.\n'
-                                        + '2. 🥘 **Nahrhaftes Futter & Unterkunft:** Hochwertige Mahlzeiten und sichere, gemütliche temporäre Unterkünfte.\n'
-                                        + '3. 🤝 **Adoption & Öffentlichkeitsarbeit:** Finden ihres perfekten menschlichen Partners und Sensibilisierung.\n\n'
-                                        + 'Globaler Einfluss: Unser Engagement erstreckt sich weltweit und berührt das Leben von streunenden Katzen, wo immer sie uns brauchen. \n\n'
-                                        + '🌍 🇪🇸 🇾🇹 🇯🇴 🇮🇱 🇮🇶 🇵🇸 🇫🇷 🇯🇵 🇲🇷 🇷🇺 🇪🇨 🇧🇴 🇧🇩 🇪🇨 🇧🇪 🇭🇰 🇮🇲 🇰🇬 🇲🇹 🇲🇩 🇲🇰 🇳🇱 🇷🇪 🇬🇧 🇵🇹 🇮🇹 🇲🇪 🇰🇬 🇲🇦 🇬🇱 🇦🇴 \n\n'
-                                        + 'Bereit, ein Katzenwächter zu sein? Spenden Sie, um ein Leben zu retten, oder schließen Sie sich uns an, um als Freiwilliger mitzuarbeiten! 🌟',
+                                    text: '🐈 Das Katzenwächter-Versprechen: Warum wir Sie brauchen 🐾\n\n'
+                                        + 'Wir glauben, dass jede Katze ein sicheres, liebevolles Leben verdient. Unsere Mission ist es, die schutzbedürftigsten Katzen in Not zu retten, zu rehabilitieren und neu zu vermitteln, um Angst in Schnurren zu verwandeln.\n\n'
+                                        + 'Ihre Unterstützung treibt direkt drei Kernpfeiler unserer lebensrettenden Arbeit an:\n'
+                                        + '1. 🏥 <b>Notfallversorgung:</b> Finanzierung kritischer Operationen, Impfungen und essentieller Kastrations-/Sterilisationsprogramme.\n'
+                                        + '2. 🍲 <b>Nahrung & Unterkunft:</b> Bereitstellung von hochwertigem Futter, gemütlichen Übergangsheimen und Sicherheit.\n'
+                                        + '3. 🤝 <b>Adoption & Zusammenarbeit:</b> Vermittlung von Katzen in ihr endgültiges Zuhause und Mobilisierung lokaler Freiwilliger.\n\n'
+                                        + 'Wir engagieren uns für eine globale Wirkung und helfen streunenden Katzen, wo immer sie eine helfende Hand brauchen.\n\n'
+                                        + 'Bereit, ein Katzenwächter zu sein? Wählen Sie Ihre Rolle unten: Spenden Sie, um eine Rettung zu finanzieren, oder treten Sie unserer Community bei, um zusammenzuarbeiten! 🌟',
                                     parse_mode: 'HTML',
                                     reply_markup: {
                                         inline_keyboard: [
@@ -6420,15 +6415,14 @@ EMD.DonationCampaign = {
                             {
                                 method: 'sendMessage',
                                 payload: {
-                                    text: '🐈 Perché il tuo Supporto è Importante (I Dettagli) 🐈\n\n'
-                                        + 'Ogni gatto merita una possibilità di una vita amorevole. La nostra missione è chiara: salvare, riabilitare e trovare casa ai felini più vulnerabili nella nostra comunità e oltre.\n\n'
-                                        + 'Il tuo contributo finanzia direttamente l\'essenziale per la loro sopravvivenza e felicità:\n'
-                                        + '1. 🏥 **Cure Mediche Salvavita:** Interventi chirurgici d\'emergenza, vaccinazioni e programmi di sterilizzazione/castrazione.\n'
-                                        + '2. 🥘 **Cibo Nutriente e Rifugio:** Pasti di alta qualità e rifugi temporanei sicuri e accoglienti.\n'
-                                        + '3. 🤝 **Adozione e Sensibilizzazione:** Trovare il loro partner umano perfetto e sensibilizzare.\n\n'
-                                        + 'Impatto Globale: Il nostro impegno si estende a livello globale, toccando la vita dei gatti randagi ovunque abbiano bisogno di noi. \n\n'
-                                        + '🌍 🇪🇸 🇾🇹 🇯🇴 🇮🇱 🇮🇶 🇵🇸 🇫🇷 🇯🇵 🇲🇷 🇷🇺 🇪🇨 🇧🇴 🇧🇩 🇪🇨 🇧🇪 🇭🇰 🇮🇲 🇰🇬 🇲🇹 🇲🇩 🇲🇰 🇳🇱 🇷🇪 🇬🇧 🇵🇹 🇮🇹 🇲🇪 🇰🇬 🇲🇦 🇬🇱 🇦🇴 \n\n'
-                                        + 'Pronto per essere un Guardiano di Gatti? Dona per salvare una vita o unisciti a noi per collaborare come volontario! 🌟',
+                                    text: '🐈 L\'Impegno del Guardiano dei Gatti: Perché Abbiamo Bisogno di Te 🐾\n\n'
+                                        + 'Crediamo che ogni gatto meriti una vita sicura e amorevole. La nostra missione è salvare, riabilitare e trovare casa ai felini più vulnerabili, trasformando la paura in fusa.\n\n'
+                                        + 'Il tuo supporto alimenta direttamente tre pilastri fondamentali del nostro lavoro per salvare vite:\n'
+                                        + '1. 🏥 <b>Cure d\'Emergenza:</b> Finanziamento di interventi chirurgici critici, vaccinazioni e programmi essenziali di sterilizzazione/castrazione.\n'
+                                        + '2. 🍲 <b>Nutrimento e Rifugio:</b> Fornitura di cibo di alta qualità, case temporanee accoglienti e sicurezza.\n'
+                                        + '3. 🤝 <b>Adozione e Collaborazione:</b> Abbinamento dei gatti con le loro case per sempre e mobilitazione dei volontari locali.\n\n'
+                                        + 'Ci impegniamo per un impatto globale, toccando le vite dei gatti randagi ovunque abbiano bisogno di aiuto.\n\n'
+                                        + 'Pronto a essere un Guardiano dei Gatti? Scegli il tuo ruolo qui sotto: Dona per finanziare un salvataggio, o Unisciti alla nostra Comunità per collaborare! 🌟',
                                     parse_mode: 'HTML',
                                     reply_markup: {
                                         inline_keyboard: [
@@ -6444,19 +6438,18 @@ EMD.DonationCampaign = {
                             {
                                 method: 'sendMessage',
                                 payload: {
-                                    text: '🐈 Por que o Seu Apoio é Importante (Os Detalhes) 🐈\n\n'
-                                        + 'Todo gato merece uma chance de uma vida amorosa. Nossa missão é clara: resgatar, reabilitar e realojar os felinos mais vulneráveis em nossa comunidade e além.\n\n'
-                                        + 'Sua contribuição financia diretamente os elementos essenciais para sua sobrevivência e felicidade:\n'
-                                        + '1. 🏥 **Cuidados Médicos Vitais:** Cirurgias de emergência, vacinas e programas de esterilização/castração.\n'
-                                        + '2. 🥘 **Alimento Nutritivo e Abrigo:** Refeições de alta qualidade e lares temporários seguros e aconchegantes.\n'
-                                        + '3. 🤝 **Adoção e Divulgação:** Encontrar seu par humano perfeito e aumentar a conscientização.\n\n'
-                                        + 'Impacto Global: Nosso compromisso se estende globalmente, tocando a vida de gatos vadios onde quer que eles precisem de nós. \n\n'
-                                        + '🌍 🇪🇸 🇾🇹 🇯🇴 🇮🇱 🇮🇶 🇵🇸 🇫🇷 🇯🇵 🇲🇷 🇷🇺 🇪🇨 🇧🇴 🇧🇩 🇪🇨 🇧🇪 🇭🇰 🇮🇲 🇰🇬 🇲🇹 🇲🇩 🇲🇰 🇳🇱 🇷🇪 🇬🇧 🇵🇹 🇮🇹 🇲🇪 🇰🇬 🇲🇦 🇬🇱 🇦🇴 \n\n'
-                                        + 'Pronto para ser um Guardião de Gatos? Doe para salvar uma vida ou junte-se a nós para colaborar como voluntário! 🌟',
+                                    text: '🐈 O Compromisso do Guardião de Gatos: Por Que Precisamos de Você 🐾\n\n'
+                                        + 'Acreditamos que todo gato merece uma vida segura e amorosa. Nossa missão é resgatar, reabilitar e realojar os felinos mais vulneráveis em necessidade, transformando o medo em ronronos.\n\n'
+                                        + 'Seu apoio impulsiona diretamente três pilares essenciais do nosso trabalho de salvar vidas:\n'
+                                        + '1. 🏥 <b>Cuidados de Emergência:</b> Financiamento de cirurgias críticas, vacinação e programas essenciais de esterilização/castração.\n'
+                                        + '2. 🍲 <b>Nutrição e Abrigo:</b> Fornecimento de alimentos de alta qualidade, lares temporários aconchegantes e segurança.\n'
+                                        + '3. 🤝 <b>Adoção e Colaboração:</b> Encontrar o lar permanente perfeito para os gatos e mobilizar voluntários locais.\n\n'
+                                        + 'Estamos comprometidos com um impacto global, alcançando a vida de gatos de rua onde quer que precisem de uma mão.\n\n'
+                                        + 'Pronto para ser um Guardião de Gatos? Escolha seu papel abaixo: Doe para financiar um resgate, ou Junte-se à nossa Comunidade para colaborar! 🌟',
                                     parse_mode: 'HTML',
                                     reply_markup: {
                                         inline_keyboard: [
-                                            [{ text: "💝 Doar Agora", callback_data: "/3rd_engagement" }],
+                                            [{ text: "💝 Doe Agora", callback_data: "/3rd_engagement" }],
                                             [{ text: "👥 Junte-se à Nossa Comunidade", callback_data: "/join_our_community" }]
                                         ]
                                     }
@@ -6468,20 +6461,19 @@ EMD.DonationCampaign = {
                             {
                                 method: 'sendMessage',
                                 payload: {
-                                    text: '🐈 Почему Ваша Поддержка Важна (Подробности) 🐈\n\n'
-                                        + 'Каждая кошка заслуживает шанса на любящую жизнь. Наша миссия ясна: спасти, реабилитировать и найти дом самым уязвимым кошкам в нашем сообществе и за его пределами.\n\n'
-                                        + 'Ваш вклад напрямую финансирует необходимое для их выживания и счастья:\n'
-                                        + '1. 🏥 **Жизненно важная медицинская помощь:** Экстренные операции, вакцинация и программы стерилизации/кастрации.\n'
-                                        + '2. 🥘 **Питательный корм и приют:** Высококачественное питание и безопасные, уютные временные дома.\n'
-                                        + '3. 🤝 **Усыновление и Просвещение:** Поиск идеального человеческого партнера и повышение осведомленности.\n\n'
-                                        + 'Глобальное воздействие: Наше обязательство распространяется по всему миру, касаясь жизней бездомных кошек везде, где мы нужны. \n\n'
-                                        + '🌍 🇪🇸 🇾🇹 🇯🇴 🇮🇱 🇮🇶 🇵🇸 🇫🇷 🇯🇵 🇲🇷 🇷🇺 🇪🇨 🇧🇴 🇧🇩 🇪🇨 🇧🇪 🇭🇰 🇮🇲 🇰🇬 🇲🇹 🇲🇩 🇲🇰 🇳🇱 🇷🇪 🇬🇧 🇵🇹 🇮🇹 🇲🇪 🇰🇬 🇲🇦 🇬🇱 🇦🇴 \n\n'
-                                        + 'Готовы стать Кошачьим Хранителем? Пожертвуйте, чтобы спасти жизнь, или присоединяйтесь к нам, чтобы сотрудничать в качестве волонтера! 🌟',
+                                    text: '🐈 Обещание Хранителя Кошек: Почему мы нуждаемся в Вас 🐾\n\n'
+                                        + 'Мы верим, что каждая кошка заслуживает безопасной и любящей жизни. Наша миссия — спасать, реабилитировать и пристраивать самых уязвимых кошек, превращая страх в мурлыканье.\n\n'
+                                        + 'Ваша поддержка напрямую питает три ключевых столпа нашей спасательной работы:\n'
+                                        + '1. 🏥 <b>Экстренная помощь:</b> Финансирование критических операций, вакцинации и основных программ стерилизации/кастрации.\n'
+                                        + '2. 🍲 <b>Питание и приют:</b> Предоставление высококачественного корма, уютных временных домов и безопасности.\n'
+                                        + '3. 🤝 <b>Усыновление и сотрудничество:</b> Поиск идеальной семьи для кошек и мобилизация местных волонтеров.\n\n'
+                                        + 'Мы стремимся к глобальному воздействию, помогая бездомным кошкам везде, где нужна помощь.\n\n'
+                                        + 'Готовы стать Хранителем Кошек? Выберите свою роль ниже: Сделайте пожертвование для финансирования спасения или Присоединяйтесь к нашему Сообществу для сотрудничества! 🌟',
                                     parse_mode: 'HTML',
                                     reply_markup: {
                                         inline_keyboard: [
                                             [{ text: "💝 Пожертвовать сейчас", callback_data: "/3rd_engagement" }],
-                                            [{ text: "👥 Присоединяйтесь к нашему сообществу", callback_data: "/join_our_community" }]
+                                            [{ text: "👥 Присоединиться к нашему сообществу", callback_data: "/join_our_community" }]
                                         ]
                                     }
                                 }
@@ -6492,15 +6484,14 @@ EMD.DonationCampaign = {
                             {
                                 method: 'sendMessage',
                                 payload: {
-                                    text: '🐈 为什么您的支持至关重要（详情） 🐈\n\n'
-                                        + '每只猫都应该有机会过上充满爱的生活。我们的使命很明确：拯救、康复并为我们社区及其他地区最脆弱的猫科动物找到新家。\n\n'
-                                        + '您的捐款直接资助了它们生存和幸福的必需品：\n'
-                                        + '1. 🏥 **救命医疗护理：** 紧急手术、疫苗接种和绝育/去势计划。\n'
-                                        + '2. 🥘 **营养食物和住所：** 高质量的餐食和安全、舒适的临时住所。\n'
-                                        + '3. 🤝 **领养与宣传：** 找到它们完美的人类伴侣并提高公众意识。\n\n'
-                                        + '全球影响：我们的承诺遍及全球，无论流浪猫在哪里需要我们，我们都会伸出援手。 \n\n'
-                                        + '🌍 🇪🇸 🇾🇹 🇯🇴 🇮🇱 🇮🇶 🇵🇸 🇫🇷 🇯🇵 🇲🇷 🇷🇺 🇪🇨 🇧🇴 🇧🇩 🇪🇨 🇧🇪 🇭🇰 🇮🇲 🇰🇬 🇲🇹 🇲🇩 🇲🇰 🇳🇱 🇷🇪 🇬🇧 🇵🇹 🇮🇹 🇲🇪 🇰🇬 🇲🇦 🇬🇱 🇦🇴 \n\n'
-                                        + '准备好成为一名猫咪守护者了吗？捐款以拯救生命，或加入我们以志愿者身份合作！🌟',
+                                    text: '🐈 猫咪守护者承诺：为什么我们需要您 🐾\n\n'
+                                        + '我们相信每只猫都值得拥有一个安全、充满爱的生活。我们的使命是拯救、康复和重新安置社区内外最弱势的猫科动物，将恐惧转化为咕噜声。\n\n'
+                                        + '您的支持直接驱动我们救生工作的三个核心支柱:\n'
+                                        + '1. 🏥 <b>紧急护理：</b> 资助关键手术、疫苗接种和必要的绝育/阉割计划。\n'
+                                        + '2. 🍲 <b>营养与住所：</b> 提供高质量的食物、舒适的临时住所和安全保障。\n'
+                                        + '3. 🤝 <b>领养与协作：</b> 为猫咪找到它们永远的家，并动员本地志愿者。\n\n'
+                                        + '我们致力于产生全球影响，在流浪猫最需要帮助的地方伸出援手。\n\n'
+                                        + '准备好成为一名猫咪守护者了吗？请在下方选择您的角色：捐款以资助一次救援，或加入我们的社区进行协作！🌟',
                                     parse_mode: 'HTML',
                                     reply_markup: {
                                         inline_keyboard: [
@@ -6516,15 +6507,14 @@ EMD.DonationCampaign = {
                             {
                                 method: 'sendMessage',
                                 payload: {
-                                    text: '🐈 なぜあなたの支援が重要なのか（詳細） 🐈\n\n'
-                                        + 'すべての猫は愛情に満ちた生活を送るチャンスに値します。私たちの使命は明確です。私たちのコミュニティやその他の地域で最も弱い立場にある猫を救助し、リハビリし、新しい家を見つけることです。\n\n'
-                                        + 'あなたの貢献は、彼らの生存と幸福に不可欠なものに直接資金を提供します：\n'
-                                        + '1. 🏥 **救命医療：** 緊急手術、ワクチン接種、避妊・去勢プログラム。\n'
-                                        + '2. 🥘 **栄養のある食べ物とシェルター：** 高品質の食事と安全で居心地の良い一時的な家。\n'
-                                        + '3. 🤝 **里親探しとアウトリーチ：** 彼らの完璧な人間のパートナーを見つけ、意識を高めること。\n\n'
-                                        + '世界的な影響：私たちの取り組みは世界中に広がり、私たちを必要としている場所ならどこでも野良猫の生活に触れています。 \n\n'
-                                        + '🌍 🇪🇸 🇾🇹 🇯🇴 🇮🇱 🇮🇶 🇵🇸 🇫🇷 🇯🇵 🇲🇷 🇷🇺 🇪🇨 🇧🇴 🇧🇩 🇪🇨 🇧🇪 🇭🇰 🇮🇲 🇰🇬 🇲🇹 🇲🇩 🇲🇰 🇳🇱 🇷🇪 🇬🇧 🇵🇹 🇮🇹 🇲🇪 🇰🇬 🇲🇦 🇬🇱 🇦🇴 \n\n'
-                                        + '猫の守護者になる準備はできていますか？命を救うために寄付をするか、ボランティアとして私たちに参加し、協力してください！🌟',
+                                    text: '🐈 猫の守護者の誓い：なぜあなたが必要なのか 🐾\n\n'
+                                        + '私たちはすべての猫が安全で愛情ある生活を送る価値があると信じています。私たちの使命は、最も弱い立場の猫を救助し、リハビリし、新しい家に迎えることです。恐怖を喉を鳴らす音に変えましょう。\n\n'
+                                        + 'あなたの支援は、私たちの命を救う活動の3つの核となる柱を直接支えます:\n'
+                                        + '1. 🏥 <b>緊急医療：</b> 重要な手術、予防接種、必須の不妊・去勢プログラムに資金を提供します。\n'
+                                        + '2. 🍲 <b>栄養とシェルター：</b> 高品質の食事、居心地の良い一時的な家、そして安全を提供します。\n'
+                                        + '3. 🤝 <b>里親探しと協力：</b> 猫と永遠の家族を結びつけ、地元のボランティアを動員します。\n\n'
+                                        + '私たちはグローバルな影響を与えることにコミットし、助けが必要な場所ならどこでも野良猫の命に触れています。\n\n'
+                                        + '猫の守護者になる準備はできましたか？以下からあなたの役割を選んでください：寄付で救助を支援するか、私たちのコミュニティに参加して協力しましょう！🌟',
                                     parse_mode: 'HTML',
                                     reply_markup: {
                                         inline_keyboard: [
@@ -6540,20 +6530,19 @@ EMD.DonationCampaign = {
                             {
                                 method: 'sendMessage',
                                 payload: {
-                                    text: '🐈 당신의 지원이 중요한 이유 (세부 사항) 🐈\n\n'
-                                        + '모든 고양이는 사랑스러운 삶을 누릴 기회를 가질 자격이 있습니다. 우리의 임무는 분명합니다. 우리 지역 사회와 그 너머에서 가장 취약한 고양이들을 구조하고, 재활시키고, 새 보금자리를 찾아주는 것입니다.\n\n'
-                                        + '당신의 기여는 그들의 생존과 행복에 필수적인 요소에 직접적으로 자금을 지원합니다:\n'
-                                        + '1. 🏥 **생명을 구하는 의료:** 응급 수술, 예방 접종 및 중성화/불임 수술 프로그램.\n'
-                                        + '2. 🥘 **영양가 있는 음식 및 쉼터:** 고품질 식사와 안전하고 아늑한 임시 보호소.\n'
-                                        + '3. 🤝 **입양 및 홍보:** 그들의 완벽한 인간 파트너를 찾고 인식을 높이는 것.\n\n'
-                                        + '글로벌 영향: 우리의 약속은 전 세계적으로 뻗어 있으며, 도움이 필요한 곳이라면 어디든 길고양이들의 삶에 영향을 미치고 있습니다. \n\n'
-                                        + '🌍 🇪🇸 🇾🇹 🇯🇴 🇮🇱 🇮🇶 🇵🇸 🇫🇷 🇯🇵 🇲🇷 🇷🇺 🇪🇨 🇧🇴 🇧🇩 🇪🇨 🇧🇪 🇭🇰 🇮🇲 🇰🇬 🇲🇹 🇲🇩 🇲🇰 🇳🇱 🇷🇪 🇬🇧 🇵🇹 🇮🇹 🇲🇪 🇰🇬 🇲🇦 🇬🇱 🇦🇴 \n\n'
-                                        + '고양이 수호자가 될 준비가 되셨습니까? 생명을 구하기 위해 기부하거나, 자원 봉사자로 협력하기 위해 우리와 함께하세요! 🌟',
+                                    text: '🐈 고양이 수호자의 서약: 왜 당신이 필요한가요 🐾\n\n'
+                                        + '우리는 모든 고양이가 안전하고 사랑받는 삶을 누릴 자격이 있다고 믿습니다. 우리의 임무는 가장 취약한 고양이를 구조하고, 재활시키고, 입양시키는 것입니다. 두려움을 골골송으로 바꿔주세요.\n\n'
+                                        + '당신의 지원은 우리의 생명을 구하는 작업의 세 가지 핵심 기둥을 직접적으로 지원합니다:\n'
+                                        + '1. 🏥 <b>응급 치료:</b> 중요한 수술, 예방 접종, 필수적인 중성화/불임 수술 프로그램에 자금을 지원합니다.\n'
+                                        + '2. 🍲 <b>영양 및 쉼터:</b> 고품질 사료, 아늑한 임시 보호소 및 안전을 제공합니다.\n'
+                                        + '3. 🤝 <b>입양 및 협력:</b> 고양이와 평생 가족을 연결하고 지역 자원 봉사자를 동원합니다.\n\n'
+                                        + '우리는 도움이 필요한 길고양이들의 삶에 영향을 미치기 위해 전 세계적인 영향력을 발휘하기 위해 노력하고 있습니다.\n\n'
+                                        + '고양이 수호자가 될 준비가 되셨나요? 아래에서 역할을 선택하세요: 구조 자금을 기부하거나 커뮤니티에 참여하여 협력하세요! 🌟',
                                     parse_mode: 'HTML',
                                     reply_markup: {
                                         inline_keyboard: [
                                             [{ text: "💝 지금 기부하기", callback_data: "/3rd_engagement" }],
-                                            [{ text: "👥 우리 커뮤니티에 참여하세요", callback_data: "/join_our_community" }]
+                                            [{ text: "👥 우리 커뮤니티에 참여", callback_data: "/join_our_community" }]
                                         ]
                                     }
                                 }
@@ -6564,15 +6553,14 @@ EMD.DonationCampaign = {
                             {
                                 method: 'sendMessage',
                                 payload: {
-                                    text: '🐈 למה התמיכה שלך חשובה (הפרטים) 🐈\n\n'
-                                        + 'לכל חתול מגיעה הזדמנות לחיים אוהבים. המשימה שלנו ברורה: להציל, לשקם ולמצוא בתים לחתולים הפגיעים ביותר בקהילה שלנו ומחוצה לה.\n\n'
-                                        + 'התרומה שלך מממנת ישירות את הדברים החיוניים להישרדותם ואושרם:\n'
-                                        + '1. 🏥 **טיפול רפואי מציל חיים:** ניתוחי חירום, חיסונים ותוכניות עיקור/סירוס.\n'
-                                        + '2. 🥘 **מזון מזין ומחסה:** ארוחות איכותיות ומקלטים זמניים בטוחים ונוחים.\n'
-                                        + '3. 🤝 **אימוץ והסברה:** מציאת בן הזוג האנושי המושלם עבורם והגברת המודעות.\n\n'
-                                        + 'השפעה גלובלית: המחויבות שלנו משתרעת ברחבי העולם, ונוגעת לחייהם של חתולי רחוב בכל מקום שהם זקוקים לנו. \n\n'
-                                        + '🌍 🇪🇸 🇾🇹 🇯🇴 🇮🇱 🇮🇶 🇵🇸 🇫🇷 🇯🇵 🇲🇷 🇷🇺 🇪🇨 🇧🇴 🇧🇩 🇪🇨 🇧🇪 🇭🇰 🇮🇲 🇰🇬 🇲🇹 🇲🇩 🇲🇰 🇳🇱 🇷🇪 🇬🇧 🇵🇹 🇮🇹 🇲🇪 🇰🇬 🇲🇦 🇬🇱 🇦🇴 \n\n'
-                                        + 'מוכן להיות שומר חתולים? תרום כדי להציל חיים, או הצטרף אלינו כדי לשתף פעולה כמתנדב! 🌟',
+                                    text: '🐈 הבטחת שומר החתולים: למה אנחנו זקוקים לך 🐾\n\n'
+                                        + 'אנו מאמינים שלכל חתול מגיע חיים בטוחים ואוהבים. המשימה שלנו היא להציל, לשקם ולמצוא בית לחתולים הפגיעים ביותר הזקוקים לעזרה, ולהפוך פחד לגרגורים.\n\n'
+                                        + 'התמיכה שלך מניעה ישירות שלושה עמודי ליבה של עבודתנו להצלת חיים:\n'
+                                        + '1. 🏥 <b>טיפול רפואי דחוף:</b> מימון ניתוחים קריטיים, חיסונים ותוכניות עיקור/סירוס חיוניות.\n'
+                                        + '2. 🍲 <b>תזונה ומחסה:</b> אספקת מזון איכותי, בתים זמניים נעימים וביטחון.\n'
+                                        + '3. 🤝 <b>אימוץ ושיתוף פעולה:</b> מציאת ההתאמה האנושית המושלמת לחתולים וגיוס מתנדבים מקומיים.\n\n'
+                                        + 'אנו מחויבים להשפעה גלובלית, נוגעים בחייהם של חתולי רחוב בכל מקום שהם זקוקים ליד עוזרת.\n\n'
+                                        + 'מוכנים להיות שומר חתולים? בחר את תפקידך למטה: תרום כדי לממן הצלה, או הצטרף לקהילה שלנו כדי לשתף פעולה! 🌟',
                                     parse_mode: 'HTML',
                                     reply_markup: {
                                         inline_keyboard: [
