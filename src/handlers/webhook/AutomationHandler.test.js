@@ -26,6 +26,7 @@ describe('AutomationHandler', () => {
         };
 
         const sendMessgeUrl = `https://api.telegram.org/bot${dummyToken}/sendMessage`;
+        const sendPhotoUrl = `https://api.telegram.org/bot${dummyToken}/sendPhoto`;
         const editMessageReplyMarkupUrl = `https://api.telegram.org/bot${dummyToken}/editMessageReplyMarkup`;
 
 
@@ -35,6 +36,12 @@ describe('AutomationHandler', () => {
                     result: {
                         message_id: 1,
                     }
+                })));
+
+        UrlFetchAppStubConfiguration.when(sendPhotoUrl)
+            .return(new HttpResponse()
+                .setContentText(JSON.stringify({
+                    result: true
                 })));
 
         UrlFetchAppStubConfiguration.when(editMessageReplyMarkupUrl)
