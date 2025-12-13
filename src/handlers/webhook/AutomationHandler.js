@@ -37,6 +37,34 @@ class AutomationHandler {
             // Update localReplyToMessageId for chaining actions that depend on previous message
             const actionContent = JSON.parse(lastActionResult);
             localReplyToMessageId = actionContent.result?.message_id || localReplyToMessageId;
+            // handle createInvoiceLink  (log the link)  
+            if (action.method?.startsWith('createInvoiceLink')) {
+                LoggerModel.create(this._userProperties, this._activeSpreadsheet)
+                    .logEvent({
+                        dc: 'automation_action',
+                        action: action?.method || '_no_method_',
+                        chat_id: chat_id || '0000',
+                        content: lastActionResult || 'no_content',
+                        event: `${actionContent.result || 'No link'}`
+                    });
+
+                // response _invoice_link_result_ action with the link
+                const linkActions = this.findActionsForQuery('_invoice_link_result_', language_code);
+                if (linkActions.length > 0) {
+                    linkActions.forEach((linkActionResult) => {
+                        // replace {{invoice_link}} in payload with actual link
+                        if (linkActionResult.payload) {
+                            for (const key in linkActionResult.payload) {
+                                if (typeof linkActionResult.payload[key] === 'string') {
+                                    linkActionResult.payload[key] = linkActionResult.payload[key].replace('{{invoice_link}}', actionContent.result || 'about:blank');
+                                }
+                            }
+                        }
+                        this.executeAction(chat_id, linkActionResult);
+                    });
+                }
+
+            }
         });
 
         // For testing purposes, return a simple status        
@@ -111,8 +139,9 @@ class AutomationHandler {
         if (response?.getResponseCode() !== 200) {
             throw new Error(`Failed to execute action ${uriAction}: ${response?.getContentText() || 'No response'}`);
         }
+        const responseContent = response.getContentText() || null;
 
-        return response.getContentText();
+        return responseContent;
     }
 
     findActionsForQuery(query, language_code) {

@@ -5929,18 +5929,31 @@ EMD.DonationCampaign = {
                         // default (en)
                         JSON.stringify([
                             {   // send ask for donation message
-                                method: 'sendMessage',
+                                method: 'sendInvoice',
                                 payload: {
-                                    text: '🙏 Thank You for Considering a Donation! 🙏\n\n'
-                                        + 'Your support means the world to us and the cats we care for. Every donation, no matter the size, helps us continue our mission to provide a better life for stray and abandoned cats.\n\n',
-                                    parse_mode: 'HTML',
+                                    // Product name, 1-32 characters
+                                    title: '🥉 Bronze Supporter',
+                                    // Product description, 1-255 characters
+                                    description: '🙏 Thank You for Considering a Bronze Supporter! 🙏\n\n'
+                                        + 'Your generosity will directly impact the lives of stray and abandoned cats, providing them with the care and support they need to thrive.\n\n',
+                                    payload: 'bronze_supporter', // Custom payload for your reference
+                                    currency: 'XTR',
+                                    prices: JSON.stringify([
+                                        { label: 'Donate 150 XTR', amount: 150 }
+                                    ]),
+                                    photo_url: EMD.LOGO_PNG_URL,
+                                    photo_width: 500,
+                                    protect_content: true,
+                                    // Pass True to allow up to 1000 messages per second, ignoring broadcasting limits for a fee of 0.1 Telegram Stars per message. 
+                                    // The relevant Stars will be withdrawn from the bot's balance.
+                                    allow_paid_broadcast: false,
                                     reply_markup: {
                                         inline_keyboard: [
-                                            [{ text: "🥉 Promote to Bronze Supporter", callback_data: "/donate" }],
-                                            [{ text: "🥈 Promote to Silver Supporter", callback_data: "/donate" }],
-                                            [{ text: "🥇 Promote to Gold Supporter", callback_data: "/donate" }],
+                                            //[{ text: "🥉 Promote to Bronze Supporter", callback_data: "" }],
+                                            //[{ text: "🥈 Promote to Silver Supporter", callback_data: "/donate" }],
+                                            //[{ text: "🥇 Promote to Gold Supporter", callback_data: "/donate" }],
                                             [{ text: "🥉 Promote to Platinum Supporter", callback_data: "/donate" }],
-                                            [{ text: "💎 Promote to Diamond Supporter 100000", callback_data: "/donate" }],
+                                            //[{ text: "💎 Promote to Diamond Supporter 100000", callback_data: "/donate" }],
                                             [{ text: "💝 Donate Now", callback_data: "/donate" }]
                                         ]
                                     }
@@ -5948,20 +5961,41 @@ EMD.DonationCampaign = {
                             }
                         ])
                     ],
-                    ['/send_donate_now_options',
+                    ['/create_invoice_link',
+                        // default (en)
+                        JSON.stringify([
+                            {   // create invoice link for 30 day bronze cat care subscription
+                                method: 'createInvoiceLink',
+                                payload: {
+                                    // Product name, 1-32 characters
+                                    title: '🐾 30 Day | 🥉 Bronze Cat Care 🐾',
+                                    description: '🐱🥉 Thank You for Considering a Bronze Cat Care Subscription! 🥉🐱\n\n'
+                                        + 'By subscribing, you are committing to ongoing support for stray and abandoned cats, ensuring they receive the care and attention they deserve on a regular basis.\n\n',
+                                    currency: 'XTR',
+                                    // Bot-defined invoice payload, 1-128 bytes. This will not be displayed to the user, use it for your internal processes.
+                                    payload: '30day_bronze_cat_care_subscription',
+                                    prices: JSON.stringify([
+                                        { label: 'Donate 500 XTR', amount: 500 }
+                                    ]),
+                                    photo_url: EMD.LOGO_PNG_URL,
+                                    photo_width: 480,
+                                    photo_height: 480,
+                                    protect_content: true,
+                                    allow_paid_broadcast: false,
+                                    // The number of seconds the subscription will be active for before the next payment. 
+                                    // The currency must be set to “XTR” (Telegram Stars) if the parameter is used. Currently, it must always be 2592000 (30 days) if specified.
+                                    subscription_periods: 2592000 // 30 days in seconds
+                                }
+                            }
+                        ])
+                    ],
+                    ['_invoice_link_result_',
                         // default (en)
                         JSON.stringify([{
                             method: 'sendMessage',
                             payload: {
-                                text: '🐾 About Our Cat Donation Campaign 🐾\n\n'
-                                    + 'Our mission is to provide care and support for stray and abandoned cats in our community. With your help, we can make a significant impact on their lives.\n\n'
-                                    + 'Funds raised through this campaign will be used for:\n'
-                                    + '1. Providing nutritious food and clean water.\n'
-                                    + '2. Offering medical care and vaccinations.\n'
-                                    + '3. Creating safe shelters for stray cats.\n\n'
-                                    + 'Global Reach: Our campaign extends beyond local communities, aiming to support stray cats worldwide.\n\n'
-                                    + '🌍 🇪🇸 🇾🇹 🇯🇴 🇮🇱 🇮🇶 🇵🇸 🇫🇷 🇯🇵 🇲🇷 🇷🇺 🇪🇨 🇧🇴 🇧🇩 🇪🇨 🇧🇪 🇭🇰 🇮🇲 🇰🇬 🇲🇹 🇲🇩 🇲🇰 🇳🇱 🇷🇪 🇬🇧 🇵🇹 🇮🇹 🇲🇪 🇰🇬 🇲🇦 🇬🇱 🇦🇴 \n\n'
-                                    + 'Every contribution, big or small, makes a difference. Thank you for your support! 🐱❤️',
+                                text: 'Your invoice link has been created successfully! You can share this link with others to facilitate donations for our Cat Donation Campaign. 🐱❤️\n\n'
+                                    + 'Invoice Link: {{invoice_link}}\n\n',
                                 parse_mode: 'HTML'
                             }
                         }])
