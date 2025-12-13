@@ -930,7 +930,7 @@ EMD.Automation = {
             },
             sections:
                 [
-                    { // Basic Automation Section
+                    {   // Basic Automation Section
                         // header: 'Automation Management',
                         collapsible: false,
                         numUncollapsibleWidgets: 0,
@@ -948,7 +948,7 @@ EMD.Automation = {
                                         onClick: {
                                             functionName: 'EntityHandler.Addon.onBindSheetDataClick',
                                             parameters: {
-                                                entityName: 'BasicAutomation'
+                                                entityName: EMD.BasicAutomation.entityName
                                             }
                                         }
                                     }
@@ -956,25 +956,24 @@ EMD.Automation = {
                             }
                         ]
                     },
-                    { // Add Store Automation template section
-                        // header: 'Automation Management',
+                    {   // 🐱❤️ Support Our Feline Friends! ❤️🐱
                         collapsible: false,
                         numUncollapsibleWidgets: 0,
                         widgets: [
                             {
-                                id: 'create_store_automation_widget',
+                                id: 'create_donation_campaign_widget',
                                 DecoratedText: {
-                                    topLabel: '💰 Store',
-                                    text: 'Add store automation templates to manage your store-related tasks efficiently.',
-                                    bottomLabel: 'Bind store template data to get started with store automations',
+                                    topLabel: '🐱❤️',
+                                    text: 'Support Our Feline Friends! ❤️🐱\n\nHelp us make a difference in the lives of stray and abandoned cats. Your generous donation will provide food, shelter, and medical care to these deserving animals. Together, we can create a better future for our furry friends. Thank you for your kindness and support!',
+                                    bottomLabel: 'Join us in our mission to care for cats in need.',
                                     wrapText: false,
                                     textButton: {
-                                        text: '💰 Store Template',
+                                        text: '🐱❤️ Donation Template',
                                         disabled: false,
                                         onClick: {
                                             functionName: 'EntityHandler.Addon.onBindSheetDataClick',
                                             parameters: {
-                                                entityName: 'StoreAutomation'
+                                                entityName: EMD.DonationCampaign.entityName
                                             }
                                         }
                                     }
@@ -982,33 +981,7 @@ EMD.Automation = {
                             }
                         ]
                     },
-                    { // Add Survey Automation template section
-                        // header: 'Automation Management',
-                        collapsible: false,
-                        numUncollapsibleWidgets: 0,
-                        widgets: [
-                            {
-                                id: 'create_survey_automation_widget',
-                                DecoratedText: {
-                                    topLabel: '📋 Survey',
-                                    text: 'Add survey automation templates to manage your survey-related tasks efficiently.',
-                                    bottomLabel: 'Bind survey template data to get started with survey automations',
-                                    wrapText: false,
-                                    textButton: {
-                                        text: '📋 Survey Template',
-                                        disabled: false,
-                                        onClick: {
-                                            functionName: 'EntityHandler.Addon.onBindSheetDataClick',
-                                            parameters: {
-                                                entityName: 'SurveyAutomation'
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        ]
-                    },
-                    { // Add Api Automation template section
+                    {   // Add Api Automation template section
                         // header: 'Automation Management',
                         collapsible: false,
                         numUncollapsibleWidgets: 0,
@@ -1026,7 +999,7 @@ EMD.Automation = {
                                         onClick: {
                                             functionName: 'EntityHandler.Addon.onBindSheetDataClick',
                                             parameters: {
-                                                entityName: 'ApiFeatures'
+                                                entityName: EMD.ApiFeaturesAutomation.entityName
                                             }
                                         }
                                     }
@@ -1034,7 +1007,7 @@ EMD.Automation = {
                             }
                         ]
                     },
-                    { // Security Checks Section
+                    {   // Security Checks Section
                         // header: 'Automation Management',
                         collapsible: false,
                         numUncollapsibleWidgets: 0,
@@ -1052,7 +1025,7 @@ EMD.Automation = {
                                         onClick: {
                                             functionName: 'EntityHandler.Addon.onBindSheetDataClick',
                                             parameters: {
-                                                entityName: 'SecurityChecks'
+                                                entityName: EMD.SecurityChecksAutomation.entityName
                                             }
                                         }
                                     }
@@ -1060,25 +1033,25 @@ EMD.Automation = {
                             }
                         ]
                     },
-                    { // Automation Management Section
+                    {   // Add Store Automation template section
                         // header: 'Automation Management',
                         collapsible: false,
                         numUncollapsibleWidgets: 0,
                         widgets: [
                             {
-                                id: 'create_automation_widget',
+                                id: 'create_store_automation_widget',
                                 DecoratedText: {
-                                    topLabel: '⚡ Master',
-                                    text: 'Create automations from predefined templates to get started quickly.',
-                                    bottomLabel: 'Bind template data to get started',
+                                    topLabel: '💰 Store',
+                                    text: 'Add store automation templates to manage your store-related tasks efficiently.',
+                                    bottomLabel: 'Bind store template data to get started with store automations',
                                     wrapText: false,
                                     textButton: {
-                                        text: '⚡ Master Template',
+                                        text: '💰 Store Template',
                                         disabled: false,
                                         onClick: {
                                             functionName: 'EntityHandler.Addon.onBindSheetDataClick',
                                             parameters: {
-                                                entityName: 'Automation'
+                                                entityName: EMD.StoreAutomation.entityName
                                             }
                                         }
                                     }
@@ -1086,7 +1059,33 @@ EMD.Automation = {
                             }
                         ]
                     },
-                    { // clear cache memory section
+                    {   // Add Survey Automation template section
+                        // header: 'Automation Management',
+                        collapsible: false,
+                        numUncollapsibleWidgets: 0,
+                        widgets: [
+                            {
+                                id: 'create_survey_automation_widget',
+                                DecoratedText: {
+                                    topLabel: '📋 Survey',
+                                    text: 'Add survey automation templates to manage your survey-related tasks efficiently.',
+                                    bottomLabel: 'Bind survey template data to get started with survey automations',
+                                    wrapText: false,
+                                    textButton: {
+                                        text: '📋 Survey Template',
+                                        disabled: false,
+                                        onClick: {
+                                            functionName: 'EntityHandler.Addon.onBindSheetDataClick',
+                                            parameters: {
+                                                entityName: EMD.SurveyAutomation.entityName
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    {   // clear cache memory section
                         // header: 'Cache Management',
                         collapsible: true,
                         widgets: [
@@ -5513,35 +5512,21 @@ EMD.SurveyAutomation = {
 
 EMD.StoreAutomation = {
     entityName: 'StoreAutomation',
-    displayName: 'Store Automation',
-    pluralDisplayName: 'Store Automations',
     sheet: (data = {}) => {
         return {
             name: EMD.Automation.sheet(data).name,
             columns: EMD.Automation.sheet(data).columns,
             sample_data:
                 [
-                    ['---- ✨ STORE AUTOMATION SAMPLE DATA START ----']
+                    ['---- ✨ STORE AUTOMATION SAMPLE DATA START ----'],
                     ['/store',
-                    // default (en)
-                    JSON.stringify([{
-                        method: 'sendPhoto',
-                        payload: {
-                            caption: 'Welcome to the Store! Here you can find various products and services.',
-                            photo: "https://www.gstatic.com/webp/gallery/1.jpg",
-                            parse_mode: 'HTML',
-                            reply_markup: {
-                                inline_keyboard: [
-                                    [{ text: "Category A", callback_data: "#categoryA" }],
-                                    [{ text: "Category B", callback_data: "#categoryB" }],
-                                    [{ text: "Category C", callback_data: "#categoryC" }],
-                                    [{ text: "Category D", callback_data: "#categoryD" }],
-                                    [{ text: "Category E", callback_data: "#categoryE" }],
-                                    [{ text: "Home", callback_data: "/start" }]
-                                ]
-                            }
-                        }
-                    }])],
+                        // default (en)
+                        JSON.stringify([
+                            { "next": "#remove_keyboard" },
+                            { "next": "/cats" }
+                        ])
+
+                    ],
                     ['#categoryA',
                         // default (en)
                         JSON.stringify([
@@ -5599,7 +5584,8 @@ EMD.StoreAutomation = {
                                     ]),
                                 }
                             }, { "next": "/store" }
-                        ])],
+                        ])
+                    ],
                     ['#categoryB',
                         // default (en)
                         JSON.stringify([
@@ -5653,8 +5639,9 @@ EMD.StoreAutomation = {
                                         { label: 'Total', amount: 300 } // Amount in smallest units (e.g., cents)
                                     ]),
                                 }
-                            }, { "next": "/store" }
-                        ])],
+                            }
+                        ])
+                    ],
                     ['#categoryC',
                         // default (en)
                         JSON.stringify([
@@ -5679,7 +5666,8 @@ EMD.StoreAutomation = {
                                         { label: 'Total', amount: 1250 } // Amount in smallest units (e.g., cents)
                                     ]),
                                 }
-                            }, {
+                            },
+                            {
                                 method: 'sendInvoice',
                                 payload: {
                                     title: 'Product # 122',
@@ -5708,8 +5696,9 @@ EMD.StoreAutomation = {
                                         { label: 'Total', amount: 1200 } // Amount in smallest units (e.g., cents)
                                     ]),
                                 }
-                            }, { "next": "/store" }
-                        ])],
+                            }
+                        ])
+                    ],
                     ['#categoryD',
                         // default (en)
                         JSON.stringify([
@@ -5734,7 +5723,8 @@ EMD.StoreAutomation = {
                                         { label: 'Total', amount: 123 } // Amount in smallest units (e.g., cents)
                                     ]),
                                 }
-                            }, {
+                            },
+                            {
                                 method: 'sendInvoice',
                                 payload: {
                                     title: 'Product #12',
@@ -5763,81 +5753,25 @@ EMD.StoreAutomation = {
                                         { label: 'Total', amount: 1200 } // Amount in smallest units (e.g., cents)
                                     ]),
                                 }
-                            }, { "next": "/store" }
-                        ])],
+                            }
+                        ])
+                    ],
                     ['#categoryE',
                         // default (en)
-                        JSON.stringify([{
-                            method: 'sendMessage',
-                            payload: {
-                                text: 'Welcome to Category E! Here you can find a variety of products and services tailored to your needs.',
-                                parse_mode: 'HTML'
-                            }
-                        }, {
-                            // send paid media as sample after invoice
-                            method: 'sendPaidMedia',
-                            payload: {
-                                protect_content: true,
-                                star_count: 1000,
-                                media: [
-                                    {
-                                        type: 'photo',
-                                        media: 'https://www.gstatic.com/webp/gallery/1.jpg',
-                                        caption: 'Thank you for your purchase! Here is your paid media content.'
-                                    }
-                                ]
-                            }
-                        },
-                        {
-                            // send paid media as sample after invoice
-                            method: 'sendPaidMedia',
-                            payload: {
-                                protect_content: true,
-                                star_count: 2400,
-                                media: [
-                                    {
-                                        type: 'photo',
-                                        media: 'https://www.gstatic.com/webp/gallery/3.jpg',
-                                        caption: 'Thank you for your purchase! Here is your paid media content.'
-                                    }
-                                ]
-                            }
-                        },
-                        {
-                            // send paid media as sample after invoice
-                            method: 'sendPaidMedia',
-                            payload: {
-                                protect_content: true,
-                                star_count: 1400,
-                                media: [
-                                    {
-                                        type: 'photo',
-                                        media: 'https://www.gstatic.com/webp/gallery/2.jpg',
-                                        caption: 'Thank you for your purchase! Here is your paid media content.'
-                                    }
-                                ]
-                            }
-                        }, { "next": "/store" }])],
-                    ['/payments',
-                        // default (en)
                         JSON.stringify([
-                            {
-                                method: 'sendInvoice',
+                            {   // send welcome message
+                                method: 'sendMessage',
                                 payload: {
-                                    title: 'Sample Product',
-                                    description: 'This is a sample product for demonstration purposes.',
-                                    payload: 'sample_product_payload',
-                                    currency: 'XTR',
-                                    prices: JSON.stringify([
-                                        { label: 'Total', amount: 100 } // amount in the smallest units of the currency (e.g., cents)
-                                    ])
+                                    text: 'Welcome to Category E! Here you can find a variety of products and services tailored to your needs.',
+                                    parse_mode: 'HTML'
                                 }
-                            }, {
+                            },
+                            {
                                 // send paid media as sample after invoice
                                 method: 'sendPaidMedia',
                                 payload: {
                                     protect_content: true,
-                                    star_count: 100,
+                                    star_count: 1000,
                                     media: [
                                         {
                                             type: 'photo',
@@ -5846,8 +5780,193 @@ EMD.StoreAutomation = {
                                         }
                                     ]
                                 }
-                            }])
+                            },
+                            {
+                                // send paid media as sample after invoice
+                                method: 'sendPaidMedia',
+                                payload: {
+                                    protect_content: true,
+                                    star_count: 2400,
+                                    media: [
+                                        {
+                                            type: 'photo',
+                                            media: 'https://www.gstatic.com/webp/gallery/3.jpg',
+                                            caption: 'Thank you for your purchase! Here is your paid media content.'
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                // send paid media as sample after invoice
+                                method: 'sendPaidMedia',
+                                payload: {
+                                    protect_content: true,
+                                    star_count: 1400,
+                                    media: [
+                                        {
+                                            type: 'photo',
+                                            media: 'https://www.gstatic.com/webp/gallery/2.jpg',
+                                            caption: 'Thank you for your purchase! Here is your paid media content.'
+                                        }
+                                    ]
+                                }
+                            }
+                        ])
+                    ],
+                    ['#send_paid_media_sample',
+                        // default (en)
+                        JSON.stringify([
+                            {
+                                // send paid media as sample after invoice
+                                method: 'sendPaidMedia',
+                                payload: {
+                                    protect_content: true,
+                                    star_count: 1000,
+                                    caption: 'Thank you for your purchase! Here is your paid media content.',
+                                    parse_mode: 'HTML',
+                                    disable_notification: false,
+                                    show_caption_above_media: false,
+                                    // A JSON-serialized array describing the media to be sent; up to 10 items
+                                    media: [
+                                        {
+                                            type: 'photo',
+                                            media: EMD.CHEERS_IMG_URL
+                                        }
+                                    ]
+                                }
+                            }
+                        ])
+                    ],
+                    ['#send_invoice_sample',
+                        // default (en)
+                        JSON.stringify([{
+                            method: 'sendInvoice',
+                            payload: {
+                                title: 'Sample Product',
+                                description: 'This is a sample product used to demonstrate the Send Invoice API feature.',
+                                photo_url: EMD.PEACH_IMG_URL,
+                                photo_width: 240,
+                                currency: 'XTR',
+                                payload: 'sample_payload_001', // Custom payload for your reference
+                                prices: JSON.stringify([{ label: 'Total', amount: 1999 }]), // Amount in smallest units (e.g., cents)
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "Pay 1299 XTR", pay: true }]
+                                    ]
+                                }
+                            }
+                        }])
                     ]
+                    ['---- 🛍️ STORE AUTOMATION SAMPLE DATA END ----']
+                ]
+        }
+    }
+}
+
+// 🐱❤️ Support Our Feline Friends! ❤️🐱
+EMD.DonationCampaign = {
+    entityName: 'DonationCampaign',
+    sheet: (data = {}) => {
+        return {
+            name: EMD.Automation.sheet(data).name,
+            columns: EMD.Automation.sheet(data).columns,
+            sample_data:
+                [
+                    ['---- 🐱❤️ Support Our Feline Friends! ❤️🐱 ----'],
+                    ['/cats',
+                        // default (en)
+                        JSON.stringify([
+                            { "next": "#remove_keyboard" },
+                            { "next": "#send_1st_engagement_sample" }
+                        ])
+
+                    ],
+                    ['#send_1st_engagement_sample',
+                        // default (en)
+                        JSON.stringify([{
+                            method: 'sendPhoto',
+                            payload: {
+                                caption: '🐱❤️ Support Our Feline Friends! ❤️🐱\n\n'
+                                    + 'Dear Cat Lovers,\n\n'
+                                    + 'We hope this message finds you well. As fellow enthusiasts of our feline companions, we are reaching out to share an exciting initiative that aims to make a positive impact on the lives of stray and abandoned cats.\n\n'
+                                    + 'We are excited to announce our Cat Donation Campaign, aimed at helping stray and abandoned cats find loving homes and receive the care they deserve.\n\n'
+                                    + 'Join us in making a difference in the lives of stray and abandoned cats. Your generous donation will help provide food, shelter, and medical care to these deserving animals.\n\n',
+                                photo: EMD.YOU_GOT_IT_IMG_URL,
+                                parse_mode: 'HTML',
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "💌 Learn More About Our Campaign", callback_data: "#send_2nd_engagement_sample" }],
+                                    ]
+                                }
+                            }
+                        }])
+                    ],
+                    ['#send_2nd_engagement_sample',
+                        // default (en)
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: '🐾 About Our Cat Donation Campaign 🐾\n\n'
+                                    + 'Our mission is to provide care and support for stray and abandoned cats in our community. With your help, we can make a significant impact on their lives.\n\n'
+                                    + 'Funds raised through this campaign will be used for:\n'
+                                    + '1. Providing nutritious food and clean water.\n'
+                                    + '2. Offering medical care and vaccinations.\n'
+                                    + '3. Creating safe shelters for stray cats.\n\n'
+                                    + 'Global Reach: Our campaign extends beyond local communities, aiming to support stray cats worldwide.\n\n'
+                                    + '🌍 🇪🇸 🇾🇹 🇯🇴 🇮🇱 🇮🇶 🇵🇸 🇫🇷 🇯🇵 🇲🇷 🇷🇺 🇪🇨 🇧🇴 🇧🇩 🇪🇨 🇧🇪 🇭🇰 🇮🇲 🇰🇬 🇲🇹 🇲🇩 🇲🇰 🇳🇱 🇷🇪 🇬🇧 🇵🇹 🇮🇹 🇲🇪 🇰🇬 🇲🇦 🇬🇱 🇦🇴 \n\n'
+                                    + 'Every contribution, big or small, makes a difference. Thank you for your support! 🐱❤️',
+                                parse_mode: 'HTML',
+                                reply_markup: {
+                                    inline_keyboard: [
+                                        [{ text: "💝 Donate Now", callback_data: "#send_3rd_engagement_sample" }],
+                                        [{ text: "🏆 Be Active Supporter", callback_data: "#send_3rd_engagement_sample" }]
+                                    ]
+                                }
+                            }
+                        }])
+                    ],
+                    ['#send_3rd_engagement_sample',
+                        // default (en)
+                        JSON.stringify([
+                            {   // send ask for donation message
+                                method: 'sendMessage',
+                                payload: {
+                                    text: '🙏 Thank You for Considering a Donation! 🙏\n\n'
+                                        + 'Your support means the world to us and the cats we care for. Every donation, no matter the size, helps us continue our mission to provide a better life for stray and abandoned cats.\n\n',
+                                    parse_mode: 'HTML',
+                                    reply_markup: {
+                                        inline_keyboard: [
+                                            [{ text: "🥉 Promote to Bronze Supporter", callback_data: "/donate" }],
+                                            [{ text: "🥈 Promote to Silver Supporter", callback_data: "/donate" }],
+                                            [{ text: "🥇 Promote to Gold Supporter", callback_data: "/donate" }],
+                                            [{ text: "🥉 Promote to Platinum Supporter", callback_data: "/donate" }],
+                                            [{ text: "💎 Promote to Diamond Supporter 100000", callback_data: "/donate" }],
+                                            [{ text: "💝 Donate Now", callback_data: "/donate" }]
+                                        ]
+                                    }
+                                }
+                            }
+                        ])
+                    ],
+                    ['/send_donate_now_options',
+                        // default (en)
+                        JSON.stringify([{
+                            method: 'sendMessage',
+                            payload: {
+                                text: '🐾 About Our Cat Donation Campaign 🐾\n\n'
+                                    + 'Our mission is to provide care and support for stray and abandoned cats in our community. With your help, we can make a significant impact on their lives.\n\n'
+                                    + 'Funds raised through this campaign will be used for:\n'
+                                    + '1. Providing nutritious food and clean water.\n'
+                                    + '2. Offering medical care and vaccinations.\n'
+                                    + '3. Creating safe shelters for stray cats.\n\n'
+                                    + 'Global Reach: Our campaign extends beyond local communities, aiming to support stray cats worldwide.\n\n'
+                                    + '🌍 🇪🇸 🇾🇹 🇯🇴 🇮🇱 🇮🇶 🇵🇸 🇫🇷 🇯🇵 🇲🇷 🇷🇺 🇪🇨 🇧🇴 🇧🇩 🇪🇨 🇧🇪 🇭🇰 🇮🇲 🇰🇬 🇲🇹 🇲🇩 🇲🇰 🇳🇱 🇷🇪 🇬🇧 🇵🇹 🇮🇹 🇲🇪 🇰🇬 🇲🇦 🇬🇱 🇦🇴 \n\n'
+                                    + 'Every contribution, big or small, makes a difference. Thank you for your support! 🐱❤️',
+                                parse_mode: 'HTML'
+                            }
+                        }])
+                    ],
+                    ['---- 🛍️ STORE AUTOMATION SAMPLE DATA END ----']
                 ]
         }
     }
@@ -7407,7 +7526,7 @@ EMD.InvoiceLinks = {
                         need_email: false,
                         need_phone_number: false,
                         need_shipping_address: false,
-                        photo_url: EMD.KISS_IMG_URL,
+                        photo_url: EMD.LOGO_PNG_URL,
                         photo_size: 512,
                         photo_width: 512,
                         photo_height: 512,
@@ -7427,7 +7546,7 @@ EMD.InvoiceLinks = {
                         need_name: false,
                         need_email: false,
                         need_phone_number: false,
-                        photo_url: EMD.DEFAULT_IMAGE_URL,
+                        photo_url: EMD.LOGO_PNG_URL,
                         photo_size: 512,
                         photo_width: 512,
                         photo_height: 512,
@@ -7448,7 +7567,7 @@ EMD.InvoiceLinks = {
                         need_name: false,
                         need_email: false,
                         need_phone_number: false,
-                        photo_url: EMD.DEFAULT_IMAGE_URL,
+                        photo_url: EMD.LOGO_PNG_URL,
                         photo_size: 512,
                         photo_width: 512,
                         photo_height: 512,
