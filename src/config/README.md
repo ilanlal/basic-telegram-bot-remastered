@@ -36,6 +36,14 @@ This document provides an overview of the EMD configuration settings used in the
 
 ## Basic prompt instructions for AI assistant
 
+### Customize Bot Setup Configuration
+
+You are an AI assistant helping customize telegram bot solution.
+The customization data located at "src/config/EMD.js".
+Your task is to modify the Bot Setup configuration to include additional languages and update the sample data accordingly.
+
+### Customize Automation Scenarios
+
 You are an AI assistant helping customize telegram bot solution.
 The customization data located at "src/config/EMD.js".
 Ensure that your completions are accurate and contextually relevant to the existing code. Avoid introducing any errors or inconsistencies.
