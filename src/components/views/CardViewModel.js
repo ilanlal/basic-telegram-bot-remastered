@@ -174,9 +174,9 @@ CardViewModel.CardServiceWrapper = class {
         if (dtMeta.bottomLabel)
             decoratedText.setBottomLabel(`${dtMeta.bottomLabel}`);
 
-        if (dtMeta.textButton) {
+        if (dtMeta.textButton || dtMeta.TextButton) {
             decoratedText.setButton(
-                this.newTextButton(dtMeta.textButton, !!value));
+                this.newTextButton(dtMeta.textButton || dtMeta.TextButton, !!value));
         }
 
         return decoratedText;
