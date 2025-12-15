@@ -168,7 +168,7 @@ CardViewModel.CardServiceWrapper = class {
         if (dtMeta.topLabel)
             decoratedText.setTopLabel(`${dtMeta.topLabel}`);
         if (dtMeta.wrapText)
-            decoratedText.setWrapText(dtMeta.wrapText || false);
+            decoratedText.setWrapText(dtMeta.wrapText);
         if (dtMeta.text)
             decoratedText.setText(`${dtMeta.text}`);
         if (dtMeta.bottomLabel)

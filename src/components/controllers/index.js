@@ -1,7 +1,7 @@
 const { BotSetupController } = require('./BotSetupController');
-const { EntityController } = require('./EntityController');
+const { CardController } = require('./CardController');
 const { CustomerController } = require('./CustomerController');
 
-global.EntityController = EntityController;
+global.CardController = CardController;
 global.BotSetupController = BotSetupController;
 global.CustomerController = CustomerController;

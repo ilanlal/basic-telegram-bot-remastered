@@ -1,21 +1,19 @@
-class EntityController {
+class CardController {
     static create(
         cardService = CardService,
-        activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet(),
-        userProperties = PropertiesService.getDocumentProperties()
+        documentProperties = PropertiesService.getDocumentProperties()
     ) {
-        return new EntityController(cardService, activeSpreadsheet, userProperties);
+        return new CardController(cardService, documentProperties);
     }
 
-    constructor(cardService, activeSpreadsheet, userProperties) {
+    constructor(cardService, documentProperties) {
         this.cardService = cardService;
-        this.activeSpreadsheet = activeSpreadsheet;
-        this.userProperties = userProperties;
+        this.documentProperties = documentProperties;
     }
 
     pushCard(cardMeta = {}) {
         const cardWeapper = CardViewModel.CardServiceWrapper
-            .create(this.cardService, this.userProperties);
+            .create(this.cardService, this.documentProperties);
 
         const cardBuilder = cardWeapper.newCardBuilder(cardMeta);
 
@@ -44,5 +42,5 @@ class EntityController {
 }
 
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { EntityController };
+    module.exports = { CardController };
 }

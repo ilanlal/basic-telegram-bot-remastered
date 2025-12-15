@@ -63,8 +63,8 @@ EntityHandler.AddonWrapper = class {
             };
             const setupFlow = SetupFlow.create(this._userProperties);
             const environmentModel = EnvironmentModel.create(this._userProperties);
-            
-            return EntityController
+
+            return CardController
                 .create(
                     CardService,
                     SpreadsheetApp.getActiveSpreadsheet(),
@@ -98,7 +98,7 @@ EntityHandler.AddonWrapper = class {
                 throw new Error(`Static method "sheet: (data={}) {}" not found for entityName: ${entityName}`);
             }
 
-            const rs = EntityController
+            const rs = CardController
                 .create(
                     CardService,
                     SpreadsheetApp.getActiveSpreadsheet(),
