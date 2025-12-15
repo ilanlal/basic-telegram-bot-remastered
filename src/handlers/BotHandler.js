@@ -1,9 +1,9 @@
 class BotHandler {
-    get userProperties() {
-        if (!this._userProperties) {
-            this._userProperties = PropertiesService.getDocumentProperties();
+    get documentProperties() {
+        if (!this._documentProperties) {
+            this._documentProperties = PropertiesService.getDocumentProperties();
         }
-        return this._userProperties;
+        return this._documentProperties;
     }
 
     get activeSpreadsheet() {
@@ -14,7 +14,7 @@ class BotHandler {
     }
 
     constructor() {
-        this._userProperties = null;
+        this._documentProperties = null;
         this._activeSpreadsheet = null;
     }
 };
@@ -24,14 +24,14 @@ BotHandler.Addon = {
         // Not implemented yet
         return new BotHandler
             .AddonWrapper(
-                BotHandler.prototype.userProperties,
+                BotHandler.prototype.documentProperties,
                 BotHandler.prototype.activeSpreadsheet)
             .handleIdentifyTokenClick(e);
     },
     onWebhookToggleClick: (e) => {
         return new BotHandler
             .AddonWrapper(
-                BotHandler.prototype.userProperties,
+                BotHandler.prototype.documentProperties,
                 BotHandler.prototype.activeSpreadsheet)
             .handleWebhookToggleClick(e);
     },
@@ -39,7 +39,7 @@ BotHandler.Addon = {
         // Not implemented yet
         return new BotHandler
             .AddonWrapper(
-                BotHandler.prototype.userProperties,
+                BotHandler.prototype.documentProperties,
                 BotHandler.prototype.activeSpreadsheet)
             .handleSetMyNameClick(e);
     },
@@ -47,7 +47,7 @@ BotHandler.Addon = {
         // Not implemented yet
         return new BotHandler
             .AddonWrapper(
-                BotHandler.prototype.userProperties,
+                BotHandler.prototype.documentProperties,
                 BotHandler.prototype.activeSpreadsheet)
             .handleSetMyDescriptionClick(e);
     },
@@ -55,7 +55,7 @@ BotHandler.Addon = {
         // Not implemented yet
         return new BotHandler
             .AddonWrapper(
-                BotHandler.prototype.userProperties,
+                BotHandler.prototype.documentProperties,
                 BotHandler.prototype.activeSpreadsheet)
             .handleSetMyShortDescriptionClick(e);
     },
@@ -63,15 +63,15 @@ BotHandler.Addon = {
         // Not implemented yet
         return new BotHandler
             .AddonWrapper(
-                BotHandler.prototype.userProperties,
+                BotHandler.prototype.documentProperties,
                 BotHandler.prototype.activeSpreadsheet)
             .handleSetMyCommandsClick(e);
     }
 }
 
 BotHandler.AddonWrapper = class {
-    constructor(userProperties, activeSpreadsheet) {
-        this._userProperties = userProperties;
+    constructor(documentProperties, activeSpreadsheet) {
+        this._documentProperties = documentProperties;
         this._activeSpreadsheet = activeSpreadsheet;
     }
 
@@ -84,7 +84,7 @@ BotHandler.AddonWrapper = class {
             }
 
             const controller = BotSetupController
-                .create(this._userProperties, this._activeSpreadsheet);
+                .create(this._documentProperties, this._activeSpreadsheet);
 
             const result = controller.identifyNewBotToken(token);
             controller.setNewBotToken(token);
@@ -107,7 +107,7 @@ BotHandler.AddonWrapper = class {
             }
 
             const controller = BotSetupController
-                .create(this._userProperties, this._activeSpreadsheet);
+                .create(this._documentProperties, this._activeSpreadsheet);
 
             if (action === 'setWebhook') {
                 controller.setWebhook();
@@ -126,7 +126,7 @@ BotHandler.AddonWrapper = class {
     handleSetMyNameClick(e) {
         try {
             const controller = BotSetupController
-                .create(this._userProperties, this._activeSpreadsheet);
+                .create(this._documentProperties, this._activeSpreadsheet);
 
             const response = controller.setMyName();
 
@@ -142,7 +142,7 @@ BotHandler.AddonWrapper = class {
     handleSetMyDescriptionClick(e) {
         try {
             const controller = BotSetupController
-                .create(this._userProperties, this._activeSpreadsheet);
+                .create(this._documentProperties, this._activeSpreadsheet);
 
             const response = controller.setMyDescription();
             return this.handleOperationSuccess("👍 Bot description set successfully."
@@ -157,7 +157,7 @@ BotHandler.AddonWrapper = class {
     handleSetMyShortDescriptionClick(e) {
         try {
             const controller = BotSetupController
-                .create(this._userProperties, this._activeSpreadsheet);
+                .create(this._documentProperties, this._activeSpreadsheet);
 
             const response = controller.setMyShortDescription();
 
@@ -173,7 +173,7 @@ BotHandler.AddonWrapper = class {
     handleSetMyCommandsClick(e) {
         try {
             const controller = BotSetupController
-                .create(this._userProperties, this._activeSpreadsheet);
+                .create(this._documentProperties, this._activeSpreadsheet);
 
             const response = controller.setMyCommands();
 

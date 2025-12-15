@@ -1,13 +1,13 @@
 class EventHandler {
-    get userProperties() {
-        if (!this._userProperties) {
-            this._userProperties = PropertiesService.getDocumentProperties();
+    get documentProperties() {
+        if (!this._documentProperties) {
+            this._documentProperties = PropertiesService.getDocumentProperties();
         }
-        return this._userProperties;
+        return this._documentProperties;
     }
 
     constructor() {
-        this._userProperties = null;
+        this._documentProperties = null;
     }
 };
 
@@ -15,37 +15,37 @@ EventHandler.Addon = {
     onOpenHomeCard: (e) => {
         return new EventHandler
             .AddonWrapper(
-                EventHandler.prototype.userProperties)
+                EventHandler.prototype.documentProperties)
             .handleOpenHomeCard(e);
     },
     onOpenAccountCard: (e) => {
         return new EventHandler
             .AddonWrapper(
-                EventHandler.prototype.userProperties)
+                EventHandler.prototype.documentProperties)
             .handleOpenAccountCard(e);
     },
     onOpenAboutCard: (e) => {
         return new EventHandler
             .AddonWrapper(
-                EventHandler.prototype.userProperties)
+                EventHandler.prototype.documentProperties)
             .handleOpenAboutCard(e);
     },
     onActivatePremiumClicked: (e) => {
         return new EventHandler
             .AddonWrapper(
-                EventHandler.prototype.userProperties)
+                EventHandler.prototype.documentProperties)
             .handleActivatePremiumClicked(e);
     },
     onRevokeLicenseClicked: (e) => {
         return new EventHandler
             .AddonWrapper(
-                EventHandler.prototype.userProperties)
+                EventHandler.prototype.documentProperties)
             .handleRevokeLicenseClicked(e);
     }
 }
 EventHandler.AddonWrapper = class {
-    constructor(userProperties) {
-        this._userProperties = userProperties;
+    constructor(documentProperties) {
+        this._documentProperties = documentProperties;
     }
 
     handleOpenHomeCard(e) {

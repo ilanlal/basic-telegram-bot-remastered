@@ -16,8 +16,7 @@ describe('CardViewModel', () => {
     it('should create an view model instance.', () => {
         const viewModel = CardViewModel.create({
             cardService: CardService,
-            activeSpreadsheet: SpreadsheetApp.getActiveSpreadsheet(),
-            userProperties: PropertiesService.getDocumentProperties()
+            documentProperties: PropertiesService.getDocumentProperties()
         });
         expect(viewModel).toBeDefined();
     });

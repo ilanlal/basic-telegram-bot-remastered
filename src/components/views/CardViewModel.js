@@ -1,11 +1,10 @@
 class CardViewModel {
     static create({
         cardService = CardService,
-        activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet(),
-        userProperties = PropertiesService.getDocumentProperties() } = {}
+        documentProperties = PropertiesService.getDocumentProperties() } = {}
     ) {
         return new CardViewModel({
-            cardWrapper: CardViewModel.CardServiceWrapper.create(cardService, userProperties)
+            cardWrapper: CardViewModel.CardServiceWrapper.create(cardService, documentProperties)
         });
     }
 
@@ -22,25 +21,6 @@ class CardViewModel {
 };
 
 CardViewModel.CardServiceWrapper = class {
-    // Default Card Header Values
-    static get DEFAULT_IMAGE_URL() {
-        return 'https://raw.githubusercontent.com/ilanlal/basic-telegram-bot-remastered/refs/heads/vnext/assets/logo128.png';
-    }
-
-    // Error Messages
-    static get FIXED_FOOTER_BUTTON_NOT_DEFINED_ERROR() {
-        return "Fixed footer must have a primaryButton defined.";
-    }
-    static get TEXT_INPUT_MISSING_FIELD_NAME_ERROR() {
-        return "TextInput widget must have a 'fieldName' property.";
-    }
-    static get DECORATED_TEXT_MISSING_CONTENT_ERROR() {
-        return "DecoratedText widget must have at least one of 'text', 'decoratedText', 'topLabel', or 'bottomLabel' properties defined.";
-    }
-    static get TEXT_BUTTON_MISSING_PROPERTIES_ERROR() {
-        return "TextButton widget must have either 'text', and 'openLink' or 'onClick' defined.";
-    }
-
     static create(cardService = CardService, documentProperties = PropertiesService.getDocumentProperties()) {
         return new CardViewModel.CardServiceWrapper(cardService, documentProperties);
     }
@@ -86,13 +66,13 @@ CardViewModel.CardServiceWrapper = class {
             .setTitle(`${headerMeta.title || ''}`)
             .setSubtitle(`${headerMeta.subTitle || ''}`)
             .setImageStyle(headerMeta.imageStyle || CardService.ImageStyle.SQUARE)
-            .setImageUrl(headerMeta.imageUrl || CardViewModel.DEFAULT_IMAGE_URL)
+            .setImageUrl(headerMeta.imageUrl || EMD.DEFAULT_IMAGE_URL)
             .setImageAltText(headerMeta.imageAltText || 'Card Image');
     }
 
     newFixedFooter(fixedFooterMeta = {}) {
         if (!fixedFooterMeta.primaryButton?.textButton) {
-            throw new Error(CardViewModel.CardServiceWrapper.FIXED_FOOTER_BUTTON_NOT_DEFINED_ERROR);
+            throw new Error(CardViewModel.ErrorMessages.FIXED_FOOTER_BUTTON_NOT_DEFINED_ERROR);
         }
         const fixedFooter = this._cardService.newFixedFooter();
 
@@ -154,10 +134,10 @@ CardViewModel.CardServiceWrapper = class {
     newDecoratedText(dtMeta = {}, value = '') {
         // setText(text) and one of the keys: setTopLabel(text), or setBottomLabel(text) are required
         if (!dtMeta.text) {
-            throw new Error(CardViewModel.CardServiceWrapper.DECORATED_TEXT_MISSING_CONTENT_ERROR);
+            throw new Error(CardViewModel.ErrorMessages.DECORATED_TEXT_MISSING_CONTENT_ERROR);
         }
         if (!dtMeta.topLabel && !dtMeta.bottomLabel) {
-            throw new Error(CardViewModel.CardServiceWrapper.DECORATED_TEXT_MISSING_CONTENT_ERROR);
+            throw new Error(CardViewModel.ErrorMessages.DECORATED_TEXT_MISSING_CONTENT_ERROR);
         }
         const decoratedText = this._cardService.newDecoratedText();
 
@@ -180,7 +160,7 @@ CardViewModel.CardServiceWrapper = class {
 
     newTextInput(inputTextMeta = {}, value = '') {
         if (!inputTextMeta.fieldName || String(inputTextMeta.fieldName).trim() === '') {
-            throw new Error(CardViewModel.CardServiceWrapper.TEXT_INPUT_MISSING_FIELD_NAME_ERROR);
+            throw new Error(CardViewModel.ErrorMessages.TEXT_INPUT_MISSING_FIELD_NAME_ERROR);
         }
 
         return CardService.newTextInput()
@@ -202,7 +182,7 @@ CardViewModel.CardServiceWrapper = class {
 
     newTextButton(textButtonMeta = {}, disabled = false, style = CardService.TextButtonStyle.TEXT) {
         if (!textButtonMeta.text || (!textButtonMeta.openLink && !textButtonMeta.onClick)) {
-            throw new Error(CardViewModel.CardServiceWrapper.TEXT_BUTTON_MISSING_PROPERTIES_ERROR);
+            throw new Error(CardViewModel.ErrorMessages.TEXT_BUTTON_MISSING_PROPERTIES_ERROR);
         }
 
         const _textButton = this._cardService.newTextButton()
@@ -220,10 +200,17 @@ CardViewModel.CardServiceWrapper = class {
             );
         }
         else {
-            throw new Error(CardViewModel.CardServiceWrapper.TEXT_BUTTON_MISSING_PROPERTIES_ERROR);
+            throw new Error(CardViewModel.ErrorMessages.TEXT_BUTTON_MISSING_PROPERTIES_ERROR);
         }
         return _textButton;
     }
+};
+
+CardViewModel.ErrorMessages = {
+    FIXED_FOOTER_BUTTON_NOT_DEFINED_ERROR: "Fixed footer must have a primaryButton defined.",
+    TEXT_INPUT_MISSING_FIELD_NAME_ERROR: "TextInput widget must have a 'fieldName' property.",
+    DECORATED_TEXT_MISSING_CONTENT_ERROR: "DecoratedText widget must have at least one of 'text', 'decoratedText', 'topLabel', or 'bottomLabel' properties defined.",
+    TEXT_BUTTON_MISSING_PROPERTIES_ERROR: "TextButton widget must have either 'text', and 'openLink' or 'onClick' defined."
 };
 
 if (typeof module !== "undefined" && module.exports) {

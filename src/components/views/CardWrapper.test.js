@@ -10,8 +10,7 @@ describe('Model.CardWrapper', () => {
     it('should create a new instance of CardWrapper with initiated service references', () => {
         const viewModel = CardViewModel.create({
             cardService: CardService,
-            activeSpreadsheet: SpreadsheetApp.getActiveSpreadsheet(),
-            userProperties: PropertiesService.getDocumentProperties()
+            documentProperties: PropertiesService.getDocumentProperties()
         });
         expect(viewModel.cardWrapper).toBeDefined();
     });
@@ -19,8 +18,7 @@ describe('Model.CardWrapper', () => {
     describe('Testing', () => {
         const viewModel = CardViewModel.create({
             cardService: CardService,
-            activeSpreadsheet: SpreadsheetApp.getActiveSpreadsheet(),
-            userProperties: PropertiesService.getDocumentProperties()
+            documentProperties: PropertiesService.getDocumentProperties()
         });
 
         const wrapper = viewModel.cardWrapper;
@@ -231,7 +229,7 @@ describe('Model.CardWrapper', () => {
                 };
                 expect(() => {
                     wrapper.newFixedFooter(footerMeta);
-                }).toThrow(CardViewModel.CardServiceWrapper.FIXED_FOOTER_BUTTON_NOT_DEFINED_ERROR);
+                }).toThrow(CardViewModel.ErrorMessages.FIXED_FOOTER_BUTTON_NOT_DEFINED_ERROR);
             });
 
         });

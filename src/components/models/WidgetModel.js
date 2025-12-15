@@ -10,14 +10,14 @@ class WidgetModel {
         return this._tabIndex++;
     }
 
-    static create(widgetMeta = {}, userProperties = PropertiesService.getDocumentProperties()) {
+    static create(widgetMeta = {}, documentProperties = PropertiesService.getDocumentProperties()) {
         const { id, value = null, tabIndex = WidgetModel.tabIndex(), propertyName = null } = widgetMeta;
 
         if (!id) {
             throw new Error(WidgetModel.INVALID_ID_ERROR);
         }
 
-        const widgetInstance = new WidgetModel(id, userProperties)
+        const widgetInstance = new WidgetModel(id, documentProperties)
             .setTabIndex(tabIndex);
 
         if (value) {
@@ -26,7 +26,7 @@ class WidgetModel {
 
         if (propertyName) {
             widgetInstance.setPropertyName(propertyName);
-            const value = userProperties.getProperty(propertyName);
+            const value = documentProperties.getProperty(propertyName);
             if (value !== null) {
                 widgetInstance.setValue(value);
             }
@@ -34,9 +34,9 @@ class WidgetModel {
         return widgetInstance;
     }
 
-    constructor(id, userProperty) {
+    constructor(id, documentProperties) {
         this._id = id;
-        this._userProperty = userProperty;
+        this._documentProperties = documentProperties;
         this._value = null;
         this._tabIndex = 0;
         this._propertyName = null;
@@ -74,8 +74,6 @@ class WidgetModel {
     get propertyName() {
         return this._propertyName;
     }
-
-
 }
 
 
