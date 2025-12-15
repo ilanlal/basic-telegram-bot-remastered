@@ -9,7 +9,7 @@ describe('BotModel', () => {
     beforeEach(() => {
         SpreadsheetStubConfiguration.reset();
         SheetModel.create(SpreadsheetApp.getActiveSpreadsheet())
-            .bindSheetSampleData(EMD.BotSetup.sheet({}));
+            .bindSheetSampleData(EMD.Spreadsheet.BotSetup({}));
     });
 
     it('should create an instance', () => {
@@ -38,7 +38,7 @@ describe('BotModel', () => {
         test('should find value by key', () => {
             // reply is array of actions like {method: 'sendMessage', payload: {...}}
             const text = model.getValue('name', 'es');
-            expect(text).toBe(EMD.BotSetup.sheet({}).sample_data[0][3]); // Spanish name
+            expect(text).toBe(EMD.Spreadsheet.BotSetup({}).sample_data[0][3]); // Spanish name
         });
 
         test('should return null for non-existing key', () => {

@@ -49,18 +49,18 @@ EventHandler.AddonWrapper = class {
     }
 
     handleOpenHomeCard(e) {
-        return EntityHandler.Addon
-                .onOpenCardClick({ parameters: { entityName: 'Home' } });
+        return CardHandler.Addon
+                .onOpenCardClick({ parameters: { card: 'EMD.Cards.Home' } });
     }
 
     handleOpenAccountCard(e) {
-        return EntityHandler.Addon
-                .onOpenCardClick({ parameters: { entityName: 'Account' } });
+        return CardHandler.Addon
+                .onOpenCardClick({ parameters: { card: 'EMD.Cards.Account' } });
     }
 
     handleOpenAboutCard(e) {
-        return EntityHandler.Addon
-                .onOpenCardClick({ parameters: { entityName: 'About' } });
+        return CardHandler.Addon
+                .onOpenCardClick({ parameters: { card: 'EMD.Cards.About' } });
     }
 
     handleActivatePremiumClicked(e) {

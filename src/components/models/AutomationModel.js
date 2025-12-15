@@ -1,7 +1,7 @@
 class AutomationModel {
     constructor(activeSpreadsheet) {
         this.sheetModel = SheetModel.create(activeSpreadsheet);
-        this.sheet = this.sheetModel.initializeSheet(EMD.Automation.sheet({}));
+        this.sheet = this.sheetModel.initializeSheet(EMD.Spreadsheet.Automation({}));
     }
 
     static create(activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet()) {

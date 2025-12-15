@@ -3,7 +3,7 @@ const { CardController } = require('./CardController');
 const { EMD } = require('../../config/EMD');
 
 describe('Entity Controller', () => {
-    const userProperties = PropertiesService.getDocumentProperties();
+    const documentProperties = PropertiesService.getDocumentProperties();
     test('should create an instance using the static create method', () => {
         const cardController = CardController.create();
         expect(cardController).toBeInstanceOf(CardController);
@@ -13,12 +13,11 @@ describe('Entity Controller', () => {
     test('should push a card to the card service', () => {
         const cardServiceController = CardController.create(
             CardService,
-            SpreadsheetApp.getActiveSpreadsheet(),
-            userProperties
+            documentProperties
         );
 
         const actionResponseBuilder = cardServiceController.pushCard(
-            EMD.Home.card({}));
+            EMD.Cards.Home({ isActive: true, isAdmin: false }));
 
         expect(actionResponseBuilder).toBeDefined();
         const builtResponse = actionResponseBuilder.build();

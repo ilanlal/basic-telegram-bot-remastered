@@ -15,7 +15,7 @@ describe('AutomationHandler', () => {
         PropertiesService.getDocumentProperties().setProperty(EnvironmentModel.InputMeta.BOT_API_TOKEN, dummyToken);
         handler = AutomationHandler.create();
         SheetModel.create(SpreadsheetApp.getActiveSpreadsheet())
-            .bindSheetSampleData(EMD.BasicAutomation.sheet({}));
+            .bindSheetSampleData(EMD.Spreadsheet.BasicAutomation({}));
     });
 
     test('should handle automation request', () => {

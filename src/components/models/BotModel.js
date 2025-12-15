@@ -1,7 +1,7 @@
 class BotModel {
     constructor(activeSpreadsheet) {
         this.sheetModel = SheetModel.create(activeSpreadsheet);
-        this.sheet = this.sheetModel.initializeSheet(EMD.BotSetup.sheet({}));
+        this.sheet = this.sheetModel.initializeSheet(EMD.Spreadsheet.BotSetup({}));
     }
 
     static create(activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet()) {

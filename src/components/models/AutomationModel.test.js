@@ -10,7 +10,7 @@ describe('AutomationModel', () => {
         SpreadsheetStubConfiguration.reset();
         SheetModel.create(
             SpreadsheetApp.getActiveSpreadsheet()
-        ).bindSheetSampleData(EMD.BasicAutomation.sheet({}));
+        ).bindSheetSampleData(EMD.Spreadsheet.BasicAutomation({}));
     });
 
     it('should create an instance', () => {

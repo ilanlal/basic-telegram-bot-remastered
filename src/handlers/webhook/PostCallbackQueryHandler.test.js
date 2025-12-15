@@ -13,7 +13,7 @@ describe('PostCallbackQueryHandler', () => {
         PropertiesService.getDocumentProperties().setProperty(EnvironmentModel.InputMeta.BOT_API_TOKEN, dummyToken);
         handler = PostCallbackQueryHandler.create();
         SheetModel.create(SpreadsheetApp.getActiveSpreadsheet())
-            .bindSheetSampleData(EMD.Automation.sheet({}));
+            .bindSheetSampleData(EMD.Spreadsheet.BasicAutomation({}));
 
     });
 
@@ -37,6 +37,7 @@ describe('PostCallbackQueryHandler', () => {
         const sendMessgeUrl = `https://api.telegram.org/bot${dummyToken}/sendMessage`;
         const sendPhotoUrl = `https://api.telegram.org/bot${dummyToken}/sendPhoto`;
         const answerCallbackQueryUrl = `https://api.telegram.org/bot${dummyToken}/answerCallbackQuery`;
+        const editMessageReplyMarkupUrl = `https://api.telegram.org/bot${dummyToken}/editMessageReplyMarkup`;
 
         UrlFetchAppStubConfiguration.when(sendMessgeUrl)
             .return(new HttpResponse()
@@ -53,6 +54,12 @@ describe('PostCallbackQueryHandler', () => {
                     }
                 })));
         UrlFetchAppStubConfiguration.when(answerCallbackQueryUrl)
+            .return(new HttpResponse()
+                .setContentText(JSON.stringify({
+                    result: true
+                })));
+
+        UrlFetchAppStubConfiguration.when(editMessageReplyMarkupUrl)
             .return(new HttpResponse()
                 .setContentText(JSON.stringify({
                     result: true

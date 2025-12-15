@@ -1,6 +1,6 @@
 class SetupFlow {
-    constructor(userProperties, activeSpreadsheet) {
-        this._userProperties = userProperties;
+    constructor(documentProperties, activeSpreadsheet) {
+        this._documentProperties = documentProperties;
         this._telegramBotClient = null;
         this._activeSpreadsheet = activeSpreadsheet;
         this.sheetModel = SheetModel.create(activeSpreadsheet);
@@ -8,10 +8,10 @@ class SetupFlow {
     }
 
     static create(
-        userProperties = PropertiesService.getDocumentProperties(),
+        documentProperties = PropertiesService.getDocumentProperties(),
         activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet()
     ) {
-        return new SetupFlow(userProperties, activeSpreadsheet);
+        return new SetupFlow(documentProperties, activeSpreadsheet);
     }
 
 
@@ -25,7 +25,7 @@ class SetupFlow {
         if (response.getResponseCode() !== 200) {
             throw new Error("Failed to validate bot token");
         }
-        EnvironmentModel.create(this._userProperties)
+        EnvironmentModel.create(this._documentProperties)
             .setNewBotToken(safeToken);
 
         const contentText = response.getContentText();
@@ -34,7 +34,7 @@ class SetupFlow {
     }
 
     setWebhook() {
-        const deploymentId = this._userProperties.getProperty(EnvironmentModel.InputMeta.DEPLOYMENT_ID);
+        const deploymentId = this._documentProperties.getProperty(EnvironmentModel.InputMeta.DEPLOYMENT_ID);
         if (!deploymentId) {
             throw new Error("Deployment ID is not available. Please deploy the script as a web app.");
         }
@@ -49,7 +49,7 @@ class SetupFlow {
     }
 
     setTestWebhook() {
-        const deploymentId = this._userProperties
+        const deploymentId = this._documentProperties
             .getProperty(EnvironmentModel.InputMeta.TEST_DEPLOYMENT_ID);
         if (!deploymentId) {
             throw new Error("Test Deployment ID is not available. Please deploy the script as a web app.");
@@ -65,7 +65,7 @@ class SetupFlow {
     }
 
     deleteWebhook() {
-        const deploymentId = this._userProperties.getProperty(EnvironmentModel.InputMeta.DEPLOYMENT_ID);
+        const deploymentId = this._documentProperties.getProperty(EnvironmentModel.InputMeta.DEPLOYMENT_ID);
         if (!deploymentId) {
             throw new Error("Deployment ID is not available. Please deploy the script as a web app.");
         }
@@ -196,15 +196,15 @@ class SetupFlow {
 
     // Getters
     get state() {
-        const token = this._userProperties.getProperty(EnvironmentModel.InputMeta.BOT_API_TOKEN);
-        const deploymentId = this._userProperties.getProperty(EnvironmentModel.InputMeta.DEPLOYMENT_ID);
+        const token = this._documentProperties.getProperty(EnvironmentModel.InputMeta.BOT_API_TOKEN);
+        const deploymentId = this._documentProperties.getProperty(EnvironmentModel.InputMeta.DEPLOYMENT_ID);
         const _webhookUrl = this.webhookUrl;
         return {
             // show 4 first and 4 last characters of the token
             botToken: token ? `${token.substring(0, 4)}****${token.substring(token.length - 4)}` : null,
-            botTokenSet: !!this._userProperties.getProperty(EnvironmentModel.InputMeta.BOT_API_TOKEN),
+            botTokenSet: !!this._documentProperties.getProperty(EnvironmentModel.InputMeta.BOT_API_TOKEN),
             deploymentId: deploymentId ? `${deploymentId.substring(0, 4)}****${deploymentId.substring(deploymentId.length - 4)}` : null,
-            deploymentIdSet: !!this._userProperties.getProperty(EnvironmentModel.InputMeta.DEPLOYMENT_ID),
+            deploymentIdSet: !!this._documentProperties.getProperty(EnvironmentModel.InputMeta.DEPLOYMENT_ID),
             webhookUrl: decodeURI(_webhookUrl),
             webhookSet: !!_webhookUrl
         }
@@ -212,7 +212,7 @@ class SetupFlow {
 
     get telegramBotClient() {
         if (!this._telegramBotClient) {
-            const token = this._userProperties.getProperty(EnvironmentModel.InputMeta.BOT_API_TOKEN);
+            const token = this._documentProperties.getProperty(EnvironmentModel.InputMeta.BOT_API_TOKEN);
             if (!token) {
                 return null;
             }

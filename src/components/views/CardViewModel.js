@@ -22,10 +22,6 @@ class CardViewModel {
 };
 
 CardViewModel.CardServiceWrapper = class {
-    static get DEFAULT_EVENT_CLICK_FUNCTION_NAME() {
-        return 'EventHandler.Addon.onButtonClick';
-    }
-
     // Default Card Header Values
     static get DEFAULT_IMAGE_URL() {
         return 'https://raw.githubusercontent.com/ilanlal/basic-telegram-bot-remastered/refs/heads/vnext/assets/logo128.png';
@@ -45,14 +41,14 @@ CardViewModel.CardServiceWrapper = class {
         return "TextButton widget must have either 'text', and 'openLink' or 'onClick' defined.";
     }
 
-    static create(cardService = CardService, userProperties = PropertiesService.getDocumentProperties()) {
-        return new CardViewModel.CardServiceWrapper(cardService, userProperties);
+    static create(cardService = CardService, documentProperties = PropertiesService.getDocumentProperties()) {
+        return new CardViewModel.CardServiceWrapper(cardService, documentProperties);
     }
 
-    constructor(cardService, userProperties) {
+    constructor(cardService, documentProperties) {
         // Use the global CardService in Apps Script environment
         this._cardService = cardService;
-        this._userProperties = userProperties;
+        this._documentProperties = documentProperties;
     }
 
     newCardBuilder(cardMeta = {}) {
@@ -132,7 +128,7 @@ CardViewModel.CardServiceWrapper = class {
     }
 
     newWidget(widgetMeta = {}) {
-        const _widgetInstance = WidgetModel.create(widgetMeta, this._userProperties);
+        const _widgetInstance = WidgetModel.create(widgetMeta, this._documentProperties);
         // Bind value from 'propertyName' property if specified
         const value = _widgetInstance.value || '';
 
@@ -219,7 +215,7 @@ CardViewModel.CardServiceWrapper = class {
         }
         else if (textButtonMeta.onClick) {
             _textButton.setOnClickAction(textButtonMeta.onClick.functionName ? this._cardService.newAction()
-                .setFunctionName(textButtonMeta.onClick.functionName || CardViewModel.CardServiceWrapper.DEFAULT_EVENT_CLICK_FUNCTION_NAME)
+                .setFunctionName(textButtonMeta.onClick.functionName)
                 .setParameters(textButtonMeta.onClick.parameters || {}) : null
             );
         }

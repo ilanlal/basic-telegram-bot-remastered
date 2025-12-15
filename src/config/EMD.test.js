@@ -3,12 +3,10 @@ const { EMD } = require('./EMD');
 
 describe('EMD Configuration', () => {
     it('should have Home entity defined correctly with all properties', () => {
-        expect(EMD.Home).toBeDefined();
-        expect(EMD.Home.entityName).toBe('Home');
-        expect(typeof EMD.Home.card).toBe('function');
-        expect(EMD.Home.sheetMeta).toBeUndefined();
+        expect(EMD.Cards.Home).toBeDefined();
+        expect(EMD.Cards.Home({}).name).toBe('homeCard');
 
-        const card = EMD.Home.card({ isActive: true, isAdmin: false });
+        const card = EMD.Cards.Home({ isActive: true, isAdmin: false });
         expect(card).toBeDefined();
         expect(card.name).toBe('homeCard');
         expect(card.header).toBeDefined();

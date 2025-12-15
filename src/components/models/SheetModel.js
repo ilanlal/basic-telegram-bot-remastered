@@ -41,29 +41,23 @@ class SheetModel {
         return this._sheet = this.initializeSheet(sheetMeta);
     }
 
-    getSheetSimpleData(sheetMeta = {}) {
-        const sheet = this.getSheet(sheetMeta);
-        const sampleData = sheetMeta.sample_data || [];
-        return sampleData;
-    }
-
     bindSheetSampleData(sheetMeta = {}) {
-        const sampleData = this.getSheetSimpleData(sheetMeta);
+        const sampleData = sheetMeta.sample_data || [];
         if (sampleData.length === 0) {
             return;
         }
 
         const sheet = this.getSheet(sheetMeta);
-        sampleData.forEach(row => {
-            sheet.appendRow(row);
-        });
+        const existingValues = sheet.getDataRange().getValues() || [];
 
+        // merge existing values with sample data (existing values first)
+        const mergedValues = existingValues.concat(sampleData);
+
+        // set the merged values back to the sheet
+        sheet.getRange(1, 1, mergedValues.length, mergedValues[0].length)
+            .setValues(mergedValues);
+            
         return sheet;
-    }
-
-    appendRow(sheetMeta = {}, rowData = []) {
-        const sheet = this.getSheet(sheetMeta);
-        sheet.appendRow(rowData);
     }
 
     get columns() {

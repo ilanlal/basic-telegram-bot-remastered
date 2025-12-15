@@ -23,22 +23,6 @@ class CardController {
                     .pushCard(cardBuilder.build())
             );
     }
-    activateSheet(sheetMeta = {}) {
-        const sheetModel = SheetModel.create(this.activeSpreadsheet);
-        return sheetModel.setActiveSheet(sheetMeta);
-    }
-    bindSheetSampleData(sheetMeta = {}) {
-        const sheetModel = SheetModel.create(this.activeSpreadsheet);
-        return sheetModel.bindSheetSampleData(sheetMeta);
-    }
-    save(edm = {}, rowIndex = -1) {
-        // Implementation for save action
-    }
-
-
-    delete(rowIndex = -1) {
-        // Implementation for delete action
-    }
 }
 
 if (typeof module !== 'undefined' && module.exports) {

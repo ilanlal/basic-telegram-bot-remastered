@@ -1,5 +1,6 @@
 require('../../../tests');
 const { BotSetupController } = require('./BotSetupController');
+const { EMD } = require('../../config/EMD');
 
 describe('BotSetupController Tests', () => {
     test("BotSetupController should be defined", () => {
@@ -18,7 +19,7 @@ describe('BotSetupController Tests', () => {
                 SpreadsheetApp.getActiveSpreadsheet()
             );
             SheetModel.create(SpreadsheetApp.getActiveSpreadsheet())
-                .bindSheetSampleData(EMD.BotSetup.sheet({}));
+                .bindSheetSampleData(EMD.Spreadsheet.BotSetup({}));
         });
 
         test("BotSetupController instance should be created", () => {

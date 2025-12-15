@@ -56,9 +56,9 @@ EMD.Home = {
                                     disabled: false,
                                     text: '🔩',
                                     onClick: {
-                                        functionName: 'EntityHandler.Addon.onOpenCardClick',
+                                        functionName: 'CardHandler.Addon.onOpenCardClick',
                                         parameters: {
-                                            entityName: 'EnvironmentVariables'
+                                            card: 'EMD.Cards.EnvironmentVariables'
                                         }
                                     }
                                 }
@@ -82,8 +82,8 @@ EMD.Home = {
                                     disabled: false,
                                     text: '🤖',
                                     onClick: {
-                                        functionName: 'EntityHandler.Addon.onOpenCardClick',
-                                        parameters: { entityName: 'BotSetup' }
+                                        functionName: 'CardHandler.Addon.onOpenCardClick',
+                                        parameters: { card: 'EMD.Cards.BotSetup' }
                                     }
                                 }
                             }
@@ -106,8 +106,8 @@ EMD.Home = {
                                     disabled: false,
                                     text: '⚡',
                                     onClick: {
-                                        functionName: 'EntityHandler.Addon.onOpenCardClick',
-                                        parameters: { entityName: 'Automation' }
+                                        functionName: 'CardHandler.Addon.onOpenCardClick',
+                                        parameters: { card: 'EMD.Cards.Automation' }
                                     }
                                 }
                             }
@@ -130,8 +130,8 @@ EMD.Home = {
                                     disabled: false,
                                     text: '👥',
                                     onClick: {
-                                        functionName: 'EntityHandler.Addon.onOpenCardClick',
-                                        parameters: { entityName: 'Customer' }
+                                        functionName: 'CardHandler.Addon.onOpenCardClick',
+                                        parameters: { card: 'EMD.Cards.Customer' }
                                     }
                                 }
                             }
@@ -497,8 +497,8 @@ EMD.BotSetup = {
                                 TextButton: {
                                     text: '📄 Bind Sheet with Sample Data',
                                     onClick: {
-                                        functionName: 'EntityHandler.Addon.onBindSheetDataClick',
-                                        parameters: { entityName: 'BotSetup' }
+                                        functionName: 'SpreadsheetHandler.Addon.onInsertSampleDataClick',
+                                        parameters: { sheet: 'EMD.Spreadsheet.BotSetup' }
                                     }
                                 }
                             },
@@ -925,9 +925,9 @@ EMD.Customer = {
                                         text: 'Add Sample Data',
                                         disabled: false,
                                         onClick: {
-                                            functionName: 'EntityHandler.Addon.onBindSheetDataClick',
+                                            functionName: 'SpreadsheetHandler.Addon.onInsertSampleDataClick',
                                             parameters: {
-                                                entityName: 'Customer'
+                                                sheet: 'EMD.Spreadsheet.Customer'
                                             }
                                         }
                                     }
@@ -978,44 +978,53 @@ EMD.Automation = {
             name: 'automation_Card',
             header: {
                 title: '⚡ Automation & Workflows',
-                subTitle: 'Manage your bot automations here.',
+                subTitle: 'Add and manage automations to enhance your Telegram bot functionality.',
                 imageUrl: EMD.MATH_IMG_URL,
                 imageStyle: CardService.ImageStyle.SQUARE,
                 imageAltText: 'Automation Image'
             },
             sections:
                 [
-                    {   // Basic Automation Section
-                        // header: 'Automation Management',
+                    { // Automation Overview Section
+                        header: 'Automation Overview',
                         collapsible: false,
                         numUncollapsibleWidgets: 0,
                         widgets: [
-                            {
-                                id: 'create_basic_automation_widget',
-                                DecoratedText: {
-                                    topLabel: '✨ Base',
-                                    text: 'Create basic automations from predefined templates to get started quickly.',
-                                    bottomLabel: 'Bind basic template data to get started with basic automations',
-                                    wrapText: false,
-                                    textButton: {
-                                        text: '✨ Base Template',
-                                        disabled: false,
-                                        onClick: {
-                                            functionName: 'EntityHandler.Addon.onBindSheetDataClick',
-                                            parameters: {
-                                                entityName: EMD.BasicAutomation.entityName
-                                            }
-                                        }
-                                    }
+                            { // Automation Overview Text
+                                id: 'automation_overview_widget',
+                                TextParagraph: {
+                                    text: 'Automations allow you to streamline and enhance your Telegram bot\'s functionality. '
+                                        + 'By setting up automations, you can create dynamic interactions, manage user engagement, '
+                                        + 'and perform various tasks automatically based on user actions or predefined triggers. '
                                 }
                             }
                         ]
                     },
-                    {   // 🐱❤️ Support Our Feline Friends! ❤️🐱
-                        collapsible: false,
-                        numUncollapsibleWidgets: 0,
+                    {   // Sample Data Management Section
+                        header: 'Create Automations from Templates',
+                        collapsible: true,
+                        numUncollapsibleWidgets: 4,
                         widgets: [
-                            {
+                            {   // Add Basic Automation template widget
+                                id: 'create_basic_automation_widget',
+                                DecoratedText: {
+                                    topLabel: '✨ Base',
+                                    text: 'Get started with essential automations to enhance your Telegram bot experience.',
+                                    bottomLabel: 'Beginner-friendly templates to kickstart your bot automations',
+                                    wrapText: false,
+                                    textButton: {
+                                        text: '✨ Baseic',
+                                        disabled: false,
+                                        onClick: {
+                                            functionName: 'SpreadsheetHandler.Addon.onInsertSampleDataClick',
+                                            parameters: {
+                                                sheet: 'EMD.Spreadsheet.BasicAutomation',
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            {   // Add Donation Campaign template widget
                                 id: 'create_donation_campaign_widget',
                                 DecoratedText: {
                                     topLabel: '🐱❤️',
@@ -1026,22 +1035,15 @@ EMD.Automation = {
                                         text: '🐱❤️ Donation Template',
                                         disabled: false,
                                         onClick: {
-                                            functionName: 'EntityHandler.Addon.onBindSheetDataClick',
+                                            functionName: 'SpreadsheetHandler.Addon.onInsertSampleDataClick',
                                             parameters: {
-                                                entityName: EMD.DonationCampaign.entityName
+                                                sheet: 'EMD.Spreadsheet.DonationCampaign',
                                             }
                                         }
                                     }
                                 }
-                            }
-                        ]
-                    },
-                    {   // Add Api Automation template section
-                        // header: 'Automation Management',
-                        collapsible: false,
-                        numUncollapsibleWidgets: 0,
-                        widgets: [
-                            {
+                            },
+                            {   // Add API Automation template widget
                                 id: 'create_api_automation_widget',
                                 DecoratedText: {
                                     topLabel: '🤖 API',
@@ -1052,22 +1054,15 @@ EMD.Automation = {
                                         text: '🤖 API Template',
                                         disabled: false,
                                         onClick: {
-                                            functionName: 'EntityHandler.Addon.onBindSheetDataClick',
+                                            functionName: 'SpreadsheetHandler.Addon.onInsertSampleDataClick',
                                             parameters: {
-                                                entityName: EMD.ApiFeaturesAutomation.entityName
+                                                sheet: 'EMD.Spreadsheet.ApiFeaturesAutomation'
                                             }
                                         }
                                     }
                                 }
-                            }
-                        ]
-                    },
-                    {   // Security Checks Section
-                        // header: 'Automation Management',
-                        collapsible: false,
-                        numUncollapsibleWidgets: 0,
-                        widgets: [
-                            {
+                            },
+                            {   // Add Security Automation template widget
                                 id: 'create_security_automation_widget',
                                 DecoratedText: {
                                     topLabel: '🔒 Security',
@@ -1078,22 +1073,15 @@ EMD.Automation = {
                                         text: '🔒 Security Template',
                                         disabled: false,
                                         onClick: {
-                                            functionName: 'EntityHandler.Addon.onBindSheetDataClick',
+                                            functionName: 'SpreadsheetHandler.Addon.onInsertSampleDataClick',
                                             parameters: {
-                                                entityName: EMD.SecurityChecksAutomation.entityName
+                                                sheet: 'EMD.Spreadsheet.SecurityAutomation'
                                             }
                                         }
                                     }
                                 }
-                            }
-                        ]
-                    },
-                    {   // Add Store Automation template section
-                        // header: 'Automation Management',
-                        collapsible: false,
-                        numUncollapsibleWidgets: 0,
-                        widgets: [
-                            {
+                            },
+                            {   // Add Store Automation template widget
                                 id: 'create_store_automation_widget',
                                 DecoratedText: {
                                     topLabel: '💰 Store',
@@ -1104,22 +1092,15 @@ EMD.Automation = {
                                         text: '💰 Store Template',
                                         disabled: false,
                                         onClick: {
-                                            functionName: 'EntityHandler.Addon.onBindSheetDataClick',
+                                            functionName: 'SpreadsheetHandler.Addon.onInsertSampleDataClick',
                                             parameters: {
-                                                entityName: EMD.StoreAutomation.entityName
+                                                sheet: 'EMD.Spreadsheet.StoreAutomation'
                                             }
                                         }
                                     }
                                 }
-                            }
-                        ]
-                    },
-                    {   // Add Survey Automation template section
-                        // header: 'Automation Management',
-                        collapsible: false,
-                        numUncollapsibleWidgets: 0,
-                        widgets: [
-                            {
+                            },
+                            {   // Add Survey Automation template widget
                                 id: 'create_survey_automation_widget',
                                 DecoratedText: {
                                     topLabel: '📋 Survey',
@@ -1130,34 +1111,9 @@ EMD.Automation = {
                                         text: '📋 Survey Template',
                                         disabled: false,
                                         onClick: {
-                                            functionName: 'EntityHandler.Addon.onBindSheetDataClick',
+                                            functionName: 'SpreadsheetHandler.Addon.onInsertSampleDataClick',
                                             parameters: {
-                                                entityName: EMD.SurveyAutomation.entityName
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        ]
-                    },
-                    {   // clear cache memory section
-                        // header: 'Cache Management',
-                        collapsible: true,
-                        widgets: [
-                            {
-                                id: 'clear_cache_widget',
-                                DecoratedText: {
-                                    topLabel: '🧹 Clear Cache',
-                                    text: 'Clear the cache to free up memory and improve performance.',
-                                    bottomLabel: 'This action cannot be undone.',
-                                    wrapText: false,
-                                    textButton: {
-                                        text: '🧹 Clear Cache',
-                                        disabled: false,
-                                        onClick: {
-                                            functionName: 'EntityHandler.Addon.onClearCacheClick',
-                                            parameters: {
-                                                prefix: 'Automation'
+                                                sheet: 'EMD.Spreadsheet.SurveyAutomation'
                                             }
                                         }
                                     }
@@ -5918,7 +5874,6 @@ EMD.StoreAutomation = {
     }
 }
 
-// 🐱❤️ Support Our Feline Friends! ❤️🐱
 EMD.DonationCampaign = {
     entityName: 'DonationCampaign',
     sheet: (data = {}) => {
@@ -9420,6 +9375,12 @@ EMD.Cards = {
     Help: EMD.Help.card,
     About: EMD.About.card
 };
+
+EMD.CardNavigations = {
+    PushCard: EMD.Cards,
+    PopCard: true,
+    UpdateCard: { }
+}
 
 EMD.Spreadsheet = {
     BotSetup: EMD.BotSetup.sheet,

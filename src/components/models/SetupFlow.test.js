@@ -1,6 +1,8 @@
 require('../../../tests');
 const { SetupFlow } = require('./SetupFlow');
 const { EnvironmentModel } = require('./EnvironmentModel');
+const { SheetModel } = require('./SheetModel');
+const { EMD } = require('../../config/EMD');
 
 describe('SetupFlow', () => {
     /** @type {SetupFlow} */
