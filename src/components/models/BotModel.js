@@ -1,8 +1,4 @@
 class BotModel {
-    static get SHEET_NAME() {
-        return EMD.BotSetup.sheet({}).name;
-    }
-
     constructor(activeSpreadsheet) {
         this.sheetModel = SheetModel.create(activeSpreadsheet);
         this.sheet = this.sheetModel.initializeSheet(EMD.BotSetup.sheet({}));

@@ -1,4 +1,4 @@
-class Widget {
+class WidgetModel {
     static get INVALID_ID_ERROR() {
         return 'Widget id is required';
     }
@@ -11,13 +11,13 @@ class Widget {
     }
 
     static create(widgetMeta = {}, userProperties = PropertiesService.getDocumentProperties()) {
-        const { id, value = null, tabIndex = Widget.tabIndex(), propertyName = null } = widgetMeta;
+        const { id, value = null, tabIndex = WidgetModel.tabIndex(), propertyName = null } = widgetMeta;
 
         if (!id) {
-            throw new Error(Widget.INVALID_ID_ERROR);
+            throw new Error(WidgetModel.INVALID_ID_ERROR);
         }
 
-        const widgetInstance = new Widget(id, userProperties)
+        const widgetInstance = new WidgetModel(id, userProperties)
             .setTabIndex(tabIndex);
 
         if (value) {
@@ -81,6 +81,6 @@ class Widget {
 
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = {
-        Widget
+        WidgetModel
     };
 }

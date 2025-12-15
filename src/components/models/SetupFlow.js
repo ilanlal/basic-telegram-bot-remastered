@@ -4,7 +4,7 @@ class SetupFlow {
         this._telegramBotClient = null;
         this._activeSpreadsheet = activeSpreadsheet;
         this.sheetModel = SheetModel.create(activeSpreadsheet);
-        this.sheet = this.sheetModel.initializeSheet(EMD.BotSetup.sheet({}));
+        this.sheet = this.sheetModel.initializeSheet(EMD.Spreadsheet.BotSetup({}));
     }
 
     static create(

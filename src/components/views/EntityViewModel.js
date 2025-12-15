@@ -132,7 +132,7 @@ EntityViewModel.CardServiceWrapper = class {
     }
 
     newWidget(widgetMeta = {}) {
-        const _widgetInstance = Widget.create(widgetMeta, this._userProperties);
+        const _widgetInstance = WidgetModel.create(widgetMeta, this._userProperties);
         // Bind value from 'propertyName' property if specified
         const value = _widgetInstance.value || '';
 
@@ -163,11 +163,16 @@ EntityViewModel.CardServiceWrapper = class {
         if (!dtMeta.topLabel && !dtMeta.bottomLabel) {
             throw new Error(EntityViewModel.CardServiceWrapper.DECORATED_TEXT_MISSING_CONTENT_ERROR);
         }
-        const decoratedText = this._cardService.newDecoratedText()
-            .setTopLabel(`${dtMeta.topLabel}`)
-            .setWrapText(dtMeta.wrapText || false)
-            .setText(`${dtMeta.text}`)
-            .setBottomLabel(`${dtMeta.bottomLabel}`);
+        const decoratedText = this._cardService.newDecoratedText();
+
+        if (dtMeta.topLabel)
+            decoratedText.setTopLabel(`${dtMeta.topLabel}`);
+        if (dtMeta.wrapText)
+            decoratedText.setWrapText(dtMeta.wrapText || false);
+        if (dtMeta.text)
+            decoratedText.setText(`${dtMeta.text}`);
+        if (dtMeta.bottomLabel)
+            decoratedText.setBottomLabel(`${dtMeta.bottomLabel}`);
 
         if (dtMeta.textButton) {
             decoratedText.setButton(

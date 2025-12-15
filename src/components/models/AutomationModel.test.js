@@ -1,6 +1,5 @@
 require('../../../tests');
 const { AutomationModel } = require('./AutomationModel');
-const { Entity } = require('./EntityModel');
 const SpreadsheetStubConfiguration = require('@ilanlal/gasmocks/src/spreadsheetapp/classes/SpreadsheetStubConfiguration');
 const SpreadsheetApp = require('@ilanlal/gasmocks/src/spreadsheetapp/SpreadsheetApp');
 const { SheetModel } = require('./SheetModel');

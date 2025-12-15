@@ -1,5 +1,5 @@
-require('../../../../tests');
-const { Widget } = require('./Widget');
+require('../../../tests');
+const { WidgetModel } = require('./WidgetModel');
 
 describe('Widget', () => {
     test('should initialize with user property value', () => {
@@ -19,7 +19,7 @@ describe('Widget', () => {
             }
         };
 
-        const widgetModel = Widget
+        const widgetModel = WidgetModel
             .create(
                 widgetObject,
                 global.PropertiesService.getDocumentProperties()
@@ -40,14 +40,14 @@ describe('Widget', () => {
             value: 'Should not be overridden'
         };
 
-        const widgetModel = Widget.create(widgetObject, global.PropertiesService.getDocumentProperties());
+        const widgetModel = WidgetModel.create(widgetObject, global.PropertiesService.getDocumentProperties());
         expect(widgetModel.id).toBe(widgetObject.id);
         expect(widgetModel.value).toBe('Should not be overridden');
         expect(widgetModel.tabIndex).toBe(1);
     });
 
     test('should throw error if id is missing', () => {
-        expect(() => Widget.create({
+        expect(() => WidgetModel.create({
             // missing id
             DecoratedText: {
                 text: 'Sample Text',
@@ -55,7 +55,7 @@ describe('Widget', () => {
             },
             value: 'Sample Value'
         }))
-            .toThrow(Widget.INVALID_ID_ERROR);
+            .toThrow(WidgetModel.INVALID_ID_ERROR);
     });
 
 });

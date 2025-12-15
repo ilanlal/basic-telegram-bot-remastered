@@ -28,8 +28,6 @@ EMD.GIT_REPO_URL = 'https://github.com/ilanlal/basic-telegram-bot-remastered';
 
 EMD.Home = {
     entityName: 'Home',
-    displayName: 'Home',
-    pluralDisplayName: 'Homes',
     card: (data = {}) => {
         return {
             name: 'homeCard',
@@ -161,8 +159,6 @@ EMD.Home = {
 
 EMD.EnvironmentVariables = {
     entityName: 'EnvironmentVariables',
-    displayName: 'Environment Variables',
-    pluralDisplayName: 'Environment Variables',
     card: (data = {}) => {
         return {
             name: 'environment_variables_Card',
@@ -334,8 +330,6 @@ EMD.EnvironmentVariables = {
 
 EMD.BotSetup = {
     entityName: 'BotSetup',
-    displayName: 'Bot Setup',
-    pluralDisplayName: 'Bot Setups',
     card: (data = {}) => {
         return {
             name: 'bot_setup_Card',
@@ -9371,6 +9365,29 @@ EMD.Logger = {
             sample_data: []
         };
     }
+}
+
+EMD.Cards = {
+    Home: EMD.Home.card,
+    EnvironmentVariables: EMD.EnvironmentVariables.card,
+    BotSetup: EMD.BotSetup.card,
+    Automation: EMD.Automation.card,
+    Customer: EMD.Customer.card,
+    Account: EMD.Account.card,
+    About: EMD.About.card
+};
+
+EMD.Spreadsheet = {
+    BotSetup: EMD.BotSetup.sheet,
+    Customer: EMD.Customer.sheet,
+    Automation: EMD.Automation.sheet,
+    BasicAutomation: EMD.BasicAutomation.sheet,
+    SurveyAutomation: EMD.SurveyAutomation.sheet,
+    StoreAutomation: EMD.StoreAutomation.sheet,
+    DonationCampaign: EMD.DonationCampaign.sheet,
+    ApiFeaturesAutomation: EMD.ApiFeaturesAutomation.sheet,
+    SecurityChecksAutomation: EMD.SecurityChecksAutomation.sheet,
+    Logger: EMD.Logger.sheet
 }
 
 if (typeof module !== 'undefined' && module.exports) {

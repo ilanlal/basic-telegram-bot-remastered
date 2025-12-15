@@ -37,38 +37,53 @@ class AutomationHandler {
             // Update localReplyToMessageId for chaining actions that depend on previous message
             const actionContent = JSON.parse(lastActionResult);
             localReplyToMessageId = actionContent.result?.message_id || localReplyToMessageId;
-            // handle createInvoiceLink  (log the link)  
-            if (action.method?.startsWith('createInvoiceLink')) {
-                LoggerModel.create(this._userProperties, this._activeSpreadsheet)
-                    .logEvent({
-                        dc: 'automation_action',
-                        action: action?.method || '_no_method_',
-                        chat_id: chat_id || '0000',
-                        content: lastActionResult || 'no_content',
-                        event: `${actionContent.result || 'No link'}`
-                    });
+            
+            // handle create actions separately
+            if (action.method?.startsWith('create')) {
+                const createActionResul = this.handlePostCreateAction({ language_code, chat_id, action, actionResponse: actionContent });
+            }
 
-                // response _invoice_link_result_ action with the link
-                const linkActions = this.findActionsForQuery('_invoice_link_result_', language_code);
-                if (linkActions.length > 0) {
-                    linkActions.forEach((linkActionResult) => {
-                        // replace {{invoice_link}} in payload with actual link
-                        if (linkActionResult.payload) {
-                            for (const key in linkActionResult.payload) {
-                                if (typeof linkActionResult.payload[key] === 'string') {
-                                    linkActionResult.payload[key] = linkActionResult.payload[key].replace('{{invoice_link}}', actionContent.result || 'about:blank');
-                                }
-                            }
-                        }
-                        this.executeAction(chat_id, linkActionResult);
-                    });
-                }
-
+            // handle get actions separately
+            if (action.method?.startsWith('get')) {
+                const getActionResul = this.handlePostGetAction({ chat_id, action, reply_to_message_id: localReplyToMessageId, callback_query_id  });
             }
         });
 
         // For testing purposes, return a simple status        
         return JSON.stringify({ status: 'dynamic_reply_handled', chat_id, query, actions_executed: actions?.length || 0, last_action_result: lastActionResult });
+    }
+
+    handlePostGetAction({ chat_id, action, reply_to_message_id = null, callback_query_id = null }) {
+        if (!chat_id || !action) {
+            throw new Error('Invalid "get" action response format');
+        }
+        return JSON.stringify({ status: 'get_action_handled', chat_id, action });
+    }
+
+    handlePostCreateAction({ language_code, chat_id, method, actionResponse }) {
+        if (!chat_id || !method || !actionResponse) {
+            throw new Error('Invalid "create" action response format');
+        }
+
+        if (method.startsWith('createInvoiceLink')) {
+            // response _invoice_link_result_ action with the link
+            const linkActions = this.findActionsForQuery('_invoice_link_result_', language_code);
+            if (linkActions.length > 0) {
+                linkActions.forEach((linkActionResult) => {
+                    // replace {{invoice_link}} in payload with actual link
+                    if (linkActionResult.payload) {
+                        for (const key in linkActionResult.payload) {
+                            if (typeof linkActionResult.payload[key] === 'string') {
+                                linkActionResult.payload[key] = linkActionResult.payload[key].replace('{{invoice_link}}', actionResponse.result || 'about:blank');
+                            }
+                        }
+                    }
+                    this.executeAction(chat_id, linkActionResult);
+                });
+            }
+
+        }
+        return JSON.stringify({ status: 'create_action_handled', chat_id, action });
     }
 
     executeAction(chat_id, action, reply_to_message_id, callback_query_id = null) {
@@ -87,12 +102,12 @@ class AutomationHandler {
         }
 
         // Handle next action chaining
-        if (action.next) {
+        if (action.next || action.task || action.sub_action) {
             // Chain the next action after a delay
             const summeryResponseText = this.handleAutomationRequest({
                 language_code: this._defaultLanguageCode,
                 chat_id,
-                query: action.next,
+                query: action.next || action.task || action.sub_action,
                 reply_to_message_id,
                 callback_query_id
             });
@@ -144,7 +159,7 @@ class AutomationHandler {
         return responseContent;
     }
 
-    findActionsForQuery(query, language_code) {
+    findActionsForQuery(query, language_code = 'none') {
         // array of actions like [{method: 'sendMessage', payload: {...}}] to execute (as string)
         // Try to find actions for the given language code
         let apiActionsToDoList = this._automationModel.findData(query, language_code);
