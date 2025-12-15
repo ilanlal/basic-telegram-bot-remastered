@@ -1,4 +1,3 @@
-
 class EntityController {
     static create(
         cardService = CardService,
@@ -15,7 +14,7 @@ class EntityController {
     }
 
     pushCard(cardMeta = {}) {
-        const cardWeapper = EntityViewModel.CardServiceWrapper
+        const cardWeapper = CardViewModel.CardServiceWrapper
             .create(this.cardService, this.userProperties);
 
         const cardBuilder = cardWeapper.newCardBuilder(cardMeta);

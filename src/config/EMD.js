@@ -165,7 +165,7 @@ EMD.EnvironmentVariables = {
             header: {
                 title: '🔩 Environment Variables',
                 subTitle: 'Configure your environment variables here.',
-                imageUrl: EMD.DEFAULT_IMAGE_URL,
+                imageUrl: EMD.WELCOME_IMG_URL,
                 imageStyle: CardService.ImageStyle.SQUARE,
                 imageAltText: 'Environment Image'
             },
@@ -336,7 +336,7 @@ EMD.BotSetup = {
             header: {
                 title: '🤖 Bot Setup',
                 subTitle: 'Configure your bot environment variables here.',
-                imageUrl: EMD.DEFAULT_IMAGE_URL,
+                imageUrl: EMD.YES_IMG_URL,
                 imageStyle: CardService.ImageStyle.SQUARE,
                 imageAltText: 'Environment Image'
             }
@@ -979,7 +979,7 @@ EMD.Automation = {
             header: {
                 title: '⚡ Automation & Workflows',
                 subTitle: 'Manage your bot automations here.',
-                imageUrl: EMD.DEFAULT_IMAGE_URL,
+                imageUrl: EMD.MATH_IMG_URL,
                 imageStyle: CardService.ImageStyle.SQUARE,
                 imageAltText: 'Automation Image'
             },
@@ -9266,7 +9266,7 @@ EMD.About = {
             header: {
                 title: 'About This Addon',
                 subTitle: 'Learn more about this Addon.',
-                imageUrl: EMD.DEFAULT_IMAGE_URL,
+                imageUrl: EMD.I_AM_THINKING_IMG_URL,
                 imageStyle: CardService.ImageStyle.SQUARE,
                 imageAltText: 'About Image'
             },
@@ -9307,6 +9307,49 @@ EMD.About = {
     }
 }
 
+EMD.Help = {
+    entityName: 'Help',
+    card: (data = {}) => {
+        return {
+            name: 'help_Card',
+            header: {
+                title: 'Help & Support',
+                subTitle: 'Get help and support for this Addon.',
+                imageUrl: EMD.HELP_IMG_URL,
+                imageStyle: CardService.ImageStyle.SQUARE,
+                imageAltText: 'Help Image'
+            },
+            sections: [
+                {
+                    // header: 'Help & Support',
+                    widgets: [
+                        {
+                            id: 'help_text_paragraph',
+                            TextParagraph: {
+                                text: 'If you need assistance, please contact our support team or visit our help center.'
+                            }
+                        }
+                    ]
+                },
+                {   // Data view
+                    header: 'Data View',
+                    collapsible: true,
+                    numUncollapsibleWidgets: 0,
+                    widgets: [
+                        {   // Data View widget
+                            id: 'data_view_widget',
+                            TextParagraph: {
+                                text: `Data: ${JSON.stringify(data, null, 2)}`,
+                                maxLines: 35
+                            }
+                        }
+                    ]
+                }
+            ]
+        };
+    }
+}
+
 EMD.Account = {
     entityName: 'Account',
     card: (data = {}) => {
@@ -9315,7 +9358,7 @@ EMD.Account = {
             header: {
                 title: 'Account Management',
                 subTitle: 'Manage your account settings and preferences.',
-                imageUrl: EMD.DEFAULT_IMAGE_URL,
+                imageUrl: EMD.BLINK_IMG_URL,
                 imageStyle: CardService.ImageStyle.SQUARE,
                 imageAltText: 'Account Image'
             },
@@ -9374,6 +9417,7 @@ EMD.Cards = {
     Automation: EMD.Automation.card,
     Customer: EMD.Customer.card,
     Account: EMD.Account.card,
+    Help: EMD.Help.card,
     About: EMD.About.card
 };
 
