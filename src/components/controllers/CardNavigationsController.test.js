@@ -12,7 +12,7 @@ describe('CardNavigationsController', () => {
     // pushCard
     it('should push a card onto the navigation stack', () => {
         const cardNavigationsController = CardNavigationsController.create();
-        const navigation = cardNavigationsController.pushCard(EMD.CardNavigations.PushCard.Home);
+        const navigation = cardNavigationsController.pushCard(EMD.Cards.Home);
         expect(navigation).toBeDefined();
         expect(typeof navigation).toBe('object');
     });
@@ -20,7 +20,7 @@ describe('CardNavigationsController', () => {
     // updateCard
     it('should update the current card in the navigation stack', () => {
         const cardNavigationsController = CardNavigationsController.create();
-        const navigation = cardNavigationsController.updateCard(EMD.CardNavigations.UpdateCard.EnvironmentVariables);
+        const navigation = cardNavigationsController.updateCard(EMD.Cards.EnvironmentVariables);
         expect(navigation).toBeDefined();
         expect(typeof navigation).toBe('object');
     });

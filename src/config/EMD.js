@@ -9374,12 +9374,6 @@ EMD.Cards = {
     Account: EMD.Account.card,
     Help: EMD.Help.card,
     About: EMD.About.card
-};
-
-EMD.CardNavigations = {
-    PushCard: EMD.Cards,
-    PopCard: true,
-    UpdateCard: { }
 }
 
 EMD.Spreadsheet = {
