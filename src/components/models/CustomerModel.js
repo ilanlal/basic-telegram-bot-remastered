@@ -1,8 +1,4 @@
 class CustomerModel {
-    static get SHEET_NAME() {
-        return EMD.Customer.sheet({}).name;
-    }
-
     static create(userProperties = PropertiesService.getDocumentProperties(), activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet()) {
         return new CustomerModel(userProperties, activeSpreadsheet);
     }

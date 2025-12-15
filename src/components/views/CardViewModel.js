@@ -1,27 +1,27 @@
-class EntityViewModel {
+class CardViewModel {
     static create({
         cardService = CardService,
         activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet(),
         userProperties = PropertiesService.getDocumentProperties() } = {}
     ) {
-        return new EntityViewModel({
-            cardWrapper: EntityViewModel.CardServiceWrapper.create(cardService, userProperties)
+        return new CardViewModel({
+            cardWrapper: CardViewModel.CardServiceWrapper.create(cardService, userProperties)
         });
     }
 
     constructor({ cardWrapper } = {}) {
         // Use the global CardService in Apps Script environment
-        /** @type {EntityViewModel.CardServiceWrapper} */
+        /** @type {CardViewModel.CardServiceWrapper} */
         this._cardWrapper = cardWrapper;
     }
 
-    /** @returns {EntityViewModel.CardServiceWrapper} */
+    /** @returns {CardViewModel.CardServiceWrapper} */
     get cardWrapper() {
         return this._cardWrapper;
     }
 };
 
-EntityViewModel.CardServiceWrapper = class {
+CardViewModel.CardServiceWrapper = class {
     static get DEFAULT_EVENT_CLICK_FUNCTION_NAME() {
         return 'EventHandler.Addon.onButtonClick';
     }
@@ -46,7 +46,7 @@ EntityViewModel.CardServiceWrapper = class {
     }
 
     static create(cardService = CardService, userProperties = PropertiesService.getDocumentProperties()) {
-        return new EntityViewModel.CardServiceWrapper(cardService, userProperties);
+        return new CardViewModel.CardServiceWrapper(cardService, userProperties);
     }
 
     constructor(cardService, userProperties) {
@@ -90,13 +90,13 @@ EntityViewModel.CardServiceWrapper = class {
             .setTitle(`${headerMeta.title || ''}`)
             .setSubtitle(`${headerMeta.subTitle || ''}`)
             .setImageStyle(headerMeta.imageStyle || CardService.ImageStyle.SQUARE)
-            .setImageUrl(headerMeta.imageUrl || EntityViewModel.DEFAULT_IMAGE_URL)
+            .setImageUrl(headerMeta.imageUrl || CardViewModel.DEFAULT_IMAGE_URL)
             .setImageAltText(headerMeta.imageAltText || 'Card Image');
     }
 
     newFixedFooter(fixedFooterMeta = {}) {
         if (!fixedFooterMeta.primaryButton?.textButton) {
-            throw new Error(EntityViewModel.CardServiceWrapper.FIXED_FOOTER_BUTTON_NOT_DEFINED_ERROR);
+            throw new Error(CardViewModel.CardServiceWrapper.FIXED_FOOTER_BUTTON_NOT_DEFINED_ERROR);
         }
         const fixedFooter = this._cardService.newFixedFooter();
 
@@ -132,7 +132,7 @@ EntityViewModel.CardServiceWrapper = class {
     }
 
     newWidget(widgetMeta = {}) {
-        const _widgetInstance = Widget.create(widgetMeta, this._userProperties);
+        const _widgetInstance = WidgetModel.create(widgetMeta, this._userProperties);
         // Bind value from 'propertyName' property if specified
         const value = _widgetInstance.value || '';
 
@@ -158,20 +158,25 @@ EntityViewModel.CardServiceWrapper = class {
     newDecoratedText(dtMeta = {}, value = '') {
         // setText(text) and one of the keys: setTopLabel(text), or setBottomLabel(text) are required
         if (!dtMeta.text) {
-            throw new Error(EntityViewModel.CardServiceWrapper.DECORATED_TEXT_MISSING_CONTENT_ERROR);
+            throw new Error(CardViewModel.CardServiceWrapper.DECORATED_TEXT_MISSING_CONTENT_ERROR);
         }
         if (!dtMeta.topLabel && !dtMeta.bottomLabel) {
-            throw new Error(EntityViewModel.CardServiceWrapper.DECORATED_TEXT_MISSING_CONTENT_ERROR);
+            throw new Error(CardViewModel.CardServiceWrapper.DECORATED_TEXT_MISSING_CONTENT_ERROR);
         }
-        const decoratedText = this._cardService.newDecoratedText()
-            .setTopLabel(`${dtMeta.topLabel}`)
-            .setWrapText(dtMeta.wrapText || false)
-            .setText(`${dtMeta.text}`)
-            .setBottomLabel(`${dtMeta.bottomLabel}`);
+        const decoratedText = this._cardService.newDecoratedText();
 
-        if (dtMeta.textButton) {
+        if (dtMeta.topLabel)
+            decoratedText.setTopLabel(`${dtMeta.topLabel}`);
+        if (dtMeta.wrapText)
+            decoratedText.setWrapText(dtMeta.wrapText || false);
+        if (dtMeta.text)
+            decoratedText.setText(`${dtMeta.text}`);
+        if (dtMeta.bottomLabel)
+            decoratedText.setBottomLabel(`${dtMeta.bottomLabel}`);
+
+        if (dtMeta.textButton || dtMeta.TextButton) {
             decoratedText.setButton(
-                this.newTextButton(dtMeta.textButton, !!value));
+                this.newTextButton(dtMeta.textButton || dtMeta.TextButton, !!value));
         }
 
         return decoratedText;
@@ -179,7 +184,7 @@ EntityViewModel.CardServiceWrapper = class {
 
     newTextInput(inputTextMeta = {}, value = '') {
         if (!inputTextMeta.fieldName || String(inputTextMeta.fieldName).trim() === '') {
-            throw new Error(EntityViewModel.CardServiceWrapper.TEXT_INPUT_MISSING_FIELD_NAME_ERROR);
+            throw new Error(CardViewModel.CardServiceWrapper.TEXT_INPUT_MISSING_FIELD_NAME_ERROR);
         }
 
         return CardService.newTextInput()
@@ -201,7 +206,7 @@ EntityViewModel.CardServiceWrapper = class {
 
     newTextButton(textButtonMeta = {}, disabled = false, style = CardService.TextButtonStyle.TEXT) {
         if (!textButtonMeta.text || (!textButtonMeta.openLink && !textButtonMeta.onClick)) {
-            throw new Error(EntityViewModel.CardServiceWrapper.TEXT_BUTTON_MISSING_PROPERTIES_ERROR);
+            throw new Error(CardViewModel.CardServiceWrapper.TEXT_BUTTON_MISSING_PROPERTIES_ERROR);
         }
 
         const _textButton = this._cardService.newTextButton()
@@ -214,17 +219,17 @@ EntityViewModel.CardServiceWrapper = class {
         }
         else if (textButtonMeta.onClick) {
             _textButton.setOnClickAction(textButtonMeta.onClick.functionName ? this._cardService.newAction()
-                .setFunctionName(textButtonMeta.onClick.functionName || EntityViewModel.CardServiceWrapper.DEFAULT_EVENT_CLICK_FUNCTION_NAME)
+                .setFunctionName(textButtonMeta.onClick.functionName || CardViewModel.CardServiceWrapper.DEFAULT_EVENT_CLICK_FUNCTION_NAME)
                 .setParameters(textButtonMeta.onClick.parameters || {}) : null
             );
         }
         else {
-            throw new Error(EntityViewModel.CardServiceWrapper.TEXT_BUTTON_MISSING_PROPERTIES_ERROR);
+            throw new Error(CardViewModel.CardServiceWrapper.TEXT_BUTTON_MISSING_PROPERTIES_ERROR);
         }
         return _textButton;
     }
 };
 
 if (typeof module !== "undefined" && module.exports) {
-    module.exports = EntityViewModel;
+    module.exports = CardViewModel;
 }

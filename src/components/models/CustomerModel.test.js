@@ -1,7 +1,6 @@
 require('../../../tests');
 const RangeStubConfiguration = require('@ilanlal/gasmocks/src/spreadsheetapp/classes/RangeStubConfiguration');
 const { CustomerModel } = require('./CustomerModel');
-const { Entity } = require('./EntityModel');
 const SpreadsheetStubConfiguration = require('@ilanlal/gasmocks/src/spreadsheetapp/classes/SpreadsheetStubConfiguration');
 const SpreadsheetApp = require('@ilanlal/gasmocks/src/spreadsheetapp/SpreadsheetApp');
 const { SheetModel } = require('./SheetModel');

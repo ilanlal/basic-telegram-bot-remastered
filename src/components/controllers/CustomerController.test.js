@@ -39,7 +39,7 @@ describe('CustomerController', () => {
 
         // Ensure no duplicate is added
         const allCustomers = [];
-        const sheet = activeSpreadsheet.getSheetByName(CustomerModel.SHEET_NAME);
+        const sheet = activeSpreadsheet.getSheetByName(EMD.Spreadsheet.Customer({}).name);
         const data = sheet.getDataRange().getValues();
         for (let row of data) {
             if (row[1] === mockedMessage.from.id) {

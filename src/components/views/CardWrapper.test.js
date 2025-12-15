@@ -1,14 +1,14 @@
 require('../../../tests');
-const EntityViewModel = require('./EntityViewModel');
+const CardViewModel = require('./CardViewModel');
 
 describe('Model.CardWrapper', () => {
     it('should create an instance of CardWrapper with new service instances', () => {
-        const wrapper = new EntityViewModel.CardServiceWrapper(CardService);
+        const wrapper = new CardViewModel.CardServiceWrapper(CardService);
         expect(wrapper).toBeDefined();
     });
 
     it('should create a new instance of CardWrapper with initiated service references', () => {
-        const viewModel = EntityViewModel.create({
+        const viewModel = CardViewModel.create({
             cardService: CardService,
             activeSpreadsheet: SpreadsheetApp.getActiveSpreadsheet(),
             userProperties: PropertiesService.getDocumentProperties()
@@ -17,7 +17,7 @@ describe('Model.CardWrapper', () => {
     });
 
     describe('Testing', () => {
-        const viewModel = EntityViewModel.create({
+        const viewModel = CardViewModel.create({
             cardService: CardService,
             activeSpreadsheet: SpreadsheetApp.getActiveSpreadsheet(),
             userProperties: PropertiesService.getDocumentProperties()
@@ -66,7 +66,7 @@ describe('Model.CardWrapper', () => {
                         // text is missing
                     };
                     expect(() => wrapper.newTextButton(textButtonMeta))
-                        .toThrowError(EntityViewModel.CardServiceWrapper.TEXT_BUTTON_MISSING_PROPERTIES_ERROR);
+                        .toThrowError(CardViewModel.CardServiceWrapper.TEXT_BUTTON_MISSING_PROPERTIES_ERROR);
                 });
 
 
@@ -111,7 +111,7 @@ describe('Model.CardWrapper', () => {
                         type: 'string'
                     };
                     expect(() => wrapper.newTextInput(textInputMeta))
-                        .toThrowError(EntityViewModel.CardServiceWrapper.TEXT_INPUT_MISSING_FIELD_NAME_ERROR);
+                        .toThrowError(CardViewModel.CardServiceWrapper.TEXT_INPUT_MISSING_FIELD_NAME_ERROR);
                 });
             });
 
@@ -138,7 +138,7 @@ describe('Model.CardWrapper', () => {
                         // missing text, topLabel, bottomLabel
                     };
                     expect(() => wrapper.newDecoratedText(decoratedTextMeta))
-                        .toThrowError(EntityViewModel.CardServiceWrapper.DECORATED_TEXT_MISSING_CONTENT_ERROR);
+                        .toThrowError(CardViewModel.CardServiceWrapper.DECORATED_TEXT_MISSING_CONTENT_ERROR);
                 });
 
                 it('should throw an error if DecoratedText content is missing', () => {
@@ -147,7 +147,7 @@ describe('Model.CardWrapper', () => {
                         // missing topLabel, bottomLabel
                     };
                     expect(() => wrapper.newDecoratedText(decoratedTextMeta))
-                        .toThrowError(EntityViewModel.CardServiceWrapper.DECORATED_TEXT_MISSING_CONTENT_ERROR);
+                        .toThrowError(CardViewModel.CardServiceWrapper.DECORATED_TEXT_MISSING_CONTENT_ERROR);
                 });
 
                 it('should throw an error if DecoratedText content is missing', () => {
@@ -156,7 +156,7 @@ describe('Model.CardWrapper', () => {
                         topLabel: 'Top Label',
                     };
                     expect(() => wrapper.newDecoratedText(decoratedTextMeta))
-                        .toThrowError(EntityViewModel.CardServiceWrapper.DECORATED_TEXT_MISSING_CONTENT_ERROR);
+                        .toThrowError(CardViewModel.CardServiceWrapper.DECORATED_TEXT_MISSING_CONTENT_ERROR);
                 });
             });
         });
@@ -231,7 +231,7 @@ describe('Model.CardWrapper', () => {
                 };
                 expect(() => {
                     wrapper.newFixedFooter(footerMeta);
-                }).toThrow(EntityViewModel.CardServiceWrapper.FIXED_FOOTER_BUTTON_NOT_DEFINED_ERROR);
+                }).toThrow(CardViewModel.CardServiceWrapper.FIXED_FOOTER_BUTTON_NOT_DEFINED_ERROR);
             });
 
         });

@@ -1,8 +1,4 @@
 class AutomationModel {
-    static get REPLIES_SHEET_NAME() {
-        return EMD.Automation.sheet({}).name;
-    }
-
     constructor(activeSpreadsheet) {
         this.sheetModel = SheetModel.create(activeSpreadsheet);
         this.sheet = this.sheetModel.initializeSheet(EMD.Automation.sheet({}));

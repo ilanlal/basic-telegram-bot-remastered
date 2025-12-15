@@ -1,21 +1,20 @@
 require('../../../tests');
 
 const { EMD } = require('../../config/EMD');
-const EntityViewModel = require('./EntityViewModel');
+const CardViewModel = require('./CardViewModel');
 
-describe('EntityViewModel', () => {
+describe('CardViewModel', () => {
     const tests = [
-        [EMD.Home, { isActive: true }],
-        [EMD.Automation, { isActive: true }],
-        [EMD.BasicAutomation, { isActive: true }],
-        [EMD.BotSetup, { isActive: true }],
-        [EMD.EnvironmentVariables, { isActive: true }],
-        [EMD.Account, { isActive: true }],
-        [EMD.About, { isActive: true }]
+        [EMD.Cards.Home, { isActive: true }],
+        [EMD.Cards.Automation, { isActive: true }],
+        [EMD.Cards.BotSetup, { isActive: true }],
+        [EMD.Cards.EnvironmentVariables, { isActive: true }],
+        [EMD.Cards.Account, { isActive: true }],
+        [EMD.Cards.Help, { isActive: true }],
     ];
 
     it('should create an view model instance.', () => {
-        const viewModel = EntityViewModel.create({
+        const viewModel = CardViewModel.create({
             cardService: CardService,
             activeSpreadsheet: SpreadsheetApp.getActiveSpreadsheet(),
             userProperties: PropertiesService.getDocumentProperties()
@@ -27,7 +26,7 @@ describe('EntityViewModel', () => {
         tests.forEach((emd) => {
             describe(`Testing entity: ${emd[0].entityName}`, () => {
                 it(`should create a card from the "${emd[0].entityName}" card method`, () => {
-                    const cardWeapper = EntityViewModel.CardServiceWrapper.create(
+                    const cardWeapper = CardViewModel.CardServiceWrapper.create(
                         CardService,
                         PropertiesService.getDocumentProperties()
                     );

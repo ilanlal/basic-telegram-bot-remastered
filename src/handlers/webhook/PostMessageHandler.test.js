@@ -5,6 +5,7 @@ const RangeStubConfiguration = require('@ilanlal/gasmocks/src/spreadsheetapp/cla
 const SpreadsheetApp = require('@ilanlal/gasmocks/src/spreadsheetapp/SpreadsheetApp');
 const { PostMessageHandler } = require('./PostMessageHandler');
 const { CustomerModel } = require('../../components/models/CustomerModel');
+const { EMD } = require('../../config/EMD');
 
 describe('PostMessageHandler', () => {
     /** @type {PostMessageHandler} */
@@ -22,7 +23,7 @@ describe('PostMessageHandler', () => {
             SpreadsheetApp.getActiveSpreadsheet()
         );
         SheetModel.create(SpreadsheetApp.getActiveSpreadsheet())
-            .bindSheetSampleData(EMD.BasicAutomation.sheet({}));
+            .bindSheetSampleData(EMD.Spreadsheet.BasicAutomation({}));
 
     });
 
@@ -42,7 +43,7 @@ describe('PostMessageHandler', () => {
         expect(Array.isArray(response)).toBe(true);
 
         // check if user is added to Users sheet
-        const sheetName = CustomerModel.SHEET_NAME;
+        const sheetName = EMD.Spreadsheet.Customer({}).name;
         const customerSheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(sheetName);
         expect(customerSheet).not.toBeNull();
         let data = customerSheet.getDataRange().getValues();
@@ -119,8 +120,6 @@ describe('PostMessageHandler', () => {
     });
 
     describe('handlePostMessage', () => {
-
-
         const commands = ['/start', '/help', '/about'];
         commands.forEach(cmd => {
             test(`should handle ${cmd} message`, () => {

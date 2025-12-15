@@ -1,3 +1,4 @@
-const EntityViewModel = require('./EntityViewModel');
+const CardViewModel = require('./CardViewModel');
 
-global.EntityViewModel = EntityViewModel;
+// Expose globally for tests and other scripts
+global.CardViewModel = CardViewModel;

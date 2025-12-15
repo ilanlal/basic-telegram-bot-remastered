@@ -13,7 +13,7 @@ describe('SetupFlow', () => {
         model = SetupFlow.create(PropertiesService.getDocumentProperties(),
             SpreadsheetApp.getActiveSpreadsheet());
         SheetModel.create(SpreadsheetApp.getActiveSpreadsheet())
-            .bindSheetSampleData(EMD.BotSetup.sheet({}));
+            .bindSheetSampleData(EMD.Spreadsheet.BotSetup({}));
     });
 
     test('should create a SetupFlow instance', () => {

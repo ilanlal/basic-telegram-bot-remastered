@@ -28,8 +28,6 @@ EMD.GIT_REPO_URL = 'https://github.com/ilanlal/basic-telegram-bot-remastered';
 
 EMD.Home = {
     entityName: 'Home',
-    displayName: 'Home',
-    pluralDisplayName: 'Homes',
     card: (data = {}) => {
         return {
             name: 'homeCard',
@@ -161,15 +159,13 @@ EMD.Home = {
 
 EMD.EnvironmentVariables = {
     entityName: 'EnvironmentVariables',
-    displayName: 'Environment Variables',
-    pluralDisplayName: 'Environment Variables',
     card: (data = {}) => {
         return {
             name: 'environment_variables_Card',
             header: {
                 title: '🔩 Environment Variables',
                 subTitle: 'Configure your environment variables here.',
-                imageUrl: EMD.DEFAULT_IMAGE_URL,
+                imageUrl: EMD.WELCOME_IMG_URL,
                 imageStyle: CardService.ImageStyle.SQUARE,
                 imageAltText: 'Environment Image'
             },
@@ -334,15 +330,13 @@ EMD.EnvironmentVariables = {
 
 EMD.BotSetup = {
     entityName: 'BotSetup',
-    displayName: 'Bot Setup',
-    pluralDisplayName: 'Bot Setups',
     card: (data = {}) => {
         return {
             name: 'bot_setup_Card',
             header: {
                 title: '🤖 Bot Setup',
                 subTitle: 'Configure your bot environment variables here.',
-                imageUrl: EMD.DEFAULT_IMAGE_URL,
+                imageUrl: EMD.YES_IMG_URL,
                 imageStyle: CardService.ImageStyle.SQUARE,
                 imageAltText: 'Environment Image'
             }
@@ -569,79 +563,143 @@ EMD.BotSetup = {
     },
     sheet: (data = {}) => {
         return {
+            // Sheet name for Bot Setup
             name: '🤖 Bot',
-            columns: ['key', 'en', 'es', 'fr', 'ar', 'de', 'it', 'pt', 'ru', 'zh', 'ja', 'ko', 'he'],
+            // Columns for the Bot Setup sheet (in multiple languages, including default). The first column is the key.
+            columns: ['key', 'default', 'en', 'es', 'fr', 'ar', 'de', 'it', 'pt', 'ru', 'zh', 'ja', 'ko', 'he'],
+            // Sample data for the Bot settings (setMyName, setMyDescription, setMyShortDescription, setMyCommands), in multiple languages;
             sample_data: [
-                // Bot name; 0-64 characters. Pass an empty string to remove the dedicated name for the given language.
+                // setMyName; 0-64 characters.
                 ['name',
+                    // default (en)
                     '🤖 Bot Hub, Private, Secure, Easy to use',
+                    // en
+                    '🤖 Bot Hub, Private, Secure, Easy to use',
+                    // es
                     '🤖 Centro de bots, privado, seguro, fácil de usar',
+                    // fr
                     '🤖 Centre de bots, privé, sécurisé, facile à utiliser',
+                    // ar
                     '🤖 مركز الروبوتات، خاص، آمن، سهل الاستخدام',
+                    // de
                     '🤖 Bot-Zentrale, privat, sicher, einfach zu bedienen',
+                    // it
                     '🤖 Centro bot, privato, sicuro, facile da usare',
+                    // pt
                     '🤖 Central de bots, privado, seguro, fácil de usar',
+                    // ru
                     'Центр ботов, приватный, безопасный, простой в использовании',
+                    // zh
                     '🤖 机器人中心，私密，安全，易于使用',
+                    // ja
                     '🤖 ボットハブ、プライベート、セキュア、使いやすい',
+                    // ko
                     '🤖 봇 허브, 개인용, 안전함, 사용하기 쉬움',
+                    // he
                     '🤖 מרכז בוטים, פרטי, מאובטח, קל לשימוש'],
-                // Short description of the bot; 0-120 characters. Pass an empty string to remove the dedicated short description for the given language.
+                // setMyShortDescription; 0-120 characters.
                 ['short_description',
+                    // default (en)
                     'What bot can do? Take a journey with this bot, explore its features!',
+                    // en
+                    'What bot can do? Take a journey with this bot, explore its features!',
+                    // es
                     '¿Qué puede hacer el bot? ¡Emprende un viaje con este bot y explora sus funciones!',
+                    // fr
                     'Que peut faire le bot ? Partez en voyage avec ce bot et explorez ses fonctionnalités !',
+                    // ar
                     'ماذا يمكن أن يفعل الروبوت؟ انطلق في رحلة مع هذا الروبوت واستكشف ميزاته!',
+                    // de
                     'Was kann der Bot tun? Machen Sie eine Reise mit diesem Bot und erkunden Sie seine Funktionen!',
+                    // it
                     'Cosa può fare il bot? Fai un viaggio con questo bot ed esplora le sue funzionalità!',
+                    // pt
                     'O que o bot pode fazer? Faça uma jornada com este bot e explore seus recursos!',
+                    // ru
                     'Что может делать бот? Отправьтесь в путешествие с этим ботом и исследуйте его функции!',
+                    // zh
                     '机器人能做什么？与这个机器人一起踏上旅程，探索它的功能！',
+                    // ja
                     'ボットは何ができますか？このボットと一緒に旅をして、その機能を探検しましょう！',
+                    // ko
                     '봇은 무엇을 할 수 있나요? 이 봇과 함께 여행을 떠나 그 기능을 탐험해보세요!',
+                    // he
                     'מה הבוט יכול לעשות? צא למסע עם הבוט הזה, חקור את התכונות שלו!'],
-                // Description of the bot; 0-512 characters. Pass an empty string to remove the dedicated description for the given language.
+                // setMyDescription; 0-512 characters.
                 ['description',
+                    // default (en)
                     'Telegram Bots are secure and private channels ideal marketing tools within customer relationship management (CRM) systems. \n\n'
                     + 'Promote your goods and services, send notifications, conduct surveys, and much more!\n\n'
                     + 'Group your customers, create targeted communication channels, and engage with your audience like never before!\n\n',
+                    // en
+                    'Telegram Bots are secure and private channels ideal marketing tools within customer relationship management (CRM) systems. \n\n'
+                    + 'Promote your goods and services, send notifications, conduct surveys, and much more!\n\n'
+                    + 'Group your customers, create targeted communication channels, and engage with your audience like never before!\n\n',
+                    // es
                     'Los bots de Telegram son canales seguros y privados, herramientas de marketing ideales dentro de los sistemas de gestión de relaciones con los clientes (CRM). \n\n'
                     + 'Promociona tus productos y servicios, envía notificaciones, realiza encuestas y mucho más.\n\n'
                     + 'Agrupa a tus clientes, crea canales de comunicación segmentados y conecta con tu audiencia como nunca antes.\n\n',
+                    // fr
                     'Les bots Telegram sont des canaux sécurisés et privés, des outils de marketing idéaux au sein des systèmes de gestion de la relation client (CRM). \n\n'
                     + 'Faites la promotion de vos biens et services, envoyez des notifications, réalisez des sondages, et bien plus encore !\n\n'
                     + 'Regroupez vos clients, créez des canaux de communication ciblés, et engagez-vous avec votre audience comme jamais auparavant !\n\n',
+                    // ar
                     'روبوتات تيليجرام هي قنوات آمنة وخاصة، وأدوات تسويقية مثالية ضمن أنظمة إدارة علاقات العملاء (CRM). \n\n'
                     + 'قم بالترويج لمنتجاتك وخدماتك، وأرسل الإشعارات، وأجرِ الاستطلاعات، وأكثر من ذلك بكثير!\n\n'
                     + 'قم بتجميع عملائك، وأنشئ قنوات اتصال مستهدفة، وتفاعل مع جمهورك كما لم يحدث من قبل!\n\n',
+                    // de
                     'Telegram-Bots sind sichere und private Kanäle, ideale Marketing-Tools innerhalb von Customer-Relationship-Management-(CRM)-Systemen. \n\n'
                     + 'Bewerben Sie Ihre Waren und Dienstleistungen, senden Sie Benachrichtigungen, führen Sie Umfragen durch und vieles mehr!\n\n'
                     + 'Gruppieren Sie Ihre Kunden, erstellen Sie gezielte Kommunikationskanäle und interagieren Sie wie nie zuvor mit Ihrem Publikum!\n\n',
+                    // it
                     'I bot di Telegram sono canali sicuri e privati, strumenti di marketing ideali all\'interno dei sistemi di gestione delle relazioni con i clienti (CRM). \n\n'
                     + 'Promuovi i tuoi beni e servizi, invia notifiche, conduci sondaggi e molto altro!\n\n'
                     + 'Raggruppa i tuoi clienti, crea canali di comunicazione mirati e interagisci con il tuo pubblico come mai prima d\'ora!\n\n',
+                    // pt
                     'Os bots do Telegram são canais seguros e privados, ferramentas de marketing ideais dentro dos sistemas de gestão de relacionamento com o cliente (CRM). \n\n'
                     + 'Promova seus bens e serviços, envie notificações, realize pesquisas e muito mais!\n\n'
                     + 'Agrupe seus clientes, crie canais de comunicação direcionados e interaja com seu público como nunca antes!\n\n',
+                    // ru
                     'Телеграм-боты — это безопасные и приватные каналы, идеальные маркетинговые инструменты в системах управления взаимоотношениями с клиентами (CRM). \n\n'
                     + 'Продвигайте свои товары и услуги, отправляйте уведомления, проводите опросы и многое другое!\n\n'
                     + 'Группируйте своих клиентов, создавайте целевые каналы связи и взаимодействуйте с вашей аудиторией как никогда ранее!\n\n',
+                    // zh
                     '电报机器人 是安全且私密的频道，是客户关系管理（CRM）系统中理想的营销工具。 \n\n'
                     + '推广您的商品和服务，发送通知，进行调查，等等！\n\n'
                     + '将客户分组，创建针对性的沟通渠道，与受众进行前所未有的互动！\n\n',
+                    // ja
                     'テレグラムボット は、安全でプライベートなチャネルであり、顧客関係管理（CRM）システム内で理想的なマーケティングツールです。 \n\n'
                     + '商品やサービスを宣伝し、通知を送信し、アンケートを実施するなど、さまざまなことができます！\n\n'
                     + '顧客をグループ化し、ターゲットを絞ったコミュニケーションチャネルを作成し、かつてない方法でオーディエンスと交流しましょう！\n\n',
+                    // ko
                     '텔레그램 봇 은 안전하고 개인적인 채널로, 고객 관계 관리(CRM) 시스템 내에서 이상적인 마케팅 도구입니다. \n\n'
                     + '상품 및 서비스를 홍보하고, 알림을 보내고, 설문 조사를 수행하는 등 다양한 작업을 수행할 수 있습니다!\n\n'
                     + '고객을 그룹화하고, 대상 커뮤니케이션 채널을 만들고, 그 어느 때보다 청중과 소통하세요!\n\n',
+                    // he
                     'בוטים של טלגרם הם ערוצים מאובטחים ופרטיים, כלים שיווקיים אידיאליים בתוך מערכות ניהול קשרי לקוחות (CRM). \n\n'
                     + 'קדם את הסחורות והשירותים שלך, שלח התראות, ערוך סקרים ועוד!\n\n'
-                    + 'קבץ את הלקוחות שלך, צור ערוצי תקשורת ממוקדים ואינטראקציה עם הקהל שלך כמו שמעולם לא היה לפני כן!\n\n']
-                ,
-                // A JSON-serialized list of bot commands to be set as the list of the bot's commands.
-                // At most 100 commands can be specified.
+                    + 'קבץ את הלקוחות שלך, צור ערוצי תקשורת ממוקדים ואינטראקציה עם הקהל שלך כמו שמעולם לא היה לפני כן!\n\n'],
+                // setMyCommands; Each command is represented by an object with 'command' and 'description' fields.
                 ['commands',
+                    // default (en)
+                    JSON.stringify(
+                        [
+                            {   // '/start' command
+                                // Text of the command; 1-32 characters. Can contain only lowercase English letters, digits and underscores.
+                                command: '/start',
+                                // Description of the command; 1-256 characters.
+                                description: 'Start the bot'
+                            },
+                            {   // '/help' command
+                                command: '/help',
+                                description: 'Get help on using the bot, or report an issue'
+                            },
+                            {   // '/about' command
+                                command: '/about',
+                                description: 'About the bot'
+                            }
+                        ]),
+                    // English
                     JSON.stringify(
                         [
                             {   // '/start' command
@@ -829,10 +887,7 @@ EMD.BotSetup = {
                             description: 'מידע על הבוט'
                         }
                     ])
-                ],
-                // Webhook URL
-                ['webhook_url',
-                    'https://script.google.com/macros/s/[YOUR_DEPLOYMENT_ID]/exec']
+                ]
             ]
         }
     }
@@ -924,7 +979,7 @@ EMD.Automation = {
             header: {
                 title: '⚡ Automation & Workflows',
                 subTitle: 'Manage your bot automations here.',
-                imageUrl: EMD.DEFAULT_IMAGE_URL,
+                imageUrl: EMD.MATH_IMG_URL,
                 imageStyle: CardService.ImageStyle.SQUARE,
                 imageAltText: 'Automation Image'
             },
@@ -7829,14 +7884,17 @@ EMD.ApiFeaturesAutomation = {
                                 delay_ms: 3000,
                                 method: 'editMessageMedia',
                                 payload: {
-                                    caption: 'This is a sample photo sent using the Send Photo API feature. \n\n'
-                                        + 'The caption has been edited after a 3 second delay to demonstrate the Edit Message Caption API feature.\n\n'
-                                        + 'Now, In about 3 seconds, I will edit the photo to demonstrate the Edit Message Media API feature.',
-                                    parse_mode: 'HTML',
-                                    media: EMD.WAIT_FOR_IT_IMG_URL,
-                                    has_spoiler: false,
-                                    protect_content: true,
-                                    disable_notification: true
+                                    media: {
+                                        type: "photo",
+                                        media: EMD.PAY_ATTENTION_IMG_URL,
+                                        caption: 'This is a sample photo sent using the Send Photo API feature. \n\n'
+                                            + 'The caption has been edited after a 3 second delay to demonstrate the Edit Message Caption API feature.\n\n'
+                                            + 'Now, In about 3 seconds, I will edit the photo to demonstrate the Edit Message Media API feature.',
+                                        parse_mode: 'HTML',
+                                        has_spoiler: false,
+                                        protect_content: true,
+                                        disable_notification: true
+                                    }
                                 }
                             },
                             {   // editMessageMedia after delay
@@ -9208,7 +9266,7 @@ EMD.About = {
             header: {
                 title: 'About This Addon',
                 subTitle: 'Learn more about this Addon.',
-                imageUrl: EMD.DEFAULT_IMAGE_URL,
+                imageUrl: EMD.I_AM_THINKING_IMG_URL,
                 imageStyle: CardService.ImageStyle.SQUARE,
                 imageAltText: 'About Image'
             },
@@ -9249,6 +9307,49 @@ EMD.About = {
     }
 }
 
+EMD.Help = {
+    entityName: 'Help',
+    card: (data = {}) => {
+        return {
+            name: 'help_Card',
+            header: {
+                title: 'Help & Support',
+                subTitle: 'Get help and support for this Addon.',
+                imageUrl: EMD.HELP_IMG_URL,
+                imageStyle: CardService.ImageStyle.SQUARE,
+                imageAltText: 'Help Image'
+            },
+            sections: [
+                {
+                    // header: 'Help & Support',
+                    widgets: [
+                        {
+                            id: 'help_text_paragraph',
+                            TextParagraph: {
+                                text: 'If you need assistance, please contact our support team or visit our help center.'
+                            }
+                        }
+                    ]
+                },
+                {   // Data view
+                    header: 'Data View',
+                    collapsible: true,
+                    numUncollapsibleWidgets: 0,
+                    widgets: [
+                        {   // Data View widget
+                            id: 'data_view_widget',
+                            TextParagraph: {
+                                text: `Data: ${JSON.stringify(data, null, 2)}`,
+                                maxLines: 35
+                            }
+                        }
+                    ]
+                }
+            ]
+        };
+    }
+}
+
 EMD.Account = {
     entityName: 'Account',
     card: (data = {}) => {
@@ -9257,7 +9358,7 @@ EMD.Account = {
             header: {
                 title: 'Account Management',
                 subTitle: 'Manage your account settings and preferences.',
-                imageUrl: EMD.DEFAULT_IMAGE_URL,
+                imageUrl: EMD.BLINK_IMG_URL,
                 imageStyle: CardService.ImageStyle.SQUARE,
                 imageAltText: 'Account Image'
             },
@@ -9307,6 +9408,30 @@ EMD.Logger = {
             sample_data: []
         };
     }
+}
+
+EMD.Cards = {
+    Home: EMD.Home.card,
+    EnvironmentVariables: EMD.EnvironmentVariables.card,
+    BotSetup: EMD.BotSetup.card,
+    Automation: EMD.Automation.card,
+    Customer: EMD.Customer.card,
+    Account: EMD.Account.card,
+    Help: EMD.Help.card,
+    About: EMD.About.card
+};
+
+EMD.Spreadsheet = {
+    BotSetup: EMD.BotSetup.sheet,
+    Customer: EMD.Customer.sheet,
+    Automation: EMD.Automation.sheet,
+    BasicAutomation: EMD.BasicAutomation.sheet,
+    SurveyAutomation: EMD.SurveyAutomation.sheet,
+    StoreAutomation: EMD.StoreAutomation.sheet,
+    DonationCampaign: EMD.DonationCampaign.sheet,
+    ApiFeaturesAutomation: EMD.ApiFeaturesAutomation.sheet,
+    SecurityChecksAutomation: EMD.SecurityChecksAutomation.sheet,
+    Logger: EMD.Logger.sheet
 }
 
 if (typeof module !== 'undefined' && module.exports) {
