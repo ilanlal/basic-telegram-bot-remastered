@@ -114,6 +114,30 @@ EMD.Home = {
                         }
                     ]
                 },
+                {   // Channel Management Section
+                    // header: 'Channel Management',
+                    collapsible: true,
+                    numUncollapsibleWidgets: 1,
+                    widgets: [
+                        {  // Channel management widget
+                            id: 'channel_management_widget',
+                            DecoratedText: {
+                                text: 'Channels: Manage Your Bot Channels',
+                                topLabel: `Total: ${data?.totalChannels || 0} channels`,
+                                bottomLabel: 'Click 📢 to manage your bot channels',
+                                wrapText: false,
+                                textButton: {
+                                    disabled: false,
+                                    text: '📢',
+                                    onClick: {
+                                        functionName: 'CardHandler.Addon.onOpenCardClick',
+                                        parameters: { card: 'EMD.Cards.Channels' }
+                                    }
+                                }
+                            }
+                        }
+                    ]
+                },
                 { // Customer Management Section
                     // header: 'Customer Management',
                     collapsible: true,
@@ -9365,8 +9389,241 @@ EMD.Logger = {
     }
 }
 
+EMD.Channels = {
+    entityName: 'Channels',
+    card: (data = {}) => {
+        return {
+            name: 'channels_Card',
+            header: {
+                title: 'Channels Management',
+                subTitle: 'Manage your Telegram channels here.',
+                imageUrl: EMD.BIG_TIME_IMG_URL,
+                imageStyle: CardService.ImageStyle.SQUARE,
+                imageAltText: 'Channels Image'
+            },
+            sections: [
+                {   // Channels Management section
+                    // header: 'Channels Management',
+                    collapsible: false,
+                    numUncollapsibleWidgets: 0,
+                    widgets: [
+                        { // Channels Info widget
+                            id: 'channels_info_widget',
+                            TextParagraph: {
+                                text: 'Create and manage your Telegram channels using the options below.'
+                            }
+                        }
+                    ]
+                },
+                {   // Bind Sample Data section
+                    // header: 'Bind Sample Data',
+                    collapsible: false,
+                    numUncollapsibleWidgets: 0,
+                    widgets: [
+                        {   // Bind Sample Data widget
+                            id: 'bind_sample_data_widget',
+                            DecoratedText: {
+                                text: 'Bind Sample Data',
+                                bottomLabel: 'Click the \'🔩 Bind\' button to bind sample channel data to your account for testing purposes.',
+                                wrapText: false,
+                                textButton: {
+                                    disabled: false,
+                                    text: '🔩 Bind',
+                                    onClick: {
+                                        functionName: 'SpreadsheetHandler.Addon.onInsertSampleDataClick',
+                                        parameters: {
+                                            sheet: 'EMD.Spreadsheet.Channels'
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    ]
+
+                },
+                {   // exportChatInviteLink section
+                    collapsible: false,
+                    numUncollapsibleWidgets: 0,
+                    widgets: [
+                        {   // exportChatInviteLink decorated text with button to execute exportChatInviteLink
+                            id: 'export_chat_invite_link_widget',
+                            DecoratedText: {
+                                text: 'Export Chat Invite Link',
+                                bottomLabel: 'Click the \'📤 Export\' button to export the primary chat invite link for your channel.',
+                                wrapText: false,
+                                textButton: {
+                                    disabled: false,
+                                    text: '📤 Export',
+                                    onClick: {
+                                        functionName: 'TelegramBotHandler.onExportChatInviteLinkClick',
+                                        parameters: {
+                                            channel_username: '@your_channel_username'
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        {   // exportChatInviteLink info widget
+                            id: 'export_chat_invite_link_info_widget',
+                            TextParagraph: {
+                                text: 'Use \'📤 Export\' to generate a new primary invite link for a chat; any previously generated primary link is revoked.\n\n'
+                                    + 'The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights.\n\n'
+                                    + 'Returns the new invite link as String on success.'
+                            }
+
+                        }
+                    ]
+
+                },
+                {   // createChatSubscriptionInviteLink section
+                    collapsible: false,
+                    numUncollapsibleWidgets: 0,
+                    widgets: [
+                        {  // createChatSubscriptionInviteLink info widget
+                            id: 'create_chat_subscription_invite_link_info_widget',
+                            TextParagraph: {
+                                text: 'Use \'➕ Create\' to create a new chat subscription invite link for a chat.\n\n'
+                                    + 'The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights.\n\n'
+                                    + 'Returns the newly created invite link as ChatInviteLink object.'
+                            }
+                        },
+                        {   // createChatSubscriptionInviteLink decorated text with button to execute createChatSubscriptionInviteLink
+                            id: 'create_chat_subscription_invite_link_widget',
+                            DecoratedText: {
+                                text: 'Create Chat Subscription Invite Link',
+                                bottomLabel: 'Click the \'➕ Create\' button to create a new chat subscription invite link for your channel.',
+                                wrapText: false,
+                                textButton: {
+                                    disabled: false,
+                                    text: '➕ Create',
+                                    onClick: {
+                                        functionName: 'TelegramBotHandler.onCreateChatSubscriptionInviteLinkClick',
+                                        parameters: {
+                                            channel_username: '@your_channel_username'
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    ]
+                },
+                {   // createChatInviteLink Management section
+                    // header: 'Invite Links Management',
+                    collapsible: false,
+                    numUncollapsibleWidgets: 0,
+                    widgets: [
+                        {   // createChatInviteLink info widget
+                            id: 'create_chat_invite_link_info_widget',
+                            TextParagraph: {
+                                text: 'Use \'➕ Create\' to create a new chat invite link for a chat.\n\n'
+                                    + 'The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights.\n\n'
+                                    + 'Returns the newly created invite link as ChatInviteLink object.'
+                            }
+                        },
+                        {   // createChatInviteLink decorated text with button to execute createChatInviteLink
+                            id: 'create_chat_invite_link_widget',
+                            DecoratedText: {
+                                text: 'Create Chat Invite Link',
+                                bottomLabel: 'Click the \'➕ Create\' button to create a new chat invite link for your channel.',
+                                wrapText: false,
+                                textButton: {
+                                    disabled: false,
+                                    text: '➕ Create',
+                                    onClick: {
+                                        functionName: 'TelegramBotHandler.onCreateChatInviteLinkClick',
+                                        parameters: {
+                                            channel_username: '@your_channel_username'
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    ]
+                },
+                {   // Data view
+                    header: 'Data View',
+                    collapsible: true,
+                    numUncollapsibleWidgets: 0,
+                    widgets: [
+                        {   // Data View widget
+                            id: 'data_view_widget',
+                            TextParagraph: {
+                                text: `Data: ${JSON.stringify(data, null, 2)}`,
+                                maxLines: 35
+                            }
+                        }
+                    ]
+                }
+            ]
+        };
+    },
+    sheet: (data = {}) => {
+        return {
+            name: '📢 Channels',
+            columns: [
+                // chat username, e.g., @channelusername
+                'Chat ID',
+                // chat photo, uploaded using multipart/form-data
+                'Photo URL',
+                // chat title, 1-128 characters
+                'Chat Title',
+                // chat description, 0-255 characters
+                'Chat Description',
+                // createChatSubscriptionInviteLink payload
+                'Subscription Invite Link Payload',
+                // exportChatInviteLink
+                'Exported Invite Link Payload',
+                // createChatInviteLink payload
+                'Invite Link Payload',
+                // ChatInviteLink URL
+                'Invite Link URL'
+            ],
+            sample_data: [
+                [
+                    // chat username, e.g.,
+                    '@channelusername',
+                    // chat photo, uploaded using multipart/form-data
+                    'https://example.com/path/to/channel_photo.jpg',
+                    // chat title, 1-128 characters
+                    'Channel Title (1-128 characters)',
+                    // chat description, 0-255 characters
+                    'This is a description of the channel. (0-255 characters)',
+                    // createChatSubscriptionInviteLink payload
+                    JSON.stringify({
+                        chat_id: '@channelusername',
+                        // The name of the subscription link; 1-32 characters
+                        name: 'Join Our Channel',
+                        // The number of seconds the subscription will be active for before the next payment. Currently, it must always be 2592000 (30 days).
+                        subscription_period: 2592000, // 30 days in seconds
+                        // The amount of Telegram Stars a user must pay initially and after each subsequent subscription period to be a member of the chat; 1-10000
+                        subscription_prices: 10000
+                    }),
+                    // exportChatInviteLink payload
+                    JSON.stringify({
+                        chat_id: '@channelusername'
+                    }),
+                    // createChatInviteLink payload
+                    JSON.stringify({
+                        chat_id: '@channelusername',
+                        // Invite link name; 0-32 characters
+                        name: 'General Invite Link',
+                        // Point in time (Unix timestamp) when the link will expire
+                        expire_date: Math.floor(Date.now() / 1000) + 7 *
+                            24 * 60 * 60, // 7 days from now
+                        // The maximum number of users that can be members of the chat simultaneously after joining the chat via this invite link; 1-99999
+                        member_limit: 100
+                    }),
+                    // ChatInviteLink URL
+                    '[Invite Link URL Here]'
+                ]
+            ]
+        };
+    }
+}
+
 EMD.Cards = {
     Home: EMD.Home.card,
+    Channels: EMD.Channels.card,
     EnvironmentVariables: EMD.EnvironmentVariables.card,
     BotSetup: EMD.BotSetup.card,
     Automation: EMD.Automation.card,
@@ -9377,6 +9634,7 @@ EMD.Cards = {
 }
 
 EMD.Spreadsheet = {
+    Channels: EMD.Channels.sheet,
     BotSetup: EMD.BotSetup.sheet,
     Customer: EMD.Customer.sheet,
     Automation: EMD.Automation.sheet,
