@@ -163,12 +163,25 @@ CardViewModel.CardServiceWrapper = class {
             throw new Error(CardViewModel.ErrorMessages.TEXT_INPUT_MISSING_FIELD_NAME_ERROR);
         }
 
-        return CardService.newTextInput()
+        const textInput = CardService.newTextInput()
             .setFieldName(inputTextMeta.fieldName)
+            .setInputMode(inputTextMeta.inputMode || CardService.TextInputMode.PLAIN_TEXT)
             .setTitle(inputTextMeta.title || '')
             .setValue(value || '')
             .setHint(inputTextMeta.hint || '')
             .setMultiline(inputTextMeta.multiline || false);
+
+        if (inputTextMeta.validation) {
+            const validationBuilder = CardService.newValidation();
+            if (inputTextMeta.validation.characterLimit) {
+                validationBuilder.setCharacterLimit(inputTextMeta.validation.characterLimit);
+            }
+            if (inputTextMeta.validation.type) {
+                validationBuilder.setInputType(inputTextMeta.validation.type);
+            }
+            textInput.setValidation(validationBuilder);
+        }
+        return textInput;
     }
 
     newTextParagraph(tpMeta = {}, value = '') {

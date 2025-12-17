@@ -1,7 +1,7 @@
 // Deprecated: Use package.json for versioning and metadata
 class Config {
-    static get version() { return '1.1.0'; }
-    static get build() { return '20251112.053100'; }
+    static get version() { return '1.2.0'; }
+    static get build() { return '20251217.084500'; }
     static get author() { return 'Ilan Laloum <ilanlal@gmail.com>'; }
     static get license() { return 'MIT'; }
     static get repository() { return 'https://github.com/ilanlal/basic-telegram-bot-remastered'; }

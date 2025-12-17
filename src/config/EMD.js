@@ -9415,6 +9415,49 @@ EMD.Channels = {
                         }
                     ]
                 },
+                {   // getChat section
+                    collapsible: true,
+                    numUncollapsibleWidgets: 1,
+                    widgets: [
+                        {   // getChat info widget
+                            id: 'get_chat_info_widget',
+                            TextParagraph: {
+                                text: 'Use \'🔍 getChat\' to retrieve information about a specific chat by its chat ID.'
+                            }
+                        },
+                        {   // Text input for chat_id
+                            id: 'chat_id_input_widget',
+                            TextInput: {
+                                title: 'Chat ID',
+                                fieldName: 'chat_id',
+                                hint: 'Enter the chat ID of the channel',
+                                multiple: false,
+                                // inputMode (CardService.TextInputMode.PLAIN_TEXT || CardService.TextInputMode.RICH_TEXT)
+                                inputMode: CardService.TextInputMode.RICH_TEXT,
+                                validation : {
+                                    characterLimit: '150',
+                                    // InputType.INTEGER || InputType.EMAIL || InputType.FLOAT || InputType.TEXT
+                                    type: CardService.InputType.TEXT
+                                }
+                            }
+                        },
+                        {   // getChat decorated text with button to execute getChat
+                            id: 'get_chat_widget',
+                            DecoratedText: {
+                                text: 'Get Chat Information',
+                                bottomLabel: 'Click the \'🔍 getChat\' button to fetch chat details for your channel.',
+                                wrapText: false,
+                                textButton: {
+                                    disabled: false,
+                                    text: '🔍 getChat',
+                                    onClick: {
+                                        functionName: 'TelegramBotHandler.onGetChatClick'
+                                    }
+                                }
+                            }
+                        }
+                    ]
+                },
                 {   // Bind Sample Data section
                     // header: 'Bind Sample Data',
                     collapsible: false,
@@ -9439,12 +9482,20 @@ EMD.Channels = {
                             }
                         }
                     ]
-
                 },
                 {   // exportChatInviteLink section
                     collapsible: false,
                     numUncollapsibleWidgets: 0,
                     widgets: [
+                        {   // exportChatInviteLink info widget
+                            id: 'export_chat_invite_link_info_widget',
+                            TextParagraph: {
+                                text: 'Use \'📤 Export\' to generate a new primary invite link for a chat; any previously generated primary link is revoked.\n\n'
+                                    + 'The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights.\n\n'
+                                    + 'Returns the new invite link as String on success.'
+                            }
+
+                        },
                         {   // exportChatInviteLink decorated text with button to execute exportChatInviteLink
                             id: 'export_chat_invite_link_widget',
                             DecoratedText: {
@@ -9462,15 +9513,6 @@ EMD.Channels = {
                                     }
                                 }
                             }
-                        },
-                        {   // exportChatInviteLink info widget
-                            id: 'export_chat_invite_link_info_widget',
-                            TextParagraph: {
-                                text: 'Use \'📤 Export\' to generate a new primary invite link for a chat; any previously generated primary link is revoked.\n\n'
-                                    + 'The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights.\n\n'
-                                    + 'Returns the new invite link as String on success.'
-                            }
-
                         }
                     ]
 
