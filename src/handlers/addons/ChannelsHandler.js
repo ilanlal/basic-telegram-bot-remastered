@@ -38,16 +38,16 @@ class ChannelsHandler {
 ChannelsHandler.Controller = {
     onGetChatlClick: (e) => {
         return new ChannelsHandler.ControllerWrapper(
+            ChannelsHandler.prototype.activeSpreadsheet,
             ChannelsHandler.prototype.documentProperties,
             ChannelsHandler.prototype.userProperties,
-            ChannelsHandler.prototype.scriptProperties,
-            ChannelsHandler.prototype.activeSpreadsheet
-        ).handleGetChatlClick(e);
+            ChannelsHandler.prototype.scriptProperties
+        ).handleGetChatlInfo(e);
     }
 };
 
 ChannelsHandler.ControllerWrapper = class extends ChannelsHandler {
-    constructor(documentProperties, userProperties, scriptProperties, activeSpreadsheet) {
+    constructor(activeSpreadsheet, documentProperties, userProperties, scriptProperties) {
         super();
         this._documentProperties = documentProperties;
         this._userProperties = userProperties;
@@ -55,7 +55,7 @@ ChannelsHandler.ControllerWrapper = class extends ChannelsHandler {
         this._activeSpreadsheet = activeSpreadsheet;
     }
 
-    handleGetChatlClick(e) {
+    handleGetChatlInfo(e) {
         try {
             // extract chat_id from event object
             const chatId = (e.commonEventObject.formInputs && e.commonEventObject.formInputs['chat_id'])
@@ -68,11 +68,8 @@ ChannelsHandler.ControllerWrapper = class extends ChannelsHandler {
 
             // 1. using some mode object to call getChat API method to get full chat info;
             const model = BotModeModel.create(
-                this._documentProperties,
-                this._userProperties,
-                this._scriptProperties,
-                this._activeSpreadsheet
-            );
+                this._activeSpreadsheet,this._documentProperties,this._userProperties,this._scriptProperties);
+
             const chatInfo = model.callGetChatAPI(chatId);
             // 2. process the response and extract needed info; store it in sheet.
 

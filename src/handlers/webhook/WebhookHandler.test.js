@@ -43,6 +43,7 @@ describe('WebhookHandler', () => {
 
         const sendMessgeUrl = `https://api.telegram.org/bot${dummyToken}/sendMessage`;
 
+        // Mock the sendMessage API response
         UrlFetchAppStubConfiguration.when(sendMessgeUrl)
             .return(new HttpResponse()
                 .setContentText(JSON.stringify({
