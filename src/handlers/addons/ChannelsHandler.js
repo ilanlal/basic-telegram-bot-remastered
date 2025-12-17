@@ -67,10 +67,10 @@ ChannelsHandler.ControllerWrapper = class extends ChannelsHandler {
             }
 
             // 1. using some mode object to call getChat API method to get full chat info;
-            const model = BotModeModel.create(
+            const model = ChannelsModel.create(
                 this._activeSpreadsheet,this._documentProperties,this._userProperties,this._scriptProperties);
 
-            const chatInfo = model.callGetChatAPI(chatId);
+            const chatInfo = model.getChat(chatId);
             // 2. process the response and extract needed info; store it in sheet.
 
 
@@ -78,8 +78,9 @@ ChannelsHandler.ControllerWrapper = class extends ChannelsHandler {
             return this.handleOperationSuccess(`Chat ID retrieved successfully: ${chatId}`)
                 .build();
         } catch (error) {
-            return this.handleError(error)
+            this.handleError(error)
                 .build();
+            throw error;
         }
     }
 

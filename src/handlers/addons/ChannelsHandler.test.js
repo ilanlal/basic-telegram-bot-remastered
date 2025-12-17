@@ -26,12 +26,17 @@ describe('Channels Handler', () => {
             }
         }; // Mock event object
 
+        const dummyToken = 'DUMMY_BOT_TOKEN';
+        // Set dummy bot token in script properties
+        PropertiesService.getScriptProperties().setProperty(EnvironmentModel.InputMeta.BOT_API_TOKEN, dummyToken);
+
         // Mock the sendMessage API response
-        const getChatUrl = `https://api.telegram.org/botDUMMY_BOT_TOKEN/getChat?chat_id=-1001234567890`;
+        const getChatUrl = `https://api.telegram.org/bot${dummyToken}/getChat?chat_id=-1001234567890`;
         UrlFetchAppStubConfiguration.when(getChatUrl)
             .return(new HttpResponse()
                 .setContentText(JSON.stringify({
                     // ChatFullInfo response structure
+                    ok: true,
                     result: {
                         id: -1001234567890,
                         title: "Test Channel",

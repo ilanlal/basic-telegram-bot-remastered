@@ -6,8 +6,9 @@ const { LoggerModel } = require('./LoggerModel');
 const { BotSheetModel } = require('./BotSheetModel');
 const { CustomerModel } = require('./CustomerModel');
 const { WidgetModel } = require('./WidgetModel');
+const { ChannelsModel } = require('./ChannelsModel');
 
-// Expose globally for tests and other scripts
+// Export all models
 global.AutomationModel = AutomationModel;
 global.SetupFlow = SetupFlow;
 global.SheetModel = SheetModel;
@@ -16,3 +17,4 @@ global.LoggerModel = LoggerModel;
 global.BotSheetModel = BotSheetModel;
 global.CustomerModel = CustomerModel;
 global.WidgetModel = WidgetModel;
+global.ChannelsModel = ChannelsModel;
