@@ -66,13 +66,21 @@ ChannelsHandler.ControllerWrapper = class extends ChannelsHandler {
                 throw new Error('Chat ID is required.');
             }
 
+            const sheetModel = SheetModel.create(this._activeSpreadsheet);
+            const channelModel = ChannelsModel.create(
+                this._activeSpreadsheet, this._documentProperties, this._userProperties, this._scriptProperties);
+
             // 1. using some mode object to call getChat API method to get full chat info;
-            const model = ChannelsModel.create(
-                this._activeSpreadsheet,this._documentProperties,this._userProperties,this._scriptProperties);
-
-            const chatInfo = model.getChat(chatId);
-            // 2. process the response and extract needed info; store it in sheet.
-
+            const chatInfoResult = channelModel.getChat(chatId);
+            // 2. add result to sheet. (for user)
+            sheetModel.getSheet(EMD.Spreadsheet.TerminalOutput({}))
+                .appendRow([
+                    // Created On as iso string
+                    new Date().toISOString(),
+                    'server', // chat side
+                    `Retrieved info for chat ID: ${chatId}`,
+                    JSON.stringify(chatInfoResult)
+                ]);
 
             // For demonstration, we just return the chat ID back
             return this.handleOperationSuccess(`Chat ID retrieved successfully: ${chatId}`)
@@ -80,6 +88,14 @@ ChannelsHandler.ControllerWrapper = class extends ChannelsHandler {
         } catch (error) {
             this.handleError(error)
                 .build();
+            sheetModel.getSheet(EMD.Spreadsheet.TerminalOutput({}))
+                .appendRow([
+                    // Created On as iso string
+                    new Date().toISOString(),
+                    'server', // chat side
+                    `Error retrieving chat info`,
+                    error.toString()
+                ]);
             throw error;
         }
     }
