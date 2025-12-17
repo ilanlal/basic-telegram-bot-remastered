@@ -165,11 +165,26 @@ CardViewModel.CardServiceWrapper = class {
 
         const textInput = CardService.newTextInput()
             .setFieldName(inputTextMeta.fieldName)
-            .setInputMode(inputTextMeta.inputMode || CardService.TextInputMode.PLAIN_TEXT)
-            .setTitle(inputTextMeta.title || '')
-            .setValue(value || '')
-            .setHint(inputTextMeta.hint || '')
-            .setMultiline(inputTextMeta.multiline || false);
+            .setTitle(inputTextMeta.title || '');
+
+        if (inputTextMeta.value) {
+            textInput.setValue(inputTextMeta.value);
+        }
+        else if (value) {
+            textInput.setValue(value);
+        }
+
+        if (inputTextMeta.inputMode) {
+            textInput.setInputMode(inputTextMeta.inputMode);
+        }
+
+        if (inputTextMeta.hint) {
+            textInput.setHint(inputTextMeta.hint);
+        }
+
+        if (inputTextMeta.multiline) {
+            textInput.setMultiline(inputTextMeta.multiline);
+        }
 
         if (inputTextMeta.validation) {
             const validationBuilder = CardService.newValidation();

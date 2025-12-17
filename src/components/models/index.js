@@ -3,7 +3,7 @@ const { SetupFlow } = require('./SetupFlow');
 const { SheetModel } = require('./SheetModel');
 const { EnvironmentModel } = require('./EnvironmentModel');
 const { LoggerModel } = require('./LoggerModel');
-const { BotModel } = require('./BotModel');
+const { BotSheetModel } = require('./BotSheetModel');
 const { CustomerModel } = require('./CustomerModel');
 const { WidgetModel } = require('./WidgetModel');
 
@@ -13,6 +13,6 @@ global.SetupFlow = SetupFlow;
 global.SheetModel = SheetModel;
 global.EnvironmentModel = EnvironmentModel;
 global.LoggerModel = LoggerModel;
-global.BotModel = BotModel;
+global.BotSheetModel = BotSheetModel;
 global.CustomerModel = CustomerModel;
 global.WidgetModel = WidgetModel;

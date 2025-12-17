@@ -9441,18 +9441,12 @@ EMD.Channels = {
                                 }
                             }
                         },
-                        {   // getChat decorated text with button to execute getChat
+                        {   // getChat button widget
                             id: 'get_chat_widget',
-                            DecoratedText: {
-                                text: 'Get Chat Information',
-                                bottomLabel: 'Click the \'🔍 getChat\' button to fetch chat details for your channel.',
-                                wrapText: false,
-                                textButton: {
-                                    disabled: false,
-                                    text: '🔍 getChat',
-                                    onClick: {
-                                        functionName: 'TelegramBotHandler.onGetChatClick'
-                                    }
+                            TextButton: {
+                                text: '🔍 getChat',
+                                onClick: {
+                                    functionName: 'ChannelsHandler.Controller.onGetChatlClick'
                                 }
                             }
                         }

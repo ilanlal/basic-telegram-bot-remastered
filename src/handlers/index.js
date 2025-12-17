@@ -6,9 +6,9 @@ const { AutomationHandler } = require('./webhook/AutomationHandler');
 const { CardHandler } = require('./CardHandler');
 const { EnvironmentHandler } = require('./EnvironmentHandler');
 const { BotHandler } = require('./BotHandler');
-// Export handlers for use in Code.js
+const { ChannelsHandler } = require('./addons/ChannelsHandler');
 
-
+// Expose handlers globally for testing and local Apps Script runtime
 global.CardHandler = CardHandler;
 global.PostMessageHandler = PostMessageHandler;
 global.PostCallbackQueryHandler = PostCallbackQueryHandler;
@@ -17,3 +17,4 @@ global.AutomationHandler = AutomationHandler;
 global.EventHandler = EventHandler;
 global.EnvironmentHandler = EnvironmentHandler;
 global.BotHandler = BotHandler;
+global.ChannelsHandler = ChannelsHandler;

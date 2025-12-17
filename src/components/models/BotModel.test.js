@@ -1,24 +1,24 @@
 require('../../../tests');
-const { BotModel } = require('./BotModel');
+const { BotSheetModel } = require('./BotSheetModel');
 const SpreadsheetStubConfiguration = require('@ilanlal/gasmocks/src/spreadsheetapp/classes/SpreadsheetStubConfiguration');
 const SpreadsheetApp = require('@ilanlal/gasmocks/src/spreadsheetapp/SpreadsheetApp');
 const { SheetModel } = require('./SheetModel');
 const { EMD } = require('../../config/EMD');
 
-describe('BotModel', () => {
+describe('BotSheetModel', () => {
     beforeEach(() => {
         SpreadsheetStubConfiguration.reset();
         SheetModel.create(SpreadsheetApp.getActiveSpreadsheet())
             .bindSheetSampleData(EMD.Spreadsheet.BotSetup({}));
     });
 
-    it('should create an instance', () => {
-        const model = BotModel.create();
-        expect(model).toBeInstanceOf(BotModel);
+    it('should create an BotSheetModel', () => {
+        const model = BotSheetModel.create();
+        expect(model).toBeInstanceOf(BotSheetModel);
     });
 
     describe('model methods', () => {
-        const model = BotModel.create();
+        const model = BotSheetModel.create();
 
         test('should find language column index', () => {
             const index = model.findLanguageColumnIndex('default');

@@ -82,7 +82,7 @@ class SetupFlow {
     }
 
     setMyName() {
-        const model = BotModel.create(this._activeSpreadsheet);
+        const model = BotSheetModel.create(this._activeSpreadsheet);
         const langs = model.getLanguages().map(({ lang }) => lang);
 
         langs.forEach((language_code) => {
@@ -111,7 +111,7 @@ class SetupFlow {
     }
 
     setMyDescription() {
-        const model = BotModel.create(this._activeSpreadsheet);
+        const model = BotSheetModel.create(this._activeSpreadsheet);
         const langs = model.getLanguages().map(({ lang }) => lang);
 
         langs.forEach((language_code) => {
@@ -139,7 +139,7 @@ class SetupFlow {
     }
 
     setMyShortDescription() {
-        const model = BotModel.create(this._activeSpreadsheet);
+        const model = BotSheetModel.create(this._activeSpreadsheet);
         const langs = model.getLanguages().map(({ lang }) => lang);
 
         langs.forEach((language_code) => {
@@ -167,7 +167,7 @@ class SetupFlow {
     }
 
     setMyCommands() {
-        const model = BotModel.create(this._activeSpreadsheet);
+        const model = BotSheetModel.create(this._activeSpreadsheet);
         const langs = model.getLanguages().map(({ lang }) => lang);
 
         langs.forEach((language_code) => {

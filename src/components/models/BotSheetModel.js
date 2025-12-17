@@ -1,11 +1,11 @@
-class BotModel {
+class BotSheetModel {
     constructor(activeSpreadsheet) {
         this.sheetModel = SheetModel.create(activeSpreadsheet);
         this.sheet = this.sheetModel.initializeSheet(EMD.Spreadsheet.BotSetup({}));
     }
 
     static create(activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet()) {
-        return new BotModel(activeSpreadsheet);
+        return new BotSheetModel(activeSpreadsheet);
     }
 
     findLanguageColumnIndex(language_code) {
@@ -68,6 +68,6 @@ class BotModel {
 
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = {
-        BotModel
+        BotSheetModel
     };
 }
