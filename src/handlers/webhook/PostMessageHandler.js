@@ -1,11 +1,16 @@
 class PostMessageHandler {
-    constructor(userProperties, activeSpreadsheet) {
+    constructor(activeSpreadsheet, documentProperties, userProperties, scriptProperties) {
         this._activeSpreadsheet = activeSpreadsheet;
+        this._documentProperties = documentProperties;
         this._userProperties = userProperties;
+        this._scriptProperties = scriptProperties;
     }
 
-    static create(userProperties = PropertiesService.getDocumentProperties(), activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet()) {
-        return new PostMessageHandler(userProperties, activeSpreadsheet);
+    static create(activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet(),
+        documentProperties = PropertiesService.getDocumentProperties(),
+        userProperties = PropertiesService.getUserProperties(),
+        scriptProperties = PropertiesService.getScriptProperties()) {
+        return new PostMessageHandler(activeSpreadsheet, documentProperties, userProperties, scriptProperties);
     }
 
     handlePostMessage(message) {
@@ -69,7 +74,7 @@ class PostMessageHandler {
         }
 
         return CustomerController
-            .create(this._userProperties, this._activeSpreadsheet)
+            .create(this._documentProperties, this._activeSpreadsheet)
             .verifyCustomer(message);
     }
     // reply from force input request
@@ -85,7 +90,7 @@ class PostMessageHandler {
 
     processMessageDynamicResponse(chat_id, query, language_code) {
         const automationHandler = AutomationHandler
-            .create(this._userProperties, this._activeSpreadsheet);
+            .create(this._activeSpreadsheet, this._documentProperties, this._userProperties, this._scriptProperties);
 
         // Execute the dynamic reply handling on the local container message_id
         return automationHandler.handleAutomationRequest({

@@ -1,11 +1,16 @@
 class PostCallbackQueryHandler {
-  constructor(userProperties, activeSpreadsheet) {
+  constructor(activeSpreadsheet, documentProperties, userProperties, scriptProperties) {
+    this._documentProperties = documentProperties;
     this._userProperties = userProperties;
+    this._scriptProperties = scriptProperties;
     this._activeSpreadsheet = activeSpreadsheet;
   }
 
-  static create(userProperties = PropertiesService.getDocumentProperties(), activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet()) {
-    return new PostCallbackQueryHandler(userProperties, activeSpreadsheet);
+  static create(activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet(),
+    documentProperties = PropertiesService.getDocumentProperties(),
+    userProperties = PropertiesService.getUserProperties(),
+    scriptProperties = PropertiesService.getScriptProperties()) {
+    return new PostCallbackQueryHandler(activeSpreadsheet, documentProperties, userProperties, scriptProperties);
   }
 
   handlePostCallbackQuery(contents) {
@@ -16,7 +21,7 @@ class PostCallbackQueryHandler {
     const language_code = contents.callback_query.from.language_code;
     const query = contents.callback_query.data;
     const message_id = contents.callback_query.message ? contents.callback_query.message.message_id : null;
-    const automationHandler = AutomationHandler.create(this._userProperties, this._activeSpreadsheet);
+    const automationHandler = AutomationHandler.create(this._activeSpreadsheet, this._documentProperties, this._userProperties, this._scriptProperties);
 
     if (query.startsWith('/echo ')) {
       const echoText = query.substring(6);

@@ -1,21 +1,25 @@
 class AutomationHandler {
-    constructor(userProperties, activeSpreadsheet) {
+    constructor(activeSpreadsheet, documentProperties, userProperties, scriptProperties) {
         this._automationModel = AutomationModel.create(activeSpreadsheet);
-        const token = userProperties.getProperty(EnvironmentModel.InputMeta.BOT_API_TOKEN);
+        const token = documentProperties.getProperty(EnvironmentModel.InputMeta.BOT_API_TOKEN);
         if (!token) {
             throw new Error('Bot token is not set in user properties');
         }
         this._telegramBotProxy = TelegramBotProxy.create(token);
-        this._defaultLanguageCode = userProperties.getProperty(EnvironmentModel.InputMeta.LANGUAGE_CODE) || 'default';
+        this._defaultLanguageCode = documentProperties.getProperty(EnvironmentModel.InputMeta.LANGUAGE_CODE) || 'default';
+        this._documentProperties = documentProperties;
         this._userProperties = userProperties;
+        this._scriptProperties = scriptProperties;
         this._activeSpreadsheet = activeSpreadsheet;
     }
 
     static create(
-        userProperties = PropertiesService.getDocumentProperties(),
-        activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet()
+        activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet(),
+        documentProperties = PropertiesService.getDocumentProperties(),
+        userProperties = PropertiesService.getUserProperties(),
+        scriptProperties = PropertiesService.getScriptProperties()
     ) {
-        return new AutomationHandler(userProperties, activeSpreadsheet);
+        return new AutomationHandler(activeSpreadsheet, documentProperties, userProperties, scriptProperties);
     }
 
     handleAutomationRequest({ language_code, chat_id, query, reply_to_message_id = null, callback_query_id = null }) {
@@ -37,7 +41,7 @@ class AutomationHandler {
             // Update localReplyToMessageId for chaining actions that depend on previous message
             const actionContent = JSON.parse(lastActionResult);
             localReplyToMessageId = actionContent.result?.message_id || localReplyToMessageId;
-            
+
             // handle create actions separately
             if (action.method?.startsWith('create')) {
                 const createActionResul = this.handlePostCreateAction({ language_code, chat_id, action, actionResponse: actionContent });
@@ -45,7 +49,7 @@ class AutomationHandler {
 
             // handle get actions separately
             if (action.method?.startsWith('get')) {
-                const getActionResul = this.handlePostGetAction({ chat_id, action, reply_to_message_id: localReplyToMessageId, callback_query_id  });
+                const getActionResul = this.handlePostGetAction({ chat_id, action, reply_to_message_id: localReplyToMessageId, callback_query_id });
             }
         });
 
@@ -87,13 +91,14 @@ class AutomationHandler {
     }
 
     executeAction(chat_id, action, reply_to_message_id, callback_query_id = null) {
-        LoggerModel.create(this._userProperties, this._activeSpreadsheet)
+        LoggerModel.create(this._scriptProperties, this._activeSpreadsheet)
             .logEvent({
                 dc: 'automation_action',
                 action: action.method || '_no_method_',
                 chat_id: chat_id || '0000',
                 content: JSON.stringify(action),
-                event: `reply_to_message_id: ${reply_to_message_id || 'none'} | callback_query_id: ${callback_query_id || 'none'}`
+                event: 'executeAction',
+                note: `reply_to_message_id: ${reply_to_message_id || 'none'} | callback_query_id: ${callback_query_id || 'none'}`
             });
 
         // Handle delay if specified

@@ -15,20 +15,20 @@ class LoggerModel {
         // this.archiveLog();
     }
 
-    logEvent({ dc, action, chat_id, content, event }) {
+    logEvent({ dc, action, chat_id, content, event, note = '' }) {
         if (this.debugMode !== 'true' && this.debugMode !== 'all') {
             return;
         }
         const datestring = new Date().toISOString();
-        this.sheet.appendRow([datestring, dc, action, chat_id, content, event]);
+        this.sheet.appendRow([datestring, dc, action, chat_id, content, event, note]);
     }
 
-    logError({ dc, action, chat_id, content, event }) {
+    logError({ dc, action, chat_id, content, event, note = '' }) {
         if (this.debugMode !== 'true' && this.debugMode !== 'all' && this.debugMode !== 'errors' && this.debugMode !== 'error') {
             return;
         }
         const datestring = new Date().toISOString();
-        this.sheet.appendRow([datestring, dc, action, chat_id, content, event]);
+        this.sheet.appendRow([datestring, dc, action, chat_id, content, event, note]);
     }
 
     archiveLog() {

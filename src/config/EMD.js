@@ -9383,7 +9383,7 @@ EMD.Logger = {
     sheet: (data = {}) => {
         return {
             name: '📜 Event Log',
-            columns: ['Created On', 'DC', 'Action', 'chat_id', 'content', 'event'],
+            columns: ['Created On', 'DC', 'Action', 'chat_id', 'content', 'event', 'note'],
             sample_data: []
         };
     }

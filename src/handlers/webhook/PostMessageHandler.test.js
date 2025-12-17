@@ -19,8 +19,10 @@ describe('PostMessageHandler', () => {
         // Set dummy bot token in user properties
         PropertiesService.getDocumentProperties().setProperty(EnvironmentModel.InputMeta.BOT_API_TOKEN, dummyToken);
         handler = PostMessageHandler.create(
+            SpreadsheetApp.getActiveSpreadsheet(),
             PropertiesService.getDocumentProperties(),
-            SpreadsheetApp.getActiveSpreadsheet()
+            PropertiesService.getUserProperties(),
+            PropertiesService.getScriptProperties()
         );
         SheetModel.create(SpreadsheetApp.getActiveSpreadsheet())
             .bindSheetSampleData(EMD.Spreadsheet.BasicAutomation({}));
