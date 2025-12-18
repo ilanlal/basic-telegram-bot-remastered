@@ -13,8 +13,24 @@ class BotHandler {
         return this._activeSpreadsheet;
     }
 
+    get userProperties() {
+        if (!this._userProperties) {
+            this._userProperties = PropertiesService.getUserProperties();
+        }
+        return this._userProperties;
+    }
+
+    get scriptProperties() {
+        if (!this._scriptProperties) {
+            this._scriptProperties = PropertiesService.getScriptProperties();
+        }
+        return this._scriptProperties;
+    }
+
     constructor() {
         this._documentProperties = null;
+        this._userProperties = null;
+        this._scriptProperties = null;
         this._activeSpreadsheet = null;
     }
 };
@@ -23,55 +39,51 @@ BotHandler.Addon = {
     onIdentifyTokenClick: (e) => {
         // Not implemented yet
         return new BotHandler
-            .AddonWrapper(
-                BotHandler.prototype.documentProperties,
-                BotHandler.prototype.activeSpreadsheet)
+            .ControllerWrapper(
+                BotHandler.prototype.activeSpreadsheet, BotHandler.prototype.documentProperties, BotHandler.prototype.userProperties, BotHandler.prototype.scriptProperties)
             .handleIdentifyTokenClick(e);
     },
     onWebhookToggleClick: (e) => {
         return new BotHandler
-            .AddonWrapper(
-                BotHandler.prototype.documentProperties,
-                BotHandler.prototype.activeSpreadsheet)
+            .ControllerWrapper(
+                BotHandler.prototype.activeSpreadsheet, BotHandler.prototype.documentProperties, BotHandler.prototype.userProperties, BotHandler.prototype.scriptProperties)
             .handleWebhookToggleClick(e);
     },
     onSetMyNameClick: (e) => {
         // Not implemented yet
         return new BotHandler
-            .AddonWrapper(
-                BotHandler.prototype.documentProperties,
-                BotHandler.prototype.activeSpreadsheet)
+            .ControllerWrapper(
+                BotHandler.prototype.activeSpreadsheet, BotHandler.prototype.documentProperties, BotHandler.prototype.userProperties, BotHandler.prototype.scriptProperties)
             .handleSetMyNameClick(e);
     },
     onSetMyDescriptionClick: (e) => {
         // Not implemented yet
         return new BotHandler
-            .AddonWrapper(
-                BotHandler.prototype.documentProperties,
-                BotHandler.prototype.activeSpreadsheet)
+            .ControllerWrapper(
+                BotHandler.prototype.activeSpreadsheet, BotHandler.prototype.documentProperties, BotHandler.prototype.userProperties, BotHandler.prototype.scriptProperties)
             .handleSetMyDescriptionClick(e);
     },
     onSetMyShortDescriptionClick: (e) => {
         // Not implemented yet
         return new BotHandler
-            .AddonWrapper(
-                BotHandler.prototype.documentProperties,
-                BotHandler.prototype.activeSpreadsheet)
+            .ControllerWrapper(
+                BotHandler.prototype.activeSpreadsheet, BotHandler.prototype.documentProperties, BotHandler.prototype.userProperties, BotHandler.prototype.scriptProperties)
             .handleSetMyShortDescriptionClick(e);
     },
     onSetMyCommandsClick: (e) => {
         // Not implemented yet
         return new BotHandler
-            .AddonWrapper(
-                BotHandler.prototype.documentProperties,
-                BotHandler.prototype.activeSpreadsheet)
+            .ControllerWrapper(
+                BotHandler.prototype.activeSpreadsheet, BotHandler.prototype.documentProperties, BotHandler.prototype.userProperties, BotHandler.prototype.scriptProperties)
             .handleSetMyCommandsClick(e);
     }
 }
 
-BotHandler.AddonWrapper = class {
-    constructor(documentProperties, activeSpreadsheet) {
+BotHandler.ControllerWrapper = class {
+    constructor(activeSpreadsheet, documentProperties, userProperties, scriptProperties) {
         this._documentProperties = documentProperties;
+        this._userProperties = userProperties;
+        this._scriptProperties = scriptProperties;
         this._activeSpreadsheet = activeSpreadsheet;
     }
 
@@ -101,7 +113,7 @@ BotHandler.AddonWrapper = class {
     handleWebhookToggleClick(e) {
         try {
             const action = e.parameters?.action || null;
-            
+
             if (!action) {
                 throw new Error("'action' parameter is required for webhook management.");
             }

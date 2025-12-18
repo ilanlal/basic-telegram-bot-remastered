@@ -1,14 +1,16 @@
 class EnvironmentModel {
-    constructor(documentProperties) {
+    constructor(documentProperties, userProperties, scriptProperties) {
         this._documentProperties = documentProperties;
-        this._telegramBotClient = null;
-
+        this._userProperties = userProperties;
+        this._scriptProperties = scriptProperties;
     }
 
     static create(
-        documentProperties = PropertiesService.getDocumentProperties()
+        documentProperties = PropertiesService.getDocumentProperties(),
+        userProperties = PropertiesService.getUserProperties(),
+        scriptProperties = PropertiesService.getScriptProperties()
     ) {
-        return new EnvironmentModel(documentProperties);
+        return new EnvironmentModel(documentProperties, userProperties, scriptProperties);
     }
 
     setNewDefaultLanguage(code) {
